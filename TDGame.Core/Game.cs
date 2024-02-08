@@ -97,14 +97,21 @@ namespace TDGame.Core
                     }
                     target = Map.WayPoints[enemy.WayPointID];
                 }
-                var angle = Math.Atan((1 + (target.Y - enemy.Y)) / (1 + (target.X - enemy.X)));
+                var angle = GetAngle(target, enemy);
                 var xMod = Math.Cos(angle);
                 var yMod = Math.Sin(angle);
-                enemy.X += (int)(xMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
-                enemy.Y += (int)(yMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
+                enemy.X += (int)Math.Ceiling(xMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
+                enemy.Y += (int)Math.Ceiling(yMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
             }
             foreach (var enemy in toRemove)
                 CurrentEnemies.Remove(enemy);
+        }
+
+        private double GetAngle(WayPoint target, Enemy enemy)
+        {
+            var a = target.Y - enemy.Y;
+            var b = target.X - enemy.X;
+            return Math.Atan2(a, b);
         }
 
         private void QueueEnemies()
