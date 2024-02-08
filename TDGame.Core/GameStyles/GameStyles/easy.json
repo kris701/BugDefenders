@@ -1,6 +1,8 @@
 ﻿{
   "Name": "Easy",
-  "EvolutionRate": 0.5,
+  "EvolutionRate": 1.01,
   "EnemySpeedMultiplier": 0.5,
-  "MoneyMultiplier": 2
+  "MoneyMultiplier": 2,
+  "EnemyQuantity": 5,
+  "StartingHP": 50
 }

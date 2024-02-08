@@ -10,16 +10,9 @@ namespace Project1.Screens.PathTest
     {
         public override void Initialize()
         {
-            _moveTest = new PanelControl()
-            {
-                FillColor = BasicTextures.Black,
-                Width = 10,
-                Height = 10
-            };
             _canvas = new CanvasControl() {
                 Children = new List<IControl>()
                 {
-                    _moveTest
                 }
             };
             Container = _canvas;

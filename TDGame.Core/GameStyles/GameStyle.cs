@@ -12,13 +12,7 @@ namespace TDGame.Core.GameStyles
         public double EvolutionRate { get; set; }
         public double EnemySpeedMultiplier { get; set; }
         public double MoneyMultiplier { get; set; }
-
-        public GameStyle(string name, double evolutionRate, double enemySpeedMultiplier, double moneyMultiplier)
-        {
-            Name = name;
-            EvolutionRate = evolutionRate;
-            EnemySpeedMultiplier = enemySpeedMultiplier;
-            MoneyMultiplier = moneyMultiplier;
-        }
+        public int EnemyQuantity { get; set; }
+        public int StartingHP { get; set; }
     }
 }

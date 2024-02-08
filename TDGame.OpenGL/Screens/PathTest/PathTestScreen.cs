@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using TDGame.Core;
+using TDGame.Core.Enemies;
 
 namespace Project1.Screens.PathTest
 {
@@ -15,7 +16,6 @@ namespace Project1.Screens.PathTest
         private TDGame.Core.Game _game;
 
         private CanvasControl _canvas;
-        private PanelControl _moveTest;
 
         public PathTestScreen(IEngine parent) : base(parent)
         {
@@ -26,8 +26,32 @@ namespace Project1.Screens.PathTest
 
         private void OnUpdate(GameTime gameTime)
         {
-            _moveTest.X = _moveTest.X + 1;
             _game.Update(gameTime.ElapsedGameTime);
+            _canvas.Children.Clear();
+            foreach (var blockingTile in _game.Map.BlockingTiles)
+            {
+                var newPanel = new PanelControl()
+                {
+                    FillColor = BasicTextures.Black,
+                    Width = blockingTile.Width,
+                    Height = blockingTile.Height,
+                    X = blockingTile.X,
+                    Y = blockingTile.Y,
+                };
+                _canvas.Children.Add(newPanel);
+            }
+            foreach (var enemy in _game.CurrentEnemies)
+            {
+                var newPanel = new PanelControl()
+                {
+                    FillColor = BasicTextures.White,
+                    Width = 10,
+                    Height = 10,
+                    X = enemy.X,
+                    Y = enemy.Y,
+                };
+                _canvas.Children.Add(newPanel);
+            }
         }
     }
 }
