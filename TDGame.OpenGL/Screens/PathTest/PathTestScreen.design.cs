@@ -108,6 +108,7 @@ namespace Project1.Screens.PathTest
             Container = new GridControl()
             {
                 ColumnDefinitions = new List<int>() { 2, 1 },
+                RowDefinitions = new List<int>() { 15, 1 },
                 Margin = 5,
                 Children = new List<IControl>()
                 {
@@ -119,7 +120,12 @@ namespace Project1.Screens.PathTest
                             _selectTurretRangePanel
                         }
                     },
-                    _gameCanvas,
+                    new BorderControl()
+                    {
+                        BorderWidth = 5,
+                        Margin = 5,
+                        Child = _gameCanvas
+                    },
                     new BorderControl()
                     {
                         Column = 1,
@@ -138,9 +144,9 @@ namespace Project1.Screens.PathTest
                                         Margin = 2,
                                         Children = new List<IControl>()
                                         {
-                                            _buyGatlingTurretButton,
-                                            _buyRocketTurretButton,
-                                            _buyMissileTurretButton
+                                            _startButton,
+                                            _sendWave,
+                                            _autoRunButton
                                         }
                                     }
                                 },
@@ -151,9 +157,9 @@ namespace Project1.Screens.PathTest
                                         Margin = 2,
                                         Children = new List<IControl>()
                                         {
-                                            _startButton,
-                                            _sendWave,
-                                            _autoRunButton
+                                            _buyGatlingTurretButton,
+                                            _buyRocketTurretButton,
+                                            _buyMissileTurretButton
                                         }
                                     }
                                 },
@@ -168,6 +174,31 @@ namespace Project1.Screens.PathTest
                                             Font = BasicFonts.GetFont(10)
                                         },
                                         _nextWavePanel
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    new BorderControl()
+                    {
+                        ColumnSpan = 2,
+                        Row = 1,
+                        Child = new GridControl()
+                        {
+                            Margin = 5,
+                            FillColor = BasicTextures.GetBasicRectange(Color.Green),
+                            ColumnDefinitions = new List<int>(){1,1},
+                            Children = new List<IControl>()
+                            {
+                                new BorderControl()
+                                {
+                                    Column = 0,
+                                    Child = new ButtonControl(clicked: (s) => { Parent.SwitchView(new MainMenu.MainMenu(Parent)); })
+                                    {
+                                        FillColor = BasicTextures.GetBasicRectange(Color.White),
+                                        FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                                        Font = BasicFonts.GetFont(16),
+                                        Text = "Exit"
                                     }
                                 }
                             }

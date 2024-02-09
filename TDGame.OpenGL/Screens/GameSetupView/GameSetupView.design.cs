@@ -98,7 +98,7 @@ namespace Project1.Screens.GameSetupView
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Margin = 5,
                 RowDefinitions = new List<int>() { 1, 4, 1, 1 },
-                ColumnDefinitions = new List<int>() { 1, 2, 2, 4, 1 },
+                ColumnDefinitions = new List<int>() { 1, 4, 4, 6, 1 },
                 Children = new List<IControl>()
                 {
                     new LabelControl()
@@ -122,8 +122,7 @@ namespace Project1.Screens.GameSetupView
                     new BorderControl()
                     {
                         Row = 2,
-                        Column = 0,
-                        ColumnSpan = 2,
+                        Column = 1,
                         Child = new ButtonControl(clicked: (x) => Parent.SwitchView(new MainMenu.MainMenu(Parent)))
                         {
                             Text = "Back",
@@ -137,7 +136,6 @@ namespace Project1.Screens.GameSetupView
                     {
                         Row = 2,
                         Column = 3,
-                        ColumnSpan = 2,
                         Child = new ButtonControl(clicked: StartButton_Click)
                         {
                             Text = "Start",
