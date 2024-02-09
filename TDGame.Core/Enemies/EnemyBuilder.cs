@@ -20,6 +20,7 @@ namespace TDGame.Core.Enemies
             var enemy = _builder.GetResource(name);
 
             enemy.Health = (int)(enemy.Health * evolution);
+            enemy.Reward = (int)(enemy.Reward * evolution);
 
             return enemy;
         }

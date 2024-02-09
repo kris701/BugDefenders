@@ -8,7 +8,7 @@ namespace TDGame.Core.Helpers
 {
     public class GameTimer
     {
-        private TimeSpan Target { get; }
+        public TimeSpan Target { get; }
         private TimeSpan _last = TimeSpan.Zero;
         private Action _func;
 

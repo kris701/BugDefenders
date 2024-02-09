@@ -1,12 +1,12 @@
 ﻿{
-  "Name": "turret 1",
+  "Name": "turret 2",
   "Description": "asfdasfasf",
-  "Type": 1,
+  "Type": 2,
   "Size": 25,
   "Cost": 10,
-  "Range": 100,
-  "Damage": 10,
-  "Cooldown": 5,
+  "Range": 300,
+  "Damage": 50,
+  "Cooldown": 1000,
   "Levels": [
     {
       "Name": "Upgrade 1",

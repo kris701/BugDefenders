@@ -1,0 +1,6 @@
+﻿{
+  "Name": "Enemy Type 2",
+  "Health": 200,
+  "Speed": 5,
+  "Reward": 20
+}

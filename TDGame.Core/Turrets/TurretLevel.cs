@@ -14,8 +14,9 @@ namespace TDGame.Core.Turrets
         public int Cost { get; set; }
         public double RangeModifier { get; set; }
         public double DamageModifier { get; set; }
+        public double CooldownModifier { get; set; }
 
-        public TurretLevel(string name, int requiresTurretLevel, string description, int cost, double rangeModifier, double damageModifier)
+        public TurretLevel(string name, int requiresTurretLevel, string description, int cost, double rangeModifier, double damageModifier, double cooldownModifier)
         {
             Name = name;
             RequiresTurretLevel = requiresTurretLevel;
@@ -23,6 +24,7 @@ namespace TDGame.Core.Turrets
             Cost = cost;
             RangeModifier = rangeModifier;
             DamageModifier = damageModifier;
+            CooldownModifier = cooldownModifier;
         }
     }
 }
