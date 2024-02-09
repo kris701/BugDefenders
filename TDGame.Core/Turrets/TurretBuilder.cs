@@ -14,7 +14,7 @@ namespace TDGame.Core.Turret
 {
     public static class TurretBuilder
     {
-        private static BaseBuilder<TurretDefinition> _builder = new BaseBuilder<TurretDefinition>("Turrets.Turrets");
+        private static BaseBuilder<TurretDefinition> _builder = new BaseBuilder<TurretDefinition>("Turrets.Turrets", Assembly.GetExecutingAssembly());
 
         public static List<string> GetTurrets() => _builder.GetResources();
         public static TurretDefinition GetTurret(string name) => _builder.GetResource(name);

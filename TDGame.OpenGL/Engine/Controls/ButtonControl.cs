@@ -17,9 +17,9 @@ namespace TDGame.OpenGL.Engine.Controls
         public Keys ModifierKeyA { get; set; } = Keys.LeftShift;
         public Keys ModifierKeyB { get; set; } = Keys.LeftControl;
         public string FillColorName { get; set; } = "";
-        public Texture2D FillColor { get; set; } = BasicTextures.Transparent;
+        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
         public string FillClickedColorName { get; set; } = "";
-        public Texture2D FillClickedColor { get; set; } = BasicTextures.Transparent;
+        public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
 
         private bool _isClicked = false;
         private bool _wasPressed = false;

@@ -158,7 +158,6 @@ namespace TDGame.Core
         }
 
         private EnemyDefinition? GetNearestEnemy(TurretDefinition turret) => GetNearestEnemy(turret.X, turret.Y, turret.Range);
-        private EnemyDefinition? GetNearestEnemy(RocketDefinition rocket) => GetNearestEnemy(rocket.X, rocket.Y, rocket.Range);
         private EnemyDefinition? GetNearestEnemy(MissileDefinition missile) => GetNearestEnemy(missile.X, missile.Y, missile.Range);
         private EnemyDefinition? GetNearestEnemy(int x, int y, int range)
         {
@@ -335,6 +334,8 @@ namespace TDGame.Core
 
         public bool AddTurret(TurretDefinition turret, WayPoint point)
         {
+            if (Money < turret.Cost)
+                return false;
             foreach (var block in Map.BlockingTiles)
                 if (MathHelpers.Intersects(turret, point, block))
                     return false;
@@ -345,6 +346,7 @@ namespace TDGame.Core
 
             turret.X = point.X;
             turret.Y = point.Y;
+            Money -= turret.Cost;
             Turrets.Add(turret);
 
             return true;

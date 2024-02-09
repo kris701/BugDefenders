@@ -1,5 +1,7 @@
 ﻿{
+  "id": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
   "Name": "Enemy Type 2",
+  "description": "abav",
   "Health": 200,
   "Speed": 5,
   "Reward": 20

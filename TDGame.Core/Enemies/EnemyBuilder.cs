@@ -12,7 +12,7 @@ namespace TDGame.Core.Enemies
 {
     public static class EnemyBuilder
     {
-        private static BaseBuilder<EnemyDefinition> _builder = new BaseBuilder<EnemyDefinition>("Enemies.Enemies");
+        private static BaseBuilder<EnemyDefinition> _builder = new BaseBuilder<EnemyDefinition>("Enemies.Enemies", Assembly.GetExecutingAssembly());
 
         public static List<string> GetEnemies() => _builder.GetResources();
         public static EnemyDefinition GetEnemy(string name, double evolution)

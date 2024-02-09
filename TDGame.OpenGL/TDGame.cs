@@ -4,6 +4,7 @@ using System;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL
 {
@@ -29,6 +30,8 @@ namespace TDGame.OpenGL
 
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
+            TextureBuilder.Initialize(Content);
+            TextureBuilder.LoadTexturePack(TextureBuilder.GetTexturePacks()[0]);
 
             CurrentScreen = _initialScreen.Invoke(this);
             if (CurrentScreen != null)

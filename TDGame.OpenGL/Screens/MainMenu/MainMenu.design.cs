@@ -20,7 +20,7 @@ namespace Project1.Screens.MainMenu
         {
             Container = new GridControl()
             {
-                FillColor = BasicTextures.Gray,
+                FillColor = BasicTextures.GetBasicTexture(Color.Gray),
                 Margin = 5,
                 RowDefinitions = new List<int>() { 2, 1, 1, 2 },
                 ColumnDefinitions = new List<int>() { 1, 2, 1 },
@@ -36,7 +36,7 @@ namespace Project1.Screens.MainMenu
                     },
                     new StackPanelControl()
                     {
-                        FillColor = BasicTextures.White,
+                        FillColor = BasicTextures.GetBasicTexture(Color.White),
                         Margin = 5,
                         Row = 2,
                         Column = 1,
@@ -48,8 +48,8 @@ namespace Project1.Screens.MainMenu
                                 {
                                     Text = "Start Game",
                                     Font = BasicFonts.Font24pt,
-                                    FillColor = BasicTextures.White,
-                                    FillClickedColor = BasicTextures.Gray
+                                    FillColor = BasicTextures.GetBasicTexture(Color.White),
+                                    FillClickedColor = BasicTextures.GetBasicTexture(Color.Gray)
                                 },
                                 Margin = 5
                             },
@@ -59,8 +59,8 @@ namespace Project1.Screens.MainMenu
                                 {
                                     Text = "Exit",
                                     Font = BasicFonts.Font24pt,
-                                    FillColor = BasicTextures.White,
-                                    FillClickedColor = BasicTextures.Gray
+                                    FillColor = BasicTextures.GetBasicTexture(Color.White),
+                                    FillClickedColor = BasicTextures.GetBasicTexture(Color.Gray)
                                 },
                                 Margin = 5
                             }

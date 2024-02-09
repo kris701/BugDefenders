@@ -8,7 +8,7 @@ namespace TDGame.OpenGL.Engine.Controls
     public class StackPanelControl : BaseChildrenContainer
     {
         public string FillColorName { get; set; } = "";
-        public Texture2D FillColor { get; set; } = BasicTextures.Transparent;
+        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
         public int Margin { get; set; } = 0;
 
         public StackPanelControl()

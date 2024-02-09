@@ -13,7 +13,7 @@ namespace TDGame.Core.Maps
 {
     public static class MapBuilder
     {
-        private static BaseBuilder<MapDefinition> _builder = new BaseBuilder<MapDefinition>("Maps.Maps");
+        private static BaseBuilder<MapDefinition> _builder = new BaseBuilder<MapDefinition>("Maps.Maps", Assembly.GetExecutingAssembly());
 
         public static List<string> GetMaps() => _builder.GetResources();
         public static MapDefinition GetMap(string name) => _builder.GetResource(name);

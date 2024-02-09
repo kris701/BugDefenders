@@ -13,7 +13,7 @@ namespace TDGame.OpenGL.Engine.Controls
     public class CanvasControl : BaseChildrenContainer
     {
         public string FillColorName { get; set; } = "";
-        public Texture2D FillColor { get; set; } = BasicTextures.Transparent;
+        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
 
         public CanvasControl()
         {

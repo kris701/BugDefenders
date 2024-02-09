@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using TDGame.Core.Models;
 
 namespace TDGame.Core.Enemies
 {
-    public class EnemyDefinition
+    public class EnemyDefinition : BaseGameModel
     {
-        public string Name { get; set; }
         public int Health { get; set; }
         public double Speed { get; set; }
         public int Reward { get; set; }
@@ -22,9 +22,8 @@ namespace TDGame.Core.Enemies
         [JsonIgnore]
         public Guid GroupID { get; set; }
 
-        public EnemyDefinition(string name, int health, double speed, int reward)
+        public EnemyDefinition(Guid id, string name, string description, int health, double speed, int reward) : base(id, name, description)
         {
-            Name = name;
             Health = health;
             Speed = speed;
             Reward = reward;

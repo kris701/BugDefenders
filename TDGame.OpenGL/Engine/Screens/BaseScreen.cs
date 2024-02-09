@@ -35,7 +35,7 @@ namespace TDGame.OpenGL.Engine.Screens
                 throw new ArgumentNullException("Container is null!");
 
             Container.Draw(gameTime, spriteBatch);
-            spriteBatch.FillScreen(BasicTextures.Black, Parent.ScreenWidth(), Parent.ScreenHeight(), fadeValue);
+            spriteBatch.FillScreen(BasicTextures.GetBasicTexture(Color.Black), Parent.ScreenWidth(), Parent.ScreenHeight(), fadeValue);
         }
 
         public virtual void Initialize()
