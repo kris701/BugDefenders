@@ -1,9 +1,8 @@
-﻿using MonoGame.FormEngine.Templates.Engines.PlainEngine;
-using Project1.Helpers;
-using Project1.Screens.MainMenu;
+﻿using Project1.Screens.MainMenu;
 using System;
+using TDGame.OpenGL.Engine.Helpers;
 
-namespace Project1
+namespace TDGame.OpenGL
 {
     public static class Program
     {
@@ -11,12 +10,11 @@ namespace Project1
         static void Main()
         {
 #if DEBUG
-            using (var game = new PlainEngine((x) => new MainMenu(x)))
+            using (var game = new TDGame((x) => new MainMenu(x)))
             {
                 game.Device.PreferredBackBufferWidth = 1000;
                 game.Device.PreferredBackBufferHeight = 1000;
                 game.Device.ApplyChanges();
-                game.OnInitialize += () => { BasicFonts.Initialize(game.Content); };
                 game.Run();
             }
 #else

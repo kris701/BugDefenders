@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project1.Helpers
+namespace TDGame.OpenGL.Engine.Helpers
 {
     public static class BasicFonts
     {
@@ -17,7 +17,7 @@ namespace Project1.Helpers
             _content = content;
         }
 
-        private static SpriteFont? _font8pt;
+        private static SpriteFont _font8pt;
         public static SpriteFont Font8pt
         {
             get
@@ -30,7 +30,7 @@ namespace Project1.Helpers
             }
         }
 
-        private static SpriteFont? _font10pt;
+        private static SpriteFont _font10pt;
         public static SpriteFont Font10pt
         {
             get
@@ -43,7 +43,7 @@ namespace Project1.Helpers
             }
         }
 
-        private static SpriteFont? _font12pt;
+        private static SpriteFont _font12pt;
         public static SpriteFont Font12pt
         {
             get
@@ -56,7 +56,7 @@ namespace Project1.Helpers
             }
         }
 
-        private static SpriteFont? _font16pt;
+        private static SpriteFont _font16pt;
         public static SpriteFont Font16pt
         {
             get
@@ -69,7 +69,7 @@ namespace Project1.Helpers
             }
         }
 
-        private static SpriteFont? _font24pt;
+        private static SpriteFont _font24pt;
         public static SpriteFont Font24pt
         {
             get
@@ -82,7 +82,7 @@ namespace Project1.Helpers
             }
         }
 
-        private static SpriteFont? _font48pt;
+        private static SpriteFont _font48pt;
         public static SpriteFont Font48pt
         {
             get
@@ -95,7 +95,7 @@ namespace Project1.Helpers
             }
         }
 
-        private static SpriteFont? _font72pt;
+        private static SpriteFont _font72pt;
         public static SpriteFont Font72pt
         {
             get

@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using MonoGame.FormEngine.Core;
-using MonoGame.FormEngine.Core.Screens;
-using MonoGame.FormEngine.Toolbox.Controls;
-using MonoGame.FormEngine.Toolbox.Helpers;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using TDGame.Core;
 using TDGame.Core.Enemies;
+using TDGame.OpenGL.Engine;
+using TDGame.OpenGL.Engine.Controls;
+using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Screens;
 
 namespace Project1.Screens.PathTest
 {
@@ -19,12 +19,12 @@ namespace Project1.Screens.PathTest
 
         public PathTestScreen(IEngine parent) : base(parent)
         {
-            parent.OnUpdate += OnUpdate;
             _game = new TDGame.Core.Game("map1", "easy");
+            OnUpdate += Game_OnUpdate;
             Initialize();
         }
 
-        private void OnUpdate(GameTime gameTime)
+        private void Game_OnUpdate(GameTime gameTime)
         {
             _game.Update(gameTime.ElapsedGameTime);
             _canvas.Children.Clear();
