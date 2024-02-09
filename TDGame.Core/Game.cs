@@ -280,5 +280,21 @@ namespace TDGame.Core
             }
             return false;
         }
+
+        public bool LevelUpTurret(TurretDefinition turret, int levelIndex)
+        {
+            var upgrade = turret.Levels[levelIndex];
+            if (Money < upgrade.Cost)
+                return false;
+            if (!turret.Levels[upgrade.RequiresTurretLevel].HasUpgrade)
+                return false;
+            
+            Money -= upgrade.Cost;
+            upgrade.HasUpgrade = true;
+            turret.Range = (int)(turret.Range * upgrade.RangeModifier);
+            turret.Damage = (int)(turret.Damage * upgrade.DamageModifier);
+            turret.Cooldown = (int)(turret.Cooldown * upgrade.CooldownModifier);
+            return true;
+        }
     }
 }

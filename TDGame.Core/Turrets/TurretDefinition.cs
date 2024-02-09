@@ -41,6 +41,10 @@ namespace TDGame.Core.Turrets
             Damage = damage;
             Cooldown = cooldown;
             Levels = levels;
+
+            foreach(var level in Levels)
+                if (level.RequiresTurretLevel >= Levels.Count)
+                    throw new Exception("Turret definition has an upgrade with a too high required index!");
         }
     }
 }
