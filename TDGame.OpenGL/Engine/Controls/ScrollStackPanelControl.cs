@@ -10,11 +10,8 @@ namespace TDGame.OpenGL.Engine.Controls
     public class ScrollStackPanelControl : StackPanelControl
     {
         public int ScrollButtonsSize { get; set; } = 25;
-        public string ScrollBarIndicatorFillColorName { get; set; } = "";
         public Texture2D ScrollBarIndicatorFillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
-        public string ScrollButtonsFillColorName { get; set; } = "";
         public Texture2D ScrollButtonsFillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
-        public string ScrollButtonsClickedFillColorName { get; set; } = "";
         public Texture2D ScrollButtonsClickedFillColor { get; set; } = BasicTextures.GetBasicRectange(Color.White);
         public SpriteFont ScrollButtonsFont { get; set; }
 
@@ -280,13 +277,6 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void LoadContent(ContentManager content)
         {
-            if (ScrollBarIndicatorFillColorName != "")
-                ScrollBarIndicatorFillColor = content.Load<Texture2D>(ScrollBarIndicatorFillColorName);
-            if (ScrollButtonsFillColorName != "")
-                ScrollButtonsFillColor = content.Load<Texture2D>(ScrollButtonsFillColorName);
-            if (ScrollButtonsClickedFillColorName != "")
-                ScrollButtonsClickedFillColor = content.Load<Texture2D>(ScrollButtonsClickedFillColorName);
-
             _upButton.LoadContent(content);
             _downButton.LoadContent(content);
             _scrollIndicator.LoadContent(content);

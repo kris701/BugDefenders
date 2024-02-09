@@ -12,7 +12,6 @@ namespace TDGame.OpenGL.Engine.Controls
 {
     public class CanvasControl : BaseChildrenContainer
     {
-        public string FillColorName { get; set; } = "";
         public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
 
         public CanvasControl()
@@ -40,26 +39,6 @@ namespace TDGame.OpenGL.Engine.Controls
             spriteBatch.Draw(FillColor, new Rectangle(X, Y, Width, Height), Color.White);
             foreach (var child in Children)
                 child.Draw(gameTime, spriteBatch);
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            if (FillColorName != "")
-                FillColor = content.Load<Texture2D>(FillColorName);
-
-            foreach (var child in Children)
-                child.LoadContent(content);
-        }
-
-        public override void Refresh()
-        {
-            if (!IsVisible)
-                return;
-            if (!IsEnabled)
-                return;
-
-            foreach (var child in Children)
-                child.Refresh();
         }
     }
 }

@@ -25,6 +25,9 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (!IsVisible)
+                return;
+
             foreach (var child in Children)
                 child.Draw(gameTime, spriteBatch);
         }
@@ -37,15 +40,23 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Refresh()
         {
-            if (IsEnabled)
-                foreach (var child in Children)
+            if (!IsVisible)
+                return;
+            if (!IsEnabled)
+                return;
+
+            foreach (var child in Children)
                     child.Refresh();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEnabled)
-                foreach (var child in Children)
+            if (!IsVisible)
+                return;
+            if (!IsEnabled)
+                return;
+
+            foreach (var child in Children)
                     child.Update(gameTime);
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
@@ -9,8 +10,7 @@ namespace TDGame.OpenGL.Engine.Controls
     {
         public string Text { get; set; } = "";
         public Color FontColor { get; set; } = Color.Black;
-        public string FontName { get; set; } = "";
-        public SpriteFont? Font { get; set; }
+        public SpriteFont Font { get; set; } = BasicFonts.GetFont(8);
 
         private int _textX = 0;
         private int _textY = 0;
@@ -24,13 +24,8 @@ namespace TDGame.OpenGL.Engine.Controls
             if (!IsVisible)
                 return;
 
-            spriteBatch.DrawString(Font, Text, new Vector2(_textX, _textY), FontColor);
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            if (Font == null)
-                Font = content.Load<SpriteFont>(FontName);
+            if (Text != "")
+                spriteBatch.DrawString(Font, Text, new Vector2(_textX, _textY), FontColor);
         }
 
         public override void Refresh()
@@ -40,16 +35,16 @@ namespace TDGame.OpenGL.Engine.Controls
             if (!IsEnabled)
                 return;
 
-            if (Font == null)
-                throw new ArgumentNullException("Error! Font have not been loaded!");
-
-            var size = Font.MeasureString(Text);
-            if (Width == 0)
-                Width = (int)size.X;
-            if (Height == 0)
-                Height = (int)size.Y;
-            _textX = X + (Width - (int)size.X) / 2;
-            _textY = Y + (Height - (int)size.Y) / 2;
+            if (Text != "")
+            {
+                var size = Font.MeasureString(Text);
+                if (Width == 0)
+                    Width = (int)size.X;
+                if (Height == 0)
+                    Height = (int)size.Y;
+                _textX = X + (Width - (int)size.X) / 2;
+                _textY = Y + (Height - (int)size.Y) / 2;
+            }
         }
     }
 }

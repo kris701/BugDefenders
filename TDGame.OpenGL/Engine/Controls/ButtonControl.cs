@@ -16,15 +16,12 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public Keys ModifierKeyA { get; set; } = Keys.LeftShift;
         public Keys ModifierKeyB { get; set; } = Keys.LeftControl;
-        public string FillColorName { get; set; } = "";
         public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
-        public string FillClickedColorName { get; set; } = "";
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
-        public string FillDisabledColorName { get; set; } = "";
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
 
-        private bool _isClicked = false;
-        private bool _wasPressed = false;
+        private bool _holding = false;
+        private bool _blocked = false;
         private int _textX = 0;
         private int _textY = 0;
 
@@ -46,14 +43,16 @@ namespace TDGame.OpenGL.Engine.Controls
 
             if (IsEnabled)
             {
-                if (!_isClicked)
+                if (!_holding)
                     spriteBatch.Draw(FillColor, new Rectangle(X, Y, Width, Height), Color.White);
                 else
                     spriteBatch.Draw(FillClickedColor, new Rectangle(X, Y, Width, Height), Color.White);
             }
             else
                 spriteBatch.Draw(FillDisabledColor, new Rectangle(X, Y, Width, Height), Color.White);
-            spriteBatch.DrawString(Font, Text, new Vector2(_textX, _textY), FontColor);
+
+            if (Text != "")
+                spriteBatch.DrawString(Font, Text, new Vector2(_textX, _textY), FontColor);
         }
 
         public override void Refresh()
@@ -64,21 +63,13 @@ namespace TDGame.OpenGL.Engine.Controls
                 return;
 
             base.Refresh();
-            if (Font == null)
-                throw new Exception("Font not loaded!");
 
-            var size = Font.MeasureString(Text);
-            _textX = X + (Width - (int)size.X) / 2;
-            _textY = Y + (Height - (int)size.Y) / 2;
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            base.LoadContent(content);
-            if (FillColorName != "")
-                FillColor = content.Load<Texture2D>(FillColorName);
-            if (FillClickedColorName != "")
-                FillClickedColor = content.Load<Texture2D>(FillClickedColorName);
+            if (Text != "")
+            {
+                var size = Font.MeasureString(Text);
+                _textX = X + (Width - (int)size.X) / 2;
+                _textY = Y + (Height - (int)size.Y) / 2;
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -89,45 +80,40 @@ namespace TDGame.OpenGL.Engine.Controls
                 return;
 
             var mouseState = Mouse.GetState();
-            if (mouseState.X > X && mouseState.X < X + Width &&
-                mouseState.Y > Y && mouseState.Y < Y + Height &&
-                !_wasPressed &&
-                mouseState.LeftButton == ButtonState.Pressed)
-            {
-                _isClicked = true;
-                _wasPressed = true;
-            }
-
-            if (mouseState.X > X && mouseState.X < X + Width &&
-                mouseState.Y > Y && mouseState.Y < Y + Height &&
-                _wasPressed &&
-                mouseState.LeftButton != ButtonState.Pressed)
-            {
-                var keyState = Keyboard.GetState();
-                if (keyState.IsKeyDown(ModifierKeyA))
-                {
-                    if (ClickedModifierA != null)
-                        ClickedModifierA.Invoke(this);
-                }
-                else if (keyState.IsKeyDown(ModifierKeyB))
-                {
-                    if (ClickedModifierB != null)
-                        ClickedModifierB.Invoke(this);
-                }
-                else
-                {
-                    if (Clicked != null)
-                        Clicked.Invoke(this);
-                }
-                _wasPressed = false;
-                _isClicked = false;
-            }
-
-            if (!(mouseState.X > X && mouseState.X < X + Width &&
+            if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&
                 mouseState.Y > Y && mouseState.Y < Y + Height))
             {
-                _wasPressed = false;
-                _isClicked = false;
+                if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
+                    _holding = true;
+                else if (_holding && mouseState.LeftButton == ButtonState.Released)
+                {
+                    var keyState = Keyboard.GetState();
+                    if (keyState.IsKeyDown(ModifierKeyA))
+                    {
+                        if (ClickedModifierA != null)
+                            ClickedModifierA.Invoke(this);
+                    }
+                    else if (keyState.IsKeyDown(ModifierKeyB))
+                    {
+                        if (ClickedModifierB != null)
+                            ClickedModifierB.Invoke(this);
+                    }
+                    else
+                    {
+                        if (Clicked != null)
+                            Clicked.Invoke(this);
+                    }
+                    _holding = false;
+                }
+            }
+            else
+            {
+                if (_holding && mouseState.LeftButton == ButtonState.Released)
+                    _holding = false;
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                    _blocked = true;
+                else
+                    _blocked = false;
             }
 
             base.Update(gameTime);

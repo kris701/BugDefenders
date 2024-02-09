@@ -20,6 +20,8 @@ namespace Project1.Screens.PathTest
         private ButtonControl _autoRunButton;
         private StackPanelControl _nextWavePanel;
 
+        private PanelControl _selectTurretRangePanel;
+
         private PanelControl _buyingPreviewPanel;
         private PanelControl _buyingPreviewRangePanel;
         private ButtonControl _buyGatlingTurretButton;
@@ -31,32 +33,32 @@ namespace Project1.Screens.PathTest
             _moneyLabel = new LabelControl()
             {
                 Text = $"Money: {_game.Money}$",
-                Font = BasicFonts.Font24pt
+                Font = BasicFonts.GetFont(24)
             };
             _hpLabel = new LabelControl()
             {
                 Text = $"HP: {_game.HP}",
-                Font = BasicFonts.Font24pt
+                Font = BasicFonts.GetFont(24)
             };
             _buyGatlingTurretButton = new ButtonControl(clicked: BuyGatlingTurret_Click)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-                Font = BasicFonts.Font16pt,
+                Font = BasicFonts.GetFont(16),
                 Text = $"{TurretBuilder.GetTurret("turret1").Cost}$ Buy Gatling Turret",
             };
             _buyRocketTurretButton = new ButtonControl(clicked: BuyRocketTurret_Click)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-                Font = BasicFonts.Font16pt,
+                Font = BasicFonts.GetFont(16),
                 Text = $"{TurretBuilder.GetTurret("turret2").Cost}$ Buy Rocket Turret"
             };
             _buyMissileTurretButton = new ButtonControl(clicked: BuyMissileTurret_Click)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-                Font = BasicFonts.Font16pt,
+                Font = BasicFonts.GetFont(16),
                 Text = $"{TurretBuilder.GetTurret("turret3").Cost}$ Buy Missile Turret",
             };
             _buyingPreviewPanel = new PanelControl()
@@ -79,25 +81,29 @@ namespace Project1.Screens.PathTest
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Text = $"Pause",
-                Font = BasicFonts.Font24pt
+                Font = BasicFonts.GetFont(24)
             };
             _autoRunButton = new ButtonControl(clicked: AutoRunButton_Click)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Text = $"[ ] Auto-Wave",
-                Font = BasicFonts.Font24pt
+                Font = BasicFonts.GetFont(24)
             };
             _sendWave = new ButtonControl(clicked: (s) => { _game.QueueEnemies(); })
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Text = $"Send Wave",
-                Font = BasicFonts.Font24pt
+                Font = BasicFonts.GetFont(24)
             };
             _nextWavePanel = new StackPanelControl()
             {
                 Margin = 2
+            };
+            _selectTurretRangePanel = new PanelControl()
+            {
+                IsVisible = false
             };
             Container = new GridControl()
             {
@@ -109,7 +115,8 @@ namespace Project1.Screens.PathTest
                         Children = new List<IControl>()
                         {
                             _buyingPreviewRangePanel,
-                            _buyingPreviewPanel
+                            _buyingPreviewPanel,
+                            _selectTurretRangePanel
                         }
                     },
                     _gameCanvas,
@@ -150,20 +157,17 @@ namespace Project1.Screens.PathTest
                                         }
                                     }
                                 },
-                                new BorderControl()
+                                new StackPanelControl()
                                 {
-                                    Child = new StackPanelControl()
+                                    Margin = 2,
+                                    Children = new List<IControl>()
                                     {
-                                        Margin = 2,
-                                        Children = new List<IControl>()
+                                        new LabelControl()
                                         {
-                                            new LabelControl()
-                                            {
-                                                Text = "Next Waves:",
-                                                Font = BasicFonts.Font10pt
-                                            },
-                                            _nextWavePanel
-                                        }
+                                            Text = "Next Waves:",
+                                            Font = BasicFonts.GetFont(10)
+                                        },
+                                        _nextWavePanel
                                     }
                                 }
                             }

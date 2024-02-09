@@ -35,6 +35,7 @@ namespace TDGame.OpenGL.Engine.Controls
         public int Column { get; set; } = 0;
         public int RowSpan { get; set; } = 1;
         public int ColumnSpan { get; set; } = 1;
+        public object Tag { get; set; }
 
         protected BaseControl()
         {

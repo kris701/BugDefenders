@@ -45,6 +45,7 @@ namespace TDGame.Core
         private void EndGame()
         {
             Running = false;
+            GameOver = true;
         }
 
         public void Update(TimeSpan passed)
@@ -177,10 +178,10 @@ namespace TDGame.Core
 
         private void UpdateGatlingTurret(TurretDefinition turret)
         {
+            turret.Targeting = null;
             var best = GetNearestEnemy(turret);
             if (best != null)
             {
-                turret.Targeting = null;
                 if (!DamageEnemy(best, turret.Damage))
                     turret.Targeting = best;
                 turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
@@ -189,10 +190,10 @@ namespace TDGame.Core
 
         private void UpdateRocketTurret(TurretDefinition turret)
         {
+            turret.Targeting = null;
             var best = GetNearestEnemy(turret);
             if (best != null)
             {
-                turret.Targeting = best;
                 var angle = GetAngle(best, turret);
                 Rockets.Add(new RocketDefinition()
                 {
@@ -212,10 +213,10 @@ namespace TDGame.Core
 
         private void UpdateMissileTurret(TurretDefinition turret)
         {
+            turret.Targeting = null;
             var best = GetNearestEnemy(turret);
             if (best != null)
             {
-                turret.Targeting = best;
                 Missiles.Add(new MissileDefinition()
                 {
                     X = turret.X,

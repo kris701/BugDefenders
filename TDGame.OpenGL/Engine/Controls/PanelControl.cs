@@ -7,16 +7,9 @@ namespace TDGame.OpenGL.Engine.Controls
 {
     public class PanelControl : BaseControl
     {
-        public string FillColorName { get; set; } = "";
         public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public PanelControl()
         {
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            if (FillColorName != "")
-                FillColor = content.Load<Texture2D>(FillColorName);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

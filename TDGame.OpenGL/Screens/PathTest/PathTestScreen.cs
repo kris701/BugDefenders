@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Project1.Screens.MainMenu;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -48,6 +49,12 @@ namespace Project1.Screens.PathTest
 
         private void Game_OnUpdate(GameTime gameTime)
         {
+            if (_game.GameOver)
+                SwitchView(new MainMenu.MainMenu(this.Parent));
+
+            var mouseState = Mouse.GetState();
+            var keyState = Keyboard.GetState();
+
             _game.Update(gameTime.ElapsedGameTime);
             _gameCanvas.Children.Clear();
             foreach (var enemy in _game.CurrentEnemies)
@@ -62,44 +69,69 @@ namespace Project1.Screens.PathTest
                 };
                 _gameCanvas.Children.Add(newPanel);
             }
+            bool any = false;
             foreach (var turret in _game.Turrets)
             {
-                var newPanel = new PanelControl();
+                if (mouseState.X > turret.X - turret.Size / 2 && mouseState.X < turret.X + turret.Size / 2 &&
+                    mouseState.Y > turret.Y - turret.Size / 2 && mouseState.Y < turret.Y + turret.Size / 2)
+                {
+                    _selectTurretRangePanel.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turret.Range * 2);
+                    _selectTurretRangePanel.X = turret.X - _selectTurretRangePanel.FillColor.Width / 2;
+                    _selectTurretRangePanel.Y = turret.Y - _selectTurretRangePanel.FillColor.Height / 2;
+                    _selectTurretRangePanel.Width = _selectTurretRangePanel.FillColor.Width;
+                    _selectTurretRangePanel.Height = _selectTurretRangePanel.FillColor.Height;
+                    _selectTurretRangePanel.IsVisible = true;
+                    any = true;
+                }
+
                 switch (turret.Type)
                 {
                     case TurretType.Bullets:
-                        newPanel = new PanelControl()
+                        _gameCanvas.Children.Add(new PanelControl()
                         {
                             FillColor = BasicTextures.GetBasicRectange(Color.Red),
                             Width = turret.Size,
                             Height = turret.Size,
                             X = turret.X - turret.Size / 2,
-                            Y = turret.Y - turret.Size / 2,
-                        };
+                            Y = turret.Y - turret.Size / 2
+                        });
+                        if (turret.Targeting != null)
+                        {
+                            _gameCanvas.Children.Add(new LineControl()
+                            {
+                                Stroke = BasicTextures.GetBasicRectange(Color.OrangeRed),
+                                X = turret.X,
+                                Y = turret.Y,
+                                X2 = turret.Targeting.X,
+                                Y2 = turret.Targeting.Y,
+                                Thickness = 3
+                            });
+                        }
                         break;
                     case TurretType.Rockets:
-                        newPanel = new PanelControl()
+                        _gameCanvas.Children.Add(new PanelControl()
                         {
                             FillColor = BasicTextures.GetBasicRectange(Color.Blue),
                             Width = turret.Size,
                             Height = turret.Size,
                             X = turret.X - turret.Size / 2,
                             Y = turret.Y - turret.Size / 2,
-                        };
+                        });
                         break;
                     case TurretType.Missile:
-                        newPanel = new PanelControl()
+                        _gameCanvas.Children.Add(new PanelControl()
                         {
                             FillColor = BasicTextures.GetBasicRectange(Color.Yellow),
                             Width = turret.Size,
                             Height = turret.Size,
                             X = turret.X - turret.Size / 2,
                             Y = turret.Y - turret.Size / 2,
-                        };
+                        });
                         break;
                 }
-                _gameCanvas.Children.Add(newPanel);
             }
+            if (!any)
+                _selectTurretRangePanel.IsVisible = false;
             foreach (var rocket in _game.Rockets)
             {
                 var newPanel = new PanelControl()
@@ -146,16 +178,14 @@ namespace Project1.Screens.PathTest
             {
                 _nextWavePanel.Children.Add(new LabelControl()
                 {
-                    Text = $"{item}",
-                    Font = BasicFonts.Font8pt
+                    Text = $"{EnemyBuilder.GetEnemy(item,0).Name}",
+                    Font = BasicFonts.GetFont(8)
                 });
                 _nextWavePanel.Refresh();
             }
 
             if (_buyingPreviewPanel.IsVisible)
             {
-                var mouseState = Mouse.GetState();
-                var keyState = Keyboard.GetState();
                 _buyingPreviewPanel.X = mouseState.X - _buyingPreviewPanel.Width / 2;
                 _buyingPreviewPanel.Y = mouseState.Y - _buyingPreviewPanel.Height / 2;
                 _buyingPreviewRangePanel.X = mouseState.X - _buyingPreviewRangePanel.Width / 2;

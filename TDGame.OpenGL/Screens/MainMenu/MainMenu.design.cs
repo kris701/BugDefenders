@@ -32,7 +32,7 @@ namespace Project1.Screens.MainMenu
                         Column = 1,
                         Text = "Test",
                         FontColor = Color.Black,
-                        Font = BasicFonts.Font72pt
+                        Font = BasicFonts.GetFont(72)
                     },
                     new StackPanelControl()
                     {
@@ -47,7 +47,7 @@ namespace Project1.Screens.MainMenu
                                 Child = new ButtonControl(clicked: (x) => Parent.SwitchView(new PathTestScreen(Parent)))
                                 {
                                     Text = "Start Game",
-                                    Font = BasicFonts.Font24pt,
+                                    Font = BasicFonts.GetFont(24),
                                     FillColor = BasicTextures.GetBasicRectange(Color.White),
                                     FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
                                 },
@@ -58,7 +58,7 @@ namespace Project1.Screens.MainMenu
                                 Child = new ButtonControl(clicked: (x) => Parent.Exit())
                                 {
                                     Text = "Exit",
-                                    Font = BasicFonts.Font24pt,
+                                    Font = BasicFonts.GetFont(24),
                                     FillColor = BasicTextures.GetBasicRectange(Color.White),
                                     FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
                                 },

@@ -19,6 +19,7 @@ namespace TDGame.Core
         public double Evolution { get; set; } = 1;
         public int EnemySpawnDistance { get; set; } = 10;
         public bool Running { get; set; } = true;
+        public bool GameOver { get; set; }
         public List<EnemyDefinition> CurrentEnemies { get; set; }
         public int HP { get; set; }
         public int Money { get; set; }
