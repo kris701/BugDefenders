@@ -11,6 +11,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Engine.Helpers;
+using Project1.Screens.GameSetupView;
 
 namespace Project1.Screens.MainMenu
 {
@@ -30,7 +31,7 @@ namespace Project1.Screens.MainMenu
                     {
                         Row = 1,
                         Column = 1,
-                        Text = "Test",
+                        Text = "TD Game",
                         FontColor = Color.Black,
                         Font = BasicFonts.GetFont(72)
                     },
@@ -44,7 +45,7 @@ namespace Project1.Screens.MainMenu
                         {
                             new BorderControl()
                             {
-                                Child = new ButtonControl(clicked: (x) => Parent.SwitchView(new PathTestScreen(Parent)))
+                                Child = new ButtonControl(clicked: (x) => Parent.SwitchView(new GameSetupView.GameSetupView(Parent)))
                                 {
                                     Text = "Start Game",
                                     Font = BasicFonts.GetFont(24),

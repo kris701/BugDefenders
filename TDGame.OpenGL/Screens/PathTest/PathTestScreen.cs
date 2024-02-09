@@ -22,9 +22,9 @@ namespace Project1.Screens.PathTest
         private TDGame.Core.Game _game;
         private string _buyingTurret;
 
-        public PathTestScreen(IEngine parent) : base(parent)
+        public PathTestScreen(IEngine parent, string map, string gamestyle) : base(parent)
         {
-            _game = new TDGame.Core.Game("map1", "easy");
+            _game = new TDGame.Core.Game(map, gamestyle);
             OnUpdate += Game_OnUpdate;
             Initialize();
         }
@@ -50,7 +50,7 @@ namespace Project1.Screens.PathTest
         private void Game_OnUpdate(GameTime gameTime)
         {
             if (_game.GameOver)
-                SwitchView(new MainMenu.MainMenu(this.Parent));
+                Parent.SwitchView(new MainMenu.MainMenu(Parent));
 
             var mouseState = Mouse.GetState();
             var keyState = Keyboard.GetState();
