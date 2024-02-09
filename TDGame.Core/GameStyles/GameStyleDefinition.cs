@@ -15,5 +15,7 @@ namespace TDGame.Core.GameStyles
         public int EnemyQuantity { get; set; }
         public int StartingHP { get; set; }
         public int StartingMoney { get; set; }
+        public int EnemySpawnQuantity { get; set; }
+        public int ProjectileSpeedCap { get; set; }
     }
 }

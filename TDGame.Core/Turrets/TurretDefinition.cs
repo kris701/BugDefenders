@@ -8,7 +8,7 @@ using TDGame.Core.Enemies;
 
 namespace TDGame.Core.Turrets
 {
-    public enum TurretType { None, Bullets, Rockets, Missile, Laser };
+    public enum TurretType { None, Bullets, Rockets, Missile };
     public class TurretDefinition
     {
         public string Name { get; set; }

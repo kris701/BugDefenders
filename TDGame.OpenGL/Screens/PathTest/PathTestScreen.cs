@@ -24,6 +24,7 @@ namespace Project1.Screens.PathTest
             _game = new TDGame.Core.Game("map1", "easy");
             _game.AddTurret(TurretBuilder.GetTurret("turret1"), new WayPoint(175, 300));
             _game.AddTurret(TurretBuilder.GetTurret("turret2"), new WayPoint(225, 300));
+            _game.AddTurret(TurretBuilder.GetTurret("turret3"), new WayPoint(275, 600));
             OnUpdate += Game_OnUpdate;
             Initialize();
         }
@@ -77,6 +78,18 @@ namespace Project1.Screens.PathTest
                     Height = 10,
                     X = rocket.X,
                     Y = rocket.Y,
+                };
+                _canvas.Children.Add(newPanel);
+            }
+            foreach (var missile in _game.Missiles)
+            {
+                var newPanel = new PanelControl()
+                {
+                    FillColor = BasicTextures.White,
+                    Width = 10,
+                    Height = 10,
+                    X = missile.X,
+                    Y = missile.Y,
                 };
                 _canvas.Children.Add(newPanel);
             }

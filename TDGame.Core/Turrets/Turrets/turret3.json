@@ -1,0 +1,30 @@
+﻿{
+  "Name": "turret 3",
+  "Description": "asfdasfasf",
+  "Type": 3,
+  "Size": 25,
+  "Cost": 10,
+  "Range": 500,
+  "Damage": 500,
+  "Cooldown": 5000,
+  "Levels": [
+    {
+      "Name": "Upgrade 1",
+      "Description": "asfaf",
+      "RequiresTurretLevel": 0,
+      "Cost": 5,
+      "RangeModifier": 2,
+      "DamageModifier": 2,
+      "CooldownModifier": 1
+    },
+    {
+      "Name": "Upgrade 2",
+      "Description": "fast turret",
+      "RequiresTurretLevel": 1,
+      "Cost": 50,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 0.5
+    }
+  ]
+}

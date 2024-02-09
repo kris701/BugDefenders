@@ -16,8 +16,6 @@ namespace TDGame.Core
         private GameTimer _evolutionTimer;
         private GameTimer _mainLoopTimer;
         private Random _rnd = new Random();
-        private int _enemiesToSpawnLimit = 5;
-        private int _rocketSpeedCap = 10;
 
         public Game(string mapName, string style)
         {
@@ -33,13 +31,14 @@ namespace TDGame.Core
             Turrets = new List<TurretDefinition>();
             EnemiesToSpawn = new List<string>();
             Rockets = new List<RocketDefinition>();
+            Missiles = new List<MissileDefinition>();
             UpdateEnemiesToSpawnList();
         }
 
         private void UpdateEnemiesToSpawnList()
         {
             var options = EnemyBuilder.GetEnemies();
-            for (int i = EnemiesToSpawn.Count; i < _enemiesToSpawnLimit; i++)
+            for (int i = EnemiesToSpawn.Count; i < GameStyle.EnemySpawnQuantity; i++)
                 EnemiesToSpawn.Add(options[_rnd.Next(0, options.Count)]);
         }
 
@@ -64,6 +63,7 @@ namespace TDGame.Core
             UpdateSpawnQueue();
             UpdateEnemyPositions();
             UpdateRockets();
+            UpdateMissiles();
             UpdateTurrets(_mainLoopTimer.Target);
         }
 
@@ -115,6 +115,7 @@ namespace TDGame.Core
 
         private double GetAngle(WayPoint target, EnemyDefinition enemy) => GetAngle(target.X, target.Y, enemy.X, enemy.Y);
         private double GetAngle(EnemyDefinition enemy, TurretDefinition turret) => GetAngle(enemy.X, enemy.Y, turret.X, turret.Y);
+        private double GetAngle(EnemyDefinition enemy, MissileDefinition missile) => GetAngle(enemy.X, enemy.Y, missile.X, missile.Y);
 
         private double GetAngle(int x1, int y1, int x2, int y2)
         {
@@ -150,21 +151,23 @@ namespace TDGame.Core
                     {
                         case TurretType.Bullets: UpdateGatlingTurret(turret); break;
                         case TurretType.Rockets: UpdateRocketTurret(turret); break;
+                        case TurretType.Missile: UpdateMissileTurret(turret); break;
                     }
                 }
             }
         }
 
-        private EnemyDefinition? GetNearestEnemy(TurretDefinition turret) => GetNearestEnemy(turret.X, turret.Y);
-        private EnemyDefinition? GetNearestEnemy(RocketDefinition rocket) => GetNearestEnemy(rocket.X, rocket.Y);
-        private EnemyDefinition? GetNearestEnemy(int x, int y)
+        private EnemyDefinition? GetNearestEnemy(TurretDefinition turret) => GetNearestEnemy(turret.X, turret.Y, turret.Range);
+        private EnemyDefinition? GetNearestEnemy(RocketDefinition rocket) => GetNearestEnemy(rocket.X, rocket.Y, rocket.Range);
+        private EnemyDefinition? GetNearestEnemy(MissileDefinition missile) => GetNearestEnemy(missile.X, missile.Y, missile.Range);
+        private EnemyDefinition? GetNearestEnemy(int x, int y, int range)
         {
             var minDist = double.MaxValue;
             EnemyDefinition? best = null;
             foreach (var enemy in CurrentEnemies)
             {
                 var dist = MathHelpers.Distance(x, y, enemy.X, enemy.Y);
-                if (dist < minDist)
+                if (dist <= range && dist < minDist)
                 {
                     minDist = dist;
                     best = enemy;
@@ -208,6 +211,28 @@ namespace TDGame.Core
             }
         }
 
+        private void UpdateMissileTurret(TurretDefinition turret)
+        {
+            var best = GetNearestEnemy(turret);
+            if (best != null)
+            {
+                turret.Targeting = best;
+                Missiles.Add(new MissileDefinition()
+                {
+                    X = turret.X,
+                    Y = turret.Y,
+                    Target = best,
+                    Speed = 1,
+                    Damage = turret.Damage,
+                    Range = turret.Range,
+                    SplashRange = 50,
+                    TriggerRange = 25,
+                    Acceleration = 1.2
+                });
+                turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
+            }
+        }
+
         private void UpdateRockets()
         {
             var toRemove = new List<RocketDefinition>();
@@ -216,8 +241,8 @@ namespace TDGame.Core
                 var xMod = Math.Cos(rocket.Angle);
                 var yMod = Math.Sin(rocket.Angle);
                 rocket.Speed = (int)Math.Ceiling(rocket.Speed * rocket.Acceleration);
-                if (rocket.Speed > _rocketSpeedCap)
-                    rocket.Speed = _rocketSpeedCap;
+                if (rocket.Speed > GameStyle.ProjectileSpeedCap)
+                    rocket.Speed = GameStyle.ProjectileSpeedCap;
                 rocket.Traveled += rocket.Speed;
                 if (rocket.Traveled > rocket.Range)
                 {
@@ -250,6 +275,62 @@ namespace TDGame.Core
             }
             foreach (var rocket in toRemove)
                 Rockets.Remove(rocket);
+        }
+
+        private void UpdateMissiles()
+        {
+            var toRemove = new List<MissileDefinition>();
+            foreach (var missile in Missiles)
+            {
+                if (!CurrentEnemies.Contains(missile.Target))
+                {
+                    var best = GetNearestEnemy(missile);
+                    if (best == null)
+                    {
+                        toRemove.Add(missile);
+                        continue;
+                    }
+                    missile.Target = best;
+                }
+
+                var angle = GetAngle(missile.Target, missile);
+                var xMod = Math.Cos(angle);
+                var yMod = Math.Sin(angle);
+                missile.Speed = (int)Math.Ceiling(missile.Speed * missile.Acceleration);
+                if (missile.Speed > GameStyle.ProjectileSpeedCap)
+                    missile.Speed = GameStyle.ProjectileSpeedCap;
+                missile.Traveled += missile.Speed;
+                if (missile.Traveled > missile.Range)
+                {
+                    toRemove.Add(missile);
+                    continue;
+                }
+                missile.X += (int)Math.Ceiling(xMod * missile.Speed);
+                missile.Y += (int)Math.Ceiling(yMod * missile.Speed);
+
+                var minDist = double.MaxValue;
+                foreach (var enemy in CurrentEnemies)
+                {
+                    var dist = MathHelpers.Distance(missile.X, missile.Y, enemy.X, enemy.Y);
+                    if (dist < minDist)
+                        minDist = dist;
+                }
+                if (minDist <= missile.TriggerRange)
+                {
+                    for (int i = 0; i < CurrentEnemies.Count; i++)
+                    {
+                        var dist = MathHelpers.Distance(missile.X, missile.Y, CurrentEnemies[i].X, CurrentEnemies[i].Y);
+                        if (dist < missile.SplashRange)
+                        {
+                            DamageEnemy(CurrentEnemies[i], missile.Damage);
+                            i--;
+                        }
+                    }
+                    toRemove.Add(missile);
+                }
+            }
+            foreach (var missile in toRemove)
+                Missiles.Remove(missile);
         }
 
         public bool AddTurret(TurretDefinition turret, WayPoint point)

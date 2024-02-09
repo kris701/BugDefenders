@@ -24,5 +24,6 @@ namespace TDGame.Core
         public int Money { get; set; }
         public List<TurretDefinition> Turrets { get; set; }
         public List<RocketDefinition> Rockets { get; set; }
+        public List<MissileDefinition> Missiles { get; set; }
     }
 }

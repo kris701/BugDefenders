@@ -13,6 +13,7 @@
     <None Remove="Maps\Maps\map1.json" />
     <None Remove="Turrets\Turrets\turret1.json" />
     <None Remove="Turrets\Turrets\turret2.json" />
+    <None Remove="Turrets\Turrets\turret3.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Maps\Maps\map1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Turrets\Turrets\turret3.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Turrets\Turrets\turret2.json">
