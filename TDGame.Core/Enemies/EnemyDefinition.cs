@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TDGame.Core.Enemies
 {
-    public class Enemy
+    public class EnemyDefinition
     {
         public string Name { get; set; }
         public int Health { get; set; }
@@ -21,7 +21,7 @@ namespace TDGame.Core.Enemies
         [JsonIgnore]
         public Guid GroupID { get; set; }
 
-        public Enemy(string name, int health, double speed)
+        public EnemyDefinition(string name, int health, double speed)
         {
             Name = name;
             Health = health;

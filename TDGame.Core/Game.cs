@@ -1,24 +1,29 @@
-﻿using TDGame.Core.Enemies;
+﻿using System.Collections.Generic;
+using TDGame.Core.Enemies;
 using TDGame.Core.GameStyles;
 using TDGame.Core.Helpers;
 using TDGame.Core.Maps;
+using TDGame.Core.Maps.Tiles;
+using TDGame.Core.Turrets;
 
 namespace TDGame.Core
 {
     public class Game
     {
         public MapDefinition Map { get; }
-        public GameStyle GameStyle { get; }
+        public GameStyleDefinition GameStyle { get; }
         private int _enemiesToSpawnLimit = 5;
         public List<string> EnemiesToSpawn { get; internal set; }
         public bool AutoSpawn { get; set; } = true;
         public double Evolution { get; internal set; } = 1;
         public int EnemySpawnDistance { get; internal set; } = 10;
         public bool Running { get; set; } = true;
-        public List<Enemy> CurrentEnemies { get; internal set; }
+        public List<EnemyDefinition> CurrentEnemies { get; internal set; }
         public int HP { get; internal set; }
+        public int Money { get; internal set; }
+        public List<TurretDefinition> Turrets { get; internal set; }
 
-        private List<Enemy> _spawnQueue = new List<Enemy>();
+        private List<EnemyDefinition> _spawnQueue = new List<EnemyDefinition>();
         private GameTimer _enemySpawnTimer;
         private GameTimer _evolutionTimer;
         private Random _rnd = new Random();
@@ -28,10 +33,12 @@ namespace TDGame.Core
             Map = MapBuilder.GetMap(mapName);
             GameStyle = GameStyleBuilder.GetGameStyle(style);
             HP = GameStyle.StartingHP;
+            Money = GameStyle.StartingMoney;
             _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), QueueEnemies);
-            _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(10), () => { Evolution *= GameStyle.EvolutionRate; });
+            _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
 
-            CurrentEnemies = new List<Enemy>();
+            CurrentEnemies = new List<EnemyDefinition>();
+            Turrets = new List<TurretDefinition>();
             EnemiesToSpawn = new List<string>();
             UpdateEnemiesToSpawnList();
         }
@@ -58,6 +65,7 @@ namespace TDGame.Core
 
                 UpdateSpawnQueue();
                 UpdateEnemyPositions();
+                UpdateTurrets(passed);
             }
         }
 
@@ -80,7 +88,7 @@ namespace TDGame.Core
 
         private void UpdateEnemyPositions()
         {
-            var toRemove = new List<Enemy>();
+            var toRemove = new List<EnemyDefinition>();
             foreach(var enemy in CurrentEnemies)
             {
                 var target = Map.WayPoints[enemy.WayPointID];
@@ -107,7 +115,7 @@ namespace TDGame.Core
                 CurrentEnemies.Remove(enemy);
         }
 
-        private double GetAngle(WayPoint target, Enemy enemy)
+        private double GetAngle(WayPoint target, EnemyDefinition enemy)
         {
             var a = target.Y - enemy.Y;
             var b = target.X - enemy.X;
@@ -129,8 +137,93 @@ namespace TDGame.Core
             UpdateEnemiesToSpawnList();
         }
 
-        private static double Distance(Enemy e1, Enemy e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
-        private static double Distance(Enemy e1, WayPoint w2) => Distance(e1.X, e1.Y, w2.X, w2.Y);
+        private void UpdateTurrets(TimeSpan passed)
+        {
+            foreach (var turret in Turrets)
+            {
+                turret.CoolingFor -= passed;
+
+                if (turret.CoolingFor <= TimeSpan.Zero)
+                {
+                    switch (turret.Type)
+                    {
+                        case TurretType.Bullets: UpdateGatlingTurret(turret); break;
+                    }
+                }
+            }
+        }
+
+        private EnemyDefinition? GetNearestEnemy(TurretDefinition turret)
+        {
+            var minDist = double.MaxValue;
+            EnemyDefinition? best = null;
+            foreach (var enemy in CurrentEnemies)
+            {
+                var dist = Distance(turret, enemy);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    best = enemy;
+                }
+            }
+            return best;
+        }
+
+        private void UpdateGatlingTurret(TurretDefinition turret)
+        {
+            var best = GetNearestEnemy(turret);
+            if (best != null)
+            {
+                turret.Targeting = null;
+                if (!DamageEnemy(best, turret.Damage))
+                    turret.Targeting = best;
+                turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
+            }
+        }
+
+        public bool AddTurret(TurretDefinition turret, WayPoint point)
+        {
+            foreach (var block in Map.BlockingTiles)
+                if (Intersects(turret, point, block))
+                    return false;
+
+            foreach(var otherTurret in Turrets)
+                if (Intersects(otherTurret, turret))
+                    return false;
+
+            turret.X = point.X;
+            turret.Y = point.Y;
+            Turrets.Add(turret);
+
+            return true;
+        }
+
+        private bool DamageEnemy(EnemyDefinition enemy, int damage)
+        {
+            enemy.Health -= damage;
+            if (enemy.Health <= 0)
+            {
+                CurrentEnemies.Remove(enemy);
+                return true;
+            }
+            return false;
+        }
+
+        private static bool Intersects(TurretDefinition turret, WayPoint turretLocation, BlockedTile tile)
+        {
+            float closestX = (turretLocation.X < tile.X ? tile.X : (turretLocation.X > tile.Width ? tile.Width : turretLocation.X));
+            float closestY = (turretLocation.Y < tile.Y ? tile.Y : (turretLocation.Y > tile.Height ? tile.Height : turretLocation.Y));
+            float dx = closestX - turretLocation.X;
+            float dy = closestY - turretLocation.Y;
+
+            return (dx * dx + dy * dy) <= turret.Size * turret.Size;
+        }
+
+        private static bool Intersects(TurretDefinition e1, TurretDefinition e2) => Distance(e1, e2) < e1.Size + e2.Size;
+        private static double Distance(TurretDefinition e1, TurretDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
+        private static double Distance(TurretDefinition e1, EnemyDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
+        private static double Distance(EnemyDefinition e1, EnemyDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
+        private static double Distance(EnemyDefinition e1, WayPoint w2) => Distance(e1.X, e1.Y, w2.X, w2.Y);
         private static double Distance(int x1, double y1, double x2, double y2) => Math.Sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
     }
 }

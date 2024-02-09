@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TDGame.Core.GameStyles
 {
-    public class GameStyle
+    public class GameStyleDefinition
     {
         public string Name { get; set; }
         public double EvolutionRate { get; set; }
@@ -14,5 +14,6 @@ namespace TDGame.Core.GameStyles
         public double MoneyMultiplier { get; set; }
         public int EnemyQuantity { get; set; }
         public int StartingHP { get; set; }
+        public int StartingMoney { get; set; }
     }
 }

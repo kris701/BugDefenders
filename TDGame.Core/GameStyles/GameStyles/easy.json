@@ -4,5 +4,6 @@
   "EnemySpeedMultiplier": 0.5,
   "MoneyMultiplier": 2,
   "EnemyQuantity": 5,
-  "StartingHP": 50
+  "StartingHP": 50,
+  "StartingMoney": 500
 }

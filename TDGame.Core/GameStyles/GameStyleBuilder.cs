@@ -11,9 +11,9 @@ namespace TDGame.Core.GameStyles
 {
     public static class GameStyleBuilder
     {
-        private static BaseBuilder<GameStyle> _builder = new BaseBuilder<GameStyle>("GameStyles.GameStyles");
+        private static BaseBuilder<GameStyleDefinition> _builder = new BaseBuilder<GameStyleDefinition>("GameStyles.GameStyles");
 
         public static List<string> GetGameStyles() => _builder.GetResources();
-        public static GameStyle GetGameStyle(string name) => _builder.GetResource(name);
+        public static GameStyleDefinition GetGameStyle(string name) => _builder.GetResource(name);
     }
 }

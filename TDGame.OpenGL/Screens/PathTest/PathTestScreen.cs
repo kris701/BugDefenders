@@ -4,6 +4,8 @@ using System.IO;
 using System.Text.Json;
 using TDGame.Core;
 using TDGame.Core.Enemies;
+using TDGame.Core.Maps;
+using TDGame.Core.Turret;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -20,6 +22,7 @@ namespace Project1.Screens.PathTest
         public PathTestScreen(IEngine parent) : base(parent)
         {
             _game = new TDGame.Core.Game("map1", "easy");
+            _game.AddTurret(TurretBuilder.GetTurret("turret1"), new WayPoint(175, 300));
             OnUpdate += Game_OnUpdate;
             Initialize();
         }
@@ -49,6 +52,18 @@ namespace Project1.Screens.PathTest
                     Height = 10,
                     X = enemy.X,
                     Y = enemy.Y,
+                };
+                _canvas.Children.Add(newPanel);
+            }
+            foreach (var turret in _game.Turrets)
+            {
+                var newPanel = new PanelControl()
+                {
+                    FillColor = BasicTextures.Gray,
+                    Width = turret.Size,
+                    Height = turret.Size,
+                    X = turret.X,
+                    Y = turret.Y,
                 };
                 _canvas.Children.Add(newPanel);
             }
