@@ -12,49 +12,53 @@ using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Textures;
 
 namespace Project1.Screens.PathTest
 {
     public partial class PathTestScreen : BaseScreen
     {
         private TDGame.Core.Game _game;
-        private TurretDefinition? _buyingTurret;
+        private string _buyingTurret;
 
         public PathTestScreen(IEngine parent) : base(parent)
         {
             _game = new TDGame.Core.Game("map1", "easy");
-            _game.AddTurret(TurretBuilder.GetTurret("turret1"), new WayPoint(175, 300));
-            _game.AddTurret(TurretBuilder.GetTurret("turret2"), new WayPoint(225, 300));
-            _game.AddTurret(TurretBuilder.GetTurret("turret3"), new WayPoint(275, 600));
             OnUpdate += Game_OnUpdate;
             Initialize();
+        }
+
+        private void StartButton_Click(ButtonControl parent)
+        {
+            _game.Running = !_game.Running;
+            if (_game.Running)
+                _startButton.Text = "Pause";
+            else
+                _startButton.Text = "Start";
+        }
+
+        private void AutoRunButton_Click(ButtonControl parent)
+        {
+            _game.AutoSpawn = !_game.AutoSpawn;
+            if (_game.AutoSpawn)
+                _autoRunButton.Text = "[X] Auto-Wave";
+            else
+                _autoRunButton.Text = "[ ] Auto-Wave";
         }
 
         private void Game_OnUpdate(GameTime gameTime)
         {
             _game.Update(gameTime.ElapsedGameTime);
             _gameCanvas.Children.Clear();
-            foreach (var blockingTile in _game.Map.BlockingTiles)
-            {
-                var newPanel = new PanelControl()
-                {
-                    FillColor = BasicTextures.GetBasicTexture(Color.Black),
-                    Width = blockingTile.Width,
-                    Height = blockingTile.Height,
-                    X = blockingTile.X,
-                    Y = blockingTile.Y,
-                };
-                _gameCanvas.Children.Add(newPanel);
-            }
             foreach (var enemy in _game.CurrentEnemies)
             {
                 var newPanel = new PanelControl()
                 {
-                    FillColor = BasicTextures.GetBasicTexture(Color.White),
-                    Width = 10,
-                    Height = 10,
-                    X = enemy.X,
-                    Y = enemy.Y,
+                    FillColor = TextureBuilder.GetTexture(enemy.ID),
+                    Width = 20,
+                    Height = 20,
+                    X = enemy.X - 10,
+                    Y = enemy.Y - 10
                 };
                 _gameCanvas.Children.Add(newPanel);
             }
@@ -66,31 +70,31 @@ namespace Project1.Screens.PathTest
                     case TurretType.Bullets:
                         newPanel = new PanelControl()
                         {
-                            FillColor = BasicTextures.GetBasicTexture(Color.Red),
+                            FillColor = BasicTextures.GetBasicRectange(Color.Red),
                             Width = turret.Size,
                             Height = turret.Size,
-                            X = turret.X,
-                            Y = turret.Y,
+                            X = turret.X - turret.Size / 2,
+                            Y = turret.Y - turret.Size / 2,
                         };
                         break;
                     case TurretType.Rockets:
                         newPanel = new PanelControl()
                         {
-                            FillColor = BasicTextures.GetBasicTexture(Color.Blue),
+                            FillColor = BasicTextures.GetBasicRectange(Color.Blue),
                             Width = turret.Size,
                             Height = turret.Size,
-                            X = turret.X,
-                            Y = turret.Y,
+                            X = turret.X - turret.Size / 2,
+                            Y = turret.Y - turret.Size / 2,
                         };
                         break;
                     case TurretType.Missile:
                         newPanel = new PanelControl()
                         {
-                            FillColor = BasicTextures.GetBasicTexture(Color.Yellow),
+                            FillColor = BasicTextures.GetBasicRectange(Color.Yellow),
                             Width = turret.Size,
                             Height = turret.Size,
-                            X = turret.X,
-                            Y = turret.Y,
+                            X = turret.X - turret.Size / 2,
+                            Y = turret.Y - turret.Size / 2,
                         };
                         break;
                 }
@@ -100,11 +104,11 @@ namespace Project1.Screens.PathTest
             {
                 var newPanel = new PanelControl()
                 {
-                    FillColor = BasicTextures.GetBasicTexture(Color.Cyan),
+                    FillColor = BasicTextures.GetBasicRectange(Color.Cyan),
                     Width = 10,
                     Height = 10,
-                    X = rocket.X,
-                    Y = rocket.Y,
+                    X = rocket.X - 5,
+                    Y = rocket.Y - 5,
                 };
                 _gameCanvas.Children.Add(newPanel);
             }
@@ -112,53 +116,103 @@ namespace Project1.Screens.PathTest
             {
                 var newPanel = new PanelControl()
                 {
-                    FillColor = BasicTextures.GetBasicTexture(Color.Gold),
+                    FillColor = BasicTextures.GetBasicRectange(Color.Gold),
                     Width = 10,
                     Height = 10,
-                    X = missile.X,
-                    Y = missile.Y,
+                    X = missile.X - 5,
+                    Y = missile.Y - 5,
                 };
                 _gameCanvas.Children.Add(newPanel);
             }
 
             _moneyLabel.Text = $"Money: {_game.Money}$";
-            _hpLabel.Text = $"HP: {_game.HP}$";
+            _hpLabel.Text = $"HP: {_game.HP}";
 
-            if (_buyingPreviewPanel.IsEnabled)
+            if (_game.Money < TurretBuilder.GetTurret("turret1").Cost)
+                _buyGatlingTurretButton.IsEnabled = false;
+            else
+                _buyGatlingTurretButton.IsEnabled = true;
+            if (_game.Money < TurretBuilder.GetTurret("turret2").Cost)
+                _buyRocketTurretButton.IsEnabled = false;
+            else
+                _buyRocketTurretButton.IsEnabled = true;
+            if (_game.Money < TurretBuilder.GetTurret("turret3").Cost)
+                _buyMissileTurretButton.IsEnabled = false;
+            else
+                _buyMissileTurretButton.IsEnabled = true;
+
+            _nextWavePanel.Children.Clear();
+            foreach (var item in _game.EnemiesToSpawn)
+            {
+                _nextWavePanel.Children.Add(new LabelControl()
+                {
+                    Text = $"{item}",
+                    Font = BasicFonts.Font8pt
+                });
+                _nextWavePanel.Refresh();
+            }
+
+            if (_buyingPreviewPanel.IsVisible)
             {
                 var mouseState = Mouse.GetState();
-                _buyingPreviewPanel.X = mouseState.X;
-                _buyingPreviewPanel.Y = mouseState.Y;
+                var keyState = Keyboard.GetState();
+                _buyingPreviewPanel.X = mouseState.X - _buyingPreviewPanel.Width / 2;
+                _buyingPreviewPanel.Y = mouseState.Y - _buyingPreviewPanel.Height / 2;
+                _buyingPreviewRangePanel.X = mouseState.X - _buyingPreviewRangePanel.Width / 2;
+                _buyingPreviewRangePanel.Y = mouseState.Y - _buyingPreviewRangePanel.Height / 2;
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (_game.AddTurret(_buyingTurret, new WayPoint(mouseState.X, mouseState.Y)))
-                        _buyingPreviewPanel.IsEnabled = false;
+                    if (mouseState.X > 0 && mouseState.X < _gameCanvas.Width &&
+                        mouseState.Y > 0 && mouseState.Y < _gameCanvas.Height)
+                    {
+                        if (_game.AddTurret(TurretBuilder.GetTurret(_buyingTurret), new WayPoint(mouseState.X, mouseState.Y)))
+                        {
+                            if (!keyState.IsKeyDown(Keys.LeftShift))
+                            {
+                                _buyingPreviewPanel.IsVisible = false;
+                                _buyingPreviewRangePanel.IsVisible = false;
+                            }
+                        }
+                    }
                 } else if (mouseState.RightButton == ButtonState.Pressed)
                 {
-                    _buyingPreviewPanel.IsEnabled = false;
+                    _buyingPreviewPanel.IsVisible = false;
+                    _buyingPreviewRangePanel.IsVisible = false;
                 }
             }
         }
 
         private void BuyGatlingTurret_Click(ButtonControl parent)
         {
-            _buyingPreviewPanel.IsEnabled = true;
-            _buyingPreviewPanel.FillColor = BasicTextures.GetBasicTexture(Color.Red);
-            _buyingTurret = TurretBuilder.GetTurret("turret1");
+            _buyingPreviewPanel.IsVisible = true;
+            _buyingPreviewRangePanel.IsVisible = true;
+            _buyingTurret = "turret1";
+            _buyingPreviewPanel.FillColor = BasicTextures.GetBasicRectange(Color.Red);
+            _buyingPreviewRangePanel.FillColor = BasicTextures.GetBasicCircle(Color.Gray, TurretBuilder.GetTurret(_buyingTurret).Range * 2);
+            _buyingPreviewRangePanel.Width = _buyingPreviewRangePanel.FillColor.Width;
+            _buyingPreviewRangePanel.Height = _buyingPreviewRangePanel.FillColor.Height;
         }
 
         private void BuyRocketTurret_Click(ButtonControl parent)
         {
-            _buyingPreviewPanel.IsEnabled = true;
-            _buyingPreviewPanel.FillColor = BasicTextures.GetBasicTexture(Color.Blue);
-            _buyingTurret = TurretBuilder.GetTurret("turret2");
+            _buyingPreviewPanel.IsVisible = true;
+            _buyingPreviewRangePanel.IsVisible = true;
+            _buyingTurret = "turret2";
+            _buyingPreviewPanel.FillColor = BasicTextures.GetBasicRectange(Color.Blue);
+            _buyingPreviewRangePanel.FillColor = BasicTextures.GetBasicCircle(Color.Gray, TurretBuilder.GetTurret(_buyingTurret).Range * 2);
+            _buyingPreviewRangePanel.Width = _buyingPreviewRangePanel.FillColor.Width;
+            _buyingPreviewRangePanel.Height = _buyingPreviewRangePanel.FillColor.Height;
         }
 
         private void BuyMissileTurret_Click(ButtonControl parent)
         {
-            _buyingPreviewPanel.IsEnabled = true;
-            _buyingPreviewPanel.FillColor = BasicTextures.GetBasicTexture(Color.Yellow);
-            _buyingTurret = TurretBuilder.GetTurret("turret3");
+            _buyingPreviewPanel.IsVisible = true;
+            _buyingPreviewRangePanel.IsVisible = true;
+            _buyingTurret = "turret3";
+            _buyingPreviewPanel.FillColor = BasicTextures.GetBasicRectange(Color.Yellow);
+            _buyingPreviewRangePanel.FillColor = BasicTextures.GetBasicCircle(Color.Gray, TurretBuilder.GetTurret(_buyingTurret).Range * 2);
+            _buyingPreviewRangePanel.Width = _buyingPreviewRangePanel.FillColor.Width;
+            _buyingPreviewRangePanel.Height = _buyingPreviewRangePanel.FillColor.Height;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TDGame.OpenGL.Engine.Controls
     public class GridControl : BaseChildrenContainer
     {
         public string FillColorName { get; set; } = "";
-        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
+        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public int Margin { get; set; } = 1;
         public List<int> RowDefinitions { get; set; } = new List<int>() { 1 };
         public List<int> ColumnDefinitions { get; set; } = new List<int>() { 1 };

@@ -3,6 +3,18 @@
     {
       "ID": "2811A657-6811-423A-8342-142BF5BD261A",
       "Content": "map1"
+    },
+    {
+      "ID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "Content": "enemy1"
+    },
+    {
+      "ID": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "Content": "enemy2"
+    },
+    {
+      "ID": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "Content": "enemy3"
     }
   ]
 }

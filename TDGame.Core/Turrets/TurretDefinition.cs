@@ -5,13 +5,15 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Enemies;
-using TDGame.Core.Models;
 
 namespace TDGame.Core.Turrets
 {
     public enum TurretType { None, Bullets, Rockets, Missile };
-    public class TurretDefinition : BaseGameModel
+    public class TurretDefinition
     {
+        public Guid ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public TurretType Type { get; set; }
         public int Size { get; set; }
         public int Cost { get; set; }
@@ -29,8 +31,11 @@ namespace TDGame.Core.Turrets
         [JsonIgnore]
         public EnemyDefinition? Targeting { get; set; }
 
-        public TurretDefinition(Guid id, string name, string description, TurretType type, int size, int cost, int range, int damage, int cooldown, List<TurretLevel> levels) : base(id, name, description)
+        public TurretDefinition(Guid id, string name, string description, TurretType type, int size, int cost, int range, int damage, int cooldown, List<TurretLevel> levels)
         {
+            ID = id;
+            Name = name;
+            Description = description;
             Type = type;
             Size = size;
             Cost = cost;

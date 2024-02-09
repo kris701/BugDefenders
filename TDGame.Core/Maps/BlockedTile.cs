@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Maps.Tiles
+namespace TDGame.Core.Maps
 {
     public class BlockedTile
     {
-        public int X { get; set; }  
+        public int X { get; set; }
         public int Y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }

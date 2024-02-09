@@ -11,11 +11,11 @@ namespace TDGame.OpenGL.Engine.Controls
     {
         public int ScrollButtonsSize { get; set; } = 25;
         public string ScrollBarIndicatorFillColorName { get; set; } = "";
-        public Texture2D ScrollBarIndicatorFillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Gray);
+        public Texture2D ScrollBarIndicatorFillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public string ScrollButtonsFillColorName { get; set; } = "";
-        public Texture2D ScrollButtonsFillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Gray);
+        public Texture2D ScrollButtonsFillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public string ScrollButtonsClickedFillColorName { get; set; } = "";
-        public Texture2D ScrollButtonsClickedFillColor { get; set; } = BasicTextures.GetBasicTexture(Color.White);
+        public Texture2D ScrollButtonsClickedFillColor { get; set; } = BasicTextures.GetBasicRectange(Color.White);
         public SpriteFont ScrollButtonsFont { get; set; }
 
         private ButtonControl _upButton;

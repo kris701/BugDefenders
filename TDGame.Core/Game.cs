@@ -4,7 +4,6 @@ using TDGame.Core.Enemies;
 using TDGame.Core.GameStyles;
 using TDGame.Core.Helpers;
 using TDGame.Core.Maps;
-using TDGame.Core.Maps.Tiles;
 using TDGame.Core.Turrets;
 
 namespace TDGame.Core
@@ -19,19 +18,20 @@ namespace TDGame.Core
 
         public Game(string mapName, string style)
         {
-            Map = MapBuilder.GetMap(mapName);
-            GameStyle = GameStyleBuilder.GetGameStyle(style);
-            HP = GameStyle.StartingHP;
-            Money = GameStyle.StartingMoney;
-            _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), QueueEnemies);
-            _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
-            _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
-
             CurrentEnemies = new List<EnemyDefinition>();
             Turrets = new List<TurretDefinition>();
             EnemiesToSpawn = new List<string>();
             Rockets = new List<RocketDefinition>();
             Missiles = new List<MissileDefinition>();
+
+            Map = MapBuilder.GetMap(mapName);
+            GameStyle = GameStyleBuilder.GetGameStyle(style);
+            HP = GameStyle.StartingHP;
+            Money = GameStyle.StartingMoney;
+            _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (CurrentEnemies.Count == 0) QueueEnemies(); });
+            _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
+            _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
+
             UpdateEnemiesToSpawnList();
         }
 
@@ -124,7 +124,7 @@ namespace TDGame.Core
             return Math.Atan2(a, b);
         }
 
-        private void QueueEnemies()
+        public void QueueEnemies()
         {
             var group = Guid.NewGuid();
             for (int i = 0; i < GameStyle.EnemyQuantity; i++)
@@ -264,10 +264,8 @@ namespace TDGame.Core
                     {
                         var dist = MathHelpers.Distance(rocket.X, rocket.Y, CurrentEnemies[i].X, CurrentEnemies[i].Y);
                         if (dist < rocket.SplashRange)
-                        {
-                            DamageEnemy(CurrentEnemies[i], rocket.Damage);
-                            i--;
-                        }
+                            if (DamageEnemy(CurrentEnemies[i], rocket.Damage))
+                                i--;
                     }
                     toRemove.Add(rocket);
                 }
@@ -320,10 +318,8 @@ namespace TDGame.Core
                     {
                         var dist = MathHelpers.Distance(missile.X, missile.Y, CurrentEnemies[i].X, CurrentEnemies[i].Y);
                         if (dist < missile.SplashRange)
-                        {
-                            DamageEnemy(CurrentEnemies[i], missile.Damage);
-                            i--;
-                        }
+                            if (DamageEnemy(CurrentEnemies[i], missile.Damage))
+                                i--;
                     }
                     toRemove.Add(missile);
                 }
@@ -341,7 +337,7 @@ namespace TDGame.Core
                     return false;
 
             foreach(var otherTurret in Turrets)
-                if (MathHelpers.Intersects(otherTurret, turret))
+                if (MathHelpers.Intersects(otherTurret, turret, point))
                     return false;
 
             turret.X = point.X;

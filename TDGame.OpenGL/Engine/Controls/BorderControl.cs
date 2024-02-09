@@ -8,7 +8,7 @@ namespace TDGame.OpenGL.Engine.Controls
     public class BorderControl : BaseChildContainer, IChildContainer
     {
         public string BorderColorName { get; set; } = "";
-        public Texture2D BorderColor { get; set; } = BasicTextures.GetBasicTexture(Color.Black);
+        public Texture2D BorderColor { get; set; } = BasicTextures.GetBasicRectange(Color.Black);
         public int BorderWidth { get; set; } = 1;
         public int Margin { get; set; } = 0;
 

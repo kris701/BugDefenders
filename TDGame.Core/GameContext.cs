@@ -15,7 +15,7 @@ namespace TDGame.Core
         public MapDefinition Map { get; set; }
         public GameStyleDefinition GameStyle { get; set; }
         public List<string> EnemiesToSpawn { get; set; }
-        public bool AutoSpawn { get; set; } = true;
+        public bool AutoSpawn { get; set; } = false;
         public double Evolution { get; set; } = 1;
         public int EnemySpawnDistance { get; set; } = 10;
         public bool Running { get; set; } = true;

@@ -8,7 +8,7 @@ namespace TDGame.OpenGL.Engine.Controls
     public class PanelControl : BaseControl
     {
         public string FillColorName { get; set; } = "";
-        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
+        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public PanelControl()
         {
         }

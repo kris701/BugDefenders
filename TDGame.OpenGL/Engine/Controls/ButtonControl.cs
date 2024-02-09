@@ -17,9 +17,11 @@ namespace TDGame.OpenGL.Engine.Controls
         public Keys ModifierKeyA { get; set; } = Keys.LeftShift;
         public Keys ModifierKeyB { get; set; } = Keys.LeftControl;
         public string FillColorName { get; set; } = "";
-        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
+        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public string FillClickedColorName { get; set; } = "";
-        public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicTexture(Color.Transparent);
+        public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
+        public string FillDisabledColorName { get; set; } = "";
+        public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
 
         private bool _isClicked = false;
         private bool _wasPressed = false;
@@ -42,10 +44,15 @@ namespace TDGame.OpenGL.Engine.Controls
             if (!IsVisible)
                 return;
 
-            if (!_isClicked)
-                spriteBatch.Draw(FillColor, new Rectangle(X, Y, Width, Height), Color.White);
+            if (IsEnabled)
+            {
+                if (!_isClicked)
+                    spriteBatch.Draw(FillColor, new Rectangle(X, Y, Width, Height), Color.White);
+                else
+                    spriteBatch.Draw(FillClickedColor, new Rectangle(X, Y, Width, Height), Color.White);
+            }
             else
-                spriteBatch.Draw(FillClickedColor, new Rectangle(X, Y, Width, Height), Color.White);
+                spriteBatch.Draw(FillDisabledColor, new Rectangle(X, Y, Width, Height), Color.White);
             spriteBatch.DrawString(Font, Text, new Vector2(_textX, _textY), FontColor);
         }
 

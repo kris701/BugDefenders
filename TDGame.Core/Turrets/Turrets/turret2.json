@@ -4,10 +4,10 @@
   "Description": "asfdasfasf",
   "Type": 2,
   "Size": 25,
-  "Cost": 10,
+  "Cost": 500,
   "Range": 300,
-  "Damage": 50,
-  "Cooldown": 1000,
+  "Damage": 100,
+  "Cooldown": 500,
   "Levels": [
     {
       "Name": "Upgrade 1",

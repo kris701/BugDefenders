@@ -46,7 +46,7 @@ namespace TDGame.Core.Helpers
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
-                    var map = JsonSerializer.Deserialize<T>(result);
+                    var map = JsonSerializer.Deserialize<T>(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                     if (map == null)
                         throw new Exception($"Resource not found: {name}");
                     return map;

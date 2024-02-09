@@ -4,8 +4,8 @@
   "Description": "asfdasfasf",
   "Type": 1,
   "Size": 25,
-  "Cost": 10,
-  "Range": 100,
+  "Cost": 250,
+  "Range": 200,
   "Damage": 10,
   "Cooldown": 5,
   "Levels": [

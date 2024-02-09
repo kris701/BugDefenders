@@ -5,7 +5,7 @@
   "MoneyMultiplier": 2,
   "EnemyQuantity": 5,
   "StartingHP": 50,
-  "StartingMoney": 500,
+  "StartingMoney": 1500,
   "EnemySpawnQuantity": 5,
   "ProjectileSpeedCap": 10
 }
