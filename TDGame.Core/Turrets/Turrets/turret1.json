@@ -1,18 +1,18 @@
 ﻿{
   "id": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
-  "Name": "turret 1",
+  "Name": "Laser Turret",
   "Description": "asfdasfasf",
   "Type": 1,
   "Size": 25,
   "Cost": 250,
   "Range": 200,
   "Damage": 10,
+  "ProjectileID": null,
   "Cooldown": 5,
-  "Levels": [
+  "TurretLevels": [
     {
       "Name": "Upgrade 1",
       "Description": "asfaf",
-      "RequiresTurretLevel": 0,
       "Cost": 5,
       "RangeModifier": 2,
       "DamageModifier": 2,
@@ -21,11 +21,11 @@
     {
       "Name": "Upgrade 2",
       "Description": "fast turret",
-      "RequiresTurretLevel": 1,
       "Cost": 50,
       "RangeModifier": 1,
       "DamageModifier": 1,
       "CooldownModifier": 0.5
     }
-  ]
+  ],
+  "ProjectileLevels": []
 }

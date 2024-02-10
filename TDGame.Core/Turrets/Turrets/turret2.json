@@ -1,31 +1,32 @@
 ﻿{
   "id": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
-  "Name": "turret 2",
+  "Name": "Rocket Turret",
   "Description": "asfdasfasf",
   "Type": 2,
   "Size": 25,
   "Cost": 500,
   "Range": 300,
-  "Damage": 100,
+  "Damage": 0,
+  "ProjectileID": "rocket",
   "Cooldown": 500,
-  "Levels": [
-    {
-      "Name": "Upgrade 1",
-      "Description": "asfaf",
-      "RequiresTurretLevel": 0,
-      "Cost": 5,
-      "RangeModifier": 2,
-      "DamageModifier": 2,
-      "CooldownModifier": 1
-    },
+  "TurretLevels": [
     {
       "Name": "Upgrade 2",
       "Description": "fast turret",
-      "RequiresTurretLevel": 1,
       "Cost": 50,
       "RangeModifier": 1,
       "DamageModifier": 1,
       "CooldownModifier": 0.5
+    }
+  ],
+  "ProjectileLevels": [
+    {
+      "Name": "Upgrade 3",
+      "Description": "more damage",
+      "Cost": 50,
+      "DamageModifier": 2,
+      "SplashRangeModifier": 1,
+      "TriggerRangeModifier": 1
     }
   ]
 }

@@ -53,6 +53,13 @@ namespace TDGame.OpenGL.Engine.Screens
             _viewLayers[layer].Add(control);
         }
 
+        public void RemoveControl(int layer, IControl control)
+        {
+            if (!_viewLayers.ContainsKey(layer))
+                _viewLayers.Add(layer, new List<IControl>());
+            _viewLayers[layer].Remove(control);
+        }
+
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             foreach (var key in _viewLayers.Keys)

@@ -8,10 +8,10 @@ namespace TDGame.Core.Maps
 {
     public class WayPoint
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
 
-        public WayPoint(int x, int y)
+        public WayPoint(float x, float y)
         {
             X = x;
             Y = y;

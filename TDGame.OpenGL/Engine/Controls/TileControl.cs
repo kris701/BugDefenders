@@ -14,6 +14,7 @@ namespace TDGame.OpenGL.Engine.Controls
     {
         public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public bool ForceFit { get; set; } = false;
+        public float Rotation { get; set; } = 0;
 
         public TileControl(IScreen parent) : base(parent)
         {
@@ -40,7 +41,7 @@ namespace TDGame.OpenGL.Engine.Controls
                     new Vector2(X, Y),
                     new Rectangle(0, 0, (int)Width, (int)Height),
                     GetAlphaColor(),
-                    0,
+                    Rotation,
                     new Vector2(),
                     1,
                     SpriteEffects.None,
@@ -58,7 +59,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         new Vector2(X, Y),
                         null,
                         GetAlphaColor(),
-                        0,
+                        Rotation,
                         new Vector2(),
                         new Vector2(xFit, yFit),
                         SpriteEffects.None,
@@ -70,7 +71,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         new Vector2(X, Y),
                         null,
                         GetAlphaColor(),
-                        0,
+                        Rotation,
                         new Vector2(),
                         Parent.ScaleValue,
                         SpriteEffects.None,

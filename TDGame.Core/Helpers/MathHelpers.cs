@@ -31,6 +31,6 @@ namespace TDGame.Core.Helpers
         public static double Distance(TurretDefinition e1, EnemyDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
         public static double Distance(EnemyDefinition e1, EnemyDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
         public static double Distance(EnemyDefinition e1, WayPoint w2) => Distance(e1.X, e1.Y, w2.X, w2.Y);
-        public static double Distance(int x1, double y1, double x2, double y2) => Math.Sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+        public static double Distance(float x1, float y1, float x2, float y2) => Math.Sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
     }
 }

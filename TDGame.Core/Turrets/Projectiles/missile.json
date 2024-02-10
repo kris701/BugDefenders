@@ -1,0 +1,12 @@
+﻿{
+  "id": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+  "Name": "Basic Missile",
+  "Description": "asfdasfasf",
+  "Speed": 1,
+  "Damage": 500,
+  "Range": 600,
+  "SplashRange": 100,
+  "TriggerRange": 50,
+  "Acceleration": 1.2,
+  "IsGuided": true
+}

@@ -5,29 +5,36 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Turrets
+namespace TDGame.Core.Turrets.Upgrades
 {
-    public class TurretLevel
+    public class TurretLevel : IUpgrade
     {
         public string Name { get; set; }
-        public int RequiresTurretLevel { get; set; }
         public string Description { get; set; }
         public int Cost { get; set; }
         public double RangeModifier { get; set; }
         public double DamageModifier { get; set; }
         public double CooldownModifier { get; set; }
+
         [JsonIgnore]
         public bool HasUpgrade { get; set; }
 
-        public TurretLevel(string name, int requiresTurretLevel, string description, int cost, double rangeModifier, double damageModifier, double cooldownModifier)
+        public TurretLevel(string name, string description, int cost, double rangeModifier, double damageModifier, double cooldownModifier)
         {
             Name = name;
-            RequiresTurretLevel = requiresTurretLevel;
             Description = description;
             Cost = cost;
             RangeModifier = rangeModifier;
             DamageModifier = damageModifier;
             CooldownModifier = cooldownModifier;
+        }
+
+        public void ApplyUpgrade(TurretDefinition on)
+        {
+            on.Range = (int)(on.Range * RangeModifier);
+            on.Damage = (int)(on.Damage * DamageModifier);
+            on.Cooldown = (int)(on.Cooldown * CooldownModifier);
+            HasUpgrade = true;
         }
     }
 }

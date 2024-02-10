@@ -31,6 +31,14 @@
     {
       "ID": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
       "Content": "turret3"
+    },
+    {
+      "ID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+      "Content": "missile"
+    },
+    {
+      "ID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+      "Content": "rocket"
     }
   ]
 }

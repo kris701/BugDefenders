@@ -14,8 +14,8 @@ namespace TDGame.OpenGL.Engine.Controls
     {
         public float Thickness { get; set; } = 2;
         public Texture2D Stroke { get; set; } = BasicTextures.GetBasicRectange(Color.Red);
-        private int _x2 = 0;
-        public int X2
+        private float _x2 = 0;
+        public float X2
         {
             get
             {
@@ -26,8 +26,8 @@ namespace TDGame.OpenGL.Engine.Controls
                 _x2 = Parent.Scale(value);
             }
         }
-        private int _y2 = 0;
-        public int Y2
+        private float _y2 = 0;
+        public float Y2
         {
             get
             {

@@ -2,22 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Enemies;
+using TDGame.Core.Models;
 
 namespace TDGame.Core.Turrets
 {
-    public class MissileDefinition
+    public class ProjectileDefinition : BasePositionModel, ITextured
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public EnemyDefinition Target { get; set; }
+        public Guid ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public int Speed { get; set; }
         public int Damage { get; set; }
         public int Range { get; set; }
         public int SplashRange { get; set; }
         public int TriggerRange { get; set; }
         public double Acceleration { get; set; }
+        public bool IsGuided { get; set; }
+
+        [JsonIgnore]
         public int Traveled { get; set; }
+
+        [JsonIgnore]
+        public double Angle { get; set; }
+        [JsonIgnore]
+        public EnemyDefinition Target { get; set; }
     }
 }

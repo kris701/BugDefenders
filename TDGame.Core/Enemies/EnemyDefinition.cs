@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using TDGame.Core.Models;
 
 namespace TDGame.Core.Enemies
 {
-    public class EnemyDefinition
+    public class EnemyDefinition : BasePositionModel, ITextured
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
@@ -15,10 +16,6 @@ namespace TDGame.Core.Enemies
         public int Health { get; set; }
         public double Speed { get; set; }
         public int Reward { get; set; }
-        [JsonIgnore]
-        public int X { get; set; }
-        [JsonIgnore]
-        public int Y { get; set; }
         [JsonIgnore]
         public int WayPointID { get; set; } = 0;
         [JsonIgnore]

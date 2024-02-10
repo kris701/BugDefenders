@@ -24,6 +24,7 @@ namespace TDGame.OpenGL.Engine.Screens
 
         public void ClearLayer(int layer);
         public void AddControl(int layer, IControl control);
+        public void RemoveControl(int layer, IControl control);
 
         public void Initialize();
         public void Update(GameTime gameTime);

@@ -5,11 +5,13 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Enemies;
+using TDGame.Core.Models;
+using TDGame.Core.Turrets.Upgrades;
 
 namespace TDGame.Core.Turrets
 {
-    public enum TurretType { None, Bullets, Rockets, Missile };
-    public class TurretDefinition
+    public enum TurretType { None, Laser, Projectile };
+    public class TurretDefinition : BasePositionModel, ITextured
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
@@ -20,20 +22,18 @@ namespace TDGame.Core.Turrets
         public int Range { get; set; }
         public int Damage { get; set; }
         public int Cooldown { get; set; }
-        public List<TurretLevel> Levels { get; set; }
+        public string? ProjectileID { get; set; }
+        public List<TurretLevel> TurretLevels { get; set; }
+        public List<ProjectileLevel> ProjectileLevels { get; set; }
 
-        [JsonIgnore]
-        public int X { get; set; }
-        [JsonIgnore]
-        public int Y { get; set; }
         [JsonIgnore]
         public TimeSpan CoolingFor { get; set; }
         [JsonIgnore]
         public EnemyDefinition? Targeting { get; set; }
 
-        public TurretDefinition(Guid id, string name, string description, TurretType type, int size, int cost, int range, int damage, int cooldown, List<TurretLevel> levels)
+        public TurretDefinition(Guid iD, string name, string description, TurretType type, int size, int cost, int range, int damage, int cooldown, string? projectileID, List<TurretLevel> turretLevels, List<ProjectileLevel> projectileLevels)
         {
-            ID = id;
+            ID = iD;
             Name = name;
             Description = description;
             Type = type;
@@ -42,11 +42,9 @@ namespace TDGame.Core.Turrets
             Range = range;
             Damage = damage;
             Cooldown = cooldown;
-            Levels = levels;
-
-            foreach(var level in Levels)
-                if (level.RequiresTurretLevel >= Levels.Count)
-                    throw new Exception("Turret definition has an upgrade with a too high required index!");
+            ProjectileID = projectileID;
+            TurretLevels = turretLevels;
+            ProjectileLevels = projectileLevels;
         }
     }
 }
