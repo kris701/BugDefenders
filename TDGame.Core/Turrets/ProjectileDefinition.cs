@@ -26,7 +26,7 @@ namespace TDGame.Core.Turrets
         public int Traveled { get; set; }
 
         [JsonIgnore]
-        public double Angle { get; set; }
+        public float Angle { get; set; }
         [JsonIgnore]
         public EnemyDefinition Target { get; set; }
     }

@@ -21,6 +21,8 @@ namespace TDGame.OpenGL.Screens.PathTest
         private TileControl _buyingPreviewTile;
         private TileControl _buyingPreviewRangeTile;
 
+        private TileControl _turretSelectRangeTile;
+
         private List<ButtonControl> _turretButtons = new List<ButtonControl>();
 
         public override void Initialize()
@@ -63,6 +65,12 @@ namespace TDGame.OpenGL.Screens.PathTest
                     Width = _gameArea.Width
                 }
             });
+            _turretSelectRangeTile = new TileControl(this)
+            {
+                IsVisible = false,
+                Alpha = 100
+            };
+            AddControl(0, _turretSelectRangeTile);
         }
 
         private void SetupGameControlsField()
@@ -213,7 +221,7 @@ namespace TDGame.OpenGL.Screens.PathTest
                 var turret = TurretBuilder.GetTurret(turretName);
                 var newTurretButton = new ButtonControl(this, clicked: BuyTurret_Click)
                 {
-                    Text = $"[{turret.Cost}] {turret.Name}",
+                    Text = $"[{turret.Cost}$] {turret.Name}",
                     Font = BasicFonts.GetFont(12),
                     FillColor = BasicTextures.GetBasicRectange(Color.White),
                     FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),

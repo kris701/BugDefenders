@@ -8,6 +8,7 @@ using TDGame.Core.Models;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
+using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
 namespace TDGame.OpenGL.Screens.PathTest
 {
@@ -16,37 +17,58 @@ namespace TDGame.OpenGL.Screens.PathTest
         public int Layer { get; set; }
         public IScreen Screen { get; set; }
         public int Size { get; set; }
+        public int XOffset { get; set; }
+        public int YOffset { get; set; }
 
-        private Dictionary<T, TileControl> _entities = new Dictionary<T, TileControl>();
+        private Dictionary<T, ButtonControl> _entities = new Dictionary<T, ButtonControl>();
+        private ClickedHandler? _onClicked;
 
-        public EntityUpdater(int layer, IScreen screen, int size)
+        public EntityUpdater(int layer, IScreen screen, int size, int xOffset, int yOffset, ClickedHandler? onClicked = null)
         {
             Layer = layer;
             Screen = screen;
             Size = size;
+            XOffset = xOffset;
+            YOffset = yOffset;
+            _onClicked = onClicked;
         }
 
-        public void UpdateEntities(List<T> entities)
+        public void UpdateEntities(List<T> entities, Func<T, ButtonControl> toControlOverride = null, Action<T, ButtonControl> updateOverride = null)
         {
             foreach(var entity in entities)
             {
                 if (_entities.ContainsKey(entity)) 
                 {
                     var toUpdate = _entities[entity];
-                    toUpdate.X = entity.X - Size / 2;
-                    toUpdate.Y = entity.Y - Size / 2;
+                    if (updateOverride != null)
+                        updateOverride(entity, toUpdate);
+                    else
+                    {
+                        toUpdate.X = XOffset + entity.X - Size / 2;
+                        toUpdate.Y = YOffset + entity.Y - Size / 2;
+                    }
                 }
                 else
                 {
-                    var newControl = new TileControl(Screen)
+                    ButtonControl newControl;
+                    if (toControlOverride != null)
+                        newControl = toControlOverride(entity);
+                    else
                     {
-                        ForceFit = true,
-                        FillColor = TextureBuilder.GetTexture(entity.ID),
-                        X = entity.X - Size / 2,
-                        Y = entity.Y - Size / 2,
-                        Width = Size,
-                        Height = Size
-                    };
+                        newControl = new ButtonControl(Screen, clicked: _onClicked)
+                        {
+                            ForceFit = true,
+                            IsEnabled = false,
+                            FillClickedColor = TextureBuilder.GetTexture(entity.ID),
+                            FillDisabledColor = TextureBuilder.GetTexture(entity.ID),
+                            FillColor = TextureBuilder.GetTexture(entity.ID),
+                            X = entity.X - Size / 2,
+                            Y = entity.Y - Size / 2,
+                            Width = Size,
+                            Height = Size,
+                            Tag = entity
+                        };
+                    }
                     Screen.AddControl(Layer, newControl);
                     _entities.Add(entity, newControl);
                 }

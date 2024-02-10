@@ -115,15 +115,15 @@ namespace TDGame.Core
                 CurrentEnemies.Remove(enemy);
         }
 
-        private double GetAngle(WayPoint target, EnemyDefinition enemy) => GetAngle(target.X, target.Y, enemy.X, enemy.Y);
-        private double GetAngle(EnemyDefinition enemy, TurretDefinition turret) => GetAngle(enemy.X, enemy.Y, turret.X, turret.Y);
-        private double GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => GetAngle(enemy.X, enemy.Y, projectile.X, projectile.Y);
+        private float GetAngle(WayPoint target, EnemyDefinition enemy) => GetAngle(target.X, target.Y, enemy.X, enemy.Y);
+        private float GetAngle(EnemyDefinition enemy, TurretDefinition turret) => GetAngle(enemy.X, enemy.Y, turret.X, turret.Y);
+        private float GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => GetAngle(enemy.X, enemy.Y, projectile.X, projectile.Y);
 
-        private double GetAngle(float x1, float y1, float x2, float y2)
+        private float GetAngle(float x1, float y1, float x2, float y2)
         {
             var a = y1 - y2;
             var b = x1 - x2;
-            return Math.Atan2(a, b);
+            return (float)Math.Atan2(a, b);
         }
 
         public void QueueEnemies()
@@ -211,7 +211,6 @@ namespace TDGame.Core
             var toRemove = new List<ProjectileDefinition>();
             foreach(var projectile in Projectiles)
             {
-                double angle = projectile.Angle;
                 if (projectile.IsGuided)
                 {
                     if (!CurrentEnemies.Contains(projectile.Target))
@@ -224,11 +223,11 @@ namespace TDGame.Core
                         }
                         projectile.Target = best;
                     }
-                    angle = GetAngle(projectile.Target, projectile);
+                    projectile.Angle = GetAngle(projectile.Target, projectile);
                 }
 
-                var xMod = Math.Cos(angle);
-                var yMod = Math.Sin(angle);
+                var xMod = Math.Cos(projectile.Angle);
+                var yMod = Math.Sin(projectile.Angle);
                 projectile.Speed = (int)Math.Ceiling(projectile.Speed * projectile.Acceleration);
                 if (projectile.Speed > GameStyle.ProjectileSpeedCap)
                     projectile.Speed = GameStyle.ProjectileSpeedCap;
@@ -268,6 +267,15 @@ namespace TDGame.Core
         {
             if (Money < turret.Cost)
                 return false;
+            if (point.X < turret.Size)
+                return false;
+            if (point.X > Map.Width - turret.Size)
+                return false;
+            if (point.Y < turret.Size)
+                return false;
+            if (point.Y > Map.Height - turret.Size)
+                return false;
+
             foreach (var block in Map.BlockingTiles)
                 if (MathHelpers.Intersects(turret, point, block))
                     return false;

@@ -43,36 +43,57 @@ namespace TDGame.OpenGL.Engine.Controls
                 targetColor = FillDisabledColor;
 
             if (FillColor.Width == 1 && FillColor.Height == 1)
+            {
                 spriteBatch.Draw(
                     targetColor,
-                    new Vector2(X, Y),
+                    new Vector2(X + Width / 2, Y + Height / 2),
                     new Rectangle(0, 0, (int)Width, (int)Height),
                     GetAlphaColor(),
-                    0,
-                    new Vector2(),
+                    Rotation,
+                    new Vector2(Width / 2, Height / 2),
                     1,
                     SpriteEffects.None,
                     0);
+            }
             else
-                spriteBatch.Draw(
-                    targetColor,
-                    new Vector2(X, Y),
-                    null,
-                    GetAlphaColor(),
-                    0,
-                    new Vector2(),
-                    Parent.ScaleValue,
-                    SpriteEffects.None,
-                    0);
+            {
+                if (ForceFit)
+                {
+                    var xFit = Width / FillColor.Width;
+                    var yFit = Height / FillColor.Height;
+
+                    spriteBatch.Draw(
+                        targetColor,
+                        new Vector2(X + Width / 2, Y + Height / 2),
+                        null,
+                        GetAlphaColor(),
+                        Rotation,
+                        new Vector2(Width / 2, Height / 2),
+                        new Vector2(xFit, yFit),
+                        SpriteEffects.None,
+                        0);
+                }
+                else
+                    spriteBatch.Draw(
+                        targetColor,
+                        new Vector2(X + Width / 2, Y + Height / 2),
+                        null,
+                        GetAlphaColor(),
+                        Rotation,
+                        new Vector2(Width / 2, Height / 2),
+                        Parent.ScaleValue,
+                        SpriteEffects.None,
+                        0);
+            }
 
             if (Text != "")
                 spriteBatch.DrawString(
                     Font,
                     Text,
-                    new Vector2(_textX, _textY),
+                    new Vector2(_textX + Width / 2, _textY + Height / 2),
                     new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
-                    0,
-                    new Vector2(),
+                    Rotation,
+                    new Vector2(Width / 2, Height / 2),
                     Parent.ScaleValue,
                     SpriteEffects.None,
                     0);

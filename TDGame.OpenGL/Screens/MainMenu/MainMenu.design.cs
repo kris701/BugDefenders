@@ -37,6 +37,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 HorizontalAlignment = Alignment.Middle,
                 Y = 100,
                 FillColor = TextureBuilder.GetTexture(new Guid("960c3e27-bfa4-40db-8397-ce47655eb169")),
+                Rotation = 1
             });
             AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {

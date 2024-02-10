@@ -15,8 +15,8 @@ namespace TDGame.OpenGL.Engine.Screens
         public GameEngine Parent { get; set; }
         public FadeState State { get; set; } = FadeState.FadeIn;
 
-        public int FadeInTime { get; set; } = 500;
-        public int FadeOutTime { get; set; } = 500;
+        public int FadeInTime { get; set; } = 200;
+        public int FadeOutTime { get; set; } = 200;
 
         public float ScaleValue { get; set; } = 1;
         public int Scale(int value) => (int)(value * ScaleValue);

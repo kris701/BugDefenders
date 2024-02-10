@@ -38,11 +38,11 @@ namespace TDGame.OpenGL.Engine.Controls
             {
                 spriteBatch.Draw(
                     FillColor,
-                    new Vector2(X, Y),
+                    new Vector2(X + Width / 2, Y + Height / 2),
                     new Rectangle(0, 0, (int)Width, (int)Height),
                     GetAlphaColor(),
                     Rotation,
-                    new Vector2(),
+                    new Vector2(Width / 2, Height / 2),
                     1,
                     SpriteEffects.None,
                     0);
@@ -56,11 +56,11 @@ namespace TDGame.OpenGL.Engine.Controls
 
                     spriteBatch.Draw(
                         FillColor,
-                        new Vector2(X, Y),
+                        new Vector2(X + Width / 2, Y + Height / 2),
                         null,
                         GetAlphaColor(),
                         Rotation,
-                        new Vector2(),
+                        new Vector2(Width / 2, Height / 2),
                         new Vector2(xFit, yFit),
                         SpriteEffects.None,
                         0);
@@ -68,11 +68,11 @@ namespace TDGame.OpenGL.Engine.Controls
                 else
                     spriteBatch.Draw(
                         FillColor,
-                        new Vector2(X, Y),
+                        new Vector2(X + Width / 2, Y + Height / 2),
                         null,
                         GetAlphaColor(),
                         Rotation,
-                        new Vector2(),
+                        new Vector2(Width / 2, Height / 2),
                         Parent.ScaleValue,
                         SpriteEffects.None,
                         0);
