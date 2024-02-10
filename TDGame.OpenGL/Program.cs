@@ -10,7 +10,7 @@ namespace TDGame.OpenGL
         static void Main()
         {
 #if DEBUG
-            using (var game = new TDGame((x) => new MainMenu(x)))
+            using (var game = new TDGame((g) => new MainMenu(g)))
             {
                 game.Device.PreferredBackBufferWidth = 1000;
                 game.Device.PreferredBackBufferHeight = 1000;

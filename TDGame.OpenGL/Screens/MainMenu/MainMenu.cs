@@ -5,8 +5,9 @@ namespace Project1.Screens.MainMenu
 {
     public partial class MainMenu : BaseScreen
     {
-        public MainMenu(IEngine parent) : base(parent)
+        public MainMenu(TDGame.OpenGL.TDGame parent) : base(parent)
         {
+            ScaleValue = parent.Scale;
             Initialize();
         }
     }

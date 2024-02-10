@@ -1,18 +1,39 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
-    public class BorderControl : BaseChildContainer, IChildContainer
+    public class BorderControl : TileControl
     {
-        public Texture2D BorderColor { get; set; } = BasicTextures.GetBasicRectange(Color.Black);
-        public int BorderWidth { get; set; } = 1;
-        public int Margin { get; set; } = 0;
+        public Texture2D BorderBrush { get; set; } = BasicTextures.GetBasicRectange(Color.Black);
+        public float Thickness { get; set; } = 2;
+        public IControl Child { get; set; }
 
-        public BorderControl()
+        public BorderControl(IScreen parent) : base(parent)
         {
+        }
+
+        public override void Initialize()
+        {
+            X = Child.X;
+            Y = Child.Y;
+            Width = Child.Width; 
+            Height = Child.Height;
+            Child.Initialize();
+            base.Initialize();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            Child.Update(gameTime);
+            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -21,37 +42,10 @@ namespace TDGame.OpenGL.Engine.Controls
                 return;
 
             Child.Draw(gameTime, spriteBatch);
-            spriteBatch.Draw(BorderColor, new Rectangle(X, Y, Width, BorderWidth), Color.White);
-            spriteBatch.Draw(BorderColor, new Rectangle(X, Y, BorderWidth, Height), Color.White);
-            spriteBatch.Draw(BorderColor, new Rectangle(X + Width, Y, BorderWidth, Height), Color.White);
-            spriteBatch.Draw(BorderColor, new Rectangle(X, Y + Height, Width + BorderWidth, BorderWidth), Color.White);
-        }
-
-        public override void Refresh()
-        {
-            if (!IsVisible)
-                return;
-            if (!IsEnabled)
-                return;
-
-            if (Width != 0)
-                Child.Width = Width - Margin * 2;
-            if (Height != 0)
-                Child.Height = Height - Margin * 2;
-            Child.X = X + Margin;
-            Child.Y = Y + Margin;
-            Child.Refresh();
-            X = Child.X - Margin;
-            Y = Child.Y - Margin;
-            if (Width == 0)
-                Width = Child.Width + Margin * 2;
-            if (Height == 0)
-                Height = Child.Height + Margin * 2;
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            Child.LoadContent(content);
+            spriteBatch.Draw(BorderBrush, new Vector2(X, Y), new Rectangle((int)X, (int)Y, (int)Width, (int)Thickness), GetAlphaColor());
+            spriteBatch.Draw(BorderBrush, new Vector2(X, Y), new Rectangle((int)X, (int)Y, (int)Thickness, (int)Height), GetAlphaColor());
+            spriteBatch.Draw(BorderBrush, new Vector2(X + Width, Y), new Rectangle((int)(X + Width), (int)Y, (int)Thickness, (int)Height), GetAlphaColor());
+            spriteBatch.Draw(BorderBrush, new Vector2(X, Y + Height), new Rectangle((int)X, (int)(Y + Height), (int)(Width + Thickness), (int)Thickness), GetAlphaColor());
         }
     }
 }

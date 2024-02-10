@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
@@ -8,20 +9,23 @@ using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL
 {
-    public class TDGame : Game, IEngine
+    public class TDGame : Game
     {
         public GraphicsDeviceManager Device { get; }
-        public IScreen? CurrentScreen { get; internal set; }
+        public int ScreenWidth() => Window.ClientBounds.Width;
+        public int ScreenHeight() => Window.ClientBounds.Height;
+        public float Scale { get; set; } = 1;
 
+        private Func<TDGame, IScreen> _screenToLoad;
+        private IScreen _currentScreen;
         private SpriteBatch? _spriteBatch;
-        private Func<TDGame, IScreen> _initialScreen;
 
-        public TDGame(Func<TDGame, IScreen> initialScreen)
+        public TDGame(Func<TDGame, IScreen> screen)
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            _screenToLoad = screen;
             IsMouseVisible = true;
-            _initialScreen = initialScreen;
         }
 
         protected override void Initialize()
@@ -33,27 +37,18 @@ namespace TDGame.OpenGL
             TextureBuilder.Initialize(Content);
             TextureBuilder.LoadTexturePack(TextureBuilder.GetTexturePacks()[0]);
 
-            CurrentScreen = _initialScreen.Invoke(this);
-            if (CurrentScreen != null)
-                CurrentScreen.Parent = this;
-            SwitchView(CurrentScreen);
+            _currentScreen = _screenToLoad(this);
+            _currentScreen.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            if (CurrentScreen != null)
-            {
-                CurrentScreen.LoadContent(Content);
-                CurrentScreen.Refresh();
-            }
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (CurrentScreen != null)
-                CurrentScreen.Update(gameTime);
+            _currentScreen.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -66,24 +61,15 @@ namespace TDGame.OpenGL
                 throw new Exception("Error! Spritebatch was not initialized!");
 
             _spriteBatch.Begin();
-            if (CurrentScreen != null)
-                CurrentScreen.Draw(gameTime, _spriteBatch);
+            _currentScreen.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-        public void SwitchView(IScreen? screen)
+        public void SwitchView(IScreen screen)
         {
-            CurrentScreen = screen;
-            if (CurrentScreen != null)
-            {
-                CurrentScreen.LoadContent(Content);
-                CurrentScreen.Refresh();
-            }
+            _currentScreen = screen;
         }
-
-        public int ScreenWidth() => Window.ClientBounds.Width;
-        public int ScreenHeight() => Window.ClientBounds.Height;
     }
 }

@@ -1,50 +1,87 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
-    public class LabelControl : BaseControl
+    public class LabelControl : TileControl
     {
-        public string Text { get; set; } = "";
+        private string _text = "";
+        public string Text { 
+            get { 
+                return _text; 
+            } set { 
+                _text = value;
+                _textChanged = true;
+            } 
+        }
         public Color FontColor { get; set; } = Color.Black;
-        public SpriteFont Font { get; set; } = BasicFonts.GetFont(8);
+        private SpriteFont _font = BasicFonts.GetFont(8);
+        public SpriteFont Font { 
+            get { 
+                return _font; 
+            } set { 
+                _font = value;
+                _textChanged = true;
+            } 
+        }
 
-        private int _textX = 0;
-        private int _textY = 0;
+        internal float _textX = 0;
+        internal float _textY = 0;
+        internal bool _textChanged = true;
 
-        public LabelControl()
+        public LabelControl(IScreen parent) : base(parent)
         {
+        }
+
+        private void UpdateTextPositions()
+        {
+            var size = Font.MeasureString(Text);
+            if (Width == 0)
+                Width = size.X;
+            if (Height == 0)
+                Height = size.Y;
+            ReAlign();
+            _textX = X + (Width - Parent.Scale(size.X)) / 2;
+            _textY = Y + (Height - Parent.Scale(size.Y)) / 2;
+        }
+
+        public override void Initialize()
+        {
+            UpdateTextPositions();
+            base.Initialize();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (!IsVisible)
-                return;
-
+            base.Draw(gameTime, spriteBatch);
             if (Text != "")
-                spriteBatch.DrawString(Font, Text, new Vector2(_textX, _textY), FontColor);
+                spriteBatch.DrawString(
+                    Font, 
+                    Text, 
+                    new Vector2(_textX, _textY), 
+                    new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
+                    0,
+                    new Vector2(),
+                    Parent.ScaleValue,
+                    SpriteEffects.None,
+                    0);
         }
 
-        public override void Refresh()
+        public override void Update(GameTime gameTime)
         {
-            if (!IsVisible)
-                return;
-            if (!IsEnabled)
-                return;
-
-            if (Text != "")
+            if (_textChanged && Text != "")
             {
-                var size = Font.MeasureString(Text);
-                if (Width == 0)
-                    Width = (int)size.X;
-                if (Height == 0)
-                    Height = (int)size.Y;
-                _textX = X + (Width - (int)size.X) / 2;
-                _textY = Y + (Height - (int)size.Y) / 2;
+                _textChanged = false;
+                UpdateTextPositions();
             }
+            base.Update(gameTime);
         }
     }
 }

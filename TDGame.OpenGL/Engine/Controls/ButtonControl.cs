@@ -1,9 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
@@ -16,20 +20,12 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public Keys ModifierKeyA { get; set; } = Keys.LeftShift;
         public Keys ModifierKeyB { get; set; } = Keys.LeftControl;
-        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
-        public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
-        public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
+        public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
 
         private bool _holding = false;
         private bool _blocked = false;
-        private int _textX = 0;
-        private int _textY = 0;
 
-        public ButtonControl()
-        {
-        }
-
-        public ButtonControl(ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null)
+        public ButtonControl(IScreen parent, ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null) : base(parent)
         {
             Clicked += clicked;
             ClickedModifierA += clickedModifierA;
@@ -38,47 +34,48 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (!IsVisible)
-                return;
+            var targetColor = FillColor;
+            if (_holding)
+                targetColor = FillClickedColor;
 
-            if (IsEnabled)
-            {
-                if (!_holding)
-                    spriteBatch.Draw(FillColor, new Rectangle(X, Y, Width, Height), Color.White);
-                else
-                    spriteBatch.Draw(FillClickedColor, new Rectangle(X, Y, Width, Height), Color.White);
-            }
+            if (FillColor.Width == 1 && FillColor.Height == 1)
+                spriteBatch.Draw(
+                    targetColor,
+                    new Vector2(X, Y),
+                    new Rectangle(0, 0, (int)Width, (int)Height),
+                    GetAlphaColor(),
+                    0,
+                    new Vector2(),
+                    1,
+                    SpriteEffects.None,
+                    0);
             else
-                spriteBatch.Draw(FillDisabledColor, new Rectangle(X, Y, Width, Height), Color.White);
+                spriteBatch.Draw(
+                    targetColor,
+                    new Vector2(X, Y),
+                    null,
+                    GetAlphaColor(),
+                    0,
+                    new Vector2(),
+                    Parent.ScaleValue,
+                    SpriteEffects.None,
+                    0);
 
             if (Text != "")
-                spriteBatch.DrawString(Font, Text, new Vector2(_textX, _textY), FontColor);
-        }
-
-        public override void Refresh()
-        {
-            if (!IsVisible)
-                return;
-            if (!IsEnabled)
-                return;
-
-            base.Refresh();
-
-            if (Text != "")
-            {
-                var size = Font.MeasureString(Text);
-                _textX = X + (Width - (int)size.X) / 2;
-                _textY = Y + (Height - (int)size.Y) / 2;
-            }
+                spriteBatch.DrawString(
+                    Font,
+                    Text,
+                    new Vector2(_textX, _textY),
+                    new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
+                    0,
+                    new Vector2(),
+                    Parent.ScaleValue,
+                    SpriteEffects.None,
+                    0);
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (!IsVisible)
-                return;
-            if (!IsEnabled)
-                return;
-
             var mouseState = Mouse.GetState();
             if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&
                 mouseState.Y > Y && mouseState.Y < Y + Height))

@@ -1,85 +1,95 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
     public abstract class BaseControl : IControl
     {
-        public event UIEvent? UIChanged;
-        public string Name { get; set; } = "";
-        private bool _isVisible = true;
-        public bool IsVisible
+        public IScreen Parent { get; internal set; }
+        public Alignment HorizontalAlignment { get; set; } = Alignment.None;
+
+        public bool IsVisible { get; set; } = true;
+        private float _x = 0;
+        public float X
         {
             get
             {
-                return _isVisible;
+                return _x;
             }
             set
             {
-                if (_isVisible != value)
-                {
-                    _isVisible = value;
-                    if (UIChanged != null)
-                        UIChanged.Invoke();
-                }
+                _x = Parent.Scale(value);
             }
         }
-        public bool IsEnabled { get; set; } = true;
-        public int X { get; set; } = 0;
-        public int Y { get; set; } = 0;
-        public int Width { get; set; } = 0;
-        public virtual int Height { get; set; } = 0;
-        public int Row { get; set; } = 0;
-        public int Column { get; set; } = 0;
-        public int RowSpan { get; set; } = 1;
-        public int ColumnSpan { get; set; } = 1;
+        private float _y = 0;
+        public float Y
+        {
+            get
+            {
+                return _y;
+            }
+            set
+            {
+                _y = Parent.Scale(value);
+            }
+        }
+        private float _width = 0;
+        public float Width
+        {
+            get
+            {
+                return _width;
+            }
+            set
+            {
+                _width = Parent.Scale(value);
+            }
+        }
+        private float _height = 0;
+        public float Height
+        {
+            get
+            {
+                return _height;
+            }
+            set
+            {
+                _height = Parent.Scale(value);
+            }
+        }
+        public int Alpha { get; set; } = 255;
         public object Tag { get; set; }
 
-        protected BaseControl()
+        protected BaseControl(IScreen parent)
         {
+            Parent = parent;
         }
 
-        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        internal void ReAlign()
         {
-
+            switch (HorizontalAlignment)
+            {
+                case Alignment.Left: _x = 0; break;
+                case Alignment.Right: _x = Parent.Parent.ScreenWidth() - Width; break;
+                case Alignment.Middle: _x = Parent.Parent.ScreenWidth() / 2 - Width / 2; break;
+            }
         }
 
         public virtual void Initialize()
         {
-
+            ReAlign();
         }
-
-        public virtual void LoadContent(ContentManager content)
-        {
-
-        }
-
-        public virtual void Refresh()
-        {
-
-        }
-
         public virtual void Update(GameTime gameTime)
         {
-
         }
+        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
-        public void UpdateUI()
-        {
-            if (IsEnabled)
-            {
-                if (UIChanged != null)
-                    UIChanged.Invoke();
-                else
-                    Refresh();
-            }
-        }
-
-        public virtual List<IControl> GetLookupStack()
-        {
-            return new List<IControl>() { this };
-        }
+        internal Color GetAlphaColor() => new Color(255, 255, 255, Alpha);
     }
 }

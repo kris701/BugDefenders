@@ -1,24 +1,29 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using TDGame.Core.Maps;
 
 namespace TDGame.OpenGL.Engine.Screens
 {
-    public delegate void SwitchEvent();
-    public delegate void UpdatedEvent(GameTime passed);
     public enum FadeState { FadeIn, Hold, FadeOut, PostHold }
-    public interface IScreen : ILookup
+    public interface IScreen
     {
-        public event SwitchEvent EnteredView;
-        public event SwitchEvent ExitedView;
-        public event UpdatedEvent OnUpdate;
-        public IEngine Parent { get; set; }
+        public TDGame Parent { get; set; }
         public int FadeInTime { get; }
         public int FadeOutTime { get; }
         public FadeState State { get; set; }
+
+        public float ScaleValue { get; set; }
+        public int Scale(int value);
+        public double Scale(double value);
+        public float Scale(float value);
+        public WayPoint GetRelativePosition(MouseState from);
+
+        public void AddControl(int layer, IControl control);
+
         public void Initialize();
-        public void LoadContent(ContentManager content);
-        public void Refresh();
         public void Update(GameTime gameTime);
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch);
     }

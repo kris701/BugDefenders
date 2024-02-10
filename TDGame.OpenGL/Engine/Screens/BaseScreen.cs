@@ -1,104 +1,71 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using TDGame.Core.Maps;
+using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Screens
 {
-    public abstract class BaseScreen : IScreen, ILookup
+    public abstract class BaseScreen : IScreen
     {
-        public event SwitchEvent? EnteredView;
-        public event SwitchEvent? ExitedView;
-        public event UpdatedEvent? OnUpdate;
-        public IEngine Parent { get; set; }
-        public Dictionary<string, IControl> Lookup { get; } = new Dictionary<string, IControl>();
-        public IChildrenContainer? Container { get; set; }
+        public TDGame Parent { get; set; }
         public FadeState State { get; set; } = FadeState.FadeIn;
 
-        public int FadeInTime { get; set; } = 200;
-        public int FadeOutTime { get; set; } = 200;
+        public int FadeInTime { get; set; } = 500;
+        public int FadeOutTime { get; set; } = 500;
+
+        public float ScaleValue { get; set; } = 1;
+        public int Scale(int value) => (int)(value * ScaleValue);
+        public double Scale(double value) => value * ScaleValue;
+        public float Scale(float value) => (float)(value * ScaleValue);
+        public WayPoint GetRelativePosition(MouseState from) => new WayPoint(Scale(from.X), Scale(from.Y));
 
         private double fadeTimer = 0;
         private int fadeValue = 255;
-        private IScreen? _switchTo;
+        private IScreen _switchTo;
+        private Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
+        private Dictionary<int, List<IControl>> _viewLayers;
 
-        public BaseScreen(IEngine parent)
+        public BaseScreen(TDGame parent)
         {
             Parent = parent;
+            _viewLayers = new Dictionary<int, List<IControl>>() {
+                { 0, new List<IControl>() }
+            };
+        }
+
+        public void AddControl(int layer, IControl control)
+        {
+            if (!_viewLayers.ContainsKey(layer))
+                _viewLayers.Add(layer, new List<IControl>());
+            _viewLayers[layer].Add(control);
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (Container == null)
-                throw new ArgumentNullException("Container is null!");
-
-            Container.Draw(gameTime, spriteBatch);
-            spriteBatch.FillScreen(BasicTextures.GetBasicRectange(Color.Black), Parent.ScreenWidth(), Parent.ScreenHeight(), fadeValue);
+            foreach (var key in _viewLayers.Keys)
+                foreach (var control in _viewLayers[key])
+                    control.Draw(gameTime, spriteBatch);
+            spriteBatch.FillScreen(_fillColor, Parent.ScreenWidth(), Parent.ScreenHeight(), fadeValue);
         }
 
         public virtual void Initialize()
         {
-            if (Container != null)
-            {
-                GenerateLookup();
-                Container.Initialize();
-            }
-        }
-
-        public void GenerateLookup()
-        {
-            if (Container == null)
-                throw new ArgumentNullException("Container is null!");
-
-            Lookup.Clear();
-            var lookupStack = Container.GetLookupStack();
-            foreach (var item in lookupStack)
-            {
-                if (item.Name != "" && item.Name != null)
-                    Lookup.Add(item.Name, item);
-            }
-        }
-
-        public T FindItem<T>(string name) where T : IControl
-        {
-            if (Lookup.ContainsKey(name))
-            {
-                if (Lookup[name] is T item)
-                    return item;
-                else
-                    throw new EntryPointNotFoundException($"Control named '{name}' was found, but it was not the type expected!");
-            }
-            throw new EntryPointNotFoundException($"Could not find control named '{name}'");
-        }
-
-        public virtual void LoadContent(ContentManager content)
-        {
-            if (Container == null)
-                throw new ArgumentNullException("Container is null!");
-
-            Container.X = 0;
-            Container.Y = 0;
-            Container.Width = Parent.ScreenWidth();
-            Container.Height = Parent.ScreenHeight();
-            Container.LoadContent(content);
-        }
-
-        public void Refresh()
-        {
-            if (Container == null)
-                throw new ArgumentNullException("Container is null!");
-
-            Container.Refresh();
+            foreach (var key in _viewLayers.Keys)
+                foreach (var control in _viewLayers[key])
+                    control.Initialize();
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            if (Container == null)
-                throw new ArgumentNullException("Container is null!");
+            foreach (var key in _viewLayers.Keys)
+                foreach (var control in _viewLayers[key])
+                    control.Update(gameTime);
 
-            Container.Update(gameTime);
             switch (State)
             {
                 case FadeState.FadeIn:
@@ -109,8 +76,6 @@ namespace TDGame.OpenGL.Engine.Screens
                         fadeTimer = 0;
                         State = FadeState.Hold;
                         fadeValue = 0;
-                        if (EnteredView != null)
-                            EnteredView.Invoke();
                     }
                     break;
                 case FadeState.FadeOut:
@@ -119,20 +84,14 @@ namespace TDGame.OpenGL.Engine.Screens
                     if (fadeTimer >= FadeOutTime)
                     {
                         if (_switchTo != null)
-                        {
-                            if (ExitedView != null)
-                                ExitedView.Invoke();
                             Parent.SwitchView(_switchTo);
-                        }
                         State = FadeState.PostHold;
                     }
                     break;
             }
-            if (OnUpdate != null)
-                OnUpdate.Invoke(gameTime);
         }
 
-        public void SwitchView(IScreen? screen)
+        public void SwitchView(IScreen screen)
         {
             if (_switchTo == null)
             {

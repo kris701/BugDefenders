@@ -1,23 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine
 {
-    public delegate void UIEvent();
-    public interface IControl : IRenderable
+    public enum Alignment { None, Left, Middle, Right }
+    public interface IControl
     {
-        public event UIEvent UIChanged;
-        public string Name { get; set; }
-        public bool IsEnabled { get; set; }
-        public bool IsVisible { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public int Row { get; set; }
-        public int Column { get; set; }
-        public int RowSpan { get; set; }
-        public int ColumnSpan { get; set; }
+        public IScreen Parent { get; }
+        public Alignment HorizontalAlignment { get; set; }
 
-        public List<IControl> GetLookupStack();
+        public bool IsVisible { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        public int Alpha { get; set; }
+        public object Tag { get; set; }
+
+        public void Initialize(); // Constructor level initialization
+        public void Update(GameTime gameTime); // Update each frame
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch); // Draw each frame
     }
 }
