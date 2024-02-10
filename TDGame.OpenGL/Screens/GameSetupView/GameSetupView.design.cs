@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Project1.Screens.MainMenu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +16,15 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 {
     public partial class GameSetupView : BaseScreen
     {
+        private ButtonControl _startButton;
         private TileControl _mapPreviewTile;
+        private LabelControl _mapNameLabel;
+        private TextboxControl _mapDescriptionTextbox;
 
         public override void Initialize()
         {
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.SwitchView(new GameSetupView(Parent)))
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameSetupView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -35,7 +37,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             });
 #endif
 
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.SwitchView(new MainMenu(Parent)))
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new MainMenu.MainMenu(Parent)))
             {
                 Text = "Back",
                 Font = BasicFonts.GetFont(16),
@@ -46,7 +48,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 100,
                 Height = 35
             });
-            AddControl(0, new ButtonControl(this, clicked: StartButton_Click)
+            _startButton = new ButtonControl(this, clicked: StartButton_Click)
             {
                 Text = "Start",
                 Font = BasicFonts.GetFont(16),
@@ -56,8 +58,18 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Y = 50,
                 Width = 100,
                 Height = 35
-            });
+            };
+            AddControl(0, _startButton);
 
+            SetupPreviewPanel();
+            SetupMapsView();
+            SetupGameStyleView();
+
+            base.Initialize();
+        }
+
+        private void SetupPreviewPanel()
+        {
             AddControl(0, new TileControl(this)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Blue),
@@ -91,11 +103,27 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 400,
                 Width = 570
             });
-
-            SetupMapsView();
-            SetupGameStyleView();
-
-            base.Initialize();
+            _mapNameLabel = new LabelControl(this)
+            {
+                Text = "Select A Map",
+                Font = BasicFonts.GetFont(16),
+                FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                X = 420,
+                Y = 100,
+                Height = 35,
+                Width = 570
+            };
+            AddControl(1, _mapNameLabel);
+            _mapDescriptionTextbox = new TextboxControl(this)
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.Aquamarine),
+                Font = BasicFonts.GetFont(10),
+                X = 430,
+                Y = 140,
+                Height = 350,
+                Width = 550
+            };
+            AddControl(1, _mapDescriptionTextbox);
         }
 
         private void SetupMapsView()

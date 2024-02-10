@@ -40,7 +40,7 @@ namespace TDGame.OpenGL.Engine.Controls
         {
         }
 
-        private void UpdateTextPositions()
+        internal void UpdateTextPositions()
         {
             var size = Font.MeasureString(Text);
             if (Width == 0)

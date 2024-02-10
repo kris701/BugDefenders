@@ -15,7 +15,7 @@ namespace TDGame.OpenGL.Engine.Controls
         public Alignment HorizontalAlignment { get; set; } = Alignment.None;
 
         public bool IsVisible { get; set; } = true;
-        private float _x = 0;
+        internal float _x = 0;
         public float X
         {
             get
@@ -27,7 +27,7 @@ namespace TDGame.OpenGL.Engine.Controls
                 _x = Parent.Scale(value);
             }
         }
-        private float _y = 0;
+        internal float _y = 0;
         public float Y
         {
             get
@@ -39,7 +39,7 @@ namespace TDGame.OpenGL.Engine.Controls
                 _y = Parent.Scale(value);
             }
         }
-        private float _width = 0;
+        internal float _width = 0;
         public float Width
         {
             get
@@ -51,7 +51,7 @@ namespace TDGame.OpenGL.Engine.Controls
                 _width = Parent.Scale(value);
             }
         }
-        private float _height = 0;
+        internal float _height = 0;
         public float Height
         {
             get

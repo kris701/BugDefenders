@@ -30,6 +30,9 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (!IsVisible)
+                return;
+
             if (FillColor.Width == 1 && FillColor.Height == 1)
             {
                 spriteBatch.Draw(

@@ -1,6 +1,6 @@
-﻿using Project1.Screens.MainMenu;
-using System;
+﻿using System;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Screens.MainMenu;
 
 namespace TDGame.OpenGL
 {
@@ -10,7 +10,7 @@ namespace TDGame.OpenGL
         static void Main()
         {
 #if DEBUG
-            using (var game = new TDGame((g) => new MainMenu(g)))
+            using (var game = new GameEngine((g) => new MainMenu(g)))
             {
                 game.Device.PreferredBackBufferWidth = 1000;
                 game.Device.PreferredBackBufferHeight = 1000;

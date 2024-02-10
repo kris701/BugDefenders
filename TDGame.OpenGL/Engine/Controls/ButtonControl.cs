@@ -21,6 +21,8 @@ namespace TDGame.OpenGL.Engine.Controls
         public Keys ModifierKeyA { get; set; } = Keys.LeftShift;
         public Keys ModifierKeyB { get; set; } = Keys.LeftControl;
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
+        public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
+        public bool IsEnabled { get; set; } = true;
 
         private bool _holding = false;
         private bool _blocked = false;
@@ -37,6 +39,8 @@ namespace TDGame.OpenGL.Engine.Controls
             var targetColor = FillColor;
             if (_holding)
                 targetColor = FillClickedColor;
+            if (!IsEnabled)
+                targetColor = FillDisabledColor;
 
             if (FillColor.Width == 1 && FillColor.Height == 1)
                 spriteBatch.Draw(
@@ -76,41 +80,44 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Update(GameTime gameTime)
         {
-            var mouseState = Mouse.GetState();
-            if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&
-                mouseState.Y > Y && mouseState.Y < Y + Height))
+            if (IsEnabled)
             {
-                if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
-                    _holding = true;
-                else if (_holding && mouseState.LeftButton == ButtonState.Released)
+                var mouseState = Mouse.GetState();
+                if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&
+                    mouseState.Y > Y && mouseState.Y < Y + Height))
                 {
-                    var keyState = Keyboard.GetState();
-                    if (keyState.IsKeyDown(ModifierKeyA))
+                    if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
+                        _holding = true;
+                    else if (_holding && mouseState.LeftButton == ButtonState.Released)
                     {
-                        if (ClickedModifierA != null)
-                            ClickedModifierA.Invoke(this);
+                        var keyState = Keyboard.GetState();
+                        if (keyState.IsKeyDown(ModifierKeyA))
+                        {
+                            if (ClickedModifierA != null)
+                                ClickedModifierA.Invoke(this);
+                        }
+                        else if (keyState.IsKeyDown(ModifierKeyB))
+                        {
+                            if (ClickedModifierB != null)
+                                ClickedModifierB.Invoke(this);
+                        }
+                        else
+                        {
+                            if (Clicked != null)
+                                Clicked.Invoke(this);
+                        }
+                        _holding = false;
                     }
-                    else if (keyState.IsKeyDown(ModifierKeyB))
-                    {
-                        if (ClickedModifierB != null)
-                            ClickedModifierB.Invoke(this);
-                    }
-                    else
-                    {
-                        if (Clicked != null)
-                            Clicked.Invoke(this);
-                    }
-                    _holding = false;
                 }
-            }
-            else
-            {
-                if (_holding && mouseState.LeftButton == ButtonState.Released)
-                    _holding = false;
-                if (mouseState.LeftButton == ButtonState.Pressed)
-                    _blocked = true;
                 else
-                    _blocked = false;
+                {
+                    if (_holding && mouseState.LeftButton == ButtonState.Released)
+                        _holding = false;
+                    if (mouseState.LeftButton == ButtonState.Pressed)
+                        _blocked = true;
+                    else
+                        _blocked = false;
+                }
             }
 
             base.Update(gameTime);

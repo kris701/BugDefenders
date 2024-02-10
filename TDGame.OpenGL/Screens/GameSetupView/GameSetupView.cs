@@ -4,6 +4,7 @@ using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Screens.PathTest;
 using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
@@ -15,7 +16,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private string _selectedMap = "";
         private ButtonControl? _selectedMapButton;
 
-        public GameSetupView(TDGame parent) : base(parent)
+        public GameSetupView(GameEngine parent) : base(parent)
         {
             ScaleValue = parent.Scale;
             Initialize();
@@ -23,8 +24,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void StartButton_Click(ButtonControl sender)
         {
-            //if (_selectedMap != "" && _selectedGameStyle != "")
-            //    Parent.SwitchView(new PathTestScreen(Parent, _selectedMap, _selectedGameStyle));
+            if (_selectedMap != "" && _selectedGameStyle != "")
+                Parent.SwitchView(new PathTestScreen(Parent, _selectedMap, _selectedGameStyle));
         }
 
         private void SelectMap_Click(ButtonControl sender)
@@ -40,6 +41,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 _selectedMap = mapName;
                 var map = MapBuilder.GetMap(mapName);
                 _mapPreviewTile.FillColor = TextureBuilder.GetTexture(map.ID);
+                _mapNameLabel.Text = map.Name;
+                _mapDescriptionTextbox.Text = map.Description;
             }
         }
 

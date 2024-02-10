@@ -12,7 +12,7 @@ namespace TDGame.OpenGL.Engine.Screens
 {
     public abstract class BaseScreen : IScreen
     {
-        public TDGame Parent { get; set; }
+        public GameEngine Parent { get; set; }
         public FadeState State { get; set; } = FadeState.FadeIn;
 
         public int FadeInTime { get; set; } = 500;
@@ -22,7 +22,8 @@ namespace TDGame.OpenGL.Engine.Screens
         public int Scale(int value) => (int)(value * ScaleValue);
         public double Scale(double value) => value * ScaleValue;
         public float Scale(float value) => (float)(value * ScaleValue);
-        public WayPoint GetRelativePosition(MouseState from) => new WayPoint(Scale(from.X), Scale(from.Y));
+        public int InvScale(int value) => (int)(value / ScaleValue);
+        public float InvScale(float value) => value / ScaleValue;
 
         private double fadeTimer = 0;
         private int fadeValue = 255;
@@ -30,12 +31,19 @@ namespace TDGame.OpenGL.Engine.Screens
         private Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
         private Dictionary<int, List<IControl>> _viewLayers;
 
-        public BaseScreen(TDGame parent)
+        public BaseScreen(GameEngine parent)
         {
             Parent = parent;
             _viewLayers = new Dictionary<int, List<IControl>>() {
                 { 0, new List<IControl>() }
             };
+        }
+
+        public void ClearLayer(int layer)
+        {
+            if (!_viewLayers.ContainsKey(layer))
+                _viewLayers.Add(layer, new List<IControl>());
+            _viewLayers[layer].Clear();
         }
 
         public void AddControl(int layer, IControl control)
@@ -89,6 +97,12 @@ namespace TDGame.OpenGL.Engine.Screens
                     }
                     break;
             }
+            OnUpdate(gameTime);
+        }
+
+        public virtual void OnUpdate(GameTime gameTime)
+        {
+
         }
 
         public void SwitchView(IScreen screen)

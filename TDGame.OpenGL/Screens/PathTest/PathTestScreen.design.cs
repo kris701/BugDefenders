@@ -1,212 +1,265 @@
-﻿//using Microsoft.Xna.Framework;
-//using System.Collections.Generic;
-//using TDGame.Core.Turret;
-//using TDGame.OpenGL.Engine;
-//using TDGame.OpenGL.Engine.Controls;
-//using TDGame.OpenGL.Engine.Helpers;
-//using TDGame.OpenGL.Engine.Screens;
-//using TDGame.OpenGL.Textures;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using TDGame.Core.Turret;
+using TDGame.OpenGL.Engine;
+using TDGame.OpenGL.Engine.Controls;
+using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Textures;
 
-//namespace Project1.Screens.PathTest
-//{
-//    public partial class PathTestScreen : BaseScreen
-//    {
-//        private CanvasControl _gameCanvas;
-//        private LabelControl _moneyLabel;
-//        private LabelControl _hpLabel;
+namespace TDGame.OpenGL.Screens.PathTest
+{
+    public partial class PathTestScreen : BaseScreen
+    {
+        private LabelControl _moneyLabel;
+        private LabelControl _hpLabel;
 
-//        private ButtonControl _startButton;
-//        private ButtonControl _sendWave;
-//        private ButtonControl _autoRunButton;
-//        private StackPanelControl _nextWavePanel;
+        private ButtonControl _startButton;
+        private ButtonControl _sendWave;
+        private ButtonControl _autoRunButton;
 
-//        private PanelControl _selectTurretRangePanel;
+        private TileControl _buyingPreviewTile;
+        private TileControl _buyingPreviewRangeTile;
 
-//        private PanelControl _buyingPreviewPanel;
-//        private PanelControl _buyingPreviewRangePanel;
-//        private ButtonControl _buyGatlingTurretButton;
-//        private ButtonControl _buyRocketTurretButton;
-//        private ButtonControl _buyMissileTurretButton;
+        private List<ButtonControl> _turretButtons = new List<ButtonControl>();
 
-//        public override void Initialize()
-//        {
-//            _moneyLabel = new LabelControl()
-//            {
-//                Text = $"Money: {_game.Money}$",
-//                Font = BasicFonts.GetFont(24)
-//            };
-//            _hpLabel = new LabelControl()
-//            {
-//                Text = $"HP: {_game.HP}",
-//                Font = BasicFonts.GetFont(24)
-//            };
-//            _buyGatlingTurretButton = new ButtonControl(clicked: BuyGatlingTurret_Click)
-//            {
-//                FillColor = BasicTextures.GetBasicRectange(Color.White),
-//                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-//                Font = BasicFonts.GetFont(16),
-//                Text = $"{TurretBuilder.GetTurret("turret1").Cost}$ Buy Gatling Turret",
-//            };
-//            _buyRocketTurretButton = new ButtonControl(clicked: BuyRocketTurret_Click)
-//            {
-//                FillColor = BasicTextures.GetBasicRectange(Color.White),
-//                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-//                Font = BasicFonts.GetFont(16),
-//                Text = $"{TurretBuilder.GetTurret("turret2").Cost}$ Buy Rocket Turret"
-//            };
-//            _buyMissileTurretButton = new ButtonControl(clicked: BuyMissileTurret_Click)
-//            {
-//                FillColor = BasicTextures.GetBasicRectange(Color.White),
-//                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-//                Font = BasicFonts.GetFont(16),
-//                Text = $"{TurretBuilder.GetTurret("turret3").Cost}$ Buy Missile Turret",
-//            };
-//            _buyingPreviewPanel = new PanelControl()
-//            {
-//                IsVisible = false,
-//                Width = 25,
-//                Height = 25
-//            };
-//            _buyingPreviewRangePanel = new PanelControl()
-//            {
-//                IsVisible = false,
-//                Width = 10,
-//                Height = 10
-//            };
-//            _gameCanvas = new CanvasControl() {
-//                FillColor = TextureBuilder.GetTexture(_game.Map.ID)
-//            };
-//            _startButton = new ButtonControl(clicked: StartButton_Click)
-//            {
-//                FillColor = BasicTextures.GetBasicRectange(Color.White),
-//                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-//                Text = $"Pause",
-//                Font = BasicFonts.GetFont(24)
-//            };
-//            _autoRunButton = new ButtonControl(clicked: AutoRunButton_Click)
-//            {
-//                FillColor = BasicTextures.GetBasicRectange(Color.White),
-//                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-//                Text = $"[ ] Auto-Wave",
-//                Font = BasicFonts.GetFont(24)
-//            };
-//            _sendWave = new ButtonControl(clicked: (s) => { _game.QueueEnemies(); })
-//            {
-//                FillColor = BasicTextures.GetBasicRectange(Color.White),
-//                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-//                Text = $"Send Wave",
-//                Font = BasicFonts.GetFont(24)
-//            };
-//            _nextWavePanel = new StackPanelControl()
-//            {
-//                Margin = 2
-//            };
-//            _selectTurretRangePanel = new PanelControl()
-//            {
-//                IsVisible = false
-//            };
-//            Container = new GridControl()
-//            {
-//                ColumnDefinitions = new List<int>() { 2, 1 },
-//                RowDefinitions = new List<int>() { 15, 1 },
-//                Margin = 5,
-//                Children = new List<IControl>()
-//                {
-//                    new CanvasControl(){
-//                        Children = new List<IControl>()
-//                        {
-//                            _buyingPreviewRangePanel,
-//                            _buyingPreviewPanel,
-//                            _selectTurretRangePanel
-//                        }
-//                    },
-//                    new BorderControl()
-//                    {
-//                        BorderWidth = 5,
-//                        Margin = 5,
-//                        Child = _gameCanvas
-//                    },
-//                    new BorderControl()
-//                    {
-//                        Column = 1,
-//                        Child = new StackPanelControl()
-//                        {
-//                            FillColor = BasicTextures.GetBasicRectange(Color.Green),
-//                            Margin = 5,
-//                            Children = new List<IControl>()
-//                            {
-//                                _moneyLabel,
-//                                _hpLabel,
-//                                new BorderControl()
-//                                {
-//                                    Child = new StackPanelControl()
-//                                    {
-//                                        Margin = 2,
-//                                        Children = new List<IControl>()
-//                                        {
-//                                            _startButton,
-//                                            _sendWave,
-//                                            _autoRunButton
-//                                        }
-//                                    }
-//                                },
-//                                new BorderControl()
-//                                {
-//                                    Child = new StackPanelControl()
-//                                    {
-//                                        Margin = 2,
-//                                        Children = new List<IControl>()
-//                                        {
-//                                            _buyGatlingTurretButton,
-//                                            _buyRocketTurretButton,
-//                                            _buyMissileTurretButton
-//                                        }
-//                                    }
-//                                },
-//                                new StackPanelControl()
-//                                {
-//                                    Margin = 2,
-//                                    Children = new List<IControl>()
-//                                    {
-//                                        new LabelControl()
-//                                        {
-//                                            Text = "Next Waves:",
-//                                            Font = BasicFonts.GetFont(10)
-//                                        },
-//                                        _nextWavePanel
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    },
-//                    new BorderControl()
-//                    {
-//                        ColumnSpan = 2,
-//                        Row = 1,
-//                        Child = new GridControl()
-//                        {
-//                            Margin = 5,
-//                            FillColor = BasicTextures.GetBasicRectange(Color.Green),
-//                            ColumnDefinitions = new List<int>(){1,1},
-//                            Children = new List<IControl>()
-//                            {
-//                                new BorderControl()
-//                                {
-//                                    Column = 0,
-//                                    Child = new ButtonControl(clicked: (s) => { Parent.SwitchView(new MainMenu.MainMenu(Parent)); })
-//                                    {
-//                                        FillColor = BasicTextures.GetBasicRectange(Color.White),
-//                                        FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-//                                        Font = BasicFonts.GetFont(16),
-//                                        Text = "Exit"
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            };
-//            base.Initialize();
-//        }
-//    }
-//}
+        public override void Initialize()
+        {
+#if DEBUG
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new PathTestScreen(Parent, _currentMap, _currentGameStyle)))
+            {
+                X = 0,
+                Y = 0,
+                Width = 50,
+                Height = 25,
+                Text = "Reload",
+                Font = BasicFonts.GetFont(10),
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+            });
+#endif
+
+            SetupGameField();
+            SetupGameControlsField();
+            SetupPurchasingField();
+            SetupUpgradeField();
+
+
+            
+            base.Initialize();
+        }
+
+        private void SetupGameField()
+        {
+            AddControl(0, new BorderControl(this)
+            {
+                Child = new TileControl(this)
+                {
+                    ForceFit = true,
+                    FillColor = TextureBuilder.GetTexture(_game.Map.ID),
+                    X = _gameArea.X,
+                    Y = _gameArea.Y,
+                    Height = _gameArea.Height,
+                    Width = _gameArea.Width
+                }
+            });
+        }
+
+        private void SetupGameControlsField()
+        {
+            AddControl(0, new BorderControl(this)
+            {
+                Child = new TileControl(this)
+                {
+                    FillColor = BasicTextures.GetBasicRectange(Color.Beige),
+                    Alpha = 100,
+                    X = _gameArea.X + _gameArea.Width + 10,
+                    Y = _gameArea.Y,
+                    Height = 170,
+                    Width = 320
+                }
+            });
+            AddControl(1, new LabelControl(this)
+            {
+                Text = "TDGame",
+                Font = BasicFonts.GetFont(24),
+                FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                X = _gameArea.X + _gameArea.Width + 10,
+                Y = _gameArea.Y,
+                Height = 30,
+                Width = 320
+            });
+            _startButton = new ButtonControl(this, clicked: StartButton_Click)
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                Text = $"Pause",
+                Font = BasicFonts.GetFont(16),
+                X = _gameArea.X + _gameArea.Width + 15,
+                Y = _gameArea.Y + 100,
+                Height = 30,
+                Width = 100
+            };
+            AddControl(1, new BorderControl(this)
+            {
+                Child = _startButton
+            });
+
+            AddControl(1, new BorderControl(this)
+            {
+                Child = new ButtonControl(this, clicked: (x) => { SwitchView(new MainMenu.MainMenu(Parent)); })
+                {
+                    FillColor = BasicTextures.GetBasicRectange(Color.White),
+                    FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    Text = $"Exit",
+                    Font = BasicFonts.GetFont(16),
+                    X = _gameArea.X + _gameArea.Width + 15,
+                    Y = _gameArea.Y + 135,
+                    Height = 30,
+                    Width = 100
+                }
+            });
+
+            _moneyLabel = new LabelControl(this)
+            {
+                Text = $"Money: {_game.Money}$",
+                Font = BasicFonts.GetFont(16),
+                X = _gameArea.X + _gameArea.Width + 15,
+                Y = _gameArea.Y + 35,
+                Height = 30,
+                Width = 310
+            };
+            AddControl(1, new BorderControl(this)
+            {
+                Child = _moneyLabel
+            });
+
+            _hpLabel = new LabelControl(this)
+            {
+                Text = $"HP: {_game.HP}",
+                Font = BasicFonts.GetFont(16),
+                X = _gameArea.X + _gameArea.Width + 15,
+                Y = _gameArea.Y + 65,
+                Height = 30,
+                Width = 310
+            };
+            AddControl(1, new BorderControl(this)
+            {
+                Child = _hpLabel
+            });
+
+            _autoRunButton = new ButtonControl(this, clicked: AutoRunButton_Click)
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                Text = $"[ ] Auto-Wave",
+                Font = BasicFonts.GetFont(16),
+                X = _gameArea.X + _gameArea.Width + 15 + 105,
+                Y = _gameArea.Y + 100,
+                Height = 30,
+                Width = 205
+            };
+            AddControl(1, new BorderControl(this)
+            {
+                Child = _autoRunButton
+            });
+
+            _sendWave = new ButtonControl(this, clicked: (s) => { _game.QueueEnemies(); })
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                Text = $"Send Wave",
+                Font = BasicFonts.GetFont(16),
+                X = _gameArea.X + _gameArea.Width + 15 + 105,
+                Y = _gameArea.Y + 135,
+                Height = 30,
+                Width = 205
+            };
+            AddControl(1, new BorderControl(this)
+            {
+                Child = _sendWave
+            });
+        }
+
+        private void SetupPurchasingField()
+        {
+            AddControl(0, new BorderControl(this)
+            {
+                Child = new TileControl(this)
+                {
+                    FillColor = BasicTextures.GetBasicRectange(Color.Beige),
+                    Alpha = 100,
+                    X = _gameArea.X + _gameArea.Width + 10,
+                    Y = _gameArea.Y + 180,
+                    Height = 470,
+                    Width = 320
+                }
+            });
+            AddControl(1, new LabelControl(this)
+            {
+                Text = "Turrets",
+                Font = BasicFonts.GetFont(24),
+                FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                X = _gameArea.X + _gameArea.Width + 10,
+                Y = _gameArea.Y + 180,
+                Height = 30,
+                Width = 320
+            });
+
+            var turrets = TurretBuilder.GetTurrets();
+            int offset = 0;
+            foreach(var turretName in turrets)
+            {
+                var turret = TurretBuilder.GetTurret(turretName);
+                var newTurretButton = new ButtonControl(this, clicked: BuyTurret_Click)
+                {
+                    Text = $"[{turret.Cost}] {turret.Name}",
+                    Font = BasicFonts.GetFont(12),
+                    FillColor = BasicTextures.GetBasicRectange(Color.White),
+                    FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    X = _gameArea.X + _gameArea.Width + 15,
+                    Y = _gameArea.Y + 215 + (offset++ * 35),
+                    Height = 30,
+                    Width = 310,
+                    Tag = turretName
+                };
+                _turretButtons.Add(newTurretButton);
+                AddControl(1, new BorderControl(this)
+                {
+                    Child = newTurretButton
+                });
+            }
+
+            _buyingPreviewRangeTile = new TileControl(this)
+            {
+                IsVisible = false,
+                Alpha = 100
+            };
+            AddControl(10, _buyingPreviewRangeTile);
+            _buyingPreviewTile = new TileControl(this)
+            {
+                IsVisible = false,
+                ForceFit = true,
+                Width = 50,
+                Height = 50
+            };
+            AddControl(10, _buyingPreviewTile);
+        }
+
+        private void SetupUpgradeField()
+        {
+            AddControl(0, new BorderControl(this)
+            {
+                Child = new TileControl(this)
+                {
+                    FillColor = BasicTextures.GetBasicRectange(Color.Beige),
+                    Alpha = 100,
+                    X = _gameArea.X,
+                    Y = _gameArea.Y + _gameArea.Height + 10,
+                    Height = 320,
+                    Width = 1000 - 20
+                }
+            });
+        }
+    }
+}

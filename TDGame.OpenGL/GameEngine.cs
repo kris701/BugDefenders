@@ -9,18 +9,18 @@ using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL
 {
-    public class TDGame : Game
+    public class GameEngine : Game
     {
         public GraphicsDeviceManager Device { get; }
         public int ScreenWidth() => Window.ClientBounds.Width;
         public int ScreenHeight() => Window.ClientBounds.Height;
         public float Scale { get; set; } = 1;
 
-        private Func<TDGame, IScreen> _screenToLoad;
+        private Func<GameEngine, IScreen> _screenToLoad;
         private IScreen _currentScreen;
         private SpriteBatch? _spriteBatch;
 
-        public TDGame(Func<TDGame, IScreen> screen)
+        public GameEngine(Func<GameEngine, IScreen> screen)
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

@@ -12,14 +12,14 @@ using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Screens.GameSetupView;
 using TDGame.OpenGL.Textures;
 
-namespace Project1.Screens.MainMenu
+namespace TDGame.OpenGL.Screens.MainMenu
 {
     public partial class MainMenu : BaseScreen
     {
         public override void Initialize()
         {
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.SwitchView(new MainMenu(Parent)))
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new MainMenu(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -38,7 +38,7 @@ namespace Project1.Screens.MainMenu
                 Y = 100,
                 FillColor = TextureBuilder.GetTexture(new Guid("960c3e27-bfa4-40db-8397-ce47655eb169")),
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.SwitchView(new GameSetupView(Parent)))
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 300,
