@@ -90,10 +90,10 @@ namespace TDGame.OpenGL.Engine.Controls
                 spriteBatch.DrawString(
                     Font,
                     Text,
-                    new Vector2(_textX + Width / 2, _textY + Height / 2),
+                    new Vector2(_textX + _textWidth / 2, _textY + _textHeight / 2),
                     new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
                     Rotation,
-                    new Vector2(Width / 2, Height / 2),
+                    new Vector2(_textWidth / 2, _textHeight / 2),
                     Parent.ScaleValue,
                     SpriteEffects.None,
                     0);

@@ -39,8 +39,10 @@ namespace TDGame.OpenGL.Engine.Controls
                 _textChanged = true;
             }
         }
+        public float Margin { get; set; } = 5;
         internal bool _textChanged = true;
         internal List<LabelControl> lines = new List<LabelControl>();
+        private float _magicScaleNumber => (float)Math.Pow(Parent.ScaleValue, -0.4);
 
         public TextboxControl(IScreen parent) : base(parent)
         {
@@ -56,7 +58,7 @@ namespace TDGame.OpenGL.Engine.Controls
                 {
                     currentString += character;
                     var size = Font.MeasureString(currentString);
-                    if (Parent.Scale(size.X) > Width - 20)
+                    if (Parent.Scale(size.X) > Width - Parent.Scale(Margin * 2))
                     {
                         var newLabel = new LabelControl(Parent)
                         {

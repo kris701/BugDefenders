@@ -9,6 +9,7 @@ using TDGame.Core.Enemies;
 using TDGame.Core.Maps;
 using TDGame.Core.Turret;
 using TDGame.Core.Turrets;
+using TDGame.Core.Turrets.Upgrades;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -29,6 +30,7 @@ namespace TDGame.OpenGL.Screens.PathTest
         private string _currentGameStyle;
         private Core.Game _game;
         private string _buyingTurret = "";
+        private TurretDefinition? _selectedTurret;
 
         public PathTestScreen(GameEngine parent, string map, string gamestyle) : base(parent)
         {
@@ -42,18 +44,85 @@ namespace TDGame.OpenGL.Screens.PathTest
             Initialize();
         }
 
+        private void UnselectTurret()
+        {
+            _selectedTurret = null;
+            _turretSelectRangeTile.IsVisible = false;
+            _turretUpgrade1.TurnInvisible();
+            _turretUpgrade2.TurnInvisible();
+            _turretUpgrade3.TurnInvisible();
+            _projectileUpgrade1.TurnInvisible();
+            _projectileUpgrade2.TurnInvisible();
+            _projectileUpgrade3.TurnInvisible();
+        }
+
         private void Turret_Click(ButtonControl parent)
         {
             if (_turretSelectRangeTile.IsVisible)
             {
-                _turretSelectRangeTile.IsVisible = false;
+                UnselectTurret();
             }
             else if (parent.Tag is TurretDefinition turretDef)
             {
+                _selectedTurret = turretDef;
                 _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turretDef.Range * 2);
-                _turretSelectRangeTile.X = turretDef.X - Scale(_turretSelectRangeTile.FillColor.Width) / 2 + turretDef.Size / 2;
-                _turretSelectRangeTile.Y = turretDef.Y - Scale(_turretSelectRangeTile.FillColor.Height) / 2 + turretDef.Size / 2;
+                _turretSelectRangeTile._x = Scale(turretDef.X) - Scale(_turretSelectRangeTile.FillColor.Width) / 2 + turretDef.Size / 2;
+                _turretSelectRangeTile._y = Scale(turretDef.Y) - Scale(_turretSelectRangeTile.FillColor.Height) / 2 + turretDef.Size / 2;
                 _turretSelectRangeTile.IsVisible = true;
+
+                for(int i = 0; i < turretDef.TurretLevels.Count; i++)
+                {
+                    if (!turretDef.TurretLevels[i].HasUpgrade)
+                    {
+                        if (!_turretUpgrade1.IsVisible)
+                        {
+                            _turretUpgrade1.SetUpgrade(turretDef.TurretLevels[i]);
+                        } else if (!_turretUpgrade2.IsVisible)
+                        {
+                            _turretUpgrade2.SetUpgrade(turretDef.TurretLevels[i]);
+                        } else if (!_turretUpgrade3.IsVisible)
+                        {
+                            _turretUpgrade3.SetUpgrade(turretDef.TurretLevels[i]);
+                        }
+                    }
+                }
+
+                for (int i = 0; i < turretDef.ProjectileLevels.Count; i++)
+                {
+                    if (!turretDef.ProjectileLevels[i].HasUpgrade)
+                    {
+                        if (!_projectileUpgrade1.IsVisible)
+                        {
+                            _projectileUpgrade1.SetUpgrade(turretDef.ProjectileLevels[i]);
+                        }
+                        else if (!_projectileUpgrade2.IsVisible)
+                        {
+                            _projectileUpgrade2.SetUpgrade(turretDef.ProjectileLevels[i]);
+                        }
+                        else if (!_projectileUpgrade3.IsVisible)
+                        {
+                            _projectileUpgrade3.SetUpgrade(turretDef.ProjectileLevels[i]);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void BuyUpgrade_Click(ButtonControl parent)
+        {
+            if (_selectedTurret != null && parent.Tag is IUpgrade upg)
+            {
+                if (upg is TurretLevel turretLevel)
+                {
+                    var index = _selectedTurret.TurretLevels.IndexOf(turretLevel);
+                    _game.LevelUpTurret(_selectedTurret, index);
+                }
+                else if (upg is ProjectileLevel projLevel)
+                {
+                    var index = _selectedTurret.ProjectileLevels.IndexOf(projLevel);
+                    _game.LevelUpProjectile(_selectedTurret, index);
+                }
+                UnselectTurret();
             }
         }
 

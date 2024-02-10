@@ -60,7 +60,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         null,
                         GetAlphaColor(),
                         Rotation,
-                        new Vector2(Width / 2, Height / 2),
+                        new Vector2(FillColor.Width / 2, FillColor.Height / 2),
                         new Vector2(xFit, yFit),
                         SpriteEffects.None,
                         0);

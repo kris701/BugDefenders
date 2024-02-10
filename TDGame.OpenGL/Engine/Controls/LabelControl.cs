@@ -16,9 +16,10 @@ namespace TDGame.OpenGL.Engine.Controls
         public string Text { 
             get { 
                 return _text; 
-            } set { 
+            } set {
+                if (value != _text)
+                    _textChanged = true;
                 _text = value;
-                _textChanged = true;
             } 
         }
         public Color FontColor { get; set; } = Color.Black;
@@ -34,7 +35,10 @@ namespace TDGame.OpenGL.Engine.Controls
 
         internal float _textX = 0;
         internal float _textY = 0;
+        internal float _textWidth = 0;
+        internal float _textHeight = 0;
         internal bool _textChanged = true;
+        private float _magicScaleNumber => (float)Math.Pow(Parent.ScaleValue, -0.85);
 
         public LabelControl(IScreen parent) : base(parent)
         {
@@ -42,14 +46,16 @@ namespace TDGame.OpenGL.Engine.Controls
 
         internal void UpdateTextPositions()
         {
-            var size = Font.MeasureString(Text);
+            var size = Font.MeasureString(Text) * _magicScaleNumber;
             if (Width == 0)
                 Width = size.X;
             if (Height == 0)
                 Height = size.Y;
             ReAlign();
-            _textX = X + (Width - Parent.Scale(size.X)) / 2;
-            _textY = Y + (Height - Parent.Scale(size.Y)) / 2;
+            _textWidth = Parent.Scale(size.X);
+            _textHeight = Parent.Scale(size.Y);
+            _textX = X + Width / 2 - _textWidth / 2;
+            _textY = Y + Height / 2 - _textHeight / 2;
         }
 
         public override void Initialize()
@@ -65,10 +71,10 @@ namespace TDGame.OpenGL.Engine.Controls
                 spriteBatch.DrawString(
                     Font, 
                     Text,
-                    new Vector2(_textX + Width / 2, _textY + Height / 2),
+                    new Vector2(_textX + _textWidth / 2, _textY + _textHeight / 2),
                     new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
                     Rotation,
-                    new Vector2(Width / 2, Height / 2),
+                    new Vector2(_textWidth / 2, _textHeight / 2),
                     Parent.ScaleValue,
                     SpriteEffects.None,
                     0);
