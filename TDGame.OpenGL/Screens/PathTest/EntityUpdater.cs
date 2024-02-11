@@ -16,18 +16,16 @@ namespace TDGame.OpenGL.Screens.PathTest
     {
         public int Layer { get; set; }
         public IScreen Screen { get; set; }
-        public int Size { get; set; }
         public int XOffset { get; set; }
         public int YOffset { get; set; }
 
         private Dictionary<T, ButtonControl> _entities = new Dictionary<T, ButtonControl>();
         private ClickedHandler? _onClicked;
 
-        public EntityUpdater(int layer, IScreen screen, int size, int xOffset, int yOffset, ClickedHandler? onClicked = null)
+        public EntityUpdater(int layer, IScreen screen, int xOffset, int yOffset, ClickedHandler? onClicked = null)
         {
             Layer = layer;
             Screen = screen;
-            Size = size;
             XOffset = xOffset;
             YOffset = yOffset;
             _onClicked = onClicked;
@@ -46,6 +44,7 @@ namespace TDGame.OpenGL.Screens.PathTest
                     {
                         toUpdate.X = entity.X + XOffset;
                         toUpdate.Y = entity.Y + YOffset;
+                        toUpdate.Rotation = entity.Angle + (float)Math.PI / 2;
                     }
                 }
                 else
@@ -63,8 +62,9 @@ namespace TDGame.OpenGL.Screens.PathTest
                             FillColor = TextureBuilder.GetTexture(entity.ID),
                             X = entity.X + XOffset,
                             Y = entity.Y + YOffset,
-                            Width = Size,
-                            Height = Size,
+                            Width = entity.Size,
+                            Height = entity.Size,
+                            Rotation = entity.Angle + (float)Math.PI / 2,
                             Tag = entity
                         };
                     }

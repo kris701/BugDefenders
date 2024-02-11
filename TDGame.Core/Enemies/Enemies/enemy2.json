@@ -4,5 +4,6 @@
   "description": "abav",
   "Health": 200,
   "Speed": 5,
-  "Reward": 20
+  "Reward": 20,
+  "Size": 20
 }

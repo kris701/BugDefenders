@@ -82,18 +82,6 @@ namespace TDGame.OpenGL.Engine.Controls
                     Parent.ScaleValue,
                     SpriteEffects.None,
                     0);
-#if CENTERPOINT
-            spriteBatch.Draw(
-                BasicTextures.GetBasicRectange(Color.Pink),
-                new Vector2(_textX + _textWidth / 2 - 3, _textY + _textHeight / 2 - 3),
-                new Rectangle(0, 0, 5, 5),
-                GetAlphaColor(),
-                Rotation,
-                new Vector2(0, 0),
-                1,
-                SpriteEffects.None,
-                0);
-#endif
 #if TEXTBORDER
             spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY), new Rectangle((int)_textX, (int)_textY, (int)_textWidth, 1), GetAlphaColor());
             spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY), new Rectangle((int)_textX, (int)_textY, 1, (int)_textHeight), GetAlphaColor());

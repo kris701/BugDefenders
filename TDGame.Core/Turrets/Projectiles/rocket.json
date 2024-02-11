@@ -3,6 +3,7 @@
   "Name": "Basic Rocket",
   "Description": "asfdasfasf",
   "Speed": 1,
+  "Size": 20,
   "Damage": 100,
   "Range": 600,
   "SplashRange": 50,

@@ -17,7 +17,7 @@ namespace TDGame.Core.Turrets
         public string Name { get; set; }
         public string Description { get; set; }
         public TurretType Type { get; set; }
-        public int Size { get; set; }
+        public override float Size { get; set; }
         public int Cost { get; set; }
         public int Range { get; set; }
         public int Damage { get; set; }
@@ -30,8 +30,10 @@ namespace TDGame.Core.Turrets
         public TimeSpan CoolingFor { get; set; }
         [JsonIgnore]
         public EnemyDefinition? Targeting { get; set; }
+        [JsonIgnore]
+        public override float Angle { get; set; } = 0;
 
-        public TurretDefinition(Guid iD, string name, string description, TurretType type, int size, int cost, int range, int damage, int cooldown, string? projectileID, List<TurretLevel> turretLevels, List<ProjectileLevel> projectileLevels)
+        public TurretDefinition(Guid iD, string name, string description, TurretType type, float size, int cost, int range, int damage, int cooldown, string? projectileID, List<TurretLevel> turretLevels, List<ProjectileLevel> projectileLevels)
         {
             ID = iD;
             Name = name;

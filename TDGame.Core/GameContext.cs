@@ -17,7 +17,6 @@ namespace TDGame.Core
         public List<string> EnemiesToSpawn { get; set; }
         public bool AutoSpawn { get; set; } = false;
         public double Evolution { get; set; } = 1;
-        public int EnemySpawnDistance { get; set; } = 10;
         public bool Running { get; set; } = true;
         public bool GameOver { get; set; }
         public List<EnemyDefinition> CurrentEnemies { get; set; }

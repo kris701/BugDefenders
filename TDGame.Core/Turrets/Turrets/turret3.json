@@ -3,7 +3,7 @@
   "Name": "Missile Turret",
   "Description": "asfdasfasf",
   "Type": 2,
-  "Size": 50,
+  "Size": 75,
   "Cost": 1000,
   "Range": 500,
   "Damage": 0,

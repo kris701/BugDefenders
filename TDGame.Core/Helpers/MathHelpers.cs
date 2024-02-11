@@ -15,19 +15,17 @@ namespace TDGame.Core.Helpers
 
         public static bool Intersects(TurretDefinition turret, BlockedTile tile)
         {
-            return new Rectangle((int)turret.X, (int)turret.Y, turret.Size, turret.Size).IntersectsWith(
+            return new Rectangle((int)turret.X, (int)turret.Y, (int)turret.Size, (int)turret.Size).IntersectsWith(
                 new Rectangle((int)tile.X, (int)tile.Y, (int)tile.Width, (int)tile.Height));
         }
         public static bool Intersects(TurretDefinition e1, TurretDefinition e2)
         {
-            return new Rectangle((int)e1.X, (int)e1.Y, e1.Size, e1.Size).IntersectsWith(
+            return new Rectangle((int)e1.X, (int)e1.Y, (int)e1.Size, (int)e1.Size).IntersectsWith(
                 new Rectangle((int)e2.X, (int)e2.Y, (int)e2.Size, (int)e2.Size));
         }
 
-        public static double Distance(TurretDefinition e1, TurretDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
-        public static double Distance(TurretDefinition e1, EnemyDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
-        public static double Distance(EnemyDefinition e1, EnemyDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
-        public static double Distance(EnemyDefinition e1, WayPoint w2) => Distance(e1.X, e1.Y, w2.X, w2.Y);
-        public static double Distance(float x1, float y1, float x2, float y2) => Math.Sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+        public static double Distance(EnemyDefinition e1, EnemyDefinition e2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, e2.X + e2.Size / 2, e2.Y + e2.Size / 2);
+        public static double Distance(EnemyDefinition e1, WayPoint w2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, w2.X, w2.Y);
+        public static double Distance(double x1, double y1, double x2, double y2) => Math.Sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
     }
 }

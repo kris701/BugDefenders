@@ -14,6 +14,7 @@ namespace TDGame.Core.Turrets
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public override float Size { get; set; }
         public int Speed { get; set; }
         public int Damage { get; set; }
         public int Range { get; set; }
@@ -26,7 +27,7 @@ namespace TDGame.Core.Turrets
         public int Traveled { get; set; }
 
         [JsonIgnore]
-        public float Angle { get; set; }
+        public override float Angle { get; set; }
         [JsonIgnore]
         public EnemyDefinition Target { get; set; }
     }

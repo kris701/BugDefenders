@@ -3,6 +3,7 @@
   "Name": "Basic Missile",
   "Description": "asfdasfasf",
   "Speed": 1,
+  "Size": 20,
   "Damage": 500,
   "Range": 600,
   "SplashRange": 100,

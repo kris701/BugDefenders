@@ -73,15 +73,24 @@ namespace TDGame.Core
         {
             if (_spawnQueue.Count > 0)
             {
-                var first = _spawnQueue[0];
-                var minDist = double.MaxValue;
-                foreach (var enemy in CurrentEnemies)
-                    if (enemy.GroupID == first.GroupID)
-                        minDist = Math.Min(MathHelpers.Distance(first, enemy), minDist);
-                if (minDist > EnemySpawnDistance)
+                var vistedGroups = new List<Guid>();
+                var toAdd = new List<EnemyDefinition>();
+                foreach(var enemy in _spawnQueue)
                 {
-                    CurrentEnemies.Add(first);
-                    _spawnQueue.RemoveAt(0);
+                    if (vistedGroups.Contains(enemy.GroupID))
+                        continue;
+                    vistedGroups.Add(enemy.GroupID);
+                    var minDist = double.MaxValue;
+                    foreach (var CurrentEnemy in CurrentEnemies)
+                        if (CurrentEnemy.GroupID == enemy.GroupID)
+                            minDist = Math.Min(MathHelpers.Distance(enemy, CurrentEnemy), minDist);
+                    if (minDist > enemy.Size)
+                        toAdd.Add(enemy);
+                }
+                foreach(var add in toAdd)
+                {
+                    CurrentEnemies.Add(add);
+                    _spawnQueue.Remove(add);
                 }
             }
         }
@@ -105,9 +114,9 @@ namespace TDGame.Core
                     }
                     target = Map.WayPoints[enemy.WayPointID];
                 }
-                var angle = GetAngle(target, enemy);
-                var xMod = Math.Cos(angle);
-                var yMod = Math.Sin(angle);
+                enemy.Angle = GetAngle(target, enemy);
+                var xMod = Math.Cos(enemy.Angle);
+                var yMod = Math.Sin(enemy.Angle);
                 enemy.X += (int)Math.Ceiling(xMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
                 enemy.Y += (int)Math.Ceiling(yMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
             }
@@ -115,9 +124,9 @@ namespace TDGame.Core
                 CurrentEnemies.Remove(enemy);
         }
 
-        private float GetAngle(WayPoint target, EnemyDefinition enemy) => GetAngle(target.X, target.Y, enemy.X, enemy.Y);
-        private float GetAngle(EnemyDefinition enemy, TurretDefinition turret) => GetAngle(enemy.X, enemy.Y, turret.X, turret.Y);
-        private float GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => GetAngle(enemy.X, enemy.Y, projectile.X, projectile.Y);
+        private float GetAngle(WayPoint target, EnemyDefinition enemy) => GetAngle(target.X, target.Y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
+        private float GetAngle(EnemyDefinition enemy, TurretDefinition turret) => GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
+        private float GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2);
 
         private float GetAngle(float x1, float y1, float x2, float y2)
         {
@@ -132,8 +141,8 @@ namespace TDGame.Core
             for (int i = 0; i < GameStyle.EnemyQuantity; i++)
             {
                 var enemy = EnemyBuilder.GetEnemy(EnemiesToSpawn[0], Evolution);
-                enemy.X = Map.WayPoints[0].X;
-                enemy.Y = Map.WayPoints[0].Y;
+                enemy.X = Map.WayPoints[0].X - enemy.Size / 2;
+                enemy.Y = Map.WayPoints[0].Y - enemy.Size / 2;
                 enemy.GroupID = group;
                 _spawnQueue.Add(enemy);
             }
@@ -160,7 +169,7 @@ namespace TDGame.Core
 
         private EnemyDefinition? GetNearestEnemy(TurretDefinition turret) => GetNearestEnemy(turret.X, turret.Y, turret.Range);
         private EnemyDefinition? GetNearestEnemy(ProjectileDefinition projectile) => GetNearestEnemy(projectile.X, projectile.Y, projectile.Range);
-        private EnemyDefinition? GetNearestEnemy(float x, float y, int range)
+        private EnemyDefinition? GetNearestEnemy(double x, double y, int range)
         {
             var minDist = double.MaxValue;
             EnemyDefinition? best = null;
@@ -183,7 +192,10 @@ namespace TDGame.Core
             if (best != null)
             {
                 if (!DamageEnemy(best, turret.Damage))
+                {
                     turret.Targeting = best;
+                    turret.Angle = GetAngle(best, turret);
+                }
                 turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
             }
         }
@@ -196,8 +208,9 @@ namespace TDGame.Core
             {
                 var projectile = ProjectileBuilder.GetProjectile(turret.ProjectileID);
                 projectile.Angle = GetAngle(best, turret);
-                projectile.X = turret.X;
-                projectile.Y = turret.Y;
+                turret.Angle = projectile.Angle;
+                projectile.X = turret.X + turret.Size / 2 - projectile.Size / 2;
+                projectile.Y = turret.Y + turret.Size / 2 - projectile.Size / 2;
                 foreach (var level in turret.ProjectileLevels)
                     if (level.HasUpgrade)
                         level.ApplyUpgrade(projectile);
@@ -267,13 +280,13 @@ namespace TDGame.Core
         {
             if (Money < turret.Cost)
                 return false;
-            if (turret.X < turret.Size / 2)
+            if (turret.X < 0)
                 return false;
-            if (turret.X > Map.Width - turret.Size / 2)
+            if (turret.X > Map.Width - turret.Size)
                 return false;
-            if (turret.Y < turret.Size / 2)
+            if (turret.Y < 0)
                 return false;
-            if (turret.Y > Map.Height - turret.Size / 2)
+            if (turret.Y > Map.Height - turret.Size)
                 return false;
 
             foreach (var block in Map.BlockingTiles)
