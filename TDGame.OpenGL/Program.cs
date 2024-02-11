@@ -1,6 +1,7 @@
 ﻿using System;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Screens.MainMenu;
+using TDGame.OpenGL.Screens.SplashScreen;
 
 namespace TDGame.OpenGL
 {
@@ -9,7 +10,7 @@ namespace TDGame.OpenGL
         [STAThread]
         static void Main()
         {
-            using (var game = new GameEngine((g) => new MainMenu(g)))
+            using (var game = new GameEngine((g) => new SplashScreen(g)))
                 game.Run();
         }
     }
