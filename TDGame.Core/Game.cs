@@ -58,6 +58,7 @@ namespace TDGame.Core
                     _enemySpawnTimer.Update(passed);
                 _evolutionTimer.Update(passed);
                 _mainLoopTimer.Update(passed);
+                GameTime += passed;
             }
         }
 
@@ -271,6 +272,10 @@ namespace TDGame.Core
                     }
                     toRemove.Add(projectile);
                 }
+
+                if (projectile.X < 0 || projectile.X > Map.Width ||
+                    projectile.Y < 0 || projectile.Y > Map.Height)
+                    toRemove.Add(projectile);
             }
             foreach (var projectile in toRemove)
                 Projectiles.Remove(projectile);
@@ -309,6 +314,7 @@ namespace TDGame.Core
             if (enemy.Health <= 0)
             {
                 Money += enemy.Reward;
+                Score += enemy.Reward;
                 CurrentEnemies.Remove(enemy);
                 return true;
             }

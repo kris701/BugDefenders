@@ -17,12 +17,23 @@ namespace TDGame.Core
         public List<string> EnemiesToSpawn { get; set; }
         public bool AutoSpawn { get; set; } = false;
         public double Evolution { get; set; } = 1;
-        public bool Running { get; set; } = true;
-        public bool GameOver { get; set; }
+        private bool _running = true;
+        public bool Running { 
+            get { 
+                return _running; 
+            } set {
+                if (!GameOver)
+                    _running = value;
+            } 
+        }
         public List<EnemyDefinition> CurrentEnemies { get; set; }
         public int HP { get; set; }
         public int Money { get; set; }
+        public int Score { get; set; }
         public List<TurretDefinition> Turrets { get; set; }
         public List<ProjectileDefinition> Projectiles { get; set; }
+
+        public bool GameOver { get; set; }
+        public TimeSpan GameTime { get; set; }
     }
 }

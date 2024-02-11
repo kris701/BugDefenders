@@ -105,5 +105,23 @@ namespace TDGame.OpenGL
         {
             _currentScreen = screen;
         }
+
+        public Texture2D TakeScreenCap()
+        {
+            int w = GraphicsDevice.PresentationParameters.BackBufferWidth;
+            int h = GraphicsDevice.PresentationParameters.BackBufferHeight;
+
+            //force a frame to be drawn (otherwise back buffer is empty) 
+            Draw(new GameTime());
+
+            //pull the picture from the buffer 
+            int[] backBuffer = new int[w * h];
+            GraphicsDevice.GetBackBufferData(backBuffer);
+
+            //copy into a texture 
+            Texture2D texture = new Texture2D(GraphicsDevice, w, h, false, GraphicsDevice.PresentationParameters.BackBufferFormat);
+            texture.SetData(backBuffer);
+            return texture;
+        }
     }
 }

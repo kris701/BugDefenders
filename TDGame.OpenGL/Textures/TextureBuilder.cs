@@ -38,5 +38,13 @@ namespace TDGame.OpenGL.Textures
                 return _textures[id];
             throw new Exception("Texture not found in texture pack!");
         }
+
+        public static List<Texture2D> GetTextureSet(List<Guid> ids)
+        {
+            var textureSet = new List<Texture2D>();
+            foreach (var id in ids)
+                textureSet.Add(GetTexture(id));
+            return textureSet;
+        }
     }
 }

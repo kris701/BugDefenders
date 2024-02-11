@@ -36,6 +36,15 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
 #endif
+            AddControl(0, new LabelControl(this)
+            {
+                Text = "Game Setup",
+                Font = BasicFonts.GetFont(48),
+                HorizontalAlignment = Alignment.Middle,
+                Y = 25,
+                Width = 100,
+                Height = 35
+            });
 
             AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new MainMenu.MainMenu(Parent)))
             {

@@ -7,12 +7,13 @@ using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
 
-namespace TDGame.OpenGL.Screens.PathTest
+namespace TDGame.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseScreen
     {
         private LabelControl _moneyLabel;
         private LabelControl _hpLabel;
+        private LabelControl _scoreLabel;
 
         private ButtonControl _startButton;
         private ButtonControl _sendWave;
@@ -50,11 +51,9 @@ namespace TDGame.OpenGL.Screens.PathTest
 #endif
 
             SetupGameField();
-            SetupGameControlsField();
-            SetupPurchasingField();
+            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 205);
+            SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 215, 320, 435);
             SetupUpgradeField();
-
-
             
             base.Initialize();
         }
@@ -80,7 +79,7 @@ namespace TDGame.OpenGL.Screens.PathTest
             AddControl(0, _turretSelectRangeTile);
         }
 
-        private void SetupGameControlsField()
+        private void SetupGameControlsField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(0, new BorderControl(this)
             {
@@ -88,10 +87,10 @@ namespace TDGame.OpenGL.Screens.PathTest
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Beige),
                     Alpha = 100,
-                    X = _gameArea.X + _gameArea.Width + 10,
-                    Y = _gameArea.Y,
-                    Height = 170,
-                    Width = 320
+                    X = xOffset,
+                    Y = yOffset,
+                    Height = height,
+                    Width = width
                 }
             });
             AddControl(1, new LabelControl(this)
@@ -99,10 +98,24 @@ namespace TDGame.OpenGL.Screens.PathTest
                 Text = "TDGame",
                 Font = BasicFonts.GetFont(24),
                 FillColor = BasicTextures.GetBasicRectange(Color.Red),
-                X = _gameArea.X + _gameArea.Width + 10,
-                Y = _gameArea.Y,
+                X = xOffset,
+                Y = yOffset,
                 Height = 30,
-                Width = 320
+                Width = width
+            });
+            _scoreLabel = new LabelControl(this)
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                Text = $"Score : 0",
+                Font = BasicFonts.GetFont(16),
+                X = xOffset + 5,
+                Y = yOffset + 30,
+                Height = 30,
+                Width = width - 10
+            };
+            AddControl(1, new BorderControl(this)
+            {
+                Child = _scoreLabel
             });
             _startButton = new ButtonControl(this, clicked: StartButton_Click)
             {
@@ -110,8 +123,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Text = $"Pause",
                 Font = BasicFonts.GetFont(16),
-                X = _gameArea.X + _gameArea.Width + 15,
-                Y = _gameArea.Y + 100,
+                X = xOffset + 5,
+                Y = yOffset + 135 ,
                 Height = 30,
                 Width = 100
             };
@@ -128,8 +141,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                     FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
                     Text = $"Exit",
                     Font = BasicFonts.GetFont(16),
-                    X = _gameArea.X + _gameArea.Width + 15,
-                    Y = _gameArea.Y + 135,
+                    X = xOffset + 5,
+                    Y = yOffset + 170,
                     Height = 30,
                     Width = 100
                 }
@@ -139,8 +152,8 @@ namespace TDGame.OpenGL.Screens.PathTest
             {
                 Text = $"Money: {_game.Money}$",
                 Font = BasicFonts.GetFont(16),
-                X = _gameArea.X + _gameArea.Width + 15,
-                Y = _gameArea.Y + 35,
+                X = xOffset + 5,
+                Y = yOffset + 65,
                 Height = 30,
                 Width = 310
             };
@@ -153,8 +166,8 @@ namespace TDGame.OpenGL.Screens.PathTest
             {
                 Text = $"HP: {_game.HP}",
                 Font = BasicFonts.GetFont(16),
-                X = _gameArea.X + _gameArea.Width + 15,
-                Y = _gameArea.Y + 65,
+                X = xOffset + 5,
+                Y = yOffset + 100,
                 Height = 30,
                 Width = 310
             };
@@ -169,8 +182,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Text = $"[ ] Auto-Wave",
                 Font = BasicFonts.GetFont(16),
-                X = _gameArea.X + _gameArea.Width + 15 + 105,
-                Y = _gameArea.Y + 100,
+                X = xOffset + 110,
+                Y = yOffset + 135,
                 Height = 30,
                 Width = 205
             };
@@ -185,8 +198,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Text = $"Send Wave",
                 Font = BasicFonts.GetFont(16),
-                X = _gameArea.X + _gameArea.Width + 15 + 105,
-                Y = _gameArea.Y + 135,
+                X = xOffset + 110,
+                Y = yOffset + 170,
                 Height = 30,
                 Width = 205
             };
@@ -196,7 +209,7 @@ namespace TDGame.OpenGL.Screens.PathTest
             });
         }
 
-        private void SetupPurchasingField()
+        private void SetupPurchasingField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(0, new BorderControl(this)
             {
@@ -204,10 +217,10 @@ namespace TDGame.OpenGL.Screens.PathTest
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Beige),
                     Alpha = 100,
-                    X = _gameArea.X + _gameArea.Width + 10,
-                    Y = _gameArea.Y + 180,
-                    Height = 470,
-                    Width = 320
+                    X = xOffset,
+                    Y = yOffset,
+                    Height = height,
+                    Width = width
                 }
             });
             AddControl(1, new LabelControl(this)
@@ -215,10 +228,10 @@ namespace TDGame.OpenGL.Screens.PathTest
                 Text = "Turrets",
                 Font = BasicFonts.GetFont(24),
                 FillColor = BasicTextures.GetBasicRectange(Color.Red),
-                X = _gameArea.X + _gameArea.Width + 10,
-                Y = _gameArea.Y + 180,
+                X = xOffset,
+                Y = yOffset,
                 Height = 30,
-                Width = 320
+                Width = width
             });
 
             var turrets = TurretBuilder.GetTurrets();
@@ -230,12 +243,12 @@ namespace TDGame.OpenGL.Screens.PathTest
                 {
                     Text = $"[{turret.Cost}$] {turret.Name}",
                     Font = BasicFonts.GetFont(12),
-                    FillColor = BasicTextures.GetBasicRectange(Color.White),
+                    FillColor = BasicTextures.GetBasicRectange(Color.FloralWhite),
                     FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    X = _gameArea.X + _gameArea.Width + 15,
-                    Y = _gameArea.Y + 215 + (offset++ * 35),
+                    X = xOffset + 5,
+                    Y = yOffset + 35 + (offset++ * 35),
                     Height = 30,
-                    Width = 310,
+                    Width = width - 10,
                     Tag = turretName
                 };
                 _turretButtons.Add(newTurretButton);
@@ -253,9 +266,7 @@ namespace TDGame.OpenGL.Screens.PathTest
             AddControl(10, _buyingPreviewRangeTile);
             _buyingPreviewTile = new TileControl(this)
             {
-                IsVisible = false,
-                Width = 50,
-                Height = 50
+                IsVisible = false
             };
             AddControl(10, _buyingPreviewTile);
         }

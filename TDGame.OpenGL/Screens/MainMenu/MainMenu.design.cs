@@ -64,7 +64,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
             AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 550,
+                Y = 450,
                 Width = 200,
                 Height = 50,
                 Text = "Exit",

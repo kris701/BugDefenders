@@ -39,6 +39,14 @@
     {
       "ID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
       "Content": "rocket"
+    },
+    {
+      "ID": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
+      "Content": "Explosion/explosion1"
+    },
+    {
+      "ID": "d07d1ff5-1e67-454a-8e1b-3264705d2704",
+      "Content": "Explosion/explosion2"
     }
   ]
 }

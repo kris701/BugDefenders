@@ -10,10 +10,12 @@ using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
 using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
-namespace TDGame.OpenGL.Screens.PathTest
+namespace TDGame.OpenGL.Screens.GameScreen
 {
     public class EntityUpdater<T> where T : IPosition, ITextured
     {
+        public delegate void EntityHandler(ButtonControl parent);
+        public EntityHandler? OnDelete;
         public int Layer { get; set; }
         public IScreen Screen { get; set; }
         public int XOffset { get; set; }
@@ -78,6 +80,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                     toRemove.Add(entity);
             foreach (var entity in toRemove)
             {
+                if (OnDelete != null)
+                    OnDelete.Invoke(_entities[entity]);
                 Screen.RemoveControl(Layer, _entities[entity]);
                 _entities.Remove(entity);
             }

@@ -4,7 +4,7 @@ using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Screens.PathTest;
+using TDGame.OpenGL.Screens.GameScreen;
 using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
@@ -25,7 +25,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != "" && _selectedGameStyle != "")
-                Parent.SwitchView(new GameScreen(Parent, _selectedMap, _selectedGameStyle));
+                Parent.SwitchView(new GameScreen.GameScreen(Parent, _selectedMap, _selectedGameStyle));
         }
 
         private void SelectMap_Click(ButtonControl sender)

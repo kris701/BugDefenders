@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
 
-namespace TDGame.OpenGL.Screens.PathTest
+namespace TDGame.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseScreen
     {
@@ -31,6 +32,7 @@ namespace TDGame.OpenGL.Screens.PathTest
         private Core.Game _game;
         private string _buyingTurret = "";
         private TurretDefinition? _selectedTurret;
+        private List<AnimatedTileControl> _explosions = new List<AnimatedTileControl>();
 
         public GameScreen(GameEngine parent, string map, string gamestyle) : base(parent)
         {
@@ -41,6 +43,7 @@ namespace TDGame.OpenGL.Screens.PathTest
             _turretUpdater = new EntityUpdater<TurretDefinition>(4, this, _gameArea.X, _gameArea.Y, Turret_Click);
             _enemyUpdater = new EntityUpdater<EnemyDefinition>(3, this, _gameArea.X, _gameArea.Y);
             _projectile = new EntityUpdater<ProjectileDefinition>(5, this,  _gameArea.X, _gameArea.Y);
+            _projectile.OnDelete += OnProjectileDeleted;
             Initialize();
 
 #if DRAWBLOCKINGTILES
@@ -57,6 +60,37 @@ namespace TDGame.OpenGL.Screens.PathTest
                 });
             }
 #endif
+        }
+
+        private void OnProjectileDeleted(ButtonControl parent)
+        {
+            if (parent.Tag is ProjectileDefinition projDef)
+            {
+                var newTile = new AnimatedTileControl(this)
+                {
+                    X = projDef.X + projDef.Size / 2 - projDef.SplashRange / 2,
+                    Y = projDef.Y + projDef.Size / 2 - projDef.SplashRange / 2,
+                    FrameTime = TimeSpan.FromMilliseconds(100),
+                    TileSet = TextureBuilder.GetTextureSet(new List<Guid>()
+                    {
+                        new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
+                        new Guid("d07d1ff5-1e67-454a-8e1b-3264705d2704"),
+                        new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
+                        new Guid("d07d1ff5-1e67-454a-8e1b-3264705d2704"),
+                        new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
+                        new Guid("d07d1ff5-1e67-454a-8e1b-3264705d2704"),
+                    }),
+                    AutoPlay = false,
+                    Width = projDef.SplashRange,
+                    Height = projDef.SplashRange
+                };
+                newTile.OnAnimationDone += (p) => {
+                    p.IsVisible = false;
+                };
+                newTile.Initialize();
+                _explosions.Add(newTile);
+                AddControl(7, newTile);
+            }
         }
 
         private void UnselectTurret()
@@ -166,7 +200,7 @@ namespace TDGame.OpenGL.Screens.PathTest
         public override void OnUpdate(GameTime gameTime)
         {
             if (_game.GameOver)
-                Parent.SwitchView(new MainMenu.MainMenu(Parent));
+                GameOver();
 
             var mouseState = Mouse.GetState();
             var keyState = Keyboard.GetState();
@@ -175,6 +209,7 @@ namespace TDGame.OpenGL.Screens.PathTest
             
             _moneyLabel.Text = $"Money: {_game.Money}$";
             _hpLabel.Text = $"HP: {_game.HP}";
+            _scoreLabel.Text = $"Score: {_game.Score}";
 
             UpdateTurretPurchaseButtons();
 
@@ -197,6 +232,7 @@ namespace TDGame.OpenGL.Screens.PathTest
             _enemyUpdater.UpdateEntities(_game.CurrentEnemies);
             _projectile.UpdateEntities(_game.Projectiles);
             UpdateLasers();
+            UpdateExplosions(gameTime);
 
             if (mouseState.X >= Scale(_gameArea.X) && mouseState.X <= Scale(_gameArea.X) + Scale(_gameArea.Width) &&
                 mouseState.Y >= Scale(_gameArea.Y) && mouseState.Y <= Scale(_gameArea.Y) + Scale(_gameArea.Height))
@@ -285,6 +321,13 @@ namespace TDGame.OpenGL.Screens.PathTest
             }
         }
 
+        private void UpdateExplosions(GameTime gameTime)
+        {
+            foreach (var explosion in _explosions)
+                explosion.Update(gameTime);
+            _explosions.RemoveAll(x => x.IsVisible == false);
+        }
+
         private void BuyTurret_Click(ButtonControl parent)
         {
             if (parent.Tag is string turretName)
@@ -298,6 +341,12 @@ namespace TDGame.OpenGL.Screens.PathTest
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
             }
+        }
+
+        private void GameOver()
+        {
+            var screen = Parent.TakeScreenCap();
+            Parent.SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
         }
     }
 }

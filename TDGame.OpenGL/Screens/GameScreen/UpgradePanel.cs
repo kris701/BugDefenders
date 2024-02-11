@@ -12,7 +12,7 @@ using TDGame.OpenGL.Engine.Helpers;
 using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 using TDGame.Core.Turrets.Upgrades;
 
-namespace TDGame.OpenGL.Screens.PathTest
+namespace TDGame.OpenGL.Screens.GameScreen
 {
     public class UpgradePanel : TileControl
     {
