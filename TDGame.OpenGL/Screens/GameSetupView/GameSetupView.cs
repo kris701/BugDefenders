@@ -25,7 +25,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != "" && _selectedGameStyle != "")
-                Parent.SwitchView(new GameScreen.GameScreen(Parent, _selectedMap, _selectedGameStyle));
+                SwitchView(new GameScreen.GameScreen(Parent, _selectedMap, _selectedGameStyle));
         }
 
         private void SelectMap_Click(ButtonControl sender)

@@ -13,6 +13,7 @@
     <None Remove="GameStyles\GameStyles\easy.json" />
     <None Remove="GameStyles\GameStyles\medium.json" />
     <None Remove="Maps\Maps\map1.json" />
+    <None Remove="Maps\Maps\map2.json" />
     <None Remove="Turrets\Projectiles\missile.json" />
     <None Remove="Turrets\Projectiles\rocket.json" />
     <None Remove="Turrets\Turrets\turret1.json" />
@@ -34,6 +35,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GameStyles\GameStyles\easy.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\Maps\map2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Maps\Maps\map1.json">

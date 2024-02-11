@@ -99,7 +99,7 @@ namespace TDGame.OpenGL.Engine.Screens
                     if (fadeTimer >= FadeOutTime)
                     {
                         if (_switchTo != null)
-                            Parent.SwitchView(_switchTo);
+                            Parent.CurrentScreen = _switchTo;
                         State = FadeState.PostHold;
                     }
                     break;

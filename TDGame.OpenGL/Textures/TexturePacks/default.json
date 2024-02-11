@@ -2,7 +2,11 @@
   "TextureSet": [
     {
       "ID": "2811A657-6811-423A-8342-142BF5BD261A",
-      "Content": "map1"
+      "Content": "Maps/map1"
+    },
+    {
+      "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+      "Content": "Maps/map2"
     },
     {
       "ID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",

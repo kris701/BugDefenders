@@ -69,7 +69,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
 
             AddControl(1, new BorderControl(this)
             {
-                Child = new ButtonControl(this, clicked: (s) => { Parent.SwitchView(new MainMenu.MainMenu(Parent)); })
+                Child = new ButtonControl(this, clicked: (s) => { SwitchView(new MainMenu.MainMenu(Parent)); })
                 {
                     HorizontalAlignment = Alignment.Middle,
                     Y = 875,

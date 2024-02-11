@@ -394,7 +394,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private void GameOver()
         {
             var screen = Parent.TakeScreenCap();
-            Parent.SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
+            SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
         }
     }
 }

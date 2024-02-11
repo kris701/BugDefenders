@@ -28,6 +28,7 @@ namespace TDGame.OpenGL.Textures
         public static void LoadTexturePack(string texturePack)
         {
             var pack = _resourceFetcher.GetResource(texturePack);
+            _textures.Clear();
             foreach (var item in pack.TextureSet)
                 _textures.Add(item.ID, _contentManager.Load<Texture2D>(item.Content));
         }
