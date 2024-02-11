@@ -42,7 +42,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             AddControl(0, new LabelControl(this)
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 100,
+                Y = 75,
                 Text = "Settings",
                 Font = BasicFonts.GetFont(72),
             });

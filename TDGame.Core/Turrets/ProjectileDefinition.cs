@@ -30,5 +30,7 @@ namespace TDGame.Core.Turrets
         public override float Angle { get; set; }
         [JsonIgnore]
         public EnemyDefinition Target { get; set; }
+        [JsonIgnore]
+        public TurretDefinition Source { get; set; }
     }
 }

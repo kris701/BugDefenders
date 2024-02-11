@@ -26,13 +26,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private List<ButtonControl> _turretButtons = new List<ButtonControl>();
 
-        private UpgradePanel _turretUpgrade1;
-        private UpgradePanel _turretUpgrade2;
-        private UpgradePanel _turretUpgrade3;
+        private List<UpgradePanel> _turretUpgradePanels = new List<UpgradePanel>();
+        private List<LabelControl> _nextEnemyPanels = new List<LabelControl>();
 
-        private UpgradePanel _projectileUpgrade1;
-        private UpgradePanel _projectileUpgrade2;
-        private UpgradePanel _projectileUpgrade3;
+        private TextboxControl _turretStatesTextbox;
 
         public override void Initialize()
         {
@@ -49,12 +46,13 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
 #endif
-
             SetupGameField();
             SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 205);
             SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 215, 320, 435);
-            SetupUpgradeField();
-            
+            SetupUpgradeField(_gameArea.X, _gameArea.Y + _gameArea.Height + 10, _gameArea.Width, 200);
+            SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 20 + 200, 980, 110);
+            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 200);
+
             base.Initialize();
         }
 
@@ -271,7 +269,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             AddControl(10, _buyingPreviewTile);
         }
 
-        private void SetupUpgradeField()
+        private void SetupUpgradeField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(0, new BorderControl(this)
             {
@@ -279,10 +277,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Beige),
                     Alpha = 100,
-                    X = _gameArea.X,
-                    Y = _gameArea.Y + _gameArea.Height + 10,
-                    Height = 320,
-                    Width = 1000 - 20
+                    X = xOffset,
+                    Y = yOffset,
+                    Height = height,
+                    Width = width
                 }
             });
             AddControl(1, new LabelControl(this)
@@ -290,94 +288,114 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Text = "Upgrades",
                 Font = BasicFonts.GetFont(24),
                 FillColor = BasicTextures.GetBasicRectange(Color.Red),
-                X = _gameArea.X,
-                Y = _gameArea.Y + _gameArea.Height + 10,
+                X = xOffset,
+                Y = yOffset,
                 Height = 35,
-                Width = 1000 - 20
+                Width = width
+            });
+
+            int x = xOffset + 5;
+            int y = yOffset + 40;
+            int itemXOffset = 0;
+            int itemWidth = 205;
+            int margin = 10;
+            for(int i = 0; i < 3; i++)
+            {
+                var newItem = new UpgradePanel(this, BuyUpgrade_Click)
+                {
+                    X = x + (itemXOffset++ * (itemWidth + margin)),
+                    Y = y,
+                    Height = 135,
+                    Width = itemWidth,
+                };
+                newItem.TurnInvisible();
+                _turretUpgradePanels.Add(newItem);
+                AddControl(1, newItem);
+            }
+        }
+
+        private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)
+        {
+            AddControl(0, new BorderControl(this)
+            {
+                Child = new TileControl(this)
+                {
+                    FillColor = BasicTextures.GetBasicRectange(Color.Beige),
+                    Alpha = 100,
+                    X = xOffset,
+                    Y = yOffset,
+                    Height = height,
+                    Width = width
+                }
             });
             AddControl(1, new LabelControl(this)
             {
-                Text = "Turret",
+                Text = "Next Enemies",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Green),
-                X = _gameArea.X + 5,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40,
-                Height = 135,
-                Width = 200
+                FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                X = xOffset,
+                Y = yOffset,
+                Height = 35,
+                Width = width
+            });
+
+            int x = xOffset + 5;
+            int y = yOffset + 40;
+            int itemXOffset = 0;
+            int itemWidth = 185;
+            int margin = 10;
+            for (int i = 0; i < 5; i++)
+            {
+                var newItem = new LabelControl(this)
+                {
+                    X = x + (itemXOffset++ * (itemWidth + margin)),
+                    Y = y,
+                    Height = 65,
+                    Width = itemWidth,
+                    FillColor = BasicTextures.GetBasicRectange(Color.CadetBlue),
+                    Font = BasicFonts.GetFont(12),
+                };
+                _nextEnemyPanels.Add(newItem);
+                AddControl(1, newItem);
+            }
+        }
+
+        private void SetupTurretStatsPanel(int xOffset, int yOffset, int width, int height)
+        {
+            AddControl(0, new BorderControl(this)
+            {
+                Child = new TileControl(this)
+                {
+                    FillColor = BasicTextures.GetBasicRectange(Color.Beige),
+                    Alpha = 100,
+                    X = xOffset,
+                    Y = yOffset,
+                    Height = height,
+                    Width = width
+                }
             });
             AddControl(1, new LabelControl(this)
             {
-                Text = "Projectile",
+                Text = "Turret Stats",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Green),
-                X = _gameArea.X + 5,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40 + 140,
-                Height = 135,
-                Width = 200
+                FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                X = xOffset,
+                Y = yOffset,
+                Height = 35,
+                Width = width
             });
 
-            int width = 245;
-            _turretUpgrade1 = new UpgradePanel(this, BuyUpgrade_Click)
+            _turretStatesTextbox = new TextboxControl(this)
             {
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
-                X = _gameArea.X + 220,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40,
-                Height = 135,
-                Width = width
+                Font = BasicFonts.GetFont(10),
+                Text = "Select a Turret",
+                X = xOffset + 5,
+                Y = yOffset + 40,
+                Width = width - 10,
+                Height = height - 45,
+                FillColor = BasicTextures.GetBasicRectange(Color.Beige)
             };
-            _turretUpgrade1.TurnInvisible();
-            AddControl(2, _turretUpgrade1);
-            _turretUpgrade2 = new UpgradePanel(this, BuyUpgrade_Click)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
-                X = _gameArea.X + 220 + width + 5,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40,
-                Height = 135,
-                Width = width
-            };
-            _turretUpgrade2.TurnInvisible();
-            AddControl(2, _turretUpgrade2);
-            _turretUpgrade3 = new UpgradePanel(this, BuyUpgrade_Click)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
-                X = _gameArea.X + 220 + width * 2 + 10,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40,
-                Height = 135,
-                Width = width
-            };
-            _turretUpgrade3.TurnInvisible();
-            AddControl(2, _turretUpgrade3);
-
-            _projectileUpgrade1 = new UpgradePanel(this, BuyUpgrade_Click)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
-                X = _gameArea.X + 220,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40 + 140,
-                Height = 135,
-                Width = width
-            };
-            _projectileUpgrade1.TurnInvisible();
-            AddControl(2, _projectileUpgrade1);
-            _projectileUpgrade2 = new UpgradePanel(this, BuyUpgrade_Click)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
-                X = _gameArea.X + 220 + width + 5,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40 + 140,
-                Height = 135,
-                Width = width
-            };
-            _projectileUpgrade2.TurnInvisible();
-            AddControl(2, _projectileUpgrade2);
-            _projectileUpgrade3 = new UpgradePanel(this, BuyUpgrade_Click)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
-                X = _gameArea.X + 220 + width * 2 + 10,
-                Y = _gameArea.Y + _gameArea.Height + 10 + 40 + 140,
-                Height = 135,
-                Width = width
-            };
-            _projectileUpgrade3.TurnInvisible();
-            AddControl(2, _projectileUpgrade3);
+            AddControl(1, _turretStatesTextbox);
         }
     }
 }

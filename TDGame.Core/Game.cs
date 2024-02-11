@@ -197,6 +197,8 @@ namespace TDGame.Core
                     turret.Targeting = best;
                     turret.Angle = GetAngle(best, turret);
                 }
+                else
+                    turret.Kills++;
                 turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
             }
         }
@@ -207,17 +209,26 @@ namespace TDGame.Core
             var best = GetNearestEnemy(turret);
             if (best != null && turret.ProjectileID != null)
             {
-                var projectile = ProjectileBuilder.GetProjectile(turret.ProjectileID);
+                var projectile = GetProjectileForTurret(turret);
                 projectile.Angle = GetAngle(best, turret);
                 turret.Angle = projectile.Angle;
-                projectile.X = turret.X + turret.Size / 2 - projectile.Size / 2;
-                projectile.Y = turret.Y + turret.Size / 2 - projectile.Size / 2;
-                foreach (var level in turret.ProjectileLevels)
-                    if (level.HasUpgrade)
-                        level.ApplyUpgrade(projectile);
                 Projectiles.Add(projectile);
                 turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
             }
+        }
+
+        public ProjectileDefinition GetProjectileForTurret(TurretDefinition turret)
+        {
+            if (turret.ProjectileID == null)
+                throw new ArgumentNullException("Projectile ID was null!");
+            var projectile = ProjectileBuilder.GetProjectile(turret.ProjectileID);
+            projectile.Source = turret;
+            projectile.X = turret.X + turret.Size / 2 - projectile.Size / 2;
+            projectile.Y = turret.Y + turret.Size / 2 - projectile.Size / 2;
+            foreach (var level in turret.ProjectileLevels)
+                if (level.HasUpgrade)
+                    level.ApplyUpgrade(projectile);
+            return projectile;
         }
 
         private void UpdateProjectiles()
@@ -267,8 +278,13 @@ namespace TDGame.Core
                     {
                         var dist = MathHelpers.Distance(projectile.X, projectile.Y, CurrentEnemies[i].X, CurrentEnemies[i].Y);
                         if (dist < projectile.SplashRange)
+                        {
                             if (DamageEnemy(CurrentEnemies[i], projectile.Damage))
+                            {
+                                projectile.Source.Kills++;
                                 i--;
+                            }
+                        }
                     }
                     toRemove.Add(projectile);
                 }
@@ -321,25 +337,40 @@ namespace TDGame.Core
             return false;
         }
 
-        public bool LevelUpTurret(TurretDefinition turret, int levelIndex)
+        public bool CanLevelUpTurret(TurretDefinition turret, int levelIndex)
         {
             var upgrade = turret.TurretLevels[levelIndex];
             if (Money < upgrade.Cost)
                 return false;
             if (levelIndex > 0 && !turret.TurretLevels[levelIndex - 1].HasUpgrade)
                 return false;
-            
+            return true;
+        }
+        public bool LevelUpTurret(TurretDefinition turret, int levelIndex)
+        {
+            var upgrade = turret.TurretLevels[levelIndex];
+            if (!CanLevelUpTurret(turret, levelIndex))
+                return false;
+
             Money -= upgrade.Cost;
             upgrade.ApplyUpgrade(turret);
             return true;
         }
 
-        public bool LevelUpProjectile(TurretDefinition turret, int levelIndex)
+        public bool CanLevelUpProjectile(TurretDefinition turret, int levelIndex)
         {
-            var upgrade = turret.ProjectileLevels[levelIndex];
+            var upgrade = turret.TurretLevels[levelIndex];
             if (Money < upgrade.Cost)
                 return false;
             if (levelIndex > 0 && !turret.ProjectileLevels[levelIndex - 1].HasUpgrade)
+                return false;
+
+            return true;
+        }
+        public bool LevelUpProjectile(TurretDefinition turret, int levelIndex)
+        {
+            var upgrade = turret.ProjectileLevels[levelIndex];
+            if (!CanLevelUpProjectile(turret, levelIndex))
                 return false;
 
             Money -= upgrade.Cost;

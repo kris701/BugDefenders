@@ -7,5 +7,5 @@
   "StartingHP": 50,
   "StartingMoney": 1000,
   "EnemySpawnQuantity": 7,
-  "ProjectileSpeedCap": 10
+  "ProjectileSpeedCap": 20
 }

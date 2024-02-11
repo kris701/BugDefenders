@@ -52,29 +52,26 @@ namespace TDGame.OpenGL.Engine.Controls
             if (_textChanged && Text != "")
             {
                 lines = new List<LabelControl>();
-                var currentString = "";
-                foreach (var character in Text)
+                var split = Text.Split(Environment.NewLine).ToList();
+                split.RemoveAll(x => x == "");
+                foreach (var line in split)
+                    ProcessString(line);
+                _textChanged = false;
+            }
+            foreach (var line in lines)
+                line.Update(gameTime);
+            base.Update(gameTime);
+        }
+
+        private void ProcessString(string str)
+        {
+            var currentString = "";
+            foreach (var character in str)
+            {
+                currentString += character;
+                var size = Font.MeasureString(currentString);
+                if (Parent.Scale(size.X) > Width - Parent.Scale(Margin * 2))
                 {
-                    currentString += character;
-                    var size = Font.MeasureString(currentString);
-                    if (Parent.Scale(size.X) > Width - Parent.Scale(Margin * 2))
-                    {
-                        var newLabel = new LabelControl(Parent)
-                        {
-                            Font = Font,
-                            Text = currentString,
-                        };
-                        newLabel._x = _x;
-                        newLabel._y = _y + size.Y * lines.Count;
-                        newLabel._width = _width;
-                        newLabel._height = size.Y;
-                        lines.Add(newLabel);
-                        currentString = "";
-                    }
-                }
-                if (currentString != "")
-                {
-                    var size = Font.MeasureString(currentString);
                     var newLabel = new LabelControl(Parent)
                     {
                         Font = Font,
@@ -85,12 +82,23 @@ namespace TDGame.OpenGL.Engine.Controls
                     newLabel._width = _width;
                     newLabel._height = size.Y;
                     lines.Add(newLabel);
+                    currentString = "";
                 }
-                _textChanged = false;
             }
-            foreach (var line in lines)
-                line.Update(gameTime);
-            base.Update(gameTime);
+            if (currentString != "")
+            {
+                var size = Font.MeasureString(currentString);
+                var newLabel = new LabelControl(Parent)
+                {
+                    Font = Font,
+                    Text = currentString,
+                };
+                newLabel._x = _x;
+                newLabel._y = _y + size.Y * lines.Count;
+                newLabel._width = _width;
+                newLabel._height = size.Y;
+                lines.Add(newLabel);
+            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

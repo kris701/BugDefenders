@@ -32,6 +32,7 @@ namespace TDGame.OpenGL
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
+            Window.Title = "TDGame";
 
             if (File.Exists(_settingsFile))
             {
@@ -39,7 +40,6 @@ namespace TDGame.OpenGL
                 if (settings != null)
                 {
                     Settings = settings;
-                    ApplySettings();
                 }
             }
             else
@@ -50,6 +50,7 @@ namespace TDGame.OpenGL
         {
             base.Initialize();
 
+            ApplySettings();
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
             TextureBuilder.Initialize(Content);

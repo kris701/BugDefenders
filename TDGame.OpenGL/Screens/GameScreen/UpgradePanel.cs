@@ -21,6 +21,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private LabelControl _nameLabel;
         private TextboxControl _descriptionTextbox;
         private ButtonControl _buyUpgradeButton;
+        private TileControl _cantBuyTile;
 
         public UpgradePanel(IScreen parent, ClickedHandler buy) : base(parent)
         {
@@ -44,14 +45,20 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Text = "Buy",
                 Height = 35
             };
+            _cantBuyTile = new TileControl(Parent)
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
+                Alpha = 100
+            };
             Children = new List<IControl>() {
                 _nameLabel,
                 _descriptionTextbox,
-                _buyUpgradeButton
+                _buyUpgradeButton,
+                _cantBuyTile
             };
         }
 
-        public void SetUpgrade(IUpgrade upgrade)
+        public void SetUpgrade(IUpgrade upgrade, bool canUpgrade)
         {
             _nameLabel.Text = $"[{upgrade.Cost}$] {upgrade.Name}";
             _descriptionTextbox.Text = upgrade.Description;
@@ -59,6 +66,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             IsVisible = true;
             foreach (var child in Children)
                 child.IsVisible = true;
+            _buyUpgradeButton.IsEnabled = canUpgrade;
+            _cantBuyTile.IsVisible = !canUpgrade;
             Initialize();
         }
 
@@ -75,11 +84,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _nameLabel._y = _y;
             _nameLabel._width = _width;
             _descriptionTextbox._x = _x;
-            _descriptionTextbox._y = _y + 35;
+            _descriptionTextbox._y = _y + Parent.Scale(35);
             _descriptionTextbox._width = _width;
             _buyUpgradeButton._x = _x;
-            _buyUpgradeButton._y = _y + 35 + 65;
+            _buyUpgradeButton._y = _y + Parent.Scale(35 + 65);
             _buyUpgradeButton._width = _width;
+            _cantBuyTile._x = _x;
+            _cantBuyTile._y = _y;
+            _cantBuyTile._width = _width;
+            _cantBuyTile._height = _height;
 
             foreach (var child in Children)
                 child.Initialize();

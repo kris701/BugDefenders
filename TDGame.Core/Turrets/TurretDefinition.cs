@@ -32,6 +32,8 @@ namespace TDGame.Core.Turrets
         public EnemyDefinition? Targeting { get; set; }
         [JsonIgnore]
         public override float Angle { get; set; } = 0;
+        [JsonIgnore]
+        public int Kills { get; set; } = 0;
 
         public TurretDefinition(Guid iD, string name, string description, TurretType type, float size, int cost, int range, int damage, int cooldown, string? projectileID, List<TurretLevel> turretLevels, List<ProjectileLevel> projectileLevels)
         {

@@ -21,6 +21,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
         public int XOffset { get; set; }
         public int YOffset { get; set; }
 
+        public int Count => _entities.Count;
+        public ButtonControl Indexed(int index) => _entities.Values.ElementAt(index);
+
         private Dictionary<T, ButtonControl> _entities = new Dictionary<T, ButtonControl>();
         private ClickedHandler? _onClicked;
 

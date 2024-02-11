@@ -25,6 +25,22 @@
       "RangeModifier": 1,
       "DamageModifier": 1,
       "CooldownModifier": 0.5
+    },
+    {
+      "Name": "Upgrade 3",
+      "Description": "fast turret",
+      "Cost": 50,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 0.5
+    },
+    {
+      "Name": "Upgrade 4",
+      "Description": "fast turret",
+      "Cost": 50,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 0.5
     }
   ],
   "ProjectileLevels": []

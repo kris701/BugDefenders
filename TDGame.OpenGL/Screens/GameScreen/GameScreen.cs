@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Text.Json;
 using TDGame.Core;
 using TDGame.Core.Enemies;
@@ -14,6 +15,7 @@ using TDGame.Core.Turrets.Upgrades;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
 
@@ -34,6 +36,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private TurretDefinition? _selectedTurret;
         private List<AnimatedTileControl> _explosions = new List<AnimatedTileControl>();
 
+        private KeyWatcher _waveKeyWatcher;
+        private int tabIndex = 0;
+        private KeyWatcher _switchTurretWatcher;
+        private KeyWatcher _escapeKeyWatcher;
+
         public GameScreen(GameEngine parent, string map, string gamestyle) : base(parent)
         {
             _currentGameStyle = gamestyle;
@@ -44,6 +51,23 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _enemyUpdater = new EntityUpdater<EnemyDefinition>(3, this, _gameArea.X, _gameArea.Y);
             _projectile = new EntityUpdater<ProjectileDefinition>(5, this,  _gameArea.X, _gameArea.Y);
             _projectile.OnDelete += OnProjectileDeleted;
+            _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { 
+                _game.QueueEnemies();
+                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
+            }, () => {
+                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.White);
+            });
+            _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
+            {
+                if (_game.Turrets.Count == 0)
+                    return;
+                tabIndex++;
+                if (tabIndex >= _game.Turrets.Count)
+                    tabIndex = 0;
+                UnselectTurret();
+                SelectTurret(_game.Turrets[tabIndex]);
+            });
+            _escapeKeyWatcher = new KeyWatcher(Keys.Escape, UnselectTurret);
             Initialize();
 
 #if DRAWBLOCKINGTILES
@@ -97,12 +121,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             _selectedTurret = null;
             _turretSelectRangeTile.IsVisible = false;
-            _turretUpgrade1.TurnInvisible();
-            _turretUpgrade2.TurnInvisible();
-            _turretUpgrade3.TurnInvisible();
-            _projectileUpgrade1.TurnInvisible();
-            _projectileUpgrade2.TurnInvisible();
-            _projectileUpgrade3.TurnInvisible();
+            foreach (var item in _turretUpgradePanels)
+                item.TurnInvisible();
+            _turretStatesTextbox.Text = "Select a Turret";
         }
 
         private void Turret_Click(ButtonControl parent)
@@ -115,50 +136,59 @@ namespace TDGame.OpenGL.Screens.GameScreen
             }
             else if (parent.Tag is TurretDefinition turretDef)
             {
-                _selectedTurret = turretDef;
-                _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turretDef.Range * 2);
-                _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
-                _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
-                _turretSelectRangeTile.X = turretDef.X + turretDef.Size / 2 + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
-                _turretSelectRangeTile.Y = turretDef.Y + turretDef.Size / 2 + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
-                _turretSelectRangeTile.IsVisible = true;
-
-                for(int i = 0; i < turretDef.TurretLevels.Count; i++)
-                {
-                    if (!turretDef.TurretLevels[i].HasUpgrade)
-                    {
-                        if (!_turretUpgrade1.IsVisible)
-                        {
-                            _turretUpgrade1.SetUpgrade(turretDef.TurretLevels[i]);
-                        } else if (!_turretUpgrade2.IsVisible)
-                        {
-                            _turretUpgrade2.SetUpgrade(turretDef.TurretLevels[i]);
-                        } else if (!_turretUpgrade3.IsVisible)
-                        {
-                            _turretUpgrade3.SetUpgrade(turretDef.TurretLevels[i]);
-                        }
-                    }
-                }
-
-                for (int i = 0; i < turretDef.ProjectileLevels.Count; i++)
-                {
-                    if (!turretDef.ProjectileLevels[i].HasUpgrade)
-                    {
-                        if (!_projectileUpgrade1.IsVisible)
-                        {
-                            _projectileUpgrade1.SetUpgrade(turretDef.ProjectileLevels[i]);
-                        }
-                        else if (!_projectileUpgrade2.IsVisible)
-                        {
-                            _projectileUpgrade2.SetUpgrade(turretDef.ProjectileLevels[i]);
-                        }
-                        else if (!_projectileUpgrade3.IsVisible)
-                        {
-                            _projectileUpgrade3.SetUpgrade(turretDef.ProjectileLevels[i]);
-                        }
-                    }
-                }
+                SelectTurret(turretDef);
             }
+        }
+
+        private void SelectTurret(TurretDefinition turretDef)
+        {
+            _selectedTurret = turretDef;
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turretDef.Range * 2);
+            _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
+            _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
+            _turretSelectRangeTile.X = turretDef.X + turretDef.Size / 2 + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
+            _turretSelectRangeTile.Y = turretDef.Y + turretDef.Size / 2 + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
+            _turretSelectRangeTile.IsVisible = true;
+
+            var index = 0;
+            for (int i = 0; i < turretDef.TurretLevels.Count; i++)
+            {
+                if (index >= _turretUpgradePanels.Count)
+                    break;
+                if (!turretDef.TurretLevels[i].HasUpgrade)
+                    _turretUpgradePanels[index++].SetUpgrade(turretDef.TurretLevels[i], _game.CanLevelUpTurret(turretDef, i));
+            }
+            for (int i = 0; i < turretDef.ProjectileLevels.Count; i++)
+            {
+                if (index >= _turretUpgradePanels.Count)
+                    break;
+                if (!turretDef.ProjectileLevels[i].HasUpgrade)
+                    _turretUpgradePanels[index++].SetUpgrade(turretDef.ProjectileLevels[i], _game.CanLevelUpProjectile(turretDef, i));
+            }
+
+            var sb = new StringBuilder();
+            if (turretDef.ProjectileID == null)
+            {
+                sb.AppendLine($"Name: {turretDef.Name}");
+                sb.AppendLine($"Damage: {turretDef.Damage}");
+                sb.AppendLine($"Range: {turretDef.Range}");
+                sb.AppendLine($"Cooldown: {turretDef.Cooldown}");
+                sb.AppendLine(" ");
+                sb.AppendLine($"Kills: {turretDef.Kills}");
+            }
+            else
+            {
+                var projectile = _game.GetProjectileForTurret(turretDef);
+                sb.AppendLine($"Name: {turretDef.Name}");
+                sb.AppendLine($"Projectile Damage: {projectile.Damage}");
+                sb.AppendLine($"Projectile Splash: {projectile.SplashRange}");
+                sb.AppendLine($"Projectile Trigger: {projectile.TriggerRange}");
+                sb.AppendLine($"Range: {turretDef.Range}");
+                sb.AppendLine($"Cooldown: {turretDef.Cooldown}");
+                sb.AppendLine(" ");
+                sb.AppendLine($"Kills: {turretDef.Kills}");
+            }
+            _turretStatesTextbox.Text = sb.ToString();
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)
@@ -168,14 +198,21 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 if (upg is TurretLevel turretLevel)
                 {
                     var index = _selectedTurret.TurretLevels.IndexOf(turretLevel);
-                    _game.LevelUpTurret(_selectedTurret, index);
+                    if (_game.CanLevelUpTurret(_selectedTurret, index))
+                    {
+                        _game.LevelUpTurret(_selectedTurret, index);
+                        UnselectTurret();
+                    }
                 }
                 else if (upg is ProjectileLevel projLevel)
                 {
                     var index = _selectedTurret.ProjectileLevels.IndexOf(projLevel);
-                    _game.LevelUpProjectile(_selectedTurret, index);
+                    if (_game.CanLevelUpProjectile(_selectedTurret, index))
+                    {
+                        _game.LevelUpProjectile(_selectedTurret, index);
+                        UnselectTurret();
+                    }
                 }
-                UnselectTurret();
             }
         }
 
@@ -205,6 +242,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var mouseState = Mouse.GetState();
             var keyState = Keyboard.GetState();
 
+            _waveKeyWatcher.Update(keyState);
+            _switchTurretWatcher.Update(keyState);
+            _escapeKeyWatcher.Update(keyState);
+
             _game.Update(gameTime.ElapsedGameTime);
             
             _moneyLabel.Text = $"Money: {_game.Money}$";
@@ -212,6 +253,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _scoreLabel.Text = $"Score: {_game.Score}";
 
             UpdateTurretPurchaseButtons();
+            UpdateNextEnemies();
 
             _turretUpdater.UpdateEntities(_game.Turrets, (e) =>
             {
@@ -326,6 +368,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
             foreach (var explosion in _explosions)
                 explosion.Update(gameTime);
             _explosions.RemoveAll(x => x.IsVisible == false);
+        }
+
+        private void UpdateNextEnemies()
+        {
+            for (int i = 0; i < _game.EnemiesToSpawn.Count && i < _nextEnemyPanels.Count; i++)
+                _nextEnemyPanels[i].Text = _game.EnemiesToSpawn[i];
         }
 
         private void BuyTurret_Click(ButtonControl parent)
