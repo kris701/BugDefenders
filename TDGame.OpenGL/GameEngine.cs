@@ -2,19 +2,25 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Settings;
 using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL
 {
     public class GameEngine : Game
     {
+        private static string _contentDir = "Content";
+        private static string _settingsFile = "settings.json";
+
+        public SettingsDefinition Settings { get; set; }
         public GraphicsDeviceManager Device { get; }
         public int ScreenWidth() => Window.ClientBounds.Width;
         public int ScreenHeight() => Window.ClientBounds.Height;
-        public float Scale { get; set; } = 1;
 
         private Func<GameEngine, IScreen> _screenToLoad;
         private IScreen _currentScreen;
@@ -23,9 +29,21 @@ namespace TDGame.OpenGL
         public GameEngine(Func<GameEngine, IScreen> screen)
         {
             Device = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
+
+            if (File.Exists(_settingsFile))
+            {
+                var settings = JsonSerializer.Deserialize<SettingsDefinition>(File.ReadAllText(_settingsFile));
+                if (settings != null)
+                {
+                    Settings = settings;
+                    ApplySettings();
+                }
+            }
+            else
+                Settings = new SettingsDefinition();
         }
 
         protected override void Initialize()
@@ -65,6 +83,22 @@ namespace TDGame.OpenGL
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void ApplySettings()
+        {
+            Device.PreferredBackBufferHeight = (int)(Settings.Scale * 1000);
+            Device.PreferredBackBufferWidth = (int)(Settings.Scale * 1000);
+            Device.SynchronizeWithVerticalRetrace = Settings.IsVsync;
+            Device.IsFullScreen = Settings.IsFullscreen;
+            Device.ApplyChanges();
+        }
+
+        public void SaveSettings() 
+        {
+            if (File.Exists(_settingsFile))
+                File.Delete(_settingsFile);
+            File.WriteAllText(_settingsFile, JsonSerializer.Serialize(Settings));
         }
 
         public void SwitchView(IScreen screen)

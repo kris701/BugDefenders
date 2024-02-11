@@ -18,14 +18,14 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         public GameSetupView(GameEngine parent) : base(parent)
         {
-            ScaleValue = parent.Scale;
+            ScaleValue = parent.Settings.Scale;
             Initialize();
         }
 
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != "" && _selectedGameStyle != "")
-                Parent.SwitchView(new PathTestScreen(Parent, _selectedMap, _selectedGameStyle));
+                Parent.SwitchView(new GameScreen(Parent, _selectedMap, _selectedGameStyle));
         }
 
         private void SelectMap_Click(ButtonControl sender)

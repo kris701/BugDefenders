@@ -18,7 +18,7 @@ using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.PathTest
 {
-    public partial class PathTestScreen : BaseScreen
+    public partial class GameScreen : BaseScreen
     {
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
 
@@ -32,11 +32,11 @@ namespace TDGame.OpenGL.Screens.PathTest
         private string _buyingTurret = "";
         private TurretDefinition? _selectedTurret;
 
-        public PathTestScreen(GameEngine parent, string map, string gamestyle) : base(parent)
+        public GameScreen(GameEngine parent, string map, string gamestyle) : base(parent)
         {
             _currentGameStyle = gamestyle;
             _currentMap = map;
-            ScaleValue = parent.Scale;
+            ScaleValue = parent.Settings.Scale;
             _game = new Core.Game(map, gamestyle);
             _turretUpdater = new EntityUpdater<TurretDefinition>(4, this, _gameArea.X, _gameArea.Y, Turret_Click);
             _enemyUpdater = new EntityUpdater<EnemyDefinition>(3, this, _gameArea.X, _gameArea.Y);

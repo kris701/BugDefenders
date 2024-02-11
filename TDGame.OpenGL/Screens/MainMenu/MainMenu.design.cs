@@ -50,13 +50,13 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 375,
                 Width = 200,
                 Height = 50,
-                Text = "Exit",
+                Text = "Settings",
                 Font = BasicFonts.GetFont(24),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
@@ -64,96 +64,10 @@ namespace TDGame.OpenGL.Screens.MainMenu
             AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 375,
+                Y = 550,
                 Width = 200,
                 Height = 50,
                 Text = "Exit",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
-            });
-
-            AddControl(0, new ButtonControl(this, clicked: (x) => {
-                Parent.Scale = 1.5f;
-                Parent.Device.PreferredBackBufferHeight = (int)(1000 * Parent.Scale);
-                Parent.Device.PreferredBackBufferWidth = (int)(1000 * Parent.Scale);
-                Parent.Device.ApplyChanges();
-                Parent.SwitchView(new MainMenu(Parent));
-            })
-            {
-                X = 0,
-                Y = 1000 - 50,
-                Width = 100,
-                Height = 50,
-                Text = "150%",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
-            });
-            AddControl(0, new ButtonControl(this, clicked: (x) => {
-                Parent.Scale = 1.25f;
-                Parent.Device.PreferredBackBufferHeight = (int)(1000 * Parent.Scale);
-                Parent.Device.PreferredBackBufferWidth = (int)(1000 * Parent.Scale);
-                Parent.Device.ApplyChanges();
-                Parent.SwitchView(new MainMenu(Parent));
-            })
-            {
-                X = 110,
-                Y = 1000 - 50,
-                Width = 100,
-                Height = 50,
-                Text = "125%",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
-            });
-            AddControl(0, new ButtonControl(this, clicked: (x) => {
-                Parent.Scale = 1;
-                Parent.Device.PreferredBackBufferHeight = (int)(1000 * Parent.Scale);
-                Parent.Device.PreferredBackBufferWidth = (int)(1000 * Parent.Scale);
-                Parent.Device.ApplyChanges();
-                Parent.SwitchView(new MainMenu(Parent));
-            })
-            {
-                X = 220,
-                Y = 1000 - 50,
-                Width = 100,
-                Height = 50,
-                Text = "100%",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
-            });
-            AddControl(0, new ButtonControl(this, clicked: (x) => {
-                Parent.Scale = 0.75f;
-                Parent.Device.PreferredBackBufferHeight = (int)(1000 * Parent.Scale);
-                Parent.Device.PreferredBackBufferWidth = (int)(1000 * Parent.Scale);
-                Parent.Device.ApplyChanges();
-                Parent.SwitchView(new MainMenu(Parent));
-            })
-            {
-                X = 330,
-                Y = 1000 - 50,
-                Width = 100,
-                Height = 50,
-                Text = "75%",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
-            });
-            AddControl(0, new ButtonControl(this, clicked: (x) => {
-                Parent.Scale = 0.50f;
-                Parent.Device.PreferredBackBufferHeight = (int)(1000 * Parent.Scale);
-                Parent.Device.PreferredBackBufferWidth = (int)(1000 * Parent.Scale);
-                Parent.Device.ApplyChanges();
-                Parent.SwitchView(new MainMenu(Parent));
-            })
-            {
-                X = 440,
-                Y = 1000 - 50,
-                Width = 100,
-                Height = 50,
-                Text = "50%",
                 Font = BasicFonts.GetFont(24),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)

@@ -9,7 +9,7 @@ using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.PathTest
 {
-    public partial class PathTestScreen : BaseScreen
+    public partial class GameScreen : BaseScreen
     {
         private LabelControl _moneyLabel;
         private LabelControl _hpLabel;
@@ -36,7 +36,7 @@ namespace TDGame.OpenGL.Screens.PathTest
         public override void Initialize()
         {
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new PathTestScreen(Parent, _currentMap, _currentGameStyle)))
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameScreen(Parent, _currentMap, _currentGameStyle)))
             {
                 X = 0,
                 Y = 0,
