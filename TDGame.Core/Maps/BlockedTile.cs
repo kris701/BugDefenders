@@ -8,12 +8,12 @@ namespace TDGame.Core.Maps
 {
     public class BlockedTile
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
 
-        public BlockedTile(int x, int y, int width, int height)
+        public BlockedTile(float x, float y, float width, float height)
         {
             X = x;
             Y = y;

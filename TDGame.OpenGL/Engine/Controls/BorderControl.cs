@@ -38,10 +38,10 @@ namespace TDGame.OpenGL.Engine.Controls
                 return;
 
             Child.Draw(gameTime, spriteBatch);
-            spriteBatch.Draw(BorderBrush, new Vector2(Child.X, Child.Y), new Rectangle((int)Child.X, (int)Child.Y, (int)Child.Width, (int)Thickness), GetAlphaColor());
-            spriteBatch.Draw(BorderBrush, new Vector2(Child.X, Child.Y), new Rectangle((int)Child.X, (int)Child.Y, (int)Thickness, (int)Child.Height), GetAlphaColor());
-            spriteBatch.Draw(BorderBrush, new Vector2(Child.X + Child.Width, Child.Y), new Rectangle((int)(Child.X + Child.Width), (int)Child.Y, (int)Thickness, (int)Child.Height), GetAlphaColor());
-            spriteBatch.Draw(BorderBrush, new Vector2(Child.X, Child.Y + Child.Height), new Rectangle((int)Child.X, (int)(Child.Y + Child.Height), (int)(Child.Width + Thickness), (int)Thickness), GetAlphaColor());
+            spriteBatch.DrawLine(BorderBrush, new Vector2(Child.X - Thickness / 2, Child.Y), new Vector2(Child.X + Child.Width + Thickness / 2, Child.Y), Thickness, Alpha);
+            spriteBatch.DrawLine(BorderBrush, new Vector2(Child.X, Child.Y), new Vector2(Child.X, Child.Y + Child.Height), Thickness, Alpha);
+            spriteBatch.DrawLine(BorderBrush, new Vector2(Child.X + Child.Width, Child.Y), new Vector2(Child.X + Child.Width, Child.Y + Child.Height), Thickness, Alpha);
+            spriteBatch.DrawLine(BorderBrush, new Vector2(Child.X - Thickness / 2, Child.Y + Child.Height), new Vector2(Child.X + Child.Width + Thickness / 2, Child.Y + Child.Height), Thickness, Alpha);
         }
     }
 }

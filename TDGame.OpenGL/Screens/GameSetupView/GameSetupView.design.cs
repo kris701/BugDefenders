@@ -86,7 +86,6 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Y = 110,
                 Width = 380,
                 Height = 380,
-                ForceFit = true
             };
             AddControl(1, new BorderControl(this)
             {

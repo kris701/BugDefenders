@@ -38,7 +38,6 @@ namespace TDGame.OpenGL.Engine.Controls
         internal float _textWidth = 0;
         internal float _textHeight = 0;
         internal bool _textChanged = true;
-        private float _magicScaleNumber => (float)Math.Pow(Parent.ScaleValue, -0.85);
 
         public LabelControl(IScreen parent) : base(parent)
         {
@@ -46,7 +45,7 @@ namespace TDGame.OpenGL.Engine.Controls
 
         internal void UpdateTextPositions()
         {
-            var size = Font.MeasureString(Text) * _magicScaleNumber;
+            var size = Font.MeasureString(Text);
             if (Width == 0)
                 Width = size.X;
             if (Height == 0)
@@ -67,17 +66,40 @@ namespace TDGame.OpenGL.Engine.Controls
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
+            DrawString(gameTime, spriteBatch);
+        }
+
+        internal void DrawString(GameTime gameTime, SpriteBatch spriteBatch)
+        {
             if (Text != "")
                 spriteBatch.DrawString(
-                    Font, 
+                    Font,
                     Text,
-                    new Vector2(_textX + _textWidth / 2, _textY + _textHeight / 2),
+                    new Vector2(_textX + (_textWidth * Parent.ScaleValue) / 2, _textY + (_textHeight * Parent.ScaleValue) / 2),
                     new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
                     Rotation,
                     new Vector2(_textWidth / 2, _textHeight / 2),
                     Parent.ScaleValue,
                     SpriteEffects.None,
                     0);
+#if CENTERPOINT
+            spriteBatch.Draw(
+                BasicTextures.GetBasicRectange(Color.Pink),
+                new Vector2(_textX + _textWidth / 2 - 3, _textY + _textHeight / 2 - 3),
+                new Rectangle(0, 0, 5, 5),
+                GetAlphaColor(),
+                Rotation,
+                new Vector2(0, 0),
+                1,
+                SpriteEffects.None,
+                0);
+#endif
+#if TEXTBORDER
+            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY), new Rectangle((int)_textX, (int)_textY, (int)_textWidth, 1), GetAlphaColor());
+            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY), new Rectangle((int)_textX, (int)_textY, 1, (int)_textHeight), GetAlphaColor());
+            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX + _textWidth, _textY), new Rectangle((int)(_textX + _textWidth), (int)_textY, 1, (int)_textHeight), GetAlphaColor());
+            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY + _textHeight), new Rectangle((int)_textX, (int)(_textY + _textHeight), (int)(_textWidth + 1), 1), GetAlphaColor());
+#endif
         }
 
         public override void Update(GameTime gameTime)

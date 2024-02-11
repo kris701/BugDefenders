@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,20 +13,16 @@ namespace TDGame.Core.Helpers
     public static class MathHelpers
     {
 
-        public static bool Intersects(TurretDefinition turret, WayPoint turretLocation, BlockedTile tile)
+        public static bool Intersects(TurretDefinition turret, BlockedTile tile)
         {
-            if (turretLocation.X >= tile.X && turretLocation.X <= tile.X + tile.Width &&
-                turretLocation.Y >= tile.Y && turretLocation.Y <= tile.Y + tile.Height)
-                return true;
-
-            float closestX = (turretLocation.X < tile.X ? tile.X : (turretLocation.X > tile.Width ? tile.Width : turretLocation.X));
-            float closestY = (turretLocation.Y < tile.Y ? tile.Y : (turretLocation.Y > tile.Height ? tile.Height : turretLocation.Y));
-            float dx = closestX - turretLocation.X;
-            float dy = closestY - turretLocation.Y;
-
-            return (dx * dx + dy * dy) <= turret.Size * turret.Size;
+            return new Rectangle((int)turret.X, (int)turret.Y, turret.Size, turret.Size).IntersectsWith(
+                new Rectangle((int)tile.X, (int)tile.Y, (int)tile.Width, (int)tile.Height));
         }
-        public static bool Intersects(TurretDefinition e1, TurretDefinition e2, WayPoint turretLocation) => Distance(e1.X, e1.Y, turretLocation.X, turretLocation.Y) < (e1.Size / 2) + (e2.Size / 2);
+        public static bool Intersects(TurretDefinition e1, TurretDefinition e2)
+        {
+            return new Rectangle((int)e1.X, (int)e1.Y, e1.Size, e1.Size).IntersectsWith(
+                new Rectangle((int)e2.X, (int)e2.Y, (int)e2.Size, (int)e2.Size));
+        }
 
         public static double Distance(TurretDefinition e1, TurretDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);
         public static double Distance(TurretDefinition e1, EnemyDefinition e2) => Distance(e1.X, e1.Y, e2.X, e2.Y);

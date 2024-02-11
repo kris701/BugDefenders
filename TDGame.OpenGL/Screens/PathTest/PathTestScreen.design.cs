@@ -65,7 +65,6 @@ namespace TDGame.OpenGL.Screens.PathTest
             {
                 Child = new TileControl(this)
                 {
-                    ForceFit = true,
                     FillColor = TextureBuilder.GetTexture(_game.Map.ID),
                     X = _gameArea.X,
                     Y = _gameArea.Y,
@@ -255,7 +254,6 @@ namespace TDGame.OpenGL.Screens.PathTest
             _buyingPreviewTile = new TileControl(this)
             {
                 IsVisible = false,
-                ForceFit = true,
                 Width = 50,
                 Height = 50
             };

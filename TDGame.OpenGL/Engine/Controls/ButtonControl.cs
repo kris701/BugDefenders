@@ -42,61 +42,8 @@ namespace TDGame.OpenGL.Engine.Controls
             if (!IsEnabled)
                 targetColor = FillDisabledColor;
 
-            if (FillColor.Width == 1 && FillColor.Height == 1)
-            {
-                spriteBatch.Draw(
-                    targetColor,
-                    new Vector2(X + Width / 2, Y + Height / 2),
-                    new Rectangle(0, 0, (int)Width, (int)Height),
-                    GetAlphaColor(),
-                    Rotation,
-                    new Vector2(Width / 2, Height / 2),
-                    1,
-                    SpriteEffects.None,
-                    0);
-            }
-            else
-            {
-                if (ForceFit)
-                {
-                    var xFit = Width / FillColor.Width;
-                    var yFit = Height / FillColor.Height;
-
-                    spriteBatch.Draw(
-                        targetColor,
-                        new Vector2(X + Width / 2, Y + Height / 2),
-                        null,
-                        GetAlphaColor(),
-                        Rotation,
-                        new Vector2(Width / 2, Height / 2),
-                        new Vector2(xFit, yFit),
-                        SpriteEffects.None,
-                        0);
-                }
-                else
-                    spriteBatch.Draw(
-                        targetColor,
-                        new Vector2(X + Width / 2, Y + Height / 2),
-                        null,
-                        GetAlphaColor(),
-                        Rotation,
-                        new Vector2(Width / 2, Height / 2),
-                        Parent.ScaleValue,
-                        SpriteEffects.None,
-                        0);
-            }
-
-            if (Text != "")
-                spriteBatch.DrawString(
-                    Font,
-                    Text,
-                    new Vector2(_textX + _textWidth / 2, _textY + _textHeight / 2),
-                    new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
-                    Rotation,
-                    new Vector2(_textWidth / 2, _textHeight / 2),
-                    Parent.ScaleValue,
-                    SpriteEffects.None,
-                    0);
+            DrawTile(gameTime, spriteBatch, targetColor);
+            DrawString(gameTime, spriteBatch);
         }
 
         public override void Update(GameTime gameTime)

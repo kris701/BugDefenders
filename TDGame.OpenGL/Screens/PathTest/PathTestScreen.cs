@@ -42,6 +42,21 @@ namespace TDGame.OpenGL.Screens.PathTest
             _enemyUpdater = new EntityUpdater<EnemyDefinition>(3, this, 20, _gameArea.X, _gameArea.Y);
             _projectile = new EntityUpdater<ProjectileDefinition>(5, this, 20, _gameArea.X, _gameArea.Y);
             Initialize();
+
+#if DRAWBLOCKINGTILES
+            foreach (var blockingTile in _game.Map.BlockingTiles)
+            {
+                AddControl(99, new TileControl(this)
+                {
+                    X = blockingTile.X + _gameArea.X,
+                    Y = blockingTile.Y + _gameArea.Y,
+                    Width = blockingTile.Width,
+                    Height = blockingTile.Height,
+                    FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                    Alpha = 50
+                });
+            }
+#endif
         }
 
         private void UnselectTurret()
@@ -58,6 +73,8 @@ namespace TDGame.OpenGL.Screens.PathTest
 
         private void Turret_Click(ButtonControl parent)
         {
+            if (_buyingPreviewTile.IsVisible)
+                return;
             if (_turretSelectRangeTile.IsVisible)
             {
                 UnselectTurret();
@@ -66,8 +83,10 @@ namespace TDGame.OpenGL.Screens.PathTest
             {
                 _selectedTurret = turretDef;
                 _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turretDef.Range * 2);
-                _turretSelectRangeTile._x = Scale(turretDef.X) - Scale(_turretSelectRangeTile.FillColor.Width) / 2 + turretDef.Size / 2;
-                _turretSelectRangeTile._y = Scale(turretDef.Y) - Scale(_turretSelectRangeTile.FillColor.Height) / 2 + turretDef.Size / 2;
+                _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
+                _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
+                _turretSelectRangeTile.X = turretDef.X + turretDef.Size / 2 + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
+                _turretSelectRangeTile.Y = turretDef.Y + turretDef.Size / 2 + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
                 _turretSelectRangeTile.IsVisible = true;
 
                 for(int i = 0; i < turretDef.TurretLevels.Count; i++)
@@ -164,13 +183,12 @@ namespace TDGame.OpenGL.Screens.PathTest
                     {
                         return new ButtonControl(this, clicked: Turret_Click)
                         {
-                            ForceFit = true,
                             IsEnabled = true,
                             FillClickedColor = TextureBuilder.GetTexture(e.ID),
                             FillDisabledColor = TextureBuilder.GetTexture(e.ID),
                             FillColor = TextureBuilder.GetTexture(e.ID),
-                            X = e.X - _turretUpdater.Size / 2,
-                            Y = e.Y - _turretUpdater.Size / 2,
+                            X = _gameArea.X + e.X,
+                            Y = _gameArea.Y + e.Y,
                             Width = _turretUpdater.Size,
                             Height = _turretUpdater.Size,
                             Tag = e
@@ -180,15 +198,14 @@ namespace TDGame.OpenGL.Screens.PathTest
             _projectile.UpdateEntities(_game.Projectiles, 
                 (e) =>
                     {
-                        return new ButtonControl(this, clicked: Turret_Click)
+                        return new ButtonControl(this)
                         {
-                            ForceFit = true,
                             IsEnabled = false,
                             FillClickedColor = TextureBuilder.GetTexture(e.ID),
                             FillDisabledColor = TextureBuilder.GetTexture(e.ID),
                             FillColor = TextureBuilder.GetTexture(e.ID),
-                            X = e.X - _projectile.Size / 2,
-                            Y = e.Y - _projectile.Size / 2,
+                            X = _gameArea.X + e.X,
+                            Y = _gameArea.Y + e.Y,
                             Width = _projectile.Size,
                             Height = _projectile.Size,
                             Rotation = e.Angle + (float)Math.PI / 2,
@@ -197,8 +214,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                     }, 
                 (e, c) =>
                     {
-                        c.X = _gameArea.X + e.X - _projectile.Size / 2;
-                        c.Y = _gameArea.Y + e.Y - _projectile.Size / 2;
+                        c.X = e.X + _gameArea.X;
+                        c.Y = e.Y + _gameArea.Y;
                         c.Rotation = e.Angle + (float)Math.PI / 2;
                     });
             UpdateLasers();
@@ -235,15 +252,22 @@ namespace TDGame.OpenGL.Screens.PathTest
             if (_buyingTurret != "")
             {
                 _buyingPreviewTile.IsVisible = true;
+                _buyingPreviewTile.Width = _buyingPreviewTile.FillColor.Width;
+                _buyingPreviewTile.Height = _buyingPreviewTile.FillColor.Height;
                 _buyingPreviewTile._x = mouseState.X - _buyingPreviewTile.Width / 2;
                 _buyingPreviewTile._y = mouseState.Y - _buyingPreviewTile.Height / 2;
                 _buyingPreviewRangeTile.IsVisible = true;
-                _buyingPreviewRangeTile._x = mouseState.X - Scale(_buyingPreviewRangeTile.FillColor.Width) / 2;
-                _buyingPreviewRangeTile._y = mouseState.Y - Scale(_buyingPreviewRangeTile.FillColor.Height) / 2;
+                _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
+                _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
+                _buyingPreviewRangeTile._x = mouseState.X - _buyingPreviewRangeTile.Width / 2;
+                _buyingPreviewRangeTile._y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (_game.AddTurret(TurretBuilder.GetTurret(_buyingTurret), relativeMousePosition))
+                    var newTurret = TurretBuilder.GetTurret(_buyingTurret);
+                    newTurret.X = relativeMousePosition.X - Scale(newTurret.Size / 2);
+                    newTurret.Y = relativeMousePosition.Y - Scale(newTurret.Size / 2);
+                    if (_game.AddTurret(newTurret))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
@@ -260,6 +284,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                     _buyingPreviewRangeTile.IsVisible = false;
                 }
             }
+            if (_selectedTurret != null && mouseState.RightButton == ButtonState.Pressed)
+                UnselectTurret();
         }
 
         private void UpdateLasers()
@@ -275,10 +301,10 @@ namespace TDGame.OpenGL.Screens.PathTest
                         {
                             Thickness = 3,
                             Stroke = BasicTextures.GetBasicRectange(Color.Red),
-                            X = _gameArea.X + turret.X,
-                            Y = _gameArea.Y + turret.Y,
-                            X2 = _gameArea.X + turret.Targeting.X,
-                            Y2 = _gameArea.Y + turret.Targeting.Y,
+                            X = _gameArea.X + turret.X + turret.Size / 2,
+                            Y = _gameArea.Y + turret.Y + turret.Size / 2,
+                            X2 = _gameArea.X + turret.Targeting.X + 10,
+                            Y2 = _gameArea.Y + turret.Targeting.Y + 10,
                         });
                     }
                 }
@@ -292,6 +318,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                 _buyingTurret = turretName;
                 var turret = TurretBuilder.GetTurret(turretName);
                 _buyingPreviewTile.FillColor = TextureBuilder.GetTexture(turret.ID);
+                _buyingPreviewTile.Width = _buyingPreviewTile.FillColor.Width;
+                _buyingPreviewTile.Height = _buyingPreviewTile.FillColor.Height;
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turret.Range * 2);
             }
         }

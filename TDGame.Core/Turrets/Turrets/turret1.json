@@ -3,7 +3,7 @@
   "Name": "Laser Turret",
   "Description": "asfdasfasf",
   "Type": 1,
-  "Size": 25,
+  "Size": 50,
   "Cost": 250,
   "Range": 200,
   "Damage": 10,

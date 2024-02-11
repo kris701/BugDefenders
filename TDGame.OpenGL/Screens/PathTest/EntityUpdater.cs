@@ -44,8 +44,8 @@ namespace TDGame.OpenGL.Screens.PathTest
                         updateOverride(entity, toUpdate);
                     else
                     {
-                        toUpdate.X = XOffset + entity.X - Size / 2;
-                        toUpdate.Y = YOffset + entity.Y - Size / 2;
+                        toUpdate.X = entity.X + XOffset;
+                        toUpdate.Y = entity.Y + YOffset;
                     }
                 }
                 else
@@ -57,13 +57,12 @@ namespace TDGame.OpenGL.Screens.PathTest
                     {
                         newControl = new ButtonControl(Screen, clicked: _onClicked)
                         {
-                            ForceFit = true,
                             IsEnabled = false,
                             FillClickedColor = TextureBuilder.GetTexture(entity.ID),
                             FillDisabledColor = TextureBuilder.GetTexture(entity.ID),
                             FillColor = TextureBuilder.GetTexture(entity.ID),
-                            X = entity.X - Size / 2,
-                            Y = entity.Y - Size / 2,
+                            X = entity.X + XOffset,
+                            Y = entity.Y + YOffset,
                             Width = Size,
                             Height = Size,
                             Tag = entity

@@ -263,29 +263,27 @@ namespace TDGame.Core
                 Projectiles.Remove(projectile);
         }
 
-        public bool AddTurret(TurretDefinition turret, WayPoint point)
+        public bool AddTurret(TurretDefinition turret)
         {
             if (Money < turret.Cost)
                 return false;
-            if (point.X < turret.Size)
+            if (turret.X < turret.Size / 2)
                 return false;
-            if (point.X > Map.Width - turret.Size)
+            if (turret.X > Map.Width - turret.Size / 2)
                 return false;
-            if (point.Y < turret.Size)
+            if (turret.Y < turret.Size / 2)
                 return false;
-            if (point.Y > Map.Height - turret.Size)
+            if (turret.Y > Map.Height - turret.Size / 2)
                 return false;
 
             foreach (var block in Map.BlockingTiles)
-                if (MathHelpers.Intersects(turret, point, block))
+                if (MathHelpers.Intersects(turret, block))
                     return false;
 
             foreach(var otherTurret in Turrets)
-                if (MathHelpers.Intersects(otherTurret, turret, point))
+                if (MathHelpers.Intersects(otherTurret, turret))
                     return false;
 
-            turret.X = point.X;
-            turret.Y = point.Y;
             Money -= turret.Cost;
             Turrets.Add(turret);
 
