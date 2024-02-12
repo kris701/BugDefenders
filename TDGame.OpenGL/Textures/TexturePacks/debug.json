@@ -60,6 +60,14 @@
     {
       "ID": "ba2a23be-8bf7-4307-9009-8ed330ac5b7d",
       "Content": "turretBase"
+    },
+    {
+      "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+      "Content": "turret4"
+    },
+    {
+      "ID": "1db411e4-8599-464b-923c-0e23bc031435",
+      "Content": "bullet"
     }
   ]
 }

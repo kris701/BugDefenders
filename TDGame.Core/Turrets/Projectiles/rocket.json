@@ -9,5 +9,6 @@
   "SplashRange": 50,
   "TriggerRange": 25,
   "Acceleration": 1.2,
-  "IsGuided": false
+  "IsGuided": false,
+  "IsExplosive": true
 }

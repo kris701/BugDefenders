@@ -1,0 +1,14 @@
+﻿{
+  "id": "1db411e4-8599-464b-923c-0e23bc031435",
+  "Name": "Bullet",
+  "Description": "asfdasfasf",
+  "Speed": 15,
+  "Size": 5,
+  "Damage": 10,
+  "Range": 600,
+  "SplashRange": 5,
+  "TriggerRange": 5,
+  "Acceleration": 1,
+  "IsGuided": false,
+  "IsExplosive": false
+}

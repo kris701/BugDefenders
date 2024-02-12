@@ -99,6 +99,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (parent.Tag is ProjectileDefinition projDef)
             {
+                if (!projDef.IsExplosive)
+                    return;
                 var newTile = new AnimatedTileControl(this)
                 {
                     X = projDef.X + projDef.Size / 2 - projDef.SplashRange / 2,

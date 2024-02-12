@@ -22,6 +22,7 @@ namespace TDGame.Core.Turrets
         public int TriggerRange { get; set; }
         public double Acceleration { get; set; }
         public bool IsGuided { get; set; }
+        public bool IsExplosive { get; set; }
 
         [JsonIgnore]
         public int Traveled { get; set; }

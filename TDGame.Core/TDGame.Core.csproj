@@ -14,11 +14,13 @@
     <None Remove="GameStyles\GameStyles\medium.json" />
     <None Remove="Maps\Maps\map1.json" />
     <None Remove="Maps\Maps\map2.json" />
+    <None Remove="Turrets\Projectiles\bullet.json" />
     <None Remove="Turrets\Projectiles\missile.json" />
     <None Remove="Turrets\Projectiles\rocket.json" />
     <None Remove="Turrets\Turrets\turret1.json" />
     <None Remove="Turrets\Turrets\turret2.json" />
     <None Remove="Turrets\Turrets\turret3.json" />
+    <None Remove="Turrets\Turrets\turret4.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +48,13 @@
     <EmbeddedResource Include="Turrets\Projectiles\missile.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Turrets\Projectiles\bullet.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Turrets\Projectiles\rocket.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Turrets\Turrets\turret4.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Turrets\Turrets\turret3.json">
@@ -59,5 +67,7 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -1,0 +1,32 @@
+﻿{
+  "id": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+  "Name": "Gatling Turret",
+  "Description": "asfdasfasf",
+  "Type": 2,
+  "Size": 50,
+  "Cost": 150,
+  "Range": 200,
+  "Damage": 0,
+  "ProjectileID": "bullet",
+  "Cooldown": 45,
+  "TurretLevels": [
+    {
+      "Name": "Upgrade 1",
+      "Description": "fast turret",
+      "Cost": 50,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 0.5
+    }
+  ],
+  "ProjectileLevels": [
+    {
+      "Name": "Upgrade 3",
+      "Description": "more damage",
+      "Cost": 50,
+      "DamageModifier": 2,
+      "SplashRangeModifier": 1,
+      "TriggerRangeModifier": 1
+    }
+  ]
+}

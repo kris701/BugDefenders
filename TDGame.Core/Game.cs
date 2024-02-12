@@ -129,8 +129,8 @@ namespace TDGame.Core
                 enemy.Angle = GetAngle(target, enemy);
                 var xMod = Math.Cos(enemy.Angle);
                 var yMod = Math.Sin(enemy.Angle);
-                enemy.X += (int)Math.Ceiling(xMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
-                enemy.Y += (int)Math.Ceiling(yMod * enemy.Speed * GameStyle.EnemySpeedMultiplier);
+                enemy.X += (float)xMod * (float)enemy.Speed * (float)GameStyle.EnemySpeedMultiplier;
+                enemy.Y += (float)yMod * (float)enemy.Speed * (float)GameStyle.EnemySpeedMultiplier;
             }
             foreach (var enemy in toRemove)
                 CurrentEnemies.Remove(enemy);
@@ -264,48 +264,78 @@ namespace TDGame.Core
 
                 var xMod = Math.Cos(projectile.Angle);
                 var yMod = Math.Sin(projectile.Angle);
-                projectile.Speed = (int)Math.Ceiling(projectile.Speed * projectile.Acceleration);
-                if (projectile.Speed > GameStyle.ProjectileSpeedCap)
-                    projectile.Speed = GameStyle.ProjectileSpeedCap;
+                if (projectile.Acceleration != 1)
+                {
+                    projectile.Speed = (int)Math.Ceiling(projectile.Speed * projectile.Acceleration);
+                    if (projectile.Speed > GameStyle.ProjectileSpeedCap)
+                        projectile.Speed = GameStyle.ProjectileSpeedCap;
+                }
                 projectile.Traveled += projectile.Speed;
                 if (projectile.Traveled > projectile.Range)
                 {
                     toRemove.Add(projectile);
                     continue;
                 }
-                projectile.X += (int)Math.Ceiling(xMod * projectile.Speed);
-                projectile.Y += (int)Math.Ceiling(yMod * projectile.Speed);
 
-                var minDist = double.MaxValue;
-                foreach (var enemy in CurrentEnemies)
+                if (projectile.Size >= 10)
                 {
-                    var dist = MathHelpers.Distance(projectile.X, projectile.Y, enemy.X, enemy.Y);
-                    if (dist < minDist)
-                        minDist = dist;
+                    projectile.X += (float)xMod * projectile.Speed;
+                    projectile.Y += (float)yMod * projectile.Speed;
+
+                    if (IsWithinTriggerRange(projectile) || 
+                        projectile.X < 0 || projectile.X > Map.Width ||
+                        projectile.Y < 0 || projectile.Y > Map.Height)
+                        toRemove.Add(projectile);
                 }
-                if (minDist <= projectile.TriggerRange)
+                else
                 {
-                    for(int i = 0; i < CurrentEnemies.Count; i++)
+                    for(int i = 0; i < 5; i++)
                     {
-                        var dist = MathHelpers.Distance(projectile.X, projectile.Y, CurrentEnemies[i].X, CurrentEnemies[i].Y);
-                        if (dist < projectile.SplashRange)
+                        projectile.X += (float)xMod * ((float)projectile.Speed / 5);
+                        projectile.Y += (float)yMod * ((float)projectile.Speed / 5);
+
+                        if (IsWithinTriggerRange(projectile) ||
+                            projectile.X < 0 || projectile.X > Map.Width ||
+                            projectile.Y < 0 || projectile.Y > Map.Height)
                         {
-                            if (DamageEnemy(CurrentEnemies[i], projectile.Damage))
-                            {
-                                projectile.Source.Kills++;
-                                i--;
-                            }
+                            toRemove.Add(projectile);
+                            break;
                         }
                     }
-                    toRemove.Add(projectile);
                 }
-
-                if (projectile.X < 0 || projectile.X > Map.Width ||
-                    projectile.Y < 0 || projectile.Y > Map.Height)
-                    toRemove.Add(projectile);
             }
             foreach (var projectile in toRemove)
                 Projectiles.Remove(projectile);
+        }
+
+        private bool IsWithinTriggerRange(ProjectileDefinition projectile)
+        {
+            bool isWithin = false;
+            foreach (var enemy in CurrentEnemies)
+            {
+                if (MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2) < projectile.TriggerRange)
+                {
+                    isWithin = true;
+                    break;
+                }
+            }
+            if (isWithin)
+            {
+                for (int i = 0; i < CurrentEnemies.Count; i++)
+                {
+                    var dist = MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, CurrentEnemies[i].X + CurrentEnemies[i].Size / 2, CurrentEnemies[i].Y + CurrentEnemies[i].Size / 2);
+                    if (dist < projectile.SplashRange)
+                    {
+                        if (DamageEnemy(CurrentEnemies[i], projectile.Damage))
+                        {
+                            projectile.Source.Kills++;
+                            i--;
+                        }
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
         public bool AddTurret(TurretDefinition turret)
