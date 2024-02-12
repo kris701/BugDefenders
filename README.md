@@ -10,6 +10,7 @@
 - [X] Show the name and texture of enemies in the "enemy queue" list
 - [ ] Score board
 - [X] Actual bullet turret type (maybe just a fast projectile will work?)
+- [X] Trailing projectile turrets
 - [ ] Animated enemies
 - [ ] Animated projectiles
 - [ ] Animated turrets

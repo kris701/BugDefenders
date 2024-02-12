@@ -22,6 +22,7 @@ namespace TDGame.Core.Turrets
         public int Range { get; set; }
         public int Damage { get; set; }
         public int Cooldown { get; set; }
+        public bool IsTrailing { get; set; }
         public string? ProjectileID { get; set; }
         public List<TurretLevel> TurretLevels { get; set; }
         public List<ProjectileLevel> ProjectileLevels { get; set; }

@@ -127,15 +127,24 @@ namespace TDGame.Core
                     target = Map.WayPoints[enemy.WayPointID];
                 }
                 enemy.Angle = GetAngle(target, enemy);
-                var xMod = Math.Cos(enemy.Angle);
-                var yMod = Math.Sin(enemy.Angle);
-                enemy.X += (float)xMod * (float)enemy.Speed * (float)GameStyle.EnemySpeedMultiplier;
-                enemy.Y += (float)yMod * (float)enemy.Speed * (float)GameStyle.EnemySpeedMultiplier;
+                var change = GetEnemyLocationChange(enemy.Angle, (float)enemy.Speed);
+                enemy.X += change.X;
+                enemy.Y += change.Y;
             }
             foreach (var enemy in toRemove)
                 CurrentEnemies.Remove(enemy);
         }
 
+        private WayPoint GetEnemyLocationChange(float angle, float speed)
+        {
+            var xMod = Math.Cos(angle);
+            var yMod = Math.Sin(angle);
+            return new WayPoint(
+                (float)xMod * speed * (float)GameStyle.EnemySpeedMultiplier,
+                (float)yMod * speed * (float)GameStyle.EnemySpeedMultiplier);
+        }
+
+        private float GetAngle(WayPoint target, TurretDefinition turret) => GetAngle(target.X, target.Y, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
         private float GetAngle(WayPoint target, EnemyDefinition enemy) => GetAngle(target.X, target.Y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
         private float GetAngle(EnemyDefinition enemy, TurretDefinition turret) => GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
         private float GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2);
@@ -221,11 +230,26 @@ namespace TDGame.Core
             if (best != null && turret.ProjectileID != null)
             {
                 var projectile = GetProjectileForTurret(turret);
-                projectile.Angle = GetAngle(best, turret);
+                if (turret.IsTrailing)
+                    projectile.Angle = GetAngle(
+                        GetTrailingPoint(best, projectile), 
+                        turret);
+                else
+                    projectile.Angle = GetAngle(best, turret);
                 turret.Angle = projectile.Angle;
                 Projectiles.Add(projectile);
                 turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
             }
+        }
+
+        private WayPoint GetTrailingPoint(EnemyDefinition enemy, ProjectileDefinition projectile)
+        {
+            float x = enemy.X + enemy.Size / 2;
+            float y = enemy.Y + enemy.Size / 2;
+            var dist = MathHelpers.Distance(enemy, projectile);
+            var steps = dist / projectile.Speed;
+            var change = GetEnemyLocationChange(enemy.Angle, (float)enemy.Speed);
+            return new WayPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
         }
 
         public ProjectileDefinition GetProjectileForTurret(TurretDefinition turret)

@@ -9,6 +9,7 @@
   "Damage": 10,
   "ProjectileID": null,
   "Cooldown": 5,
+  "IsTrailing": false,
   "TurretLevels": [
     {
       "Name": "Upgrade 1",

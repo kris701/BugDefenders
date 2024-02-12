@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Enemies;
 using TDGame.Core.Maps;
+using TDGame.Core.Models;
 using TDGame.Core.Turrets;
 
 namespace TDGame.Core.Helpers
@@ -24,7 +25,7 @@ namespace TDGame.Core.Helpers
                 new Rectangle((int)e2.X, (int)e2.Y, (int)e2.Size, (int)e2.Size));
         }
 
-        public static double Distance(EnemyDefinition e1, EnemyDefinition e2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, e2.X + e2.Size / 2, e2.Y + e2.Size / 2);
+        public static double Distance(IPosition e1, IPosition e2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, e2.X + e2.Size / 2, e2.Y + e2.Size / 2);
         public static double Distance(EnemyDefinition e1, WayPoint w2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, w2.X, w2.Y);
         public static double Distance(double x1, double y1, double x2, double y2) => Math.Sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
     }
