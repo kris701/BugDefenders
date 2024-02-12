@@ -17,6 +17,8 @@ namespace TDGame.Core.Enemies
         public int Health { get; set; }
         public double Speed { get; set; }
         public int Reward { get; set; }
+        public double WaveSize { get; set; }
+        public bool IsBoss { get; set; }
         [JsonIgnore]
         public int WayPointID { get; set; } = 0;
         [JsonIgnore]

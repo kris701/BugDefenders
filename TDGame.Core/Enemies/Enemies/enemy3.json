@@ -5,5 +5,7 @@
   "Health": 500,
   "Speed": 5,
   "Reward": 50,
-  "Size": 30
+  "Size": 30,
+  "WaveSize": 3,
+  "IsBoss": false
 }

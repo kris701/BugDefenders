@@ -49,7 +49,7 @@ namespace TDGame.Core
         private void UpdateEnemiesToSpawnList()
         {
             var options = EnemyBuilder.GetEnemies();
-            for (int i = EnemiesToSpawn.Count; i < GameStyle.EnemySpawnQuantity; i++)
+            for (int i = EnemiesToSpawn.Count; i < 5; i++)
                 EnemiesToSpawn.Add(options[_rnd.Next(0, options.Count)]);
         }
 
@@ -159,7 +159,8 @@ namespace TDGame.Core
         public void QueueEnemies()
         {
             var group = Guid.NewGuid();
-            for (int i = 0; i < GameStyle.EnemyQuantity; i++)
+            var template = EnemyBuilder.GetEnemy(EnemiesToSpawn[0], Evolution);
+            for (int i = 0; i < template.WaveSize * GameStyle.EnemyWaveMultiplier; i++)
             {
                 var enemy = EnemyBuilder.GetEnemy(EnemiesToSpawn[0], Evolution);
                 enemy.X = Map.WayPoints[0].X - enemy.Size / 2;

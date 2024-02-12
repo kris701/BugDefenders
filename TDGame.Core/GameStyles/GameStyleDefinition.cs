@@ -12,10 +12,9 @@ namespace TDGame.Core.GameStyles
         public double EvolutionRate { get; set; }
         public double EnemySpeedMultiplier { get; set; }
         public double MoneyMultiplier { get; set; }
-        public int EnemyQuantity { get; set; }
         public int StartingHP { get; set; }
         public int StartingMoney { get; set; }
-        public int EnemySpawnQuantity { get; set; }
+        public double EnemyWaveMultiplier { get; set; }
         public int ProjectileSpeedCap { get; set; }
     }
 }

@@ -16,7 +16,7 @@
 - [ ] Animated projectiles
 - [ ] Animated turrets
     - [ ] Different animations for different actions (e.g. shooting vs idle)
-- [ ] Enemy health bar
+- [X] Enemy health bar
 - [ ] Enemy boss waves
 - [ ] Enemy types
     - I.e. some turrets are more effective against certain enemy types

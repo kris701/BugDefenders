@@ -3,9 +3,8 @@
   "EvolutionRate": 1.01,
   "EnemySpeedMultiplier": 0.5,
   "MoneyMultiplier": 2,
-  "EnemyQuantity": 5,
   "StartingHP": 50,
   "StartingMoney": 1500,
-  "EnemySpawnQuantity": 5,
+  "EnemyWaveMultiplier": 1,
   "ProjectileSpeedCap": 20
 }

@@ -26,7 +26,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
 
         private EntityUpdater<TurretDefinition, TurretControl> _turretUpdater;
-        private EntityUpdater<EnemyDefinition, TileControl> _enemyUpdater;
+        private EntityUpdater<EnemyDefinition, EnemyControl> _enemyUpdater;
         private EntityUpdater<ProjectileDefinition, TileControl> _projectile;
 
         private string _currentMap;
@@ -48,7 +48,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             ScaleValue = parent.Settings.Scale;
             _game = new Core.Game(map, gamestyle);
             _turretUpdater = new EntityUpdater<TurretDefinition, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
-            _enemyUpdater = new EntityUpdater<EnemyDefinition, TileControl>(3, this, _gameArea.X, _gameArea.Y);
+            _enemyUpdater = new EntityUpdater<EnemyDefinition, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
             _projectile = new EntityUpdater<ProjectileDefinition, TileControl>(5, this,  _gameArea.X, _gameArea.Y);
             _projectile.OnDelete += OnProjectileDeleted;
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { 
@@ -298,7 +298,18 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Tag = e
                 };
             });
-            _enemyUpdater.UpdateEntities(_game.CurrentEnemies);
+            _enemyUpdater.UpdateEntities(_game.CurrentEnemies, (e) => {
+                return new EnemyControl(this, e)
+                {
+                    FillColor = TextureBuilder.GetTexture(e.ID),
+                    X = e.X + _gameArea.X,
+                    Y = e.Y + _gameArea.Y,
+                    Width = e.Size,
+                    Height = e.Size,
+                    Rotation = e.Angle + (float)Math.PI / 2,
+                    Tag = e
+                };
+            });
             _projectile.UpdateEntities(_game.Projectiles);
             UpdateLasers();
             UpdateExplosions(gameTime);
