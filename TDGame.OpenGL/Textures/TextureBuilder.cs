@@ -14,6 +14,7 @@ namespace TDGame.OpenGL.Textures
 {
     public static class TextureBuilder
     {
+        private static string _noTextureName = "notexture";
         private static ContentManager? _contentManager;
         private static Dictionary<Guid, Texture2D> _textures = new Dictionary<Guid, Texture2D>();
         private static BaseBuilder<TexturePackDefinition> _resourceFetcher = new BaseBuilder<TexturePackDefinition>("Textures.TexturePacks", Assembly.GetExecutingAssembly());
@@ -33,11 +34,13 @@ namespace TDGame.OpenGL.Textures
                 _textures.Add(item.ID, _contentManager.Load<Texture2D>(item.Content));
         }
 
+        public static TexturePackDefinition GetTexturePack(string texturePack) => _resourceFetcher.GetResource(texturePack);
+
         public static Texture2D GetTexture(Guid id)
         {
             if (_textures.ContainsKey(id)) 
                 return _textures[id];
-            throw new Exception("Texture not found in texture pack!");
+            return _contentManager.Load<Texture2D>(_noTextureName);
         }
 
         public static List<Texture2D> GetTextureSet(List<Guid> ids)

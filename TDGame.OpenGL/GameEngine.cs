@@ -54,8 +54,6 @@ namespace TDGame.OpenGL
             ApplySettings();
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
-            TextureBuilder.Initialize(Content);
-            TextureBuilder.LoadTexturePack(TextureBuilder.GetTexturePacks()[0]);
 
             CurrentScreen = _screenToLoad(this);
             CurrentScreen.Initialize();
@@ -93,6 +91,8 @@ namespace TDGame.OpenGL
             Device.PreferredBackBufferWidth = (int)(Settings.Scale * 1000);
             Device.SynchronizeWithVerticalRetrace = Settings.IsVsync;
             Device.IsFullScreen = Settings.IsFullscreen;
+            TextureBuilder.Initialize(Content);
+            TextureBuilder.LoadTexturePack(Settings.TexturePack);
             Device.ApplyChanges();
         }
 

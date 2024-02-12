@@ -8,10 +8,12 @@ namespace TDGame.OpenGL.Textures
 {
     public class TexturePackDefinition
     {
+        public string Name { get; set; }
         public List<TextureDefinition> TextureSet { get; set; }
 
-        public TexturePackDefinition(List<TextureDefinition> textureSet)
+        public TexturePackDefinition(string name, List<TextureDefinition> textureSet)
         {
+            Name = name;
             TextureSet = textureSet;
         }
     }

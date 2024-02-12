@@ -11,6 +11,7 @@ namespace TDGame.OpenGL.Settings
         public float Scale { get; set; } = 1;
         public bool IsFullscreen { get; set; } = false;
         public bool IsVsync { get; set; } = true;
+        public string TexturePack { get; set; } = "medium";
 
         public SettingsDefinition Copy()
         {
@@ -18,7 +19,8 @@ namespace TDGame.OpenGL.Settings
             {
                 Scale = Scale,
                 IsFullscreen = IsFullscreen,
-                IsVsync = IsVsync
+                IsVsync = IsVsync,
+                TexturePack = TexturePack
             };
         }
     }

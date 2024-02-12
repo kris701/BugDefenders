@@ -16,12 +16,16 @@
   <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
-    <None Remove="Textures\TexturePacks\default.json" />
+    <None Remove="Textures\TexturePacks\debug.json" />
+    <None Remove="Textures\TexturePacks\medium.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
-    <EmbeddedResource Include="Textures\TexturePacks\default.json">
+    <EmbeddedResource Include="Textures\TexturePacks\medium.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Textures\TexturePacks\debug.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

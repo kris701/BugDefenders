@@ -2,7 +2,7 @@
 
 ## TODO List
 - [X] Selling turrets
-- [ ] Texture pack levels (at least the setup for it)
+- [X] Texture pack levels (at least the setup for it)
 - [ ] A static base for turrets?
     - So that its not only just a whole part moving
 - [ ] Show turret info when buying a new turret (in the turret stats window)

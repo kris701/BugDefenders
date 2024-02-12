@@ -22,6 +22,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         private ButtonControl _isFullScreen;
         private ButtonControl _isVSync;
+        private List<ButtonControl> _texturePacksButtons = new List<ButtonControl>();
 
         public override void Initialize()
         {
@@ -48,6 +49,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             });
 
             SetupScreenSettingsView(200);
+            SetupTextureSettingsView(560);
 
             AddControl(0, new ButtonControl(this, clicked: (x) => {
                 Parent.Settings = _settings;
@@ -197,6 +199,52 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             };
             AddControl(1, _isVSync);
+
+            UpdateScreenSettingsButtons();
+        }
+
+        private void SetupTextureSettingsView(int yOffset)
+        {
+            AddControl(1, new TileControl(this)
+            {
+                X = 100,
+                Y = yOffset,
+                Width = 800,
+                Height = 200,
+                FillColor = BasicTextures.GetBasicRectange(Color.Chartreuse)
+            });
+            AddControl(1, new LabelControl(this)
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Width = 800,
+                Y = yOffset,
+                Text = "Textures",
+                Font = BasicFonts.GetFont(48),
+                FillColor = BasicTextures.GetBasicRectange(Color.Red)
+            });
+
+            var packs = TextureBuilder.GetTexturePacks();
+            for(int i = 0; i < packs.Count; i++)
+            {
+                var newControl = new ButtonControl(this, clicked: (s) => {
+                    if (s.Tag is string str)
+                        _settings.TexturePack = str;
+                    UpdateScreenSettingsButtons();
+                })
+                {
+                    Y = yOffset + 125,
+                    X = 110 + (i * (770 / packs.Count + 10)),
+                    Width = 770 / packs.Count,
+                    Height = 50,
+                    Text = TextureBuilder.GetTexturePack(packs[i]).Name,
+                    Font = BasicFonts.GetFont(16),
+                    FillColor = BasicTextures.GetBasicRectange(Color.White),
+                    FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    Tag = packs[i]
+                };
+                AddControl(1, newControl);
+                _texturePacksButtons.Add(newControl);
+            }
 
             UpdateScreenSettingsButtons();
         }
