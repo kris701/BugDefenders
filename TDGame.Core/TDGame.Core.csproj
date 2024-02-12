@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Enemies\Enemies\boss1.json" />
     <None Remove="Enemies\Enemies\enemy1.json" />
     <None Remove="Enemies\Enemies\enemy2.json" />
     <None Remove="Enemies\Enemies\enemy3.json" />
@@ -24,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Enemies\Enemies\boss1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Enemies\Enemies\enemy3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

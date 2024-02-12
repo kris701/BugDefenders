@@ -16,5 +16,6 @@ namespace TDGame.Core.GameStyles
         public int StartingMoney { get; set; }
         public double EnemyWaveMultiplier { get; set; }
         public int ProjectileSpeedCap { get; set; }
+        public int BossEveryNWave {  get; set; }
     }
 }

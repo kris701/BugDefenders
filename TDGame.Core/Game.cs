@@ -28,6 +28,10 @@ namespace TDGame.Core
         private GameTimer _mainLoopTimer;
         private Random _rnd = new Random();
 
+        private int _spawned = 1;
+        private List<string> _normalEnemies = new List<string>();
+        private List<string> _bossEnemies = new List<string>();
+
         public Game(string mapName, string style)
         {
             CurrentEnemies = new List<EnemyDefinition>();
@@ -43,14 +47,27 @@ namespace TDGame.Core
             _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
 
+            var options = EnemyBuilder.GetEnemies();
+            foreach(var enemy in options)
+            {
+                if (EnemyBuilder.GetEnemy(enemy, 0).IsBoss)
+                    _bossEnemies.Add(enemy);
+                else
+                    _normalEnemies.Add(enemy);
+            }
+
             UpdateEnemiesToSpawnList();
         }
 
         private void UpdateEnemiesToSpawnList()
         {
-            var options = EnemyBuilder.GetEnemies();
             for (int i = EnemiesToSpawn.Count; i < 5; i++)
-                EnemiesToSpawn.Add(options[_rnd.Next(0, options.Count)]);
+            {
+                if (_spawned++ % GameStyle.BossEveryNWave == 0)
+                    EnemiesToSpawn.Add(_bossEnemies[_rnd.Next(0, _bossEnemies.Count)]);
+                else
+                    EnemiesToSpawn.Add(_normalEnemies[_rnd.Next(0, _normalEnemies.Count)]);
+            }
         }
 
         private void EndGame()

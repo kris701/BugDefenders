@@ -6,5 +6,6 @@
   "StartingHP": 50,
   "StartingMoney": 1000,
   "EnemyWaveMultiplier": 1.5,
-  "ProjectileSpeedCap": 20
+  "ProjectileSpeedCap": 20,
+  "BossEveryNWave": 5
 }
