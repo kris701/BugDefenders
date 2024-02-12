@@ -19,16 +19,6 @@ namespace TDGame.Core.Turrets.Upgrades
         [JsonIgnore]
         public bool HasUpgrade { get; set; }
 
-        public TurretLevel(string name, string description, int cost, double rangeModifier, double damageModifier, double cooldownModifier)
-        {
-            Name = name;
-            Description = description;
-            Cost = cost;
-            RangeModifier = rangeModifier;
-            DamageModifier = damageModifier;
-            CooldownModifier = cooldownModifier;
-        }
-
         public void ApplyUpgrade(TurretDefinition on)
         {
             on.Range = (int)(on.Range * RangeModifier);

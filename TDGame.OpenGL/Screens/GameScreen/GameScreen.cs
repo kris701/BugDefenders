@@ -180,7 +180,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             }
 
             _turretStatesTextbox.Text = GetTurretDescriptionString(turretDef);
-            _sellTurretButton.Text = $"[{_game.GetTurretWorth(_selectedTurret)}$] Sell Turret";
+            _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
         }
 

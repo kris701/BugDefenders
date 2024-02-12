@@ -19,16 +19,6 @@ namespace TDGame.Core.Turrets.Upgrades
         [JsonIgnore]
         public bool HasUpgrade { get; set; }
 
-        public ProjectileLevel(string name, string description, int cost, double damageModifier, double splashRangeModifier, double triggerRangeModifier)
-        {
-            Name = name;
-            Description = description;
-            Cost = cost;
-            DamageModifier = damageModifier;
-            SplashRangeModifier = splashRangeModifier;
-            TriggerRangeModifier = triggerRangeModifier;
-        }
-
         public void ApplyUpgrade(ProjectileDefinition on)
         {
             on.Damage = (int)(on.Damage * DamageModifier);
