@@ -36,5 +36,20 @@ namespace TDGame.Core.Turrets.Upgrades
             on.Cooldown = (int)(on.Cooldown * CooldownModifier);
             HasUpgrade = true;
         }
+
+        public string GetDescriptionString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(Description);
+            sb.AppendLine("Turret get:");
+            if (DamageModifier != 1)
+                sb.AppendLine($"Damage {DamageModifier}x");
+            if (RangeModifier != 1)
+                sb.AppendLine($"Range {RangeModifier}x");
+            if (CooldownModifier != 1)
+                sb.AppendLine($"Cooldown {CooldownModifier}x");
+
+            return sb.ToString();
+        }
     }
 }

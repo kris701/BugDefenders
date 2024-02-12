@@ -12,5 +12,7 @@ namespace TDGame.Core.Turrets.Upgrades
         public string Description { get; set; }
         public int Cost { get; set; }
         public bool HasUpgrade { get; set; }
+
+        public string GetDescriptionString();
     }
 }

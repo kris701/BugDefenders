@@ -34,7 +34,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             };
             _descriptionTextbox = new TextboxControl(Parent)
             {
-                Font = BasicFonts.GetFont(12),
+                Font = BasicFonts.GetFont(10),
                 FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
                 Height = 60
             };
@@ -61,7 +61,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         public void SetUpgrade(IUpgrade upgrade, bool canUpgrade)
         {
             _nameLabel.Text = $"[{upgrade.Cost}$] {upgrade.Name}";
-            _descriptionTextbox.Text = upgrade.Description;
+            _descriptionTextbox.Text = upgrade.GetDescriptionString();
             _buyUpgradeButton.Tag = upgrade;
             IsVisible = true;
             foreach (var child in Children)

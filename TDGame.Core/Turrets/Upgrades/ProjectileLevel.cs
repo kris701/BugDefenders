@@ -41,5 +41,20 @@ namespace TDGame.Core.Turrets.Upgrades
         {
             HasUpgrade = true;
         }
+
+        public string GetDescriptionString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(Description);
+            sb.AppendLine("Projectile get:");
+            if (DamageModifier != 1)
+                sb.AppendLine($"Damage {DamageModifier}x");
+            if (SplashRangeModifier != 1)
+                sb.AppendLine($"Splash Range {SplashRangeModifier}x");
+            if (TriggerRangeModifier != 1)
+                sb.AppendLine($"Trigger Range {TriggerRangeModifier}x");
+
+            return sb.ToString();
+        }
     }
 }
