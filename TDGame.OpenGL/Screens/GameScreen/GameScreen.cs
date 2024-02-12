@@ -25,9 +25,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
 
-        private EntityUpdater<TurretDefinition> _turretUpdater;
-        private EntityUpdater<EnemyDefinition> _enemyUpdater;
-        private EntityUpdater<ProjectileDefinition> _projectile;
+        private EntityUpdater<TurretDefinition, TurretControl> _turretUpdater;
+        private EntityUpdater<EnemyDefinition, TileControl> _enemyUpdater;
+        private EntityUpdater<ProjectileDefinition, TileControl> _projectile;
 
         private string _currentMap;
         private string _currentGameStyle;
@@ -47,9 +47,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _currentMap = map;
             ScaleValue = parent.Settings.Scale;
             _game = new Core.Game(map, gamestyle);
-            _turretUpdater = new EntityUpdater<TurretDefinition>(4, this, _gameArea.X, _gameArea.Y, Turret_Click);
-            _enemyUpdater = new EntityUpdater<EnemyDefinition>(3, this, _gameArea.X, _gameArea.Y);
-            _projectile = new EntityUpdater<ProjectileDefinition>(5, this,  _gameArea.X, _gameArea.Y);
+            _turretUpdater = new EntityUpdater<TurretDefinition, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
+            _enemyUpdater = new EntityUpdater<EnemyDefinition, TileControl>(3, this, _gameArea.X, _gameArea.Y);
+            _projectile = new EntityUpdater<ProjectileDefinition, TileControl>(5, this,  _gameArea.X, _gameArea.Y);
             _projectile.OnDelete += OnProjectileDeleted;
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { 
                 _game.QueueEnemies();
@@ -95,7 +95,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             }
         }
 
-        private void OnProjectileDeleted(ButtonControl parent)
+        private void OnProjectileDeleted(TileControl parent)
         {
             if (parent.Tag is ProjectileDefinition projDef)
             {
@@ -271,7 +271,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             _turretUpdater.UpdateEntities(_game.Turrets, (e) =>
             {
-                return new ButtonControl(this, clicked: Turret_Click)
+                return new TurretControl(this, clicked: Turret_Click)
                 {
                     IsEnabled = true,
                     FillClickedColor = TextureBuilder.GetTexture(e.ID),

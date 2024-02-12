@@ -12,9 +12,9 @@ using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public class EntityUpdater<T> where T : IPosition, ITextured
+    public class EntityUpdater<T, U> where T : IPosition, ITextured where U : TileControl
     {
-        public delegate void EntityHandler(ButtonControl parent);
+        public delegate void EntityHandler(U parent);
         public EntityHandler? OnDelete;
         public int Layer { get; set; }
         public IScreen Screen { get; set; }
@@ -22,21 +22,19 @@ namespace TDGame.OpenGL.Screens.GameScreen
         public int YOffset { get; set; }
 
         public int Count => _entities.Count;
-        public ButtonControl Indexed(int index) => _entities.Values.ElementAt(index);
+        public U Indexed(int index) => _entities.Values.ElementAt(index);
 
-        private Dictionary<T, ButtonControl> _entities = new Dictionary<T, ButtonControl>();
-        private ClickedHandler? _onClicked;
+        private Dictionary<T, U> _entities = new Dictionary<T, U>();
 
-        public EntityUpdater(int layer, IScreen screen, int xOffset, int yOffset, ClickedHandler? onClicked = null)
+        public EntityUpdater(int layer, IScreen screen, int xOffset, int yOffset)
         {
             Layer = layer;
             Screen = screen;
             XOffset = xOffset;
             YOffset = yOffset;
-            _onClicked = onClicked;
         }
 
-        public void UpdateEntities(List<T> entities, Func<T, ButtonControl> toControlOverride = null, Action<T, ButtonControl> updateOverride = null)
+        public void UpdateEntities(List<T> entities, Func<T, U> toControlOverride = null, Action<T, U> updateOverride = null)
         {
             foreach(var entity in entities)
             {
@@ -54,16 +52,13 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 }
                 else
                 {
-                    ButtonControl newControl;
+                    U newControl;
                     if (toControlOverride != null)
                         newControl = toControlOverride(entity);
                     else
                     {
-                        newControl = new ButtonControl(Screen, clicked: _onClicked)
+                        newControl = (U)(new TileControl(Screen)
                         {
-                            IsEnabled = false,
-                            FillClickedColor = TextureBuilder.GetTexture(entity.ID),
-                            FillDisabledColor = TextureBuilder.GetTexture(entity.ID),
                             FillColor = TextureBuilder.GetTexture(entity.ID),
                             X = entity.X + XOffset,
                             Y = entity.Y + YOffset,
@@ -71,8 +66,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                             Height = entity.Size,
                             Rotation = entity.Angle + (float)Math.PI / 2,
                             Tag = entity
-                        };
+                        });
                     }
+                    newControl.Initialize();
                     Screen.AddControl(Layer, newControl);
                     _entities.Add(entity, newControl);
                 }
