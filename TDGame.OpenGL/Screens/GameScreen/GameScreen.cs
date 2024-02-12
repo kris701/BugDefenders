@@ -177,32 +177,41 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     _turretUpgradePanels[index++].SetUpgrade(turretDef.ProjectileLevels[i], _game.CanLevelUpProjectile(turretDef, i));
             }
 
+            _turretStatesTextbox.Text = GetTurretDescriptionString(turretDef);
+            _sellTurretButton.Text = $"[{_game.GetTurretWorth(_selectedTurret)}$] Sell Turret";
+            _sellTurretButton.IsEnabled = true;
+        }
+
+        private string GetTurretDescriptionString(TurretDefinition turretDef)
+        {
             var sb = new StringBuilder();
+            switch (turretDef.Type)
+            {
+                case TurretType.Laser: sb.AppendLine("Laser Type Turret"); break;
+                case TurretType.Projectile: sb.AppendLine("Projectile Type Turret"); break;
+            }
+            sb.AppendLine($"Name: {turretDef.Name}");
+            sb.AppendLine($"Range: {turretDef.Range}");
+            sb.AppendLine($"Cooldown: {turretDef.Cooldown}");
             if (turretDef.ProjectileID == null)
             {
-                sb.AppendLine($"Name: {turretDef.Name}");
                 sb.AppendLine($"Damage: {turretDef.Damage}");
-                sb.AppendLine($"Range: {turretDef.Range}");
-                sb.AppendLine($"Cooldown: {turretDef.Cooldown}");
-                sb.AppendLine(" ");
-                sb.AppendLine($"Kills: {turretDef.Kills}");
             }
             else
             {
                 var projectile = _game.GetProjectileForTurret(turretDef);
-                sb.AppendLine($"Name: {turretDef.Name}");
                 sb.AppendLine($"Projectile Damage: {projectile.Damage}");
                 sb.AppendLine($"Projectile Splash: {projectile.SplashRange}");
                 sb.AppendLine($"Projectile Trigger: {projectile.TriggerRange}");
-                sb.AppendLine($"Range: {turretDef.Range}");
-                sb.AppendLine($"Cooldown: {turretDef.Cooldown}");
+            }
+            sb.AppendLine($"Range: {turretDef.Range}");
+            sb.AppendLine($"Cooldown: {turretDef.Cooldown}");
+            if (turretDef.Kills != 0)
+            {
                 sb.AppendLine(" ");
                 sb.AppendLine($"Kills: {turretDef.Kills}");
             }
-            _turretStatesTextbox.Text = sb.ToString();
-
-            _sellTurretButton.Text = $"[{_game.GetTurretWorth(_selectedTurret)}$] Sell Turret";
-            _sellTurretButton.IsEnabled = true;
+            return sb.ToString();
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)
@@ -338,6 +347,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
                             _buyingTurret = "";
+                            _turretStatesTextbox.Text = "Select a Turret";
                             _buyingPreviewTile.IsVisible = false;
                             _buyingPreviewRangeTile.IsVisible = false;
                         }
@@ -346,6 +356,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 else if (mouseState.RightButton == ButtonState.Pressed)
                 {
                     _buyingTurret = "";
+                    _turretStatesTextbox.Text = "Select a Turret";
                     _buyingPreviewTile.IsVisible = false;
                     _buyingPreviewRangeTile.IsVisible = false;
                 }
@@ -402,6 +413,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turret.Range * 2);
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
+                _turretStatesTextbox.Text = GetTurretDescriptionString(turret);
             }
         }
 
