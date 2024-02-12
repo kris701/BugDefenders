@@ -103,25 +103,19 @@ namespace TDGame.Core
             {
                 var vistedGroups = new List<Guid>();
                 var enemiesToAdd = new List<EnemyDefinition>();
-                foreach(var enemy in _spawnQueue)
+                foreach (var enemy in _spawnQueue)
                 {
                     if (vistedGroups.Contains(enemy.GroupID))
                         continue;
                     vistedGroups.Add(enemy.GroupID);
-
+                    var minDist = double.MaxValue;
                     foreach (var CurrentEnemy in CurrentEnemies)
-                    {
                         if (CurrentEnemy.GroupID == enemy.GroupID)
-                        {
-                            if (MathHelpers.Distance(enemy, CurrentEnemy) > enemy.Size)
-                            {
-                                enemiesToAdd.Add(enemy);
-                                break;
-                            }
-                        }
-                    }
+                            minDist = Math.Min(MathHelpers.Distance(enemy, CurrentEnemy), minDist);
+                    if (minDist > enemy.Size)
+                        enemiesToAdd.Add(enemy);
                 }
-                foreach(var enemy in enemiesToAdd)
+                foreach (var enemy in enemiesToAdd)
                 {
                     CurrentEnemies.Add(enemy);
                     _spawnQueue.Remove(enemy);
@@ -130,6 +124,7 @@ namespace TDGame.Core
                 }
             }
         }
+
 
         private void UpdateEnemyPositions()
         {

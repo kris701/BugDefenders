@@ -78,9 +78,9 @@ namespace TDGame.OpenGL.Engine.Controls
                         Text = currentString,
                     };
                     newLabel._x = _x;
-                    newLabel._y = _y + size.Y * lines.Count;
+                    newLabel._y = _y + Parent.Scale(size.Y) * lines.Count;
                     newLabel._width = _width;
-                    newLabel._height = size.Y;
+                    newLabel._height = Parent.Scale(size.Y);
                     lines.Add(newLabel);
                     currentString = "";
                 }
@@ -94,9 +94,9 @@ namespace TDGame.OpenGL.Engine.Controls
                     Text = currentString,
                 };
                 newLabel._x = _x;
-                newLabel._y = _y + size.Y * lines.Count;
+                newLabel._y = _y + Parent.Scale(size.Y) * lines.Count;
                 newLabel._width = _width;
-                newLabel._height = size.Y;
+                newLabel._height = Parent.Scale(size.Y);
                 lines.Add(newLabel);
             }
         }
