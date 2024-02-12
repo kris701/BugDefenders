@@ -46,5 +46,14 @@ namespace TDGame.Core.Turrets
             returnList.AddRange(ProjectileLevels);
             return returnList;
         }
+
+        public int GetTurretWorth()
+        {
+            var worth = Cost;
+            foreach (var upgrade in GetAllUpgrades())
+                if (upgrade.HasUpgrade)
+                    worth += upgrade.Cost;
+            return worth;
+        }
     }
 }

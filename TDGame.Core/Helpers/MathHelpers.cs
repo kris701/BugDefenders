@@ -26,7 +26,14 @@ namespace TDGame.Core.Helpers
         }
 
         public static double Distance(IPosition e1, IPosition e2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, e2.X + e2.Size / 2, e2.Y + e2.Size / 2);
-        public static double Distance(EnemyDefinition e1, WayPoint w2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, w2.X, w2.Y);
+        public static double Distance(EnemyDefinition e1, FloatPoint w2) => Distance(e1.X + e1.Size / 2, e1.Y + e1.Size / 2, w2.X, w2.Y);
         public static double Distance(double x1, double y1, double x2, double y2) => Math.Sqrt(((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)));
+
+        public static float GetAngle(float x1, float y1, float x2, float y2)
+        {
+            var a = y1 - y2;
+            var b = x1 - x2;
+            return (float)Math.Atan2(a, b);
+        }
     }
 }

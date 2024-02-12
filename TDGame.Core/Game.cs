@@ -108,12 +108,18 @@ namespace TDGame.Core
                     if (vistedGroups.Contains(enemy.GroupID))
                         continue;
                     vistedGroups.Add(enemy.GroupID);
-                    var minDist = double.MaxValue;
+
                     foreach (var CurrentEnemy in CurrentEnemies)
+                    {
                         if (CurrentEnemy.GroupID == enemy.GroupID)
-                            minDist = Math.Min(MathHelpers.Distance(enemy, CurrentEnemy), minDist);
-                    if (minDist > enemy.Size)
-                        enemiesToAdd.Add(enemy);
+                        {
+                            if (MathHelpers.Distance(enemy, CurrentEnemy) > enemy.Size)
+                            {
+                                enemiesToAdd.Add(enemy);
+                                break;
+                            }
+                        }
+                    }
                 }
                 foreach(var enemy in enemiesToAdd)
                 {
@@ -136,9 +142,7 @@ namespace TDGame.Core
                     enemy.WayPointID++;
                     if (enemy.WayPointID >= Map.WayPoints.Count)
                     {
-                        HP--;
-                        if (HP <= 0)
-                            EndGame();
+                        DamagePlayer();
                         toRemove.Add(enemy);
                         continue;
                     }
@@ -153,26 +157,26 @@ namespace TDGame.Core
                 CurrentEnemies.Remove(enemy);
         }
 
-        private WayPoint GetEnemyLocationChange(float angle, float speed)
+        private void DamagePlayer()
+        {
+            HP--;
+            if (HP <= 0)
+                EndGame();
+        }
+
+        private FloatPoint GetEnemyLocationChange(float angle, float speed)
         {
             var xMod = Math.Cos(angle);
             var yMod = Math.Sin(angle);
-            return new WayPoint(
+            return new FloatPoint(
                 (float)xMod * speed * (float)GameStyle.EnemySpeedMultiplier,
                 (float)yMod * speed * (float)GameStyle.EnemySpeedMultiplier);
         }
 
-        private float GetAngle(WayPoint target, TurretDefinition turret) => GetAngle(target.X, target.Y, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
-        private float GetAngle(WayPoint target, EnemyDefinition enemy) => GetAngle(target.X, target.Y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
-        private float GetAngle(EnemyDefinition enemy, TurretDefinition turret) => GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
-        private float GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2);
-
-        private float GetAngle(float x1, float y1, float x2, float y2)
-        {
-            var a = y1 - y2;
-            var b = x1 - x2;
-            return (float)Math.Atan2(a, b);
-        }
+        private float GetAngle(FloatPoint target, TurretDefinition turret) => MathHelpers.GetAngle(target.X, target.Y, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
+        private float GetAngle(FloatPoint target, EnemyDefinition enemy) => MathHelpers.GetAngle(target.X, target.Y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
+        private float GetAngle(EnemyDefinition enemy, TurretDefinition turret) => MathHelpers.GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
+        private float GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => MathHelpers.GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2);
 
         public void QueueEnemies()
         {
@@ -261,14 +265,14 @@ namespace TDGame.Core
             }
         }
 
-        private WayPoint GetTrailingPoint(EnemyDefinition enemy, ProjectileDefinition projectile)
+        private FloatPoint GetTrailingPoint(EnemyDefinition enemy, ProjectileDefinition projectile)
         {
             float x = enemy.X + enemy.Size / 2;
             float y = enemy.Y + enemy.Size / 2;
             var dist = MathHelpers.Distance(enemy, projectile);
             var steps = dist / projectile.Speed;
             var change = GetEnemyLocationChange(enemy.Angle, (float)enemy.Speed);
-            return new WayPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
+            return new FloatPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
         }
 
         public ProjectileDefinition GetProjectileForTurret(TurretDefinition turret)
@@ -474,20 +478,11 @@ namespace TDGame.Core
             return true;
         }
 
-        public int GetTurretWorth(TurretDefinition turret)
-        {
-            var worth = turret.Cost;
-            foreach (var upgrade in turret.GetAllUpgrades())
-                if (upgrade.HasUpgrade)
-                    worth += upgrade.Cost;
-            return worth;
-        }
-
         public void SellTurret(TurretDefinition turret)
         {
             if (!Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
-            Money += GetTurretWorth(turret);
+            Money += turret.GetTurretWorth();
             Turrets.Remove(turret);
 
             if (OnTurretSold != null)
