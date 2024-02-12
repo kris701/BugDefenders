@@ -7,7 +7,7 @@
     - So that its not only just a whole part moving
 - [X] Propper upgrade panel descriptions
 - [X] Show turret info when buying a new turret (in the turret stats window)
-- [ ] Show the name and texture of enemies in the "enemy queue" list
+- [X] Show the name and texture of enemies in the "enemy queue" list
 - [ ] Score board
 - [ ] Actual bullet turret type (maybe just a fast projectile will work?)
 - [ ] Animated enemies

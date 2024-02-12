@@ -27,7 +27,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private List<ButtonControl> _turretButtons = new List<ButtonControl>();
 
         private List<UpgradePanel> _turretUpgradePanels = new List<UpgradePanel>();
-        private List<LabelControl> _nextEnemyPanels = new List<LabelControl>();
+        private List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
 
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
@@ -343,18 +343,17 @@ namespace TDGame.OpenGL.Screens.GameScreen
             int x = xOffset + 5;
             int y = yOffset + 40;
             int itemXOffset = 0;
-            int itemWidth = 120;
+            int itemWidth = 205;
             int margin = 10;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                var newItem = new LabelControl(this)
+                var newItem = new EnemyQueueControl(this)
                 {
                     X = x + (itemXOffset++ * (itemWidth + margin)),
                     Y = y,
                     Height = 65,
                     Width = itemWidth,
-                    FillColor = BasicTextures.GetBasicRectange(Color.CadetBlue),
-                    Font = BasicFonts.GetFont(12),
+                    FillColor = BasicTextures.GetBasicRectange(Color.CadetBlue)
                 };
                 _nextEnemyPanels.Add(newItem);
                 AddControl(1, newItem);

@@ -398,7 +398,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private void UpdateNextEnemies()
         {
             for (int i = 0; i < _game.EnemiesToSpawn.Count && i < _nextEnemyPanels.Count; i++)
-                _nextEnemyPanels[i].Text = _game.EnemiesToSpawn[i];
+                _nextEnemyPanels[i].UpdateToEnemy(EnemyBuilder.GetEnemy(_game.EnemiesToSpawn[i], _game.Evolution));
         }
 
         private void BuyTurret_Click(ButtonControl parent)
