@@ -1,7 +1,7 @@
 # TDGame
 
 ## TODO List
-- [ ] Selling turrets
+- [X] Selling turrets
 - [ ] Texture pack levels (at least the setup for it)
 - [ ] A static base for turrets?
     - So that its not only just a whole part moving
@@ -22,4 +22,5 @@
 - [ ] Cache tile sets (for animated tiles)
 - [ ] Area of effect turret
 - [ ] Slowdown turret
+- [ ] Mod support?
 

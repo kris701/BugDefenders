@@ -30,6 +30,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private List<LabelControl> _nextEnemyPanels = new List<LabelControl>();
 
         private TextboxControl _turretStatesTextbox;
+        private ButtonControl _sellTurretButton;
 
         public override void Initialize()
         {
@@ -50,8 +51,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 205);
             SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 215, 320, 435);
             SetupUpgradeField(_gameArea.X, _gameArea.Y + _gameArea.Height + 10, _gameArea.Width, 200);
-            SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 20 + 200, 980, 110);
-            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 200);
+            SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 20 + 200, _gameArea.Width, 110);
+            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 320);
 
             base.Initialize();
         }
@@ -342,7 +343,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             int x = xOffset + 5;
             int y = yOffset + 40;
             int itemXOffset = 0;
-            int itemWidth = 185;
+            int itemWidth = 120;
             int margin = 10;
             for (int i = 0; i < 5; i++)
             {
@@ -385,14 +386,30 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = width
             });
 
+            _sellTurretButton = new ButtonControl(this, clicked: SellTurret_Click)
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                Font = BasicFonts.GetFont(10),
+                Text = "Sell Turret",
+                X = xOffset + 5,
+                Y = yOffset + 40,
+                Width = width - 10,
+                Height = 30,
+                IsEnabled = false
+            };
+            AddControl(1, new BorderControl(this)
+            {
+                Child = _sellTurretButton,
+            });
             _turretStatesTextbox = new TextboxControl(this)
             {
                 Font = BasicFonts.GetFont(10),
                 Text = "Select a Turret",
                 X = xOffset + 5,
-                Y = yOffset + 40,
+                Y = yOffset + 75,
                 Width = width - 10,
-                Height = height - 45,
+                Height = height - 80,
                 FillColor = BasicTextures.GetBasicRectange(Color.Beige)
             };
             AddControl(1, _turretStatesTextbox);

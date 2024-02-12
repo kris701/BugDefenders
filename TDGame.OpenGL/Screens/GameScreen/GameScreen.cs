@@ -86,6 +86,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
 #endif
         }
 
+        private void SellTurret_Click(ButtonControl parent)
+        {
+            if (_selectedTurret != null)
+            {
+                _game.SellTurret(_selectedTurret);
+                UnselectTurret();
+            }
+        }
+
         private void OnProjectileDeleted(ButtonControl parent)
         {
             if (parent.Tag is ProjectileDefinition projDef)
@@ -124,6 +133,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             foreach (var item in _turretUpgradePanels)
                 item.TurnInvisible();
             _turretStatesTextbox.Text = "Select a Turret";
+            _sellTurretButton.IsEnabled = false;
+            _sellTurretButton.Text = $"Sell Turret";
         }
 
         private void Turret_Click(ButtonControl parent)
@@ -189,6 +200,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 sb.AppendLine($"Kills: {turretDef.Kills}");
             }
             _turretStatesTextbox.Text = sb.ToString();
+
+            _sellTurretButton.Text = $"[{_game.GetTurretWorth(_selectedTurret)}$] Sell Turret";
+            _sellTurretButton.IsEnabled = true;
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)

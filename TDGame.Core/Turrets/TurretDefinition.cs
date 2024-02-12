@@ -50,5 +50,13 @@ namespace TDGame.Core.Turrets
             TurretLevels = turretLevels;
             ProjectileLevels = projectileLevels;
         }
+
+        public List<IUpgrade> GetAllUpgrades()
+        {
+            var returnList = new List<IUpgrade>();
+            returnList.AddRange(TurretLevels);
+            returnList.AddRange(ProjectileLevels);
+            return returnList;
+        }
     }
 }

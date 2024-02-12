@@ -11,8 +11,17 @@ using TDGame.Core.Turrets.Upgrades;
 
 namespace TDGame.Core
 {
+    public delegate void TurretEventHandler(TurretDefinition turret);
+    public delegate void EnemyEventHandler(EnemyDefinition enemy);
     public partial class Game
     {
+        public EnemyEventHandler? OnEnemySpawned;
+        public EnemyEventHandler? OnEnemyKilled;
+
+        public TurretEventHandler? OnTurretPurchased;
+        public TurretEventHandler? OnTurretSold;
+        public TurretEventHandler? OnTurretUpgraded;
+
         private List<EnemyDefinition> _spawnQueue = new List<EnemyDefinition>();
         private GameTimer _enemySpawnTimer;
         private GameTimer _evolutionTimer;
@@ -75,7 +84,7 @@ namespace TDGame.Core
             if (_spawnQueue.Count > 0)
             {
                 var vistedGroups = new List<Guid>();
-                var toAdd = new List<EnemyDefinition>();
+                var enemiesToAdd = new List<EnemyDefinition>();
                 foreach(var enemy in _spawnQueue)
                 {
                     if (vistedGroups.Contains(enemy.GroupID))
@@ -86,12 +95,14 @@ namespace TDGame.Core
                         if (CurrentEnemy.GroupID == enemy.GroupID)
                             minDist = Math.Min(MathHelpers.Distance(enemy, CurrentEnemy), minDist);
                     if (minDist > enemy.Size)
-                        toAdd.Add(enemy);
+                        enemiesToAdd.Add(enemy);
                 }
-                foreach(var add in toAdd)
+                foreach(var enemy in enemiesToAdd)
                 {
-                    CurrentEnemies.Add(add);
-                    _spawnQueue.Remove(add);
+                    CurrentEnemies.Add(enemy);
+                    _spawnQueue.Remove(enemy);
+                    if (OnEnemySpawned != null)
+                        OnEnemySpawned.Invoke(enemy);
                 }
             }
         }
@@ -161,7 +172,7 @@ namespace TDGame.Core
                 {
                     switch (turret.Type)
                     {
-                        case TurretType.Laser: UpdateGatlingTurret(turret); break;
+                        case TurretType.Laser: UpdateLaserTurret(turret); break;
                         case TurretType.Projectile: UpdateProjectileTurret(turret); break;
                     }
                 }
@@ -186,7 +197,7 @@ namespace TDGame.Core
             return best;
         }
 
-        private void UpdateGatlingTurret(TurretDefinition turret)
+        private void UpdateLaserTurret(TurretDefinition turret)
         {
             turret.Targeting = null;
             var best = GetNearestEnemy(turret);
@@ -320,6 +331,8 @@ namespace TDGame.Core
 
             Money -= turret.Cost;
             Turrets.Add(turret);
+            if (OnTurretPurchased != null)
+                OnTurretPurchased.Invoke(turret);
 
             return true;
         }
@@ -332,6 +345,8 @@ namespace TDGame.Core
                 Money += enemy.Reward;
                 Score += enemy.Reward;
                 CurrentEnemies.Remove(enemy);
+                if (OnEnemyKilled != null)
+                    OnEnemyKilled.Invoke(enemy);
                 return true;
             }
             return false;
@@ -354,6 +369,8 @@ namespace TDGame.Core
 
             Money -= upgrade.Cost;
             upgrade.ApplyUpgrade(turret);
+            if (OnTurretUpgraded != null)
+                OnTurretUpgraded.Invoke(turret);
             return true;
         }
 
@@ -375,7 +392,29 @@ namespace TDGame.Core
 
             Money -= upgrade.Cost;
             upgrade.ApplyUpgrade(turret);
+            if (OnTurretUpgraded != null)
+                OnTurretUpgraded.Invoke(turret);
             return true;
+        }
+
+        public int GetTurretWorth(TurretDefinition turret)
+        {
+            var worth = turret.Cost;
+            foreach (var upgrade in turret.GetAllUpgrades())
+                if (upgrade.HasUpgrade)
+                    worth += upgrade.Cost;
+            return worth;
+        }
+
+        public void SellTurret(TurretDefinition turret)
+        {
+            if (!Turrets.Contains(turret))
+                throw new Exception("Turret not in game!");
+            Money += GetTurretWorth(turret);
+            Turrets.Remove(turret);
+
+            if (OnTurretSold != null)
+                OnTurretSold.Invoke(turret);
         }
     }
 }
