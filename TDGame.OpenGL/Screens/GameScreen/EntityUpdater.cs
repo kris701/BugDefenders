@@ -22,7 +22,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         public int YOffset { get; set; }
 
         public int Count => _entities.Count;
-        public U Indexed(int index) => _entities.Values.ElementAt(index);
+        public U GetItem(T index) => _entities[index];
 
         private Dictionary<T, U> _entities = new Dictionary<T, U>();
 

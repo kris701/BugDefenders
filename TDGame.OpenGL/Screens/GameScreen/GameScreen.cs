@@ -226,6 +226,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     if (_game.CanLevelUpTurret(_selectedTurret, index))
                     {
                         _game.LevelUpTurret(_selectedTurret, index);
+                        _turretUpdater.GetItem(_selectedTurret).UpgradeTurretLevels(_selectedTurret);
                         UnselectTurret();
                     }
                 }
@@ -235,6 +236,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     if (_game.CanLevelUpProjectile(_selectedTurret, index))
                     {
                         _game.LevelUpProjectile(_selectedTurret, index);
+                        _turretUpdater.GetItem(_selectedTurret).UpgradeTurretLevels(_selectedTurret);
                         UnselectTurret();
                     }
                 }

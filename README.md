@@ -11,6 +11,7 @@
 - [ ] Score board
 - [X] Actual bullet turret type (maybe just a fast projectile will work?)
 - [X] Trailing projectile turrets
+- [X] Turret Upgrade values
 - [ ] Animated enemies
 - [ ] Animated projectiles
 - [ ] Animated turrets

@@ -65,6 +65,9 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (!IsVisible)
+                return;
+
             base.Draw(gameTime, spriteBatch);
             DrawString(gameTime, spriteBatch);
         }
