@@ -10,6 +10,7 @@ namespace TDGame.Core.Enemies
 {
     public class EnemyDefinition : BasePositionModel, ITextured
     {
+        public enum EnemyTypes { None, Ice, Water, Fire, Stone }
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -19,6 +20,8 @@ namespace TDGame.Core.Enemies
         public int Reward { get; set; }
         public double WaveSize { get; set; }
         public bool IsBoss { get; set; }
+        public EnemyTypes Type { get; set; }
+
         [JsonIgnore]
         public int WayPointID { get; set; } = 0;
         [JsonIgnore]
@@ -26,15 +29,12 @@ namespace TDGame.Core.Enemies
         [JsonIgnore]
         public Guid GroupID { get; set; }
 
-        public EnemyDefinition(Guid id, string name, string description, float size, int health, double speed, int reward)
+        public static string GetEnemyTypeName(EnemyTypes type)
         {
-            ID = id;
-            Name = name;
-            Description = description;
-            Size = size;
-            Health = health;
-            Speed = speed;
-            Reward = reward;
+            var name = Enum.GetName(typeof(EnemyTypes), type);
+            if (name != null)
+                return name;
+            throw new Exception("Unknown enemy type!");
         }
     }
 }

@@ -198,6 +198,20 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (turretDef.ProjectileID == null)
             {
                 sb.AppendLine($"Damage: {turretDef.Damage}");
+                if (turretDef.StrongAgainst.Count > 0 && _game.GameStyle.StrengthModifier != 1)
+                {
+                    string strengths = "";
+                    foreach (var strength in turretDef.StrongAgainst)
+                        strengths += $" {EnemyDefinition.GetEnemyTypeName(strength)}";
+                    sb.AppendLine($"Strong Against:{strengths}");
+                }
+                if (turretDef.WeakAgainst.Count > 0 && _game.GameStyle.WeaknessModifier != 1)
+                {
+                    string weaknesses = "";
+                    foreach (var weakness in turretDef.WeakAgainst)
+                        weaknesses += $" {EnemyDefinition.GetEnemyTypeName(weakness)}";
+                    sb.AppendLine($"Weak Against:{weaknesses}");
+                }
             }
             else
             {
@@ -205,6 +219,20 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 sb.AppendLine($"Projectile Damage: {projectile.Damage}");
                 sb.AppendLine($"Projectile Splash: {projectile.SplashRange}");
                 sb.AppendLine($"Projectile Trigger: {projectile.TriggerRange}");
+                if (projectile.StrongAgainst.Count > 0 && _game.GameStyle.StrengthModifier != 1)
+                {
+                    string strengths = "";
+                    foreach (var strength in projectile.StrongAgainst)
+                        strengths += $" {EnemyDefinition.GetEnemyTypeName(strength)}";
+                    sb.AppendLine($"Strong Against:{strengths}");
+                }
+                if (projectile.WeakAgainst.Count > 0 && _game.GameStyle.WeaknessModifier != 1)
+                {
+                    string weaknesses = "";
+                    foreach (var weakness in projectile.WeakAgainst)
+                        weaknesses += $" {EnemyDefinition.GetEnemyTypeName(weakness)}";
+                    sb.AppendLine($"Weak Against:{weaknesses}");
+                }
             }
             sb.AppendLine($"Range: {turretDef.Range}");
             sb.AppendLine($"Cooldown: {turretDef.Cooldown}");

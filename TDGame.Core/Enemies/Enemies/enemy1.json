@@ -7,5 +7,6 @@
   "Reward": 10,
   "Size": 10,
   "WaveSize": 7,
-  "IsBoss" : false
+  "IsBoss": false,
+  "Type": 4
 }

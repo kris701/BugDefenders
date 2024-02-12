@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Enemies;
 using TDGame.Core.Models;
+using static TDGame.Core.Enemies.EnemyDefinition;
 
 namespace TDGame.Core.Turrets
 {
@@ -23,6 +24,9 @@ namespace TDGame.Core.Turrets
         public double Acceleration { get; set; }
         public bool IsGuided { get; set; }
         public bool IsExplosive { get; set; }
+        public List<EnemyTypes> StrongAgainst { get; set; }
+        public List<EnemyTypes> WeakAgainst { get; set; }
+
 
         [JsonIgnore]
         public int Traveled { get; set; }

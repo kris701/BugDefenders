@@ -7,5 +7,7 @@
   "StartingMoney": 1500,
   "EnemyWaveMultiplier": 1,
   "ProjectileSpeedCap": 20,
-  "BossEveryNWave": 10
+  "BossEveryNWave": 10,
+  "StrengthModifier": 1.5,
+  "WeaknessModifier": 0.5
 }

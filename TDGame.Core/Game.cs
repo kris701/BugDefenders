@@ -8,6 +8,7 @@ using TDGame.Core.Maps;
 using TDGame.Core.Turret;
 using TDGame.Core.Turrets;
 using TDGame.Core.Turrets.Upgrades;
+using static TDGame.Core.Enemies.EnemyDefinition;
 
 namespace TDGame.Core
 {
@@ -230,7 +231,7 @@ namespace TDGame.Core
             var best = GetNearestEnemy(turret);
             if (best != null)
             {
-                if (!DamageEnemy(best, turret.Damage))
+                if (!DamageEnemy(best, turret.Damage, turret.StrongAgainst, turret.WeakAgainst))
                 {
                     turret.Targeting = best;
                     turret.Angle = GetAngle(best, turret);
@@ -368,7 +369,7 @@ namespace TDGame.Core
                     var dist = MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, CurrentEnemies[i].X + CurrentEnemies[i].Size / 2, CurrentEnemies[i].Y + CurrentEnemies[i].Size / 2);
                     if (dist < projectile.SplashRange)
                     {
-                        if (DamageEnemy(CurrentEnemies[i], projectile.Damage))
+                        if (DamageEnemy(CurrentEnemies[i], projectile.Damage, projectile.StrongAgainst, projectile.WeakAgainst))
                         {
                             projectile.Source.Kills++;
                             i--;
@@ -409,8 +410,12 @@ namespace TDGame.Core
             return true;
         }
 
-        private bool DamageEnemy(EnemyDefinition enemy, int damage)
+        private bool DamageEnemy(EnemyDefinition enemy, int damage, List<EnemyTypes> strengths, List<EnemyTypes> weaknesses)
         {
+            if (strengths.Contains(enemy.Type))
+                damage = (int)(damage * GameStyle.StrengthModifier);
+            if (weaknesses.Contains(enemy.Type))
+                damage = (int)(damage * GameStyle.WeaknessModifier);
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {

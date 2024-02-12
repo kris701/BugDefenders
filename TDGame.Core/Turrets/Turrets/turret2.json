@@ -10,6 +10,8 @@
   "ProjectileID": "rocket",
   "Cooldown": 500,
   "IsTrailing": false,
+  "StrongAgainst": [],
+  "WeakAgainst": [],
   "TurretLevels": [
     {
       "Name": "Upgrade 2",

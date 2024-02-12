@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TDGame.Core.Enemies;
 using TDGame.Core.Models;
 using TDGame.Core.Turrets.Upgrades;
+using static TDGame.Core.Enemies.EnemyDefinition;
 
 namespace TDGame.Core.Turrets
 {
@@ -26,6 +27,8 @@ namespace TDGame.Core.Turrets
         public string? ProjectileID { get; set; }
         public List<TurretLevel> TurretLevels { get; set; }
         public List<ProjectileLevel> ProjectileLevels { get; set; }
+        public List<EnemyTypes> StrongAgainst { get; set; }
+        public List<EnemyTypes> WeakAgainst { get; set; }
 
         [JsonIgnore]
         public TimeSpan CoolingFor { get; set; }
@@ -35,22 +38,6 @@ namespace TDGame.Core.Turrets
         public override float Angle { get; set; } = 0;
         [JsonIgnore]
         public int Kills { get; set; } = 0;
-
-        public TurretDefinition(Guid iD, string name, string description, TurretType type, float size, int cost, int range, int damage, int cooldown, string? projectileID, List<TurretLevel> turretLevels, List<ProjectileLevel> projectileLevels)
-        {
-            ID = iD;
-            Name = name;
-            Description = description;
-            Type = type;
-            Size = size;
-            Cost = cost;
-            Range = range;
-            Damage = damage;
-            Cooldown = cooldown;
-            ProjectileID = projectileID;
-            TurretLevels = turretLevels;
-            ProjectileLevels = projectileLevels;
-        }
 
         public List<IUpgrade> GetAllUpgrades()
         {

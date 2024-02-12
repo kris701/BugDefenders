@@ -10,5 +10,7 @@
   "TriggerRange": 50,
   "Acceleration": 1.2,
   "IsGuided": true,
-  "IsExplosive": true
+  "IsExplosive": true,
+  "StrongAgainst": [ 1, 2 ],
+  "WeakAgainst": [ 3 ]
 }

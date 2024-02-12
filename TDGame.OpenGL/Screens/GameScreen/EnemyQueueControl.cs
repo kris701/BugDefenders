@@ -27,7 +27,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var sb = new StringBuilder();
             sb.AppendLine(enemy.Name);
             sb.AppendLine(enemy.Description);
-            sb.AppendLine($"HP: {enemy.Health}");
+            sb.AppendLine($"Type: {EnemyDefinition.GetEnemyTypeName(enemy.Type)}. HP: {enemy.Health}");
             descriptionControl.Text = sb.ToString();
         }
 

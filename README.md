@@ -18,7 +18,7 @@
     - [ ] Different animations for different actions (e.g. shooting vs idle)
 - [X] Enemy health bar
 - [X] Enemy boss waves
-- [ ] Enemy types
+- [X] Enemy types
     - I.e. some turrets are more effective against certain enemy types
 - [ ] Use a different font (Consolas maybe?)
 - [ ] FPS counter

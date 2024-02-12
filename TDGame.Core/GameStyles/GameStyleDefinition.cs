@@ -17,5 +17,7 @@ namespace TDGame.Core.GameStyles
         public double EnemyWaveMultiplier { get; set; }
         public int ProjectileSpeedCap { get; set; }
         public int BossEveryNWave {  get; set; }
+        public double StrengthModifier { get; set; }
+        public double WeaknessModifier { get; set; }
     }
 }
