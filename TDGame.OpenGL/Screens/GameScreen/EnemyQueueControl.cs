@@ -28,7 +28,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var sb = new StringBuilder();
             sb.AppendLine(enemy.GetDefinition().Name);
             sb.AppendLine(enemy.GetDefinition().Description);
-            sb.AppendLine($"Type: {EnemyTypeBuilder.GetEnemyType(enemy.GetDefinition().EnemyType).Name}. HP: {Math.Round(enemy.Health,0)}");
+            sb.AppendLine($"Type: {EnemyTypeBuilder.GetEnemyType(enemy.GetDefinition().EnemyType).Name}");
+            sb.AppendLine($"HP: {Math.Round(enemy.Health,0)}");
             descriptionControl.Text = sb.ToString();
         }
 
@@ -48,7 +49,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 Margin = 1,
                 Font = BasicFonts.GetFont(10),
-                FillColor = BasicTextures.GetBasicRectange(Color.Beige),
+                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
                 Height = 50,
                 Width = 150,
                 Text = ""

@@ -34,10 +34,10 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             if (sender.Tag is Guid mapName)
             {
                 if (_selectedMapButton != null)
-                    _selectedMapButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkRed);
+                    _selectedMapButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
 
                 _selectedMapButton = sender;
-                _selectedMapButton.FillColor = BasicTextures.GetBasicRectange(Color.Yellow);
+                _selectedMapButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
 
                 _selectedMap = mapName;
                 var map = MapBuilder.GetMap(mapName);
@@ -52,10 +52,10 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             if (sender.Tag is Guid gameStyleName)
             {
                 if (_selectedGameStyleButton != null)
-                    _selectedGameStyleButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkRed);
+                    _selectedGameStyleButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
 
                 _selectedGameStyleButton = sender;
-                _selectedGameStyleButton.FillColor = BasicTextures.GetBasicRectange(Color.Yellow);
+                _selectedGameStyleButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
 
                 _selectedGameStyle = gameStyleName;
             }

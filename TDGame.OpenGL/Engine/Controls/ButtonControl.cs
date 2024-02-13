@@ -36,14 +36,12 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            var targetColor = FillColor;
-            if (_holding)
-                targetColor = FillClickedColor;
-            if (!IsEnabled)
-                targetColor = FillDisabledColor;
-
-            DrawTile(gameTime, spriteBatch, targetColor);
+            DrawTile(gameTime, spriteBatch, FillColor);
             DrawString(gameTime, spriteBatch);
+            if (_holding)
+                DrawTile(gameTime, spriteBatch, FillClickedColor);
+            if (!IsEnabled)
+                DrawTile(gameTime, spriteBatch, FillDisabledColor);
         }
 
         public override void Update(GameTime gameTime)

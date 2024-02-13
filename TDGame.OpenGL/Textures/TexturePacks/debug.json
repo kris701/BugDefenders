@@ -25,7 +25,23 @@
     },
     {
       "ID": "960c3e27-bfa4-40db-8397-ce47655eb169",
-      "Content": "titleTest"
+      "Content": "MainMenu/title"
+    },
+    {
+      "ID": "c89588ae-a69f-41bf-a9df-e4fc53071c0b",
+      "Content": "MainMenu/start"
+    },
+    {
+      "ID": "40aa2d8a-7509-4bef-bf1c-9c3e1dffdd08",
+      "Content": "MainMenu/settings"
+    },
+    {
+      "ID": "e8fd55a0-ea74-48d8-b625-4352d6f1c564",
+      "Content": "MainMenu/exit"
+    },
+    {
+      "ID": "4a39d624-3171-41cd-b172-c853cea36d14",
+      "Content": "MainMenu/background"
     },
     {
       "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
@@ -78,6 +94,22 @@
     {
       "ID": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
       "Content": "Entities/Turrets/turret5"
+    },
+    {
+      "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
+      "Content": "Game/background"
+    },
+    {
+      "ID": "1d50ad58-0503-4fc6-95e4-1d18abb8c485",
+      "Content": "GameOver/background"
+    },
+    {
+      "ID": "756430ea-46e1-4c3d-95a0-a232919b7876",
+      "Content": "GameSetup/background"
+    },
+    {
+      "ID": "0739c674-5f0e-497a-a619-8ba39fd545b3",
+      "Content": "Settings/background"
     }
   ]
 }

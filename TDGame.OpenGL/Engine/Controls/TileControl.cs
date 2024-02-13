@@ -38,7 +38,7 @@ namespace TDGame.OpenGL.Engine.Controls
 
         internal void DrawTile(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture)
         {
-            if (FillColor.Width == 1 && FillColor.Height == 1)
+            if (texture.Width == 1 && texture.Height == 1)
             {
                 spriteBatch.Draw(
                     texture,

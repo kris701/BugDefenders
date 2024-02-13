@@ -26,25 +26,19 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         public override void Initialize()
         {
-#if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new SettingsView(Parent)))
+            AddControl(0, new TileControl(this)
             {
-                X = 0,
-                Y = 0,
-                Width = 50,
-                Height = 25,
-                Text = "Reload",
-                Font = BasicFonts.GetFont(10),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = TextureBuilder.GetTexture(new Guid("0739c674-5f0e-497a-a619-8ba39fd545b3")),
+                Width = 1000,
+                Height = 1000
             });
-#endif
 
             AddControl(0, new LabelControl(this)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 75,
                 Text = "Settings",
+                FontColor = Color.White,
                 Font = BasicFonts.GetFont(72),
             });
 
@@ -63,8 +57,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 50,
                 Text = "Apply",
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
             });
 
             AddControl(0, new ButtonControl(this, clicked: (x) => {
@@ -77,9 +71,24 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 50,
                 Text = "Cancel",
                 Font = BasicFonts.GetFont(24),
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
+            });
+
+#if DEBUG
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new SettingsView(Parent)))
+            {
+                X = 0,
+                Y = 0,
+                Width = 50,
+                Height = 25,
+                Text = "Reload",
+                Font = BasicFonts.GetFont(10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
+#endif
+
             base.Initialize();
         }
 
@@ -91,7 +100,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Y = yOffset,
                 Width = 800,
                 Height = 350,
-                FillColor = BasicTextures.GetBasicRectange(Color.Chartreuse)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
             AddControl(1, new LabelControl(this)
             {
@@ -100,7 +109,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Y = yOffset,
                 Text = "Screen",
                 Font = BasicFonts.GetFont(48),
-                FillColor = BasicTextures.GetBasicRectange(Color.Red)
+                FillColor = BasicTextures.GetBasicRectange(Color.LightGray)
             });
             AddControl(1, new LabelControl(this)
             {
@@ -122,8 +131,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 50,
                 Text = "50%",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
             };
             AddControl(1, _scaleButtonOne);
             _scaleButtonTwo = new ButtonControl(this, clicked: (x) =>
@@ -138,8 +147,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 50,
                 Text = "100%",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
             };
             AddControl(1, _scaleButtonTwo);
             _scaleButtonThree = new ButtonControl(this, clicked: (x) =>
@@ -154,8 +163,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 50,
                 Text = "200%",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
             };
             AddControl(1, _scaleButtonThree);
 
@@ -179,8 +188,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 50,
                 Text = "Fullscreen",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
             };
             AddControl(1, _isFullScreen);
             _isVSync = new ButtonControl(this, clicked: (x) =>
@@ -195,8 +204,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 50,
                 Text = "VSync",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
             };
             AddControl(1, _isVSync);
 
@@ -211,7 +220,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Y = yOffset,
                 Width = 800,
                 Height = 200,
-                FillColor = BasicTextures.GetBasicRectange(Color.Chartreuse)
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
             AddControl(1, new LabelControl(this)
             {
@@ -220,7 +229,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Y = yOffset,
                 Text = "Textures",
                 Font = BasicFonts.GetFont(48),
-                FillColor = BasicTextures.GetBasicRectange(Color.Red)
+                FillColor = BasicTextures.GetBasicRectange(Color.LightGray)
             });
 
             var packs = TextureBuilder.GetTexturePacks();
@@ -238,8 +247,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                     Height = 50,
                     Text = TextureBuilder.GetTexturePack(packs[i]).Name,
                     Font = BasicFonts.GetFont(16),
-                    FillColor = BasicTextures.GetBasicRectange(Color.White),
-                    FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    FillClickedColor = BasicTextures.GetClickedTexture(),
                     Tag = packs[i]
                 };
                 AddControl(1, newControl);

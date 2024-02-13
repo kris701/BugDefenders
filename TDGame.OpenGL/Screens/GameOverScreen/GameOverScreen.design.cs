@@ -18,25 +18,19 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
     {
         public override void Initialize()
         {
-#if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameOverScreen(Parent, _screen, _score, _gameTime)))
+            AddControl(0, new TileControl(this)
             {
-                X = 0,
-                Y = 0,
-                Width = 50,
-                Height = 25,
-                Text = "Reload",
-                Font = BasicFonts.GetFont(10),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+                FillColor = TextureBuilder.GetTexture(new Guid("1d50ad58-0503-4fc6-95e4-1d18abb8c485")),
+                Width = 1000,
+                Height = 1000
             });
-#endif
+
             AddControl(1, new LabelControl(this)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 100,
-                FillColor = BasicTextures.GetBasicRectange(Color.Red),
                 Text = "Game Over!",
+                FontColor = Color.White,
                 Font = BasicFonts.GetFont(72),
             });
             AddControl(1, new LabelControl(this)
@@ -44,6 +38,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 HorizontalAlignment = Alignment.Middle,
                 Y = 225,
                 Text = $"Score: {_score}",
+                FontColor = Color.White,
                 Font = BasicFonts.GetFont(24),
             });
             AddControl(1, new LabelControl(this)
@@ -51,6 +46,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 HorizontalAlignment = Alignment.Middle,
                 Y = 275,
                 Text = $"Played for {_gameTime}",
+                FontColor = Color.White,
                 Font = BasicFonts.GetFont(24),
             });
 
@@ -77,10 +73,25 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                     Height = 75,
                     Font = BasicFonts.GetFont(24),
                     Text = "Main Menu",
-                    FillColor = BasicTextures.GetBasicRectange(Color.White),
-                    FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    FillClickedColor = BasicTextures.GetClickedTexture(),
+                    FillDisabledColor = BasicTextures.GetDisabledTexture(),
                 }
             });
+
+#if DEBUG
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameOverScreen(Parent, _screen, _score, _gameTime)))
+            {
+                X = 0,
+                Y = 0,
+                Width = 50,
+                Height = 25,
+                Text = "Reload",
+                Font = BasicFonts.GetFont(10),
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
+            });
+#endif
 
             base.Initialize();
         }

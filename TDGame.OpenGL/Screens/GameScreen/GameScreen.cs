@@ -55,9 +55,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _projectile.OnDelete += OnProjectileDeleted;
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { 
                 _game.QueueEnemies();
-                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
+                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
             }, () => {
-                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.White);
+                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
             });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
             {

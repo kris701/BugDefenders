@@ -13,7 +13,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <!--<DefineConstants>$(DefineConstants);FPS</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);CENTERPOINT</DefineConstants>-->
-	  <DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>
+	  <!--<DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);TEXTBORDER</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
   </PropertyGroup>
@@ -21,14 +21,10 @@
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
     <None Remove="Textures\TexturePacks\debug.json" />
-    <None Remove="Textures\TexturePacks\medium.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
-    <EmbeddedResource Include="Textures\TexturePacks\medium.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Textures\TexturePacks\debug.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

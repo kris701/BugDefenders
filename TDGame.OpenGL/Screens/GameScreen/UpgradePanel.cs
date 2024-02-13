@@ -29,19 +29,20 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _nameLabel = new LabelControl(Parent)
             {
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
                 Height = 35
             };
             _descriptionTextbox = new TextboxControl(Parent)
             {
                 Font = BasicFonts.GetFont(10),
                 FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
-                Height = 60
+                Height = 85
             };
             _buyUpgradeButton = new ButtonControl(Parent, clicked: buy)
             {
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Red),
+                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
                 Text = "Buy",
                 Height = 35
             };
@@ -87,7 +88,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _descriptionTextbox._y = _y + Parent.Scale(35);
             _descriptionTextbox._width = _width;
             _buyUpgradeButton._x = _x;
-            _buyUpgradeButton._y = _y + Parent.Scale(35 + 65);
+            _buyUpgradeButton._y = _y + Parent.Scale(35 + 85);
             _buyUpgradeButton._width = _width;
             _cantBuyTile._x = _x;
             _cantBuyTile._y = _y;
