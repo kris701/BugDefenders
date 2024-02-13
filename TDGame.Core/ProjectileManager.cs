@@ -90,12 +90,13 @@ namespace TDGame.Core
             }
             if (isWithin)
             {
+                var projDef = projectile.GetDefinition();
                 for (int i = 0; i < CurrentEnemies.Count; i++)
                 {
-                    var dist = MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, CurrentEnemies[i].X + CurrentEnemies[i].Size / 2, CurrentEnemies[i].Y + CurrentEnemies[i].Size / 2);
-                    if (dist < projectile.GetDefinition().SplashRange)
+                    var dist = MathHelpers.Distance(projectile, CurrentEnemies[i]);
+                    if (dist < projDef.SplashRange)
                     {
-                        if (DamageEnemy(CurrentEnemies[i], projectile.GetDefinition().Damage, projectile.GetDefinition().DamageModifiers))
+                        if (DamageEnemy(CurrentEnemies[i], projDef.Damage, projDef.DamageModifiers, projDef.SlowingFactor, projDef.SlowingDuration))
                         {
                             if (projectile.Source != null)
                                 projectile.Source.Kills++;

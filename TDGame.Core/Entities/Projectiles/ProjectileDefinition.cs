@@ -24,6 +24,8 @@ namespace TDGame.Core.Entities.Projectiles
         public double Acceleration { get; set; }
         public bool IsGuided { get; set; }
         public bool IsExplosive { get; set; }
+        public float SlowingFactor { get; set; }
+        public int SlowingDuration { get; set; }
         public List<DamageModifier> DamageModifiers { get; set; }
     }
 }

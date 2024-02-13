@@ -23,7 +23,7 @@
 - [ ] Use a different font (Consolas maybe?)
 - [ ] FPS counter
 - [ ] Cache tile sets (for animated tiles)
-- [ ] Area of effect turret
-- [ ] Slowdown turret
+- [X] Area of effect turret
+- [X] Slowdown turret
 - [ ] Mod support?
 

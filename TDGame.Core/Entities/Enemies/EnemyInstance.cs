@@ -14,6 +14,8 @@ namespace TDGame.Core.Entities.Enemies
         public Guid DefinitionID { get; set; }
         public float Health { get; set; }
 
+        public float SlowingFactor { get; set; } = 1;
+        public int SlowingDuration { get; set; }
         public int WayPointID { get; set; } = 0;
         public Guid GroupID { get; set; }
 
@@ -30,5 +32,15 @@ namespace TDGame.Core.Entities.Enemies
         }
 
         public EnemyDefinition GetDefinition() => EnemyBuilder.GetEnemy(DefinitionID);
+
+        public float GetSpeed()
+        {
+            var def = GetDefinition();
+            if (SlowingFactor == 1)
+                return def.Speed;
+            if (SlowingDuration <= 0)
+                SlowingFactor = 1;
+            return def.Speed * SlowingFactor;
+        }
     }
 }

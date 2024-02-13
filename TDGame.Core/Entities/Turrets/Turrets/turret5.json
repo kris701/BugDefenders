@@ -8,8 +8,10 @@
   "Range": 100,
   "Damage": 25,
   "ProjectileID": null,
-  "Cooldown": 250,
+  "Cooldown": 2000,
   "IsTrailing": false,
+  "SlowingFactor": 0.5,
+  "SlowingDuration": 1000,
   "DamageModifiers": [
     {
       "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",

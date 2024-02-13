@@ -75,6 +75,13 @@ namespace TDGame.Core
             }
         }
 
+        private void UpdateEnemySlowDuration(TimeSpan passed)
+        {
+            foreach (var enemy in CurrentEnemies)
+                if (enemy.SlowingDuration > 0)
+                    enemy.SlowingDuration -= passed.Milliseconds;
+        }
+
         private void UpdateEnemyPositions()
         {
             var toRemove = new List<EnemyInstance>();
@@ -93,7 +100,7 @@ namespace TDGame.Core
                     target = Map.WayPoints[enemy.WayPointID];
                 }
                 enemy.Angle = GetAngle(target, enemy);
-                var change = GetEnemyLocationChange(enemy.Angle, enemy.GetDefinition().Speed);
+                var change = GetEnemyLocationChange(enemy.Angle, enemy.GetSpeed());
                 enemy.X += change.X;
                 enemy.Y += change.Y;
             }

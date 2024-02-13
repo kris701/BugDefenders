@@ -9,6 +9,8 @@
   "SplashRange": 100,
   "TriggerRange": 50,
   "Acceleration": 1.2,
+  "SlowingFactor": 1,
+  "SlowingDuration": 0,
   "IsGuided": true,
   "IsExplosive": true,
   "DamageModifiers": [

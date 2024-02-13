@@ -10,6 +10,8 @@
   "ProjectileID": "1db411e4-8599-464b-923c-0e23bc031435",
   "Cooldown": 45,
   "IsTrailing": true,
+  "SlowingFactor": 1,
+  "SlowingDuration": 0,
   "DamageModifiers": [],
   "TurretLevels": [
     {

@@ -19,10 +19,12 @@ namespace TDGame.Core.Entities.Turrets
         public TurretType Type { get; set; }
         public float Size { get; set; }
         public int Cost { get; set; }
-        public int Range { get; set; }
-        public int Damage { get; set; }
+        public float Range { get; set; }
+        public float Damage { get; set; }
         public int Cooldown { get; set; }
         public bool IsTrailing { get; set; }
+        public float SlowingFactor { get; set; }
+        public int SlowingDuration { get; set; }
         public Guid? ProjectileID { get; set; }
         public List<TurretLevel> TurretLevels { get; set; }
         public List<ProjectileLevel> ProjectileLevels { get; set; }

@@ -37,7 +37,8 @@ namespace TDGame.Core
             var best = GetNearestEnemy(turret);
             if (best != null)
             {
-                if (!DamageEnemy(best, turret.Damage, turret.GetDefinition().DamageModifiers))
+                var turretDef = turret.GetDefinition();
+                if (!DamageEnemy(best, turret.Damage, turretDef.DamageModifiers, turretDef.SlowingFactor, turretDef.SlowingDuration))
                 {
                     turret.Targeting = best;
                     turret.Angle = GetAngle(best, turret);
@@ -70,8 +71,9 @@ namespace TDGame.Core
 
             if (best != null)
             {
+                var turretDef = turret.GetDefinition();
                 foreach (var enemy in targeting)
-                    if (DamageEnemy(enemy, turret.Damage, turret.GetDefinition().DamageModifiers))
+                    if (DamageEnemy(enemy, turret.Damage, turretDef.DamageModifiers, turretDef.SlowingFactor, turretDef.SlowingDuration))
                         turret.Kills++;
                 turret.Targeting = best;
                 turret.Angle = GetAngle(best, turret);
@@ -107,13 +109,15 @@ namespace TDGame.Core
             float y = enemy.Y + enemy.Size / 2;
             var dist = MathHelpers.Distance(enemy, projectile);
             var steps = dist / projectile.GetDefinition().Speed;
-            var change = GetEnemyLocationChange(enemy.Angle, enemy.GetDefinition().Speed);
+            var change = GetEnemyLocationChange(enemy.Angle, enemy.GetSpeed());
             return new FloatPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
         }
 
         public bool CanLevelUpTurret(TurretInstance turret, Guid id)
         {
-            var upgrade = turret.GetDefinition().GetAllUpgrades().First(x => x.ID == id);
+            var upgrade = turret.GetDefinition().GetAllUpgrades().FirstOrDefault(x => x.ID == id);
+            if (upgrade == null)
+                return false;
             if (Money < upgrade.Cost)
                 return false;
             if (upgrade.Requires != null && !turret.HasUpgrades.Contains((Guid)upgrade.Requires))
@@ -126,6 +130,8 @@ namespace TDGame.Core
             if (!CanLevelUpTurret(turret, id))
                 return false;
             var upgrade = turret.GetDefinition().GetAllUpgrades().First(x => x.ID == id);
+            if (upgrade == null)
+                return false;
             turret.ApplyUpgrade(id);
             Money -= upgrade.Cost;
 

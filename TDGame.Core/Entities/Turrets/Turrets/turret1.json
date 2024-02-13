@@ -9,6 +9,8 @@
   "Damage": 10,
   "ProjectileID": null,
   "Cooldown": 5,
+  "SlowingFactor": 1,
+  "SlowingDuration": 0,
   "IsTrailing": false,
   "DamageModifiers": [
     {

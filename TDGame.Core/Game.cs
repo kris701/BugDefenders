@@ -80,6 +80,7 @@ namespace TDGame.Core
         private void MainLoop()
         {
             UpdateSpawnQueue();
+            UpdateEnemySlowDuration(_mainLoopTimer.Target);
             UpdateEnemyPositions();
             UpdateProjectiles();
             UpdateTurrets(_mainLoopTimer.Target);
@@ -113,11 +114,17 @@ namespace TDGame.Core
             return best;
         }
 
-        private bool DamageEnemy(EnemyInstance enemy, float damage, List<DamageModifier> modifiers)
+        private bool DamageEnemy(EnemyInstance enemy, float damage, List<DamageModifier> modifiers, float slowingFactor, int slowingDuration)
         {
             foreach (var modifier in modifiers)
                 if (modifier.EnemyType == enemy.GetDefinition().EnemyType)
                     damage = damage * modifier.Modifier;
+            if (slowingFactor <= enemy.SlowingFactor)
+            {
+                enemy.SlowingFactor = slowingFactor;
+                enemy.SlowingDuration = slowingDuration;
+            }
+
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {

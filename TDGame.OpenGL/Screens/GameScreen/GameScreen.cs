@@ -154,7 +154,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private void SelectTurret(TurretInstance turret)
         {
             _selectedTurret = turret;
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turret.GetDefinition().Range * 2);
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(turret.GetDefinition().Range * 2));
             _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
             _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
             _turretSelectRangeTile.X = turret.X + turret.Size / 2 + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
@@ -426,7 +426,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.FillColor = TextureBuilder.GetTexture(turret.ID);
                 _buyingPreviewTile.Width = turret.Size;
                 _buyingPreviewTile.Height = turret.Size;
-                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, turret.Range * 2);
+                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(turret.Range * 2));
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
                 _turretStatesTextbox.Text = GetTurretDescriptionString(new TurretInstance(turret));
