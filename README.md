@@ -21,7 +21,7 @@
 - [X] Enemy types
     - I.e. some turrets are more effective against certain enemy types
 - [ ] Use a different font (Consolas maybe?)
-- [ ] FPS counter
+- [X] FPS counter
 - [ ] Cache tile sets (for animated tiles)
 - [X] Area of effect turret
 - [X] Slowdown turret
