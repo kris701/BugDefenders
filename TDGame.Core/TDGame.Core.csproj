@@ -8,23 +8,24 @@
 
   <ItemGroup>
     <None Remove="EnemyTypes\EnemyTypes\type1.json" />
-    <None Remove="Enemies\Enemies\boss1.json" />
-    <None Remove="Enemies\Enemies\enemy1.json" />
-    <None Remove="Enemies\Enemies\enemy2.json" />
-    <None Remove="Enemies\Enemies\enemy3.json" />
+    <None Remove="Entities\Enemies\Enemies\boss1.json" />
+    <None Remove="Entities\Enemies\Enemies\enemy1.json" />
+    <None Remove="Entities\Enemies\Enemies\enemy2.json" />
+    <None Remove="Entities\Enemies\Enemies\enemy3.json" />
     <None Remove="EnemyTypes\EnemyTypes\type2.json" />
     <None Remove="EnemyTypes\EnemyTypes\type3.json" />
     <None Remove="GameStyles\GameStyles\easy.json" />
     <None Remove="GameStyles\GameStyles\medium.json" />
     <None Remove="Maps\Maps\map1.json" />
     <None Remove="Maps\Maps\map2.json" />
-    <None Remove="Turrets\Projectiles\bullet.json" />
-    <None Remove="Turrets\Projectiles\missile.json" />
-    <None Remove="Turrets\Projectiles\rocket.json" />
-    <None Remove="Turrets\Turrets\turret1.json" />
-    <None Remove="Turrets\Turrets\turret2.json" />
-    <None Remove="Turrets\Turrets\turret3.json" />
-    <None Remove="Turrets\Turrets\turret4.json" />
+    <None Remove="Entities\Projectiles\Projectiles\bullet.json" />
+    <None Remove="Entities\Projectiles\Projectiles\missile.json" />
+    <None Remove="Entities\Projectiles\Projectiles\rocket.json" />
+    <None Remove="Entities\Turrets\Turrets\turret1.json" />
+    <None Remove="Entities\Turrets\Turrets\turret2.json" />
+    <None Remove="Entities\Turrets\Turrets\turret3.json" />
+    <None Remove="Entities\Turrets\Turrets\turret4.json" />
+    <None Remove="Entities\Turrets\Turrets\turret5.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,16 +38,16 @@
     <EmbeddedResource Include="EnemyTypes\EnemyTypes\type1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Enemies\Enemies\boss1.json">
+    <EmbeddedResource Include="Entities\Enemies\Enemies\boss1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Enemies\Enemies\enemy3.json">
+    <EmbeddedResource Include="Entities\Enemies\Enemies\enemy3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Enemies\Enemies\enemy2.json">
+    <EmbeddedResource Include="Entities\Enemies\Enemies\enemy2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Enemies\Enemies\enemy1.json">
+    <EmbeddedResource Include="Entities\Enemies\Enemies\enemy1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GameStyles\GameStyles\medium.json">
@@ -61,25 +62,28 @@
     <EmbeddedResource Include="Maps\Maps\map1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Turrets\Projectiles\missile.json">
+    <EmbeddedResource Include="Entities\Projectiles\Projectiles\missile.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Turrets\Projectiles\bullet.json">
+    <EmbeddedResource Include="Entities\Projectiles\Projectiles\bullet.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Turrets\Projectiles\rocket.json">
+    <EmbeddedResource Include="Entities\Projectiles\Projectiles\rocket.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Turrets\Turrets\turret4.json">
+    <EmbeddedResource Include="Entities\Turrets\Turrets\turret5.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Turrets\Turrets\turret3.json">
+    <EmbeddedResource Include="Entities\Turrets\Turrets\turret4.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Turrets\Turrets\turret2.json">
+    <EmbeddedResource Include="Entities\Turrets\Turrets\turret3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Turrets\Turrets\turret1.json">
+    <EmbeddedResource Include="Entities\Turrets\Turrets\turret2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entities\Turrets\Turrets\turret1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

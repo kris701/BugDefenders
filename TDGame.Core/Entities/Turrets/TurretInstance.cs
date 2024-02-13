@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using TDGame.Core.Enemies;
+using TDGame.Core.Entities.Enemies;
+using TDGame.Core.Entities.Projectiles;
+using TDGame.Core.Entities.Turrets.Upgrades;
 using TDGame.Core.Models;
-using TDGame.Core.Turret;
-using TDGame.Core.Turrets.Upgrades;
 
-namespace TDGame.Core.Turrets
+namespace TDGame.Core.Entities.Turrets
 {
     public class TurretInstance : BasePositionModel, IInstance<TurretDefinition>
     {
@@ -65,7 +65,8 @@ namespace TDGame.Core.Turrets
                 Damage *= turretLevel.DamageModifier;
                 Cooldown *= turretLevel.CooldownModifier;
                 HasUpgrades.Add(turretLevel.ID);
-            } else if (ProjectileDefinition != null && upgrade is ProjectileLevel projLev)
+            }
+            else if (ProjectileDefinition != null && upgrade is ProjectileLevel projLev)
             {
                 ProjectileDefinition.Damage *= projLev.DamageModifier;
                 ProjectileDefinition.SplashRange *= projLev.SplashRangeModifier;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Turrets.Upgrades
+namespace TDGame.Core.Entities.Turrets.Upgrades
 {
     public class TurretLevel : IUpgrade
     {

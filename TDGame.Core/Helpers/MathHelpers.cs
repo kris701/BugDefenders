@@ -4,10 +4,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDGame.Core.Enemies;
+using TDGame.Core.Entities.Enemies;
+using TDGame.Core.Entities.Turrets;
 using TDGame.Core.Maps;
 using TDGame.Core.Models;
-using TDGame.Core.Turrets;
 
 namespace TDGame.Core.Helpers
 {

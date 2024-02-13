@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDGame.Core.Enemies;
+using TDGame.Core.Entities.Enemies;
+using TDGame.Core.Entities.Projectiles;
+using TDGame.Core.Entities.Turrets;
 using TDGame.Core.GameStyles;
 using TDGame.Core.Maps;
-using TDGame.Core.Turrets;
 
 namespace TDGame.Core
 {

@@ -1,0 +1,32 @@
+﻿{
+  "id": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+  "Name": "Wave Turret",
+  "Description": "asfdasfasf",
+  "Type": 3,
+  "Size": 50,
+  "Cost": 300,
+  "Range": 100,
+  "Damage": 25,
+  "ProjectileID": null,
+  "Cooldown": 250,
+  "IsTrailing": false,
+  "DamageModifiers": [
+    {
+      "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+      "Modifier": 3
+    }
+  ],
+  "TurretLevels": [
+    {
+      "id": "5ce6344e-a814-4acf-953e-ed5304de3bed",
+      "requires": null,
+      "Name": "Upgrade 1",
+      "Description": "fast turret",
+      "Cost": 50,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 0.5
+    }
+  ],
+  "ProjectileLevels": []
+}

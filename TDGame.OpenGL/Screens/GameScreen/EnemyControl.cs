@@ -5,12 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDGame.Core.Turrets;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
-using TDGame.Core.Enemies;
+using TDGame.Core.Entities.Enemies;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {

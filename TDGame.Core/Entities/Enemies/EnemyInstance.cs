@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Models;
 
-namespace TDGame.Core.Enemies
+namespace TDGame.Core.Entities.Enemies
 {
     public class EnemyInstance : BasePositionModel, IInstance<EnemyDefinition>
     {

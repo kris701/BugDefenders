@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using TDGame.Core.Enemies;
+using TDGame.Core.Entities.Enemies;
+using TDGame.Core.Entities.Projectiles;
+using TDGame.Core.Entities.Turrets;
 using TDGame.Core.GameStyles;
 using TDGame.Core.Helpers;
 using TDGame.Core.Maps;
-using TDGame.Core.Turret;
-using TDGame.Core.Turrets;
-using TDGame.Core.Turrets.Upgrades;
 
 namespace TDGame.Core
 {
@@ -200,6 +199,7 @@ namespace TDGame.Core
                     {
                         case TurretType.Laser: UpdateLaserTurret(turret); break;
                         case TurretType.Projectile: UpdateProjectileTurret(turret); break;
+                        case TurretType.AOE: UpdateAOETurret(turret); break;
                     }
                 }
             }
@@ -236,6 +236,37 @@ namespace TDGame.Core
                 }
                 else
                     turret.Kills++;
+                turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
+            }
+        }
+
+        private void UpdateAOETurret(TurretInstance turret)
+        {
+            turret.Targeting = null;
+            var closest = float.MaxValue;
+            EnemyInstance? best = null;
+            var targeting = new List<EnemyInstance>();
+            foreach(var enemy in CurrentEnemies)
+            {
+                var dist = MathHelpers.Distance(enemy, turret);
+                if (dist <= turret.Range)
+                {
+                    targeting.Add(enemy);
+                    if (dist < closest)
+                    {
+                        closest = dist;
+                        best = enemy;
+                    }
+                }
+            }
+
+            if (best != null)
+            {
+                foreach (var enemy in targeting)
+                    if (DamageEnemy(enemy, turret.Damage, turret.GetDefinition().DamageModifiers))
+                        turret.Kills++;
+                turret.Targeting = best;
+                turret.Angle = GetAngle(best, turret);
                 turret.CoolingFor = TimeSpan.FromMilliseconds(turret.Cooldown);
             }
         }

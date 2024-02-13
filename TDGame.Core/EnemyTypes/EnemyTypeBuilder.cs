@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using TDGame.Core.GameStyles;
 using TDGame.Core.Helpers;
-using TDGame.Core.Turrets;
 
 namespace TDGame.Core.EnemyTypes
 {
