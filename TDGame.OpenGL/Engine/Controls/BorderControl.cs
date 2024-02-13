@@ -13,7 +13,14 @@ namespace TDGame.OpenGL.Engine.Controls
     public class BorderControl : TileControl
     {
         public Texture2D BorderBrush { get; set; } = BasicTextures.GetBasicRectange(Color.Black);
-        public float Thickness { get; set; } = 2;
+        private float _thickness = 2;
+        public float Thickness { 
+            get { 
+                return _thickness; 
+            } set {
+                _thickness = Parent.Scale(value);
+            } 
+        }
         public IControl Child { get; set; }
 
         public BorderControl(IScreen parent) : base(parent)

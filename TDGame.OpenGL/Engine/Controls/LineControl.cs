@@ -12,7 +12,18 @@ namespace TDGame.OpenGL.Engine.Controls
 {
     public class LineControl : BaseControl
     {
-        public float Thickness { get; set; } = 2;
+        private float _thickness = 2;
+        public float Thickness
+        {
+            get
+            {
+                return _thickness;
+            }
+            set
+            {
+                _thickness = Parent.Scale(value);
+            }
+        }
         public Texture2D Stroke { get; set; } = BasicTextures.GetBasicRectange(Color.Red);
         private float _x2 = 0;
         public float X2
