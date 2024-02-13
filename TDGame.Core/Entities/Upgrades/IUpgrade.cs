@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Models;
 
-namespace TDGame.Core.Entities.Turrets.Upgrades
+namespace TDGame.Core.Entities.Upgrades
 {
     public interface IUpgrade : IDefinition
     {

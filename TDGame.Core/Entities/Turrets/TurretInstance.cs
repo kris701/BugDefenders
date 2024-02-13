@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Entities.Projectiles;
-using TDGame.Core.Entities.Turrets.Upgrades;
+using TDGame.Core.Entities.Upgrades;
 using TDGame.Core.Models;
 
 namespace TDGame.Core.Entities.Turrets

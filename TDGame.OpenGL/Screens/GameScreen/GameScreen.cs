@@ -12,7 +12,7 @@ using TDGame.Core.EnemyTypes;
 using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Entities.Projectiles;
 using TDGame.Core.Entities.Turrets;
-using TDGame.Core.Entities.Turrets.Upgrades;
+using TDGame.Core.Entities.Upgrades;
 using TDGame.Core.Maps;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;

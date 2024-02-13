@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using TDGame.Core.Entities.Turrets.Upgrades;
+using TDGame.Core.Entities.Upgrades;
 using TDGame.Core.GameStyles;
 using TDGame.Core.Models;
 namespace TDGame.Core.Entities.Turrets
