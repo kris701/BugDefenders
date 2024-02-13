@@ -24,9 +24,9 @@ namespace TDGame.OpenGL.Textures
             _contentManager = contentManager;
         }
 
-        public static List<string> GetTexturePacks() => _resourceFetcher.GetResources();
+        public static List<Guid> GetTexturePacks() => _resourceFetcher.GetResources();
 
-        public static void LoadTexturePack(string texturePack)
+        public static void LoadTexturePack(Guid texturePack)
         {
             var pack = _resourceFetcher.GetResource(texturePack);
             _textures.Clear();
@@ -34,7 +34,7 @@ namespace TDGame.OpenGL.Textures
                 _textures.Add(item.ID, _contentManager.Load<Texture2D>(item.Content));
         }
 
-        public static TexturePackDefinition GetTexturePack(string texturePack) => _resourceFetcher.GetResource(texturePack);
+        public static TexturePackDefinition GetTexturePack(Guid texturePack) => _resourceFetcher.GetResource(texturePack);
 
         public static Texture2D GetTexture(Guid id)
         {

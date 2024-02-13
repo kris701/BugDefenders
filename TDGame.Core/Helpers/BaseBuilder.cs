@@ -5,13 +5,14 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TDGame.Core.Models;
 
 namespace TDGame.Core.Helpers
 {
-    public class BaseBuilder<T>
+    public class BaseBuilder<T> where T : IDefinition
     {
         private string _resourceDir;
-        private Dictionary<string, string> _resources = new Dictionary<string, string>();
+        private Dictionary<Guid, T> _resources = new Dictionary<Guid, T>();
         private Assembly _assembly;
 
         public BaseBuilder(string resourceDir, Assembly assembly)
@@ -28,31 +29,29 @@ namespace TDGame.Core.Helpers
             var resources = names.Where(str => str.StartsWith(source)).ToList();
             foreach (var resource in resources)
             {
-                var name = resource.Substring(0, resource.LastIndexOf("."));
-                name = name.Substring(name.LastIndexOf(".") + 1);
-                _resources.Add(name, resource);
+                var item = ParseResource(resource);
+                _resources.Add(item.ID, item);
             }
         }
-        public List<string> GetResources() => _resources.Keys.ToList();
-        public T GetResource(string name)
-        {
-            if (!_resources.ContainsKey(name))
-                throw new Exception($"Resource not found: {name}");
+        public List<Guid> GetResources() => _resources.Keys.ToList();
+        public T GetResource(Guid id) => _resources[id];
 
-            using (Stream? stream = _assembly.GetManifestResourceStream(_resources[name]))
+        private T ParseResource(string resource)
+        {
+            using (Stream? stream = _assembly.GetManifestResourceStream(resource))
             {
                 if (stream == null)
-                    throw new Exception($"Resource not found: {name}");
+                    throw new Exception($"Resource not found: {resource}");
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
                     var map = JsonSerializer.Deserialize<T>(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                     if (map == null)
-                        throw new Exception($"Resource not found: {name}");
+                        throw new Exception($"Resource not found: {resource}");
                     return map;
                 }
             }
-            throw new Exception($"Resource not found: {name}");
+            throw new Exception($"Resource not found: {resource}");
         }
     }
 }

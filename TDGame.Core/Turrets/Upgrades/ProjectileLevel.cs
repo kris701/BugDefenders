@@ -9,28 +9,14 @@ namespace TDGame.Core.Turrets.Upgrades
 {
     public class ProjectileLevel : IUpgrade
     {
+        public Guid ID { get; set; }
+        public Guid? Requires { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int Cost { get; set; }
-        public double DamageModifier { get; set; }
-        public double SplashRangeModifier { get; set; }
-        public double TriggerRangeModifier { get; set; }
-
-        [JsonIgnore]
-        public bool HasUpgrade { get; set; }
-
-        public void ApplyUpgrade(ProjectileDefinition on)
-        {
-            on.Damage = (int)(on.Damage * DamageModifier);
-            on.SplashRange = (int)(on.SplashRange * SplashRangeModifier);
-            on.TriggerRange = (int)(on.TriggerRange * TriggerRangeModifier);
-            HasUpgrade = true;
-        }
-
-        public void ApplyUpgrade(TurretDefinition on)
-        {
-            HasUpgrade = true;
-        }
+        public float DamageModifier { get; set; }
+        public float SplashRangeModifier { get; set; }
+        public float TriggerRangeModifier { get; set; }
 
         public string GetDescriptionString()
         {

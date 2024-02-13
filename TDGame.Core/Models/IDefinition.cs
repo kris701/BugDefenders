@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDGame.Core.Models;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.Core.Models
 {
-    public class TexturePackDefinition : IDefinition
+    public interface IDefinition : IIdentifiable
     {
-        public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<TextureDefinition> TextureSet { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace TDGame.Core.GameStyles
     {
         private static BaseBuilder<GameStyleDefinition> _builder = new BaseBuilder<GameStyleDefinition>("GameStyles.GameStyles", Assembly.GetExecutingAssembly());
 
-        public static List<string> GetGameStyles() => _builder.GetResources();
-        public static GameStyleDefinition GetGameStyle(string name) => _builder.GetResource(name);
+        public static List<Guid> GetGameStyles() => _builder.GetResources();
+        public static GameStyleDefinition GetGameStyle(Guid id) => _builder.GetResource(id);
     }
 }

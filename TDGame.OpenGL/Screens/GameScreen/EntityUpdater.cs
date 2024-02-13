@@ -12,7 +12,7 @@ using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public class EntityUpdater<T, U> where T : IPosition, ITextured where U : TileControl
+    public class EntityUpdater<T, U> where T : IPosition, IIdentifiable where U : TileControl
     {
         public delegate void EntityHandler(U parent);
         public EntityHandler? OnDelete;
@@ -34,7 +34,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             YOffset = yOffset;
         }
 
-        public void UpdateEntities(List<T> entities, Func<T, U> toControlOverride = null, Action<T, U> updateOverride = null)
+        public void UpdateEntities(List<T> entities, Func<T, U> toControl, Action<T, U> updateOverride = null)
         {
             foreach(var entity in entities)
             {
@@ -52,22 +52,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 }
                 else
                 {
-                    U newControl;
-                    if (toControlOverride != null)
-                        newControl = toControlOverride(entity);
-                    else
-                    {
-                        newControl = (U)(new TileControl(Screen)
-                        {
-                            FillColor = TextureBuilder.GetTexture(entity.ID),
-                            X = entity.X + XOffset,
-                            Y = entity.Y + YOffset,
-                            Width = entity.Size,
-                            Height = entity.Size,
-                            Rotation = entity.Angle + (float)Math.PI / 2,
-                            Tag = entity
-                        });
-                    }
+                    U newControl = toControl(entity);
                     newControl.Initialize();
                     Screen.AddControl(Layer, newControl);
                     _entities.Add(entity, newControl);

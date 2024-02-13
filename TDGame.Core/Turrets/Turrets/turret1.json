@@ -10,10 +10,16 @@
   "ProjectileID": null,
   "Cooldown": 5,
   "IsTrailing": false,
-  "StrongAgainst": [ 4 ],
-  "WeakAgainst": [ 2 ],
+  "DamageModifiers": [
+    {
+      "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+      "Modifier": 2
+    }
+  ],
   "TurretLevels": [
     {
+      "id": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
+      "requires": null,
       "Name": "Upgrade 1",
       "Description": "asfaf",
       "Cost": 5,
@@ -22,6 +28,8 @@
       "CooldownModifier": 1
     },
     {
+      "id": "9715ffbf-75c7-48c2-a05f-8b31c638e02c",
+      "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
       "Name": "Upgrade 2",
       "Description": "fast turret",
       "Cost": 50,
@@ -30,15 +38,9 @@
       "CooldownModifier": 0.5
     },
     {
+      "id": "c44f33ca-bb55-495c-9307-066fa8a1ad78",
+      "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
       "Name": "Upgrade 3",
-      "Description": "fast turret",
-      "Cost": 50,
-      "RangeModifier": 1,
-      "DamageModifier": 1,
-      "CooldownModifier": 0.5
-    },
-    {
-      "Name": "Upgrade 4",
       "Description": "fast turret",
       "Cost": 50,
       "RangeModifier": 1,

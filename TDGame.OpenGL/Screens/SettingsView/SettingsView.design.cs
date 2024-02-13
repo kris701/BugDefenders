@@ -227,7 +227,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             for(int i = 0; i < packs.Count; i++)
             {
                 var newControl = new ButtonControl(this, clicked: (s) => {
-                    if (s.Tag is string str)
+                    if (s.Tag is Guid str)
                         _settings.TexturePack = str;
                     UpdateScreenSettingsButtons();
                 })

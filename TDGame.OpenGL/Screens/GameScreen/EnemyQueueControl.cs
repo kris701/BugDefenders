@@ -10,6 +10,7 @@ using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
 using TDGame.Core.Enemies;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.Core.EnemyTypes;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -21,13 +22,13 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
         }
 
-        public void UpdateToEnemy(EnemyDefinition enemy)
+        public void UpdateToEnemy(EnemyInstance enemy)
         {
-            iconControl.FillColor = TextureBuilder.GetTexture(enemy.ID);
+            iconControl.FillColor = TextureBuilder.GetTexture(enemy.DefinitionID);
             var sb = new StringBuilder();
-            sb.AppendLine(enemy.Name);
-            sb.AppendLine(enemy.Description);
-            sb.AppendLine($"Type: {EnemyDefinition.GetEnemyTypeName(enemy.Type)}. HP: {enemy.Health}");
+            sb.AppendLine(enemy.GetDefinition().Name);
+            sb.AppendLine(enemy.GetDefinition().Description);
+            sb.AppendLine($"Type: {EnemyTypeBuilder.GetEnemyType(enemy.GetDefinition().EnemyType).Name}. HP: {Math.Round(enemy.Health,0)}");
             descriptionControl.Text = sb.ToString();
         }
 

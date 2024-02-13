@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TDGame.Core.Models
 {
-    public interface ITextured
+    public interface IInstance<T> : IIdentifiable where T : IDefinition
     {
-        public Guid ID { get; set; }
+        public Guid DefinitionID { get; set; }
+        public T GetDefinition();
     }
 }

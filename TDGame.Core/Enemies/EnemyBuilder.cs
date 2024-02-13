@@ -14,14 +14,7 @@ namespace TDGame.Core.Enemies
     {
         private static BaseBuilder<EnemyDefinition> _builder = new BaseBuilder<EnemyDefinition>("Enemies.Enemies", Assembly.GetExecutingAssembly());
 
-        public static List<string> GetEnemies() => _builder.GetResources();
-        public static EnemyDefinition GetEnemy(string name, double evolution)
-        {
-            var enemy = _builder.GetResource(name);
-
-            enemy.Health = (int)(enemy.Health * evolution);
-
-            return enemy;
-        }
+        public static List<Guid> GetEnemies() => _builder.GetResources();
+        public static EnemyDefinition GetEnemy(Guid id) => _builder.GetResource(id);
     }
 }

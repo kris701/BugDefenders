@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Models;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.Core.EnemyTypes
 {
-    public class TexturePackDefinition : IDefinition
+    public class EnemyTypeDefinition : IDefinition
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<TextureDefinition> TextureSet { get; set; }
     }
 }

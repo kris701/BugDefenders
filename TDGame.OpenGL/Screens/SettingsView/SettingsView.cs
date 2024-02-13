@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -41,7 +42,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
             foreach(var button in _texturePacksButtons)
             {
-                if (button.Tag is string str && str == _settings.TexturePack)
+                if (button.Tag is Guid str && str == _settings.TexturePack)
                 {
                     button.FillColor = BasicTextures.GetBasicRectange(Color.Yellow);
                     break;

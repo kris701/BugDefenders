@@ -7,13 +7,14 @@
   "Cost": 1000,
   "Range": 500,
   "Damage": 0,
-  "ProjectileID": "missile",
+  "ProjectileID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
   "Cooldown": 5000,
   "IsTrailing": false,
-  "StrongAgainst": [],
-  "WeakAgainst": [],
+  "DamageModifiers": [],
   "TurretLevels": [
     {
+      "id": "c56cf52c-aaa9-4fed-8163-bb32b6457607",
+      "requires": null,
       "Name": "Upgrade 1",
       "Description": "fast turret",
       "Cost": 50,
@@ -24,6 +25,8 @@
   ],
   "ProjectileLevels": [
     {
+      "id": "a60d424c-c86f-498d-aef1-ed59e9d1c8b0",
+      "requires": null,
       "Name": "Upgrade 3",
       "Description": "more damage",
       "Cost": 50,

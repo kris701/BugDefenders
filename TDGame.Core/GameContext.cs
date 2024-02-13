@@ -14,9 +14,9 @@ namespace TDGame.Core
     {
         public MapDefinition Map { get; set; }
         public GameStyleDefinition GameStyle { get; set; }
-        public List<string> EnemiesToSpawn { get; set; }
+        public List<Guid> EnemiesToSpawn { get; set; }
         public bool AutoSpawn { get; set; } = false;
-        public double Evolution { get; set; } = 1;
+        public float Evolution { get; set; } = 1;
         private bool _running = true;
         public bool Running { 
             get { 
@@ -26,12 +26,12 @@ namespace TDGame.Core
                     _running = value;
             } 
         }
-        public List<EnemyDefinition> CurrentEnemies { get; set; }
+        public List<EnemyInstance> CurrentEnemies { get; set; }
         public int HP { get; set; }
         public int Money { get; set; }
         public int Score { get; set; }
-        public List<TurretDefinition> Turrets { get; set; }
-        public List<ProjectileDefinition> Projectiles { get; set; }
+        public List<TurretInstance> Turrets { get; set; }
+        public List<ProjectileInstance> Projectiles { get; set; }
 
         public bool GameOver { get; set; }
         public TimeSpan GameTime { get; set; }

@@ -56,12 +56,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
             base.Initialize();
         }
 
-        public void UpgradeTurretLevels(TurretDefinition turret)
+        public void UpgradeTurretLevels(TurretInstance turret)
         {
-            turretLevelControl.Text = $"{turret.TurretLevels.Count(x => x.HasUpgrade)}";
+            turretLevelControl.Text = $"{turret.GetDefinition().TurretLevels.Count(x => turret.HasUpgrades.Contains(x.ID))}";
             if (turretLevelControl.Text != "0")
                 turretLevelControl.IsVisible = true;
-            projectileLevelControl.Text = $"{turret.ProjectileLevels.Count(x => x.HasUpgrade)}";
+            projectileLevelControl.Text = $"{turret.GetDefinition().ProjectileLevels.Count(x => turret.HasUpgrades.Contains(x.ID))}";
             if (projectileLevelControl.Text != "0")
                 projectileLevelControl.IsVisible = true;
         }

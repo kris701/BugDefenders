@@ -10,32 +10,20 @@ using static TDGame.Core.Enemies.EnemyDefinition;
 
 namespace TDGame.Core.Turrets
 {
-    public class ProjectileDefinition : BasePositionModel, ITextured
+    public class ProjectileDefinition : IDefinition
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public override float Size { get; set; }
-        public int Speed { get; set; }
-        public int Damage { get; set; }
-        public int Range { get; set; }
-        public int SplashRange { get; set; }
-        public int TriggerRange { get; set; }
+        public float Size { get; set; }
+        public float Speed { get; set; }
+        public float Damage { get; set; }
+        public float Range { get; set; }
+        public float SplashRange { get; set; }
+        public float TriggerRange { get; set; }
         public double Acceleration { get; set; }
         public bool IsGuided { get; set; }
         public bool IsExplosive { get; set; }
-        public List<EnemyTypes> StrongAgainst { get; set; }
-        public List<EnemyTypes> WeakAgainst { get; set; }
-
-
-        [JsonIgnore]
-        public int Traveled { get; set; }
-
-        [JsonIgnore]
-        public override float Angle { get; set; }
-        [JsonIgnore]
-        public EnemyDefinition Target { get; set; }
-        [JsonIgnore]
-        public TurretDefinition Source { get; set; }
+        public List<DamageModifier> DamageModifiers { get; set; }
     }
 }

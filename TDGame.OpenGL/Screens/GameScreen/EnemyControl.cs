@@ -18,8 +18,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         private TileControl _healthBar;
         private float _initialHP;
-        private EnemyDefinition _enemy;
-        public EnemyControl(IScreen parent, EnemyDefinition enemy) : base(parent)
+        private EnemyInstance _enemy;
+        public EnemyControl(IScreen parent, EnemyInstance enemy) : base(parent)
         {
             _initialHP = enemy.Health;
             _enemy = enemy;

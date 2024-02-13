@@ -16,7 +16,7 @@ namespace TDGame.Core.Turret
     {
         private static BaseBuilder<ProjectileDefinition> _builder = new BaseBuilder<ProjectileDefinition>("Turrets.Projectiles", Assembly.GetExecutingAssembly());
 
-        public static List<string> GetProjectiles() => _builder.GetResources();
-        public static ProjectileDefinition GetProjectile(string name) => _builder.GetResource(name);
+        public static List<Guid> GetProjectiles() => _builder.GetResources();
+        public static ProjectileDefinition GetProjectile(Guid id) => _builder.GetResource(id);
     }
 }

@@ -11,6 +11,14 @@
   "Acceleration": 1,
   "IsGuided": false,
   "IsExplosive": false,
-  "StrongAgainst": [4],
-  "WeakAgainst": [3]
+  "DamageModifiers": [
+    {
+      "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+      "Modifier": 2
+    },
+    {
+      "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
+      "Modifier": 0.5
+    }
+  ]
 }

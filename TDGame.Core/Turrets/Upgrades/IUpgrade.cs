@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TDGame.Core.Models;
 
 namespace TDGame.Core.Turrets.Upgrades
 {
-    public interface IUpgrade
+    public interface IUpgrade : IDefinition
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
         public int Cost { get; set; }
-        public bool HasUpgrade { get; set; }
+        public Guid? Requires { get; set; }
 
         public string GetDescriptionString();
     }

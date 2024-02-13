@@ -8,12 +8,11 @@ using TDGame.Core.Maps;
 using TDGame.Core.Turret;
 using TDGame.Core.Turrets;
 using TDGame.Core.Turrets.Upgrades;
-using static TDGame.Core.Enemies.EnemyDefinition;
 
 namespace TDGame.Core
 {
-    public delegate void TurretEventHandler(TurretDefinition turret);
-    public delegate void EnemyEventHandler(EnemyDefinition enemy);
+    public delegate void TurretEventHandler(TurretInstance turret);
+    public delegate void EnemyEventHandler(EnemyInstance enemy);
     public partial class Game
     {
         public EnemyEventHandler? OnEnemySpawned;
@@ -23,25 +22,25 @@ namespace TDGame.Core
         public TurretEventHandler? OnTurretSold;
         public TurretEventHandler? OnTurretUpgraded;
 
-        private List<EnemyDefinition> _spawnQueue = new List<EnemyDefinition>();
+        private List<EnemyInstance> _spawnQueue = new List<EnemyInstance>();
         private GameTimer _enemySpawnTimer;
         private GameTimer _evolutionTimer;
         private GameTimer _mainLoopTimer;
         private Random _rnd = new Random();
 
         private int _spawned = 1;
-        private List<string> _normalEnemies = new List<string>();
-        private List<string> _bossEnemies = new List<string>();
+        private List<Guid> _normalEnemies = new List<Guid>();
+        private List<Guid> _bossEnemies = new List<Guid>();
 
-        public Game(string mapName, string style)
+        public Game(Guid mapID, Guid styleID)
         {
-            CurrentEnemies = new List<EnemyDefinition>();
-            Turrets = new List<TurretDefinition>();
-            EnemiesToSpawn = new List<string>();
-            Projectiles = new List<ProjectileDefinition>();
+            CurrentEnemies = new List<EnemyInstance>();
+            Turrets = new List<TurretInstance>();
+            EnemiesToSpawn = new List<Guid>();
+            Projectiles = new List<ProjectileInstance>();
 
-            Map = MapBuilder.GetMap(mapName);
-            GameStyle = GameStyleBuilder.GetGameStyle(style);
+            Map = MapBuilder.GetMap(mapID);
+            GameStyle = GameStyleBuilder.GetGameStyle(styleID);
             HP = GameStyle.StartingHP;
             Money = GameStyle.StartingMoney;
             _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (CurrentEnemies.Count == 0) QueueEnemies(); });
@@ -51,7 +50,7 @@ namespace TDGame.Core
             var options = EnemyBuilder.GetEnemies();
             foreach(var enemy in options)
             {
-                if (EnemyBuilder.GetEnemy(enemy, 0).IsBoss)
+                if (EnemyBuilder.GetEnemy(enemy).IsBoss)
                     _bossEnemies.Add(enemy);
                 else
                     _normalEnemies.Add(enemy);
@@ -102,7 +101,7 @@ namespace TDGame.Core
             if (_spawnQueue.Count > 0)
             {
                 var vistedGroups = new List<Guid>();
-                var enemiesToAdd = new List<EnemyDefinition>();
+                var enemiesToAdd = new List<EnemyInstance>();
                 foreach (var enemy in _spawnQueue)
                 {
                     if (vistedGroups.Contains(enemy.GroupID))
@@ -128,7 +127,7 @@ namespace TDGame.Core
 
         private void UpdateEnemyPositions()
         {
-            var toRemove = new List<EnemyDefinition>();
+            var toRemove = new List<EnemyInstance>();
             foreach(var enemy in CurrentEnemies)
             {
                 var target = Map.WayPoints[enemy.WayPointID];
@@ -144,7 +143,7 @@ namespace TDGame.Core
                     target = Map.WayPoints[enemy.WayPointID];
                 }
                 enemy.Angle = GetAngle(target, enemy);
-                var change = GetEnemyLocationChange(enemy.Angle, (float)enemy.Speed);
+                var change = GetEnemyLocationChange(enemy.Angle, enemy.GetDefinition().Speed);
                 enemy.X += change.X;
                 enemy.Y += change.Y;
             }
@@ -168,18 +167,18 @@ namespace TDGame.Core
                 (float)yMod * speed * (float)GameStyle.EnemySpeedMultiplier);
         }
 
-        private float GetAngle(FloatPoint target, TurretDefinition turret) => MathHelpers.GetAngle(target.X, target.Y, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
-        private float GetAngle(FloatPoint target, EnemyDefinition enemy) => MathHelpers.GetAngle(target.X, target.Y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
-        private float GetAngle(EnemyDefinition enemy, TurretDefinition turret) => MathHelpers.GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
-        private float GetAngle(EnemyDefinition enemy, ProjectileDefinition projectile) => MathHelpers.GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2);
+        private float GetAngle(FloatPoint target, TurretInstance turret) => MathHelpers.GetAngle(target.X, target.Y, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
+        private float GetAngle(FloatPoint target, EnemyInstance enemy) => MathHelpers.GetAngle(target.X, target.Y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
+        private float GetAngle(EnemyInstance enemy, TurretInstance turret) => MathHelpers.GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, turret.X + turret.Size / 2, turret.Y + turret.Size / 2);
+        private float GetAngle(EnemyInstance enemy, ProjectileInstance projectile) => MathHelpers.GetAngle(enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2, projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2);
 
         public void QueueEnemies()
         {
             var group = Guid.NewGuid();
-            var template = EnemyBuilder.GetEnemy(EnemiesToSpawn[0], Evolution);
+            var template = EnemyBuilder.GetEnemy(EnemiesToSpawn[0]);
             for (int i = 0; i < template.WaveSize * GameStyle.EnemyWaveMultiplier; i++)
             {
-                var enemy = EnemyBuilder.GetEnemy(EnemiesToSpawn[0], Evolution);
+                var enemy = new EnemyInstance(EnemiesToSpawn[0], Evolution);
                 enemy.X = Map.WayPoints[0].X - enemy.Size / 2;
                 enemy.Y = Map.WayPoints[0].Y - enemy.Size / 2;
                 enemy.GroupID = group;
@@ -197,7 +196,7 @@ namespace TDGame.Core
 
                 if (turret.CoolingFor <= TimeSpan.Zero)
                 {
-                    switch (turret.Type)
+                    switch (turret.GetDefinition().Type)
                     {
                         case TurretType.Laser: UpdateLaserTurret(turret); break;
                         case TurretType.Projectile: UpdateProjectileTurret(turret); break;
@@ -206,15 +205,15 @@ namespace TDGame.Core
             }
         }
 
-        private EnemyDefinition? GetNearestEnemy(TurretDefinition turret) => GetNearestEnemy(turret.X + turret.Size / 2, turret.Y + turret.Size / 2, turret.Range);
-        private EnemyDefinition? GetNearestEnemy(ProjectileDefinition projectile) => GetNearestEnemy(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, projectile.Range);
-        private EnemyDefinition? GetNearestEnemy(double x, double y, int range)
+        private EnemyInstance? GetNearestEnemy(TurretInstance turret) => GetNearestEnemy(turret.X + turret.Size / 2, turret.Y + turret.Size / 2, turret.GetDefinition().Range);
+        private EnemyInstance? GetNearestEnemy(ProjectileInstance projectile) => GetNearestEnemy(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, projectile.GetDefinition().Range);
+        private EnemyInstance? GetNearestEnemy(double x, double y, float range)
         {
-            var minDist = double.MaxValue;
-            EnemyDefinition? best = null;
+            var minDist = float.MaxValue;
+            EnemyInstance? best = null;
             foreach (var enemy in CurrentEnemies)
             {
-                var dist = MathHelpers.Distance(x, y, enemy.X, enemy.Y);
+                var dist = MathHelpers.Distance(x, y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
                 if (dist <= range && dist < minDist)
                 {
                     minDist = dist;
@@ -224,13 +223,13 @@ namespace TDGame.Core
             return best;
         }
 
-        private void UpdateLaserTurret(TurretDefinition turret)
+        private void UpdateLaserTurret(TurretInstance turret)
         {
             turret.Targeting = null;
             var best = GetNearestEnemy(turret);
             if (best != null)
             {
-                if (!DamageEnemy(best, turret.Damage, turret.StrongAgainst, turret.WeakAgainst))
+                if (!DamageEnemy(best, turret.Damage, turret.GetDefinition().DamageModifiers))
                 {
                     turret.Targeting = best;
                     turret.Angle = GetAngle(best, turret);
@@ -241,14 +240,17 @@ namespace TDGame.Core
             }
         }
 
-        private void UpdateProjectileTurret(TurretDefinition turret)
+        private void UpdateProjectileTurret(TurretInstance turret)
         {
             turret.Targeting = null;
             var best = GetNearestEnemy(turret);
-            if (best != null && turret.ProjectileID != null)
+            if (best != null && turret.ProjectileDefinition != null)
             {
-                var projectile = GetProjectileForTurret(turret);
-                if (turret.IsTrailing)
+                var projectile = new ProjectileInstance(turret.ProjectileDefinition);
+                projectile.X = turret.X + turret.Size / 2;
+                projectile.Y = turret.Y + turret.Size / 2;
+                projectile.Source = turret;
+                if (turret.GetDefinition().IsTrailing)
                     projectile.Angle = GetAngle(
                         GetTrailingPoint(best, projectile), 
                         turret);
@@ -260,36 +262,23 @@ namespace TDGame.Core
             }
         }
 
-        private FloatPoint GetTrailingPoint(EnemyDefinition enemy, ProjectileDefinition projectile)
+        private FloatPoint GetTrailingPoint(EnemyInstance enemy, ProjectileInstance projectile)
         {
             float x = enemy.X + enemy.Size / 2;
             float y = enemy.Y + enemy.Size / 2;
             var dist = MathHelpers.Distance(enemy, projectile);
-            var steps = dist / projectile.Speed;
-            var change = GetEnemyLocationChange(enemy.Angle, (float)enemy.Speed);
+            var steps = dist / projectile.GetDefinition().Speed;
+            var change = GetEnemyLocationChange(enemy.Angle, enemy.GetDefinition().Speed);
             return new FloatPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
-        }
-
-        public ProjectileDefinition GetProjectileForTurret(TurretDefinition turret)
-        {
-            if (turret.ProjectileID == null)
-                throw new ArgumentNullException("Projectile ID was null!");
-            var projectile = ProjectileBuilder.GetProjectile(turret.ProjectileID);
-            projectile.Source = turret;
-            projectile.X = turret.X + turret.Size / 2 - projectile.Size / 2;
-            projectile.Y = turret.Y + turret.Size / 2 - projectile.Size / 2;
-            foreach (var level in turret.ProjectileLevels)
-                if (level.HasUpgrade)
-                    level.ApplyUpgrade(projectile);
-            return projectile;
         }
 
         private void UpdateProjectiles()
         {
-            var toRemove = new List<ProjectileDefinition>();
+            var toRemove = new List<ProjectileInstance>();
             foreach(var projectile in Projectiles)
             {
-                if (projectile.IsGuided)
+                var projectileDef = projectile.GetDefinition();
+                if (projectileDef.IsGuided && projectile.Target != null)
                 {
                     if (!CurrentEnemies.Contains(projectile.Target))
                     {
@@ -306,14 +295,14 @@ namespace TDGame.Core
 
                 var xMod = Math.Cos(projectile.Angle);
                 var yMod = Math.Sin(projectile.Angle);
-                if (projectile.Acceleration != 1)
+                if (projectileDef.Acceleration != 1)
                 {
-                    projectile.Speed = (int)Math.Ceiling(projectile.Speed * projectile.Acceleration);
-                    if (projectile.Speed > GameStyle.ProjectileSpeedCap)
-                        projectile.Speed = GameStyle.ProjectileSpeedCap;
+                    projectileDef.Speed = (float)Math.Ceiling(projectileDef.Speed * projectileDef.Acceleration);
+                    if (projectileDef.Speed > GameStyle.ProjectileSpeedCap)
+                        projectileDef.Speed = GameStyle.ProjectileSpeedCap;
                 }
-                projectile.Traveled += projectile.Speed;
-                if (projectile.Traveled > projectile.Range)
+                projectile.Traveled += projectileDef.Speed;
+                if (projectile.Traveled > projectileDef.Range)
                 {
                     toRemove.Add(projectile);
                     continue;
@@ -321,8 +310,8 @@ namespace TDGame.Core
 
                 if (projectile.Size >= 10)
                 {
-                    projectile.X += (float)xMod * projectile.Speed;
-                    projectile.Y += (float)yMod * projectile.Speed;
+                    projectile.X += (float)xMod * projectileDef.Speed;
+                    projectile.Y += (float)yMod * projectileDef.Speed;
 
                     if (IsWithinTriggerRange(projectile) || 
                         projectile.X < 0 || projectile.X > Map.Width ||
@@ -333,8 +322,8 @@ namespace TDGame.Core
                 {
                     for(int i = 0; i < 5; i++)
                     {
-                        projectile.X += (float)xMod * ((float)projectile.Speed / 5);
-                        projectile.Y += (float)yMod * ((float)projectile.Speed / 5);
+                        projectile.X += (float)xMod * ((float)projectileDef.Speed / 5);
+                        projectile.Y += (float)yMod * ((float)projectileDef.Speed / 5);
 
                         if (IsWithinTriggerRange(projectile) ||
                             projectile.X < 0 || projectile.X > Map.Width ||
@@ -350,12 +339,12 @@ namespace TDGame.Core
                 Projectiles.Remove(projectile);
         }
 
-        private bool IsWithinTriggerRange(ProjectileDefinition projectile)
+        private bool IsWithinTriggerRange(ProjectileInstance projectile)
         {
             bool isWithin = false;
             foreach (var enemy in CurrentEnemies)
             {
-                if (MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2) < projectile.TriggerRange)
+                if (MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2) < projectile.GetDefinition().TriggerRange)
                 {
                     isWithin = true;
                     break;
@@ -366,11 +355,12 @@ namespace TDGame.Core
                 for (int i = 0; i < CurrentEnemies.Count; i++)
                 {
                     var dist = MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, CurrentEnemies[i].X + CurrentEnemies[i].Size / 2, CurrentEnemies[i].Y + CurrentEnemies[i].Size / 2);
-                    if (dist < projectile.SplashRange)
+                    if (dist < projectile.GetDefinition().SplashRange)
                     {
-                        if (DamageEnemy(CurrentEnemies[i], projectile.Damage, projectile.StrongAgainst, projectile.WeakAgainst))
+                        if (DamageEnemy(CurrentEnemies[i], projectile.GetDefinition().Damage, projectile.GetDefinition().DamageModifiers))
                         {
-                            projectile.Source.Kills++;
+                            if (projectile.Source != null)
+                                projectile.Source.Kills++;
                             i--;
                         }
                     }
@@ -380,46 +370,48 @@ namespace TDGame.Core
             return false;
         }
 
-        public bool AddTurret(TurretDefinition turret)
+        public bool AddTurret(TurretDefinition turretDef, FloatPoint at)
         {
-            if (Money < turret.Cost)
+            if (Money < turretDef.Cost)
                 return false;
-            if (turret.X < 0)
+            if (at.X < 0)
                 return false;
-            if (turret.X > Map.Width - turret.Size)
+            if (at.X > Map.Width - turretDef.Size)
                 return false;
-            if (turret.Y < 0)
+            if (at.Y < 0)
                 return false;
-            if (turret.Y > Map.Height - turret.Size)
+            if (at.Y > Map.Height - turretDef.Size)
                 return false;
 
             foreach (var block in Map.BlockingTiles)
-                if (MathHelpers.Intersects(turret, block))
+                if (MathHelpers.Intersects(turretDef, at, block))
                     return false;
 
             foreach(var otherTurret in Turrets)
-                if (MathHelpers.Intersects(otherTurret, turret))
+                if (MathHelpers.Intersects(turretDef, at, otherTurret))
                     return false;
 
-            Money -= turret.Cost;
-            Turrets.Add(turret);
+            var newInstance = new TurretInstance(turretDef);
+            newInstance.X = at.X;
+            newInstance.Y = at.Y;
+            Money -= turretDef.Cost;
+            Turrets.Add(newInstance);
             if (OnTurretPurchased != null)
-                OnTurretPurchased.Invoke(turret);
+                OnTurretPurchased.Invoke(newInstance);
 
             return true;
         }
 
-        private bool DamageEnemy(EnemyDefinition enemy, int damage, List<EnemyTypes> strengths, List<EnemyTypes> weaknesses)
+        private bool DamageEnemy(EnemyInstance enemy, float damage, List<DamageModifier> modifiers)
         {
-            if (strengths.Contains(enemy.Type))
-                damage = (int)(damage * GameStyle.StrengthModifier);
-            if (weaknesses.Contains(enemy.Type))
-                damage = (int)(damage * GameStyle.WeaknessModifier);
+            foreach (var modifier in modifiers)
+                if (modifier.EnemyType == enemy.GetDefinition().EnemyType)
+                    damage = damage * modifier.Modifier;
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {
-                Money += enemy.Reward;
-                Score += enemy.Reward;
+                Money += enemy.GetDefinition().Reward;
+                Score += enemy.GetDefinition().Reward;
                 CurrentEnemies.Remove(enemy);
                 if (OnEnemyKilled != null)
                     OnEnemyKilled.Invoke(enemy);
@@ -428,52 +420,30 @@ namespace TDGame.Core
             return false;
         }
 
-        public bool CanLevelUpTurret(TurretDefinition turret, int levelIndex)
+        public bool CanLevelUpTurret(TurretInstance turret, Guid id)
         {
-            var upgrade = turret.TurretLevels[levelIndex];
+            var upgrade = turret.GetDefinition().GetAllUpgrades().First(x => x.ID == id);
             if (Money < upgrade.Cost)
                 return false;
-            if (levelIndex > 0 && !turret.TurretLevels[levelIndex - 1].HasUpgrade)
+            if (upgrade.Requires != null && !turret.HasUpgrades.Contains((Guid)upgrade.Requires))
                 return false;
             return true;
         }
-        public bool LevelUpTurret(TurretDefinition turret, int levelIndex)
-        {
-            var upgrade = turret.TurretLevels[levelIndex];
-            if (!CanLevelUpTurret(turret, levelIndex))
-                return false;
 
+        public bool LevelUpTurret(TurretInstance turret, Guid id)
+        {
+            if (!CanLevelUpTurret(turret, id))
+                return false;
+            var upgrade = turret.GetDefinition().GetAllUpgrades().First(x => x.ID == id);
+            turret.ApplyUpgrade(id);
             Money -= upgrade.Cost;
-            upgrade.ApplyUpgrade(turret);
+
             if (OnTurretUpgraded != null)
                 OnTurretUpgraded.Invoke(turret);
             return true;
         }
 
-        public bool CanLevelUpProjectile(TurretDefinition turret, int levelIndex)
-        {
-            var upgrade = turret.TurretLevels[levelIndex];
-            if (Money < upgrade.Cost)
-                return false;
-            if (levelIndex > 0 && !turret.ProjectileLevels[levelIndex - 1].HasUpgrade)
-                return false;
-
-            return true;
-        }
-        public bool LevelUpProjectile(TurretDefinition turret, int levelIndex)
-        {
-            var upgrade = turret.ProjectileLevels[levelIndex];
-            if (!CanLevelUpProjectile(turret, levelIndex))
-                return false;
-
-            Money -= upgrade.Cost;
-            upgrade.ApplyUpgrade(turret);
-            if (OnTurretUpgraded != null)
-                OnTurretUpgraded.Invoke(turret);
-            return true;
-        }
-
-        public void SellTurret(TurretDefinition turret)
+        public void SellTurret(TurretInstance turret)
         {
             if (!Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");

@@ -10,7 +10,7 @@ namespace TDGame.Core.Models
     {
         public float X { get; set; }
         public float Y { get; set; }
-        public abstract float Size { get; set; }
-        public abstract float Angle { get; set; }
+        public float Size { get; set; }
+        public float Angle { get; set; }
     }
 }
