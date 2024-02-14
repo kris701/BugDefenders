@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.GameStyles;
 using TDGame.Core.Maps;
+using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -165,7 +166,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 485
             });
 
-            var maps = MapBuilder.GetMaps();
+            var maps = ResourceManager.Maps.GetResources();
             int offset = 0;
             foreach (var mapName in maps)
             {
@@ -177,7 +178,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                         FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
                         FillClickedColor = BasicTextures.GetClickedTexture(),
                         Font = BasicFonts.GetFont(16),
-                        Text = $"{MapBuilder.GetMap(mapName).Name}",
+                        Text = $"{ResourceManager.Maps.GetResource(mapName).Name}",
                         X = 20,
                         Y = 560 + offset * 40,
                         Height = 35,
@@ -211,7 +212,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 485
             });
 
-            var gameStyles = GameStyleBuilder.GetGameStyles();
+            var gameStyles = ResourceManager.GameStypes.GetResources();
             int offset = 0;
             foreach (var gameStyle in gameStyles)
             {
@@ -223,7 +224,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                         FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
                         FillClickedColor = BasicTextures.GetClickedTexture(),
                         Font = BasicFonts.GetFont(16),
-                        Text = $"{GameStyleBuilder.GetGameStyle(gameStyle).Name}",
+                        Text = $"{ResourceManager.GameStypes.GetResource(gameStyle).Name}",
                         X = 515,
                         Y = 560 + offset * 40,
                         Height = 35,

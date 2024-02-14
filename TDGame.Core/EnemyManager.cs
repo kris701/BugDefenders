@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Helpers;
 using TDGame.Core.Maps;
+using TDGame.Core.Resources;
 
 namespace TDGame.Core
 {
@@ -25,7 +26,7 @@ namespace TDGame.Core
         public void QueueEnemies()
         {
             var group = Guid.NewGuid();
-            var template = EnemyBuilder.GetEnemy(EnemiesToSpawn[0]);
+            var template = ResourceManager.Enemies.GetResource(EnemiesToSpawn[0]);
             for (int i = 0; i < template.WaveSize * GameStyle.EnemyWaveMultiplier; i++)
             {
                 var enemy = new EnemyInstance(EnemiesToSpawn[0], Evolution);

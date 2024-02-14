@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Models;
+using TDGame.Core.Resources;
 
 namespace TDGame.Core.Entities.Enemies
 {
@@ -19,7 +20,7 @@ namespace TDGame.Core.Entities.Enemies
         public int WayPointID { get; set; } = 0;
         public Guid GroupID { get; set; }
 
-        public EnemyInstance(Guid enemyDefinition, float evolution) : this(EnemyBuilder.GetEnemy(enemyDefinition), evolution)
+        public EnemyInstance(Guid enemyDefinition, float evolution) : this(ResourceManager.Enemies.GetResource(enemyDefinition), evolution)
         {
         }
 
@@ -31,7 +32,7 @@ namespace TDGame.Core.Entities.Enemies
             Size = definition.Size;
         }
 
-        public EnemyDefinition GetDefinition() => EnemyBuilder.GetEnemy(DefinitionID);
+        public EnemyDefinition GetDefinition() => ResourceManager.Enemies.GetResource(DefinitionID);
 
         public float GetSpeed()
         {

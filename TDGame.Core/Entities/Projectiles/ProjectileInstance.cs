@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Entities.Turrets;
 using TDGame.Core.Models;
+using TDGame.Core.Resources;
 
 namespace TDGame.Core.Entities.Projectiles
 {
@@ -19,7 +20,7 @@ namespace TDGame.Core.Entities.Projectiles
         public TurretInstance? Source { get; set; }
         public List<Guid> HasUpgrades { get; set; }
 
-        public ProjectileInstance(Guid definitionID) : this(ProjectileBuilder.GetProjectile(definitionID))
+        public ProjectileInstance(Guid definitionID) : this(ResourceManager.Projectiles.GetResource(definitionID))
         {
         }
 
@@ -31,6 +32,6 @@ namespace TDGame.Core.Entities.Projectiles
             HasUpgrades = new List<Guid>();
         }
 
-        public ProjectileDefinition GetDefinition() => ProjectileBuilder.GetProjectile(DefinitionID);
+        public ProjectileDefinition GetDefinition() => ResourceManager.Projectiles.GetResource(DefinitionID);
     }
 }

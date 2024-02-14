@@ -7,13 +7,13 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using TDGame.Core;
 using TDGame.Core.EnemyTypes;
 using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Entities.Projectiles;
 using TDGame.Core.Entities.Turrets;
 using TDGame.Core.Entities.Upgrades;
 using TDGame.Core.Maps;
+using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -49,6 +49,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _currentMap = mapID;
             ScaleValue = parent.Settings.Scale;
             _game = new Core.Game(mapID, gameStyleID);
+            if (ResourceManager.CheckGameIntegrity().Count != 0)
+                throw new Exception("Error loading resources!");
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
             _projectile = new EntityUpdater<ProjectileInstance, TileControl>(5, this,  _gameArea.X, _gameArea.Y);
@@ -190,7 +192,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 {
                     foreach (var modifier in turretDef.DamageModifiers) 
                     {
-                        var enemyType = EnemyTypeBuilder.GetEnemyType(modifier.EnemyType);
+                        var enemyType = ResourceManager.EnemyTypes.GetResource(modifier.EnemyType);
                         sb.AppendLine($"{enemyType.Name}: {modifier.Modifier}x ");
                     }
                 }
@@ -205,7 +207,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 {
                     foreach (var modifier in projectile.DamageModifiers)
                     {
-                        var enemyType = EnemyTypeBuilder.GetEnemyType(modifier.EnemyType);
+                        var enemyType = ResourceManager.EnemyTypes.GetResource(modifier.EnemyType);
                         sb.AppendLine($"{enemyType.Name}: {modifier.Modifier}x ");
                     }
                 }
@@ -333,7 +335,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 if (turret.Tag is Guid turretName)
                 {
-                    if (_game.Money < TurretBuilder.GetTurret(turretName).Cost)
+                    if (_game.Money < ResourceManager.Turrets.GetResource(turretName).Cost)
                         turret.IsEnabled = false;
                     else
                         turret.IsEnabled = true;
@@ -354,7 +356,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    var turretDef = TurretBuilder.GetTurret((Guid)_buyingTurret);
+                    var turretDef = ResourceManager.Turrets.GetResource((Guid)_buyingTurret);
                     var at = new FloatPoint(
                         relativeMousePosition.X - turretDef.Size / 2,
                         relativeMousePosition.Y - turretDef.Size / 2);
@@ -414,7 +416,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private void UpdateNextEnemies()
         {
             for (int i = 0; i < _game.EnemiesToSpawn.Count && i < _nextEnemyPanels.Count; i++)
-                _nextEnemyPanels[i].UpdateToEnemy(new EnemyInstance(EnemyBuilder.GetEnemy(_game.EnemiesToSpawn[i]), _game.Evolution));
+                _nextEnemyPanels[i].UpdateToEnemy(new EnemyInstance(ResourceManager.Enemies.GetResource(_game.EnemiesToSpawn[i]), _game.Evolution));
         }
 
         private void BuyTurret_Click(ButtonControl parent)
@@ -422,7 +424,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (parent.Tag is Guid turretID)
             {
                 _buyingTurret = turretID;
-                var turret = TurretBuilder.GetTurret(turretID);
+                var turret = ResourceManager.Turrets.GetResource(turretID);
                 _buyingPreviewTile.FillColor = TextureBuilder.GetTexture(turret.ID);
                 _buyingPreviewTile.Width = turret.Size;
                 _buyingPreviewTile.Height = turret.Size;

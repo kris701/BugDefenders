@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using TDGame.Core.Entities.Turrets;
+using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -244,11 +245,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            var turrets = TurretBuilder.GetTurrets();
+            var turrets = ResourceManager.Enemies.GetResources();
             int offset = 0;
             foreach(var turretName in turrets)
             {
-                var turret = TurretBuilder.GetTurret(turretName);
+                var turret = ResourceManager.Turrets.GetResource(turretName);
                 var newTurretButton = new ButtonControl(this, clicked: BuyTurret_Click)
                 {
                     Text = $"[{turret.Cost}$] {turret.Name}",

@@ -11,6 +11,7 @@ using TDGame.OpenGL.Textures;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.Core.EnemyTypes;
 using TDGame.Core.Entities.Enemies;
+using TDGame.Core.Resources;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -28,7 +29,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var sb = new StringBuilder();
             sb.AppendLine(enemy.GetDefinition().Name);
             sb.AppendLine(enemy.GetDefinition().Description);
-            sb.AppendLine($"Type: {EnemyTypeBuilder.GetEnemyType(enemy.GetDefinition().EnemyType).Name}");
+            sb.AppendLine($"Type: {ResourceManager.EnemyTypes.GetResource(enemy.GetDefinition().EnemyType).Name}");
             sb.AppendLine($"HP: {Math.Round(enemy.Health,0)}");
             descriptionControl.Text = sb.ToString();
         }

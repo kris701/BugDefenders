@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using TDGame.Core.EnemyTypes;
 using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Entities.Projectiles;
 using TDGame.Core.Entities.Turrets;
@@ -8,6 +9,7 @@ using TDGame.Core.GameStyles;
 using TDGame.Core.Helpers;
 using TDGame.Core.Maps;
 using TDGame.Core.Models;
+using TDGame.Core.Resources;
 
 namespace TDGame.Core
 {
@@ -39,18 +41,18 @@ namespace TDGame.Core
             EnemiesToSpawn = new List<Guid>();
             Projectiles = new List<ProjectileInstance>();
 
-            Map = MapBuilder.GetMap(mapID);
-            GameStyle = GameStyleBuilder.GetGameStyle(styleID);
+            Map = ResourceManager.Maps.GetResource(mapID);
+            GameStyle = ResourceManager.GameStypes.GetResource(styleID);
             HP = GameStyle.StartingHP;
             Money = GameStyle.StartingMoney;
             _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (CurrentEnemies.Count == 0) QueueEnemies(); });
             _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
 
-            var options = EnemyBuilder.GetEnemies();
+            var options = ResourceManager.Enemies.GetResources();
             foreach(var enemy in options)
             {
-                if (EnemyBuilder.GetEnemy(enemy).IsBoss)
+                if (ResourceManager.Enemies.GetResource(enemy).IsBoss)
                     _bossEnemies.Add(enemy);
                 else
                     _normalEnemies.Add(enemy);

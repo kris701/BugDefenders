@@ -24,6 +24,8 @@ namespace TDGame.Core.Helpers
 
         private void Load()
         {
+            _resources.Clear();
+
             var names = _assembly.GetManifestResourceNames().ToList();
             var source = $"{_assembly.GetName().Name}.{_resourceDir}";
             var resources = names.Where(str => str.StartsWith(source)).ToList();
@@ -33,6 +35,20 @@ namespace TDGame.Core.Helpers
                 _resources.Add(item.ID, item);
             }
         }
+
+        public void Reload() => Load();
+
+        public void LoadModResources(List<T> items)
+        {
+            foreach(var item in items)
+            {
+                if (_resources.ContainsKey(item.ID))
+                    _resources[item.ID] = item;
+                else
+                    _resources.Add(item.ID, item);
+            }
+        }
+
         public List<Guid> GetResources() => _resources.Keys.ToList();
         public T GetResource(Guid id) => _resources[id];
 
