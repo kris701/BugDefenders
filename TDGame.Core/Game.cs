@@ -29,13 +29,14 @@ namespace TDGame.Core
         private GameTimer _mainLoopTimer;
         private Random _rnd = new Random();
 
-        private int _spawned = 1;
+        public int Spawned { get; internal set; } = 1;
         private List<Guid> _normalEnemies = new List<Guid>();
         private List<Guid> _bossEnemies = new List<Guid>();
 
         public AOETurretsModule AOETurretsModule { get; }
         public LaserTurretsModule LaserTurretsModule { get; }
         public ProjectileTurretsModule ProjectileTurretsModule { get; }
+        public InvestmentTurretsModule InvestmentTurretsModule { get; }
 
         public Game(Guid mapID, Guid styleID)
         {
@@ -46,6 +47,7 @@ namespace TDGame.Core
             AOETurretsModule = new AOETurretsModule(this);
             LaserTurretsModule = new LaserTurretsModule(this);
             ProjectileTurretsModule = new ProjectileTurretsModule(this);
+            InvestmentTurretsModule = new InvestmentTurretsModule(this);
 
             Map = ResourceManager.Maps.GetResource(mapID);
             GameStyle = ResourceManager.GameStyles.GetResource(styleID);
@@ -93,6 +95,7 @@ namespace TDGame.Core
             AOETurretsModule.Update(_mainLoopTimer.Target);
             LaserTurretsModule.Update(_mainLoopTimer.Target);
             ProjectileTurretsModule.Update(_mainLoopTimer.Target);
+            InvestmentTurretsModule.Update(_mainLoopTimer.Target);
         }
 
         private void DamagePlayer()

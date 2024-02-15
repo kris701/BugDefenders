@@ -26,6 +26,6 @@
 - [X] Area of effect turret
 - [X] Slowdown turret
 - [X] Mod support
-- [ ] investment "turrets" 
-    - turrets that don't shoot, but generate money 
-- [ ] combined enemy waves
+- [X] Investment "turrets" 
+    - Turrets that don't shoot, but generate money 
+- [ ] Combined enemy waves

@@ -16,7 +16,7 @@ namespace TDGame.Core
         {
             for (int i = EnemiesToSpawn.Count; i < 5; i++)
             {
-                if (_spawned++ % GameStyle.BossEveryNWave == 0)
+                if (Spawned++ % GameStyle.BossEveryNWave == 0)
                     EnemiesToSpawn.Add(_bossEnemies[_rnd.Next(0, _bossEnemies.Count)]);
                 else
                     EnemiesToSpawn.Add(_normalEnemies[_rnd.Next(0, _normalEnemies.Count)]);

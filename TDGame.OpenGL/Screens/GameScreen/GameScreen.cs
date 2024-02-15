@@ -411,7 +411,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 case LaserTurretDefinition def: return def.Range;
                 case ProjectileTurretDefinition def: return def.Range;
             }
-            return 0;
+            return 1;
         }
 
         private float GetRangeOfTurret(TurretDefinition turret)
@@ -422,7 +422,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 case LaserTurretDefinition def: return def.Range;
                 case ProjectileTurretDefinition def: return def.Range;
             }
-            return 0;
+            return 1;
         }
     }
 }

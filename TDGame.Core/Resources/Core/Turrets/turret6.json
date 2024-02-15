@@ -1,0 +1,31 @@
+﻿{
+  "id": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
+  "Name": "Money Turret",
+  "Description": "asfdasfasf",
+  "Size": 75,
+  "Cost": 300,
+  "TurretType": {
+    "TurretModule": "InvestmentTurret",
+    "MoneyPrWave": 250
+  },
+  "Upgrades": [
+    {
+      "UpgradeType": "InvestmentTurret",
+      "id": "fb819c31-1dca-4fe6-8e57-264391f1b51a",
+      "requires": null,
+      "Name": "Upgrade 1",
+      "Description": "More Money!",
+      "Cost": 1000,
+      "MoneyPrWaveModifier": 1.2
+    },
+    {
+      "UpgradeType": "InvestmentTurret",
+      "id": "bc9c3ea1-afca-4ac1-89d7-afa54727d51b",
+      "requires": "fb819c31-1dca-4fe6-8e57-264391f1b51a",
+      "Name": "Upgrade 2",
+      "Description": "Even More Money!",
+      "Cost": 2000,
+      "MoneyPrWaveModifier": 1.2
+    }
+  ]
+}

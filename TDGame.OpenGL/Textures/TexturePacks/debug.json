@@ -112,6 +112,10 @@
       {
         "ID": "0739c674-5f0e-497a-a619-8ba39fd545b3",
         "Content": "Settings/background"
+      },
+      {
+        "ID": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
+        "Content": "Entities/Turrets/turret6"
       }
     ]
   }
