@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Models;
 
-namespace TDGame.Core.GameStyles
+namespace TDGame.Core.Models.GameStyles
 {
     public class GameStyleDefinition : IDefinition
     {
@@ -19,6 +19,6 @@ namespace TDGame.Core.GameStyles
         public int StartingMoney { get; set; }
         public double EnemyWaveMultiplier { get; set; }
         public int ProjectileSpeedCap { get; set; }
-        public int BossEveryNWave {  get; set; }
+        public int BossEveryNWave { get; set; }
     }
 }

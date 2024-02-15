@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Helpers;
-using TDGame.Core.Maps;
+using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Maps;
 using TDGame.Core.Resources;
 
 namespace TDGame.Core

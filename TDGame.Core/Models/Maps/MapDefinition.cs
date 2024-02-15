@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Models;
 
-namespace TDGame.Core.Maps
+namespace TDGame.Core.Models.Maps
 {
     public class MapDefinition : IDefinition
     {

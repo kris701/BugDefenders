@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using TDGame.Core.EnemyTypes;
-using TDGame.Core.Entities.Enemies;
-using TDGame.Core.Entities.Projectiles;
-using TDGame.Core.Entities.Turrets;
-using TDGame.Core.GameStyles;
 using TDGame.Core.Helpers;
-using TDGame.Core.Maps;
 using TDGame.Core.Models;
+using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Projectiles;
+using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Models.Maps;
 using TDGame.Core.Resources;
 
 namespace TDGame.Core
@@ -42,7 +40,7 @@ namespace TDGame.Core
             Projectiles = new List<ProjectileInstance>();
 
             Map = ResourceManager.Maps.GetResource(mapID);
-            GameStyle = ResourceManager.GameStypes.GetResource(styleID);
+            GameStyle = ResourceManager.GameStyles.GetResource(styleID);
             HP = GameStyle.StartingHP;
             Money = GameStyle.StartingMoney;
             _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (CurrentEnemies.Count == 0) QueueEnemies(); });

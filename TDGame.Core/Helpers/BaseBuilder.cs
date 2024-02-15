@@ -38,14 +38,18 @@ namespace TDGame.Core.Helpers
 
         public void Reload() => Load();
 
-        public void LoadModResources(List<T> items)
+        public void LoadExternalResources(List<FileInfo> items)
         {
             foreach(var item in items)
             {
-                if (_resources.ContainsKey(item.ID))
-                    _resources[item.ID] = item;
+                var parsed = JsonSerializer.Deserialize<T>(File.ReadAllText(item.FullName), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                if (parsed == null)
+                    throw new Exception($"Error parsing resource: {item.FullName}");
+
+                if (_resources.ContainsKey(parsed.ID))
+                    _resources[parsed.ID] = parsed;
                 else
-                    _resources.Add(item.ID, item);
+                    _resources.Add(parsed.ID, parsed);
             }
         }
 
@@ -61,10 +65,10 @@ namespace TDGame.Core.Helpers
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
-                    var map = JsonSerializer.Deserialize<T>(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    if (map == null)
+                    var item = JsonSerializer.Deserialize<T>(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    if (item == null)
                         throw new Exception($"Resource not found: {resource}");
-                    return map;
+                    return item;
                 }
             }
             throw new Exception($"Resource not found: {resource}");

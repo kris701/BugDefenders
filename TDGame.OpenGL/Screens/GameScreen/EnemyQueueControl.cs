@@ -9,9 +9,8 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.Core.EnemyTypes;
-using TDGame.Core.Entities.Enemies;
 using TDGame.Core.Resources;
+using TDGame.Core.Models.Entities.Enemies;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {

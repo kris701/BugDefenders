@@ -7,12 +7,11 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
-using TDGame.Core.EnemyTypes;
-using TDGame.Core.Entities.Enemies;
-using TDGame.Core.Entities.Projectiles;
-using TDGame.Core.Entities.Turrets;
-using TDGame.Core.Entities.Upgrades;
-using TDGame.Core.Maps;
+using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Projectiles;
+using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Models.Entities.Upgrades;
+using TDGame.Core.Models.Maps;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
@@ -49,8 +48,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _currentMap = mapID;
             ScaleValue = parent.Settings.Scale;
             _game = new Core.Game(mapID, gameStyleID);
-            if (ResourceManager.CheckGameIntegrity().Count != 0)
-                throw new Exception("Error loading resources!");
+            ResourceManager.CheckGameIntegrity();
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
             _projectile = new EntityUpdater<ProjectileInstance, TileControl>(5, this,  _gameArea.X, _gameArea.Y);

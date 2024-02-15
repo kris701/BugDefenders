@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDGame.Core.GameStyles;
-using TDGame.Core.Maps;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
@@ -212,7 +210,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 485
             });
 
-            var gameStyles = ResourceManager.GameStypes.GetResources();
+            var gameStyles = ResourceManager.GameStyles.GetResources();
             int offset = 0;
             foreach (var gameStyle in gameStyles)
             {
@@ -224,7 +222,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                         FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
                         FillClickedColor = BasicTextures.GetClickedTexture(),
                         Font = BasicFonts.GetFont(16),
-                        Text = $"{ResourceManager.GameStypes.GetResource(gameStyle).Name}",
+                        Text = $"{ResourceManager.GameStyles.GetResource(gameStyle).Name}",
                         X = 515,
                         Y = 560 + offset * 40,
                         Height = 35,

@@ -10,7 +10,7 @@ using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Helpers;
 using static TDGame.OpenGL.Engine.Controls.ButtonControl;
-using TDGame.Core.Entities.Upgrades;
+using TDGame.Core.Models.Entities.Upgrades;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {

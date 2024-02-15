@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDGame.Core.Entities.Projectiles;
 using TDGame.Core.Helpers;
+using TDGame.Core.Models.Entities.Projectiles;
 
 namespace TDGame.Core
 {

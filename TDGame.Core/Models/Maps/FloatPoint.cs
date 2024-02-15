@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Maps
+namespace TDGame.Core.Models.Maps
 {
     public class FloatPoint
     {

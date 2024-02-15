@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
@@ -15,6 +16,7 @@ namespace TDGame.OpenGL
     public class GameEngine : Game
     {
         private static string _contentDir = "Content";
+        private static string _modsDir = "Mods";
         private static string _settingsFile = "settings.json";
 
 #if FPS
@@ -60,6 +62,10 @@ namespace TDGame.OpenGL
             ApplySettings();
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
+            if (!Directory.Exists(_modsDir))
+                Directory.CreateDirectory(_modsDir);
+            foreach(var folder in new DirectoryInfo(_modsDir).GetDirectories())
+                ResourceManager.LoadResource(folder);
 
             CurrentScreen = _screenToLoad(this);
             CurrentScreen.Initialize();

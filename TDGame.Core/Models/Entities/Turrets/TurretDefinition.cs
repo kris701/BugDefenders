@@ -5,10 +5,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using TDGame.Core.Entities.Upgrades;
-using TDGame.Core.GameStyles;
 using TDGame.Core.Models;
-namespace TDGame.Core.Entities.Turrets
+using TDGame.Core.Models.Entities.Upgrades;
+namespace TDGame.Core.Models.Entities.Turrets
 {
     public enum TurretType { None, Laser, Projectile, AOE };
     public class TurretDefinition : IDefinition

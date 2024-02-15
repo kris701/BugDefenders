@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using TDGame.Core.Entities.Turrets;
 using TDGame.Core.Models;
-using static TDGame.Core.Entities.Enemies.EnemyDefinition;
+using TDGame.Core.Models.Entities.Turrets;
+using static TDGame.Core.Models.Entities.Enemies.EnemyDefinition;
 
-namespace TDGame.Core.Entities.Projectiles
+namespace TDGame.Core.Models.Entities.Projectiles
 {
     public class ProjectileDefinition : IDefinition
     {

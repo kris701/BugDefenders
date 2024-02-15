@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using TDGame.Core.Entities.Turrets;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
@@ -245,7 +244,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            var turrets = ResourceManager.Enemies.GetResources();
+            var turrets = ResourceManager.Turrets.GetResources();
             int offset = 0;
             foreach(var turretName in turrets)
             {

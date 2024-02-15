@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Entities.Turrets
+namespace TDGame.Core.Models.Entities.Turrets
 {
     public class DamageModifier
     {

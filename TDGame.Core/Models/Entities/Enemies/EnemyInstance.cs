@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TDGame.Core.Models;
 using TDGame.Core.Resources;
 
-namespace TDGame.Core.Entities.Enemies
+namespace TDGame.Core.Models.Entities.Enemies
 {
     public class EnemyInstance : BasePositionModel, IInstance<EnemyDefinition>
     {
