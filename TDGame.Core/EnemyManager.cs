@@ -25,18 +25,22 @@ namespace TDGame.Core
 
         public void QueueEnemies()
         {
-            var group = Guid.NewGuid();
-            var template = ResourceManager.Enemies.GetResource(EnemiesToSpawn[0]);
-            for (int i = 0; i < template.WaveSize * GameStyle.EnemyWaveMultiplier; i++)
+            var toSpawn = (int)(GameStyle.QueuesPrWave * Evolution);
+            for (int i = 0; i < toSpawn; i++)
             {
-                var enemy = new EnemyInstance(EnemiesToSpawn[0], Evolution);
-                enemy.X = Map.WayPoints[0].X - enemy.Size / 2;
-                enemy.Y = Map.WayPoints[0].Y - enemy.Size / 2;
-                enemy.GroupID = group;
-                _spawnQueue.Add(enemy);
+                var group = Guid.NewGuid();
+                var template = ResourceManager.Enemies.GetResource(EnemiesToSpawn[0]);
+                for (int j = 0; j < template.WaveSize * GameStyle.EnemyWaveMultiplier; j++)
+                {
+                    var enemy = new EnemyInstance(EnemiesToSpawn[0], Evolution);
+                    enemy.X = Map.WayPoints[0].X - enemy.Size / 2;
+                    enemy.Y = Map.WayPoints[0].Y - enemy.Size / 2;
+                    enemy.GroupID = group;
+                    _spawnQueue.Add(enemy);
+                }
+                EnemiesToSpawn.RemoveAt(0);
+                UpdateEnemiesToSpawnList();
             }
-            EnemiesToSpawn.RemoveAt(0);
-            UpdateEnemiesToSpawnList();
         }
 
         internal FloatPoint GetEnemyLocationChange(float angle, float speed)

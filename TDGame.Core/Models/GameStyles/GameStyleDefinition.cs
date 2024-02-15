@@ -20,5 +20,6 @@ namespace TDGame.Core.Models.GameStyles
         public double EnemyWaveMultiplier { get; set; }
         public int ProjectileSpeedCap { get; set; }
         public int BossEveryNWave { get; set; }
+        public int QueuesPrWave { get; set; }
     }
 }

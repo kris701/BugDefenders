@@ -28,4 +28,4 @@
 - [X] Mod support
 - [X] Investment "turrets" 
     - Turrets that don't shoot, but generate money 
-- [ ] Combined enemy waves
+- [X] Combined enemy waves
