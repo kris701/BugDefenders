@@ -15,9 +15,17 @@ namespace TDGame.OpenGL.Screens.SettingsView
 {
     public partial class SettingsView : BaseScreen
     {
-        private ButtonControl _scaleButtonOne;
-        private ButtonControl _scaleButtonTwo;
-        private ButtonControl _scaleButtonThree;
+        private List<float> _scaleOptions = new List<float>()
+        {
+            0.25f,
+            0.50f,
+            0.75f,
+            1f,
+            1.25f,
+            1.5f,
+            1.75f
+        };
+        private List<ButtonControl> _scaleButtons = new List<ButtonControl>();
 
         private ButtonControl _isFullScreen;
         private ButtonControl _isVSync;
@@ -118,54 +126,27 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Font = BasicFonts.GetFont(24),
             });
 
-            _scaleButtonOne = new ButtonControl(this, clicked: (x) =>
+            for (int i = 0; i < _scaleOptions.Count; i++)
             {
-                _settings.Scale = 0.5f;
-                UpdateScreenSettingsButtons();
-            })
-            {
-                Y = yOffset + 125,
-                X = 150,
-                Width = 200,
-                Height = 50,
-                Text = "50%",
-                Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-            };
-            AddControl(1, _scaleButtonOne);
-            _scaleButtonTwo = new ButtonControl(this, clicked: (x) =>
-            {
-                _settings.Scale = 1f;
-                UpdateScreenSettingsButtons();
-            })
-            {
-                Y = yOffset + 125,
-                X = 400,
-                Width = 200,
-                Height = 50,
-                Text = "100%",
-                Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-            };
-            AddControl(1, _scaleButtonTwo);
-            _scaleButtonThree = new ButtonControl(this, clicked: (x) =>
-            {
-                _settings.Scale = 2f;
-                UpdateScreenSettingsButtons();
-            })
-            {
-                Y = yOffset + 125,
-                X = 650,
-                Width = 200,
-                Height = 50,
-                Text = "200%",
-                Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-            };
-            AddControl(1, _scaleButtonThree);
+                var newControl = new ButtonControl(this, clicked: (s) => {
+                    if (s.Tag is float value)
+                        _settings.Scale = value;
+                    UpdateScreenSettingsButtons();
+                })
+                {
+                    Y = yOffset + 125,
+                    X = 110 + (i * (710 / _scaleOptions.Count + 10)),
+                    Width = 710 / _scaleOptions.Count,
+                    Height = 50,
+                    Text = $"{Math.Round(_scaleOptions[i] * 100, 0)}%",
+                    Font = BasicFonts.GetFont(16),
+                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    FillClickedColor = BasicTextures.GetClickedTexture(),
+                    Tag = _scaleOptions[i]
+                };
+                AddControl(1, newControl);
+                _scaleButtons.Add(newControl);
+            }
 
             AddControl(1, new LabelControl(this)
             {
