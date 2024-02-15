@@ -29,3 +29,12 @@
 - [X] Investment "turrets" 
     - Turrets that don't shoot, but generate money 
 - [X] Combined enemy waves
+- [ ] Enemy spawn offset
+    - To make the enemy spawning look a bit more "random"
+- [ ] Flying and ground enemies (as well as turrets that only work against those types of enemies)
+- [ ] Enemy selection typs
+    - I.e. shoot at the closest, the weakest, the farthest, etc. 
+- [ ] Cary over system
+    - Something like, each game if you kill n amount of enemies you can permanently do 1% more damage across all following games (or something like it)
+    - [ ] Upgrade menu for this
+    - [ ] GameStyle that disallows permanent upgrades
