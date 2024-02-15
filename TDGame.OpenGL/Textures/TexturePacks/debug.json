@@ -3,8 +3,8 @@
   "Name": "Debug",
   "Description": "abasf",
   "BasedOn": null,
-  "TextureDefinition": {
-    "TextureSet": [
+  "TexturesDefinition": {
+    "Textures": [
       {
         "ID": "2811A657-6811-423A-8342-142BF5BD261A",
         "Content": "Maps/map1"
@@ -46,32 +46,12 @@
         "Content": "MainMenu/background"
       },
       {
-        "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
-        "Content": "Entities/Turrets/turret1"
-      },
-      {
-        "ID": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
-        "Content": "Entities/Turrets/turret2"
-      },
-      {
-        "ID": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
-        "Content": "Entities/Turrets/turret3"
-      },
-      {
         "ID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
         "Content": "Entities/Projectiles/missile"
       },
       {
         "ID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
         "Content": "Entities/Projectiles/rocket"
-      },
-      {
-        "ID": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
-        "Content": "Explosion/explosion1"
-      },
-      {
-        "ID": "d07d1ff5-1e67-454a-8e1b-3264705d2704",
-        "Content": "Explosion/explosion2"
       },
       {
         "ID": "a23f20ed-299a-4f94-b398-3dd00ff63bd5",
@@ -82,20 +62,12 @@
         "Content": "Entities/Turrets/turretBase"
       },
       {
-        "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
-        "Content": "Entities/Turrets/turret4"
-      },
-      {
         "ID": "1db411e4-8599-464b-923c-0e23bc031435",
         "Content": "Entities/Projectiles/bullet"
       },
       {
         "ID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
         "Content": "Entities/Enemies/boss1"
-      },
-      {
-        "ID": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
-        "Content": "Entities/Turrets/turret5"
       },
       {
         "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
@@ -116,6 +88,85 @@
       {
         "ID": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
         "Content": "Entities/Turrets/turret6"
+      }
+    ],
+    "TextureSets": [
+      {
+        "ID": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
+        "Contents": [
+          "Explosion/explosion1",
+          "Explosion/explosion2"
+        ]
+      },
+      {
+        "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+        "Contents": [
+          "Entities/Turrets/turret1/turret1_idle_1",
+          "Entities/Turrets/turret1/turret1_idle_2"
+        ]
+      },
+      {
+        "ID": "9448e307-2401-4060-9bc2-12698f86aa73",
+        "Contents": [
+          "Entities/Turrets/turret1/turret1_shoot_1",
+          "Entities/Turrets/turret1/turret1_shoot_2"
+        ]
+      },
+      {
+        "ID": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+        "Contents": [
+          "Entities/Turrets/turret2/turret2_idle_1",
+          "Entities/Turrets/turret2/turret2_idle_2"
+        ]
+      },
+      {
+        "ID": "37de2d39-b883-491d-a70b-536965aac408",
+        "Contents": [
+          "Entities/Turrets/turret2/turret2_shoot_1",
+          "Entities/Turrets/turret2/turret2_shoot_2"
+        ]
+      },
+      {
+        "ID": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
+        "Contents": [
+          "Entities/Turrets/turret3/turret3_idle_1",
+          "Entities/Turrets/turret3/turret3_idle_2"
+        ]
+      },
+      {
+        "ID": "624e9637-9a13-4d0a-8b6f-35c4e9198618",
+        "Contents": [
+          "Entities/Turrets/turret3/turret3_shoot_1",
+          "Entities/Turrets/turret3/turret3_shoot_2"
+        ]
+      },
+      {
+        "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+        "Contents": [
+          "Entities/Turrets/turret4/turret4_idle_1",
+          "Entities/Turrets/turret4/turret4_idle_2"
+        ]
+      },
+      {
+        "ID": "9dca5c04-36c5-4eb5-bd36-a7f8ba25562e",
+        "Contents": [
+          "Entities/Turrets/turret4/turret4_shoot_1",
+          "Entities/Turrets/turret4/turret4_shoot_2"
+        ]
+      },
+      {
+        "ID": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+        "Contents": [
+          "Entities/Turrets/turret5/turret5_idle_1",
+          "Entities/Turrets/turret5/turret5_idle_2"
+        ]
+      },
+      {
+        "ID": "63afea5b-f247-4a86-8648-2c878a21a7ca",
+        "Contents": [
+          "Entities/Turrets/turret5/turret5_shoot_1",
+          "Entities/Turrets/turret5/turret5_shoot_2"
+        ]
       }
     ]
   }

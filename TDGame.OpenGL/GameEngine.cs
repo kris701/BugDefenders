@@ -85,8 +85,8 @@ namespace TDGame.OpenGL
                     {
                         foreach(var file in subFolder.GetFiles())
                         {
-                            var textureSetDef = JsonSerializer.Deserialize<TextureSetDefinition>(File.ReadAllText(file.FullName));
-                            foreach(var texture in textureSetDef.TextureSet)
+                            var textureSetDef = JsonSerializer.Deserialize<TexturesDefinition>(File.ReadAllText(file.FullName));
+                            foreach(var texture in textureSetDef.Textures)
                             {
                                 var textureFile = new FileInfo(Path.Combine(subFolder.Parent.FullName, "Content", texture.Content));
                                 texture.Content = textureFile.FullName;

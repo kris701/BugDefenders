@@ -10,11 +10,5 @@ namespace TDGame.OpenGL.Textures
     {
         public Guid ID {  get; set; }
         public string Content { get; set; }
-
-        public TextureDefinition(Guid iD, string content)
-        {
-            ID = iD;
-            Content = content;
-        }
     }
 }

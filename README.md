@@ -14,8 +14,8 @@
 - [X] Turret Upgrade values
 - [ ] Animated enemies
 - [ ] Animated projectiles
-- [ ] Animated turrets
-    - [ ] Different animations for different actions (e.g. shooting vs idle)
+- [X] Animated turrets
+    - [X] Different animations for different actions (e.g. shooting vs idle)
 - [X] Enemy health bar
 - [X] Enemy boss waves
 - [X] Enemy types

@@ -22,6 +22,8 @@ namespace TDGame.Core
         public TurretEventHandler? OnTurretPurchased;
         public TurretEventHandler? OnTurretSold;
         public TurretEventHandler? OnTurretUpgraded;
+        public TurretEventHandler? OnTurretShooting;
+        public TurretEventHandler? OnTurretIdle;
 
         private List<EnemyInstance> _spawnQueue = new List<EnemyInstance>();
         private GameTimer _enemySpawnTimer;

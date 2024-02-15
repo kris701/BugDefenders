@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Models;
+using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
@@ -12,7 +13,7 @@ using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public class EntityUpdater<T, U> where T : IPosition, IIdentifiable where U : TileControl
+    public class EntityUpdater<T, U> where T : IPosition, IIdentifiable where U : IControl
     {
         public delegate void EntityHandler(U parent);
         public EntityHandler? OnDelete;
@@ -22,7 +23,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
         public int YOffset { get; set; }
 
         public int Count => _entities.Count;
-        public U GetItem(T index) => _entities[index];
+        public U? GetItem(T index)
+        {
+            if (_entities.ContainsKey(index))
+                return _entities[index];
+            return default(U);
+        }
 
         private Dictionary<T, U> _entities = new Dictionary<T, U>();
 

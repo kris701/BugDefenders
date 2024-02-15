@@ -12,7 +12,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public class TurretControl : ButtonControl
+    public class TurretControl : AnimatedButtonControl
     {
         private TileControl baseControl;
         private LabelControl turretLevelControl;

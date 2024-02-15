@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TDGame.OpenGL.Textures
 {
-    public class TextureSetDefinition
+    public class TexturesDefinition
     {
-        public Guid ID { get; set; }
-        public List<string> Contents { get; set; }
+        public List<TextureDefinition> Textures { get; set; }
+        public List<TextureSetDefinition> TextureSets { get; set; }
     }
 }

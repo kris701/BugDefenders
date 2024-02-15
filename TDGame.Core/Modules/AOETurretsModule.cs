@@ -35,7 +35,6 @@ namespace TDGame.Core.Modules
 
         private void UpdateTurret(TurretInstance turret, AOETurretDefinition def)
         {
-            turret.Targeting = null;
             var closest = float.MaxValue;
             EnemyInstance? best = null;
             var targeting = new List<EnemyInstance>();
@@ -55,6 +54,10 @@ namespace TDGame.Core.Modules
 
             if (best != null)
             {
+                if (Game.OnTurretShooting != null && turret.Targeting == null)
+                    Game.OnTurretShooting.Invoke(turret);
+                turret.Targeting = best;
+
                 foreach (var enemy in targeting)
                 {
                     if (def.SlowingFactor <= enemy.SlowingFactor)
@@ -65,9 +68,14 @@ namespace TDGame.Core.Modules
                     if (Game.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def)))
                         turret.Kills++;
                 }
-                turret.Targeting = best;
                 turret.Angle = Game.GetAngle(best, turret);
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
+            }
+            else
+            {
+                if (Game.OnTurretIdle != null && turret.Targeting != null)
+                    Game.OnTurretIdle.Invoke(turret);
+                turret.Targeting = null;
             }
         }
 

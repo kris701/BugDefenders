@@ -19,7 +19,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private ButtonControl _sendWave;
         private ButtonControl _autoRunButton;
 
-        private TileControl _buyingPreviewTile;
+        private AnimatedTileControl _buyingPreviewTile;
         private TileControl _buyingPreviewRangeTile;
 
         private TileControl _turretSelectRangeTile;
@@ -274,7 +274,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Alpha = 100
             };
             AddControl(10, _buyingPreviewRangeTile);
-            _buyingPreviewTile = new TileControl(this)
+            _buyingPreviewTile = new AnimatedTileControl(this)
             {
                 IsVisible = false
             };

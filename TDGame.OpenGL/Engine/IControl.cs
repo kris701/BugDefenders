@@ -18,6 +18,7 @@ namespace TDGame.OpenGL.Engine
         public float Height { get; set; }
         public int Alpha { get; set; }
         public object Tag { get; set; }
+        public float Rotation { get; set; }
 
         public void Initialize(); // Constructor level initialization
         public void Update(GameTime gameTime); // Update each frame

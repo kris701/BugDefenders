@@ -41,10 +41,13 @@ namespace TDGame.Core.Modules
 
         private void UpdateTurret(TurretInstance turret, ProjectileTurretDefinition def)
         {
-            turret.Targeting = null;
             var best = Game.GetNearestEnemy(turret, def.Range);
-            if (best != null && def.ProjectileDefinition != null)
+            if (best != null)
             {
+                if (Game.OnTurretShooting != null && turret.Targeting == null)
+                    Game.OnTurretShooting.Invoke(turret);
+                turret.Targeting = best;
+
                 var projectile = new ProjectileInstance(def.ProjectileDefinition);
                 projectile.X = turret.X + turret.Size / 2;
                 projectile.Y = turret.Y + turret.Size / 2;
@@ -58,6 +61,12 @@ namespace TDGame.Core.Modules
                 turret.Angle = projectile.Angle;
                 Projectiles.Add(projectile);
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
+            }
+            else
+            {
+                if (Game.OnTurretIdle != null && turret.Targeting != null)
+                    Game.OnTurretIdle.Invoke(turret);
+                turret.Targeting = null;
             }
         }
 

@@ -33,24 +33,29 @@ namespace TDGame.Core.Modules
 
         private void UpdateTurret(TurretInstance turret, LaserTurretDefinition def)
         {
-            turret.Targeting = null;
             var best = Game.GetNearestEnemy(turret, def.Range);
             if (best != null)
             {
-                var turretDef = turret.GetDefinition();
+                if (Game.OnTurretShooting != null && turret.Targeting == null)
+                    Game.OnTurretShooting.Invoke(turret);
+                turret.Targeting = best;
+
                 if (def.SlowingFactor <= best.SlowingFactor)
                 {
                     best.SlowingFactor = def.SlowingFactor;
                     best.SlowingDuration = def.SlowingDuration;
                 }
                 if (!Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def)))
-                {
-                    turret.Targeting = best;
                     turret.Angle = Game.GetAngle(best, turret);
-                }
                 else
                     turret.Kills++;
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
+            }
+            else
+            {
+                if (Game.OnTurretIdle != null && turret.Targeting != null)
+                    Game.OnTurretIdle.Invoke(turret);
+                turret.Targeting = null;
             }
         }
 
