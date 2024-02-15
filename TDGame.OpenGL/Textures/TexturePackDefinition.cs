@@ -12,6 +12,7 @@ namespace TDGame.OpenGL.Textures
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<TextureDefinition> TextureSet { get; set; }
+        public Guid? BasedOn { get; set; }
+        public TextureSetDefinition TextureDefinition { get; set; }
     }
 }

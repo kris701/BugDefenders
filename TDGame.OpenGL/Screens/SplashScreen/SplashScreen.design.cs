@@ -10,7 +10,6 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Screens.GameSetupView;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.SplashScreen
 {
@@ -20,7 +19,7 @@ namespace TDGame.OpenGL.Screens.SplashScreen
         {
             AddControl(0, new TileControl(this)
             {
-                FillColor = TextureBuilder.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
+                FillColor = TextureManager.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
                 Width = 1000,
                 Height = 1000
             });

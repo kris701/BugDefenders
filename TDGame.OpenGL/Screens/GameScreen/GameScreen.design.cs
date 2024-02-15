@@ -6,7 +6,6 @@ using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -37,7 +36,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             AddControl(0, new TileControl(this)
             {
-                FillColor = TextureBuilder.GetTexture(new Guid("32b08b60-c8b9-450a-90b3-73086261e87f")),
+                FillColor = TextureManager.GetTexture(new Guid("32b08b60-c8b9-450a-90b3-73086261e87f")),
                 Width = 1000,
                 Height = 1000
             });
@@ -71,7 +70,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 Child = new TileControl(this)
                 {
-                    FillColor = TextureBuilder.GetTexture(_game.Map.ID),
+                    FillColor = TextureManager.GetTexture(_game.Map.ID),
                     X = _gameArea.X,
                     Y = _gameArea.Y,
                     Height = _gameArea.Height,

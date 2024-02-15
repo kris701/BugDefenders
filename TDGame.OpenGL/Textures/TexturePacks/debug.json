@@ -2,114 +2,117 @@
   "ID": "f58b60d7-4aed-4865-a5bb-e240014649a7",
   "Name": "Debug",
   "Description": "abasf",
-  "TextureSet": [
-    {
-      "ID": "2811A657-6811-423A-8342-142BF5BD261A",
-      "Content": "Maps/map1"
-    },
-    {
-      "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
-      "Content": "Maps/map2"
-    },
-    {
-      "ID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
-      "Content": "Entities/Enemies/enemy1"
-    },
-    {
-      "ID": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
-      "Content": "Entities/Enemies/enemy2"
-    },
-    {
-      "ID": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
-      "Content": "Entities/Enemies/enemy3"
-    },
-    {
-      "ID": "960c3e27-bfa4-40db-8397-ce47655eb169",
-      "Content": "MainMenu/title"
-    },
-    {
-      "ID": "c89588ae-a69f-41bf-a9df-e4fc53071c0b",
-      "Content": "MainMenu/start"
-    },
-    {
-      "ID": "40aa2d8a-7509-4bef-bf1c-9c3e1dffdd08",
-      "Content": "MainMenu/settings"
-    },
-    {
-      "ID": "e8fd55a0-ea74-48d8-b625-4352d6f1c564",
-      "Content": "MainMenu/exit"
-    },
-    {
-      "ID": "4a39d624-3171-41cd-b172-c853cea36d14",
-      "Content": "MainMenu/background"
-    },
-    {
-      "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
-      "Content": "Entities/Turrets/turret1"
-    },
-    {
-      "ID": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
-      "Content": "Entities/Turrets/turret2"
-    },
-    {
-      "ID": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
-      "Content": "Entities/Turrets/turret3"
-    },
-    {
-      "ID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
-      "Content": "Entities/Projectiles/missile"
-    },
-    {
-      "ID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
-      "Content": "Entities/Projectiles/rocket"
-    },
-    {
-      "ID": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
-      "Content": "Explosion/explosion1"
-    },
-    {
-      "ID": "d07d1ff5-1e67-454a-8e1b-3264705d2704",
-      "Content": "Explosion/explosion2"
-    },
-    {
-      "ID": "a23f20ed-299a-4f94-b398-3dd00ff63bd5",
-      "Content": "splash"
-    },
-    {
-      "ID": "ba2a23be-8bf7-4307-9009-8ed330ac5b7d",
-      "Content": "Entities/Turrets/turretBase"
-    },
-    {
-      "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
-      "Content": "Entities/Turrets/turret4"
-    },
-    {
-      "ID": "1db411e4-8599-464b-923c-0e23bc031435",
-      "Content": "Entities/Projectiles/bullet"
-    },
-    {
-      "ID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
-      "Content": "Entities/Enemies/boss1"
-    },
-    {
-      "ID": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
-      "Content": "Entities/Turrets/turret5"
-    },
-    {
-      "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
-      "Content": "Game/background"
-    },
-    {
-      "ID": "1d50ad58-0503-4fc6-95e4-1d18abb8c485",
-      "Content": "GameOver/background"
-    },
-    {
-      "ID": "756430ea-46e1-4c3d-95a0-a232919b7876",
-      "Content": "GameSetup/background"
-    },
-    {
-      "ID": "0739c674-5f0e-497a-a619-8ba39fd545b3",
-      "Content": "Settings/background"
-    }
-  ]
+  "BasedOn": null,
+  "TextureDefinition": {
+    "TextureSet": [
+      {
+        "ID": "2811A657-6811-423A-8342-142BF5BD261A",
+        "Content": "Maps/map1"
+      },
+      {
+        "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+        "Content": "Maps/map2"
+      },
+      {
+        "ID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+        "Content": "Entities/Enemies/enemy1"
+      },
+      {
+        "ID": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+        "Content": "Entities/Enemies/enemy2"
+      },
+      {
+        "ID": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+        "Content": "Entities/Enemies/enemy3"
+      },
+      {
+        "ID": "960c3e27-bfa4-40db-8397-ce47655eb169",
+        "Content": "MainMenu/title"
+      },
+      {
+        "ID": "c89588ae-a69f-41bf-a9df-e4fc53071c0b",
+        "Content": "MainMenu/start"
+      },
+      {
+        "ID": "40aa2d8a-7509-4bef-bf1c-9c3e1dffdd08",
+        "Content": "MainMenu/settings"
+      },
+      {
+        "ID": "e8fd55a0-ea74-48d8-b625-4352d6f1c564",
+        "Content": "MainMenu/exit"
+      },
+      {
+        "ID": "4a39d624-3171-41cd-b172-c853cea36d14",
+        "Content": "MainMenu/background"
+      },
+      {
+        "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+        "Content": "Entities/Turrets/turret1"
+      },
+      {
+        "ID": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+        "Content": "Entities/Turrets/turret2"
+      },
+      {
+        "ID": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
+        "Content": "Entities/Turrets/turret3"
+      },
+      {
+        "ID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+        "Content": "Entities/Projectiles/missile"
+      },
+      {
+        "ID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+        "Content": "Entities/Projectiles/rocket"
+      },
+      {
+        "ID": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
+        "Content": "Explosion/explosion1"
+      },
+      {
+        "ID": "d07d1ff5-1e67-454a-8e1b-3264705d2704",
+        "Content": "Explosion/explosion2"
+      },
+      {
+        "ID": "a23f20ed-299a-4f94-b398-3dd00ff63bd5",
+        "Content": "splash"
+      },
+      {
+        "ID": "ba2a23be-8bf7-4307-9009-8ed330ac5b7d",
+        "Content": "Entities/Turrets/turretBase"
+      },
+      {
+        "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+        "Content": "Entities/Turrets/turret4"
+      },
+      {
+        "ID": "1db411e4-8599-464b-923c-0e23bc031435",
+        "Content": "Entities/Projectiles/bullet"
+      },
+      {
+        "ID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+        "Content": "Entities/Enemies/boss1"
+      },
+      {
+        "ID": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+        "Content": "Entities/Turrets/turret5"
+      },
+      {
+        "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
+        "Content": "Game/background"
+      },
+      {
+        "ID": "1d50ad58-0503-4fc6-95e4-1d18abb8c485",
+        "Content": "GameOver/background"
+      },
+      {
+        "ID": "756430ea-46e1-4c3d-95a0-a232919b7876",
+        "Content": "GameSetup/background"
+      },
+      {
+        "ID": "0739c674-5f0e-497a-a619-8ba39fd545b3",
+        "Content": "Settings/background"
+      }
+    ]
+  }
 }

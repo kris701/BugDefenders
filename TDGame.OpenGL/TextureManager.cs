@@ -9,36 +9,52 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TDGame.Core.Helpers;
+using TDGame.OpenGL.Textures;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.OpenGL
 {
-    public static class TextureBuilder
+    public static class TextureManager
     {
+        public static BaseBuilder<TexturePackDefinition> TexturePacks = new BaseBuilder<TexturePackDefinition>("Textures.TexturePacks", Assembly.GetExecutingAssembly());
+
         private static string _noTextureName = "notexture";
-        private static ContentManager? _contentManager;
+        private static ContentManager _contentManager;
         private static Dictionary<Guid, Texture2D> _textures = new Dictionary<Guid, Texture2D>();
-        private static BaseBuilder<TexturePackDefinition> _resourceFetcher = new BaseBuilder<TexturePackDefinition>("Textures.TexturePacks", Assembly.GetExecutingAssembly());
 
         public static void Initialize(ContentManager contentManager)
         {
             _contentManager = contentManager;
         }
 
-        public static List<Guid> GetTexturePacks() => _resourceFetcher.GetResources();
+        public static List<Guid> GetTexturePacks() => TexturePacks.GetResources();
 
         public static void LoadTexturePack(Guid texturePack)
         {
-            var pack = _resourceFetcher.GetResource(texturePack);
             _textures.Clear();
-            foreach (var item in pack.TextureSet)
+            LoadPack(TexturePacks.GetResource(texturePack));
+        }
+
+        private static void LoadPack(TexturePackDefinition pack)
+        {
+            if (pack.BasedOn != null)
+                LoadPack(TexturePacks.GetResource((Guid)pack.BasedOn));
+            foreach (var item in pack.TextureDefinition.TextureSet)
+                LoadTexture(item);
+        }
+
+        public static void LoadTexture(TextureDefinition item)
+        {
+            if (_textures.ContainsKey(item.ID))
+                _textures[item.ID] = _contentManager.Load<Texture2D>(item.Content);
+            else
                 _textures.Add(item.ID, _contentManager.Load<Texture2D>(item.Content));
         }
 
-        public static TexturePackDefinition GetTexturePack(Guid texturePack) => _resourceFetcher.GetResource(texturePack);
+        public static TexturePackDefinition GetTexturePack(Guid texturePack) => TexturePacks.GetResource(texturePack);
 
         public static Texture2D GetTexture(Guid id)
         {
-            if (_textures.ContainsKey(id)) 
+            if (_textures.ContainsKey(id))
                 return _textures[id];
             return _contentManager.Load<Texture2D>(_noTextureName);
         }

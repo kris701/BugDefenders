@@ -18,7 +18,6 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -108,7 +107,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     X = projDef.X + projDef.Size / 2 - projDef.GetDefinition().SplashRange / 2,
                     Y = projDef.Y + projDef.Size / 2 - projDef.GetDefinition().SplashRange / 2,
                     FrameTime = TimeSpan.FromMilliseconds(100),
-                    TileSet = TextureBuilder.GetTextureSet(new List<Guid>()
+                    TileSet = TextureManager.GetTextureSet(new List<Guid>()
                     {
                         new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
                         new Guid("d07d1ff5-1e67-454a-8e1b-3264705d2704"),
@@ -275,9 +274,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 return new TurretControl(this, clicked: Turret_Click)
                 {
                     IsEnabled = true,
-                    FillClickedColor = TextureBuilder.GetTexture(e.DefinitionID),
-                    FillDisabledColor = TextureBuilder.GetTexture(e.DefinitionID),
-                    FillColor = TextureBuilder.GetTexture(e.DefinitionID),
+                    FillClickedColor = TextureManager.GetTexture(e.DefinitionID),
+                    FillDisabledColor = TextureManager.GetTexture(e.DefinitionID),
+                    FillColor = TextureManager.GetTexture(e.DefinitionID),
                     X = _gameArea.X + e.X,
                     Y = _gameArea.Y + e.Y,
                     Width = e.Size,
@@ -289,7 +288,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _enemyUpdater.UpdateEntities(_game.CurrentEnemies, (e) => {
                 return new EnemyControl(this, e)
                 {
-                    FillColor = TextureBuilder.GetTexture(e.DefinitionID),
+                    FillColor = TextureManager.GetTexture(e.DefinitionID),
                     X = e.X + _gameArea.X,
                     Y = e.Y + _gameArea.Y,
                     Width = e.Size,
@@ -302,7 +301,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 return new TileControl(this)
                 {
-                    FillColor = TextureBuilder.GetTexture(e.DefinitionID),
+                    FillColor = TextureManager.GetTexture(e.DefinitionID),
                     X = e.X + _gameArea.X,
                     Y = e.Y + _gameArea.Y,
                     Width = e.Size,
@@ -423,7 +422,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 _buyingTurret = turretID;
                 var turret = ResourceManager.Turrets.GetResource(turretID);
-                _buyingPreviewTile.FillColor = TextureBuilder.GetTexture(turret.ID);
+                _buyingPreviewTile.FillColor = TextureManager.GetTexture(turret.ID);
                 _buyingPreviewTile.Width = turret.Size;
                 _buyingPreviewTile.Height = turret.Size;
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(turret.Range * 2));

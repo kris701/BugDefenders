@@ -6,7 +6,6 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Screens.GameScreen;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
 {
@@ -41,7 +40,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
                 _selectedMap = mapName;
                 var map = ResourceManager.Maps.GetResource(mapName);
-                _mapPreviewTile.FillColor = TextureBuilder.GetTexture(map.ID);
+                _mapPreviewTile.FillColor = TextureManager.GetTexture(map.ID);
                 _mapNameLabel.Text = map.Name;
                 _mapDescriptionTextbox.Text = map.Description;
             }

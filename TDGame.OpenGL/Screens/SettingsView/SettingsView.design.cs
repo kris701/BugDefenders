@@ -10,7 +10,6 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Screens.GameSetupView;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.SettingsView
 {
@@ -28,7 +27,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
         {
             AddControl(0, new TileControl(this)
             {
-                FillColor = TextureBuilder.GetTexture(new Guid("0739c674-5f0e-497a-a619-8ba39fd545b3")),
+                FillColor = TextureManager.GetTexture(new Guid("0739c674-5f0e-497a-a619-8ba39fd545b3")),
                 Width = 1000,
                 Height = 1000
             });
@@ -232,7 +231,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FillColor = BasicTextures.GetBasicRectange(Color.LightGray)
             });
 
-            var packs = TextureBuilder.GetTexturePacks();
+            var packs = TextureManager.GetTexturePacks();
             for(int i = 0; i < packs.Count; i++)
             {
                 var newControl = new ButtonControl(this, clicked: (s) => {
@@ -245,7 +244,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                     X = 110 + (i * (770 / packs.Count + 10)),
                     Width = 770 / packs.Count,
                     Height = 50,
-                    Text = TextureBuilder.GetTexturePack(packs[i]).Name,
+                    Text = TextureManager.GetTexturePack(packs[i]).Name,
                     Font = BasicFonts.GetFont(16),
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     FillClickedColor = BasicTextures.GetClickedTexture(),

@@ -10,7 +10,6 @@ using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
 {
@@ -25,7 +24,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         {
             AddControl(0, new TileControl(this)
             {
-                FillColor = TextureBuilder.GetTexture(new Guid("756430ea-46e1-4c3d-95a0-a232919b7876")),
+                FillColor = TextureManager.GetTexture(new Guid("756430ea-46e1-4c3d-95a0-a232919b7876")),
                 Width = 1000,
                 Height = 1000
             });

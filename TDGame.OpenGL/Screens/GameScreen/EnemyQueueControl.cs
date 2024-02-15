@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.Core.Resources;
 using TDGame.Core.Models.Entities.Enemies;
@@ -24,7 +23,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public void UpdateToEnemy(EnemyInstance enemy)
         {
-            iconControl.FillColor = TextureBuilder.GetTexture(enemy.DefinitionID);
+            iconControl.FillColor = TextureManager.GetTexture(enemy.DefinitionID);
             var sb = new StringBuilder();
             sb.AppendLine(enemy.GetDefinition().Name);
             sb.AppendLine(enemy.GetDefinition().Description);

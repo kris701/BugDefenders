@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
@@ -59,16 +61,41 @@ namespace TDGame.OpenGL
 
             Window.Title = "TDGame";
 
-            ApplySettings();
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
-            if (!Directory.Exists(_modsDir))
-                Directory.CreateDirectory(_modsDir);
-            foreach(var folder in new DirectoryInfo(_modsDir).GetDirectories())
-                ResourceManager.LoadResource(folder);
+            ApplySettings();
 
             CurrentScreen = _screenToLoad(this);
             CurrentScreen.Initialize();
+        }
+
+        private void LoadMods()
+        {
+            if (!Directory.Exists(_modsDir))
+                Directory.CreateDirectory(_modsDir);
+            foreach (var folder in new DirectoryInfo(_modsDir).GetDirectories())
+            {
+                // Load core resources
+                ResourceManager.LoadResource(folder);
+
+                // Load textures
+                foreach (var subFolder in folder.GetDirectories())
+                {
+                    if (subFolder.Name.ToUpper() == "TEXTURES")
+                    {
+                        foreach(var file in subFolder.GetFiles())
+                        {
+                            var textureSetDef = JsonSerializer.Deserialize<TextureSetDefinition>(File.ReadAllText(file.FullName));
+                            foreach(var texture in textureSetDef.TextureSet)
+                            {
+                                var textureFile = new FileInfo(Path.Combine(subFolder.Parent.FullName, "Content", texture.Content));
+                                texture.Content = textureFile.FullName;
+                                TextureManager.LoadTexture(texture);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         protected override void LoadContent()
@@ -114,9 +141,10 @@ namespace TDGame.OpenGL
             Device.PreferredBackBufferWidth = (int)(Settings.Scale * 1000);
             Device.SynchronizeWithVerticalRetrace = Settings.IsVsync;
             Device.IsFullScreen = Settings.IsFullscreen;
-            TextureBuilder.Initialize(Content);
-            TextureBuilder.LoadTexturePack(Settings.TexturePack);
+            TextureManager.Initialize(Content);
+            TextureManager.LoadTexturePack(Settings.TexturePack);
             Device.ApplyChanges();
+            LoadMods();
         }
 
         public void SaveSettings() 

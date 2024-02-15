@@ -10,7 +10,6 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Screens.GameSetupView;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameOverScreen
 {
@@ -20,7 +19,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
         {
             AddControl(0, new TileControl(this)
             {
-                FillColor = TextureBuilder.GetTexture(new Guid("1d50ad58-0503-4fc6-95e4-1d18abb8c485")),
+                FillColor = TextureManager.GetTexture(new Guid("1d50ad58-0503-4fc6-95e4-1d18abb8c485")),
                 Width = 1000,
                 Height = 1000
             });

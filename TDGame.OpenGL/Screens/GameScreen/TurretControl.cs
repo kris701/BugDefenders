@@ -9,7 +9,6 @@ using TDGame.Core.Models.Entities.Turrets;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -24,7 +23,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public override void Initialize()
         {
-            var baseTexture = TextureBuilder.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d"));
+            var baseTexture = TextureManager.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d"));
             baseControl = new TileControl(Parent)
             {
                 FillColor = baseTexture,
