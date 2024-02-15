@@ -32,7 +32,6 @@ namespace TDGame.Core
         public int Money { get; set; }
         public int Score { get; set; }
         public List<TurretInstance> Turrets { get; set; }
-        public List<ProjectileInstance> Projectiles { get; set; }
 
         public bool GameOver { get; set; }
         public TimeSpan GameTime { get; set; }

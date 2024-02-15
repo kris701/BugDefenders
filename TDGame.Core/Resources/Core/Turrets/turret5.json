@@ -2,33 +2,35 @@
   "id": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
   "Name": "Wave Turret",
   "Description": "asfdasfasf",
-  "Type": 3,
   "Size": 50,
   "Cost": 300,
-  "Range": 100,
-  "Damage": 25,
-  "ProjectileID": null,
-  "Cooldown": 2000,
-  "IsTrailing": false,
-  "SlowingFactor": 0.5,
-  "SlowingDuration": 1000,
-  "DamageModifiers": [
+  "TurretType": {
+    "TurretModule": "AOETurret",
+    "Range": 100,
+    "Damage": 25,
+    "Cooldown": 2000,
+    "SlowingFactor": 0.5,
+    "SlowingDuration": 1000,
+    "DamageModifiers": [
+      {
+        "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+        "Modifier": 3
+      }
+    ]
+  },
+  "Upgrades": [
     {
-      "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
-      "Modifier": 3
-    }
-  ],
-  "TurretLevels": [
-    {
+      "UpgradeType": "AOETurret",
       "id": "5ce6344e-a814-4acf-953e-ed5304de3bed",
       "requires": null,
       "Name": "Upgrade 1",
       "Description": "fast turret",
       "Cost": 50,
-      "RangeModifier": 1,
-      "DamageModifier": 1,
-      "CooldownModifier": 0.5
+      "RangeModifier": 2,
+      "DamageModifier": 2,
+      "CooldownModifier": 1,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
     }
-  ],
-  "ProjectileLevels": []
+  ]
 }

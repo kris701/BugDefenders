@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TDGame.Core.Helpers;
+using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Resources;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace TDGame.Core.Modules
+{
+    public class AOETurretsModule : IGameModule
+    {
+        public Game Game { get; }
+
+        public AOETurretsModule(Game game)
+        {
+            Game = game;
+        }
+
+        public void Update(TimeSpan passed)
+        {
+            foreach(var turret in Game.Turrets)
+            {
+                if (turret.TurretInfo is AOETurretDefinition def)
+                {
+                    def.CoolingFor -= passed;
+                    if (def.CoolingFor <= TimeSpan.Zero)
+                        UpdateTurret(turret, def);
+                }
+            }
+        }
+
+        private void UpdateTurret(TurretInstance turret, AOETurretDefinition def)
+        {
+            turret.Targeting = null;
+            var closest = float.MaxValue;
+            EnemyInstance? best = null;
+            var targeting = new List<EnemyInstance>();
+            foreach (var enemy in Game.CurrentEnemies)
+            {
+                var dist = MathHelpers.Distance(enemy, turret);
+                if (dist <= def.Range)
+                {
+                    targeting.Add(enemy);
+                    if (dist < closest)
+                    {
+                        closest = dist;
+                        best = enemy;
+                    }
+                }
+            }
+
+            if (best != null)
+            {
+                foreach (var enemy in targeting)
+                {
+                    if (def.SlowingFactor <= enemy.SlowingFactor)
+                    {
+                        enemy.SlowingFactor = def.SlowingFactor;
+                        enemy.SlowingDuration = def.SlowingDuration;
+                    }
+                    if (Game.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def)))
+                        turret.Kills++;
+                }
+                turret.Targeting = best;
+                turret.Angle = Game.GetAngle(best, turret);
+                def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
+            }
+        }
+
+        private float GetModifiedDamage(EnemyDefinition enemyDef, AOETurretDefinition def)
+        {
+            var damage = def.Damage;
+            foreach (var modifier in def.DamageModifiers)
+                if (modifier.EnemyType == enemyDef.EnemyType)
+                    damage = damage * modifier.Modifier;
+            return damage;
+        }
+    }
+}

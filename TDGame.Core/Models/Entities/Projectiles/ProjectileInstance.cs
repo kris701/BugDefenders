@@ -15,10 +15,8 @@ namespace TDGame.Core.Models.Entities.Projectiles
     {
         public Guid ID { get; set; }
         public Guid DefinitionID { get; set; }
-        public float Traveled { get; set; }
         public EnemyInstance? Target { get; set; }
         public TurretInstance? Source { get; set; }
-        public List<Guid> HasUpgrades { get; set; }
 
         public ProjectileInstance(Guid definitionID) : this(ResourceManager.Projectiles.GetResource(definitionID))
         {
@@ -29,7 +27,6 @@ namespace TDGame.Core.Models.Entities.Projectiles
             ID = Guid.NewGuid();
             DefinitionID = definition.ID;
             Size = definition.Size;
-            HasUpgrades = new List<Guid>();
         }
 
         public ProjectileDefinition GetDefinition() => ResourceManager.Projectiles.GetResource(DefinitionID);

@@ -2,31 +2,28 @@
   "id": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
   "Name": "Rocket Turret",
   "Description": "asfdasfasf",
-  "Type": 2,
   "Size": 50,
   "Cost": 500,
-  "Range": 300,
-  "Damage": 0,
-  "ProjectileID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
-  "Cooldown": 500,
-  "IsTrailing": false,
-  "SlowingFactor": 1,
-  "SlowingDuration": 0,
-  "DamageModifiers": [],
-  "TurretLevels": [
+  "TurretType": {
+    "TurretModule": "ProjectileTurret",
+    "Range": 300,
+    "Cooldown": 500,
+    "ProjectileID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+    "IsTrailing": false
+  },
+  "Upgrades": [
     {
+      "UpgradeType": "ProjectileTurret",
       "id": "1d5bfdd5-470b-4037-a434-cdc6bb8a4367",
       "requires": null,
       "Name": "Upgrade 2",
       "Description": "fast turret",
       "Cost": 50,
       "RangeModifier": 1,
-      "DamageModifier": 1,
       "CooldownModifier": 0.5
-    }
-  ],
-  "ProjectileLevels": [
+    },
     {
+      "UpgradeType": "Projectile",
       "id": "8e6fc0ac-6487-4e43-b9f0-ecd1f0766169",
       "requires": null,
       "Name": "Upgrade 3",
@@ -34,7 +31,9 @@
       "Cost": 50,
       "DamageModifier": 2,
       "SplashRangeModifier": 1,
-      "TriggerRangeModifier": 1
+      "TriggerRangeModifier": 1,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
     }
   ]
 }

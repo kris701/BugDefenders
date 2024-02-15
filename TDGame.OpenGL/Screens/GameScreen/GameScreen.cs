@@ -153,7 +153,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private void SelectTurret(TurretInstance turret)
         {
             _selectedTurret = turret;
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(turret.GetDefinition().Range * 2));
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(turret) * 2));
             _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
             _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
             _turretSelectRangeTile.X = turret.X + turret.Size / 2 + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
@@ -161,7 +161,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _turretSelectRangeTile.IsVisible = true;
 
             int index = 0;
-            foreach(var upgrade in turret.GetDefinition().GetAllUpgrades())
+            foreach(var upgrade in turret.GetDefinition().Upgrades)
                 if (!turret.HasUpgrades.Contains(upgrade.ID))
                     _turretUpgradePanels[index++].SetUpgrade(upgrade, _game.CanLevelUpTurret(turret, upgrade.ID));
 
@@ -172,43 +172,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private string GetTurretDescriptionString(TurretInstance turret)
         {
-            var turretDef = turret.GetDefinition();
             var sb = new StringBuilder();
-            switch (turretDef.Type)
-            {
-                case TurretType.Laser: sb.AppendLine("Laser Type Turret"); break;
-                case TurretType.Projectile: sb.AppendLine("Projectile Type Turret"); break;
-            }
-            sb.AppendLine($"Name: {turretDef.Name}");
-            sb.AppendLine($"Range: {turret.Range}");
-            sb.AppendLine($"Cooldown: {turret.Cooldown}");
-            if (turret.ProjectileDefinition == null)
-            {
-                sb.AppendLine($"Damage: {turret.Damage}");
-                if (turretDef.DamageModifiers.Count > 0)
-                {
-                    foreach (var modifier in turretDef.DamageModifiers) 
-                    {
-                        var enemyType = ResourceManager.EnemyTypes.GetResource(modifier.EnemyType);
-                        sb.AppendLine($"{enemyType.Name}: {modifier.Modifier}x ");
-                    }
-                }
-            }
-            else
-            {
-                var projectile = turret.ProjectileDefinition;
-                sb.AppendLine($"Projectile Damage: {projectile.Damage}");
-                sb.AppendLine($"Projectile Splash: {projectile.SplashRange}");
-                sb.AppendLine($"Projectile Trigger: {projectile.TriggerRange}");
-                if (projectile.DamageModifiers.Count > 0)
-                {
-                    foreach (var modifier in projectile.DamageModifiers)
-                    {
-                        var enemyType = ResourceManager.EnemyTypes.GetResource(modifier.EnemyType);
-                        sb.AppendLine($"{enemyType.Name}: {modifier.Modifier}x ");
-                    }
-                }
-            }
+            sb.AppendLine(turret.TurretInfo.GetDescriptionString());
             if (turret.Kills != 0)
             {
                 sb.AppendLine(" ");
@@ -297,7 +262,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Tag = e
                 };
             });
-            _projectile.UpdateEntities(_game.Projectiles, (e) =>
+            _projectile.UpdateEntities(_game.ProjectileTurretsModule.Projectiles, (e) =>
             {
                 return new TileControl(this)
                 {
@@ -385,7 +350,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             ClearLayer(6);
             foreach(var turret in _game.Turrets)
             {
-                if (turret.GetDefinition().Type == TurretType.Laser)
+                if (turret.TurretInfo is LaserTurretDefinition)
                 {
                     if (turret.Targeting != null)
                     {
@@ -425,7 +390,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.FillColor = TextureManager.GetTexture(turret.ID);
                 _buyingPreviewTile.Width = turret.Size;
                 _buyingPreviewTile.Height = turret.Size;
-                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(turret.Range * 2));
+                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(turret) * 2));
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
                 _turretStatesTextbox.Text = GetTurretDescriptionString(new TurretInstance(turret));
@@ -436,6 +401,28 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             var screen = Parent.TakeScreenCap();
             SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
+        }
+
+        private float GetRangeOfTurret(TurretInstance turret)
+        {
+            switch (turret.TurretInfo)
+            {
+                case AOETurretDefinition def: return def.Range;
+                case LaserTurretDefinition def: return def.Range;
+                case ProjectileTurretDefinition def: return def.Range;
+            }
+            return 0;
+        }
+
+        private float GetRangeOfTurret(TurretDefinition turret)
+        {
+            switch (turret.TurretType)
+            {
+                case AOETurretDefinition def: return def.Range;
+                case LaserTurretDefinition def: return def.Range;
+                case ProjectileTurretDefinition def: return def.Range;
+            }
+            return 0;
         }
     }
 }

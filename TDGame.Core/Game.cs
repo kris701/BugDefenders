@@ -7,6 +7,7 @@ using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.Maps;
+using TDGame.Core.Modules;
 using TDGame.Core.Resources;
 
 namespace TDGame.Core
@@ -32,12 +33,19 @@ namespace TDGame.Core
         private List<Guid> _normalEnemies = new List<Guid>();
         private List<Guid> _bossEnemies = new List<Guid>();
 
+        public AOETurretsModule AOETurretsModule { get; }
+        public LaserTurretsModule LaserTurretsModule { get; }
+        public ProjectileTurretsModule ProjectileTurretsModule { get; }
+
         public Game(Guid mapID, Guid styleID)
         {
             CurrentEnemies = new List<EnemyInstance>();
             Turrets = new List<TurretInstance>();
             EnemiesToSpawn = new List<Guid>();
-            Projectiles = new List<ProjectileInstance>();
+
+            AOETurretsModule = new AOETurretsModule(this);
+            LaserTurretsModule = new LaserTurretsModule(this);
+            ProjectileTurretsModule = new ProjectileTurretsModule(this);
 
             Map = ResourceManager.Maps.GetResource(mapID);
             GameStyle = ResourceManager.GameStyles.GetResource(styleID);
@@ -82,8 +90,9 @@ namespace TDGame.Core
             UpdateSpawnQueue();
             UpdateEnemySlowDuration(_mainLoopTimer.Target);
             UpdateEnemyPositions();
-            UpdateProjectiles();
-            UpdateTurrets(_mainLoopTimer.Target);
+            AOETurretsModule.Update(_mainLoopTimer.Target);
+            LaserTurretsModule.Update(_mainLoopTimer.Target);
+            ProjectileTurretsModule.Update(_mainLoopTimer.Target);
         }
 
         private void DamagePlayer()
@@ -93,12 +102,12 @@ namespace TDGame.Core
                 EndGame();
         }
 
-        private float GetAngle(FloatPoint target, IPosition item) => MathHelpers.GetAngle(target.X, target.Y, item.X + item.Size / 2, item.Y + item.Size / 2);
-        private float GetAngle(IPosition item1, IPosition item2) => MathHelpers.GetAngle(item1.X + item1.Size / 2, item1.Y + item1.Size / 2, item2.X + item2.Size / 2, item2.Y + item2.Size / 2);
+        internal float GetAngle(FloatPoint target, IPosition item) => MathHelpers.GetAngle(target.X, target.Y, item.X + item.Size / 2, item.Y + item.Size / 2);
+        internal float GetAngle(IPosition item1, IPosition item2) => MathHelpers.GetAngle(item1.X + item1.Size / 2, item1.Y + item1.Size / 2, item2.X + item2.Size / 2, item2.Y + item2.Size / 2);
 
-        private EnemyInstance? GetNearestEnemy(TurretInstance turret) => GetNearestEnemy(turret.X + turret.Size / 2, turret.Y + turret.Size / 2, turret.GetDefinition().Range);
-        private EnemyInstance? GetNearestEnemy(ProjectileInstance projectile) => GetNearestEnemy(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, projectile.GetDefinition().Range);
-        private EnemyInstance? GetNearestEnemy(double x, double y, float range)
+        internal EnemyInstance? GetNearestEnemy(BasePositionModel projectile) => GetNearestEnemy(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, float.MaxValue);
+        internal EnemyInstance? GetNearestEnemy(BasePositionModel projectile, float range) => GetNearestEnemy(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, range);
+        internal EnemyInstance? GetNearestEnemy(double x, double y, float range)
         {
             var minDist = float.MaxValue;
             EnemyInstance? best = null;
@@ -114,17 +123,8 @@ namespace TDGame.Core
             return best;
         }
 
-        private bool DamageEnemy(EnemyInstance enemy, float damage, List<DamageModifier> modifiers, float slowingFactor, int slowingDuration)
+        internal bool DamageEnemy(EnemyInstance enemy, float damage)
         {
-            foreach (var modifier in modifiers)
-                if (modifier.EnemyType == enemy.GetDefinition().EnemyType)
-                    damage = damage * modifier.Modifier;
-            if (slowingFactor <= enemy.SlowingFactor)
-            {
-                enemy.SlowingFactor = slowingFactor;
-                enemy.SlowingDuration = slowingDuration;
-            }
-
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {

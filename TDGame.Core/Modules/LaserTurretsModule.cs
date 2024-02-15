@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Resources;
+
+namespace TDGame.Core.Modules
+{
+    public class LaserTurretsModule : IGameModule
+    {
+        public Game Game { get; }
+
+        public LaserTurretsModule(Game game)
+        {
+            Game = game;
+        }
+
+        public void Update(TimeSpan passed)
+        {
+            foreach(var turret in Game.Turrets)
+            {
+                if (turret.TurretInfo is LaserTurretDefinition def)
+                {
+                    def.CoolingFor -= passed;
+                    if (def.CoolingFor <= TimeSpan.Zero)
+                        UpdateTurret(turret, def);
+                }
+            }
+        }
+
+        private void UpdateTurret(TurretInstance turret, LaserTurretDefinition def)
+        {
+            turret.Targeting = null;
+            var best = Game.GetNearestEnemy(turret, def.Range);
+            if (best != null)
+            {
+                var turretDef = turret.GetDefinition();
+                if (def.SlowingFactor <= best.SlowingFactor)
+                {
+                    best.SlowingFactor = def.SlowingFactor;
+                    best.SlowingDuration = def.SlowingDuration;
+                }
+                if (!Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def)))
+                {
+                    turret.Targeting = best;
+                    turret.Angle = Game.GetAngle(best, turret);
+                }
+                else
+                    turret.Kills++;
+                def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
+            }
+        }
+
+        private float GetModifiedDamage(EnemyDefinition enemyDef, LaserTurretDefinition def)
+        {
+            var damage = def.Damage;
+            foreach (var modifier in def.DamageModifiers)
+                if (modifier.EnemyType == enemyDef.EnemyType)
+                    damage = damage * modifier.Modifier;
+            return damage;
+        }
+    }
+}

@@ -17,15 +17,11 @@ namespace TDGame.Core.Models.Entities.Turrets
         public Guid ID { get; set; }
         public Guid DefinitionID { get; set; }
 
-        public float Range { get; set; }
-        public float Damage { get; set; }
-        public float Cooldown { get; set; }
+        public ITurretType TurretInfo { get; set; }
 
-        public TimeSpan CoolingFor { get; set; }
         public EnemyInstance? Targeting { get; set; }
         public int Kills { get; set; } = 0;
         public List<Guid> HasUpgrades { get; set; }
-        public ProjectileDefinition? ProjectileDefinition { get; set; }
 
         public TurretInstance(Guid definitionID) : this(ResourceManager.Turrets.GetResource(definitionID))
         {
@@ -35,13 +31,9 @@ namespace TDGame.Core.Models.Entities.Turrets
         {
             ID = Guid.NewGuid();
             DefinitionID = definition.ID;
-            Range = definition.Range;
-            Damage = definition.Damage;
-            Cooldown = definition.Cooldown;
+            TurretInfo = definition.TurretType.Copy();
             Size = definition.Size;
             HasUpgrades = new List<Guid>();
-            if (definition.ProjectileID != null)
-                ProjectileDefinition = ResourceManager.Projectiles.GetResource((Guid)definition.ProjectileID);
         }
 
         public TurretDefinition GetDefinition() => ResourceManager.Turrets.GetResource(DefinitionID);
@@ -50,30 +42,10 @@ namespace TDGame.Core.Models.Entities.Turrets
         {
             var def = GetDefinition();
             var worth = def.Cost;
-            foreach (var upgrade in def.GetAllUpgrades())
+            foreach (var upgrade in def.Upgrades)
                 if (HasUpgrades.Contains(upgrade.ID))
                     worth += upgrade.Cost;
             return worth;
-        }
-
-        public void ApplyUpgrade(Guid ID)
-        {
-            var def = GetDefinition();
-            var upgrade = def.GetAllUpgrades().First(x => x.ID == ID);
-            if (upgrade is TurretLevel turretLevel)
-            {
-                Range *= turretLevel.RangeModifier;
-                Damage *= turretLevel.DamageModifier;
-                Cooldown *= turretLevel.CooldownModifier;
-                HasUpgrades.Add(turretLevel.ID);
-            }
-            else if (ProjectileDefinition != null && upgrade is ProjectileLevel projLev)
-            {
-                ProjectileDefinition.Damage *= projLev.DamageModifier;
-                ProjectileDefinition.SplashRange *= projLev.SplashRangeModifier;
-                ProjectileDefinition.TriggerRange *= projLev.TriggerRangeModifier;
-                HasUpgrades.Add(projLev.ID);
-            }
         }
     }
 }

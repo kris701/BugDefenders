@@ -109,20 +109,6 @@ namespace TDGame.Core.Resources
             foreach (var id in Turrets.GetResources())
             {
                 var turret = Turrets.GetResource(id);
-                if (turret.Type == TurretType.None)
-                    throw new Exception($"Turret ({id}) has no turret type set!");
-                if (turret.Type == TurretType.Projectile)
-                {
-                    if (turret.ProjectileID == null)
-                        throw new Exception($"Turret ({id}) is set to be a projectile turret, but has no Projectile ID set!");
-                    else if (!projectiles.Contains((Guid)turret.ProjectileID))
-                        throw new Exception($"Turret ({id}) has the projectile id {turret.ProjectileID} but it was not found in any projectile definitions!");
-                }
-                var allUpgrades = turret.GetAllUpgrades();
-                foreach (var upgrade in allUpgrades)
-                    if (upgrade.Requires != null)
-                        if (!allUpgrades.Any(x => x.ID == upgrade.Requires))
-                            throw new Exception($"Turret ({id}) has upgrade ({upgrade.ID}) that requires an upgrade ID ({upgrade.Requires}) that does not exist!");
             }
         }
     }

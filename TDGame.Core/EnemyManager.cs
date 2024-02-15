@@ -39,7 +39,7 @@ namespace TDGame.Core
             UpdateEnemiesToSpawnList();
         }
 
-        private FloatPoint GetEnemyLocationChange(float angle, float speed)
+        internal FloatPoint GetEnemyLocationChange(float angle, float speed)
         {
             var xMod = Math.Cos(angle);
             var yMod = Math.Sin(angle);

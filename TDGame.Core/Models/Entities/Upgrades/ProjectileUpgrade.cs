@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using TDGame.Core.Models.Entities.Turrets;
 
 namespace TDGame.Core.Models.Entities.Upgrades
 {
-    public class ProjectileLevel : IUpgrade
+    public class ProjectileUpgrade : IUpgrade
     {
         public Guid ID { get; set; }
         public Guid? Requires { get; set; }
@@ -17,6 +17,23 @@ namespace TDGame.Core.Models.Entities.Upgrades
         public float DamageModifier { get; set; }
         public float SplashRangeModifier { get; set; }
         public float TriggerRangeModifier { get; set; }
+        public float SlowingFactorModifier { get; set; }
+        public float SlowingDurationModifier { get; set; }
+
+        public void ApplyUpgrade(TurretInstance on)
+        {
+            if (on.TurretInfo is ProjectileTurretDefinition item)
+            {
+                item.ProjectileDefinition.Damage *= DamageModifier;
+                item.ProjectileDefinition.SplashRange *= SplashRangeModifier;
+                item.ProjectileDefinition.TriggerRange *= TriggerRangeModifier;
+                item.ProjectileDefinition.SlowingFactor *= SlowingFactorModifier;
+                item.ProjectileDefinition.SlowingDuration = (int)(item.ProjectileDefinition.SlowingDuration * SlowingDurationModifier);
+                on.HasUpgrades.Add(ID);
+            }
+            else
+                throw new Exception("Invalid upgrade type for turret!");
+        }
 
         public string GetDescriptionString()
         {

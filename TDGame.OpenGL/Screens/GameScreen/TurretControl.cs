@@ -16,7 +16,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         private TileControl baseControl;
         private LabelControl turretLevelControl;
-        private LabelControl projectileLevelControl;
         public TurretControl(IScreen parent, ClickedHandler clicked = null, ClickedHandler clickedModifierA = null, ClickedHandler clickedModifierB = null) : base(parent, clicked, clickedModifierA, clickedModifierB)
         {
         }
@@ -43,33 +42,20 @@ namespace TDGame.OpenGL.Screens.GameScreen
             turretLevelControl._y = _y;
             turretLevelControl.Initialize();
 
-            projectileLevelControl = new LabelControl(Parent)
-            {
-                Font = BasicFonts.GetFont(10),
-                IsVisible = false
-            };
-            projectileLevelControl._x = _x + Width;
-            projectileLevelControl._y = _y + Height;
-            projectileLevelControl.Initialize();
-
             base.Initialize();
         }
 
         public void UpgradeTurretLevels(TurretInstance turret)
         {
-            turretLevelControl.Text = $"{turret.GetDefinition().TurretLevels.Count(x => turret.HasUpgrades.Contains(x.ID))}";
+            turretLevelControl.Text = $"{turret.GetDefinition().Upgrades.Count(x => turret.HasUpgrades.Contains(x.ID))}";
             if (turretLevelControl.Text != "0")
                 turretLevelControl.IsVisible = true;
-            projectileLevelControl.Text = $"{turret.GetDefinition().ProjectileLevels.Count(x => turret.HasUpgrades.Contains(x.ID))}";
-            if (projectileLevelControl.Text != "0")
-                projectileLevelControl.IsVisible = true;
         }
 
         public override void Update(GameTime gameTime)
         {
             baseControl.Update(gameTime);
             turretLevelControl.Update(gameTime);
-            projectileLevelControl.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -81,7 +67,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
             baseControl.Draw(gameTime, spriteBatch);
             base.Draw(gameTime, spriteBatch);
             turretLevelControl.Draw(gameTime, spriteBatch);
-            projectileLevelControl.Draw(gameTime, spriteBatch);
         }
     }
 }
