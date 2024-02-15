@@ -25,5 +25,5 @@
 - [ ] Cache tile sets (for animated tiles)
 - [X] Area of effect turret
 - [X] Slowdown turret
-- [ ] Mod support
+- [X] Mod support
 
