@@ -4,7 +4,7 @@
   "Description": "asfdasfasf",
   "Size": 50,
   "Cost": 500,
-  "TurretType": {
+  "ModuleInfo": {
     "TurretModule": "ProjectileTurret",
     "Range": 300,
     "Cooldown": 500,

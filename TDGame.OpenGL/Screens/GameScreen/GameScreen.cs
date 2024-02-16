@@ -510,7 +510,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private float GetRangeOfTurret(TurretDefinition turret)
         {
-            switch (turret.TurretType)
+            switch (turret.ModuleInfo)
             {
                 case AOETurretDefinition def: return def.Range;
                 case LaserTurretDefinition def: return def.Range;

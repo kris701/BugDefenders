@@ -4,7 +4,7 @@
   "Description": "asfdasfasf",
   "Size": 50,
   "Cost": 300,
-  "TurretType": {
+  "ModuleInfo": {
     "TurretModule": "AOETurret",
     "Range": 100,
     "Damage": 25,

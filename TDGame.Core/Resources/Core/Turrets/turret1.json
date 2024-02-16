@@ -4,7 +4,7 @@
   "Description": "asfdasfasf",
   "Size": 50,
   "Cost": 250,
-  "TurretType": {
+  "ModuleInfo": {
     "TurretModule": "LaserTurret",
     "Range": 200,
     "Damage": 10,
@@ -18,7 +18,7 @@
       }
     ]
   },
-  "CanDamage": [1,2],
+  "CanDamage": [ 1, 2 ],
   "Upgrades": [
     {
       "UpgradeType": "LaserTurret",

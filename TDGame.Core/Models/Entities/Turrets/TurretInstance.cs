@@ -27,7 +27,7 @@ namespace TDGame.Core.Models.Entities.Turrets
         {
             ID = Guid.NewGuid();
             DefinitionID = definition.ID;
-            TurretInfo = definition.TurretType.Copy();
+            TurretInfo = definition.ModuleInfo.Copy();
             Size = definition.Size;
             HasUpgrades = new List<Guid>();
         }

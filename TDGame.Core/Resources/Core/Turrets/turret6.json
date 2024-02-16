@@ -4,7 +4,7 @@
   "Description": "asfdasfasf",
   "Size": 75,
   "Cost": 300,
-  "TurretType": {
+  "ModuleInfo": {
     "TurretModule": "InvestmentTurret",
     "MoneyPrWave": 250
   },
