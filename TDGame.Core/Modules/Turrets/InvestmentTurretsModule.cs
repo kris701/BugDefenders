@@ -1,6 +1,6 @@
 ﻿using TDGame.Core.Models.Entities.Turrets;
 
-namespace TDGame.Core.Modules
+namespace TDGame.Core.Modules.Turrets
 {
     public class InvestmentTurretsModule : IGameModule
     {

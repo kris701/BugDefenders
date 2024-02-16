@@ -4,7 +4,7 @@ using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.Maps;
 
-namespace TDGame.Core.Modules
+namespace TDGame.Core.Modules.Turrets
 {
     public class ProjectileTurretsModule : IGameModule
     {

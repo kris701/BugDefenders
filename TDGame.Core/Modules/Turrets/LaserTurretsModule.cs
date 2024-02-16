@@ -1,7 +1,7 @@
 ﻿using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Turrets;
 
-namespace TDGame.Core.Modules
+namespace TDGame.Core.Modules.Turrets
 {
     public class LaserTurretsModule : IGameModule
     {

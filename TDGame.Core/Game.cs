@@ -4,7 +4,7 @@ using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.Maps;
-using TDGame.Core.Modules;
+using TDGame.Core.Modules.Turrets;
 using TDGame.Core.Resources;
 using static TDGame.Core.Models.Entities.Enemies.EnemyDefinition;
 using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
