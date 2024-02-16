@@ -1,6 +1,7 @@
 # TDGame
 
 ## TODO List
+- [ ] Fix missile turret not guiding
 - [ ] User system (to save scores and permanent upgrades) 
 - [ ] Score board
 - [ ] Carry over system
