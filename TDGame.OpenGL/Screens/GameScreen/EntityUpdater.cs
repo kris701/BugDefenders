@@ -1,16 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TDGame.Core.Models;
 using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
-using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -43,9 +36,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public void UpdateEntities(List<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime> updateOverride = null)
         {
-            foreach(var entity in entities)
+            foreach (var entity in entities)
             {
-                if (_entities.ContainsKey(entity)) 
+                if (_entities.ContainsKey(entity))
                 {
                     var toUpdate = _entities[entity];
                     if (updateOverride != null)

@@ -1,6 +1,4 @@
 ﻿using System;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Screens.MainMenu;
 using TDGame.OpenGL.Screens.SplashScreen;
 
 namespace TDGame.OpenGL

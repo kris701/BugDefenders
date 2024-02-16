@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Settings;
@@ -22,7 +20,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
         {
             _isFullScreen.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
             _isVSync.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
-            foreach(var button in _texturePacksButtons)
+            foreach (var button in _texturePacksButtons)
                 button.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
             foreach (var button in _scaleButtons)
                 button.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
@@ -32,7 +30,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             if (_settings.IsVsync)
                 _isVSync.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
 
-            foreach(var button in _texturePacksButtons)
+            foreach (var button in _texturePacksButtons)
             {
                 if (button.Tag is Guid str && str == _settings.TexturePack)
                 {

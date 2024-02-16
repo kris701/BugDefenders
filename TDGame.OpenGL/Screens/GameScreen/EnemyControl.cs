@@ -1,16 +1,11 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Maps;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
-using TDGame.Core.Models.Entities.Enemies;
-using TDGame.Core.Models.Maps;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {

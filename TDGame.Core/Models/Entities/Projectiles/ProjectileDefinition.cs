@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using TDGame.Core.Models;
+﻿using System.Text;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Resources;
 using static TDGame.Core.Models.Entities.Enemies.EnemyDefinition;
@@ -31,7 +25,8 @@ namespace TDGame.Core.Models.Entities.Projectiles
 
         public ProjectileDefinition Copy()
         {
-            return new ProjectileDefinition() {
+            return new ProjectileDefinition()
+            {
                 ID = ID,
                 Name = Name,
                 Description = Description,
@@ -74,7 +69,7 @@ namespace TDGame.Core.Models.Entities.Projectiles
                 foreach (var modifier in DamageModifiers)
                     sb.Append($"{ResourceManager.EnemyTypes.GetResource(modifier.EnemyType).Name}: {modifier.Modifier}x, ");
                 sb.AppendLine();
-            }   
+            }
             if (CanDamage.Count != 0)
             {
                 sb.AppendLine("Can Damage:");

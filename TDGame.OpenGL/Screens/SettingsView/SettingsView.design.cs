@@ -1,15 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Screens.GameSetupView;
 
 namespace TDGame.OpenGL.Screens.SettingsView
 {
@@ -52,7 +47,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
             SetupScreenSettingsView(200);
             SetupTextureSettingsView(560);
 
-            AddControl(0, new ButtonControl(this, clicked: (x) => {
+            AddControl(0, new ButtonControl(this, clicked: (x) =>
+            {
                 Parent.Settings = _settings;
                 Parent.ApplySettings();
                 Parent.SaveSettings();
@@ -68,7 +64,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FillClickedColor = BasicTextures.GetClickedTexture(),
             });
 
-            AddControl(0, new ButtonControl(this, clicked: (x) => {
+            AddControl(0, new ButtonControl(this, clicked: (x) =>
+            {
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {
@@ -128,7 +125,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
             for (int i = 0; i < _scaleOptions.Count; i++)
             {
-                var newControl = new ButtonControl(this, clicked: (s) => {
+                var newControl = new ButtonControl(this, clicked: (s) =>
+                {
                     if (s.Tag is float value)
                         _settings.Scale = value;
                     UpdateScreenSettingsButtons();
@@ -213,9 +211,10 @@ namespace TDGame.OpenGL.Screens.SettingsView
             });
 
             var packs = TextureManager.GetTexturePacks();
-            for(int i = 0; i < packs.Count; i++)
+            for (int i = 0; i < packs.Count; i++)
             {
-                var newControl = new ButtonControl(this, clicked: (s) => {
+                var newControl = new ButtonControl(this, clicked: (s) =>
+                {
                     if (s.Tag is Guid str)
                         _settings.TexturePack = str;
                     UpdateScreenSettingsButtons();

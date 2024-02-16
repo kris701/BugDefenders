@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using System.Text.Json;
-using System.Threading.Tasks;
 using TDGame.Core.Helpers;
 using TDGame.Core.Models.EnemyTypes;
 using TDGame.Core.Models.Entities.Enemies;
@@ -38,7 +33,7 @@ namespace TDGame.Core.Resources
         public static void LoadResource(DirectoryInfo path)
         {
             FileInfo? definitionFile = null;
-            foreach (var file in path.GetFiles()) 
+            foreach (var file in path.GetFiles())
             {
                 if (file.Extension.ToUpper() == ".JSON")
                 {
@@ -52,7 +47,7 @@ namespace TDGame.Core.Resources
             if (resourceDefinition == null)
                 throw new Exception("Resource definition is malformed!");
 
-            foreach(var folder in definitionFile.Directory.GetDirectories())
+            foreach (var folder in definitionFile.Directory.GetDirectories())
             {
                 if (folder.Name.ToUpper() == "ENEMYTYPES")
                     EnemyTypes.LoadExternalResources(folder.GetFiles().ToList());

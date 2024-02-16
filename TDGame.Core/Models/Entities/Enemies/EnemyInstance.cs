@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using TDGame.Core.Models;
-using TDGame.Core.Resources;
+﻿using TDGame.Core.Resources;
 
 namespace TDGame.Core.Models.Entities.Enemies
 {

@@ -1,20 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
 using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.Entities.Upgrades;
 using TDGame.Core.Models.Maps;
 using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
@@ -59,15 +53,17 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
-            _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(5, this,  _gameArea.X, _gameArea.Y);
+            _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(5, this, _gameArea.X, _gameArea.Y);
             _projectileUpdater.OnDelete += OnProjectileDeleted;
-            _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this,  _gameArea.X, _gameArea.Y);
-            _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(7, this,  _gameArea.X, _gameArea.Y);
+            _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this, _gameArea.X, _gameArea.Y);
+            _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(7, this, _gameArea.X, _gameArea.Y);
 
-            _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { 
+            _waveKeyWatcher = new KeyWatcher(Keys.Space, () =>
+            {
                 _game.QueueEnemies();
                 _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
-            }, () => {
+            }, () =>
+            {
                 _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
             });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
@@ -159,7 +155,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _turretSelectRangeTile.IsVisible = true;
 
             int index = 0;
-            foreach(var upgrade in turret.GetDefinition().Upgrades)
+            foreach (var upgrade in turret.GetDefinition().Upgrades)
                 if (!turret.HasUpgrades.Contains(upgrade.ID))
                     _turretUpgradePanels[index++].SetUpgrade(upgrade, _game.CanLevelUpTurret(turret, upgrade.ID));
 
@@ -219,7 +215,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _escapeKeyWatcher.Update(keyState);
 
             _game.Update(gameTime.ElapsedGameTime);
-            
+
             _moneyLabel.Text = $"Money: {_game.Money}$";
             _hpLabel.Text = $"HP: {_game.HP}";
             _scoreLabel.Text = $"Score: {_game.Score}";
@@ -233,7 +229,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _effectsUpdater.UpdateEntities(_effects, gameTime, CreateNewEffect);
             _laserUpdater.UpdateEntities(_lasers.Values.ToList(), gameTime, CreateNewLaser, UpdateLaserControl);
             UpdateEffectLifetimes(gameTime);
-             
+
             UpdateLasers();
 
             if (mouseState.X >= Scale(_gameArea.X) && mouseState.X <= Scale(_gameArea.X) + Scale(_gameArea.Width) &&
@@ -440,7 +436,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private void UpdateLasers()
         {
             var found = new List<Guid>();
-            foreach(var turret in _game.Turrets)
+            foreach (var turret in _game.Turrets)
             {
                 if (turret.TurretInfo is LaserTurretDefinition)
                 {
@@ -464,7 +460,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             foreach (var key in _lasers.Keys)
                 if (!found.Contains(key))
                     toRemove.Add(key);
-            foreach(var remove in toRemove)
+            foreach (var remove in toRemove)
                 _lasers.Remove(remove);
         }
 

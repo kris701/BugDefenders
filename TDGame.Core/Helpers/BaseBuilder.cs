@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using System.Text.Json;
-using System.Threading.Tasks;
 using TDGame.Core.Models;
 
 namespace TDGame.Core.Helpers
@@ -40,7 +35,7 @@ namespace TDGame.Core.Helpers
 
         public void LoadExternalResources(List<FileInfo> items)
         {
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 var parsed = JsonSerializer.Deserialize<T>(File.ReadAllText(item.FullName), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 if (parsed == null)

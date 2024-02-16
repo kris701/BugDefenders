@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
@@ -135,7 +133,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Text = $"Pause",
                 Font = BasicFonts.GetFont(16),
                 X = xOffset + 5,
-                Y = yOffset + 135 ,
+                Y = yOffset + 135,
                 Height = 30,
                 Width = 100
             };
@@ -250,7 +248,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             var turrets = ResourceManager.Turrets.GetResources();
             int offset = 0;
-            foreach(var turretName in turrets)
+            foreach (var turretName in turrets)
             {
                 var turret = ResourceManager.Turrets.GetResource(turretName);
                 var newTurretButton = new ButtonControl(this, clicked: BuyTurret_Click)
@@ -316,7 +314,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             int itemXOffset = 0;
             int itemWidth = 205;
             int margin = 10;
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 var newItem = new UpgradePanel(this, BuyUpgrade_Click)
                 {

@@ -1,15 +1,12 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.Core.Resources;
 using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Resources;
+using TDGame.OpenGL.Engine.Controls;
+using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures.Animations;
 
 namespace TDGame.OpenGL.Screens.GameScreen
@@ -32,7 +29,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             sb.AppendLine(enemy.GetDefinition().Name);
             sb.AppendLine(enemy.GetDefinition().Description);
             sb.AppendLine($"Type: {ResourceManager.EnemyTypes.GetResource(enemy.GetDefinition().EnemyType).Name}");
-            sb.AppendLine($"HP: {Math.Round(enemy.Health,0)}");
+            sb.AppendLine($"HP: {Math.Round(enemy.Health, 0)}");
             descriptionControl.Text = sb.ToString();
         }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using TDGame.Core.Helpers;
+﻿using TDGame.Core.Helpers;
 using TDGame.Core.Models;
 using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
@@ -62,7 +59,7 @@ namespace TDGame.Core
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
 
             var options = ResourceManager.Enemies.GetResources();
-            foreach(var enemy in options)
+            foreach (var enemy in options)
             {
                 if (ResourceManager.Enemies.GetResource(enemy).IsBoss)
                     _bossEnemies.Add(enemy);

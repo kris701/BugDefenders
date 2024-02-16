@@ -1,10 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 
@@ -13,24 +8,32 @@ namespace TDGame.OpenGL.Engine.Controls
     public class LabelControl : TileControl
     {
         private string _text = "";
-        public string Text { 
-            get { 
-                return _text; 
-            } set {
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
                 if (value != _text)
                     _textChanged = true;
                 _text = value;
-            } 
+            }
         }
         public Color FontColor { get; set; } = Color.Black;
         private SpriteFont _font = BasicFonts.GetFont(8);
-        public SpriteFont Font { 
-            get { 
-                return _font; 
-            } set { 
+        public SpriteFont Font
+        {
+            get
+            {
+                return _font;
+            }
+            set
+            {
                 _font = value;
                 _textChanged = true;
-            } 
+            }
         }
 
         internal float _textX = 0;

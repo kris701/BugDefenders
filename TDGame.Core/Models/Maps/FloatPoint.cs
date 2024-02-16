@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TDGame.Core.Models.Maps
+﻿namespace TDGame.Core.Models.Maps
 {
     public class FloatPoint
     {

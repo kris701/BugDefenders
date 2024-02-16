@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 
@@ -14,12 +9,16 @@ namespace TDGame.OpenGL.Engine.Controls
     {
         public Texture2D BorderBrush { get; set; } = BasicTextures.GetBasicRectange(Color.Black);
         private float _thickness = 2;
-        public float Thickness { 
-            get { 
-                return _thickness; 
-            } set {
+        public float Thickness
+        {
+            get
+            {
+                return _thickness;
+            }
+            set
+            {
                 _thickness = Parent.Scale(value);
-            } 
+            }
         }
         public IControl Child { get; set; }
 

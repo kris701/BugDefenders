@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Models.Entities.Enemies;
-using TDGame.Core.Models.Entities.Projectiles;
+﻿using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.GameStyles;
 using TDGame.Core.Models.Maps;
@@ -19,13 +13,17 @@ namespace TDGame.Core
         public bool AutoSpawn { get; set; } = false;
         public float Evolution { get; set; } = 1;
         private bool _running = true;
-        public bool Running { 
-            get { 
-                return _running; 
-            } set {
+        public bool Running
+        {
+            get
+            {
+                return _running;
+            }
+            set
+            {
                 if (!GameOver)
                     _running = value;
-            } 
+            }
         }
         public List<EnemyInstance> CurrentEnemies { get; set; }
         public int HP { get; set; }

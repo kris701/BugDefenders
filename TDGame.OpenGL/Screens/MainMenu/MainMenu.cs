@@ -1,6 +1,4 @@
-﻿using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Settings;
+﻿using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.MainMenu
 {

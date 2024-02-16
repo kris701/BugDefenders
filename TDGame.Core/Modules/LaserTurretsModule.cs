@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Models.Entities.Enemies;
+﻿using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Turrets;
-using TDGame.Core.Resources;
 
 namespace TDGame.Core.Modules
 {
@@ -20,7 +14,7 @@ namespace TDGame.Core.Modules
 
         public void Update(TimeSpan passed)
         {
-            foreach(var turret in Game.Turrets)
+            foreach (var turret in Game.Turrets)
             {
                 if (turret.TurretInfo is LaserTurretDefinition def)
                 {

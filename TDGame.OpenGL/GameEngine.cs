@@ -1,13 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Settings;
@@ -83,10 +79,10 @@ namespace TDGame.OpenGL
                 {
                     if (subFolder.Name.ToUpper() == "TEXTURES")
                     {
-                        foreach(var file in subFolder.GetFiles())
+                        foreach (var file in subFolder.GetFiles())
                         {
                             var textureSetDef = JsonSerializer.Deserialize<TexturesDefinition>(File.ReadAllText(file.FullName));
-                            foreach(var texture in textureSetDef.Textures)
+                            foreach (var texture in textureSetDef.Textures)
                             {
                                 var textureFile = new FileInfo(Path.Combine(subFolder.Parent.FullName, "Content", texture.Content));
                                 texture.Content = textureFile.FullName;
@@ -147,7 +143,7 @@ namespace TDGame.OpenGL
             LoadMods();
         }
 
-        public void SaveSettings() 
+        public void SaveSettings()
         {
             if (File.Exists(_settingsFile))
                 File.Delete(_settingsFile);

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Resources;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TDGame.Core.Models.Entities.Turrets
 {

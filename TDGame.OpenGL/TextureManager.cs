@@ -2,12 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 using TDGame.Core.Helpers;
 using TDGame.OpenGL.Textures;
 
@@ -16,7 +11,7 @@ namespace TDGame.OpenGL
     public static class TextureManager
     {
         public static BaseBuilder<TexturePackDefinition> TexturePacks = new BaseBuilder<TexturePackDefinition>("Textures.TexturePacks", Assembly.GetExecutingAssembly());
-        
+
         private static string _noTextureName = "notexture";
         private static Texture2D _noTexture;
         private static TextureSetDefinition _noTextureSet;

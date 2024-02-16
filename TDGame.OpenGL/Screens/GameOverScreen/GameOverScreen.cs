@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
-using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Settings;
 
 namespace TDGame.OpenGL.Screens.GameOverScreen
 {

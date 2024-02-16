@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Models;
-
-namespace TDGame.Core.Models.GameStyles
+﻿namespace TDGame.Core.Models.GameStyles
 {
     public class GameStyleDefinition : IDefinition
     {

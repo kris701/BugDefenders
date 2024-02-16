@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using TDGame.Core.Models;
-
-namespace TDGame.Core.Models.Entities.Enemies
+﻿namespace TDGame.Core.Models.Entities.Enemies
 {
     public class EnemyDefinition : IDefinition
     {

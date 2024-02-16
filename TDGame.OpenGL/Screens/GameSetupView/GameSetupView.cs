@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Screens.GameScreen;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
 {

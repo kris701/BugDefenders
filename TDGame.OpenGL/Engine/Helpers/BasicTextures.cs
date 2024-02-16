@@ -22,7 +22,7 @@ namespace TDGame.OpenGL.Engine.Helpers
                 return _rectangleCache[target];
             Texture2D texture = new Texture2D(_graphicsDevice, 1, 1);
             texture.SetData(new[] { target });
-            _rectangleCache.Add(target, texture); 
+            _rectangleCache.Add(target, texture);
             return texture;
         }
         public static Texture2D GetClickedTexture() => GetBasicRectange(new Color(64, 64, 64, 100));
