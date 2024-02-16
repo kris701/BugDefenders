@@ -18,6 +18,7 @@
       }
     ]
   },
+  "CanDamage": [ 1 ],
   "Upgrades": [
     {
       "UpgradeType": "AOETurret",

@@ -8,5 +8,6 @@
   "Size": 30,
   "WaveSize": 3,
   "IsBoss": false,
-  "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0"
+  "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+  "TerrainType": 1
 }

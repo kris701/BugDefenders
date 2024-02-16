@@ -8,6 +8,7 @@
     "TurretModule": "InvestmentTurret",
     "MoneyPrWave": 250
   },
+  "CanDamage": [],
   "Upgrades": [
     {
       "UpgradeType": "InvestmentTurret",

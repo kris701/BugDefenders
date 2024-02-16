@@ -34,6 +34,8 @@ namespace TDGame.Core.Modules
         private void UpdateTurret(TurretInstance turret, LaserTurretDefinition def)
         {
             var best = Game.GetNearestEnemy(turret, def.Range);
+            if (best != null && !turret.GetDefinition().CanDamage.Contains(best.GetDefinition().TerrainType))
+                best = null;
             if (best != null)
             {
                 if (Game.OnTurretShooting != null && turret.Targeting == null)

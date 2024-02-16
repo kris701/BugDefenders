@@ -40,6 +40,8 @@ namespace TDGame.Core.Modules
             var targeting = new List<EnemyInstance>();
             foreach (var enemy in Game.CurrentEnemies)
             {
+                if (!turret.GetDefinition().CanDamage.Contains(enemy.GetDefinition().TerrainType))
+                    continue;
                 var dist = MathHelpers.Distance(enemy, turret);
                 if (dist <= def.Range)
                 {

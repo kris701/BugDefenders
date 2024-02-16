@@ -47,5 +47,20 @@ namespace TDGame.Core.Models.Entities.Turrets
                     worth += upgrade.Cost;
             return worth;
         }
+
+        public string GetDescriptionString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(GetDefinition().GetDescriptionString());
+            sb.AppendLine(TurretInfo.GetDescriptionString());
+            if (Kills != 0)
+            {
+                sb.AppendLine(" ");
+                sb.AppendLine($"Kills: {Kills}");
+            }
+
+            return sb.ToString();
+        }
     }
 }

@@ -11,6 +11,7 @@
     "ProjectileID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
     "IsTrailing": false
   },
+  "CanDamage": [ 1, 2 ],
   "Upgrades": [
     {
       "UpgradeType": "ProjectileTurret",

@@ -159,21 +159,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 if (!turret.HasUpgrades.Contains(upgrade.ID))
                     _turretUpgradePanels[index++].SetUpgrade(upgrade, _game.CanLevelUpTurret(turret, upgrade.ID));
 
-            _turretStatesTextbox.Text = GetTurretDescriptionString(turret);
+            _turretStatesTextbox.Text = turret.GetDescriptionString();
             _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
-        }
-
-        private string GetTurretDescriptionString(TurretInstance turret)
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine(turret.TurretInfo.GetDescriptionString());
-            if (turret.Kills != 0)
-            {
-                sb.AppendLine(" ");
-                sb.AppendLine($"Kills: {turret.Kills}");
-            }
-            return sb.ToString();
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)
@@ -429,7 +417,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(turret) * 2));
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
-                _turretStatesTextbox.Text = GetTurretDescriptionString(new TurretInstance(turret));
+                _turretStatesTextbox.Text = new TurretInstance(turret).GetDescriptionString();
             }
         }
 

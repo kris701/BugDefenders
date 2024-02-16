@@ -66,8 +66,13 @@ namespace TDGame.Core.Models.Entities.Projectiles
             if (SlowingDuration != 0)
                 sb.AppendLine($"Slowing Duration: {SlowingDuration}");
             sb.AppendLine();
-            foreach (var modifier in DamageModifiers)
-                sb.AppendLine($"{ResourceManager.EnemyTypes.GetResource(modifier.EnemyType).Name}: {modifier.Modifier}x");
+            if (DamageModifiers.Count > 0)
+            {
+                sb.AppendLine("Damage Modifiers:");
+                foreach (var modifier in DamageModifiers)
+                    sb.Append($"{ResourceManager.EnemyTypes.GetResource(modifier.EnemyType).Name}: {modifier.Modifier}x, ");
+                sb.AppendLine();
+            }
 
             return sb.ToString();
         }
