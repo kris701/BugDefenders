@@ -34,5 +34,14 @@ namespace TDGame.Core.Helpers
             var b = x1 - x2;
             return (float)Math.Atan2(a, b);
         }
+
+        public static FloatPoint GetPredictedLocation(float angle, float speed, float multiplier = 1)
+        {
+            var xMod = Math.Cos(angle);
+            var yMod = Math.Sin(angle);
+            return new FloatPoint(
+                (float)xMod * speed * multiplier,
+                (float)yMod * speed * multiplier);
+        }
     }
 }

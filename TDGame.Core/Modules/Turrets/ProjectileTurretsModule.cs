@@ -1,7 +1,9 @@
 ﻿using TDGame.Core.Helpers;
 using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Enemies.Modules;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Models.Entities.Turrets.Modules;
 using TDGame.Core.Models.Maps;
 
 namespace TDGame.Core.Modules.Turrets
@@ -66,12 +68,17 @@ namespace TDGame.Core.Modules.Turrets
 
         private FloatPoint GetTrailingPoint(EnemyInstance enemy, ProjectileInstance projectile)
         {
-            float x = enemy.CenterX;
-            float y = enemy.CenterY;
-            var dist = MathHelpers.Distance(enemy, projectile);
-            var steps = dist / projectile.GetDefinition().Speed;
-            var change = Game.GetEnemyLocationChange(enemy.Angle, enemy.GetSpeed());
-            return new FloatPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
+            if (enemy.ModuleInfo is ISlowable slow)
+            {
+                float x = enemy.CenterX;
+                float y = enemy.CenterY;
+                var dist = MathHelpers.Distance(enemy, projectile);
+                var steps = dist / projectile.GetDefinition().Speed;
+                var change = MathHelpers.GetPredictedLocation(enemy.Angle, slow.GetSpeed(), Game.GameStyle.EnemySpeedMultiplier);
+                return new FloatPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
+            }
+            else
+                return new FloatPoint(enemy.CenterX, enemy.CenterY);
         }
 
         private void UpdateProjectiles()

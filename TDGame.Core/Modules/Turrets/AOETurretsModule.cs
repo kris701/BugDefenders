@@ -1,6 +1,8 @@
 ﻿using TDGame.Core.Helpers;
 using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Enemies.Modules;
 using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Modules.Turrets
 {
@@ -55,10 +57,13 @@ namespace TDGame.Core.Modules.Turrets
 
                 foreach (var enemy in targeting)
                 {
-                    if (def.SlowingFactor <= enemy.SlowingFactor)
+                    if (enemy.ModuleInfo is ISlowable slow)
                     {
-                        enemy.SlowingFactor = def.SlowingFactor;
-                        enemy.SlowingDuration = def.SlowingDuration;
+                        if (def.SlowingFactor <= slow.SlowingFactor)
+                        {
+                            slow.SlowingFactor = def.SlowingFactor;
+                            slow.SlowingDuration = def.SlowingDuration;
+                        }
                     }
                     if (Game.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def)))
                         turret.Kills++;

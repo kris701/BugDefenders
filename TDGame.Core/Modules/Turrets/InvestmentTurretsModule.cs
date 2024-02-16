@@ -1,4 +1,4 @@
-﻿using TDGame.Core.Models.Entities.Turrets;
+﻿using TDGame.Core.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Modules.Turrets
 {

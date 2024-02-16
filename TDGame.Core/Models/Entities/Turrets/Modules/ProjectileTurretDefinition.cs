@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Resources;
 
-namespace TDGame.Core.Models.Entities.Turrets
+namespace TDGame.Core.Models.Entities.Turrets.Modules
 {
-    public class ProjectileTurretDefinition : ITurretType
+    public class ProjectileTurretDefinition : ITurretModule
     {
         public float Range { get; set; }
         public int Cooldown { get; set; }
@@ -26,7 +26,7 @@ namespace TDGame.Core.Models.Entities.Turrets
             ProjectileDefinition = ResourceManager.Projectiles.GetResource(ProjectileID).Copy();
         }
 
-        public ITurretType Copy()
+        public ITurretModule Copy()
         {
             return new ProjectileTurretDefinition(Range, Cooldown, ProjectileID, IsTrailing);
         }

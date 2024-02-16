@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Turrets.Modules;
 using TDGame.Core.Resources;
 
 namespace TDGame.Core.Models.Entities.Turrets
@@ -11,7 +12,7 @@ namespace TDGame.Core.Models.Entities.Turrets
         public Guid ID { get; set; }
         public Guid DefinitionID { get; set; }
 
-        public ITurretType TurretInfo { get; set; }
+        public ITurretModule TurretInfo { get; set; }
 
         public EnemyInstance? Targeting { get; set; }
         public int Kills { get; set; } = 0;

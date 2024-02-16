@@ -6,6 +6,7 @@ using System.Linq;
 using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Models.Entities.Turrets.Modules;
 using TDGame.Core.Models.Entities.Upgrades;
 using TDGame.Core.Models.Maps;
 using TDGame.Core.Resources;

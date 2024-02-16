@@ -3,11 +3,13 @@
   "Name": "Enemy Type 3",
   "description": "abav",
   "Health": 500,
-  "Speed": 5,
-  "Reward": 50,
   "Size": 30,
-  "WaveSize": 3,
-  "IsBoss": false,
+  "Reward": 50,
+  "ModuleInfo": {
+    "EnemyModule": "Wave",
+    "Speed": 7,
+    "WaveSize": 3
+  },
   "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
   "TerrainType": 1
 }

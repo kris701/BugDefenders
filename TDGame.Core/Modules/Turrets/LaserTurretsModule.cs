@@ -1,5 +1,8 @@
-﻿using TDGame.Core.Models.Entities.Enemies;
+﻿using System;
+using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Entities.Enemies.Modules;
 using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Modules.Turrets
 {
@@ -34,10 +37,13 @@ namespace TDGame.Core.Modules.Turrets
                     Game.OnTurretShooting.Invoke(turret);
                 turret.Targeting = best;
 
-                if (def.SlowingFactor <= best.SlowingFactor)
+                if (best.ModuleInfo is ISlowable slow)
                 {
-                    best.SlowingFactor = def.SlowingFactor;
-                    best.SlowingDuration = def.SlowingDuration;
+                    if (def.SlowingFactor <= slow.SlowingFactor)
+                    {
+                        slow.SlowingFactor = def.SlowingFactor;
+                        slow.SlowingDuration = def.SlowingDuration;
+                    }
                 }
                 if (!Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def)))
                     turret.Angle = Game.GetAngle(best, turret);

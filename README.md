@@ -4,14 +4,14 @@
 - [ ] Money for starting a wave
 - [ ] Black list turret ids in GameStyles 
     - Could be useful if you where to make a "bullets only" GameStyle or something like that 
-- [ ] Enemy modules like the turret system
-    - Could be interesting to make boss enemies handled separately with unique modules
 - [ ] User system (to save scores and permanent upgrades) 
 - [ ] Score board
 - [ ] Carry over system
     - Something like, each game if you kill `n` amount of enemies you can permanently do 1% more damage across all following games (or something like it)
     - [ ] Upgrade menu for this
     - [ ] GameStyle that disallows permanent upgrades
+- [X] Enemy modules like the turret system
+    - Could be interesting to make boss enemies handled separately with unique modules
 - [X] Animated projectiles
 - [X] Animated enemies
 - [X] Enemy selection typs

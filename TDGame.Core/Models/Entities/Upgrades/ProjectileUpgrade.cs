@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using TDGame.Core.Models.Entities.Turrets;
+using TDGame.Core.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Models.Entities.Upgrades
 {

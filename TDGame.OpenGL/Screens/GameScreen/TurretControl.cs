@@ -33,7 +33,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             turretLevelControl = new LabelControl(Parent)
             {
                 Font = BasicFonts.GetFont(10),
-                IsVisible = false
+                IsVisible = false,
+                FontColor = Color.White
             };
             turretLevelControl._x = _x + Width;
             turretLevelControl._y = _y;

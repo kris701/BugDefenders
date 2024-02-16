@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using TDGame.Core.Models.Entities.Turrets.Modules;
 using TDGame.Core.Models.Entities.Upgrades;
 using static TDGame.Core.Models.Entities.Enemies.EnemyDefinition;
 namespace TDGame.Core.Models.Entities.Turrets
@@ -10,7 +11,7 @@ namespace TDGame.Core.Models.Entities.Turrets
         public string Description { get; set; }
         public float Size { get; set; }
         public int Cost { get; set; }
-        public ITurretType TurretType { get; set; }
+        public ITurretModule TurretType { get; set; }
         public List<EnemyTerrrainTypes> CanDamage { get; set; }
 
         public List<IUpgrade> Upgrades { get; set; }

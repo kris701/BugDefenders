@@ -4,6 +4,7 @@ using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.Maps;
+using TDGame.Core.Modules.Enemies;
 using TDGame.Core.Modules.Turrets;
 using TDGame.Core.Resources;
 using static TDGame.Core.Models.Entities.Enemies.EnemyDefinition;
@@ -31,13 +32,14 @@ namespace TDGame.Core
         private Random _rnd = new Random();
 
         public int Spawned { get; internal set; } = 1;
-        private List<Guid> _normalEnemies = new List<Guid>();
-        private List<Guid> _bossEnemies = new List<Guid>();
 
         public AOETurretsModule AOETurretsModule { get; }
         public LaserTurretsModule LaserTurretsModule { get; }
         public ProjectileTurretsModule ProjectileTurretsModule { get; }
         public InvestmentTurretsModule InvestmentTurretsModule { get; }
+
+        public WaveEnemyModule WaveEnemiesModule { get; }
+        public SingleEnemyModule SingleEnemiesModule { get; }
 
         public Game(Guid mapID, Guid styleID)
         {
@@ -50,6 +52,9 @@ namespace TDGame.Core
             ProjectileTurretsModule = new ProjectileTurretsModule(this);
             InvestmentTurretsModule = new InvestmentTurretsModule(this);
 
+            WaveEnemiesModule = new WaveEnemyModule(this);
+            SingleEnemiesModule = new SingleEnemyModule(this);
+
             Map = ResourceManager.Maps.GetResource(mapID);
             GameStyle = ResourceManager.GameStyles.GetResource(styleID);
             HP = GameStyle.StartingHP;
@@ -57,15 +62,6 @@ namespace TDGame.Core
             _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (CurrentEnemies.Count == 0) QueueEnemies(); });
             _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
-
-            var options = ResourceManager.Enemies.GetResources();
-            foreach (var enemy in options)
-            {
-                if (ResourceManager.Enemies.GetResource(enemy).IsBoss)
-                    _bossEnemies.Add(enemy);
-                else
-                    _normalEnemies.Add(enemy);
-            }
 
             UpdateEnemiesToSpawnList();
         }
@@ -91,15 +87,15 @@ namespace TDGame.Core
         private void MainLoop()
         {
             UpdateSpawnQueue();
-            UpdateEnemySlowDuration(_mainLoopTimer.Target);
-            UpdateEnemyPositions();
             AOETurretsModule.Update(_mainLoopTimer.Target);
             LaserTurretsModule.Update(_mainLoopTimer.Target);
             ProjectileTurretsModule.Update(_mainLoopTimer.Target);
             InvestmentTurretsModule.Update(_mainLoopTimer.Target);
+            WaveEnemiesModule.Update(_mainLoopTimer.Target);
+            SingleEnemiesModule.Update(_mainLoopTimer.Target);
         }
 
-        private void DamagePlayer()
+        internal void DamagePlayer()
         {
             HP--;
             if (HP <= 0)
@@ -168,7 +164,7 @@ namespace TDGame.Core
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {
-                Money += enemy.GetDefinition().Reward;
+                Money += (int)(enemy.GetDefinition().Reward * GameStyle.MoneyMultiplier);
                 Score += enemy.GetDefinition().Reward;
                 CurrentEnemies.Remove(enemy);
                 if (OnEnemyKilled != null)

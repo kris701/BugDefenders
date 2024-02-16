@@ -1,12 +1,12 @@
 ﻿using System.Text;
 
-namespace TDGame.Core.Models.Entities.Turrets
+namespace TDGame.Core.Models.Entities.Turrets.Modules
 {
-    public class InvestmentTurretDefinition : ITurretType
+    public class InvestmentTurretDefinition : ITurretModule
     {
         public int MoneyPrWave { get; set; }
 
-        public ITurretType Copy()
+        public ITurretModule Copy()
         {
             return new InvestmentTurretDefinition()
             {

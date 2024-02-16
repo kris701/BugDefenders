@@ -9,6 +9,5 @@
   "StartingMoney": 1000,
   "EnemyWaveMultiplier": 1.5,
   "ProjectileSpeedCap": 20,
-  "BossEveryNWave": 5,
-  "QueuesPrWave": 2
+  "BossEveryNWave": 5
 }

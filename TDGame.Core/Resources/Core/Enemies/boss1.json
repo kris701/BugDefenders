@@ -3,11 +3,12 @@
   "Name": "Boss 1",
   "description": "abav",
   "Health": 5000,
-  "Speed": 2,
-  "Reward": 1000,
   "Size": 50,
-  "WaveSize": 1,
-  "IsBoss": true,
+  "Reward": 1000,
+  "ModuleInfo": {
+    "EnemyModule": "Single",
+    "Speed": 2
+  },
   "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
   "TerrainType": 1
 }

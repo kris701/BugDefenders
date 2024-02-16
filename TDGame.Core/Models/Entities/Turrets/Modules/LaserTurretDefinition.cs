@@ -2,9 +2,9 @@
 using System.Text.Json.Serialization;
 using TDGame.Core.Resources;
 
-namespace TDGame.Core.Models.Entities.Turrets
+namespace TDGame.Core.Models.Entities.Turrets.Modules
 {
-    public class AOETurretDefinition : ITurretType
+    public class LaserTurretDefinition : ITurretModule
     {
         public float Range { get; set; }
         public float Damage { get; set; }
@@ -16,9 +16,9 @@ namespace TDGame.Core.Models.Entities.Turrets
         [JsonIgnore]
         public TimeSpan CoolingFor { get; set; }
 
-        public ITurretType Copy()
+        public ITurretModule Copy()
         {
-            return new AOETurretDefinition()
+            return new LaserTurretDefinition()
             {
                 Range = Range,
                 Damage = Damage,
@@ -33,7 +33,7 @@ namespace TDGame.Core.Models.Entities.Turrets
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("Type: AOE");
+            sb.AppendLine("Type: Laser");
             if (Range != 0)
                 sb.AppendLine($"Range: {Range}");
             if (Damage != 0)
