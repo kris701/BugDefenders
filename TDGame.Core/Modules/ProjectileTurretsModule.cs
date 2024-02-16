@@ -41,9 +41,7 @@ namespace TDGame.Core.Modules
 
         private void UpdateTurret(TurretInstance turret, ProjectileTurretDefinition def)
         {
-            var best = Game.GetNearestEnemy(turret, def.Range);
-            if (best != null && !turret.GetDefinition().CanDamage.Contains(best.GetDefinition().TerrainType))
-                best = null;
+            var best = Game.GetBestEnemy(turret, def.Range);
             if (best != null)
             {
                 if (Game.OnTurretShooting != null && turret.Targeting == null)
@@ -92,7 +90,7 @@ namespace TDGame.Core.Modules
                 {
                     if (!Game.CurrentEnemies.Contains(projectile.Target))
                     {
-                        var best = Game.GetNearestEnemy(projectile);
+                        var best = Game.GetBestEnemy(projectile);
                         if (best == null)
                         {
                             toRemove.Add(projectile);

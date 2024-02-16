@@ -1,11 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -28,6 +31,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private List<UpgradePanel> _turretUpgradePanels = new List<UpgradePanel>();
         private List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
+
+        private List<ButtonControl> _turretTargetingModes = new List<ButtonControl>();
 
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
@@ -415,15 +420,44 @@ namespace TDGame.OpenGL.Screens.GameScreen
             });
             _turretStatesTextbox = new TextboxControl(this)
             {
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(8),
                 Text = "Select a Turret",
                 X = xOffset + 5,
                 Y = yOffset + 75,
                 Width = width - 10,
-                Height = height - 80,
+                Height = height - 115,
                 FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan)
             };
             AddControl(1, _turretStatesTextbox);
+
+            var values = Enum.GetValues(typeof(TargetingTypes)).Cast<TargetingTypes>().ToList();
+            var buttonWidth = (width - 10) / (values.Count - 1) - 5;
+            var count = 0;
+            foreach (TargetingTypes option in values.Skip(1))
+            {
+                var newControl = new ButtonControl(this, (e) =>
+                {
+                    if (_selectedTurret != null)
+                        _selectedTurret.TargetingType = option;
+                    foreach (var button in _turretTargetingModes)
+                        button.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
+                    e.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                })
+                {
+                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    FillClickedColor = BasicTextures.GetClickedTexture(),
+                    FillDisabledColor = BasicTextures.GetDisabledTexture(),
+                    Font = BasicFonts.GetFont(10),
+                    Text = $"{Enum.GetName(typeof(TargetingTypes), option)}",
+                    X = xOffset + 5 + (count++ * (buttonWidth + 5)),
+                    Y = yOffset + 285,
+                    Height = 25,
+                    Width = buttonWidth,
+                    IsEnabled = false,
+                };
+                _turretTargetingModes.Add(newControl);
+                AddControl(1, newControl);
+            }
         }
     }
 }

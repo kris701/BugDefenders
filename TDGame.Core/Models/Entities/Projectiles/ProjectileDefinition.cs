@@ -27,6 +27,7 @@ namespace TDGame.Core.Models.Entities.Projectiles
         public float SlowingFactor { get; set; }
         public int SlowingDuration { get; set; }
         public List<DamageModifier> DamageModifiers { get; set; }
+        public List<EnemyTerrrainTypes> CanDamage { get; set; }
 
         public ProjectileDefinition Copy()
         {
@@ -44,7 +45,8 @@ namespace TDGame.Core.Models.Entities.Projectiles
                 IsExplosive = IsExplosive,
                 SlowingFactor = SlowingFactor,
                 SlowingDuration = SlowingDuration,
-                DamageModifiers = DamageModifiers
+                DamageModifiers = DamageModifiers,
+                CanDamage = CanDamage
             };
         }
 
@@ -71,6 +73,13 @@ namespace TDGame.Core.Models.Entities.Projectiles
                 sb.AppendLine("Damage Modifiers:");
                 foreach (var modifier in DamageModifiers)
                     sb.Append($"{ResourceManager.EnemyTypes.GetResource(modifier.EnemyType).Name}: {modifier.Modifier}x, ");
+                sb.AppendLine();
+            }   
+            if (CanDamage.Count != 0)
+            {
+                sb.AppendLine("Can Damage:");
+                foreach (var item in CanDamage)
+                    sb.Append($"{Enum.GetName(typeof(EnemyTerrrainTypes), item)}, ");
                 sb.AppendLine();
             }
 

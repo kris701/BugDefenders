@@ -12,5 +12,8 @@ namespace TDGame.Core.Models
         public float Y { get; set; }
         public float Size { get; set; }
         public float Angle { get; set; }
+
+        public float CenterX { get; }
+        public float CenterY { get; }
     }
 }

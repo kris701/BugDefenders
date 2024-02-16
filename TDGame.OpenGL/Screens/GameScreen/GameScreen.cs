@@ -18,6 +18,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
+using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -132,6 +133,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _turretStatesTextbox.Text = "Select a Turret";
             _sellTurretButton.IsEnabled = false;
             _sellTurretButton.Text = $"Sell Turret";
+            foreach (var button in _turretTargetingModes)
+            {
+                button.IsEnabled = false;
+                button.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
+            }
         }
 
         private void Turret_Click(AnimatedButtonControl parent)
@@ -162,6 +168,13 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _turretStatesTextbox.Text = turret.GetDescriptionString();
             _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
+
+            foreach (var button in _turretTargetingModes)
+            {
+                button.IsEnabled = true;
+                if (Enum.GetName(typeof(TargetingTypes), turret.TargetingType) == button.Text)
+                    button.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+            }
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)

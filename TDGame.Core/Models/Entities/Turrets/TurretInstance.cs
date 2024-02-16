@@ -14,6 +14,8 @@ namespace TDGame.Core.Models.Entities.Turrets
 {
     public class TurretInstance : BasePositionModel, IInstance<TurretDefinition>
     {
+        public enum TargetingTypes { None, Closest, Weakest, Strongest }
+
         public Guid ID { get; set; }
         public Guid DefinitionID { get; set; }
 
@@ -22,6 +24,7 @@ namespace TDGame.Core.Models.Entities.Turrets
         public EnemyInstance? Targeting { get; set; }
         public int Kills { get; set; } = 0;
         public List<Guid> HasUpgrades { get; set; }
+        public TargetingTypes TargetingType { get; set; } = TargetingTypes.Closest;
 
         public TurretInstance(Guid definitionID) : this(ResourceManager.Turrets.GetResource(definitionID))
         {

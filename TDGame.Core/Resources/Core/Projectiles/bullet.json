@@ -22,5 +22,6 @@
       "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
       "Modifier": 0.5
     }
-  ]
+  ],
+  "CanDamage": [1]
 }

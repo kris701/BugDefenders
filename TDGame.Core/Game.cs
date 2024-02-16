@@ -9,6 +9,8 @@ using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.Maps;
 using TDGame.Core.Modules;
 using TDGame.Core.Resources;
+using static TDGame.Core.Models.Entities.Enemies.EnemyDefinition;
+using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.Core
 {
@@ -110,20 +112,56 @@ namespace TDGame.Core
         internal float GetAngle(FloatPoint target, IPosition item) => MathHelpers.GetAngle(target.X, target.Y, item.X + item.Size / 2, item.Y + item.Size / 2);
         internal float GetAngle(IPosition item1, IPosition item2) => MathHelpers.GetAngle(item1.X + item1.Size / 2, item1.Y + item1.Size / 2, item2.X + item2.Size / 2, item2.Y + item2.Size / 2);
 
-        internal EnemyInstance? GetNearestEnemy(BasePositionModel projectile) => GetNearestEnemy(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, float.MaxValue);
-        internal EnemyInstance? GetNearestEnemy(BasePositionModel projectile, float range) => GetNearestEnemy(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, range);
-        internal EnemyInstance? GetNearestEnemy(double x, double y, float range)
+        internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanDamage);
+        internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanDamage);
+        internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, List<EnemyTerrrainTypes> canDamage)
         {
-            var minDist = float.MaxValue;
             EnemyInstance? best = null;
-            foreach (var enemy in CurrentEnemies)
+            switch (targetingType)
             {
-                var dist = MathHelpers.Distance(x, y, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2);
-                if (dist <= range && dist < minDist)
-                {
-                    minDist = dist;
-                    best = enemy;
-                }
+                case TargetingTypes.Closest:
+                    var minDist = float.MaxValue;
+                    foreach (var enemy in CurrentEnemies)
+                    {
+                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
+                            continue;
+                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        if (dist <= range && dist < minDist)
+                        {
+                            minDist = dist;
+                            best = enemy;
+                        }
+                    }
+                    break;
+                case TargetingTypes.Weakest:
+                    var lowestHP = float.MaxValue;
+                    foreach (var enemy in CurrentEnemies)
+                    {
+                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
+                            continue;
+                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        if (dist <= range && enemy.Health < lowestHP)
+                        {
+                            lowestHP = enemy.Health;
+                            best = enemy;
+                        }
+                    }
+                    break;
+                case TargetingTypes.Strongest:
+                    var highestHP = 0f;
+                    foreach (var enemy in CurrentEnemies)
+                    {
+                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
+                            continue;
+                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        if (dist <= range && enemy.Health > highestHP)
+                        {
+                            highestHP = enemy.Health;
+                            best = enemy;
+                        }
+                    }
+                    break;
+
             }
             return best;
         }
