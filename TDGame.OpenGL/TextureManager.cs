@@ -22,7 +22,7 @@ namespace TDGame.OpenGL
         private static ContentManager _contentManager;
         private static Dictionary<Guid, IAnimationDefinition> _animations = new Dictionary<Guid, IAnimationDefinition>();
         private static Dictionary<Guid, Texture2D> _textures = new Dictionary<Guid, Texture2D>();
-        private static Dictionary<Guid, List<Texture2D>> _textureSets = new Dictionary<Guid, List<Texture2D>>();
+        private static Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
 
         public static void Initialize(ContentManager contentManager)
         {
@@ -69,11 +69,10 @@ namespace TDGame.OpenGL
         public static void LoadTexture(TextureSetDefinition item)
         {
             if (_textureSets.ContainsKey(item.ID))
-                _textureSets[item.ID].Clear();
-            else
-                _textureSets.Add(item.ID, new List<Texture2D>());
+                _textureSets.Remove(item.ID);
+            _textureSets.Add(item.ID, item);
             foreach (var content in item.Contents)
-                _textureSets[item.ID].Add(_contentManager.Load<Texture2D>(content));
+                _textureSets[item.ID].LoadedContents.Add(_contentManager.Load<Texture2D>(content));
         }
 
         public static TexturePackDefinition GetTexturePack(Guid texturePack) => TexturePacks.GetResource(texturePack);
@@ -85,13 +84,28 @@ namespace TDGame.OpenGL
             return _noTexture;
         }
 
-        public static List<Texture2D> GetTextureSet(Guid id)
+        public static TextureSetDefinition GetTextureSet(Guid id)
         {
             if (_textureSets.ContainsKey(id))
                 return _textureSets[id];
             if (_textures.ContainsKey(id))
-                return new List<Texture2D>() { _textures[id] };
-            return new List<Texture2D>() { _noTexture };
+                return new TextureSetDefinition() { 
+                    ID = id,
+                    FrameTime = 1000,
+                    LoadedContents = new List<Texture2D>()
+                    {
+                        _textures[id]
+                    }
+                };
+            return new TextureSetDefinition()
+            {
+                ID = id,
+                FrameTime = 1000,
+                LoadedContents = new List<Texture2D>()
+                {
+                    _noTexture
+                }
+            };
         }
 
         public static T GetAnimation<T>(Guid id) where T : IAnimationDefinition

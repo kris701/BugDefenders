@@ -93,6 +93,7 @@
     "TextureSets": [
       {
         "ID": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
+        "FrameTime": 100,
         "Contents": [
           "Explosion/explosion1",
           "Explosion/explosion2"
@@ -100,6 +101,7 @@
       },
       {
         "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+        "FrameTime": 500,
         "Contents": [
           "Entities/Turrets/turret1/turret1_idle_1",
           "Entities/Turrets/turret1/turret1_idle_2"
@@ -107,6 +109,7 @@
       },
       {
         "ID": "9448e307-2401-4060-9bc2-12698f86aa73",
+        "FrameTime": 100,
         "Contents": [
           "Entities/Turrets/turret1/turret1_shoot_1",
           "Entities/Turrets/turret1/turret1_shoot_2"
@@ -114,6 +117,7 @@
       },
       {
         "ID": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+        "FrameTime": 500,
         "Contents": [
           "Entities/Turrets/turret2/turret2_idle_1",
           "Entities/Turrets/turret2/turret2_idle_2"
@@ -121,6 +125,7 @@
       },
       {
         "ID": "37de2d39-b883-491d-a70b-536965aac408",
+        "FrameTime": 100,
         "Contents": [
           "Entities/Turrets/turret2/turret2_shoot_1",
           "Entities/Turrets/turret2/turret2_shoot_2"
@@ -128,6 +133,7 @@
       },
       {
         "ID": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
+        "FrameTime": 500,
         "Contents": [
           "Entities/Turrets/turret3/turret3_idle_1",
           "Entities/Turrets/turret3/turret3_idle_2"
@@ -135,6 +141,7 @@
       },
       {
         "ID": "624e9637-9a13-4d0a-8b6f-35c4e9198618",
+        "FrameTime": 100,
         "Contents": [
           "Entities/Turrets/turret3/turret3_shoot_1",
           "Entities/Turrets/turret3/turret3_shoot_2"
@@ -142,6 +149,7 @@
       },
       {
         "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+        "FrameTime": 500,
         "Contents": [
           "Entities/Turrets/turret4/turret4_idle_1",
           "Entities/Turrets/turret4/turret4_idle_2"
@@ -149,6 +157,7 @@
       },
       {
         "ID": "9dca5c04-36c5-4eb5-bd36-a7f8ba25562e",
+        "FrameTime": 100,
         "Contents": [
           "Entities/Turrets/turret4/turret4_shoot_1",
           "Entities/Turrets/turret4/turret4_shoot_2"
@@ -156,6 +165,7 @@
       },
       {
         "ID": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+        "FrameTime": 500,
         "Contents": [
           "Entities/Turrets/turret5/turret5_idle_1",
           "Entities/Turrets/turret5/turret5_idle_2"
@@ -163,6 +173,7 @@
       },
       {
         "ID": "63afea5b-f247-4a86-8648-2c878a21a7ca",
+        "FrameTime": 100,
         "Contents": [
           "Entities/Turrets/turret5/turret5_shoot_1",
           "Entities/Turrets/turret5/turret5_shoot_2"

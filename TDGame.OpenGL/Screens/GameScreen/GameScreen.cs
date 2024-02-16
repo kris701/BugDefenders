@@ -117,8 +117,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _effects.Add(new EffectEntity(projectile)
                 {
                     ID = new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
-                    LifeTime = TimeSpan.FromMilliseconds(250),
-                    FrameTime = TimeSpan.FromMilliseconds(100)
+                    LifeTime = TimeSpan.FromMilliseconds(250)
                 });
             }
         }
@@ -265,12 +264,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private TurretControl CreateNewTurretControl(TurretInstance entity)
         {
+            var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(entity.DefinitionID).OnIdle;
+            var textureSet = TextureManager.GetTextureSet(animation);
             return new TurretControl(this, clicked: Turret_Click)
             {
                 IsEnabled = true,
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
-                TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(entity.DefinitionID).OnIdle),
+                TileSet = textureSet.LoadedContents,
+                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y,
                 Width = entity.Size,
@@ -317,12 +319,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewEffect(EffectEntity entity)
         {
+            var animation = TextureManager.GetAnimation<EffectAnimationDefinition>(entity.ID).OnCreate;
+            var textureSet = TextureManager.GetTextureSet(animation);
             var newTile = new AnimatedTileControl(this)
             {
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y,
-                FrameTime = entity.FrameTime,
-                TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<EffectAnimationDefinition>(entity.ID).OnCreate),
+                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
+                TileSet = textureSet.LoadedContents,
                 AutoPlay = true,
                 Width = entity.Size,
                 Height = entity.Size,
@@ -373,7 +377,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            control.TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnShoot);
+            control.SetTurretAnimation(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnShoot);
             control.Initialize();
         }
 
@@ -382,7 +386,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            control.TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnIdle);
+            control.SetTurretAnimation(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnIdle);
             control.Initialize();
         }
 
@@ -469,7 +473,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 _buyingTurret = turretID;
                 var turret = ResourceManager.Turrets.GetResource(turretID);
-                _buyingPreviewTile.TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(turretID).OnIdle);
+                var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(turretID).OnIdle;
+                var textureSet = TextureManager.GetTextureSet(animation);
+                _buyingPreviewTile.TileSet = textureSet.LoadedContents;
+                _buyingPreviewTile.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
                 _buyingPreviewTile.Width = turret.Size;
                 _buyingPreviewTile.Height = turret.Size;
                 _buyingPreviewTile.Initialize();
