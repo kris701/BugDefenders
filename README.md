@@ -1,6 +1,18 @@
 # TDGame
 
 ## TODO List
+- [ ] Score board
+- [ ] Animated enemies
+- [ ] Animated projectiles
+- [ ] Flying and ground enemies (as well as turrets that only work against those types of enemies)
+- [ ] Enemy selection typs
+    - I.e. shoot at the closest, the weakest, the farthest, etc. 
+- [ ] Cary over system
+    - Something like, each game if you kill n amount of enemies you can permanently do 1% more damage across all following games (or something like it)
+    - [ ] Upgrade menu for this
+    - [ ] GameStyle that disallows permanent upgrades
+- [X] Enemy spawn offset
+    - To make the enemy spawning look a bit more "random"
 - [X] Selling turrets
 - [X] Texture pack levels (at least the setup for it)
 - [x] A static base for turrets?
@@ -8,12 +20,9 @@
 - [X] Propper upgrade panel descriptions
 - [X] Show turret info when buying a new turret (in the turret stats window)
 - [X] Show the name and texture of enemies in the "enemy queue" list
-- [ ] Score board
 - [X] Actual bullet turret type (maybe just a fast projectile will work?)
 - [X] Trailing projectile turrets
 - [X] Turret Upgrade values
-- [ ] Animated enemies
-- [ ] Animated projectiles
 - [X] Animated turrets
     - [X] Different animations for different actions (e.g. shooting vs idle)
 - [X] Enemy health bar
@@ -29,12 +38,3 @@
 - [X] Investment "turrets" 
     - Turrets that don't shoot, but generate money 
 - [X] Combined enemy waves
-- [ ] Enemy spawn offset
-    - To make the enemy spawning look a bit more "random"
-- [ ] Flying and ground enemies (as well as turrets that only work against those types of enemies)
-- [ ] Enemy selection typs
-    - I.e. shoot at the closest, the weakest, the farthest, etc. 
-- [ ] Cary over system
-    - Something like, each game if you kill n amount of enemies you can permanently do 1% more damage across all following games (or something like it)
-    - [ ] Upgrade menu for this
-    - [ ] GameStyle that disallows permanent upgrades

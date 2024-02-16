@@ -10,18 +10,26 @@ using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures;
 using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Models.Maps;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
     public class EnemyControl : TileControl
     {
+        public FloatPoint VisualOffset { get; }
         private TileControl _healthBar;
         private float _initialHP;
         private EnemyInstance _enemy;
+        private int _legalOffset = 5;
         public EnemyControl(IScreen parent, EnemyInstance enemy) : base(parent)
         {
             _initialHP = enemy.Health;
             _enemy = enemy;
+            var rnd = new Random();
+            VisualOffset = new FloatPoint(
+                rnd.Next(-_legalOffset, _legalOffset),
+                rnd.Next(-_legalOffset, _legalOffset)
+                );
         }
 
         public override void Initialize()

@@ -255,6 +255,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Rotation = e.Angle + (float)Math.PI / 2,
                     Tag = e
                 };
+            }, (e, i) =>
+            {
+                i.X = e.X + _gameArea.X + i.VisualOffset.X;
+                i.Y = e.Y + _gameArea.Y + i.VisualOffset.Y;
+                i.Rotation = e.Angle + (float)Math.PI / 2;
             });
             _projectile.UpdateEntities(_game.ProjectileTurretsModule.Projectiles, (e) =>
             {

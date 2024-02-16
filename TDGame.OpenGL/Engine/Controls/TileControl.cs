@@ -13,7 +13,6 @@ namespace TDGame.OpenGL.Engine.Controls
     public class TileControl : BaseControl
     {
         public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
-        public float Rotation { get; set; } = 0;
 
         public TileControl(IScreen parent) : base(parent)
         {
