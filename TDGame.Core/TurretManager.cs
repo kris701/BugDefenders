@@ -48,6 +48,8 @@ namespace TDGame.Core
         {
             if (Money < turretDef.Cost)
                 return false;
+            if (GameStyle.TurretBlackList.Contains(turretDef.ID))
+                return false;
             if (at.X < 0)
                 return false;
             if (at.X > Map.Width - turretDef.Size)

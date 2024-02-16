@@ -11,53 +11,24 @@ using TDGame.Core.Resources;
 
 namespace TDGame.Core.Modules.Enemies
 {
-    public class WaveEnemyModule : IGameEnemyModule
+    public class WaveEnemyModule : BaseEnemyModule<WaveEnemyDefinition>
     {
-        public Game Game { get; }
-        public List<Guid> EnemyOptions { get; }
-
-        public WaveEnemyModule(Game game)
+        public WaveEnemyModule(Game game) : base(game)
         {
-            Game = game;
-            var options = ResourceManager.Enemies.GetResources();
-            EnemyOptions = new List<Guid>();
-            foreach (var option in options)
-                if (ResourceManager.Enemies.GetResource(option).ModuleInfo is WaveEnemyDefinition)
-                    EnemyOptions.Add(option);
         }
 
-        public void Update(TimeSpan passed)
+        public override void Update(TimeSpan passed)
         {
             var toRemove = new List<EnemyInstance>();
             foreach (var enemy in Game.CurrentEnemies)
-            {
                 if (enemy.ModuleInfo is WaveEnemyDefinition def)
-                {
-                    if (def.SlowingDuration > 0)
-                        def.SlowingDuration -= passed.Milliseconds;
-                    var target = Game.Map.WayPoints[enemy.WayPointID];
-                    if (MathHelpers.Distance(enemy, target) < 5)
-                    {
-                        enemy.WayPointID++;
-                        if (enemy.WayPointID >= Game.Map.WayPoints.Count)
-                        {
-                            Game.DamagePlayer();
-                            toRemove.Add(enemy);
-                            continue;
-                        }
-                        target = Game.Map.WayPoints[enemy.WayPointID];
-                    }
-                    enemy.Angle = Game.GetAngle(target, enemy);
-                    var change = MathHelpers.GetPredictedLocation(enemy.Angle, def.GetSpeed(), Game.GameStyle.EnemySpeedMultiplier);
-                    enemy.X += change.X;
-                    enemy.Y += change.Y;
-                }
-            }
+                    if (UpdateEnemy(passed, enemy, def))
+                        toRemove.Add(enemy);
             foreach (var enemy in toRemove)
                 Game.CurrentEnemies.Remove(enemy);
         }
 
-        public List<EnemyInstance> QueueEnemies(Guid id)
+        public override List<EnemyInstance> QueueEnemies(Guid id)
         {
             if (!EnemyOptions.Contains(id))
                 throw new Exception("Module attempted to queue enemies that does not match its module type!");
@@ -82,7 +53,7 @@ namespace TDGame.Core.Modules.Enemies
             return enemies;
         }
 
-        public List<EnemyInstance> UpdateSpawnQueue(List<EnemyInstance> queue)
+        public override List<EnemyInstance> UpdateSpawnQueue(List<EnemyInstance> queue)
         {
             if (queue.Count > 0)
             {

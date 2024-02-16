@@ -13,5 +13,7 @@
         public float EnemyWaveMultiplier { get; set; }
         public int ProjectileSpeedCap { get; set; }
         public int BossEveryNWave { get; set; }
+        public List<Guid> TurretBlackList { get; set; }
+        public List<Guid> EnemyBlackList { get; set; }
     }
 }

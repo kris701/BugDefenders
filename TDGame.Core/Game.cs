@@ -47,14 +47,6 @@ namespace TDGame.Core
             Turrets = new List<TurretInstance>();
             EnemiesToSpawn = new List<Guid>();
 
-            AOETurretsModule = new AOETurretsModule(this);
-            LaserTurretsModule = new LaserTurretsModule(this);
-            ProjectileTurretsModule = new ProjectileTurretsModule(this);
-            InvestmentTurretsModule = new InvestmentTurretsModule(this);
-
-            WaveEnemiesModule = new WaveEnemyModule(this);
-            SingleEnemiesModule = new SingleEnemyModule(this);
-
             Map = ResourceManager.Maps.GetResource(mapID);
             GameStyle = ResourceManager.GameStyles.GetResource(styleID);
             HP = GameStyle.StartingHP;
@@ -62,6 +54,14 @@ namespace TDGame.Core
             _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (CurrentEnemies.Count == 0) QueueEnemies(); });
             _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
+
+            AOETurretsModule = new AOETurretsModule(this);
+            LaserTurretsModule = new LaserTurretsModule(this);
+            ProjectileTurretsModule = new ProjectileTurretsModule(this);
+            InvestmentTurretsModule = new InvestmentTurretsModule(this);
+
+            WaveEnemiesModule = new WaveEnemyModule(this);
+            SingleEnemiesModule = new SingleEnemyModule(this);
 
             UpdateEnemiesToSpawnList();
         }

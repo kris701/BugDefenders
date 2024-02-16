@@ -12,9 +12,9 @@ namespace TDGame.Core
         {
             for (int i = EnemiesToSpawn.Count; i < 5; i++)
             {
-                if (Spawned++ % GameStyle.BossEveryNWave == 0)
+                if (Spawned++ % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
                     EnemiesToSpawn.Add(SingleEnemiesModule.EnemyOptions[_rnd.Next(0, SingleEnemiesModule.EnemyOptions.Count)]);
-                else
+                else if (WaveEnemiesModule.EnemyOptions.Count > 0)
                     EnemiesToSpawn.Add(WaveEnemiesModule.EnemyOptions[_rnd.Next(0, WaveEnemiesModule.EnemyOptions.Count)]);
             }
         }

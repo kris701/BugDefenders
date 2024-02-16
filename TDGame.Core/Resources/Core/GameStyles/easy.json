@@ -9,5 +9,7 @@
   "StartingMoney": 1500,
   "EnemyWaveMultiplier": 1,
   "ProjectileSpeedCap": 20,
-  "BossEveryNWave": 10
+  "BossEveryNWave": 10,
+  "TurretBlackList": [],
+  "EnemyBlackList": [ "0511ffe4-1be3-489b-a0c3-066935cd7a07" ]
 }
