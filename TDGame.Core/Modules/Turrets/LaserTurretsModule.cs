@@ -6,16 +6,13 @@ using TDGame.Core.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Modules.Turrets
 {
-    public class LaserTurretsModule : IGameModule
+    public class LaserTurretsModule : BaseTurretModule
     {
-        public Game Game { get; }
-
-        public LaserTurretsModule(Game game)
+        public LaserTurretsModule(Game game) : base(game)
         {
-            Game = game;
         }
 
-        public void Update(TimeSpan passed)
+        public override void Update(TimeSpan passed)
         {
             foreach (var turret in Game.Turrets)
             {
@@ -38,14 +35,8 @@ namespace TDGame.Core.Modules.Turrets
                 turret.Targeting = best;
 
                 if (best.ModuleInfo is ISlowable slow)
-                {
-                    if (def.SlowingFactor <= slow.SlowingFactor)
-                    {
-                        slow.SlowingFactor = def.SlowingFactor;
-                        slow.SlowingDuration = def.SlowingDuration;
-                    }
-                }
-                if (!Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def)))
+                    SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
+                if (!Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def.Damage, def.DamageModifiers)))
                     turret.Angle = Game.GetAngle(best, turret);
                 else
                     turret.Kills++;
@@ -57,15 +48,6 @@ namespace TDGame.Core.Modules.Turrets
                     Game.OnTurretIdle.Invoke(turret);
                 turret.Targeting = null;
             }
-        }
-
-        private float GetModifiedDamage(EnemyDefinition enemyDef, LaserTurretDefinition def)
-        {
-            var damage = def.Damage;
-            foreach (var modifier in def.DamageModifiers)
-                if (modifier.EnemyType == enemyDef.EnemyType)
-                    damage = damage * modifier.Modifier;
-            return damage;
         }
     }
 }

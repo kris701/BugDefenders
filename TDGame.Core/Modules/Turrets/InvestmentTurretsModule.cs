@@ -2,17 +2,15 @@
 
 namespace TDGame.Core.Modules.Turrets
 {
-    public class InvestmentTurretsModule : IGameModule
+    public class InvestmentTurretsModule : BaseTurretModule
     {
-        public Game Game { get; }
         private int _currentWave = 0;
 
-        public InvestmentTurretsModule(Game game)
+        public InvestmentTurretsModule(Game game) : base(game)
         {
-            Game = game;
         }
 
-        public void Update(TimeSpan passed)
+        public override void Update(TimeSpan passed)
         {
             foreach (var turret in Game.Turrets)
             {

@@ -6,16 +6,13 @@ using TDGame.Core.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Modules.Turrets
 {
-    public class AOETurretsModule : IGameModule
+    public class AOETurretsModule : BaseTurretModule
     {
-        public Game Game { get; }
-
-        public AOETurretsModule(Game game)
+        public AOETurretsModule(Game game) : base(game)
         {
-            Game = game;
         }
 
-        public void Update(TimeSpan passed)
+        public override void Update(TimeSpan passed)
         {
             foreach (var turret in Game.Turrets)
             {
@@ -58,13 +55,7 @@ namespace TDGame.Core.Modules.Turrets
                 foreach (var enemy in targeting)
                 {
                     if (enemy.ModuleInfo is ISlowable slow)
-                    {
-                        if (def.SlowingFactor <= slow.SlowingFactor)
-                        {
-                            slow.SlowingFactor = def.SlowingFactor;
-                            slow.SlowingDuration = def.SlowingDuration;
-                        }
-                    }
+                        SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
                     if (Game.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def)))
                         turret.Kills++;
                 }

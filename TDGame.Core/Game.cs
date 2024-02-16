@@ -4,6 +4,7 @@ using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.Maps;
+using TDGame.Core.Modules;
 using TDGame.Core.Modules.Enemies;
 using TDGame.Core.Modules.Turrets;
 using TDGame.Core.Resources;
@@ -63,6 +64,17 @@ namespace TDGame.Core
             WaveEnemiesModule = new WaveEnemyModule(this);
             SingleEnemiesModule = new SingleEnemyModule(this);
 
+            GameModules = new List<IGameModule>()
+            {
+                AOETurretsModule,
+                LaserTurretsModule,
+                ProjectileTurretsModule,
+                InvestmentTurretsModule,
+
+                WaveEnemiesModule,
+                SingleEnemiesModule
+            };
+
             UpdateEnemiesToSpawnList();
         }
 
@@ -95,15 +107,17 @@ namespace TDGame.Core
             SingleEnemiesModule.Update(_mainLoopTimer.Target);
         }
 
+        internal float GetAngle(FloatPoint target, IPosition item) => MathHelpers.GetAngle(target.X, target.Y, item.CenterX, item.CenterY);
+        internal float GetAngle(IPosition item1, IPosition item2) => MathHelpers.GetAngle(item1.CenterX, item1.CenterY, item2.CenterX, item2.CenterY);
+
+        #region Enemies
+
         internal void DamagePlayer()
         {
             HP--;
             if (HP <= 0)
                 EndGame();
         }
-
-        internal float GetAngle(FloatPoint target, IPosition item) => MathHelpers.GetAngle(target.X, target.Y, item.X + item.Size / 2, item.Y + item.Size / 2);
-        internal float GetAngle(IPosition item1, IPosition item2) => MathHelpers.GetAngle(item1.X + item1.Size / 2, item1.Y + item1.Size / 2, item2.X + item2.Size / 2, item2.Y + item2.Size / 2);
 
         internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanDamage);
         internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanDamage);
@@ -173,5 +187,124 @@ namespace TDGame.Core
             }
             return false;
         }
+
+        private void UpdateEnemiesToSpawnList()
+        {
+            for (int i = EnemiesToSpawn.Count; i < 5; i++)
+            {
+                if (Spawned++ % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
+                    EnemiesToSpawn.Add(SingleEnemiesModule.EnemyOptions[_rnd.Next(0, SingleEnemiesModule.EnemyOptions.Count)]);
+                else if (WaveEnemiesModule.EnemyOptions.Count > 0)
+                    EnemiesToSpawn.Add(WaveEnemiesModule.EnemyOptions[_rnd.Next(0, WaveEnemiesModule.EnemyOptions.Count)]);
+            }
+        }
+
+        public void QueueEnemies()
+        {
+            Money += GameStyle.MoneyPrWave;
+
+            if (WaveEnemiesModule.EnemyOptions.Contains(EnemiesToSpawn[0]))
+                _spawnQueue.AddRange(WaveEnemiesModule.QueueEnemies(EnemiesToSpawn[0]));
+            else if (SingleEnemiesModule.EnemyOptions.Contains(EnemiesToSpawn[0]))
+                _spawnQueue.AddRange(SingleEnemiesModule.QueueEnemies(EnemiesToSpawn[0]));
+            EnemiesToSpawn.RemoveAt(0);
+            UpdateEnemiesToSpawnList();
+        }
+
+        private void UpdateSpawnQueue()
+        {
+            var newToAdd = WaveEnemiesModule.UpdateSpawnQueue(_spawnQueue);
+            newToAdd.AddRange(SingleEnemiesModule.UpdateSpawnQueue(_spawnQueue));
+            foreach (var enemy in newToAdd)
+            {
+                CurrentEnemies.Add(enemy);
+                if (OnEnemySpawned != null)
+                    OnEnemySpawned.Invoke(enemy);
+            }
+            foreach (var remove in newToAdd)
+                _spawnQueue.Remove(remove);
+        }
+
+        #endregion
+
+        #region Turrets
+
+        public bool CanLevelUpTurret(TurretInstance turret, Guid id)
+        {
+            if (!Turrets.Contains(turret))
+                throw new Exception("Turret not in game!");
+            var upgrade = turret.GetDefinition().Upgrades.FirstOrDefault(x => x.ID == id);
+            if (upgrade == null)
+                return false;
+            if (Money < upgrade.Cost)
+                return false;
+            if (upgrade.Requires != null && !turret.HasUpgrades.Contains((Guid)upgrade.Requires))
+                return false;
+            return true;
+        }
+
+        public bool LevelUpTurret(TurretInstance turret, Guid id)
+        {
+            if (!Turrets.Contains(turret))
+                throw new Exception("Turret not in game!");
+            if (!CanLevelUpTurret(turret, id))
+                return false;
+            var upgrade = turret.GetDefinition().Upgrades.First(x => x.ID == id);
+            if (upgrade == null)
+                return false;
+            upgrade.ApplyUpgrade(turret);
+            Money -= upgrade.Cost;
+
+            if (OnTurretUpgraded != null)
+                OnTurretUpgraded.Invoke(turret);
+            return true;
+        }
+
+        public void SellTurret(TurretInstance turret)
+        {
+            if (!Turrets.Contains(turret))
+                throw new Exception("Turret not in game!");
+            Money += turret.GetTurretWorth();
+            Turrets.Remove(turret);
+
+            if (OnTurretSold != null)
+                OnTurretSold.Invoke(turret);
+        }
+
+        public bool AddTurret(TurretDefinition turretDef, FloatPoint at)
+        {
+            if (Money < turretDef.Cost)
+                return false;
+            if (GameStyle.TurretBlackList.Contains(turretDef.ID))
+                return false;
+            if (at.X < 0)
+                return false;
+            if (at.X > Map.Width - turretDef.Size)
+                return false;
+            if (at.Y < 0)
+                return false;
+            if (at.Y > Map.Height - turretDef.Size)
+                return false;
+
+            foreach (var block in Map.BlockingTiles)
+                if (MathHelpers.Intersects(turretDef, at, block))
+                    return false;
+
+            foreach (var otherTurret in Turrets)
+                if (MathHelpers.Intersects(turretDef, at, otherTurret))
+                    return false;
+
+            var newInstance = new TurretInstance(turretDef);
+            newInstance.X = at.X;
+            newInstance.Y = at.Y;
+            Money -= turretDef.Cost;
+            Turrets.Add(newInstance);
+            if (OnTurretPurchased != null)
+                OnTurretPurchased.Invoke(newInstance);
+
+            return true;
+        }
+
+        #endregion
     }
 }

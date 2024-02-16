@@ -8,18 +8,16 @@ using TDGame.Core.Models.Maps;
 
 namespace TDGame.Core.Modules.Turrets
 {
-    public class ProjectileTurretsModule : IGameModule
+    public class ProjectileTurretsModule : BaseTurretModule
     {
-        public Game Game { get; }
         public List<ProjectileInstance> Projectiles { get; set; }
 
-        public ProjectileTurretsModule(Game game)
+        public ProjectileTurretsModule(Game game) : base(game)
         {
             Projectiles = new List<ProjectileInstance>();
-            Game = game;
         }
 
-        public void Update(TimeSpan passed)
+        public override void Update(TimeSpan passed)
         {
             foreach (var turret in Game.Turrets)
             {
@@ -161,7 +159,7 @@ namespace TDGame.Core.Modules.Turrets
                     var dist = MathHelpers.Distance(projectile, Game.CurrentEnemies[i]);
                     if (dist < projDef.SplashRange)
                     {
-                        if (Game.DamageEnemy(Game.CurrentEnemies[i], GetModifiedDamage(Game.CurrentEnemies[i].GetDefinition(), projDef)))
+                        if (Game.DamageEnemy(Game.CurrentEnemies[i], GetModifiedDamage(Game.CurrentEnemies[i].GetDefinition(), projDef.Damage, projDef.DamageModifiers)))
                         {
                             if (projectile.Source != null)
                                 projectile.Source.Kills++;
@@ -172,15 +170,6 @@ namespace TDGame.Core.Modules.Turrets
                 return true;
             }
             return false;
-        }
-
-        private float GetModifiedDamage(EnemyDefinition enemyDef, ProjectileDefinition def)
-        {
-            var damage = def.Damage;
-            foreach (var modifier in def.DamageModifiers)
-                if (modifier.EnemyType == enemyDef.EnemyType)
-                    damage = damage * modifier.Modifier;
-            return damage;
         }
     }
 }

@@ -2,6 +2,7 @@
 using TDGame.Core.Models.Entities.Turrets;
 using TDGame.Core.Models.GameStyles;
 using TDGame.Core.Models.Maps;
+using TDGame.Core.Modules;
 
 namespace TDGame.Core
 {
@@ -33,5 +34,7 @@ namespace TDGame.Core
 
         public bool GameOver { get; set; }
         public TimeSpan GameTime { get; set; }
+
+        public List<IGameModule> GameModules { get; }
     }
 }

@@ -104,6 +104,10 @@ namespace TDGame.Core.Resources
             foreach (var id in Turrets.GetResources())
             {
                 var turret = Turrets.GetResource(id);
+                foreach (var upgrade in turret.Upgrades)
+                    if (upgrade.Requires != null)
+                        if (!turret.Upgrades.Any(x => x.ID == upgrade.Requires))
+                            throw new Exception($"Turret ({id}) has an upgrade ({upgrade.ID}) that requires another upgrade ({upgrade.Requires}) but it does not exist!");
             }
         }
     }
