@@ -169,5 +169,43 @@
         ]
       }
     ]
-  }
+  },
+  "AnimationsDefinition": [
+    {
+      "TargetType": "Turret",
+      "Target": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+      "OnShoot": "9448e307-2401-4060-9bc2-12698f86aa73",
+      "OnIdle": "468b3259-bd65-4aa1-9e40-5fb5e455b847"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+      "OnShoot": "37de2d39-b883-491d-a70b-536965aac408",
+      "OnIdle": "e1e5d65f-b09e-4f71-a743-67ead199cdfc"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
+      "OnShoot": "624e9637-9a13-4d0a-8b6f-35c4e9198618",
+      "OnIdle": "9f22ceed-4d97-4ac6-846a-405ece02d64a"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+      "OnShoot": "9dca5c04-36c5-4eb5-bd36-a7f8ba25562e",
+      "OnIdle": "1a252e16-8c8c-4179-8b1c-75b2b8f47704"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+      "OnShoot": "63afea5b-f247-4a86-8648-2c878a21a7ca",
+      "OnIdle": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
+      "OnShoot": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
+      "OnIdle": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20"
+    }
+  ]
 }

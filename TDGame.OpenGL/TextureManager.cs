@@ -16,10 +16,11 @@ namespace TDGame.OpenGL
     public static class TextureManager
     {
         public static BaseBuilder<TexturePackDefinition> TexturePacks = new BaseBuilder<TexturePackDefinition>("Textures.TexturePacks", Assembly.GetExecutingAssembly());
-
+        
         private static string _noTextureName = "notexture";
         private static Texture2D _noTexture;
         private static ContentManager _contentManager;
+        private static Dictionary<Guid, IAnimationDefinition> _animations = new Dictionary<Guid, IAnimationDefinition>();
         private static Dictionary<Guid, Texture2D> _textures = new Dictionary<Guid, Texture2D>();
         private static Dictionary<Guid, List<Texture2D>> _textureSets = new Dictionary<Guid, List<Texture2D>>();
 
@@ -34,17 +35,27 @@ namespace TDGame.OpenGL
         public static void LoadTexturePack(Guid texturePack)
         {
             _textures.Clear();
-            LoadPack(TexturePacks.GetResource(texturePack));
+            LoadTexturePack(TexturePacks.GetResource(texturePack));
         }
 
-        private static void LoadPack(TexturePackDefinition pack)
+        private static void LoadTexturePack(TexturePackDefinition pack)
         {
             if (pack.BasedOn != null)
-                LoadPack(TexturePacks.GetResource((Guid)pack.BasedOn));
+                LoadTexturePack(TexturePacks.GetResource((Guid)pack.BasedOn));
             foreach (var item in pack.TexturesDefinition.Textures)
                 LoadTexture(item);
             foreach (var item in pack.TexturesDefinition.TextureSets)
                 LoadTexture(item);
+            foreach (var item in pack.AnimationsDefinition)
+                LoadAnimation(item);
+        }
+
+        public static void LoadAnimation(IAnimationDefinition item)
+        {
+            if (_animations.ContainsKey(item.Target))
+                _animations[item.Target] = item;
+            else
+                _animations.Add(item.Target, item);
         }
 
         public static void LoadTexture(TextureDefinition item)
@@ -81,6 +92,17 @@ namespace TDGame.OpenGL
             if (_textures.ContainsKey(id))
                 return new List<Texture2D>() { _textures[id] };
             return new List<Texture2D>() { _noTexture };
+        }
+
+        public static T GetAnimation<T>(Guid id) where T : IAnimationDefinition
+        {
+            if (_animations.ContainsKey(id))
+            {
+                var target = _animations[id];
+                if (target is T)
+                    return (T)target;
+            }
+            throw new Exception("Animation not found!");
         }
     }
 }

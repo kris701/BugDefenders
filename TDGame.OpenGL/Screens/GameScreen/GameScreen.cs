@@ -18,6 +18,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Textures;
 using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
@@ -310,16 +311,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            if (turret.DefinitionID == new Guid("468b3259-bd65-4aa1-9e40-5fb5e455b847"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("9448e307-2401-4060-9bc2-12698f86aa73"));
-            if (turret.DefinitionID == new Guid("e1e5d65f-b09e-4f71-a743-67ead199cdfc"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("37de2d39-b883-491d-a70b-536965aac408"));
-            if (turret.DefinitionID == new Guid("9f22ceed-4d97-4ac6-846a-405ece02d64a"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("624e9637-9a13-4d0a-8b6f-35c4e9198618"));
-            if (turret.DefinitionID == new Guid("1a252e16-8c8c-4179-8b1c-75b2b8f47704"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("9dca5c04-36c5-4eb5-bd36-a7f8ba25562e"));
-            if (turret.DefinitionID == new Guid("c402592b-1af3-4bb5-a7e6-9e285dfc31a2"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("63afea5b-f247-4a86-8648-2c878a21a7ca"));
+            control.TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnShoot);
             control.Initialize();
         }
 
@@ -328,16 +320,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            if (turret.DefinitionID == new Guid("468b3259-bd65-4aa1-9e40-5fb5e455b847"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("468b3259-bd65-4aa1-9e40-5fb5e455b847"));
-            if (turret.DefinitionID == new Guid("e1e5d65f-b09e-4f71-a743-67ead199cdfc"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("e1e5d65f-b09e-4f71-a743-67ead199cdfc"));
-            if (turret.DefinitionID == new Guid("9f22ceed-4d97-4ac6-846a-405ece02d64a"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("9f22ceed-4d97-4ac6-846a-405ece02d64a"));
-            if (turret.DefinitionID == new Guid("1a252e16-8c8c-4179-8b1c-75b2b8f47704"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("1a252e16-8c8c-4179-8b1c-75b2b8f47704"));
-            if (turret.DefinitionID == new Guid("c402592b-1af3-4bb5-a7e6-9e285dfc31a2"))
-                control.TileSet = TextureManager.GetTextureSet(new Guid("c402592b-1af3-4bb5-a7e6-9e285dfc31a2"));
+            control.TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnIdle);
             control.Initialize();
         }
 
@@ -423,7 +406,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 _buyingTurret = turretID;
                 var turret = ResourceManager.Turrets.GetResource(turretID);
-                _buyingPreviewTile.TileSet = TextureManager.GetTextureSet(turret.ID);
+                _buyingPreviewTile.TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(turretID).OnIdle);
                 _buyingPreviewTile.Width = turret.Size;
                 _buyingPreviewTile.Height = turret.Size;
                 _buyingPreviewTile.Initialize();
