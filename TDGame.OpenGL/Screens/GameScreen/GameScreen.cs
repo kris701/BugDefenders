@@ -284,9 +284,13 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private EnemyControl CreateNewEnemyControl(EnemyInstance entity)
         {
+            var animation = TextureManager.GetAnimation<EnemyAnimationDefinition>(entity.DefinitionID).OnCreate;
+            var textureSet = TextureManager.GetTextureSet(animation);
             return new EnemyControl(this, entity)
             {
-                FillColor = TextureManager.GetTexture(entity.DefinitionID),
+                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
+                TileSet = textureSet.LoadedContents,
+                AutoPlay = true,
                 X = entity.X + _gameArea.X,
                 Y = entity.Y + _gameArea.Y,
                 Width = entity.Size,

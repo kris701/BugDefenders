@@ -52,7 +52,8 @@ namespace TDGame.OpenGL.Engine.Controls
             if (Frame > TileSet.Count)
                 Frame = 0;
 
-            DrawTile(gameTime, spriteBatch, TileSet[Frame]);
+            if (TileSet.Count > 0)
+                DrawTile(gameTime, spriteBatch, TileSet[Frame]);
         }
 
         public override void Update(GameTime gameTime)

@@ -11,6 +11,7 @@ namespace TDGame.OpenGL.Textures
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "TargetType")]
     [JsonDerivedType(typeof(TurretAnimationDefinition), typeDiscriminator: "Turret")]
     [JsonDerivedType(typeof(EffectAnimationDefinition), typeDiscriminator: "Effect")]
+    [JsonDerivedType(typeof(EnemyAnimationDefinition), typeDiscriminator: "Enemy")]
     public interface IAnimationDefinition
     {
         public Guid Target { get; set; }

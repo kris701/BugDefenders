@@ -14,18 +14,6 @@
         "Content": "Maps/map2"
       },
       {
-        "ID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
-        "Content": "Entities/Enemies/enemy1"
-      },
-      {
-        "ID": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
-        "Content": "Entities/Enemies/enemy2"
-      },
-      {
-        "ID": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
-        "Content": "Entities/Enemies/enemy3"
-      },
-      {
         "ID": "960c3e27-bfa4-40db-8397-ce47655eb169",
         "Content": "MainMenu/title"
       },
@@ -64,10 +52,6 @@
       {
         "ID": "1db411e4-8599-464b-923c-0e23bc031435",
         "Content": "Entities/Projectiles/bullet"
-      },
-      {
-        "ID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
-        "Content": "Entities/Enemies/boss1"
       },
       {
         "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
@@ -178,6 +162,39 @@
           "Entities/Turrets/turret5/turret5_shoot_1",
           "Entities/Turrets/turret5/turret5_shoot_2"
         ]
+      },
+
+      {
+        "ID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+        "FrameTime": 750,
+        "Contents": [
+          "Entities/Enemies/boss1/boss1_walk_1",
+          "Entities/Enemies/boss1/boss1_walk_2"
+        ]
+      },
+      {
+        "ID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+        "FrameTime": 250,
+        "Contents": [
+          "Entities/Enemies/enemy1/enemy1_walk_1",
+          "Entities/Enemies/enemy1/enemy1_walk_2"
+        ]
+      },
+      {
+        "ID": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+        "FrameTime": 500,
+        "Contents": [
+          "Entities/Enemies/enemy2/enemy2_walk_1",
+          "Entities/Enemies/enemy2/enemy2_walk_2"
+        ]
+      },
+      {
+        "ID": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+        "FrameTime": 500,
+        "Contents": [
+          "Entities/Enemies/enemy3/enemy3_walk_1",
+          "Entities/Enemies/enemy3/enemy3_walk_2"
+        ]
       }
     ]
   },
@@ -187,6 +204,7 @@
       "Target": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
       "OnCreate": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b"
     },
+
     {
       "TargetType": "Turret",
       "Target": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
@@ -222,6 +240,27 @@
       "Target": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
       "OnShoot": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
       "OnIdle": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20"
+    },
+
+    {
+      "TargetType": "Enemy",
+      "Target": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+      "OnCreate": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07"
     }
   ]
 }

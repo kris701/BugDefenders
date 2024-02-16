@@ -10,12 +10,13 @@ using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.Core.Resources;
 using TDGame.Core.Models.Entities.Enemies;
+using TDGame.OpenGL.Textures.Animations;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
     public class EnemyQueueControl : TileControl
     {
-        private TileControl iconControl;
+        private AnimatedTileControl iconControl;
         private TextboxControl descriptionControl;
         public EnemyQueueControl(IScreen parent) : base(parent)
         {
@@ -23,7 +24,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public void UpdateToEnemy(EnemyInstance enemy)
         {
-            iconControl.FillColor = TextureManager.GetTexture(enemy.DefinitionID);
+            var animation = TextureManager.GetAnimation<EnemyAnimationDefinition>(enemy.DefinitionID);
+            var textureSet = TextureManager.GetTextureSet(animation.OnCreate);
+            iconControl.TileSet = textureSet.LoadedContents;
+            iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
             var sb = new StringBuilder();
             sb.AppendLine(enemy.GetDefinition().Name);
             sb.AppendLine(enemy.GetDefinition().Description);
@@ -34,9 +38,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public override void Initialize()
         {
-            iconControl = new TileControl(Parent)
+            iconControl = new AnimatedTileControl(Parent)
             {
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
                 Width = 25,
                 Height = 25,
             };
@@ -63,6 +66,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public override void Update(GameTime gameTime)
         {
+            iconControl.Update(gameTime);
             descriptionControl.Update(gameTime);
             base.Update(gameTime);
         }

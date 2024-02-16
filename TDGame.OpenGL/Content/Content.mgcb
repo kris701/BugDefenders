@@ -62,7 +62,7 @@
 /processorParam:TextureFormat=Compressed
 /build:DefaultFonts/DefaultFont8.spritefont
 
-#begin Entities/Enemies/boss1.png
+#begin Entities/Enemies/boss1/boss1_walk_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -72,9 +72,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Enemies/boss1.png
+/build:Entities/Enemies/boss1/boss1_walk_1.png
 
-#begin Entities/Enemies/enemy1.png
+#begin Entities/Enemies/boss1/boss1_walk_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -84,9 +84,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Enemies/enemy1.png
+/build:Entities/Enemies/boss1/boss1_walk_2.png
 
-#begin Entities/Enemies/enemy2.png
+#begin Entities/Enemies/enemy1/enemy1_walk_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -96,9 +96,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Enemies/enemy2.png
+/build:Entities/Enemies/enemy1/enemy1_walk_1.png
 
-#begin Entities/Enemies/enemy3.png
+#begin Entities/Enemies/enemy1/enemy1_walk_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -108,7 +108,55 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Enemies/enemy3.png
+/build:Entities/Enemies/enemy1/enemy1_walk_2.png
+
+#begin Entities/Enemies/enemy2/enemy2_walk_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Enemies/enemy2/enemy2_walk_1.png
+
+#begin Entities/Enemies/enemy2/enemy2_walk_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Enemies/enemy2/enemy2_walk_2.png
+
+#begin Entities/Enemies/enemy3/enemy3_walk_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Enemies/enemy3/enemy3_walk_1.png
+
+#begin Entities/Enemies/enemy3/enemy3_walk_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Enemies/enemy3/enemy3_walk_2.png
 
 #begin Entities/Projectiles/bullet.png
 /importer:TextureImporter

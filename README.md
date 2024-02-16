@@ -2,12 +2,12 @@
 
 ## TODO List
 - [ ] Score board
-- [ ] Animated enemies
 - [ ] Animated projectiles
 - [ ] Carry over system
     - Something like, each game if you kill `n` amount of enemies you can permanently do 1% more damage across all following games (or something like it)
     - [ ] Upgrade menu for this
     - [ ] GameStyle that disallows permanent upgrades
+- [X] Animated enemies
 - [X] Enemy selection typs
     - I.e. shoot at the closest, the weakest, the farthest, etc. 
 - [X] Flying and ground enemies (as well as turrets that only work against those types of enemies)

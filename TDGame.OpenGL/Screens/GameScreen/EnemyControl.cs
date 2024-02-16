@@ -14,7 +14,7 @@ using TDGame.Core.Models.Maps;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public class EnemyControl : TileControl
+    public class EnemyControl : AnimatedTileControl
     {
         public FloatPoint VisualOffset { get; }
         private TileControl _healthBar;
@@ -43,6 +43,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
             };
             _healthBar._x = _x;
             _healthBar._y = _y - 5;
+        }
+
+        public void SetEnemyAnimation(Guid id)
+        {
+            var textureSet = TextureManager.GetTextureSet(id);
+            TileSet = textureSet.LoadedContents;
+            FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
+            Initialize();
         }
 
         public override void Update(GameTime gameTime)
