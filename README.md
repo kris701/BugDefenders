@@ -1,6 +1,7 @@
 # TDGame
 
 ## TODO List
+- [ ] Money for starting a wave
 - [ ] Black list turret ids in GameStyles 
     - Could be useful if you where to make a "bullets only" GameStyle or something like that 
 - [ ] Enemy modules like the turret system
