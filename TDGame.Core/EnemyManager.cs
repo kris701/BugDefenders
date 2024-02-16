@@ -21,6 +21,8 @@ namespace TDGame.Core
 
         public void QueueEnemies()
         {
+            Money += GameStyle.MoneyPrWave;
+
             if (WaveEnemiesModule.EnemyOptions.Contains(EnemiesToSpawn[0]))
                 _spawnQueue.AddRange(WaveEnemiesModule.QueueEnemies(EnemiesToSpawn[0]));
             else if (SingleEnemiesModule.EnemyOptions.Contains(EnemiesToSpawn[0]))

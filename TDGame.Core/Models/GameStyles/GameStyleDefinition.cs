@@ -15,5 +15,6 @@
         public int BossEveryNWave { get; set; }
         public List<Guid> TurretBlackList { get; set; }
         public List<Guid> EnemyBlackList { get; set; }
+        public int MoneyPrWave { get; set; }
     }
 }

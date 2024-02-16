@@ -11,5 +11,6 @@
   "ProjectileSpeedCap": 20,
   "BossEveryNWave": 5,
   "TurretBlackList": [],
-  "EnemyBlackList": []
+  "EnemyBlackList": [],
+  "MoneyPrWave": 250
 }
