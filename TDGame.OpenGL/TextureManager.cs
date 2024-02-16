@@ -19,6 +19,8 @@ namespace TDGame.OpenGL
         
         private static string _noTextureName = "notexture";
         private static Texture2D _noTexture;
+        private static TextureSetDefinition _noTextureSet;
+
         private static ContentManager _contentManager;
         private static Dictionary<Guid, IAnimationDefinition> _animations = new Dictionary<Guid, IAnimationDefinition>();
         private static Dictionary<Guid, Texture2D> _textures = new Dictionary<Guid, Texture2D>();
@@ -28,6 +30,15 @@ namespace TDGame.OpenGL
         {
             _contentManager = contentManager;
             _noTexture = _contentManager.Load<Texture2D>(_noTextureName);
+            _noTextureSet = new TextureSetDefinition()
+            {
+                ID = Guid.Empty,
+                FrameTime = 1000,
+                LoadedContents = new List<Texture2D>()
+                {
+                    _noTexture
+                }
+            };
         }
 
         public static List<Guid> GetTexturePacks() => TexturePacks.GetResources();
@@ -89,23 +100,20 @@ namespace TDGame.OpenGL
             if (_textureSets.ContainsKey(id))
                 return _textureSets[id];
             if (_textures.ContainsKey(id))
-                return new TextureSetDefinition() { 
+            {
+                var newSet = new TextureSetDefinition()
+                {
                     ID = id,
-                    FrameTime = 1000,
+                    FrameTime = 0,
                     LoadedContents = new List<Texture2D>()
                     {
                         _textures[id]
                     }
                 };
-            return new TextureSetDefinition()
-            {
-                ID = id,
-                FrameTime = 1000,
-                LoadedContents = new List<Texture2D>()
-                {
-                    _noTexture
-                }
-            };
+                _textureSets.Add(id, newSet);
+                return newSet;
+            }
+            return _noTextureSet;
         }
 
         public static T GetAnimation<T>(Guid id) where T : IAnimationDefinition
