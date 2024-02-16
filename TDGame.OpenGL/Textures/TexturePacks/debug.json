@@ -34,14 +34,6 @@
         "Content": "MainMenu/background"
       },
       {
-        "ID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
-        "Content": "Entities/Projectiles/missile"
-      },
-      {
-        "ID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
-        "Content": "Entities/Projectiles/rocket"
-      },
-      {
         "ID": "a23f20ed-299a-4f94-b398-3dd00ff63bd5",
         "Content": "splash"
       },
@@ -195,6 +187,23 @@
           "Entities/Enemies/enemy3/enemy3_walk_1",
           "Entities/Enemies/enemy3/enemy3_walk_2"
         ]
+      },
+
+      {
+        "ID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+        "FrameTime": 150,
+        "Contents": [
+          "Entities/Projectiles/rocket/rocket_move_1",
+          "Entities/Projectiles/rocket/rocket_move_2"
+        ]
+      },
+      {
+        "ID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+        "FrameTime": 150,
+        "Contents": [
+          "Entities/Projectiles/missile/missile_move_1",
+          "Entities/Projectiles/missile/missile_move_2"
+        ]
       }
     ]
   },
@@ -261,6 +270,22 @@
       "TargetType": "Enemy",
       "Target": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
       "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07"
+    },
+
+    {
+      "TargetType": "Projectile",
+      "Target": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+      "OnCreate": "6ee45409-1dd2-4190-938b-90848cf0ec52"
+    },
+    {
+      "TargetType": "Projectile",
+      "Target": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+      "OnCreate": "24be3e70-c410-443b-9e91-75d9f3a4270f"
+    },
+    {
+      "TargetType": "Projectile",
+      "Target": "1db411e4-8599-464b-923c-0e23bc031435",
+      "OnCreate": "1db411e4-8599-464b-923c-0e23bc031435"
     }
   ]
 }

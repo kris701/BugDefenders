@@ -170,7 +170,7 @@
 /processorParam:TextureFormat=Color
 /build:Entities/Projectiles/bullet.png
 
-#begin Entities/Projectiles/missile.png
+#begin Entities/Projectiles/missile/missile_move_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -180,9 +180,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Projectiles/missile.png
+/build:Entities/Projectiles/missile/missile_move_1.png
 
-#begin Entities/Projectiles/rocket.png
+#begin Entities/Projectiles/missile/missile_move_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -192,7 +192,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Projectiles/rocket.png
+/build:Entities/Projectiles/missile/missile_move_2.png
+
+#begin Entities/Projectiles/rocket/rocket_move_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Projectiles/rocket/rocket_move_1.png
+
+#begin Entities/Projectiles/rocket/rocket_move_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Projectiles/rocket/rocket_move_2.png
 
 #begin Entities/Turrets/turret1/turret1_idle_1.png
 /importer:TextureImporter

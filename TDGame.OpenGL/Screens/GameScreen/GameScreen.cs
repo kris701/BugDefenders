@@ -30,7 +30,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
         private EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
-        private EntityUpdater<ProjectileInstance, TileControl> _projectileUpdater;
+        private EntityUpdater<ProjectileInstance, AnimatedTileControl> _projectileUpdater;
         private EntityUpdater<EffectEntity, AnimatedTileControl> _effectsUpdater;
         private EntityUpdater<LaserEntity, LineControl> _laserUpdater;
 
@@ -59,7 +59,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
-            _projectileUpdater = new EntityUpdater<ProjectileInstance, TileControl>(5, this,  _gameArea.X, _gameArea.Y);
+            _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(5, this,  _gameArea.X, _gameArea.Y);
             _projectileUpdater.OnDelete += OnProjectileDeleted;
             _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this,  _gameArea.X, _gameArea.Y);
             _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(7, this,  _gameArea.X, _gameArea.Y);
@@ -108,7 +108,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             }
         }
 
-        private void OnProjectileDeleted(TileControl parent)
+        private void OnProjectileDeleted(AnimatedTileControl parent)
         {
             if (parent.Tag is ProjectileInstance projectile)
             {
@@ -307,11 +307,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
             control.Rotation = entity.Angle + (float)Math.PI / 2;
         }
 
-        private TileControl CreateNewProjectileControl(ProjectileInstance entity)
+        private AnimatedTileControl CreateNewProjectileControl(ProjectileInstance entity)
         {
-            return new TileControl(this)
+            var animation = TextureManager.GetAnimation<ProjectileAnimationDefinition>(entity.DefinitionID).OnCreate;
+            var textureSet = TextureManager.GetTextureSet(animation);
+            return new AnimatedTileControl(this)
             {
-                FillColor = TextureManager.GetTexture(entity.DefinitionID),
+                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
+                TileSet = textureSet.LoadedContents,
                 X = entity.X + _gameArea.X,
                 Y = entity.Y + _gameArea.Y,
                 Width = entity.Size,

@@ -58,6 +58,9 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Update(GameTime gameTime)
         {
+            if (TileSet.Count <= 1)
+                return;
+
             if (_finished && !AutoPlay)
                 return;
 
