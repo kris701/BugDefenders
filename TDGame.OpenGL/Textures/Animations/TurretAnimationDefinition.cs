@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.OpenGL.Textures.Animations
 {
     public class TurretAnimationDefinition : IAnimationDefinition
     {

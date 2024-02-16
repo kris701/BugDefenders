@@ -172,6 +172,11 @@
   },
   "AnimationsDefinition": [
     {
+      "TargetType": "Effect",
+      "Target": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
+      "OnCreate": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b"
+    },
+    {
       "TargetType": "Turret",
       "Target": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
       "OnShoot": "9448e307-2401-4060-9bc2-12698f86aa73",

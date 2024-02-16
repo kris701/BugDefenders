@@ -49,8 +49,8 @@ namespace TDGame.Core.Modules
                 turret.Targeting = best;
 
                 var projectile = new ProjectileInstance(def.ProjectileDefinition);
-                projectile.X = turret.X + turret.Size / 2;
-                projectile.Y = turret.Y + turret.Size / 2;
+                projectile.X = turret.CenterX - projectile.Size / 2;
+                projectile.Y = turret.CenterY - projectile.Size / 2;
                 projectile.Source = turret;
                 if (def.IsTrailing)
                     projectile.Angle = Game.GetAngle(
@@ -72,8 +72,8 @@ namespace TDGame.Core.Modules
 
         private FloatPoint GetTrailingPoint(EnemyInstance enemy, ProjectileInstance projectile)
         {
-            float x = enemy.X + enemy.Size / 2;
-            float y = enemy.Y + enemy.Size / 2;
+            float x = enemy.CenterX;
+            float y = enemy.CenterY;
             var dist = MathHelpers.Distance(enemy, projectile);
             var steps = dist / projectile.GetDefinition().Speed;
             var change = Game.GetEnemyLocationChange(enemy.Angle, enemy.GetSpeed());
@@ -146,7 +146,7 @@ namespace TDGame.Core.Modules
             bool isWithin = false;
             foreach (var enemy in Game.CurrentEnemies)
             {
-                if (MathHelpers.Distance(projectile.X + projectile.Size / 2, projectile.Y + projectile.Size / 2, enemy.X + enemy.Size / 2, enemy.Y + enemy.Size / 2) < projectile.GetDefinition().TriggerRange)
+                if (MathHelpers.Distance(projectile.CenterX, projectile.CenterY, enemy.CenterX, enemy.CenterY) < projectile.GetDefinition().TriggerRange)
                 {
                     isWithin = true;
                     break;

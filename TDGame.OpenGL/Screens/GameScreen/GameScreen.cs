@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -18,7 +19,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures;
+using TDGame.OpenGL.Textures.Animations;
 using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
@@ -29,14 +30,17 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
         private EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
-        private EntityUpdater<ProjectileInstance, TileControl> _projectile;
+        private EntityUpdater<ProjectileInstance, TileControl> _projectileUpdater;
+        private EntityUpdater<EffectEntity, AnimatedTileControl> _effectsUpdater;
+        private EntityUpdater<LaserEntity, LineControl> _laserUpdater;
 
         private Guid _currentMap;
         private Guid _currentGameStyle;
         private Core.Game _game;
         private Guid? _buyingTurret;
         private TurretInstance? _selectedTurret;
-        private List<AnimatedTileControl> _explosions = new List<AnimatedTileControl>();
+        private List<EffectEntity> _effects = new List<EffectEntity>();
+        private Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
 
         private KeyWatcher _waveKeyWatcher;
         private int tabIndex = 0;
@@ -52,10 +56,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _game.OnTurretShooting += OnTurretFiring;
             _game.OnTurretIdle += OnTurretIdling;
             ResourceManager.CheckGameIntegrity();
+
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
-            _projectile = new EntityUpdater<ProjectileInstance, TileControl>(5, this,  _gameArea.X, _gameArea.Y);
-            _projectile.OnDelete += OnProjectileDeleted;
+            _projectileUpdater = new EntityUpdater<ProjectileInstance, TileControl>(5, this,  _gameArea.X, _gameArea.Y);
+            _projectileUpdater.OnDelete += OnProjectileDeleted;
+            _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this,  _gameArea.X, _gameArea.Y);
+            _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(7, this,  _gameArea.X, _gameArea.Y);
+
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { 
                 _game.QueueEnemies();
                 _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
@@ -102,26 +110,16 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void OnProjectileDeleted(TileControl parent)
         {
-            if (parent.Tag is ProjectileInstance projDef)
+            if (parent.Tag is ProjectileInstance projectile)
             {
-                if (!projDef.GetDefinition().IsExplosive)
+                if (!projectile.GetDefinition().IsExplosive)
                     return;
-                var newTile = new AnimatedTileControl(this)
+                _effects.Add(new EffectEntity(projectile)
                 {
-                    X = projDef.X + projDef.Size / 2 - projDef.GetDefinition().SplashRange / 2,
-                    Y = projDef.Y + projDef.Size / 2 - projDef.GetDefinition().SplashRange / 2,
-                    FrameTime = TimeSpan.FromMilliseconds(100),
-                    TileSet = TextureManager.GetTextureSet(new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b")),
-                    AutoPlay = false,
-                    Width = projDef.GetDefinition().SplashRange,
-                    Height = projDef.GetDefinition().SplashRange
-                };
-                newTile.OnAnimationDone += (p) => {
-                    p.IsVisible = false;
-                };
-                newTile.Initialize();
-                _explosions.Add(newTile);
-                AddControl(7, newTile);
+                    ID = new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
+                    LifeTime = TimeSpan.FromMilliseconds(250),
+                    FrameTime = TimeSpan.FromMilliseconds(100)
+                });
             }
         }
 
@@ -157,8 +155,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(turret) * 2));
             _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
             _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
-            _turretSelectRangeTile.X = turret.X + turret.Size / 2 + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
-            _turretSelectRangeTile.Y = turret.Y + turret.Size / 2 + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
+            _turretSelectRangeTile.X = turret.CenterX + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
+            _turretSelectRangeTile.Y = turret.CenterY + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
             _turretSelectRangeTile.IsVisible = true;
 
             int index = 0;
@@ -230,54 +228,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
             UpdateTurretPurchaseButtons();
             UpdateNextEnemies();
 
-            _turretUpdater.UpdateEntities(_game.Turrets, (e) =>
-            {
-                return new TurretControl(this, clicked: Turret_Click)
-                {
-                    IsEnabled = true,
-                    FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
-                    FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
-                    TileSet = TextureManager.GetTextureSet(e.DefinitionID),
-                    X = _gameArea.X + e.X,
-                    Y = _gameArea.Y + e.Y,
-                    Width = e.Size,
-                    Height = e.Size,
-                    Rotation = e.Angle,
-                    Tag = e
-                };
-            });
-            _enemyUpdater.UpdateEntities(_game.CurrentEnemies, (e) => {
-                return new EnemyControl(this, e)
-                {
-                    FillColor = TextureManager.GetTexture(e.DefinitionID),
-                    X = e.X + _gameArea.X,
-                    Y = e.Y + _gameArea.Y,
-                    Width = e.Size,
-                    Height = e.Size,
-                    Rotation = e.Angle + (float)Math.PI / 2,
-                    Tag = e
-                };
-            }, (e, i) =>
-            {
-                i.X = e.X + _gameArea.X + i.VisualOffset.X;
-                i.Y = e.Y + _gameArea.Y + i.VisualOffset.Y;
-                i.Rotation = e.Angle + (float)Math.PI / 2;
-            });
-            _projectile.UpdateEntities(_game.ProjectileTurretsModule.Projectiles, (e) =>
-            {
-                return new TileControl(this)
-                {
-                    FillColor = TextureManager.GetTexture(e.DefinitionID),
-                    X = e.X + _gameArea.X,
-                    Y = e.Y + _gameArea.Y,
-                    Width = e.Size,
-                    Height = e.Size,
-                    Rotation = e.Angle + (float)Math.PI / 2,
-                    Tag = e
-                };
-            });
+            _turretUpdater.UpdateEntities(_game.Turrets, gameTime, CreateNewTurretControl);
+            _enemyUpdater.UpdateEntities(_game.CurrentEnemies, gameTime, CreateNewEnemyControl, UpdateEnemyControl);
+            _projectileUpdater.UpdateEntities(_game.ProjectileTurretsModule.Projectiles, gameTime, CreateNewProjectileControl);
+            _effectsUpdater.UpdateEntities(_effects, gameTime, CreateNewEffect);
+            _laserUpdater.UpdateEntities(_lasers.Values.ToList(), gameTime, CreateNewLaser, UpdateLaserControl);
+            UpdateEffectLifetimes(gameTime);
+             
             UpdateLasers();
-            UpdateExplosions(gameTime);
 
             if (mouseState.X >= Scale(_gameArea.X) && mouseState.X <= Scale(_gameArea.X) + Scale(_gameArea.Width) &&
                 mouseState.Y >= Scale(_gameArea.Y) && mouseState.Y <= Scale(_gameArea.Y) + Scale(_gameArea.Height))
@@ -290,6 +248,110 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.IsVisible = false;
                 _buyingPreviewRangeTile.IsVisible = false;
             }
+        }
+
+        private void UpdateEffectLifetimes(GameTime gameTime)
+        {
+            var toRemove = new List<EffectEntity>();
+            foreach (var effect in _effects)
+            {
+                effect.LifeTime -= gameTime.ElapsedGameTime;
+                if (effect.LifeTime <= TimeSpan.Zero)
+                    toRemove.Add(effect);
+            }
+            foreach (var remove in toRemove)
+                _effects.Remove(remove);
+        }
+
+        private TurretControl CreateNewTurretControl(TurretInstance entity)
+        {
+            return new TurretControl(this, clicked: Turret_Click)
+            {
+                IsEnabled = true,
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
+                FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
+                TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<TurretAnimationDefinition>(entity.DefinitionID).OnIdle),
+                X = _gameArea.X + entity.X,
+                Y = _gameArea.Y + entity.Y,
+                Width = entity.Size,
+                Height = entity.Size,
+                Rotation = entity.Angle,
+                Tag = entity
+            };
+        }
+
+        private EnemyControl CreateNewEnemyControl(EnemyInstance entity)
+        {
+            return new EnemyControl(this, entity)
+            {
+                FillColor = TextureManager.GetTexture(entity.DefinitionID),
+                X = entity.X + _gameArea.X,
+                Y = entity.Y + _gameArea.Y,
+                Width = entity.Size,
+                Height = entity.Size,
+                Rotation = entity.Angle + (float)Math.PI / 2,
+                Tag = entity
+            };
+        }
+
+        private void UpdateEnemyControl(EnemyInstance entity, EnemyControl control, GameTime passed)
+        {
+            control.X = entity.X + _gameArea.X + control.VisualOffset.X;
+            control.Y = entity.Y + _gameArea.Y + control.VisualOffset.Y;
+            control.Rotation = entity.Angle + (float)Math.PI / 2;
+        }
+
+        private TileControl CreateNewProjectileControl(ProjectileInstance entity)
+        {
+            return new TileControl(this)
+            {
+                FillColor = TextureManager.GetTexture(entity.DefinitionID),
+                X = entity.X + _gameArea.X,
+                Y = entity.Y + _gameArea.Y,
+                Width = entity.Size,
+                Height = entity.Size,
+                Rotation = entity.Angle + (float)Math.PI / 2,
+                Tag = entity
+            };
+        }
+
+        private AnimatedTileControl CreateNewEffect(EffectEntity entity)
+        {
+            var newTile = new AnimatedTileControl(this)
+            {
+                X = _gameArea.X + entity.X,
+                Y = _gameArea.Y + entity.Y,
+                FrameTime = entity.FrameTime,
+                TileSet = TextureManager.GetTextureSet(TextureManager.GetAnimation<EffectAnimationDefinition>(entity.ID).OnCreate),
+                AutoPlay = true,
+                Width = entity.Size,
+                Height = entity.Size,
+                Tag = entity
+            };
+            return newTile;
+        }
+
+        private LineControl CreateNewLaser(LaserEntity entity)
+        {
+            var newTile = new LineControl(this)
+            {
+                Thickness = 3,
+                Stroke = BasicTextures.GetBasicRectange(Color.Red),
+                X = _gameArea.X + entity.From.CenterX,
+                Y = _gameArea.Y + entity.From.CenterY,
+                X2 = _gameArea.X + entity.To.CenterX,
+                Y2 = _gameArea.Y + entity.To.CenterY,
+                Tag = entity
+            };
+            return newTile;
+        }
+
+        private void UpdateLaserControl(LaserEntity entity, LineControl control, GameTime passed)
+        {
+            control.X = _gameArea.X + entity.From.CenterX;
+            control.Y = _gameArea.Y + entity.From.CenterY;
+            control.X2 = _gameArea.X + entity.To.CenterX;
+            control.Y2 = _gameArea.Y + entity.To.CenterY;
         }
 
         private void UpdateTurretPurchaseButtons()
@@ -366,32 +428,33 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void UpdateLasers()
         {
-            ClearLayer(6);
+            var found = new List<Guid>();
             foreach(var turret in _game.Turrets)
             {
                 if (turret.TurretInfo is LaserTurretDefinition)
                 {
-                    if (turret.Targeting != null)
+                    found.Add(turret.ID);
+                    if (_lasers.ContainsKey(turret.ID))
                     {
-                        AddControl(6, new LineControl(this)
-                        {
-                            Thickness = 3,
-                            Stroke = BasicTextures.GetBasicRectange(Color.Red),
-                            X = _gameArea.X + turret.X + turret.Size / 2,
-                            Y = _gameArea.Y + turret.Y + turret.Size / 2,
-                            X2 = _gameArea.X + turret.Targeting.X + turret.Targeting.Size / 2,
-                            Y2 = _gameArea.Y + turret.Targeting.Y + turret.Targeting.Size / 2,
-                        });
+                        if (turret.Targeting == null)
+                            _lasers.Remove(turret.ID);
+                        else if (_lasers[turret.ID].To != turret.Targeting)
+                            _lasers.Remove(turret.ID);
                     }
+                    else if (!_lasers.ContainsKey(turret.ID) && turret.Targeting != null)
+                        _lasers.Add(turret.ID, new LaserEntity()
+                        {
+                            From = turret,
+                            To = turret.Targeting
+                        });
                 }
             }
-        }
-
-        private void UpdateExplosions(GameTime gameTime)
-        {
-            foreach (var explosion in _explosions)
-                explosion.Update(gameTime);
-            _explosions.RemoveAll(x => x.IsVisible == false);
+            var toRemove = new List<Guid>();
+            foreach (var key in _lasers.Keys)
+                if (!found.Contains(key))
+                    toRemove.Add(key);
+            foreach(var remove in toRemove)
+                _lasers.Remove(remove);
         }
 
         private void UpdateNextEnemies()

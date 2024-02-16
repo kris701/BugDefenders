@@ -44,7 +44,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 275,
-                Text = $"Played for {_gameTime}",
+                Text = $"Played for {_gameTime.ToString("hh\\:mm\\:ss")}",
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(24),
             });

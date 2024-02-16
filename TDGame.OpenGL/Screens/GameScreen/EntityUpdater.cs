@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public class EntityUpdater<T, U> where T : IPosition, IIdentifiable where U : IControl
+    public class EntityUpdater<T, U> where U : IControl
     {
         public delegate void EntityHandler(U parent);
         public EntityHandler? OnDelete;
@@ -40,7 +41,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             YOffset = yOffset;
         }
 
-        public void UpdateEntities(List<T> entities, Func<T, U> toControl, Action<T, U> updateOverride = null)
+        public void UpdateEntities(List<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime> updateOverride = null)
         {
             foreach(var entity in entities)
             {
@@ -48,13 +49,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 {
                     var toUpdate = _entities[entity];
                     if (updateOverride != null)
-                        updateOverride(entity, toUpdate);
-                    else
+                        updateOverride(entity, toUpdate, passed);
+                    else if (entity is IPosition pos)
                     {
-                        toUpdate.X = entity.X + XOffset;
-                        toUpdate.Y = entity.Y + YOffset;
-                        toUpdate.Rotation = entity.Angle + (float)Math.PI / 2;
+                        toUpdate.X = pos.X + XOffset;
+                        toUpdate.Y = pos.Y + YOffset;
+                        toUpdate.Rotation = pos.Angle + (float)Math.PI / 2;
                     }
+                    else
+                        throw new NotImplementedException("Entity update not set for this type!");
                 }
                 else
                 {
