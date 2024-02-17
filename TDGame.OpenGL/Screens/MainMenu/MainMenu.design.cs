@@ -41,10 +41,19 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillColor = TextureManager.GetTexture(new Guid("40aa2d8a-7509-4bef-bf1c-9c3e1dffdd08")),
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 600,
+                Width = 300,
+                Height = 100,
+                FillColor = TextureManager.GetTexture(new Guid("410d9075-6e22-4ff7-9aff-1dcc3be9cd42")),
+                FillClickedColor = BasicTextures.GetClickedTexture()
+            });
+            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = 725,
                 Width = 300,
                 Height = 100,
                 FillColor = TextureManager.GetTexture(new Guid("e8fd55a0-ea74-48d8-b625-4352d6f1c564")),

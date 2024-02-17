@@ -30,6 +30,10 @@
         "Content": "MainMenu/exit"
       },
       {
+        "ID": "410d9075-6e22-4ff7-9aff-1dcc3be9cd42",
+        "Content": "MainMenu/highscores"
+      },
+      {
         "ID": "4a39d624-3171-41cd-b172-c853cea36d14",
         "Content": "MainMenu/background"
       },
@@ -68,6 +72,10 @@
       {
         "ID": "46ce91a9-78bc-4d77-95c1-46adfce971b2",
         "Content": "UsersScreen/background"
+      },
+      {
+        "ID": "fc3e4de1-331e-4a52-baee-e2f3c40962b4",
+        "Content": "HighScoresView/background"
       }
     ],
     "TextureSets": [
