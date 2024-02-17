@@ -10,7 +10,7 @@ namespace TDGame.Core
     {
         public MapDefinition Map { get; set; }
         public GameStyleDefinition GameStyle { get; set; }
-        public List<Guid> EnemiesToSpawn { get; set; }
+        public List<List<Guid>> EnemiesToSpawn { get; set; }
         public bool AutoSpawn { get; set; } = false;
         public float Evolution { get; set; } = 1;
         private bool _running = true;

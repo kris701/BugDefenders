@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Resources;
@@ -19,17 +21,36 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
         }
 
-        public void UpdateToEnemy(EnemyInstance enemy)
+        public void UpdateToEnemy(List<Guid> wave, float evolution)
         {
-            var animation = TextureManager.GetAnimation<EnemyAnimationDefinition>(enemy.DefinitionID);
+            var def = ResourceManager.Enemies.GetResource(wave[0]);
+            var instance = new EnemyInstance(def, evolution);
+            var animation = TextureManager.GetAnimation<EnemyAnimationDefinition>(def.ID);
             var textureSet = TextureManager.GetTextureSet(animation.OnCreate);
             iconControl.TileSet = textureSet.LoadedContents;
             iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
+
             var sb = new StringBuilder();
-            sb.AppendLine(enemy.GetDefinition().Name);
-            sb.AppendLine(enemy.GetDefinition().Description);
-            sb.AppendLine($"Type: {ResourceManager.EnemyTypes.GetResource(enemy.GetDefinition().EnemyType).Name}");
-            sb.AppendLine($"HP: {Math.Round(enemy.Health, 0)}");
+            if (wave.Count > 1)
+            {
+                sb.AppendLine($"{def.Name} + {wave.Count - 1} more");
+                sb.Append($"Types: {ResourceManager.EnemyTypes.GetResource(def.EnemyType).Name}");
+                foreach(var enemy in wave.Skip(1))
+                    sb.Append($", {ResourceManager.EnemyTypes.GetResource(ResourceManager.Enemies.GetResource(enemy).EnemyType).Name}");
+                sb.AppendLine();
+                var hp = instance.Health;
+                foreach (var enemy in wave.Skip(1))
+                    hp += new EnemyInstance(ResourceManager.Enemies.GetResource(enemy), evolution).Health;
+                sb.AppendLine($"Total HP: {Math.Round(hp, 0)}");
+            }
+            else
+            {
+                sb.AppendLine(def.Name);
+                sb.AppendLine(def.Description);
+                sb.AppendLine($"Type: {ResourceManager.EnemyTypes.GetResource(def.EnemyType).Name}");
+                sb.AppendLine($"HP: {Math.Round(instance.Health, 0)}");
+            }
+
             descriptionControl.Text = sb.ToString();
         }
 
@@ -47,7 +68,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             descriptionControl = new TextboxControl(Parent)
             {
                 Margin = 1,
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(8),
                 FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
                 Height = 50,
                 Width = 150,

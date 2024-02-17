@@ -1,4 +1,5 @@
-﻿using TDGame.Core.Helpers;
+﻿using System.Linq;
+using TDGame.Core.Helpers;
 using TDGame.Core.Models;
 using TDGame.Core.Models.Entities.Enemies;
 using TDGame.Core.Models.Entities.Projectiles;
@@ -46,7 +47,7 @@ namespace TDGame.Core
         {
             CurrentEnemies = new List<EnemyInstance>();
             Turrets = new List<TurretInstance>();
-            EnemiesToSpawn = new List<Guid>();
+            EnemiesToSpawn = new List<List<Guid>>();
 
             Map = ResourceManager.Maps.GetResource(mapID);
             GameStyle = ResourceManager.GameStyles.GetResource(styleID);
@@ -190,12 +191,18 @@ namespace TDGame.Core
 
         private void UpdateEnemiesToSpawnList()
         {
+            int waveSize = (int)(1 * Evolution);
             for (int i = EnemiesToSpawn.Count; i < 5; i++)
             {
-                if (Spawned++ % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
-                    EnemiesToSpawn.Add(SingleEnemiesModule.EnemyOptions[_rnd.Next(0, SingleEnemiesModule.EnemyOptions.Count)]);
-                else if (WaveEnemiesModule.EnemyOptions.Count > 0)
-                    EnemiesToSpawn.Add(WaveEnemiesModule.EnemyOptions[_rnd.Next(0, WaveEnemiesModule.EnemyOptions.Count)]);
+                var wave = new List<Guid>();
+                for (int j = 0; j < waveSize; j++)
+                {
+                    if (Spawned++ % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
+                        wave.Add(SingleEnemiesModule.EnemyOptions[_rnd.Next(0, SingleEnemiesModule.EnemyOptions.Count)]);
+                    else if (WaveEnemiesModule.EnemyOptions.Count > 0)
+                        wave.Add(WaveEnemiesModule.EnemyOptions[_rnd.Next(0, WaveEnemiesModule.EnemyOptions.Count)]);
+                }
+                EnemiesToSpawn.Add(wave);
             }
         }
 
@@ -203,10 +210,13 @@ namespace TDGame.Core
         {
             Money += GameStyle.MoneyPrWave;
 
-            if (WaveEnemiesModule.EnemyOptions.Contains(EnemiesToSpawn[0]))
-                _spawnQueue.AddRange(WaveEnemiesModule.QueueEnemies(EnemiesToSpawn[0]));
-            else if (SingleEnemiesModule.EnemyOptions.Contains(EnemiesToSpawn[0]))
-                _spawnQueue.AddRange(SingleEnemiesModule.QueueEnemies(EnemiesToSpawn[0]));
+            foreach(var item in EnemiesToSpawn[0]) 
+            {
+                if (WaveEnemiesModule.EnemyOptions.Contains(item))
+                    _spawnQueue.AddRange(WaveEnemiesModule.QueueEnemies(item));
+                else if (SingleEnemiesModule.EnemyOptions.Contains(item))
+                    _spawnQueue.AddRange(SingleEnemiesModule.QueueEnemies(item));
+            }
             EnemiesToSpawn.RemoveAt(0);
             UpdateEnemiesToSpawnList();
         }
