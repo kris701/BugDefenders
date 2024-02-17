@@ -116,7 +116,10 @@ namespace TDGame.Core.Game
         {
             HP--;
             if (HP <= 0)
+            {
+                HP = 0;
                 EndGame();
+            }
         }
 
         internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanDamage);

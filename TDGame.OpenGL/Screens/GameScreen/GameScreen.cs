@@ -42,6 +42,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private int tabIndex = 0;
         private KeyWatcher _switchTurretWatcher;
         private KeyWatcher _escapeKeyWatcher;
+        private bool _gameOver = false;
 
         public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(parent)
         {
@@ -494,8 +495,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void GameOver()
         {
-            var screen = Parent.TakeScreenCap();
-            SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
+            if (!_gameOver)
+            {
+                _gameOver = true;
+                var screen = Parent.TakeScreenCap();
+                SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
+            }
         }
 
         private float GetRangeOfTurret(TurretInstance turret)

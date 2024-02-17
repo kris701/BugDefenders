@@ -1,9 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using System.Text.Json;
 using TDGame.Core.Resources;
+using TDGame.Core.Users;
+using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Settings;
@@ -15,7 +18,6 @@ namespace TDGame.OpenGL
     {
         private static string _contentDir = "Content";
         private static string _modsDir = "Mods";
-        private static string _settingsFile = "settings.json";
 
 #if FPS
         private TimeSpan _passed = TimeSpan.Zero;
@@ -28,9 +30,12 @@ namespace TDGame.OpenGL
         public int ScreenWidth() => Window.ClientBounds.Width;
         public int ScreenHeight() => Window.ClientBounds.Height;
         public IScreen CurrentScreen { get; set; }
+        public UserEngine UserManager { get; set; }
+        public UserDefinition CurrentUser { get; set; }
 
         private Func<UIEngine, IScreen> _screenToLoad;
         private SpriteBatch? _spriteBatch;
+        private bool _isInitialized = false;
 
         public UIEngine(Func<UIEngine, IScreen> screen)
         {
@@ -38,17 +43,78 @@ namespace TDGame.OpenGL
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
-
-            if (File.Exists(_settingsFile))
+            UserManager = new UserEngine();
+            var allUsers = UserManager.GetAllUsers();
+            if (allUsers.Count == 0)
             {
-                var settings = JsonSerializer.Deserialize<SettingsDefinition>(File.ReadAllText(_settingsFile));
-                if (settings != null)
+                var newUser = new UserDefinition()
                 {
-                    Settings = settings;
-                }
+                    ID = Guid.NewGuid(),
+                    Name = "Default",
+                    IsPrimary = true
+                };
+                UserManager.AddNewUser(newUser);
+                SaveUserData(newUser);
+                ChangeUser(newUser);
             }
             else
-                Settings = new SettingsDefinition();
+            {
+                foreach(var user in allUsers)
+                {
+                    if (user.IsPrimary)
+                    {
+                        ChangeUser(user);
+                        break;
+                    }
+                }
+                if (CurrentUser == null)
+                    ChangeUser(allUsers[0]);
+            }
+        }
+
+        public void CreateNewUser(string name)
+        {
+            var newUser = new UserDefinition()
+            {
+                ID = Guid.NewGuid(),
+                Name = name,
+                IsPrimary = false
+            };
+            UserManager.AddNewUser(newUser);
+            SaveUserData(newUser);
+        }
+
+        public void DeleteUser(UserDefinition user)
+        {
+            UserManager.RemoveUser(user);
+            var settingsFile = Path.Combine(UserManager.UsersPath, $"{user.ID}_settings.json");
+            if (File.Exists(settingsFile))
+                File.Delete(settingsFile);
+        }
+
+        private void LoadSettings(FileInfo file)
+        {
+            var settings = JsonSerializer.Deserialize<SettingsDefinition>(File.ReadAllText(file.FullName));
+            if (settings != null)
+                Settings = settings;
+        }
+
+        public void ChangeUser(UserDefinition toUser)
+        {
+            if (CurrentUser != null)
+            {
+                CurrentUser.IsPrimary = false;
+                SaveUserData(CurrentUser);
+            }
+
+            UserManager.ApplyBuffsToResources(toUser);
+            toUser.IsPrimary = true;
+            UserManager.SaveUser(toUser);
+            var settingsFile = Path.Combine(UserManager.UsersPath, $"{toUser.ID}_settings.json");
+            LoadSettings(new FileInfo(settingsFile));
+            if (_isInitialized)
+                ApplySettings();
+            CurrentUser = toUser;
         }
 
         protected override void Initialize()
@@ -63,6 +129,8 @@ namespace TDGame.OpenGL
 
             CurrentScreen = _screenToLoad(this);
             CurrentScreen.Initialize();
+
+            _isInitialized = true;
         }
 
         private void LoadMods()
@@ -143,11 +211,17 @@ namespace TDGame.OpenGL
             LoadMods();
         }
 
-        public void SaveSettings()
+        public void SaveUserData(UserDefinition user)
         {
-            if (File.Exists(_settingsFile))
-                File.Delete(_settingsFile);
-            File.WriteAllText(_settingsFile, JsonSerializer.Serialize(Settings));
+            UserManager.SaveUser(user);
+            var settingsFile = Path.Combine(UserManager.UsersPath, $"{user.ID}_settings.json");
+            if (File.Exists(settingsFile))
+            {
+                File.Delete(settingsFile);
+                File.WriteAllText(settingsFile, JsonSerializer.Serialize(Settings));
+            }
+            else
+                File.WriteAllText(settingsFile, JsonSerializer.Serialize(new SettingsDefinition()));
         }
 
         public Texture2D TakeScreenCap()

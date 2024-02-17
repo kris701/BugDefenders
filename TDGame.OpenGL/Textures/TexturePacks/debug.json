@@ -64,6 +64,10 @@
       {
         "ID": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
         "Content": "Entities/Turrets/turret6"
+      },
+      {
+        "ID": "46ce91a9-78bc-4d77-95c1-46adfce971b2",
+        "Content": "UsersScreen/background"
       }
     ],
     "TextureSets": [

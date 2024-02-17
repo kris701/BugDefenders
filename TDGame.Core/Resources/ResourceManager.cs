@@ -12,6 +12,8 @@ namespace TDGame.Core.Resources
 {
     public static class ResourceManager
     {
+        private static Guid _coreID = new Guid("e142d037-51ea-45a4-bcf5-45e5c559234d");
+
         public static BaseBuilder<EnemyTypeDefinition> EnemyTypes = new BaseBuilder<EnemyTypeDefinition>("Resources.Core.EnemyTypes", Assembly.GetExecutingAssembly());
         public static BaseBuilder<GameStyleDefinition> GameStyles = new BaseBuilder<GameStyleDefinition>("Resources.Core.GameStyles", Assembly.GetExecutingAssembly());
         public static BaseBuilder<MapDefinition> Maps = new BaseBuilder<MapDefinition>("Resources.Core.Maps", Assembly.GetExecutingAssembly());
@@ -23,7 +25,7 @@ namespace TDGame.Core.Resources
         public static List<ResourceDefinition> LoadedResources { get; internal set; } = new List<ResourceDefinition>() {
             new ResourceDefinition()
             {
-                ID = new Guid("e142d037-51ea-45a4-bcf5-45e5c559234d"),
+                ID = _coreID,
                 Version = "1.0.0",
                 Name = "Core",
                 Description = "Core game components"
@@ -46,6 +48,7 @@ namespace TDGame.Core.Resources
             var resourceDefinition = JsonSerializer.Deserialize<ResourceDefinition>(File.ReadAllText(definitionFile.FullName));
             if (resourceDefinition == null)
                 throw new Exception("Resource definition is malformed!");
+            resourceDefinition.Path = path.FullName;
 
             foreach (var folder in definitionFile.Directory.GetDirectories())
             {
@@ -64,12 +67,13 @@ namespace TDGame.Core.Resources
                     Turrets.LoadExternalResources(folder.GetFiles().ToList());
             }
 
-            LoadedResources.Add(resourceDefinition);
+            if (!LoadedResources.Any(x => x.ID == resourceDefinition.ID))
+                LoadedResources.Add(resourceDefinition);
 
             CheckGameIntegrity();
         }
 
-        public static void ReloadResources()
+        public static void UnloadExternalResources()
         {
             EnemyTypes.Reload();
             GameStyles.Reload();
@@ -83,12 +87,27 @@ namespace TDGame.Core.Resources
             LoadedResources = new List<ResourceDefinition>() {
                 new ResourceDefinition()
                 {
-                    ID = new Guid("e142d037-51ea-45a4-bcf5-45e5c559234d"),
+                    ID = _coreID,
                     Version = "1.0.0",
                     Name = "Core",
                     Description = "Core game components"
                 }
             };
+        }
+
+        public static void ReloadResources()
+        {
+            EnemyTypes.Reload();
+            GameStyles.Reload();
+            Maps.Reload();
+
+            Enemies.Reload();
+            Projectiles.Reload();
+            Turrets.Reload();
+
+            foreach(var resource in LoadedResources)
+                if (resource.ID != _coreID)
+                    LoadResource(new DirectoryInfo(resource.Path));
         }
 
         public static void CheckGameIntegrity()

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Linq;
+using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameOverScreen
@@ -15,6 +17,30 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
             _score = score;
             _gameTime = gameTime;
             ScaleValue = parent.Settings.Scale;
+
+            Parent.CurrentUser.HighScores.Add(new Core.Users.Models.ScoreDefinition()
+            {
+                Score = _score,
+                GameTime = gameTime.ToString("hh\\:mm\\:ss"),
+                Date = DateTime.Now.Date.ToShortDateString(),
+            });
+            if (Parent.CurrentUser.HighScores.Count > 10)
+            {
+                var smallest = int.MaxValue;
+                ScoreDefinition? smallestDef = null;
+                foreach (var scoreDef in Parent.CurrentUser.HighScores)
+                {
+                    if (scoreDef.Score < smallest)
+                    {
+                        smallestDef = scoreDef;
+                        smallest = scoreDef.Score;
+                    }
+                }
+                if (smallestDef != null)
+                    Parent.CurrentUser.HighScores.Remove(smallestDef);
+            }
+            Parent.SaveUserData(Parent.CurrentUser);
+
             Initialize();
         }
     }

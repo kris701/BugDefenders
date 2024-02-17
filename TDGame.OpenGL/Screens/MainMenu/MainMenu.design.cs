@@ -51,6 +51,29 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
 
+            AddControl(0, new LabelControl(this)
+            {
+                X = 5,
+                Y = 900,
+                Width = 200,
+                Height = 35,
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                Text = $"Current User: {Parent.CurrentUser.Name}",
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+            });
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new UsersScreen.UsersScreen(Parent)))
+            {
+                X = 5,
+                Y = 945,
+                Width = 200,
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White,
+                Text = "Users",
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture()
+            });
 
 #if DEBUG
             AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new MainMenu(Parent)))
