@@ -7,7 +7,7 @@ namespace TDGame.OpenGL.Engine.Screens
 {
     public abstract class BaseScreen : IScreen
     {
-        public GameEngine Parent { get; set; }
+        public UIEngine Parent { get; set; }
         public FadeState State { get; set; } = FadeState.FadeIn;
 
         public int FadeInTime { get; set; } = 200;
@@ -26,7 +26,7 @@ namespace TDGame.OpenGL.Engine.Screens
         private Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
         private Dictionary<int, List<IControl>> _viewLayers;
 
-        public BaseScreen(GameEngine parent)
+        public BaseScreen(UIEngine parent)
         {
             Parent = parent;
             _viewLayers = new Dictionary<int, List<IControl>>() {

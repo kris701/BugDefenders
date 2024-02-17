@@ -6,7 +6,7 @@ namespace TDGame.OpenGL.Engine.Screens
     public enum FadeState { FadeIn, Hold, FadeOut, PostHold }
     public interface IScreen
     {
-        public GameEngine Parent { get; set; }
+        public UIEngine Parent { get; set; }
         public int FadeInTime { get; }
         public int FadeOutTime { get; }
         public FadeState State { get; set; }

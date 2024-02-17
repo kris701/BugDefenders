@@ -9,7 +9,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
     public partial class SettingsView : BaseScreen
     {
         private SettingsDefinition _settings;
-        public SettingsView(GameEngine parent) : base(parent)
+        public SettingsView(UIEngine parent) : base(parent)
         {
             _settings = parent.Settings.Copy();
             ScaleValue = parent.Settings.Scale;

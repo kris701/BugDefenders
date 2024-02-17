@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TDGame.Core.Models.Entities.Enemies;
+using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;

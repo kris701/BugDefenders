@@ -14,7 +14,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private Guid? _selectedMap;
         private ButtonControl? _selectedMapButton;
 
-        public GameSetupView(GameEngine parent) : base(parent)
+        public GameSetupView(UIEngine parent) : base(parent)
         {
             ScaleValue = parent.Settings.Scale;
             Initialize();

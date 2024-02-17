@@ -1,4 +1,4 @@
-﻿using TDGame.Core.Models;
+﻿using TDGame.Core.Game.Models;
 
 namespace TDGame.Core.Resources
 {

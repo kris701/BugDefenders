@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TDGame.Core.Models;
+using TDGame.Core.Game.Models;
 
 namespace TDGame.OpenGL.Textures
 {

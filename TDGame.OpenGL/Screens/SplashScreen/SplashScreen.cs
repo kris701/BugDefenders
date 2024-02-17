@@ -9,7 +9,7 @@ namespace TDGame.OpenGL.Screens.SplashScreen
     {
         public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(5);
 
-        public SplashScreen(GameEngine parent) : base(parent)
+        public SplashScreen(UIEngine parent) : base(parent)
         {
             FadeInTime = 1000;
             FadeOutTime = 1000;

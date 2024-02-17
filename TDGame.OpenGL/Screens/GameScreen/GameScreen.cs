@@ -3,19 +3,20 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TDGame.Core.Models.Entities.Enemies;
-using TDGame.Core.Models.Entities.Projectiles;
-using TDGame.Core.Models.Entities.Turrets;
-using TDGame.Core.Models.Entities.Turrets.Modules;
-using TDGame.Core.Models.Entities.Upgrades;
-using TDGame.Core.Models.Maps;
+using TDGame.Core.Game;
+using TDGame.Core.Game.Models.Entities.Enemies;
+using TDGame.Core.Game.Models.Entities.Projectiles;
+using TDGame.Core.Game.Models.Entities.Turrets;
+using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using TDGame.Core.Game.Models.Entities.Upgrades;
+using TDGame.Core.Game.Models.Maps;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures.Animations;
-using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
+using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
@@ -31,7 +32,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private Guid _currentMap;
         private Guid _currentGameStyle;
-        private Core.Game _game;
+        private GameEngine _game;
         private Guid? _buyingTurret;
         private TurretInstance? _selectedTurret;
         private List<EffectEntity> _effects = new List<EffectEntity>();
@@ -42,12 +43,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private KeyWatcher _switchTurretWatcher;
         private KeyWatcher _escapeKeyWatcher;
 
-        public GameScreen(GameEngine parent, Guid mapID, Guid gameStyleID) : base(parent)
+        public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(parent)
         {
             _currentGameStyle = gameStyleID;
             _currentMap = mapID;
             ScaleValue = parent.Settings.Scale;
-            _game = new Core.Game(mapID, gameStyleID);
+            _game = new GameEngine(mapID, gameStyleID);
             _game.OnTurretShooting += OnTurretFiring;
             _game.OnTurretIdle += OnTurretIdling;
             ResourceManager.CheckGameIntegrity();

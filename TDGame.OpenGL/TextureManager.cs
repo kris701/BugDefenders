@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using TDGame.Core.Helpers;
+using TDGame.Core.Game.Helpers;
 using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL

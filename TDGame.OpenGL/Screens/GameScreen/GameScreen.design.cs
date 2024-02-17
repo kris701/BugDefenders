@@ -6,7 +6,7 @@ using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using static TDGame.Core.Models.Entities.Turrets.TurretInstance;
+using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {

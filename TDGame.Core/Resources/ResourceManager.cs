@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using TDGame.Core.Helpers;
-using TDGame.Core.Models.EnemyTypes;
-using TDGame.Core.Models.Entities.Enemies;
-using TDGame.Core.Models.Entities.Projectiles;
-using TDGame.Core.Models.Entities.Turrets;
-using TDGame.Core.Models.GameStyles;
-using TDGame.Core.Models.Maps;
+using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models.EnemyTypes;
+using TDGame.Core.Game.Models.Entities.Enemies;
+using TDGame.Core.Game.Models.Entities.Projectiles;
+using TDGame.Core.Game.Models.Entities.Turrets;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Resources
 {

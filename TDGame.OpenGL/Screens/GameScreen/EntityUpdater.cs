@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using TDGame.Core.Models;
+using TDGame.Core.Game.Models;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Screens;
 
