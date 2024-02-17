@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
-using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Resources;
 
 namespace TDGame.Core.Game.Models.Entities.Turrets.Modules

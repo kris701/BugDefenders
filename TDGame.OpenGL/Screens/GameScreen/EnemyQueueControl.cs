@@ -35,7 +35,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 sb.AppendLine($"{def.Name} + {wave.Count - 1} more");
                 sb.Append($"Types: {ResourceManager.EnemyTypes.GetResource(def.EnemyType).Name}");
-                foreach(var enemy in wave.Skip(1))
+                foreach (var enemy in wave.Skip(1))
                     sb.Append($", {ResourceManager.EnemyTypes.GetResource(ResourceManager.Enemies.GetResource(enemy).EnemyType).Name}");
                 sb.AppendLine();
                 var hp = instance.Health;

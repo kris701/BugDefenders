@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using TDGame.Core.Game.Models;
 using TDGame.Core.Game.Models.Entities.Turrets;
 
 namespace TDGame.Core.Game.Models.Entities.Upgrades

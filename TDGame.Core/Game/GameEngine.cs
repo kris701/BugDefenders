@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using TDGame.Core.Game.Helpers;
+﻿using TDGame.Core.Game.Helpers;
 using TDGame.Core.Game.Models;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles;
@@ -210,7 +209,7 @@ namespace TDGame.Core.Game
         {
             Money += GameStyle.MoneyPrWave;
 
-            foreach(var item in EnemiesToSpawn[0]) 
+            foreach (var item in EnemiesToSpawn[0])
             {
                 if (WaveEnemiesModule.EnemyOptions.Contains(item))
                     _spawnQueue.AddRange(WaveEnemiesModule.QueueEnemies(item));

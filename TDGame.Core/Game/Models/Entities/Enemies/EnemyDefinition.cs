@@ -1,5 +1,4 @@
-﻿using TDGame.Core.Game.Models;
-using TDGame.Core.Game.Models.Entities.Enemies.Modules;
+﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 
 namespace TDGame.Core.Game.Models.Entities.Enemies
 {

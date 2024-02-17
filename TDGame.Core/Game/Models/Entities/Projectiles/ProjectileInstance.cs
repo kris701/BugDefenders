@@ -1,5 +1,4 @@
-﻿using TDGame.Core.Game.Models;
-using TDGame.Core.Game.Models.Entities.Enemies;
+﻿using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Resources;
 

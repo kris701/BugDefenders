@@ -1,6 +1,4 @@
-﻿using TDGame.Core.Game.Models;
-
-namespace TDGame.Core.Game.Models.Maps
+﻿namespace TDGame.Core.Game.Models.Maps
 {
     public class MapDefinition : IDefinition
     {

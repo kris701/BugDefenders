@@ -1,6 +1,4 @@
-﻿using TDGame.Core.Game.Models;
-
-namespace TDGame.Core.Game.Models.EnemyTypes
+﻿namespace TDGame.Core.Game.Models.EnemyTypes
 {
     public class EnemyTypeDefinition : IDefinition
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Modules;
+﻿using TDGame.Core.Game.Models.Entities.Enemies;
 
 namespace TDGame.Core.Game.Modules.Enemies
 {

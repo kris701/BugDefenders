@@ -1,6 +1,4 @@
-﻿using TDGame.Core.Game.Models;
-
-namespace TDGame.Core.Game.Models.GameStyles
+﻿namespace TDGame.Core.Game.Models.GameStyles
 {
     public class GameStyleDefinition : IDefinition
     {
