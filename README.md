@@ -1,13 +1,13 @@
 # TDGame
 
 ## TODO List
-- [ ] Fix missile turret not guiding
 - [ ] User system (to save scores and permanent upgrades) 
 - [ ] Score board
 - [ ] Carry over system
     - Something like, each game if you kill `n` amount of enemies you can permanently do 1% more damage across all following games (or something like it)
     - [ ] Upgrade menu for this
     - [ ] GameStyle that disallows permanent upgrades
+- [X] Fix missile turret not guiding
 - [X] Money for starting a wave
 - [X] - [X] Black list turret ids (and enemy IDs) in GameStyles 
     - Could be useful if you where to make a "bullets only" GameStyle or something like that 

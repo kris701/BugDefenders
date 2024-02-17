@@ -46,6 +46,7 @@ namespace TDGame.Core.Modules.Turrets
                 projectile.X = turret.CenterX - projectile.Size / 2;
                 projectile.Y = turret.CenterY - projectile.Size / 2;
                 projectile.Source = turret;
+                projectile.Target = best;
                 if (def.IsTrailing)
                     projectile.Angle = Game.GetAngle(
                         GetTrailingPoint(best, projectile),
