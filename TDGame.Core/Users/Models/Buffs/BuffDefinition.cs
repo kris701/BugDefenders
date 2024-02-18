@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Game.Models;
 using TDGame.Core.Resources;
-using TDGame.Core.Users.Models.Buffs.BuffCriterias;
+using TDGame.Core.Users.Models.UserCriterias;
 using TDGame.Core.Users.Models.Buffs.BuffEffects;
 
 namespace TDGame.Core.Users.Models.Buffs
@@ -17,10 +17,10 @@ namespace TDGame.Core.Users.Models.Buffs
         public string Description { get; set; }
         public Guid? Requires { get; set; }
 
-        public IBuffCriteria Criteria { get; set; }
+        public IUserCriteria Criteria { get; set; }
         public IBuffEffect Effect { get; set; }
 
-        public BuffDefinition(Guid iD, string name, string description, Guid? requires, IBuffCriteria criteria, IBuffEffect effect)
+        public BuffDefinition(Guid iD, string name, string description, Guid? requires, IUserCriteria criteria, IBuffEffect effect)
         {
             ID = iD;
             Name = name;

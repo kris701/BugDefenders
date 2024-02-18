@@ -7,6 +7,7 @@ using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.GameStyles;
 using TDGame.Core.Game.Models.Maps;
+using TDGame.Core.Users.Models;
 using TDGame.Core.Users.Models.Buffs;
 
 namespace TDGame.Core.Resources
@@ -24,6 +25,7 @@ namespace TDGame.Core.Resources
         public static BaseBuilder<TurretDefinition> Turrets = new BaseBuilder<TurretDefinition>("Resources.Core.Turrets", Assembly.GetExecutingAssembly());
 
         public static BaseBuilder<BuffDefinition> Buffs = new BaseBuilder<BuffDefinition>("Resources.Core.Buffs", Assembly.GetExecutingAssembly());
+        public static BaseBuilder<AchivementDefinition> Achivements = new BaseBuilder<AchivementDefinition>("Resources.Core.Achivements", Assembly.GetExecutingAssembly());
 
         public static List<ResourceDefinition> LoadedResources { get; internal set; } = new List<ResourceDefinition>() {
             new ResourceDefinition()
@@ -71,6 +73,8 @@ namespace TDGame.Core.Resources
 
                 if (folder.Name.ToUpper() == "BUFFS")
                     Buffs.LoadExternalResources(folder.GetFiles().ToList());
+                if (folder.Name.ToUpper() == "ACHIVEMENTS")
+                    Achivements.LoadExternalResources(folder.GetFiles().ToList());
             }
 
             if (!LoadedResources.Any(x => x.ID == resourceDefinition.ID))
@@ -90,6 +94,7 @@ namespace TDGame.Core.Resources
             Turrets.Reload();
 
             Buffs.Reload();
+            Achivements.Reload();
 
             LoadedResources.Clear();
             LoadedResources = new List<ResourceDefinition>() {
@@ -114,6 +119,7 @@ namespace TDGame.Core.Resources
             Turrets.Reload();
 
             Buffs.Reload();
+            Achivements.Reload();
 
             foreach (var resource in LoadedResources)
                 if (resource.ID != _coreID)
