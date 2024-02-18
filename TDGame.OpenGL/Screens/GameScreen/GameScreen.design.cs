@@ -144,12 +144,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             AddControl(1, new BorderControl(this)
             {
-                Child = new ButtonControl(this, clicked: (x) => { SwitchView(new MainMenu.MainMenu(Parent)); })
+                Child = new ButtonControl(this, clicked: (x) => { GameOver(); })
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     FillClickedColor = BasicTextures.GetClickedTexture(),
                     FillDisabledColor = BasicTextures.GetDisabledTexture(),
-                    Text = $"Exit",
+                    Text = $"End Game",
                     Font = BasicFonts.GetFont(16),
                     X = xOffset + 5,
                     Y = yOffset + 170,
