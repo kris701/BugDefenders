@@ -1,0 +1,9 @@
+﻿{
+  "id": "0242dd8b-6079-444d-a077-6ffe5e556ec9",
+  "Name": "Murder!",
+  "description": "You killed 10 enemies!",
+  "Criteria": {
+    "CriteriaType": "TotalKills",
+    "Quantity": 10
+  }
+}

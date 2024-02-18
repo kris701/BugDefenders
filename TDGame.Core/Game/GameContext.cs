@@ -4,6 +4,7 @@ using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.GameStyles;
 using TDGame.Core.Game.Models.Maps;
 using TDGame.Core.Game.Modules;
+using TDGame.Core.Users.Models;
 
 namespace TDGame.Core.Game
 {
@@ -27,7 +28,7 @@ namespace TDGame.Core.Game
                     _running = value;
             }
         }
-        public GameOutcome Outcome { get; set; } = new GameOutcome();
+        public StatsDefinition Outcome { get; set; } = new StatsDefinition();
         public List<EnemyInstance> CurrentEnemies { get; set; }
         public int HP { get; set; }
         public int Money { get; set; }

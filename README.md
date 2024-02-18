@@ -1,7 +1,7 @@
 # TDGame
 
 ## TODO List
-- [ ] Achievements 
+- [X] Achievements 
 - [X] Carry over system
     - Something like, each game if you kill `n` amount of enemies you can permanently do 1% more damage across all following games (or something like it)
     - [X] Upgrade menu for this
@@ -9,7 +9,7 @@
 - [X] User system (to save scores and permanent upgrades) 
 - [X] Fix missile turret not guiding
 - [X] Money for starting a wave
-- [X] - [X] Black list turret ids (and enemy IDs) in GameStyles 
+- [X] Black list turret ids (and enemy IDs) in GameStyles 
     - Could be useful if you where to make a "bullets only" GameStyle or something like that 
 - [X] Enemy modules like the turret system
     - Could be interesting to make boss enemies handled separately with unique modules

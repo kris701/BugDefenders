@@ -14,7 +14,7 @@ namespace TDGame.Core.Users.Models
         public int TotalTurretsPlaced { get; set; } = 0;
         public Dictionary<Guid, int> TotalTurretsPlacedOfType { get; set; } = new Dictionary<Guid, int>();
 
-        public void AddFromOutcome(GameOutcome outcome)
+        public void Combine(StatsDefinition outcome)
         {
             TotalKills += outcome.TotalKills;
             foreach (var key in outcome.KillsOfType.Keys)

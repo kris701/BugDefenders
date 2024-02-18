@@ -497,8 +497,20 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (!_gameOver)
             {
-                Parent.CurrentUser.Stats.AddFromOutcome(_game.Outcome);
                 _gameOver = true;
+
+                Parent.CurrentUser.Stats.Combine(_game.Outcome);
+                var achivements = ResourceManager.Achivements.GetResources();
+                foreach (var id in achivements) 
+                {
+                    if (!Parent.CurrentUser.Achivements.Contains(id))
+                    {
+                        var achivement = ResourceManager.Achivements.GetResource(id);
+                        if (achivement.Criteria.IsValid(Parent.CurrentUser.Stats))
+                            Parent.CurrentUser.Achivements.Add(id);
+                    }
+                }
+
                 var screen = Parent.TakeScreenCap();
                 SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
             }

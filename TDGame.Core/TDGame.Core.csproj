@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <None Remove="Resources\Core\Achivements\achivement1.json" />
+    <None Remove="Resources\Core\Achivements\achivement2.json" />
+    <None Remove="Resources\Core\Achivements\achivement3.json" />
     <None Remove="Resources\Core\Buffs\buff1.json" />
     <None Remove="Resources\Core\Buffs\buff2.json" />
     <None Remove="Resources\Core\Turrets\turret3.json" />
@@ -17,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Core\Achivements\achivement3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\achivement2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Achivements\achivement1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

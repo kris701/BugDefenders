@@ -9,6 +9,7 @@ using TDGame.Core.Users;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Popups.Achivements;
 using TDGame.OpenGL.Settings;
 using TDGame.OpenGL.Textures;
 
@@ -31,6 +32,7 @@ namespace TDGame.OpenGL
         public IScreen CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; set; }
         public UserDefinition<SettingsDefinition> CurrentUser { get; set; }
+        public AchivementPopupManager AchivementManager { get; set; }
 
         private Func<UIEngine, IScreen> _screenToLoad;
         private SpriteBatch? _spriteBatch;
@@ -97,6 +99,7 @@ namespace TDGame.OpenGL
             UserManager.SaveUser(toUser);
             if (_isInitialized)
                 ApplySettings();
+            AchivementManager = new AchivementPopupManager(this, toUser.Achivements);
         }
 
         protected override void Initialize()
@@ -153,6 +156,7 @@ namespace TDGame.OpenGL
         protected override void Update(GameTime gameTime)
         {
             CurrentScreen.Update(gameTime);
+            AchivementManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -166,6 +170,7 @@ namespace TDGame.OpenGL
 
             _spriteBatch.Begin();
             CurrentScreen.Draw(gameTime, _spriteBatch);
+            AchivementManager.Draw(gameTime, _spriteBatch);
 #if FPS
             _currentFrames++;
             _passed += gameTime.ElapsedGameTime;
