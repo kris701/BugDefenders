@@ -105,6 +105,7 @@ namespace TDGame.OpenGL
 
             Window.Title = "TDGame";
 
+            TextureManager.Initialize(Content);
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
             ApplySettings();

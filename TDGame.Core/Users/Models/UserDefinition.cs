@@ -14,7 +14,8 @@ namespace TDGame.Core.Users.Models
         public string Name { get; set; }
         public List<IBuff> Buffs { get; set; } = new List<IBuff>();
         public List<ScoreDefinition> HighScores { get; set; } = new List<ScoreDefinition>();
-        public bool IsPrimary { get; set; }
+        public bool IsPrimary { get; set; } = false;
+        public StatsDefinition Stats { get; set; } = new StatsDefinition();
         public T UserData { get; set; }
     }
 }

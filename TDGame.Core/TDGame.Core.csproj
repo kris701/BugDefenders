@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Core\Buffs\buff1.json" />
     <None Remove="Resources\Core\Turrets\turret3.json" />
     <None Remove="Resources\Core\Turrets\turret4.json" />
     <None Remove="Resources\Core\Turrets\turret5.json" />
@@ -14,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Core\Buffs\buff1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\EnemyTypes\type3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

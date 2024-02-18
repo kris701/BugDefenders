@@ -1,4 +1,5 @@
-﻿using TDGame.Core.Game.Helpers;
+﻿using System;
+using TDGame.Core.Game.Helpers;
 using TDGame.Core.Game.Models;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles;
@@ -186,6 +187,13 @@ namespace TDGame.Core.Game
                 CurrentEnemies.Remove(enemy);
                 if (OnEnemyKilled != null)
                     OnEnemyKilled.Invoke(enemy);
+
+                Outcome.TotalKills++;
+                if (!Outcome.KillsOfType.ContainsKey(enemy.DefinitionID))
+                    Outcome.KillsOfType.Add(enemy.DefinitionID, 1);
+                else
+                    Outcome.KillsOfType[enemy.DefinitionID] += 1;
+
                 return true;
             }
             return false;
@@ -313,6 +321,12 @@ namespace TDGame.Core.Game
             Turrets.Add(newInstance);
             if (OnTurretPurchased != null)
                 OnTurretPurchased.Invoke(newInstance);
+
+            Outcome.TotalTurretsPlaced++;
+            if (!Outcome.TotalTurretsPlacedOfType.ContainsKey(newInstance.DefinitionID))
+                Outcome.TotalTurretsPlacedOfType.Add(newInstance.DefinitionID, 1);
+            else
+                Outcome.TotalTurretsPlacedOfType[newInstance.DefinitionID] += 1;
 
             return true;
         }

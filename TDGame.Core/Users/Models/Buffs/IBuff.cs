@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TDGame.Core.Users.Models.Buffs
 {
-    [JsonPolymorphic(TypeDiscriminatorPropertyName = "Target")]
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "BuffType")]
     [JsonDerivedType(typeof(EnemyBuff), typeDiscriminator: "Enemy")]
     [JsonDerivedType(typeof(TurretBuff), typeDiscriminator: "Turret")]
     public interface IBuff

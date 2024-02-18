@@ -1,0 +1,29 @@
+﻿{
+  "id": "01c1b070-605a-4cf2-9e5c-9ae5b7f7159f",
+  "Name": "Perma Buff Test",
+  "description": "abav",
+  "Requires": null,
+  "Criteria": {
+    "CriteriaType": "TotalKillsOfType",
+    "EnemyID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+    "Quantity": 10
+  },
+  "Effect": {
+    "BuffType": "Turret",
+    "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+    "Module": {
+      "TurretModule": "LaserTurret",
+      "Range": 200,
+      "Damage": 20,
+      "Cooldown": 10,
+      "SlowingFactor": 1,
+      "SlowingDuration": 0,
+      "DamageModifiers": [
+        {
+          "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+          "Modifier": 2
+        }
+      ]
+    }
+  }
+}

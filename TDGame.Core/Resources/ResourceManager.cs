@@ -7,6 +7,7 @@ using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.GameStyles;
 using TDGame.Core.Game.Models.Maps;
+using TDGame.Core.Users.Models;
 
 namespace TDGame.Core.Resources
 {
@@ -21,6 +22,8 @@ namespace TDGame.Core.Resources
         public static BaseBuilder<EnemyDefinition> Enemies = new BaseBuilder<EnemyDefinition>("Resources.Core.Enemies", Assembly.GetExecutingAssembly());
         public static BaseBuilder<ProjectileDefinition> Projectiles = new BaseBuilder<ProjectileDefinition>("Resources.Core.Projectiles", Assembly.GetExecutingAssembly());
         public static BaseBuilder<TurretDefinition> Turrets = new BaseBuilder<TurretDefinition>("Resources.Core.Turrets", Assembly.GetExecutingAssembly());
+
+        public static BaseBuilder<BuffUpgrade> Buffs = new BaseBuilder<BuffUpgrade>("Resources.Core.Buffs", Assembly.GetExecutingAssembly());
 
         public static List<ResourceDefinition> LoadedResources { get; internal set; } = new List<ResourceDefinition>() {
             new ResourceDefinition()
@@ -65,6 +68,9 @@ namespace TDGame.Core.Resources
                     Projectiles.LoadExternalResources(folder.GetFiles().ToList());
                 if (folder.Name.ToUpper() == "TURRETS")
                     Turrets.LoadExternalResources(folder.GetFiles().ToList());
+
+                if (folder.Name.ToUpper() == "BUFFS")
+                    Buffs.LoadExternalResources(folder.GetFiles().ToList());
             }
 
             if (!LoadedResources.Any(x => x.ID == resourceDefinition.ID))
@@ -82,6 +88,8 @@ namespace TDGame.Core.Resources
             Enemies.Reload();
             Projectiles.Reload();
             Turrets.Reload();
+
+            Buffs.Reload();
 
             LoadedResources.Clear();
             LoadedResources = new List<ResourceDefinition>() {
@@ -105,7 +113,9 @@ namespace TDGame.Core.Resources
             Projectiles.Reload();
             Turrets.Reload();
 
-            foreach(var resource in LoadedResources)
+            Buffs.Reload();
+
+            foreach (var resource in LoadedResources)
                 if (resource.ID != _coreID)
                     LoadResource(new DirectoryInfo(resource.Path));
         }

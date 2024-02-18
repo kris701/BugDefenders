@@ -497,6 +497,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (!_gameOver)
             {
+                Parent.CurrentUser.Stats.AddFromOutcome(_game.Outcome);
                 _gameOver = true;
                 var screen = Parent.TakeScreenCap();
                 SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));

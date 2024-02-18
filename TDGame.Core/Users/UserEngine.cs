@@ -34,6 +34,15 @@ namespace TDGame.Core.Users
             return retList;
         }
 
+        public void AddBuffUpgrade(UserDefinition<T> user, BuffUpgrade buff)
+        {
+            if (buff.Criteria.IsValid(user.Stats))
+            {
+                user.Buffs.Add(buff.Effect);
+                SaveUser(user);
+            }
+        }
+
         public void ApplyBuffsToResources(UserDefinition<T> user)
         {
             ResourceManager.ReloadResources();
