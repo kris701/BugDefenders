@@ -7,7 +7,7 @@ using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.GameStyles;
 using TDGame.Core.Game.Models.Maps;
-using TDGame.Core.Users.Models;
+using TDGame.Core.Users.Models.Buffs;
 
 namespace TDGame.Core.Resources
 {

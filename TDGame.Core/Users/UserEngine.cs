@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TDGame.Core.Resources;
 using TDGame.Core.Users.Models;
-using TDGame.Core.Users.Models.Buffs;
+using TDGame.Core.Users.Models.Buffs.BuffEffects;
 
 namespace TDGame.Core.Users
 {
@@ -52,12 +52,12 @@ namespace TDGame.Core.Users
             foreach (var id in user.Buffs)
             {
                 var buff = ResourceManager.Buffs.GetResource(id).Effect;
-                if (buff is EnemyBuff enemyBuff)
+                if (buff is EnemyBuffEffect enemyBuff)
                 {
                     var target = ResourceManager.Enemies.GetResource(enemyBuff.EnemyID);
                     if (target.ModuleInfo.GetType() == enemyBuff.Module.GetType())
                         target.ModuleInfo = enemyBuff.Module;
-                } else if (buff is TurretBuff turretBuff)
+                } else if (buff is TurretBuffEffect turretBuff)
                 {
                     var target = ResourceManager.Turrets.GetResource(turretBuff.TurretID);
                     if (target.ModuleInfo.GetType() == turretBuff.Module.GetType())

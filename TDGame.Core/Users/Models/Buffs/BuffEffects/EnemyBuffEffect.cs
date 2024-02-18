@@ -6,9 +6,9 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 
-namespace TDGame.Core.Users.Models.Buffs
+namespace TDGame.Core.Users.Models.Buffs.BuffEffects
 {
-    public class EnemyBuff : IBuff
+    public class EnemyBuffEffect : IBuffEffect
     {
         public Guid EnemyID { get; set; }
         public IEnemyModule Module { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Users.Models.UpgradeRequirements
+namespace TDGame.Core.Users.Models.Buffs.BuffCriterias
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "CriteriaType")]
     [JsonDerivedType(typeof(EnemyKilledCriteria), typeDiscriminator: "TotalKillsOfType")]

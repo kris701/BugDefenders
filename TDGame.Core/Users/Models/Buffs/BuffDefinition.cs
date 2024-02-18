@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Game.Models;
 using TDGame.Core.Resources;
-using TDGame.Core.Users.Models.Buffs;
-using TDGame.Core.Users.Models.UpgradeRequirements;
+using TDGame.Core.Users.Models.Buffs.BuffCriterias;
+using TDGame.Core.Users.Models.Buffs.BuffEffects;
 
-namespace TDGame.Core.Users.Models
+namespace TDGame.Core.Users.Models.Buffs
 {
     public class BuffDefinition : IDefinition
     {
@@ -18,9 +18,9 @@ namespace TDGame.Core.Users.Models
         public Guid? Requires { get; set; }
 
         public IBuffCriteria Criteria { get; set; }
-        public IBuff Effect { get; set; }
+        public IBuffEffect Effect { get; set; }
 
-        public BuffDefinition(Guid iD, string name, string description, Guid? requires, IBuffCriteria criteria, IBuff effect)
+        public BuffDefinition(Guid iD, string name, string description, Guid? requires, IBuffCriteria criteria, IBuffEffect effect)
         {
             ID = iD;
             Name = name;

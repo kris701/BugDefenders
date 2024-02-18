@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Users.Models.UpgradeRequirements
+namespace TDGame.Core.Users.Models.Buffs.BuffCriterias
 {
     public class EnemiesKilledCriteria : IBuffCriteria
     {

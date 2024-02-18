@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Users.Models.UpgradeRequirements
+namespace TDGame.Core.Users.Models.Buffs.BuffCriterias
 {
-    public class TurretPlacedCriteria : IBuffCriteria
+    public class EnemyKilledCriteria : IBuffCriteria
     {
-        public Guid TurretID { get; set; }
+        public Guid EnemyID { get; set; }
         public int Quantity { get; set; }
 
         public bool IsValid(StatsDefinition stats)
         {
-            if (stats.TotalTurretsPlacedOfType.ContainsKey(TurretID) && stats.TotalTurretsPlacedOfType[TurretID] >= Quantity)
+            if (stats.KillsOfType.ContainsKey(EnemyID) && stats.KillsOfType[EnemyID] >= Quantity)
                 return true;
             return false;
         }
