@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Linq;
 using System.Reflection;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Controls;
@@ -47,7 +48,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                     var allUsers = Parent.UserManager.GetAllUsers();
                     if (allUsers.Count == 1)
                         return;
-                    Parent.ChangeUser(allUsers[0]);
+                    Parent.ChangeUser(allUsers.First(x => x.ID != Parent.CurrentUser.ID));
                 }
                 Parent.UserManager.RemoveUser(user);
                 SwitchView(new UsersScreen(Parent));
