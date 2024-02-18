@@ -13,7 +13,7 @@ namespace TDGame.OpenGL.Screens.SplashScreen
         {
             FadeInTime = 1000;
             FadeOutTime = 1000;
-            ScaleValue = parent.Settings.Scale;
+            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
         }
 

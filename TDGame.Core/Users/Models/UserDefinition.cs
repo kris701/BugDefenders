@@ -8,12 +8,13 @@ using TDGame.Core.Users.Models.Buffs;
 
 namespace TDGame.Core.Users.Models
 {
-    public class UserDefinition
+    public class UserDefinition<T>
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
         public List<IBuff> Buffs { get; set; } = new List<IBuff>();
         public List<ScoreDefinition> HighScores { get; set; } = new List<ScoreDefinition>();
         public bool IsPrimary { get; set; }
+        public T UserData { get; set; }
     }
 }

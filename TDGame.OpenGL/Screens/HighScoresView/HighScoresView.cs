@@ -9,7 +9,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
     {
         public HighScoresView(UIEngine parent) : base(parent)
         {
-            ScaleValue = parent.Settings.Scale;
+            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
         }
     }

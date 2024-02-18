@@ -25,13 +25,12 @@ namespace TDGame.OpenGL
         private int _frames = 0;
 #endif
 
-        public SettingsDefinition Settings { get; set; }
         public GraphicsDeviceManager Device { get; }
         public int ScreenWidth() => Window.ClientBounds.Width;
         public int ScreenHeight() => Window.ClientBounds.Height;
         public IScreen CurrentScreen { get; set; }
-        public UserEngine UserManager { get; set; }
-        public UserDefinition CurrentUser { get; set; }
+        public UserEngine<SettingsDefinition> UserManager { get; set; }
+        public UserDefinition<SettingsDefinition> CurrentUser { get; set; }
 
         private Func<UIEngine, IScreen> _screenToLoad;
         private SpriteBatch? _spriteBatch;
@@ -43,18 +42,18 @@ namespace TDGame.OpenGL
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
-            UserManager = new UserEngine();
+            UserManager = new UserEngine<SettingsDefinition>();
             var allUsers = UserManager.GetAllUsers();
             if (allUsers.Count == 0)
             {
-                var newUser = new UserDefinition()
+                var newUser = new UserDefinition<SettingsDefinition>()
                 {
                     ID = Guid.NewGuid(),
                     Name = "Default",
-                    IsPrimary = true
+                    IsPrimary = true,
+                    UserData = new SettingsDefinition()
                 };
                 UserManager.AddNewUser(newUser);
-                SaveUserData(newUser);
                 ChangeUser(newUser);
             }
             else
@@ -74,47 +73,30 @@ namespace TDGame.OpenGL
 
         public void CreateNewUser(string name)
         {
-            var newUser = new UserDefinition()
+            var newUser = new UserDefinition<SettingsDefinition>()
             {
                 ID = Guid.NewGuid(),
                 Name = name,
-                IsPrimary = false
+                IsPrimary = false,
+                UserData = new SettingsDefinition()
             };
             UserManager.AddNewUser(newUser);
-            SaveUserData(newUser);
         }
 
-        public void DeleteUser(UserDefinition user)
-        {
-            UserManager.RemoveUser(user);
-            var settingsFile = Path.Combine(UserManager.UsersPath, $"{user.ID}_settings.json");
-            if (File.Exists(settingsFile))
-                File.Delete(settingsFile);
-        }
-
-        private void LoadSettings(FileInfo file)
-        {
-            var settings = JsonSerializer.Deserialize<SettingsDefinition>(File.ReadAllText(file.FullName));
-            if (settings != null)
-                Settings = settings;
-        }
-
-        public void ChangeUser(UserDefinition toUser)
+        public void ChangeUser(UserDefinition<SettingsDefinition> toUser)
         {
             if (CurrentUser != null)
             {
                 CurrentUser.IsPrimary = false;
-                SaveUserData(CurrentUser);
+                UserManager.SaveUser(CurrentUser);
             }
 
+            CurrentUser = toUser;
             UserManager.ApplyBuffsToResources(toUser);
             toUser.IsPrimary = true;
             UserManager.SaveUser(toUser);
-            var settingsFile = Path.Combine(UserManager.UsersPath, $"{toUser.ID}_settings.json");
-            LoadSettings(new FileInfo(settingsFile));
             if (_isInitialized)
                 ApplySettings();
-            CurrentUser = toUser;
         }
 
         protected override void Initialize()
@@ -201,27 +183,15 @@ namespace TDGame.OpenGL
 
         public void ApplySettings()
         {
-            Device.PreferredBackBufferHeight = (int)(Settings.Scale * 1000);
-            Device.PreferredBackBufferWidth = (int)(Settings.Scale * 1000);
-            Device.SynchronizeWithVerticalRetrace = Settings.IsVsync;
-            Device.IsFullScreen = Settings.IsFullscreen;
-            TextureManager.Initialize(Content);
-            TextureManager.LoadTexturePack(Settings.TexturePack);
+            UserManager.SaveUser(CurrentUser);
+
+            Device.PreferredBackBufferHeight = (int)(CurrentUser.UserData.Scale * 1000);
+            Device.PreferredBackBufferWidth = (int)(CurrentUser.UserData.Scale * 1000);
+            Device.SynchronizeWithVerticalRetrace = CurrentUser.UserData.IsVsync;
+            Device.IsFullScreen = CurrentUser.UserData.IsFullscreen;
+            TextureManager.LoadTexturePack(CurrentUser.UserData.TexturePack);
             Device.ApplyChanges();
             LoadMods();
-        }
-
-        public void SaveUserData(UserDefinition user)
-        {
-            UserManager.SaveUser(user);
-            var settingsFile = Path.Combine(UserManager.UsersPath, $"{user.ID}_settings.json");
-            if (File.Exists(settingsFile))
-            {
-                File.Delete(settingsFile);
-                File.WriteAllText(settingsFile, JsonSerializer.Serialize(Settings));
-            }
-            else
-                File.WriteAllText(settingsFile, JsonSerializer.Serialize(new SettingsDefinition()));
         }
 
         public Texture2D TakeScreenCap()

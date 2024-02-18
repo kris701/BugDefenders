@@ -10,7 +10,7 @@ using TDGame.Core.Users.Models.Buffs;
 
 namespace TDGame.Core.Users
 {
-    public class UserEngine
+    public class UserEngine<T>
     {
         public string UsersPath { get; } = "Users";
         public UserEngine()
@@ -19,14 +19,14 @@ namespace TDGame.Core.Users
                 Directory.CreateDirectory(UsersPath);
         }
 
-        public List<UserDefinition> GetAllUsers()
+        public List<UserDefinition<T>> GetAllUsers()
         {
-            var retList = new List<UserDefinition>();
+            var retList = new List<UserDefinition<T>>();
             if (Directory.Exists(UsersPath))
             {
                 foreach(var file in new DirectoryInfo(UsersPath).GetFiles())
                 {
-                    var parsed = JsonSerializer.Deserialize<UserDefinition>(File.ReadAllText(file.FullName));
+                    var parsed = JsonSerializer.Deserialize<UserDefinition<T>>(File.ReadAllText(file.FullName));
                     if (parsed != null && parsed.ID != Guid.Empty)
                         retList.Add(parsed);
                 }
@@ -34,7 +34,7 @@ namespace TDGame.Core.Users
             return retList;
         }
 
-        public void ApplyBuffsToResources(UserDefinition user)
+        public void ApplyBuffsToResources(UserDefinition<T> user)
         {
             ResourceManager.ReloadResources();
 
@@ -54,7 +54,7 @@ namespace TDGame.Core.Users
             }
         }
 
-        public void AddNewUser(UserDefinition user)
+        public void AddNewUser(UserDefinition<T> user)
         {
             var target = Path.Combine(UsersPath, $"{user.ID}.json");
             if (File.Exists(target))
@@ -62,14 +62,14 @@ namespace TDGame.Core.Users
             File.WriteAllText(target, JsonSerializer.Serialize(user));
         }
 
-        public void RemoveUser(UserDefinition user)
+        public void RemoveUser(UserDefinition<T> user)
         {
             var target = Path.Combine(UsersPath, $"{user.ID}.json");
             if (File.Exists(target))
                 File.Delete(target);
         }
 
-        public void SaveUser(UserDefinition user)
+        public void SaveUser(UserDefinition<T> user)
         {
             var target = Path.Combine(UsersPath, $"{user.ID}.json");
             if (File.Exists(target))

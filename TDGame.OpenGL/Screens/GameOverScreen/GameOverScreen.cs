@@ -16,7 +16,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
             _screen = screen;
             _score = score;
             _gameTime = gameTime;
-            ScaleValue = parent.Settings.Scale;
+            ScaleValue = parent.CurrentUser.UserData.Scale;
 
             Parent.CurrentUser.HighScores.Add(new Core.Users.Models.ScoreDefinition()
             {
@@ -39,7 +39,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 if (smallestDef != null)
                     Parent.CurrentUser.HighScores.Remove(smallestDef);
             }
-            Parent.SaveUserData(Parent.CurrentUser);
+            Parent.UserManager.SaveUser(Parent.CurrentUser);
 
             Initialize();
         }

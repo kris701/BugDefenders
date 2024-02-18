@@ -6,7 +6,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
     {
         public MainMenu(UIEngine parent) : base(parent)
         {
-            ScaleValue = parent.Settings.Scale;
+            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
         }
     }

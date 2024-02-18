@@ -6,6 +6,7 @@ using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Settings;
 
 namespace TDGame.OpenGL.Screens.UsersScreen
 {
@@ -14,7 +15,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
         private int _hash = 1;
         public UsersScreen(UIEngine parent) : base(parent)
         {
-            ScaleValue = parent.Settings.Scale;
+            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
         }
 
@@ -39,7 +40,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
 
         private void RemoveUserButton_Click(ButtonControl sender)
         {
-            if (sender.Tag is UserDefinition user)
+            if (sender.Tag is UserDefinition<SettingsDefinition> user)
             {
                 if (Parent.CurrentUser.ID == user.ID)
                 {
@@ -48,14 +49,14 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                         return;
                     Parent.ChangeUser(allUsers[0]);
                 }
-                Parent.DeleteUser(user);
+                Parent.UserManager.RemoveUser(user);
                 SwitchView(new UsersScreen(Parent));
             }
         }
 
         private void ChangeUserButton_Click(ButtonControl sender)
         {
-            if (sender.Tag is UserDefinition user)
+            if (sender.Tag is UserDefinition<SettingsDefinition> user)
             {
                 if (Parent.CurrentUser.ID != user.ID)
                 {

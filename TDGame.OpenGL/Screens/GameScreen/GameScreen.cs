@@ -48,7 +48,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             _currentGameStyle = gameStyleID;
             _currentMap = mapID;
-            ScaleValue = parent.Settings.Scale;
+            ScaleValue = parent.CurrentUser.UserData.Scale;
             _game = new GameEngine(mapID, gameStyleID);
             _game.OnTurretShooting += OnTurretFiring;
             _game.OnTurretIdle += OnTurretIdling;

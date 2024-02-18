@@ -49,9 +49,9 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
             AddControl(0, new ButtonControl(this, clicked: (x) =>
             {
-                Parent.Settings = _settings;
+                Parent.CurrentUser.UserData = _settings;
                 Parent.ApplySettings();
-                Parent.SaveUserData(Parent.CurrentUser);
+                Parent.UserManager.SaveUser(Parent.CurrentUser);
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {

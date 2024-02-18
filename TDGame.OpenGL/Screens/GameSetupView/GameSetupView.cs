@@ -16,7 +16,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         public GameSetupView(UIEngine parent) : base(parent)
         {
-            ScaleValue = parent.Settings.Scale;
+            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
         }
 

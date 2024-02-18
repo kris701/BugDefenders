@@ -11,8 +11,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
         private SettingsDefinition _settings;
         public SettingsView(UIEngine parent) : base(parent)
         {
-            _settings = parent.Settings.Copy();
-            ScaleValue = parent.Settings.Scale;
+            _settings = parent.CurrentUser.UserData.Copy();
+            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
         }
 
