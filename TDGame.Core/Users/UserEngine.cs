@@ -34,12 +34,14 @@ namespace TDGame.Core.Users
             return retList;
         }
 
-        public void AddBuffUpgrade(UserDefinition<T> user, BuffUpgrade buff)
+        public void AddBuffUpgrade(UserDefinition<T> user, Guid id)
         {
-            if (buff.Criteria.IsValid(user.Stats))
+            var buff = ResourceManager.Buffs.GetResource(id);
+            if (buff.IsValid(user))
             {
-                user.Buffs.Add(buff.Effect);
+                user.Buffs.Add(id);
                 SaveUser(user);
+                ApplyBuffsToResources(user);
             }
         }
 
@@ -47,8 +49,9 @@ namespace TDGame.Core.Users
         {
             ResourceManager.ReloadResources();
 
-            foreach (var buff in user.Buffs)
+            foreach (var id in user.Buffs)
             {
+                var buff = ResourceManager.Buffs.GetResource(id).Effect;
                 if (buff is EnemyBuff enemyBuff)
                 {
                     var target = ResourceManager.Enemies.GetResource(enemyBuff.EnemyID);

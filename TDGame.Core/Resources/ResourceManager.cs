@@ -23,7 +23,7 @@ namespace TDGame.Core.Resources
         public static BaseBuilder<ProjectileDefinition> Projectiles = new BaseBuilder<ProjectileDefinition>("Resources.Core.Projectiles", Assembly.GetExecutingAssembly());
         public static BaseBuilder<TurretDefinition> Turrets = new BaseBuilder<TurretDefinition>("Resources.Core.Turrets", Assembly.GetExecutingAssembly());
 
-        public static BaseBuilder<BuffUpgrade> Buffs = new BaseBuilder<BuffUpgrade>("Resources.Core.Buffs", Assembly.GetExecutingAssembly());
+        public static BaseBuilder<BuffDefinition> Buffs = new BaseBuilder<BuffDefinition>("Resources.Core.Buffs", Assembly.GetExecutingAssembly());
 
         public static List<ResourceDefinition> LoadedResources { get; internal set; } = new List<ResourceDefinition>() {
             new ResourceDefinition()

@@ -4,8 +4,7 @@
 - [ ] Achievements 
 - [X] Carry over system
     - Something like, each game if you kill `n` amount of enemies you can permanently do 1% more damage across all following games (or something like it)
-    - [ ] Upgrade menu for this
-    - [ ] GameStyle that disallows permanent upgrades
+    - [X] Upgrade menu for this
 - [X] Score board
 - [X] User system (to save scores and permanent upgrades) 
 - [X] Fix missile turret not guiding

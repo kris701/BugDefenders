@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -50,10 +51,43 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillColor = TextureManager.GetTexture(new Guid("410d9075-6e22-4ff7-9aff-1dcc3be9cd42")),
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 725,
+                Width = 300,
+                Height = 100,
+                FillColor = TextureManager.GetTexture(new Guid("66038205-f63a-4f3d-a057-d2ad99496daa")),
+                FillClickedColor = BasicTextures.GetClickedTexture()
+            });
+            bool claimable = false;
+            var buffs = ResourceManager.Buffs.GetResources();
+            foreach(var id in buffs)
+            {
+                if (Parent.CurrentUser.Buffs.Contains(id))
+                    continue;
+                var buff = ResourceManager.Buffs.GetResource(id);
+                if (buff.IsValid(Parent.CurrentUser))
+                {
+                    claimable = true;
+                    break;
+                }
+            }
+            if (claimable)
+            {
+                AddControl(0, new TileControl(this)
+                {
+                    X = 375,
+                    Y = 760,
+                    Width = 25,
+                    Height = 25,
+                    FillColor = BasicTextures.GetBasicCircle(Color.Yellow, 20),
+                });
+            }
+            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = 850,
                 Width = 300,
                 Height = 100,
                 FillColor = TextureManager.GetTexture(new Guid("e8fd55a0-ea74-48d8-b625-4352d6f1c564")),

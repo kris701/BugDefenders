@@ -566,6 +566,18 @@
 /processorParam:TextureFormat=Color
 /build:MainMenu/background.png
 
+#begin MainMenu/buffs.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MainMenu/buffs.png
+
 #begin MainMenu/Exit.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -661,6 +673,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:notexture.png
+
+#begin PermaBuffsView/background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:PermaBuffsView/background.png
 
 #begin Settings/background.png
 /importer:TextureImporter

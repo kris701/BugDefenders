@@ -34,6 +34,10 @@
         "Content": "MainMenu/highscores"
       },
       {
+        "ID": "66038205-f63a-4f3d-a057-d2ad99496daa",
+        "Content": "MainMenu/buffs"
+      },
+      {
         "ID": "4a39d624-3171-41cd-b172-c853cea36d14",
         "Content": "MainMenu/background"
       },
@@ -76,6 +80,10 @@
       {
         "ID": "fc3e4de1-331e-4a52-baee-e2f3c40962b4",
         "Content": "HighScoresView/background"
+      },
+      {
+        "ID": "1ba73c85-76b6-4fa1-9cd6-680598c6163b",
+        "Content": "PermaBuffsView/background"
       }
     ],
     "TextureSets": [
