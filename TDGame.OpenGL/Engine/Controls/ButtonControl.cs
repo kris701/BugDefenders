@@ -22,7 +22,7 @@ namespace TDGame.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public ButtonControl(IScreen parent, ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null) : base(parent)
+        public ButtonControl(UIEngine parent, ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null) : base(parent)
         {
             Clicked += clicked;
             ClickedModifierA += clickedModifierA;

@@ -28,14 +28,14 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("0739c674-5f0e-497a-a619-8ba39fd545b3")),
                 Width = 1000,
                 Height = 1000
             });
 
-            AddControl(0, new LabelControl(this)
+            AddControl(0, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 75,
@@ -47,7 +47,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             SetupScreenSettingsView(200);
             SetupTextureSettingsView(560);
 
-            AddControl(0, new ButtonControl(this, clicked: (x) =>
+            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
                 Parent.CurrentUser.UserData = _settings;
                 Parent.ApplySettings();
@@ -64,7 +64,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FillClickedColor = BasicTextures.GetClickedTexture(),
             });
 
-            AddControl(0, new ButtonControl(this, clicked: (x) =>
+            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
@@ -80,7 +80,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new SettingsView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -98,7 +98,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         private void SetupScreenSettingsView(int yOffset)
         {
-            AddControl(1, new TileControl(this)
+            AddControl(1, new TileControl(Parent)
             {
                 X = 100,
                 Y = yOffset,
@@ -106,7 +106,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 350,
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Width = 800,
@@ -115,7 +115,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Font = BasicFonts.GetFont(48),
                 FillColor = BasicTextures.GetBasicRectange(Color.LightGray)
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset + 75,
@@ -125,7 +125,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
             for (int i = 0; i < _scaleOptions.Count; i++)
             {
-                var newControl = new ButtonControl(this, clicked: (s) =>
+                var newControl = new ButtonControl(Parent, clicked: (s) =>
                 {
                     if (s.Tag is float value)
                         _settings.Scale = value;
@@ -146,7 +146,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 _scaleButtons.Add(newControl);
             }
 
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset + 200,
@@ -154,7 +154,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Font = BasicFonts.GetFont(24),
             });
 
-            _isFullScreen = new ButtonControl(this, clicked: (x) =>
+            _isFullScreen = new ButtonControl(Parent, clicked: (x) =>
             {
                 _settings.IsFullscreen = !_settings.IsFullscreen;
                 UpdateScreenSettingsButtons();
@@ -170,7 +170,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FillClickedColor = BasicTextures.GetClickedTexture(),
             };
             AddControl(1, _isFullScreen);
-            _isVSync = new ButtonControl(this, clicked: (x) =>
+            _isVSync = new ButtonControl(Parent, clicked: (x) =>
             {
                 _settings.IsVsync = !_settings.IsVsync;
                 UpdateScreenSettingsButtons();
@@ -192,7 +192,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         private void SetupTextureSettingsView(int yOffset)
         {
-            AddControl(1, new TileControl(this)
+            AddControl(1, new TileControl(Parent)
             {
                 X = 100,
                 Y = yOffset,
@@ -200,7 +200,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Height = 200,
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Width = 800,
@@ -213,7 +213,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             var packs = TextureManager.GetTexturePacks();
             for (int i = 0; i < packs.Count; i++)
             {
-                var newControl = new ButtonControl(this, clicked: (s) =>
+                var newControl = new ButtonControl(Parent, clicked: (s) =>
                 {
                     if (s.Tag is Guid str)
                         _settings.TexturePack = str;

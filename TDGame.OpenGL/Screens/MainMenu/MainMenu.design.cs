@@ -12,19 +12,19 @@ namespace TDGame.OpenGL.Screens.MainMenu
     {
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("4a39d624-3171-41cd-b172-c853cea36d14")),
                 Width = 1000,
                 Height = 1000
             });
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 100,
                 FillColor = TextureManager.GetTexture(new Guid("960c3e27-bfa4-40db-8397-ce47655eb169"))
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 350,
@@ -33,7 +33,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillColor = TextureManager.GetTexture(new Guid("c89588ae-a69f-41bf-a9df-e4fc53071c0b")),
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 475,
@@ -42,7 +42,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillColor = TextureManager.GetTexture(new Guid("40aa2d8a-7509-4bef-bf1c-9c3e1dffdd08")),
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 600,
@@ -51,7 +51,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillColor = TextureManager.GetTexture(new Guid("410d9075-6e22-4ff7-9aff-1dcc3be9cd42")),
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 725,
@@ -75,7 +75,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
             }
             if (claimable)
             {
-                AddControl(0, new TileControl(this)
+                AddControl(0, new TileControl(Parent)
                 {
                     X = 375,
                     Y = 760,
@@ -84,7 +84,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                     FillColor = BasicTextures.GetBasicCircle(Color.Yellow, 20),
                 });
             }
-            AddControl(0, new ButtonControl(this, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 850,
@@ -94,7 +94,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
 
-            AddControl(0, new LabelControl(this)
+            AddControl(0, new LabelControl(Parent)
             {
                 X = 5,
                 Y = 900,
@@ -105,7 +105,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 Text = $"Current User: {Parent.CurrentUser.Name}",
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
             });
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new UsersScreen.UsersScreen(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreen(Parent)))
             {
                 X = 5,
                 Y = 945,
@@ -119,7 +119,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new MainMenu(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new MainMenu(Parent)))
             {
                 X = 0,
                 Y = 0,

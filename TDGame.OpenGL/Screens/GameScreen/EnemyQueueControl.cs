@@ -17,7 +17,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         private AnimatedTileControl iconControl;
         private TextboxControl descriptionControl;
-        public EnemyQueueControl(IScreen parent) : base(parent)
+        public EnemyQueueControl(UIEngine parent) : base(parent)
         {
         }
 
@@ -61,8 +61,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = 25,
                 Height = 25,
             };
-            iconControl._x = _x + Parent.Scale(5);
-            iconControl._y = _y + Parent.Scale(5) + Height / 2 - iconControl.Height / 2;
+            iconControl._x = _x + Scale(5);
+            iconControl._y = _y + Scale(5) + Height / 2 - iconControl.Height / 2;
             iconControl.Initialize();
 
             descriptionControl = new TextboxControl(Parent)
@@ -75,8 +75,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Text = ""
             };
 
-            descriptionControl._x = _x + Parent.Scale(10) + iconControl.Width;
-            descriptionControl._y = _y + Parent.Scale(10);
+            descriptionControl._x = _x + Scale(10) + iconControl.Width;
+            descriptionControl._y = _y + Scale(10);
             descriptionControl.Initialize();
 
             base.Initialize();

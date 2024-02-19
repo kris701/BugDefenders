@@ -17,12 +17,12 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _thickness = Parent.Scale(value);
+                _thickness = Scale(value);
             }
         }
         public IControl Child { get; set; }
 
-        public BorderControl(IScreen parent) : base(parent)
+        public BorderControl(UIEngine parent) : base(parent)
         {
         }
 

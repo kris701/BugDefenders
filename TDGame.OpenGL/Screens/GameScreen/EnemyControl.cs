@@ -16,7 +16,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private float _initialHP;
         private EnemyInstance _enemy;
         private int _legalOffset = 5;
-        public EnemyControl(IScreen parent, EnemyInstance enemy) : base(parent)
+        public EnemyControl(UIEngine parent, EnemyInstance enemy) : base(parent)
         {
             _initialHP = enemy.Health;
             _enemy = enemy;

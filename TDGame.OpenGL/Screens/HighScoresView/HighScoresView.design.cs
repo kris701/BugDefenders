@@ -15,14 +15,14 @@ namespace TDGame.OpenGL.Screens.HighScoresView
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("fc3e4de1-331e-4a52-baee-e2f3c40962b4")),
                 Width = 1000,
                 Height = 1000
             });
 
-            AddControl(0, new LabelControl(this)
+            AddControl(0, new LabelControl(Parent)
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -43,7 +43,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
             int count = 0;
             foreach(var score in allScores)
             {
-                AddControl(0, new LabelControl(this)
+                AddControl(0, new LabelControl(Parent)
                 {
                     HorizontalAlignment = Engine.Alignment.Middle,
                     Y = 200 + (count++ * 35 + 5),
@@ -56,7 +56,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                 });
             }
 
-            AddControl(0, new ButtonControl(this, clicked: (x) =>
+            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
@@ -72,7 +72,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new HighScoresView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView(Parent)))
             {
                 X = 0,
                 Y = 0,

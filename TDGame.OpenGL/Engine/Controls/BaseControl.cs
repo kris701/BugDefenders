@@ -4,9 +4,8 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
-    public abstract class BaseControl : IControl
+    public abstract class BaseControl : BaseScalable, IControl
     {
-        public IScreen Parent { get; internal set; }
         public Alignment HorizontalAlignment { get; set; } = Alignment.None;
 
         public float Rotation { get; set; } = 0;
@@ -20,7 +19,7 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _x = Parent.Scale(value);
+                _x = Scale(value);
             }
         }
         internal float _y = 0;
@@ -32,7 +31,7 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _y = Parent.Scale(value);
+                _y = Scale(value);
             }
         }
         internal float _width = 0;
@@ -44,7 +43,7 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _width = Parent.Scale(value);
+                _width = Scale(value);
             }
         }
         internal float _height = 0;
@@ -56,15 +55,14 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _height = Parent.Scale(value);
+                _height = Scale(value);
             }
         }
         public int Alpha { get; set; } = 255;
         public object Tag { get; set; }
 
-        protected BaseControl(IScreen parent)
+        protected BaseControl(UIEngine parent) : base(parent)
         {
-            Parent = parent;
         }
 
         internal void ReAlign()
@@ -72,8 +70,8 @@ namespace TDGame.OpenGL.Engine.Controls
             switch (HorizontalAlignment)
             {
                 case Alignment.Left: _x = 0; break;
-                case Alignment.Right: _x = Parent.Parent.ScreenWidth() - Width; break;
-                case Alignment.Middle: _x = Parent.Parent.ScreenWidth() / 2 - Width / 2; break;
+                case Alignment.Right: _x = Parent.ScreenWidth() - Width; break;
+                case Alignment.Middle: _x = Parent.ScreenWidth() / 2 - Width / 2; break;
             }
         }
 

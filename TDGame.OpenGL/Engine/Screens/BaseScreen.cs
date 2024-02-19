@@ -5,20 +5,12 @@ using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Screens
 {
-    public abstract class BaseScreen : IScreen
+    public abstract class BaseScreen : BaseScalable, IScreen
     {
-        public UIEngine Parent { get; set; }
         public FadeState State { get; set; } = FadeState.FadeIn;
 
         public int FadeInTime { get; set; } = 200;
         public int FadeOutTime { get; set; } = 200;
-
-        public float ScaleValue { get; set; } = 1;
-        public int Scale(int value) => (int)(value * ScaleValue);
-        public double Scale(double value) => value * ScaleValue;
-        public float Scale(float value) => (float)(value * ScaleValue);
-        public int InvScale(int value) => (int)(value / ScaleValue);
-        public float InvScale(float value) => value / ScaleValue;
 
         private double fadeTimer = 0;
         private int fadeValue = 255;
@@ -26,9 +18,8 @@ namespace TDGame.OpenGL.Engine.Screens
         private Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
         private Dictionary<int, List<IControl>> _viewLayers;
 
-        public BaseScreen(UIEngine parent)
+        public BaseScreen(UIEngine parent) : base(parent)
         {
-            Parent = parent;
             _viewLayers = new Dictionary<int, List<IControl>>() {
                 { 0, new List<IControl>() }
             };

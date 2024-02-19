@@ -37,7 +37,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("32b08b60-c8b9-450a-90b3-73086261e87f")),
                 Width = 1000,
@@ -52,7 +52,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 320);
 
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameScreen(Parent, _currentMap, _currentGameStyle)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, _currentMap, _currentGameStyle)))
             {
                 X = 0,
                 Y = 0,
@@ -69,9 +69,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupGameField()
         {
-            AddControl(0, new BorderControl(this)
+            AddControl(0, new BorderControl(Parent)
             {
-                Child = new TileControl(this)
+                Child = new TileControl(Parent)
                 {
                     FillColor = TextureManager.GetTexture(_game.Map.ID),
                     X = _gameArea.X,
@@ -80,7 +80,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Width = _gameArea.Width
                 }
             });
-            _turretSelectRangeTile = new TileControl(this)
+            _turretSelectRangeTile = new TileControl(Parent)
             {
                 IsVisible = false,
                 Alpha = 100
@@ -90,9 +90,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupGameControlsField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(this)
+            AddControl(0, new BorderControl(Parent)
             {
-                Child = new TileControl(this)
+                Child = new TileControl(Parent)
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     Alpha = 100,
@@ -102,7 +102,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Width = width
                 }
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 Text = "TDGame",
                 Font = BasicFonts.GetFont(24),
@@ -112,7 +112,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width
             });
-            _scoreLabel = new LabelControl(this)
+            _scoreLabel = new LabelControl(Parent)
             {
                 Text = $"Score : 0",
                 Font = BasicFonts.GetFont(16),
@@ -121,11 +121,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width - 10
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Child = _scoreLabel
             });
-            _startButton = new ButtonControl(this, clicked: StartButton_Click)
+            _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 FillClickedColor = BasicTextures.GetClickedTexture(),
@@ -137,14 +137,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 100
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Child = _startButton
             });
 
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
-                Child = new ButtonControl(this, clicked: (x) => { GameOver(); })
+                Child = new ButtonControl(Parent, clicked: (x) => { GameOver(); })
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     FillClickedColor = BasicTextures.GetClickedTexture(),
@@ -158,7 +158,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 }
             });
 
-            _moneyLabel = new LabelControl(this)
+            _moneyLabel = new LabelControl(Parent)
             {
                 Text = $"Money: {_game.Money}$",
                 Font = BasicFonts.GetFont(16),
@@ -167,12 +167,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 310
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Child = _moneyLabel
             });
 
-            _hpLabel = new LabelControl(this)
+            _hpLabel = new LabelControl(Parent)
             {
                 Text = $"HP: {_game.HP}",
                 Font = BasicFonts.GetFont(16),
@@ -181,12 +181,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 310
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Child = _hpLabel
             });
 
-            _autoRunButton = new ButtonControl(this, clicked: AutoRunButton_Click)
+            _autoRunButton = new ButtonControl(Parent, clicked: AutoRunButton_Click)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 FillClickedColor = BasicTextures.GetClickedTexture(),
@@ -198,12 +198,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 205
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Child = _autoRunButton
             });
 
-            _sendWave = new ButtonControl(this, clicked: (s) => { _game.QueueEnemies(); })
+            _sendWave = new ButtonControl(Parent, clicked: (s) => { _game.QueueEnemies(); })
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 FillClickedColor = BasicTextures.GetClickedTexture(),
@@ -215,7 +215,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 205
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Child = _sendWave
             });
@@ -223,9 +223,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupPurchasingField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(this)
+            AddControl(0, new BorderControl(Parent)
             {
-                Child = new TileControl(this)
+                Child = new TileControl(Parent)
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     Alpha = 100,
@@ -235,7 +235,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Width = width
                 }
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 Text = "Turrets",
                 Font = BasicFonts.GetFont(24),
@@ -251,7 +251,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             foreach (var turretName in turrets)
             {
                 var turret = ResourceManager.Turrets.GetResource(turretName);
-                var newTurretButton = new ButtonControl(this, clicked: BuyTurret_Click)
+                var newTurretButton = new ButtonControl(Parent, clicked: BuyTurret_Click)
                 {
                     Text = $"[{turret.Cost}$] {turret.Name}",
                     Font = BasicFonts.GetFont(12),
@@ -265,19 +265,19 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Tag = turretName
                 };
                 _turretButtons.Add(newTurretButton);
-                AddControl(1, new BorderControl(this)
+                AddControl(1, new BorderControl(Parent)
                 {
                     Child = newTurretButton
                 });
             }
 
-            _buyingPreviewRangeTile = new TileControl(this)
+            _buyingPreviewRangeTile = new TileControl(Parent)
             {
                 IsVisible = false,
                 Alpha = 100
             };
             AddControl(10, _buyingPreviewRangeTile);
-            _buyingPreviewTile = new AnimatedTileControl(this)
+            _buyingPreviewTile = new AnimatedTileControl(Parent)
             {
                 IsVisible = false
             };
@@ -286,9 +286,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupUpgradeField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(this)
+            AddControl(0, new BorderControl(Parent)
             {
-                Child = new TileControl(this)
+                Child = new TileControl(Parent)
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     Alpha = 100,
@@ -298,7 +298,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Width = width
                 }
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 Text = "Upgrades",
                 Font = BasicFonts.GetFont(24),
@@ -316,7 +316,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             int margin = 10;
             for (int i = 0; i < 3; i++)
             {
-                var newItem = new UpgradePanel(this, BuyUpgrade_Click)
+                var newItem = new UpgradePanel(Parent, BuyUpgrade_Click)
                 {
                     X = x + (itemXOffset++ * (itemWidth + margin)),
                     Y = y,
@@ -331,9 +331,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(this)
+            AddControl(0, new BorderControl(Parent)
             {
-                Child = new TileControl(this)
+                Child = new TileControl(Parent)
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     Alpha = 100,
@@ -343,7 +343,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Width = width
                 }
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 Text = "Next Enemies",
                 Font = BasicFonts.GetFont(16),
@@ -361,7 +361,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             int margin = 10;
             for (int i = 0; i < 3; i++)
             {
-                var newItem = new EnemyQueueControl(this)
+                var newItem = new EnemyQueueControl(Parent)
                 {
                     X = x + (itemXOffset++ * (itemWidth + margin)),
                     Y = y,
@@ -376,9 +376,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupTurretStatsPanel(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(this)
+            AddControl(0, new BorderControl(Parent)
             {
-                Child = new TileControl(this)
+                Child = new TileControl(Parent)
                 {
                     FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                     Alpha = 100,
@@ -388,7 +388,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Width = width
                 }
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 Text = "Turret Stats",
                 Font = BasicFonts.GetFont(16),
@@ -399,7 +399,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _sellTurretButton = new ButtonControl(this, clicked: SellTurret_Click)
+            _sellTurretButton = new ButtonControl(Parent, clicked: SellTurret_Click)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 FillClickedColor = BasicTextures.GetClickedTexture(),
@@ -412,11 +412,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Height = 30,
                 IsEnabled = false
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Child = _sellTurretButton,
             });
-            _turretStatesTextbox = new TextboxControl(this)
+            _turretStatesTextbox = new TextboxControl(Parent)
             {
                 Font = BasicFonts.GetFont(8),
                 Text = "Select a Turret",
@@ -433,7 +433,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var count = 0;
             foreach (TargetingTypes option in values.Skip(1))
             {
-                var newControl = new ButtonControl(this, (e) =>
+                var newControl = new ButtonControl(Parent, (e) =>
                 {
                     if (_selectedTurret != null)
                         _selectedTurret.TargetingType = option;

@@ -17,14 +17,14 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("756430ea-46e1-4c3d-95a0-a232919b7876")),
                 Width = 1000,
                 Height = 1000
             });
 
-            AddControl(0, new LabelControl(this)
+            AddControl(0, new LabelControl(Parent)
             {
                 Text = "Game Setup",
                 Font = BasicFonts.GetFont(48),
@@ -35,7 +35,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 35
             });
 
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new MainMenu.MainMenu(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new MainMenu.MainMenu(Parent)))
             {
                 Text = "Back",
                 Font = BasicFonts.GetFont(16),
@@ -46,7 +46,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 100,
                 Height = 35
             });
-            _startButton = new ButtonControl(this, clicked: StartButton_Click)
+            _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
             {
                 Text = "Start",
                 Font = BasicFonts.GetFont(16),
@@ -64,7 +64,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             SetupGameStyleView();
 
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameSetupView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -82,7 +82,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void SetupPreviewPanel()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Alpha = 100,
@@ -91,7 +91,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 400,
                 Width = 400
             });
-            _mapPreviewTile = new TileControl(this)
+            _mapPreviewTile = new TileControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
                 X = 20,
@@ -99,13 +99,13 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 380,
                 Height = 380,
             };
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Thickness = 3,
                 Child = _mapPreviewTile
             });
 
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Alpha = 100,
@@ -114,7 +114,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 400,
                 Width = 570
             });
-            _mapNameLabel = new LabelControl(this)
+            _mapNameLabel = new LabelControl(Parent)
             {
                 Text = "Select A Map",
                 Font = BasicFonts.GetFont(16),
@@ -125,7 +125,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 570
             };
             AddControl(1, _mapNameLabel);
-            _mapDescriptionTextbox = new TextboxControl(this)
+            _mapDescriptionTextbox = new TextboxControl(Parent)
             {
                 Font = BasicFonts.GetFont(10),
                 X = 430,
@@ -138,7 +138,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void SetupMapsView()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Alpha = 100,
@@ -147,7 +147,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 450,
                 Width = 485
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
                 Font = BasicFonts.GetFont(24),
@@ -162,10 +162,10 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             int offset = 0;
             foreach (var mapName in maps)
             {
-                AddControl(1, new BorderControl(this)
+                AddControl(1, new BorderControl(Parent)
                 {
                     Thickness = 2,
-                    Child = new ButtonControl(this, clicked: SelectMap_Click)
+                    Child = new ButtonControl(Parent, clicked: SelectMap_Click)
                     {
                         FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
                         FillClickedColor = BasicTextures.GetClickedTexture(),
@@ -184,7 +184,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void SetupGameStyleView()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
                 Alpha = 100,
@@ -193,7 +193,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 450,
                 Width = 485
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
                 Font = BasicFonts.GetFont(24),
@@ -208,10 +208,10 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             int offset = 0;
             foreach (var gameStyle in gameStyles)
             {
-                AddControl(1, new BorderControl(this)
+                AddControl(1, new BorderControl(Parent)
                 {
                     Thickness = 2,
-                    Child = new ButtonControl(this, clicked: SelectGameStyle_Click)
+                    Child = new ButtonControl(Parent, clicked: SelectGameStyle_Click)
                     {
                         FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
                         FillClickedColor = BasicTextures.GetClickedTexture(),

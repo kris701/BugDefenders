@@ -15,14 +15,14 @@ namespace TDGame.OpenGL.Screens.UsersScreen
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("46ce91a9-78bc-4d77-95c1-46adfce971b2")),
                 Width = 1000,
                 Height = 1000
             });
 
-            AddControl(0, new LabelControl(this)
+            AddControl(0, new LabelControl(Parent)
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -32,7 +32,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
             });
 
-            _nameInputBox = new TextInputControl(this)
+            _nameInputBox = new TextInputControl(Parent)
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 200,
@@ -43,7 +43,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
             };
             AddControl(0, _nameInputBox);
-            AddControl(0, new ButtonControl(this, AddUserButton_Click)
+            AddControl(0, new ButtonControl(Parent, AddUserButton_Click)
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 250,
@@ -58,7 +58,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
 
             UpdateUsersList();
 
-            AddControl(0, new ButtonControl(this, clicked: (x) =>
+            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
@@ -74,7 +74,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new UsersScreen(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -99,7 +99,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
             var count = 0;
             foreach (var user in allUsers)
             {
-                var newControl = new ButtonControl(this, ChangeUserButton_Click)
+                var newControl = new ButtonControl(Parent, ChangeUserButton_Click)
                 {
                     X = 250,
                     Y = 310 + (count * 35 + 5),
@@ -117,7 +117,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 _usersButtons.Add(newControl);
                 AddControl(1, newControl);
 
-                var newDeleteControl = new ButtonControl(this, RemoveUserButton_Click)
+                var newDeleteControl = new ButtonControl(Parent, RemoveUserButton_Click)
                 {
                     X = 750,
                     Y = 310 + (count++ * 35 + 5),

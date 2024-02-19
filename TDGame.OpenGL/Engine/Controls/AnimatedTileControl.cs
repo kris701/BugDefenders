@@ -19,7 +19,7 @@ namespace TDGame.OpenGL.Engine.Controls
         private bool _finished = false;
         private TimeSpan _currentFrameTime = TimeSpan.Zero;
 
-        public AnimatedTileControl(IScreen parent) : base(parent)
+        public AnimatedTileControl(UIEngine parent) : base(parent)
         {
         }
 

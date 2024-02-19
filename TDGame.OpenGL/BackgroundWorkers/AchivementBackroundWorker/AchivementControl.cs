@@ -10,7 +10,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 
-namespace TDGame.OpenGL.Popups.Achivements
+namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
 {
     public class AchivementControl : TileControl
     {
@@ -19,7 +19,7 @@ namespace TDGame.OpenGL.Popups.Achivements
         private TileControl _iconTile;
         private TextboxControl _descriptionTextbox;
 
-        public AchivementControl(IScreen parent, AchivementDefinition achivement) : base(parent)
+        public AchivementControl(UIEngine parent, AchivementDefinition achivement) : base(parent)
         {
             Achivement = achivement;
             Width = 300;
@@ -35,8 +35,8 @@ namespace TDGame.OpenGL.Popups.Achivements
                 Height = 100,
                 FillColor = TextureManager.GetTexture(Achivement.ID)
             };
-            _iconTile._x = _x + Parent.Scale(10);
-            _iconTile._y = _y + Parent.Scale(10);
+            _iconTile._x = _x + Scale(10);
+            _iconTile._y = _y + Scale(10);
             _iconTile.Initialize();
 
             _descriptionTextbox = new TextboxControl(Parent)
@@ -48,17 +48,17 @@ namespace TDGame.OpenGL.Popups.Achivements
                 FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
                 Text = $"Achivement unlocked!{Environment.NewLine}{Achivement.Name}{Environment.NewLine}{Achivement.Description}"
             };
-            _descriptionTextbox._x = _x + Parent.Scale(10) + Parent.Scale(100);
-            _descriptionTextbox._y = _y + Parent.Scale(10);
+            _descriptionTextbox._x = _x + Scale(10) + Scale(100);
+            _descriptionTextbox._y = _y + Scale(10);
             _descriptionTextbox.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
-            _iconTile._x = _x + Parent.Scale(10);
-            _iconTile._y = _y + Parent.Scale(10);
-            _descriptionTextbox._x = _x + Parent.Scale(10) + Parent.Scale(100);
-            _descriptionTextbox._y = _y + Parent.Scale(10);
+            _iconTile._x = _x + Scale(10);
+            _iconTile._y = _y + Scale(10);
+            _descriptionTextbox._x = _x + Scale(10) + Scale(100);
+            _descriptionTextbox._y = _y + Scale(10);
             _descriptionTextbox._textChanged = true;
 
             _descriptionTextbox.Update(gameTime);

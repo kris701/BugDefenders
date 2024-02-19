@@ -9,7 +9,7 @@ namespace TDGame.OpenGL.Engine.Controls
     {
         public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
 
-        public TileControl(IScreen parent) : base(parent)
+        public TileControl(UIEngine parent) : base(parent)
         {
         }
 

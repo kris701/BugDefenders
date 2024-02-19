@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Resources;
+using TDGame.OpenGL.Engine.BackgroundWorkers;
 using TDGame.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Popups.Achivements
+namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
 {
-    public class AchivementPopupManager
+    public class AchivementPopupManager : BaseBackroundWorker
     {
-        public UIEngine Parent { get; }
+        public override Guid ID { get; } = new Guid("50249fa6-d417-435e-be97-910940531f13");
         public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(2);
         public float Speed { get; set; } = 3;
 
@@ -23,14 +24,13 @@ namespace TDGame.OpenGL.Popups.Achivements
         private List<Guid> _previousAchivements = new List<Guid>();
         private AchivementControl _popup;
 
-        public AchivementPopupManager(UIEngine parent, List<Guid> initialAchivements)
+        public AchivementPopupManager(UIEngine parent, List<Guid> initialAchivements) : base(parent)
         {
-            Parent = parent;
             foreach (var id in initialAchivements)
                 _previousAchivements.Add(id);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             if (_popup == null)
             {
@@ -38,7 +38,7 @@ namespace TDGame.OpenGL.Popups.Achivements
                 if (newItem != Guid.Empty)
                 {
                     var achivement = ResourceManager.Achivements.GetResource(newItem);
-                    _popup = new AchivementControl(Parent.CurrentScreen, achivement)
+                    _popup = new AchivementControl(Parent, achivement)
                     {
                         X = 0,
                         Y = _currentY,
@@ -58,12 +58,12 @@ namespace TDGame.OpenGL.Popups.Achivements
                         if (_currentHoldTime <= TimeSpan.Zero)
                             _currentMoveState = MoveState.Down;
                         break;
-                    case MoveState.Up: 
+                    case MoveState.Up:
                         _currentY -= Speed;
                         if (_currentY <= 1000 - _popup._height)
                             _currentMoveState = MoveState.Hold;
                         break;
-                    case MoveState.Down: 
+                    case MoveState.Down:
                         _currentY += Speed;
                         if (_currentY >= 1000)
                         {
@@ -81,7 +81,7 @@ namespace TDGame.OpenGL.Popups.Achivements
             }
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (_popup != null)
                 _popup.Draw(gameTime, spriteBatch);

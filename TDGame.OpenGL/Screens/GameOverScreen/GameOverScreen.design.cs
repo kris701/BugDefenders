@@ -11,14 +11,14 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
     {
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("1d50ad58-0503-4fc6-95e4-1d18abb8c485")),
                 Width = 1000,
                 Height = 1000
             });
 
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 100,
@@ -26,7 +26,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(72),
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 225,
@@ -34,7 +34,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(24),
             });
-            AddControl(1, new LabelControl(this)
+            AddControl(1, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 275,
@@ -43,10 +43,10 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 Font = BasicFonts.GetFont(24),
             });
 
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
                 Thickness = 5,
-                Child = new TileControl(this)
+                Child = new TileControl(Parent)
                 {
                     HorizontalAlignment = Alignment.Middle,
                     Y = 350,
@@ -56,9 +56,9 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 }
             });
 
-            AddControl(1, new BorderControl(this)
+            AddControl(1, new BorderControl(Parent)
             {
-                Child = new ButtonControl(this, clicked: (s) => { SwitchView(new MainMenu.MainMenu(Parent)); })
+                Child = new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenu(Parent)); })
                 {
                     HorizontalAlignment = Alignment.Middle,
                     Y = 875,
@@ -73,7 +73,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new GameOverScreen(Parent, _screen, _score, _gameTime)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameOverScreen(Parent, _screen, _score, _gameTime)))
             {
                 X = 0,
                 Y = 0,

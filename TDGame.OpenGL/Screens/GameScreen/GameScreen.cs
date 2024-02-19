@@ -85,7 +85,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 #if DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Map.BlockingTiles)
             {
-                AddControl(99, new TileControl(this)
+                AddControl(99, new TileControl(Parent)
                 {
                     X = blockingTile.X + _gameArea.X,
                     Y = blockingTile.Y + _gameArea.Y,
@@ -265,7 +265,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(entity.DefinitionID).OnIdle;
             var textureSet = TextureManager.GetTextureSet(animation);
-            return new TurretControl(this, clicked: Turret_Click)
+            return new TurretControl(Parent, clicked: Turret_Click)
             {
                 IsEnabled = true,
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
@@ -285,7 +285,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             var animation = TextureManager.GetAnimation<EnemyAnimationDefinition>(entity.DefinitionID).OnCreate;
             var textureSet = TextureManager.GetTextureSet(animation);
-            return new EnemyControl(this, entity)
+            return new EnemyControl(Parent, entity)
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
                 TileSet = textureSet.LoadedContents,
@@ -310,7 +310,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             var animation = TextureManager.GetAnimation<ProjectileAnimationDefinition>(entity.DefinitionID).OnCreate;
             var textureSet = TextureManager.GetTextureSet(animation);
-            return new AnimatedTileControl(this)
+            return new AnimatedTileControl(Parent)
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
                 TileSet = textureSet.LoadedContents,
@@ -327,7 +327,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             var animation = TextureManager.GetAnimation<EffectAnimationDefinition>(entity.ID).OnCreate;
             var textureSet = TextureManager.GetTextureSet(animation);
-            var newTile = new AnimatedTileControl(this)
+            var newTile = new AnimatedTileControl(Parent)
             {
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y,
@@ -343,7 +343,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private LineControl CreateNewLaser(LaserEntity entity)
         {
-            var newTile = new LineControl(this)
+            var newTile = new LineControl(Parent)
             {
                 Thickness = 3,
                 Stroke = BasicTextures.GetBasicRectange(Color.Red),

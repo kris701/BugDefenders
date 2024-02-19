@@ -41,7 +41,7 @@ namespace TDGame.OpenGL.Engine.Controls
         internal bool _textChanged = true;
         internal List<LabelControl> lines = new List<LabelControl>();
 
-        public TextboxControl(IScreen parent) : base(parent)
+        public TextboxControl(UIEngine parent) : base(parent)
         {
         }
 
@@ -68,7 +68,7 @@ namespace TDGame.OpenGL.Engine.Controls
             {
                 currentString += character;
                 var size = Font.MeasureString(currentString);
-                if (Parent.Scale(size.X) > Width - Parent.Scale(Margin * 2))
+                if (Scale(size.X) > Width - Scale(Margin * 2))
                 {
                     var newLabel = new LabelControl(Parent)
                     {
@@ -76,9 +76,9 @@ namespace TDGame.OpenGL.Engine.Controls
                         Text = currentString,
                     };
                     newLabel._x = _x;
-                    newLabel._y = _y + Parent.Scale(size.Y) * lines.Count;
+                    newLabel._y = _y + Scale(size.Y) * lines.Count;
                     newLabel._width = _width;
-                    newLabel._height = Parent.Scale(size.Y);
+                    newLabel._height = Scale(size.Y);
                     lines.Add(newLabel);
                     currentString = "";
                 }
@@ -92,9 +92,9 @@ namespace TDGame.OpenGL.Engine.Controls
                     Text = currentString,
                 };
                 newLabel._x = _x;
-                newLabel._y = _y + Parent.Scale(size.Y) * lines.Count;
+                newLabel._y = _y + Scale(size.Y) * lines.Count;
                 newLabel._width = _width;
-                newLabel._height = Parent.Scale(size.Y);
+                newLabel._height = Scale(size.Y);
                 lines.Add(newLabel);
             }
         }

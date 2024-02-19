@@ -16,7 +16,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
         private List<ButtonControl> _upgradeButtons = new List<ButtonControl>();
         public override void Initialize()
         {
-            AddControl(0, new TileControl(this)
+            AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("1ba73c85-76b6-4fa1-9cd6-680598c6163b")),
                 Width = 1000,
@@ -24,7 +24,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
             });
 
 
-            AddControl(0, new LabelControl(this)
+            AddControl(0, new LabelControl(Parent)
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -34,7 +34,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 Font = BasicFonts.GetFont(48),
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
             });
-            AddControl(0, new LabelControl(this)
+            AddControl(0, new LabelControl(Parent)
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 175,
@@ -55,7 +55,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 if (Parent.CurrentUser.Buffs.Contains(id))
                     continue;
 
-                AddControl(0, new TextboxControl(this)
+                AddControl(0, new TextboxControl(Parent)
                 {
                     HorizontalAlignment = Engine.Alignment.Middle,
                     Y = 250 + count * 140 + 5,
@@ -65,7 +65,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                     Font = BasicFonts.GetFont(16),
                     FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan)
                 });
-                AddControl(0, new ButtonControl(this, clicked: (x) =>
+                AddControl(0, new ButtonControl(Parent, clicked: (x) =>
                 {
                     Parent.UserManager.AddBuffUpgrade(Parent.CurrentUser, id);
                     SwitchView(new PermaBuffsView(Parent));
@@ -84,7 +84,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 count++;
             }
 
-            AddControl(0, new ButtonControl(this, clicked: (x) =>
+            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
@@ -99,7 +99,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 FillClickedColor = BasicTextures.GetClickedTexture(),
             });
 #if DEBUG
-            AddControl(0, new ButtonControl(this, clicked: (x) => SwitchView(new PermaBuffsView(Parent)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView(Parent)))
             {
                 X = 0,
                 Y = 0,

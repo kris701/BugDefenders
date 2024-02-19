@@ -16,7 +16,7 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _thickness = Parent.Scale(value);
+                _thickness = Scale(value);
             }
         }
         public Texture2D Stroke { get; set; } = BasicTextures.GetBasicRectange(Color.Red);
@@ -29,7 +29,7 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _x2 = Parent.Scale(value);
+                _x2 = Scale(value);
             }
         }
         private float _y2 = 0;
@@ -41,11 +41,11 @@ namespace TDGame.OpenGL.Engine.Controls
             }
             set
             {
-                _y2 = Parent.Scale(value);
+                _y2 = Scale(value);
             }
         }
 
-        public LineControl(IScreen parent) : base(parent)
+        public LineControl(UIEngine parent) : base(parent)
         {
         }
 

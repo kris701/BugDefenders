@@ -43,7 +43,7 @@ namespace TDGame.OpenGL.Engine.Controls
             Keys.D9
         };
 
-        public TextInputControl(IScreen parent) : base(parent)
+        public TextInputControl(UIEngine parent) : base(parent)
         {
         }
 

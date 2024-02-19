@@ -5,9 +5,8 @@ using TDGame.OpenGL.Engine.Screens;
 namespace TDGame.OpenGL.Engine
 {
     public enum Alignment { None, Left, Middle, Right }
-    public interface IControl
+    public interface IControl : IScalable
     {
-        public IScreen Parent { get; }
         public Alignment HorizontalAlignment { get; set; }
 
         public bool IsVisible { get; set; }

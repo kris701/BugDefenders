@@ -19,7 +19,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private ButtonControl _buyUpgradeButton;
         private TileControl _cantBuyTile;
 
-        public UpgradePanel(IScreen parent, ClickedHandler buy) : base(parent)
+        public UpgradePanel(UIEngine parent, ClickedHandler buy) : base(parent)
         {
             Buy = buy;
             _nameLabel = new LabelControl(Parent)
@@ -81,10 +81,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _nameLabel._y = _y;
             _nameLabel._width = _width;
             _descriptionTextbox._x = _x;
-            _descriptionTextbox._y = _y + Parent.Scale(35);
+            _descriptionTextbox._y = _y + Scale(35);
             _descriptionTextbox._width = _width;
             _buyUpgradeButton._x = _x;
-            _buyUpgradeButton._y = _y + Parent.Scale(35 + 85);
+            _buyUpgradeButton._y = _y + Scale(35 + 85);
             _buyUpgradeButton._width = _width;
             _cantBuyTile._x = _x;
             _cantBuyTile._y = _y;

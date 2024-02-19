@@ -68,7 +68,7 @@ namespace TDGame.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public AnimatedButtonControl(IScreen parent, ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null) : base(parent)
+        public AnimatedButtonControl(UIEngine parent, ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null) : base(parent)
         {
             Clicked += clicked;
             ClickedModifierA += clickedModifierA;
@@ -83,8 +83,8 @@ namespace TDGame.OpenGL.Engine.Controls
             if (Height == 0)
                 Height = size.Y;
             ReAlign();
-            _textWidth = Parent.Scale(size.X);
-            _textHeight = Parent.Scale(size.Y);
+            _textWidth = Scale(size.X);
+            _textHeight = Scale(size.Y);
             _textX = X + Width / 2 - _textWidth / 2;
             _textY = Y + Height / 2 - _textHeight / 2;
         }
@@ -196,11 +196,11 @@ namespace TDGame.OpenGL.Engine.Controls
                 spriteBatch.DrawString(
                     Font,
                     Text,
-                    new Vector2(_textX + (_textWidth * Parent.ScaleValue) / 2, _textY + (_textHeight * Parent.ScaleValue) / 2),
+                    new Vector2(_textX + (_textWidth * ScaleValue) / 2, _textY + (_textHeight * ScaleValue) / 2),
                     new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
                     Rotation,
                     new Vector2(_textWidth / 2, _textHeight / 2),
-                    Parent.ScaleValue,
+                    ScaleValue,
                     SpriteEffects.None,
                     0);
 #if TEXTBORDER

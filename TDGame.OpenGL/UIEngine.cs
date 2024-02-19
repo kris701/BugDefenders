@@ -2,14 +2,18 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
+using TDGame.Core.Game.Helpers;
 using TDGame.Core.Resources;
 using TDGame.Core.Users;
 using TDGame.Core.Users.Models;
+using TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker;
+using TDGame.OpenGL.Engine.BackgroundWorkers;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Popups.Achivements;
 using TDGame.OpenGL.Settings;
 using TDGame.OpenGL.Textures;
 
@@ -32,7 +36,7 @@ namespace TDGame.OpenGL
         public IScreen CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; set; }
         public UserDefinition<SettingsDefinition> CurrentUser { get; set; }
-        public AchivementPopupManager AchivementManager { get; set; }
+        public List<IBackgroundWorker> BackroundWorkers { get; set; }
 
         private Func<UIEngine, IScreen> _screenToLoad;
         private SpriteBatch? _spriteBatch;
@@ -44,6 +48,7 @@ namespace TDGame.OpenGL
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
+            BackroundWorkers = new List<IBackgroundWorker>();
             UserManager = new UserEngine<SettingsDefinition>();
             var allUsers = UserManager.GetAllUsers();
             if (allUsers.Count == 0)
@@ -99,7 +104,12 @@ namespace TDGame.OpenGL
             UserManager.SaveUser(toUser);
             if (_isInitialized)
                 ApplySettings();
-            AchivementManager = new AchivementPopupManager(this, toUser.Achivements);
+
+            var newManager = new AchivementPopupManager(this, toUser.Achivements);
+            var find = BackroundWorkers.FirstOrDefault(x => x.ID == newManager.ID);
+            if (find != null)
+                BackroundWorkers.Remove(find);
+            BackroundWorkers.Add(newManager);
         }
 
         protected override void Initialize()
@@ -112,6 +122,9 @@ namespace TDGame.OpenGL
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
             ApplySettings();
+
+            foreach (var worker in BackroundWorkers)
+                worker.Initialize();
 
             CurrentScreen = _screenToLoad(this);
             CurrentScreen.Initialize();
@@ -156,7 +169,8 @@ namespace TDGame.OpenGL
         protected override void Update(GameTime gameTime)
         {
             CurrentScreen.Update(gameTime);
-            AchivementManager.Update(gameTime);
+            foreach(var worker in BackroundWorkers)
+                worker.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -170,7 +184,8 @@ namespace TDGame.OpenGL
 
             _spriteBatch.Begin();
             CurrentScreen.Draw(gameTime, _spriteBatch);
-            AchivementManager.Draw(gameTime, _spriteBatch);
+            foreach (var worker in BackroundWorkers)
+                worker.Draw(gameTime, _spriteBatch);
 #if FPS
             _currentFrames++;
             _passed += gameTime.ElapsedGameTime;

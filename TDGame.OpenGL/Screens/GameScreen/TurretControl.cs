@@ -13,7 +13,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         private TileControl baseControl;
         private LabelControl turretLevelControl;
-        public TurretControl(IScreen parent, ClickedHandler clicked = null, ClickedHandler clickedModifierA = null, ClickedHandler clickedModifierB = null) : base(parent, clicked, clickedModifierA, clickedModifierB)
+        public TurretControl(UIEngine parent, ClickedHandler clicked = null, ClickedHandler clickedModifierA = null, ClickedHandler clickedModifierB = null) : base(parent, clicked, clickedModifierA, clickedModifierB)
         {
         }
 
