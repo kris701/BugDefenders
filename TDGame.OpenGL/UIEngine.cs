@@ -11,6 +11,7 @@ using TDGame.Core.Resources;
 using TDGame.Core.Users;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker;
+using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
 using TDGame.OpenGL.Engine.BackgroundWorkers;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
@@ -41,6 +42,7 @@ namespace TDGame.OpenGL
         private Func<UIEngine, IScreen> _screenToLoad;
         private SpriteBatch? _spriteBatch;
         private bool _isInitialized = false;
+        private NotificationBackroundWorker _notificationWorker;
 
         public UIEngine(Func<UIEngine, IScreen> screen)
         {
@@ -48,7 +50,6 @@ namespace TDGame.OpenGL
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
-            BackroundWorkers = new List<IBackgroundWorker>();
             UserManager = new UserEngine<SettingsDefinition>();
             var allUsers = UserManager.GetAllUsers();
             if (allUsers.Count == 0)
@@ -76,6 +77,13 @@ namespace TDGame.OpenGL
                 if (CurrentUser == null)
                     ChangeUser(allUsers[0]);
             }
+
+            _notificationWorker = new NotificationBackroundWorker(this);
+            _notificationWorker.Handles.Add(new AchivementsHandle(this));
+            _notificationWorker.Handles.Add(new BuffsHandle(this));
+            BackroundWorkers = new List<IBackgroundWorker>() {
+                _notificationWorker
+            };
         }
 
         public void CreateNewUser(string name)
@@ -104,12 +112,6 @@ namespace TDGame.OpenGL
             UserManager.SaveUser(toUser);
             if (_isInitialized)
                 ApplySettings();
-
-            var newManager = new AchivementBackroundWorker(this, toUser.Achivements);
-            var find = BackroundWorkers.FirstOrDefault(x => x.ID == newManager.ID);
-            if (find != null)
-                BackroundWorkers.Remove(find);
-            BackroundWorkers.Add(newManager);
         }
 
         protected override void Initialize()

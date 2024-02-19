@@ -60,30 +60,6 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FillColor = TextureManager.GetTexture(new Guid("66038205-f63a-4f3d-a057-d2ad99496daa")),
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            bool claimable = false;
-            var buffs = ResourceManager.Buffs.GetResources();
-            foreach(var id in buffs)
-            {
-                if (Parent.CurrentUser.Buffs.Contains(id))
-                    continue;
-                var buff = ResourceManager.Buffs.GetResource(id);
-                if (buff.IsValid(Parent.CurrentUser))
-                {
-                    claimable = true;
-                    break;
-                }
-            }
-            if (claimable)
-            {
-                AddControl(0, new TileControl(Parent)
-                {
-                    X = 375,
-                    Y = 760,
-                    Width = 25,
-                    Height = 25,
-                    FillColor = BasicTextures.GetBasicCircle(Color.Yellow, 20),
-                });
-            }
             AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
             {
                 HorizontalAlignment = Alignment.Middle,

@@ -11,10 +11,13 @@ namespace TDGame.OpenGL.Screens.GameScreen
 {
     public class TurretControl : AnimatedButtonControl
     {
+        public TurretInstance Instance { get; }
+
         private TileControl baseControl;
         private LabelControl turretLevelControl;
-        public TurretControl(UIEngine parent, ClickedHandler clicked = null, ClickedHandler clickedModifierA = null, ClickedHandler clickedModifierB = null) : base(parent, clicked, clickedModifierA, clickedModifierB)
+        public TurretControl(UIEngine parent, TurretInstance instance, ClickedHandler clicked = null) : base(parent, clicked, null, null)
         {
+            Instance = instance;
         }
 
         public override void Initialize()
@@ -33,8 +36,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
             turretLevelControl = new LabelControl(Parent)
             {
                 Font = BasicFonts.GetFont(10),
-                IsVisible = false,
-                FontColor = Color.White
+                FontColor = Color.White,
+                IsVisible = Instance.HasUpgrades.Count > 0,
+                Text = $"{Instance.HasUpgrades.Count}"
             };
             turretLevelControl._x = _x + Width;
             turretLevelControl._y = _y;
@@ -47,14 +51,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var textureSet = TextureManager.GetTextureSet(id);
             TileSet = textureSet.LoadedContents;
             FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
-            Initialize();
         }
 
         public void UpgradeTurretLevels(TurretInstance turret)
         {
-            turretLevelControl.Text = $"{turret.GetDefinition().Upgrades.Count(x => turret.HasUpgrades.Contains(x.ID))}";
-            if (turretLevelControl.Text != "0")
+            if (turret.HasUpgrades.Count > 0)
+            {
+                turretLevelControl.Text = $"{turret.HasUpgrades.Count}";
                 turretLevelControl.IsVisible = true;
+            }
         }
 
         public override void Update(GameTime gameTime)

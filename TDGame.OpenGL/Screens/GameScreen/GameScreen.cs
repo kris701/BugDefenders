@@ -265,7 +265,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(entity.DefinitionID).OnIdle;
             var textureSet = TextureManager.GetTextureSet(animation);
-            return new TurretControl(Parent, clicked: Turret_Click)
+            return new TurretControl(Parent, entity, clicked: Turret_Click)
             {
                 IsEnabled = true,
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
