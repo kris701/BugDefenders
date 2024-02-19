@@ -41,16 +41,19 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             if (sender.Tag is Guid mapName)
             {
                 if (_selectedMapButton != null)
-                    _selectedMapButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
+                    _selectedMapButton.FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                 _selectedMapButton = sender;
-                _selectedMapButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                _selectedMapButton.FillColor = TextureManager.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                 _selectedMap = mapName;
                 var map = ResourceManager.Maps.GetResource(mapName);
                 _mapPreviewTile.FillColor = TextureManager.GetTexture(map.ID);
                 _mapNameLabel.Text = map.Name;
                 _mapDescriptionTextbox.Text = map.Description;
+
+                if (_selectedGameStyle != null && _selectedMap != null)
+                    _startButton.IsEnabled = true;
             }
         }
 
@@ -59,12 +62,15 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             if (sender.Tag is Guid gameStyleName)
             {
                 if (_selectedGameStyleButton != null)
-                    _selectedGameStyleButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
+                    _selectedGameStyleButton.FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                 _selectedGameStyleButton = sender;
-                _selectedGameStyleButton.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                _selectedGameStyleButton.FillColor = TextureManager.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                 _selectedGameStyle = gameStyleName;
+
+                if (_selectedGameStyle != null && _selectedMap != null)
+                    _startButton.IsEnabled = true;
             }
         }
     }

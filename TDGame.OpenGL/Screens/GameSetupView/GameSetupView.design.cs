@@ -14,6 +14,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private TileControl _mapPreviewTile;
         private LabelControl _mapNameLabel;
         private TextboxControl _mapDescriptionTextbox;
+        private ButtonControl _startButton;
 
         public override void Initialize()
         {
@@ -26,43 +27,58 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
             AddControl(0, new LabelControl(Parent)
             {
+                HorizontalAlignment = Engine.Alignment.Middle,
+                Y = 100,
+                Height = 75,
+                Width = 800,
                 Text = "Game Setup",
-                Font = BasicFonts.GetFont(48),
                 FontColor = Color.White,
+                Font = BasicFonts.GetFont(48)
+            });
+            AddControl(0, new LabelControl(Parent)
+            {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 25,
-                Width = 100,
-                Height = 35
+                Y = 175,
+                Height = 35,
+                Width = 700,
+                Text = $"Select a map and a gamemode to start.  ",
+                Font = BasicFonts.GetFont(16),
+                FontColor = Color.White
             });
 
             SetupPreviewPanel();
             SetupMapsView();
             SetupGameStyleView();
 
-
-            AddControl(0, new ButtonControl(Parent, StartButton_Click)
+            _startButton = new ButtonControl(Parent, StartButton_Click)
             {
-                Y = 950,
+                X = 50,
+                Y = 900,
                 Width = 200,
                 Height = 50,
                 Text = "Start",
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-            });
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = TextureManager.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                IsEnabled = false
+            };
+            AddControl(0, _startButton);
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {
-                Y = 950,
-                X = 800,
+                Y = 900,
+                X = 750,
                 Width = 200,
                 Height = 50,
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG
@@ -84,101 +100,75 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void SetupPreviewPanel()
         {
-            AddControl(0, new TileControl(Parent)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                Alpha = 100,
-                X = 10,
-                Y = 100,
-                Height = 400,
-                Width = 400
-            });
             _mapPreviewTile = new TileControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
-                X = 20,
-                Y = 110,
-                Width = 380,
-                Height = 380,
+                X = 60,
+                Y = 230,
+                Width = 300,
+                Height = 300,
             };
             AddControl(1, new BorderControl(Parent)
             {
                 Thickness = 3,
+                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue),
                 Child = _mapPreviewTile
             });
 
-            AddControl(0, new TileControl(Parent)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                Alpha = 100,
-                X = 420,
-                Y = 100,
-                Height = 400,
-                Width = 570
-            });
             _mapNameLabel = new LabelControl(Parent)
             {
                 Text = "Select A Map",
                 Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
-                X = 420,
-                Y = 100,
-                Height = 35,
-                Width = 570
+                X = 450,
+                Y = 220,
+                Height = 50,
+                Width = 400,
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
             };
             AddControl(1, _mapNameLabel);
             _mapDescriptionTextbox = new TextboxControl(Parent)
             {
                 Font = BasicFonts.GetFont(10),
-                X = 430,
-                Y = 140,
-                Height = 350,
-                Width = 550
+                X = 380,
+                Y = 270,
+                Height = 250,
+                Width = 550,
+                FontColor = Color.White
             };
             AddControl(1, _mapDescriptionTextbox);
         }
 
         private void SetupMapsView()
         {
-            AddControl(0, new TileControl(Parent)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                Alpha = 100,
-                X = 10,
-                Y = 510,
-                Height = 425,
-                Width = 485
-            });
             AddControl(1, new LabelControl(Parent)
             {
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
                 Font = BasicFonts.GetFont(24),
                 Text = "Maps",
-                X = 10,
-                Y = 510,
-                Height = 45,
-                Width = 485
+                X = 70,
+                Y = 550,
+                Height = 50,
+                Width = 400,
+                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FontColor = Color.White
             });
 
             var maps = ResourceManager.Maps.GetResources();
             int offset = 0;
             foreach (var mapName in maps)
             {
-                AddControl(1, new BorderControl(Parent)
+                AddControl(1, new ButtonControl(Parent, clicked: SelectMap_Click)
                 {
-                    Thickness = 2,
-                    Child = new ButtonControl(Parent, clicked: SelectMap_Click)
-                    {
-                        FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
-                        FillClickedColor = BasicTextures.GetClickedTexture(),
-                        Font = BasicFonts.GetFont(16),
-                        Text = $"{ResourceManager.Maps.GetResource(mapName).Name}",
-                        X = 20,
-                        Y = 560 + offset * 40,
-                        Height = 35,
-                        Width = 465,
-                        Tag = mapName
-                    }
+                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    Font = BasicFonts.GetFont(16),
+                    Text = $"{ResourceManager.Maps.GetResource(mapName).Name}",
+                    FontColor = Color.White,
+                    X = 70,
+                    Y = 610 + offset * 50,
+                    Height = 50,
+                    Width = 400,
+                    Tag = mapName
                 });
                 offset++;
             }
@@ -186,45 +176,34 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void SetupGameStyleView()
         {
-            AddControl(0, new TileControl(Parent)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                Alpha = 100,
-                X = 505,
-                Y = 510,
-                Height = 425,
-                Width = 485
-            });
             AddControl(1, new LabelControl(Parent)
             {
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
                 Font = BasicFonts.GetFont(24),
                 Text = "Game Styles",
-                X = 505,
-                Y = 510,
-                Height = 45,
-                Width = 485
+                X = 520,
+                Y = 550,
+                Height = 50,
+                Width = 400,
+                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FontColor = Color.White
             });
 
             var gameStyles = ResourceManager.GameStyles.GetResources();
             int offset = 0;
             foreach (var gameStyle in gameStyles)
             {
-                AddControl(1, new BorderControl(Parent)
+                AddControl(1, new ButtonControl(Parent, clicked: SelectGameStyle_Click)
                 {
-                    Thickness = 2,
-                    Child = new ButtonControl(Parent, clicked: SelectGameStyle_Click)
-                    {
-                        FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
-                        FillClickedColor = BasicTextures.GetClickedTexture(),
-                        Font = BasicFonts.GetFont(16),
-                        Text = $"{ResourceManager.GameStyles.GetResource(gameStyle).Name}",
-                        X = 515,
-                        Y = 560 + offset * 40,
-                        Height = 35,
-                        Width = 465,
-                        Tag = gameStyle
-                    }
+                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    FontColor = Color.White,
+                    Font = BasicFonts.GetFont(16),
+                    Text = $"{ResourceManager.GameStyles.GetResource(gameStyle).Name}",
+                    X = 520,
+                    Y = 610 + offset * 50,
+                    Height = 50,
+                    Width = 400,
+                    Tag = gameStyle
                 });
                 offset++;
             }

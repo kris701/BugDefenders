@@ -12,6 +12,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
         private List<ButtonControl> _usersButtons = new List<ButtonControl>();
         private List<ButtonControl> _usersDeleteButtons = new List<ButtonControl>();
         private TextInputControl _nameInputBox;
+        private ButtonControl _acceptButton;
 
         public override void Initialize()
         {
@@ -35,27 +36,33 @@ namespace TDGame.OpenGL.Screens.UsersScreen
 
             _nameInputBox = new TextInputControl(Parent)
             {
-                HorizontalAlignment = Engine.Alignment.Middle,
+                X = 200,
                 Y = 200,
-                Width = 250,
+                Width = 400,
                 Height = 50,
                 Limit = 10,
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = TextureManager.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
             };
             AddControl(0, _nameInputBox);
-            AddControl(0, new ButtonControl(Parent, AddUserButton_Click)
+            _acceptButton = new ButtonControl(Parent, AddUserButton_Click)
             {
-                HorizontalAlignment = Engine.Alignment.Middle,
-                Y = 250,
-                Width = 250,
+                X = 600,
+                Y = 200,
+                Width = 200,
                 Height = 50,
                 Text = "Add User",
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                FillDisabledColor = BasicTextures.GetDisabledTexture()
-            });
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = TextureManager.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968"))
+            };
+            AddControl(0, _acceptButton);
+            CheckValidUserInput();
 
             UpdateUsersList();
 
@@ -64,14 +71,15 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {
-                Y = 950,
-                X = 800,
+                Y = 900,
+                X = 750,
                 Width = 200,
                 Height = 50,
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG
@@ -102,37 +110,37 @@ namespace TDGame.OpenGL.Screens.UsersScreen
             {
                 var newControl = new ButtonControl(Parent, ChangeUserButton_Click)
                 {
-                    X = 250,
-                    Y = 310 + (count * 35 + 5),
-                    Width = 500,
-                    Height = 30,
+                    X = 200,
+                    Y = 280 + (count * 50 + 5),
+                    Width = 400,
+                    Height = 50,
                     Text = $"{user.Name}",
                     Font = BasicFonts.GetFont(16),
-                    FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
-                    FillClickedColor = BasicTextures.GetClickedTexture(),
-                    FillDisabledColor = BasicTextures.GetDisabledTexture(),
+                    FontColor = Color.White,
+                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    FillDisabledColor = TextureManager.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                     Tag = user
                 };
                 if (user.IsPrimary)
-                    newControl.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                    newControl.FillColor = TextureManager.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 _usersButtons.Add(newControl);
                 AddControl(1, newControl);
 
                 var newDeleteControl = new ButtonControl(Parent, RemoveUserButton_Click)
                 {
-                    X = 750,
-                    Y = 310 + (count++ * 35 + 5),
-                    Width = 30,
-                    Height = 30,
-                    Text = "X",
+                    X = 600,
+                    Y = 280 + (count++ * 50 + 5),
+                    Width = 200,
+                    Height = 50,
+                    Text = "Delete",
                     Font = BasicFonts.GetFont(16),
-                    FillColor = BasicTextures.GetBasicRectange(Color.Red),
-                    FillClickedColor = BasicTextures.GetClickedTexture(),
-                    FillDisabledColor = BasicTextures.GetDisabledTexture(),
+                    FontColor = Color.Red,
+                    FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillDisabledColor = TextureManager.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
                     Tag = user
                 };
-                if (user.IsPrimary)
-                    newControl.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
                 _usersDeleteButtons.Add(newDeleteControl);
                 AddControl(2, newDeleteControl);
 

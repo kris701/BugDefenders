@@ -46,6 +46,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
             AddControl(1, new BorderControl(Parent)
             {
                 Thickness = 5,
+                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue),
                 Child = new TileControl(Parent)
                 {
                     HorizontalAlignment = Alignment.Middle,
@@ -56,20 +57,17 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 }
             });
 
-            AddControl(1, new BorderControl(Parent)
+            AddControl(1, new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenu(Parent)); })
             {
-                Child = new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenu(Parent)); })
-                {
-                    HorizontalAlignment = Alignment.Middle,
-                    Y = 875,
-                    Width = 400,
-                    Height = 75,
-                    Font = BasicFonts.GetFont(24),
-                    Text = "Main Menu",
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    FillClickedColor = BasicTextures.GetClickedTexture(),
-                    FillDisabledColor = BasicTextures.GetDisabledTexture(),
-                }
+                HorizontalAlignment = Alignment.Middle,
+                Y = 875,
+                Width = 400,
+                Height = 80,
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White,
+                Text = "Main Menu",
+                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
             });
 
 #if DEBUG

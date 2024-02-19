@@ -37,7 +37,7 @@ namespace TDGame.OpenGL.Engine.Controls
                 _textChanged = true;
             }
         }
-        public double Margin { get; set; } = 5;
+        public float Margin { get; set; } = 5;
         internal bool _textChanged = true;
         internal List<LabelControl> lines = new List<LabelControl>();
 
@@ -74,11 +74,14 @@ namespace TDGame.OpenGL.Engine.Controls
                     {
                         Font = Font,
                         Text = currentString,
+                        FontColor = FontColor
                     };
                     newLabel._x = _x;
-                    newLabel._y = _y + Scale(size.Y) * lines.Count;
+                    newLabel._y = _y + Scale(size.Y) * lines.Count + Scale(Margin);
                     newLabel._width = _width;
                     newLabel._height = Scale(size.Y);
+                    if (newLabel._y + newLabel._height > _y + _height - Margin)
+                        break;
                     lines.Add(newLabel);
                     currentString = "";
                 }
@@ -90,11 +93,14 @@ namespace TDGame.OpenGL.Engine.Controls
                 {
                     Font = Font,
                     Text = currentString,
+                    FontColor = FontColor
                 };
                 newLabel._x = _x;
-                newLabel._y = _y + Scale(size.Y) * lines.Count;
+                newLabel._y = _y + Scale(size.Y) * lines.Count + Scale(Margin);
                 newLabel._width = _width;
                 newLabel._height = Scale(size.Y);
+                if (newLabel._y + newLabel._height > _y + _height - Margin)
+                    return;
                 lines.Add(newLabel);
             }
         }

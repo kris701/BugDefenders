@@ -28,23 +28,25 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         public void UpdateScreenSettingsButtons()
         {
-            _isFullScreen.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
-            _isVSync.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
+            var normal = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"));
+            var selected = TextureManager.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
+            _isFullScreen.FillColor = normal;
+            _isVSync.FillColor = normal;
             foreach (var button in _texturePacksButtons)
-                button.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
+                button.FillColor = normal;
             foreach (var button in _scaleButtons)
-                button.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
+                button.FillColor = normal;
 
             if (_settings.IsFullscreen)
-                _isFullScreen.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                _isFullScreen.FillColor = selected;
             if (_settings.IsVsync)
-                _isVSync.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                _isVSync.FillColor = selected;
 
             foreach (var button in _texturePacksButtons)
             {
                 if (button.Tag is Guid str && str == _settings.TexturePack)
                 {
-                    button.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                    button.FillColor = selected;
                     break;
                 }
             }
@@ -52,7 +54,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
             {
                 if (button.Tag is float value && value == _settings.Scale)
                 {
-                    button.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                    button.FillColor = selected;
                     break;
                 }
             }

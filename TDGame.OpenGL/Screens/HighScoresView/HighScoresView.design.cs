@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TDGame.Core.Users.Models;
+using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
@@ -11,7 +12,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
 {
     public partial class HighScoresView : BaseScreen
     {
-        private static int _showCount = 19;
+        private static int _showCount = 13;
 
         public override void Initialize()
         {
@@ -32,6 +33,16 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
+            AddControl(0, new LabelControl(Parent)
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = 175,
+                Height = 35,
+                Width = 700,
+                Text = $"Play the game and get your highscore onto the list!",
+                Font = BasicFonts.GetFont(16),
+                FontColor = Color.White
+            });
 
             var allUsers = Parent.UserManager.GetAllUsers();
             var allScores = new List<ScoreDefinition>();
@@ -46,13 +57,13 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                 AddControl(0, new LabelControl(Parent)
                 {
                     HorizontalAlignment = Engine.Alignment.Middle,
-                    Y = 200 + (count++ * 35 + 5),
-                    Height = 30,
+                    Y = 215 + (count++ * 50 + 5),
+                    Height = 50,
                     Width = 800,
                     Text = $"User: {allUsers.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
                     FontColor = Color.White,
                     Font = BasicFonts.GetFont(10),
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                    FillColor = TextureManager.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                 });
             }
 
@@ -67,8 +78,9 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                 Height = 50,
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG

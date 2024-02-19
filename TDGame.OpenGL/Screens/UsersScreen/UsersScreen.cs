@@ -41,7 +41,11 @@ namespace TDGame.OpenGL.Screens.UsersScreen
         private void AddUserButton_Click(ButtonControl sender)
         {
             if (_nameInputBox.Text != "")
+            {
                 Parent.CreateNewUser(_nameInputBox.Text);
+                _nameInputBox.Text = "";
+            }
+            CheckValidUserInput();
         }
 
         private void RemoveUserButton_Click(ButtonControl sender)
@@ -57,6 +61,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 }
                 Parent.UserManager.RemoveUser(user);
                 SwitchView(new UsersScreen(Parent));
+                CheckValidUserInput();
             }
         }
 
@@ -66,12 +71,23 @@ namespace TDGame.OpenGL.Screens.UsersScreen
             {
                 if (Parent.CurrentUser.ID != user.ID)
                 {
-                    foreach (var button in _usersButtons)
-                        button.FillColor = BasicTextures.GetBasicRectange(Color.LightGray);
-                    sender.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
                     Parent.ChangeUser(user);
                     SwitchView(new UsersScreen(Parent));
                 }
+            }
+        }
+
+        private void CheckValidUserInput()
+        {
+            if (Parent.UserManager.GetAllUsers().Count > 10)
+            {
+                _nameInputBox.IsEnabled = false;
+                _acceptButton.IsEnabled = false;
+            }
+            else
+            {
+                _nameInputBox.IsEnabled = true;
+                _acceptButton.IsEnabled = true;
             }
         }
     }

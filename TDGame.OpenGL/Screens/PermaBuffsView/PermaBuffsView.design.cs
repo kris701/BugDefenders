@@ -54,15 +54,28 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 if (!buff.IsValid(Parent.CurrentUser) || Parent.CurrentUser.Buffs.Contains(id))
                     continue;
 
+                AddControl(0, new LabelControl(Parent)
+                {
+                    X = 100,
+                    Y = 210 + count * 140 + 5,
+                    Width = 400,
+                    Height = 50,
+                    Text = buff.Name,
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.White,
+                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                });
                 AddControl(0, new TextboxControl(Parent)
                 {
-                    HorizontalAlignment = Alignment.Middle,
-                    Y = 250 + count * 140 + 5,
-                    Width = 600,
-                    Height = 100,
-                    Text = buff.GetDescriptionString(),
+                    X = 100,
+                    Y = 260 + count * 140 + 5,
+                    Width = 800,
+                    Height = 75,
+                    Text = buff.Description,
                     Font = BasicFonts.GetFont(16),
-                    FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan)
+                    FontColor = Color.White,
+                    FillColor = TextureManager.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
+                    Margin = 15
                 });
                 AddControl(0, new ButtonControl(Parent, clicked: (x) =>
                 {
@@ -70,16 +83,31 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                     SwitchView(new PermaBuffsView(Parent));
                 })
                 {
-                    HorizontalAlignment = Alignment.Middle,
-                    Y = 350 + count * 140 + 5,
-                    Width = 600,
-                    Height = 35,
+                    X = 500,
+                    Y = 210 + count * 140 + 5,
+                    Width = 400,
+                    Height = 50,
                     Text = "Claim",
                     Font = BasicFonts.GetFont(16),
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    FillClickedColor = BasicTextures.GetClickedTexture(),
+                    FontColor = Color.White,
+                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                 });
                 count++;
+            }
+
+            if (count == 0)
+            {
+                AddControl(0, new LabelControl(Parent)
+                {
+                    HorizontalAlignment = Alignment.Middle,
+                    Y = 500,
+                    Height = 80,
+                    Width = 700,
+                    Text = $"No buffs available yet! Keep playing the game to unlock them",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.White
+                });
             }
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
@@ -93,8 +121,9 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 Height = 50,
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView(Parent)))
