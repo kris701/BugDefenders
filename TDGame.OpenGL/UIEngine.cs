@@ -105,7 +105,7 @@ namespace TDGame.OpenGL
             if (_isInitialized)
                 ApplySettings();
 
-            var newManager = new AchivementPopupManager(this, toUser.Achivements);
+            var newManager = new AchivementBackroundWorker(this, toUser.Achivements);
             var find = BackroundWorkers.FirstOrDefault(x => x.ID == newManager.ID);
             if (find != null)
                 BackroundWorkers.Remove(find);

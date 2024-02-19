@@ -11,7 +11,7 @@ using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
 {
-    public class AchivementPopupManager : BaseBackroundWorker
+    public class AchivementBackroundWorker : BaseBackroundWorker
     {
         public override Guid ID { get; } = new Guid("50249fa6-d417-435e-be97-910940531f13");
         public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(2);
@@ -24,7 +24,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
         private List<Guid> _previousAchivements = new List<Guid>();
         private AchivementControl _popup;
 
-        public AchivementPopupManager(UIEngine parent, List<Guid> initialAchivements) : base(parent)
+        public AchivementBackroundWorker(UIEngine parent, List<Guid> initialAchivements) : base(parent)
         {
             foreach (var id in initialAchivements)
                 _previousAchivements.Add(id);
