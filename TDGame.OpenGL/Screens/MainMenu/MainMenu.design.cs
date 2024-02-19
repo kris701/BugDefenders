@@ -18,62 +18,74 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 Width = 1000,
                 Height = 1000
             });
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 100,
-                FillColor = TextureManager.GetTexture(new Guid("960c3e27-bfa4-40db-8397-ce47655eb169"))
+                Y = 200,
+                Font = BasicFonts.GetFont(72),
+                Text = "TD Game",
+                FontColor = Color.White,
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 350,
+                Y = 300,
                 Width = 300,
-                Height = 100,
-                FillColor = TextureManager.GetTexture(new Guid("c89588ae-a69f-41bf-a9df-e4fc53071c0b")),
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "Start Game",
+                FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 475,
+                Y = 350,
                 Width = 300,
-                Height = 100,
-                FillColor = TextureManager.GetTexture(new Guid("40aa2d8a-7509-4bef-bf1c-9c3e1dffdd08")),
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "Settings",
+                FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 600,
+                Y = 400,
                 Width = 300,
-                Height = 100,
-                FillColor = TextureManager.GetTexture(new Guid("410d9075-6e22-4ff7-9aff-1dcc3be9cd42")),
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "High Scores",
+                FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 725,
+                Y = 450,
                 Width = 300,
-                Height = 100,
-                FillColor = TextureManager.GetTexture(new Guid("66038205-f63a-4f3d-a057-d2ad99496daa")),
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "Buffs",
+                FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 850,
+                Y = 500,
                 Width = 300,
-                Height = 100,
-                FillColor = TextureManager.GetTexture(new Guid("e8fd55a0-ea74-48d8-b625-4352d6f1c564")),
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "Exit",
+                FontColor = Color.Red,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
 
             AddControl(0, new LabelControl(Parent)
             {
-                X = 5,
-                Y = 900,
+                X = 50,
+                Y = 860,
                 Width = 200,
                 Height = 35,
                 Font = BasicFonts.GetFont(10),
@@ -83,8 +95,8 @@ namespace TDGame.OpenGL.Screens.MainMenu
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreen(Parent)))
             {
-                X = 5,
-                Y = 945,
+                X = 50,
+                Y = 905,
                 Width = 200,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),

@@ -14,30 +14,6 @@
         "Content": "Maps/map2"
       },
       {
-        "ID": "960c3e27-bfa4-40db-8397-ce47655eb169",
-        "Content": "MainMenu/title"
-      },
-      {
-        "ID": "c89588ae-a69f-41bf-a9df-e4fc53071c0b",
-        "Content": "MainMenu/start"
-      },
-      {
-        "ID": "40aa2d8a-7509-4bef-bf1c-9c3e1dffdd08",
-        "Content": "MainMenu/settings"
-      },
-      {
-        "ID": "e8fd55a0-ea74-48d8-b625-4352d6f1c564",
-        "Content": "MainMenu/exit"
-      },
-      {
-        "ID": "410d9075-6e22-4ff7-9aff-1dcc3be9cd42",
-        "Content": "MainMenu/highscores"
-      },
-      {
-        "ID": "66038205-f63a-4f3d-a057-d2ad99496daa",
-        "Content": "MainMenu/buffs"
-      },
-      {
         "ID": "4a39d624-3171-41cd-b172-c853cea36d14",
         "Content": "MainMenu/background"
       },

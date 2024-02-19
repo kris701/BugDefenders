@@ -11,7 +11,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
 {
     public partial class HighScoresView : BaseScreen
     {
-        private static int _showCount = 20;
+        private static int _showCount = 19;
 
         public override void Initialize()
         {
@@ -30,8 +30,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                 Width = 800,
                 Text = "High Scores",
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(48),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                Font = BasicFonts.GetFont(48)
             });
 
             var allUsers = Parent.UserManager.GetAllUsers();
@@ -62,8 +61,8 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {
-                Y = 950,
-                X = 800,
+                Y = 900,
+                X = 750,
                 Width = 200,
                 Height = 50,
                 Text = "Back",

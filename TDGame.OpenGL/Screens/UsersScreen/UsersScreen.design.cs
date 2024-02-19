@@ -26,10 +26,11 @@ namespace TDGame.OpenGL.Screens.UsersScreen
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
-                Width = 350,
+                Height = 75,
+                Width = 800,
                 Text = "Users",
-                Font = BasicFonts.GetFont(48),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(48)
             });
 
             _nameInputBox = new TextInputControl(Parent)

@@ -37,11 +37,13 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
             AddControl(0, new LabelControl(Parent)
             {
-                HorizontalAlignment = Alignment.Middle,
-                Y = 75,
+                HorizontalAlignment = Engine.Alignment.Middle,
+                Y = 100,
+                Height = 75,
+                Width = 800,
                 Text = "Settings",
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(72),
+                Font = BasicFonts.GetFont(48)
             });
 
             SetupScreenSettingsView(200);
@@ -55,7 +57,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {
-                Y = 950,
+                X = 50,
+                Y = 900,
                 Width = 200,
                 Height = 50,
                 Text = "Apply",
@@ -69,8 +72,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {
-                Y = 950,
-                X = 800,
+                Y = 900,
+                X = 750,
                 Width = 200,
                 Height = 50,
                 Text = "Cancel",

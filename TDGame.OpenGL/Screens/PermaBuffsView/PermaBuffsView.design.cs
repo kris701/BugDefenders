@@ -25,14 +25,13 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
 
             AddControl(0, new LabelControl(Parent)
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
                 Height = 75,
-                Width = 700,
+                Width = 800,
                 Text = "Permanent Buffs",
-                Font = BasicFonts.GetFont(48),
                 FontColor = Color.White,
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                Font = BasicFonts.GetFont(48)
             });
             AddControl(0, new LabelControl(Parent)
             {
@@ -42,8 +41,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 Width = 700,
                 Text = $"Currently {Parent.CurrentUser.Buffs.Count} buffs are applied",
                 Font = BasicFonts.GetFont(16),
-                FontColor = Color.White,
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FontColor = Color.White
             });
 
             var buffs = ResourceManager.Buffs.GetResources();
@@ -89,8 +87,8 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 SwitchView(new MainMenu.MainMenu(Parent));
             })
             {
-                Y = 950,
-                X = 800,
+                Y = 900,
+                X = 750,
                 Width = 200,
                 Height = 50,
                 Text = "Back",
