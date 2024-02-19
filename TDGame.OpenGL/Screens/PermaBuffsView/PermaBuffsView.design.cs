@@ -12,8 +12,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseScreen
     {
-        private int _upgradeViewCount = 10;
-        private List<ButtonControl> _upgradeButtons = new List<ButtonControl>();
+        private int _upgradeViewCount = 5;
         public override void Initialize()
         {
             AddControl(0, new TileControl(Parent)
@@ -26,22 +25,24 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
 
             AddControl(0, new LabelControl(Parent)
             {
-                HorizontalAlignment = Engine.Alignment.Middle,
+                HorizontalAlignment = Alignment.Middle,
                 Y = 100,
                 Height = 75,
                 Width = 700,
                 Text = "Permanent Buffs",
                 Font = BasicFonts.GetFont(48),
+                FontColor = Color.White,
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
             });
             AddControl(0, new LabelControl(Parent)
             {
-                HorizontalAlignment = Engine.Alignment.Middle,
+                HorizontalAlignment = Alignment.Middle,
                 Y = 175,
                 Height = 35,
                 Width = 700,
                 Text = $"Currently {Parent.CurrentUser.Buffs.Count} buffs are applied",
                 Font = BasicFonts.GetFont(16),
+                FontColor = Color.White,
                 FillColor = BasicTextures.GetBasicRectange(Color.Gray),
             });
 
@@ -52,12 +53,12 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 if (count >= buffs.Count || count >= _upgradeViewCount)
                     break;
                 var buff = ResourceManager.Buffs.GetResource(id);
-                if (Parent.CurrentUser.Buffs.Contains(id))
+                if (!buff.IsValid(Parent.CurrentUser) || Parent.CurrentUser.Buffs.Contains(id))
                     continue;
 
                 AddControl(0, new TextboxControl(Parent)
                 {
-                    HorizontalAlignment = Engine.Alignment.Middle,
+                    HorizontalAlignment = Alignment.Middle,
                     Y = 250 + count * 140 + 5,
                     Width = 600,
                     Height = 100,
@@ -71,8 +72,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                     SwitchView(new PermaBuffsView(Parent));
                 })
                 {
-                    IsEnabled = buff.IsValid(Parent.CurrentUser),
-                    HorizontalAlignment = Engine.Alignment.Middle,
+                    HorizontalAlignment = Alignment.Middle,
                     Y = 350 + count * 140 + 5,
                     Width = 600,
                     Height = 35,

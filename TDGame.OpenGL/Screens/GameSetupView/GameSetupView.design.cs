@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Runtime;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
@@ -10,7 +11,6 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 {
     public partial class GameSetupView : BaseScreen
     {
-        private ButtonControl _startButton;
         private TileControl _mapPreviewTile;
         private LabelControl _mapNameLabel;
         private TextboxControl _mapDescriptionTextbox;
@@ -35,33 +35,35 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 35
             });
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new MainMenu.MainMenu(Parent)))
-            {
-                Text = "Back",
-                Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                X = 10,
-                Y = 50,
-                Width = 100,
-                Height = 35
-            });
-            _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
-            {
-                Text = "Start",
-                Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                X = 890,
-                Y = 50,
-                Width = 100,
-                Height = 35
-            };
-            AddControl(0, _startButton);
-
             SetupPreviewPanel();
             SetupMapsView();
             SetupGameStyleView();
+
+
+            AddControl(0, new ButtonControl(Parent, StartButton_Click)
+            {
+                Y = 950,
+                Width = 200,
+                Height = 50,
+                Text = "Start",
+                Font = BasicFonts.GetFont(24),
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
+            });
+            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            {
+                SwitchView(new MainMenu.MainMenu(Parent));
+            })
+            {
+                Y = 950,
+                X = 800,
+                Width = 200,
+                Height = 50,
+                Text = "Back",
+                Font = BasicFonts.GetFont(24),
+                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
+                FillClickedColor = BasicTextures.GetClickedTexture(),
+            });
 
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView(Parent)))
@@ -144,7 +146,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Alpha = 100,
                 X = 10,
                 Y = 510,
-                Height = 450,
+                Height = 425,
                 Width = 485
             });
             AddControl(1, new LabelControl(Parent)
@@ -190,7 +192,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Alpha = 100,
                 X = 505,
                 Y = 510,
-                Height = 450,
+                Height = 425,
                 Width = 485
             });
             AddControl(1, new LabelControl(Parent)

@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
@@ -13,11 +15,19 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private ButtonControl? _selectedGameStyleButton;
         private Guid? _selectedMap;
         private ButtonControl? _selectedMapButton;
+        private KeyWatcher _escapeKeyWatcher;
 
         public GameSetupView(UIEngine parent) : base(parent)
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
+            _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenu(Parent)); });
+        }
+
+        public override void OnUpdate(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+            _escapeKeyWatcher.Update(keyState);
         }
 
         private void StartButton_Click(ButtonControl sender)

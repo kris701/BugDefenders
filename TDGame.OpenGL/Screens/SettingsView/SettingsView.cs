@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Settings;
 
@@ -9,11 +11,19 @@ namespace TDGame.OpenGL.Screens.SettingsView
     public partial class SettingsView : BaseScreen
     {
         private SettingsDefinition _settings;
+        private KeyWatcher _escapeKeyWatcher;
         public SettingsView(UIEngine parent) : base(parent)
         {
             _settings = parent.CurrentUser.UserData.Copy();
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
+            _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenu(Parent)); });
+        }
+
+        public override void OnUpdate(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+            _escapeKeyWatcher.Update(keyState);
         }
 
         public void UpdateScreenSettingsButtons()

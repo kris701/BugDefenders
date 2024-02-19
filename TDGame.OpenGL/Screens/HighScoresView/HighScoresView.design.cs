@@ -11,7 +11,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
 {
     public partial class HighScoresView : BaseScreen
     {
-        private static int _showCount = 10;
+        private static int _showCount = 20;
 
         public override void Initialize()
         {
@@ -26,6 +26,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
+                Height = 75,
                 Width = 800,
                 Text = "High Scores",
                 FontColor = Color.White,
@@ -38,7 +39,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
             foreach(var user in allUsers)
                 allScores.AddRange(user.HighScores);
             allScores = allScores.OrderByDescending(x => x.Score).ToList();
-            allScores = allScores.Take(10).ToList();
+            allScores = allScores.Take(_showCount).ToList();
 
             int count = 0;
             foreach(var score in allScores)

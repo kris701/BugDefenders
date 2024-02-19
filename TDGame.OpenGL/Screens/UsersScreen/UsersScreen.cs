@@ -6,6 +6,7 @@ using System.Reflection;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
+using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Settings;
 
@@ -13,15 +14,19 @@ namespace TDGame.OpenGL.Screens.UsersScreen
 {
     public partial class UsersScreen : BaseScreen
     {
+        private KeyWatcher _escapeKeyWatcher;
         private int _hash = 1;
         public UsersScreen(UIEngine parent) : base(parent)
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
+            _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenu(Parent)); });
         }
 
         public override void OnUpdate(GameTime gameTime)
         {
+            var keyState = Keyboard.GetState();
+            _escapeKeyWatcher.Update(keyState);
             var allUsers = Parent.UserManager.GetAllUsers();
             var newHash = 1;
             foreach (var user in allUsers)
