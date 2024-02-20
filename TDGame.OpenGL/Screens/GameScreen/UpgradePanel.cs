@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using TDGame.Core.Game.Models.Entities.Upgrades;
 using TDGame.OpenGL.Engine;
@@ -17,62 +18,62 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private LabelControl _nameLabel;
         private TextboxControl _descriptionTextbox;
         private ButtonControl _buyUpgradeButton;
-        private TileControl _cantBuyTile;
 
-        public UpgradePanel(UIEngine parent, ClickedHandler buy) : base(parent)
+        public UpgradePanel(UIEngine parent, ClickedHandler buy, IUpgrade upgrade, bool canUpgrade) : base(parent)
         {
             Buy = buy;
             _nameLabel = new LabelControl(Parent)
             {
-                Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                Text = $"{upgrade.Name}",
                 Height = 35
             };
             _descriptionTextbox = new TextboxControl(Parent)
             {
                 Font = BasicFonts.GetFont(10),
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
+                FontColor = Color.White,
+                Text = upgrade.GetDescriptionString(),
                 Height = 85
             };
             _buyUpgradeButton = new ButtonControl(Parent, clicked: buy)
             {
-                Font = BasicFonts.GetFont(16),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                Text = "Buy",
-                Height = 35
-            };
-            _cantBuyTile = new TileControl(Parent)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkGray),
-                Alpha = 100
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
+                Text = $"[{upgrade.Cost}$] Buy",
+                Height = 35,
+                Tag = upgrade
             };
             Children = new List<IControl>() {
                 _nameLabel,
                 _descriptionTextbox,
-                _buyUpgradeButton,
-                _cantBuyTile
+                _buyUpgradeButton
             };
-        }
 
-        public void SetUpgrade(IUpgrade upgrade, bool canUpgrade)
-        {
-            _nameLabel.Text = $"[{upgrade.Cost}$] {upgrade.Name}";
-            _descriptionTextbox.Text = upgrade.GetDescriptionString();
-            _buyUpgradeButton.Tag = upgrade;
-            IsVisible = true;
-            foreach (var child in Children)
-                child.IsVisible = true;
             _buyUpgradeButton.IsEnabled = canUpgrade;
-            _cantBuyTile.IsVisible = !canUpgrade;
-            Initialize();
+
+            if (!canUpgrade)
+            {
+                _nameLabel.FontColor = Color.Gray;
+                _descriptionTextbox.FontColor = Color.Gray;
+                _buyUpgradeButton.FontColor = Color.Gray;
+            }
+            else
+            {
+                _nameLabel.FontColor = Color.White;
+                _descriptionTextbox.FontColor = Color.White;
+                _buyUpgradeButton.FontColor = Color.White;
+            }
         }
 
-        public void TurnInvisible()
+        public void SetVisibility(bool visible)
         {
-            IsVisible = false;
+            IsVisible = visible;
             foreach (var child in Children)
-                child.IsVisible = false;
+                child.IsVisible = visible;
         }
 
         public override void Initialize()
@@ -86,10 +87,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _buyUpgradeButton._x = _x;
             _buyUpgradeButton._y = _y + Scale(35 + 85);
             _buyUpgradeButton._width = _width;
-            _cantBuyTile._x = _x;
-            _cantBuyTile._y = _y;
-            _cantBuyTile._width = _width;
-            _cantBuyTile._height = _height;
 
             foreach (var child in Children)
                 child.Initialize();

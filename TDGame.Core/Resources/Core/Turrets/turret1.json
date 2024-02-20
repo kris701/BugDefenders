@@ -58,6 +58,32 @@
       "CooldownModifier": 0.5,
       "SlowingFactorModifier": 1,
       "SlowingDurationModifier": 1
+    },
+    {
+      "UpgradeType": "LaserTurret",
+      "id": "825afcf6-10b7-42e3-b18f-9925f998d058",
+      "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
+      "Name": "Upgrade 3",
+      "Description": "fast turret",
+      "Cost": 50,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 0.5,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
+    },
+    {
+      "UpgradeType": "LaserTurret",
+      "id": "78b3606d-f4a6-465b-a5bf-625308dbeb45",
+      "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
+      "Name": "Upgrade 3",
+      "Description": "fast turret",
+      "Cost": 50,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 0.5,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
     }
   ]
 }

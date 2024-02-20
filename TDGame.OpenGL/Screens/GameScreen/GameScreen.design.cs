@@ -35,9 +35,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private int _selectionsPrPage = 13;
+        private int _turretSelectionsPrPage = 13;
         private List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
         private int _currentTurretPage = 0;
+
+        private ButtonControl _upgradesLeftButton;
+        private ButtonControl _upgradesRightButton;
+        private int _upgradeSelectionsPrPage = 3;
+        private List<List<UpgradePanel>> _turretUpgradePages = new List<List<UpgradePanel>>();
+        private int _currentTurretUpgradePage = 0;
 
         public override void Initialize()
         {
@@ -99,7 +105,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
             AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
-                Alpha = 100,
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -210,7 +215,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
             AddControl(0, new TileControl(Parent)
             {
                 FillColor = TextureManager.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
-                Alpha = 100,
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -245,7 +249,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Y = yOffset + 10,
                 Height = 25,
                 Width = 25,
-                IsVisible = ResourceManager.Turrets.GetResources().Count > _selectionsPrPage
+                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
             });
             AddControl(1, new ButtonControl(Parent, clicked: (s) => {
                 _currentTurretPage++;
@@ -265,7 +269,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Y = yOffset + 10,
                 Height = 25,
                 Width = 25,
-                IsVisible = ResourceManager.Turrets.GetResources().Count > _selectionsPrPage
+                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
             });
 
             int count = 1;
@@ -274,7 +278,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _turretPages.Add(new List<ButtonControl>());
             foreach (var turretID in ResourceManager.Turrets.GetResources())
             {
-                if (count++ % (_selectionsPrPage + 1) == 0)
+                if (count++ % (_turretSelectionsPrPage + 1) == 0)
                 {
                     page++;
                     _turretPages.Add(new List<ButtonControl>());
@@ -316,47 +320,76 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupUpgradeField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(Parent)
+            AddControl(0, new TileControl(Parent)
             {
-                Child = new TileControl(Parent)
-                {
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    Alpha = 100,
-                    X = xOffset,
-                    Y = yOffset,
-                    Height = height,
-                    Width = width
-                }
+                FillColor = TextureManager.GetTexture(new Guid("f367b2e1-0b9f-40da-95af-dac50b16a0ad")),
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
             });
             AddControl(1, new LabelControl(Parent)
             {
                 Text = "Upgrades",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
+                Font = BasicFonts.GetFont(16),
+                FontColor = Color.White,
                 X = xOffset,
                 Y = yOffset,
                 Height = 35,
                 Width = width
             });
 
-            int x = xOffset + 5;
-            int y = yOffset + 40;
-            int itemXOffset = 0;
-            int itemWidth = 205;
-            int margin = 10;
-            for (int i = 0; i < 3; i++)
+            _upgradesLeftButton = new ButtonControl(Parent, clicked: (s) =>
             {
-                var newItem = new UpgradePanel(Parent, BuyUpgrade_Click)
-                {
-                    X = x + (itemXOffset++ * (itemWidth + margin)),
-                    Y = y,
-                    Height = 155,
-                    Width = itemWidth,
-                };
-                newItem.TurnInvisible();
-                _turretUpgradePanels.Add(newItem);
-                AddControl(1, newItem);
-            }
+                _currentTurretUpgradePage--;
+                if (_currentTurretUpgradePage < 0)
+                    _currentTurretUpgradePage = 0;
+                if (_currentTurretUpgradePage >= _turretUpgradePages.Count)
+                    _currentTurretUpgradePage = _turretUpgradePages.Count - 1;
+                UpdateTurretUpgradeSelectionPages();
+            })
+            {
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(10),
+                Text = $"<",
+                X = xOffset + 10,
+                Y = yOffset + 10,
+                Height = 25,
+                Width = 25,
+                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
+            };
+            AddControl(1, _upgradesLeftButton);
+            _upgradesRightButton = new ButtonControl(Parent, clicked: (s) =>
+            {
+                _currentTurretUpgradePage++;
+                if (_currentTurretUpgradePage < 0)
+                    _currentTurretUpgradePage = 0;
+                if (_currentTurretUpgradePage >= _turretUpgradePages.Count)
+                    _currentTurretUpgradePage = _turretUpgradePages.Count - 1;
+                UpdateTurretUpgradeSelectionPages();
+            })
+            {
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(10),
+                Text = $">",
+                X = xOffset + 615,
+                Y = yOffset + 10,
+                Height = 25,
+                Width = 25,
+                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
+            };
+            AddControl(1, _upgradesRightButton);
+
+            int x = xOffset + 15;
+            int y = yOffset + 35;
+            int itemXOffset = 0;
+            int itemWidth = 200;
+            int margin = 10;
+
         }
 
         private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)
