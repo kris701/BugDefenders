@@ -17,11 +17,6 @@
     <None Remove="Resources\Core\Buffs\buff5.json" />
     <None Remove="Resources\Core\Buffs\buff6.json" />
     <None Remove="Resources\Core\Buffs\buff7.json" />
-    <None Remove="Resources\Core\Maps\map3.json" />
-    <None Remove="Resources\Core\Maps\map4.json" />
-    <None Remove="Resources\Core\Maps\map5.json" />
-    <None Remove="Resources\Core\Maps\map6.json" />
-    <None Remove="Resources\Core\Maps\map7.json" />
     <None Remove="Resources\Core\Turrets\turret3.json" />
     <None Remove="Resources\Core\Turrets\turret4.json" />
     <None Remove="Resources\Core\Turrets\turret5.json" />
@@ -84,21 +79,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\easy.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Maps\map7.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Maps\map6.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Maps\map5.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Maps\map4.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Maps\map3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Maps\map2.json">

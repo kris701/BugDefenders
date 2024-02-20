@@ -58,15 +58,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = 25,
                 Height = 25,
             };
-            iconControl._x = _x + Scale(5);
-            iconControl._y = _y + Scale(5) + Height / 2 - iconControl.Height / 2;
+            iconControl._x = _x + Scale(10);
+            iconControl._y = _y + Height / 2 - iconControl.Height / 2;
             iconControl.Initialize();
 
             descriptionControl = new TextboxControl(Parent)
             {
                 Margin = 1,
                 Font = BasicFonts.GetFont(8),
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
+                FontColor = Color.White,
                 Height = 50,
                 Width = 150,
                 Text = ""

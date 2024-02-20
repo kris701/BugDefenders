@@ -124,7 +124,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             foreach (var button in _turretTargetingModes)
             {
                 button.IsEnabled = false;
-                button.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
+                button.FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
             foreach (var buttons in _turretUpgradePages)
                 foreach (var control in buttons)
@@ -163,7 +163,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 button.IsEnabled = true;
                 if (Enum.GetName(typeof(TargetingTypes), turret.TargetingType) == button.Text)
-                    button.FillColor = BasicTextures.GetBasicRectange(Color.DarkGreen);
+                    button.FillColor = TextureManager.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
             }
         }
 

@@ -46,7 +46,7 @@ namespace TDGame.OpenGL.Engine.Controls
             if (!IsVisible)
                 return;
 
-            if (Frame > TileSet.Count)
+            if (Frame >= TileSet.Count)
                 Frame = 0;
 
             if (TileSet.Count > 0)
