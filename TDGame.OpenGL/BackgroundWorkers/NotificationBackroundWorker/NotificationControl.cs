@@ -35,22 +35,21 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
             {
                 _iconTile = new TileControl(Parent)
                 {
-                    Width = 100,
-                    Height = 100,
+                    Width = 75,
+                    Height = 75,
                     FillColor = TextureManager.GetTexture(Item.Definition.ID)
                 };
-                _iconTile._x = _x + Scale(10);
-                _iconTile._y = _y + Scale(10);
+                _iconTile._x = _x + Scale(20);
+                _iconTile._y = _y + Scale(20);
                 _iconTile.Initialize();
             }
 
             _descriptionTextbox = new TextboxControl(Parent)
             {
-                Width = 180,
+                Width = 200,
                 Height = 100,
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                FillColor = BasicTextures.GetBasicRectange(Color.DarkCyan),
                 Text = $"{Item.PreFix}{Environment.NewLine}{Item.Definition.Name}{Environment.NewLine}{Item.Definition.Description}"
             };
             if (!Item.HasImage)
@@ -68,13 +67,13 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
         {
             if (Item.HasImage)
             {
-                _iconTile._x = _x + Scale(10);
-                _iconTile._y = _y + Scale(10);
-                _descriptionTextbox._x = _x + Scale(10) + Scale(100);
+                _iconTile._x = _x + Scale(20);
+                _iconTile._y = _y + Scale(20);
+                _descriptionTextbox._x = _x + Scale(10) + Scale(75);
             }
             else
-                _descriptionTextbox._x = _x + Scale(10);
-            _descriptionTextbox._y = _y + Scale(10);
+                _descriptionTextbox._x = _x + Scale(20);
+            _descriptionTextbox._y = _y + Scale(20);
             _descriptionTextbox._textChanged = true;
 
             _descriptionTextbox.Update(gameTime);

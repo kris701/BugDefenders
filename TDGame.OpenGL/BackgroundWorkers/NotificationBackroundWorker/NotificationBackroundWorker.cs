@@ -56,7 +56,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
                     {
                         X = 0,
                         Y = _currentY,
-                        FillColor = BasicTextures.GetBasicRectange(Color.Gray)
+                        FillColor = TextureManager.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"))
                     };
                     _notification.Initialize();
                     _currentMoveState = MoveState.Up;
