@@ -513,7 +513,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
                 Parent.CurrentUser.Stats.Combine(_game.Outcome);
                 var achivements = ResourceManager.Achivements.GetResources();
-                foreach (var id in achivements) 
+                foreach (var id in achivements)
                 {
                     if (!Parent.CurrentUser.Achivements.Contains(id))
                     {

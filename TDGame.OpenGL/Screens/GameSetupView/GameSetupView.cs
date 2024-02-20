@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Linq;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Screens;
 

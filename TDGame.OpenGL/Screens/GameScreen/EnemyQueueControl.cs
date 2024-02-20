@@ -8,7 +8,6 @@ using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Textures.Animations;
 
 namespace TDGame.OpenGL.Screens.GameScreen
@@ -41,7 +40,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 sb.AppendLine($"Total HP: {Math.Round(hp, 0)}");
             }
             else
-            {   
+            {
                 sb.AppendLine(def.Name);
                 sb.AppendLine(def.Description);
                 sb.AppendLine($"Type: {ResourceManager.EnemyTypes.GetResource(def.EnemyType).Name}");

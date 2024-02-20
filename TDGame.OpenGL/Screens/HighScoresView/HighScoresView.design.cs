@@ -46,13 +46,13 @@ namespace TDGame.OpenGL.Screens.HighScoresView
 
             var allUsers = Parent.UserManager.GetAllUsers();
             var allScores = new List<ScoreDefinition>();
-            foreach(var user in allUsers)
+            foreach (var user in allUsers)
                 allScores.AddRange(user.HighScores);
             allScores = allScores.OrderByDescending(x => x.Score).ToList();
             allScores = allScores.Take(_showCount).ToList();
 
             int count = 0;
-            foreach(var score in allScores)
+            foreach (var score in allScores)
             {
                 AddControl(0, new LabelControl(Parent)
                 {

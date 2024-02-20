@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine.Controls
 {

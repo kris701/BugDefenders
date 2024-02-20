@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Game.Models;
+﻿using TDGame.Core.Game.Models;
 
 namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {

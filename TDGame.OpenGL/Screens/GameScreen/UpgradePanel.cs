@@ -6,7 +6,6 @@ using TDGame.Core.Game.Models.Entities.Upgrades;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Screens;
 using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
 namespace TDGame.OpenGL.Screens.GameScreen

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Engine.Controls
 {

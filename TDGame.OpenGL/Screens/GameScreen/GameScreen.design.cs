@@ -228,7 +228,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentTurretPage--;
                 if (_currentTurretPage < 0)
                     _currentTurretPage = 0;
@@ -248,7 +249,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Width = 25,
                 IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
             });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentTurretPage++;
                 if (_currentTurretPage < 0)
                     _currentTurretPage = 0;

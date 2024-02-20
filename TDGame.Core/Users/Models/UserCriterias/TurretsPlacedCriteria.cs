@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TDGame.Core.Users.Models.UserCriterias
+﻿namespace TDGame.Core.Users.Models.UserCriterias
 {
     public class TurretsPlacedCriteria : IUserCriteria
     {

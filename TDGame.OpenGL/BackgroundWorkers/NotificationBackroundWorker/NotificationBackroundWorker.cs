@@ -2,14 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Game.Models;
-using TDGame.Core.Resources;
 using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using TDGame.OpenGL.Engine.BackgroundWorkers;
-using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
 {

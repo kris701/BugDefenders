@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
-using TDGame.Core.Game.Helpers;
 using TDGame.Core.Resources;
 using TDGame.Core.Users;
 using TDGame.Core.Users.Models;
@@ -66,7 +63,7 @@ namespace TDGame.OpenGL
             }
             else
             {
-                foreach(var user in allUsers)
+                foreach (var user in allUsers)
                 {
                     if (user.IsPrimary)
                     {
@@ -171,7 +168,7 @@ namespace TDGame.OpenGL
         protected override void Update(GameTime gameTime)
         {
             CurrentScreen.Update(gameTime);
-            foreach(var worker in BackroundWorkers)
+            foreach (var worker in BackroundWorkers)
                 worker.Update(gameTime);
 
             base.Update(gameTime);

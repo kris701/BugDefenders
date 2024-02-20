@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using TDGame.Core.Users.Models;
-using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Settings;
+﻿using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.MainMenu
 {

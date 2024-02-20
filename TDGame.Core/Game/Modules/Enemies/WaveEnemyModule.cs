@@ -1,5 +1,4 @@
-﻿using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models.Entities.Enemies;
+﻿using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Resources;
 
@@ -61,7 +60,7 @@ namespace TDGame.Core.Game.Modules.Enemies
                     {
                         if (vistedQueueItems.Contains(enemy.ID))
                             continue;
-                        foreach(var item in def.Group)
+                        foreach (var item in def.Group)
                             vistedQueueItems.Add(item.ID);
 
                         def.SpawnDelay -= (float)passed.TotalMilliseconds;

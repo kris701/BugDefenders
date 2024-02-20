@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
@@ -85,7 +84,8 @@ namespace TDGame.OpenGL.Screens.AchivementsView
                     FontColor = Color.White
                 });
             }
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentAchivementsPage--;
                 if (_currentAchivementsPage < 0)
                     _currentAchivementsPage = 0;
@@ -105,7 +105,8 @@ namespace TDGame.OpenGL.Screens.AchivementsView
                 Width = 50,
                 IsVisible = _achivementsPages.Count > 1
             });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentAchivementsPage++;
                 if (_currentAchivementsPage < 0)
                     _currentAchivementsPage = 0;

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using TDGame.Core.Game.Models;
-using TDGame.Core.Resources;
-using TDGame.Core.Users.Models.UserCriterias;
 using TDGame.Core.Users.Models.Buffs.BuffEffects;
+using TDGame.Core.Users.Models.UserCriterias;
 
 namespace TDGame.Core.Users.Models.Buffs
 {

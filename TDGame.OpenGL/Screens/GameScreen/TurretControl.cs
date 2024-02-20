@@ -1,11 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Linq;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {

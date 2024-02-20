@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
@@ -46,7 +44,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
 
             var buffs = ResourceManager.Buffs.GetResources();
             int count = 0;
-            foreach(var id in buffs)
+            foreach (var id in buffs)
             {
                 if (count >= buffs.Count || count >= _upgradeViewCount)
                     break;

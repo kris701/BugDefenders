@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Runtime;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
@@ -173,7 +172,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 400,
                 FontColor = Color.White
             });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentMapPage--;
                 if (_currentMapPage < 0)
                     _currentMapPage = 0;
@@ -193,7 +193,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 50,
                 IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
             });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentMapPage++;
                 if (_currentMapPage < 0)
                     _currentMapPage = 0;
@@ -268,7 +269,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 FontColor = Color.White
             });
 
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentGameStylePage--;
                 if (_currentGameStylePage < 0)
                     _currentGameStylePage = 0;
@@ -288,7 +290,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 50,
                 IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
             });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
                 _currentGameStylePage++;
                 if (_currentGameStylePage < 0)
                     _currentGameStylePage = 0;

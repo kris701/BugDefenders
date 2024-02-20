@@ -1,11 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Linq;
-using System.Reflection;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Settings;

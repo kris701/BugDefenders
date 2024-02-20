@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.Settings;

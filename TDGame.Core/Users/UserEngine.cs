@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using TDGame.Core.Resources;
 using TDGame.Core.Users.Models;
 using TDGame.Core.Users.Models.Buffs.BuffEffects;
@@ -24,7 +19,7 @@ namespace TDGame.Core.Users
             var retList = new List<UserDefinition<T>>();
             if (Directory.Exists(UsersPath))
             {
-                foreach(var file in new DirectoryInfo(UsersPath).GetFiles())
+                foreach (var file in new DirectoryInfo(UsersPath).GetFiles())
                 {
                     var parsed = JsonSerializer.Deserialize<UserDefinition<T>>(File.ReadAllText(file.FullName));
                     if (parsed != null && parsed.ID != Guid.Empty)
@@ -57,7 +52,8 @@ namespace TDGame.Core.Users
                     var target = ResourceManager.Enemies.GetResource(enemyBuff.EnemyID);
                     if (target.ModuleInfo.GetType() == enemyBuff.Module.GetType())
                         target.ModuleInfo = enemyBuff.Module;
-                } else if (buff is TurretBuffEffect turretBuff)
+                }
+                else if (buff is TurretBuffEffect turretBuff)
                 {
                     var target = ResourceManager.Turrets.GetResource(turretBuff.TurretID);
                     if (target.ModuleInfo.GetType() == turretBuff.Module.GetType())
