@@ -35,7 +35,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private GameEngine _game;
         private Guid? _buyingTurret;
         private TurretInstance? _selectedTurret;
-        private List<EffectEntity> _effects = new List<EffectEntity>();
+        private HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
         private Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
 
         private KeyWatcher _waveKeyWatcher;
@@ -73,7 +73,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     tabIndex = 0;
                 _unselectTurret = true;
                 _selectTurret = true;
-                _selectedTurret = _game.Turrets[tabIndex];
+                _selectedTurret = _game.Turrets.ToList()[tabIndex];
             });
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, UnselectTurret);
             Initialize();
@@ -240,7 +240,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _enemyUpdater.UpdateEntities(_game.CurrentEnemies, gameTime, CreateNewEnemyControl, UpdateEnemyControl);
             _projectileUpdater.UpdateEntities(_game.ProjectileTurretsModule.Projectiles, gameTime, CreateNewProjectileControl);
             _effectsUpdater.UpdateEntities(_effects, gameTime, CreateNewEffect);
-            _laserUpdater.UpdateEntities(_lasers.Values.ToList(), gameTime, CreateNewLaser, UpdateLaserControl);
+            _laserUpdater.UpdateEntities(_lasers.Values.ToHashSet(), gameTime, CreateNewLaser, UpdateLaserControl);
             UpdateEffectLifetimes(gameTime);
 
             UpdateLasers();

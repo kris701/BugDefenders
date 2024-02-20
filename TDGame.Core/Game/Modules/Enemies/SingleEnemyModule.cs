@@ -35,7 +35,7 @@ namespace TDGame.Core.Game.Modules.Enemies
             return enemies;
         }
 
-        public override List<EnemyInstance> UpdateSpawnQueue(List<EnemyInstance> queue)
+        public override List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, List<EnemyInstance> queue)
         {
             if (queue.Count > 0)
             {

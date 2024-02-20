@@ -28,7 +28,6 @@ namespace TDGame.Core.Game.Modules.Enemies
                 throw new Exception("Module attempted to queue enemies that does not match its module type!");
 
             var enemies = new List<EnemyInstance>();
-            var group = Guid.NewGuid();
             var template = ResourceManager.Enemies.GetResource(id);
             if (template.ModuleInfo is WaveEnemyDefinition def)
             {
@@ -39,33 +38,34 @@ namespace TDGame.Core.Game.Modules.Enemies
                     {
                         enemy.X = Game.Map.WayPoints[0].X - enemy.Size / 2;
                         enemy.Y = Game.Map.WayPoints[0].Y - enemy.Size / 2;
-                        def2.GroupID = group;
+                        def2.Group = new List<EnemyInstance>();
                         enemies.Add(enemy);
                     }
                 }
             }
+            foreach (var enemy in enemies)
+                if (enemy.ModuleInfo is WaveEnemyDefinition def2)
+                    def2.Group = enemies;
             return enemies;
         }
 
-        public override List<EnemyInstance> UpdateSpawnQueue(List<EnemyInstance> queue)
+        public override List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, List<EnemyInstance> queue)
         {
             if (queue.Count > 0)
             {
-                var vistedGroups = new List<Guid>();
                 var enemiesToAdd = new List<EnemyInstance>();
+                var vistedQueueItems = new HashSet<Guid>();
                 foreach (var enemy in queue)
                 {
                     if (EnemyOptions.Contains(enemy.DefinitionID) && enemy.ModuleInfo is WaveEnemyDefinition def)
                     {
-                        if (vistedGroups.Contains(def.GroupID))
+                        if (vistedQueueItems.Contains(enemy.ID))
                             continue;
-                        vistedGroups.Add(def.GroupID);
-                        var minDist = double.MaxValue;
-                        foreach (var current in Game.CurrentEnemies)
-                            if (EnemyOptions.Contains(current.DefinitionID) && current.ModuleInfo is WaveEnemyDefinition def2)
-                                if (def2.GroupID == def.GroupID)
-                                    minDist = Math.Min(MathHelpers.Distance(enemy, current), minDist);
-                        if (minDist > enemy.Size)
+                        foreach(var item in def.Group)
+                            vistedQueueItems.Add(item.ID);
+
+                        def.SpawnDelay -= (float)passed.TotalMilliseconds;
+                        if (def.SpawnDelay <= 0)
                             enemiesToAdd.Add(enemy);
                     }
                 }

@@ -34,7 +34,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             YOffset = yOffset;
         }
 
-        public void UpdateEntities(List<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime> updateOverride = null)
+        public void UpdateEntities(HashSet<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime> updateOverride = null)
         {
             foreach (var entity in entities)
             {

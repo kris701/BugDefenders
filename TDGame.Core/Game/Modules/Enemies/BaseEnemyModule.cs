@@ -8,12 +8,12 @@ namespace TDGame.Core.Game.Modules.Enemies
     public abstract class BaseEnemyModule<T> : IGameEnemyModule where T : IEnemyModule
     {
         public GameEngine Game { get; }
-        public List<Guid> EnemyOptions { get; }
+        public HashSet<Guid> EnemyOptions { get; }
         public BaseEnemyModule(GameEngine game)
         {
             Game = game;
             var options = ResourceManager.Enemies.GetResources();
-            EnemyOptions = new List<Guid>();
+            EnemyOptions = new HashSet<Guid>();
             foreach (var option in options)
                 if (!Game.GameStyle.EnemyBlackList.Contains(option))
                     if (ResourceManager.Enemies.GetResource(option).ModuleInfo is T)
@@ -22,7 +22,7 @@ namespace TDGame.Core.Game.Modules.Enemies
 
         public abstract void Update(TimeSpan passed);
         public abstract List<EnemyInstance> QueueEnemies(Guid id);
-        public abstract List<EnemyInstance> UpdateSpawnQueue(List<EnemyInstance> queue);
+        public abstract List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, List<EnemyInstance> queue);
 
         internal bool UpdateEnemy(TimeSpan passed, EnemyInstance enemy, ISlowable def)
         {

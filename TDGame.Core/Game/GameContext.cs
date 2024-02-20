@@ -29,11 +29,11 @@ namespace TDGame.Core.Game
             }
         }
         public StatsDefinition Outcome { get; set; } = new StatsDefinition();
-        public List<EnemyInstance> CurrentEnemies { get; set; }
+        public HashSet<EnemyInstance> CurrentEnemies { get; set; }
         public int HP { get; set; }
         public int Money { get; set; }
         public int Score { get; set; }
-        public List<TurretInstance> Turrets { get; set; }
+        public HashSet<TurretInstance> Turrets { get; set; }
 
         public bool GameOver { get; set; }
         public TimeSpan GameTime { get; set; }

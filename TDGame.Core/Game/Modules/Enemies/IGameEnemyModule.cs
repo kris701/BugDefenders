@@ -4,8 +4,8 @@ namespace TDGame.Core.Game.Modules.Enemies
 {
     public interface IGameEnemyModule : IGameModule
     {
-        public List<Guid> EnemyOptions { get; }
+        public HashSet<Guid> EnemyOptions { get; }
         public List<EnemyInstance> QueueEnemies(Guid id);
-        public List<EnemyInstance> UpdateSpawnQueue(List<EnemyInstance> queue);
+        public List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, List<EnemyInstance> queue);
     }
 }

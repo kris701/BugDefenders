@@ -8,7 +8,8 @@
   "ModuleInfo": {
     "EnemyModule": "Wave",
     "Speed": 5,
-    "WaveSize": 5
+    "WaveSize": 5,
+    "SpawnDelay": 200
   },
   "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
   "TerrainType": 2

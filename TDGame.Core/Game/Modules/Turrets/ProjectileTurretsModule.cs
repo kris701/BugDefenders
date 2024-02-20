@@ -10,11 +10,11 @@ namespace TDGame.Core.Game.Modules.Turrets
 {
     public class ProjectileTurretsModule : BaseTurretModule
     {
-        public List<ProjectileInstance> Projectiles { get; set; }
+        public HashSet<ProjectileInstance> Projectiles { get; set; }
 
         public ProjectileTurretsModule(GameEngine game) : base(game)
         {
-            Projectiles = new List<ProjectileInstance>();
+            Projectiles = new HashSet<ProjectileInstance>();
         }
 
         public override void Update(TimeSpan passed)
@@ -157,10 +157,10 @@ namespace TDGame.Core.Game.Modules.Turrets
                 var projDef = projectile.GetDefinition();
                 for (int i = 0; i < Game.CurrentEnemies.Count; i++)
                 {
-                    var dist = MathHelpers.Distance(projectile, Game.CurrentEnemies[i]);
+                    var dist = MathHelpers.Distance(projectile, Game.CurrentEnemies.ElementAt(i));
                     if (dist < projDef.SplashRange)
                     {
-                        if (Game.DamageEnemy(Game.CurrentEnemies[i], GetModifiedDamage(Game.CurrentEnemies[i].GetDefinition(), projDef.Damage, projDef.DamageModifiers)))
+                        if (Game.DamageEnemy(Game.CurrentEnemies.ElementAt(i), GetModifiedDamage(Game.CurrentEnemies.ElementAt(i).GetDefinition(), projDef.Damage, projDef.DamageModifiers)))
                         {
                             if (projectile.Source != null)
                                 projectile.Source.Kills++;

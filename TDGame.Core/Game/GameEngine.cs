@@ -45,8 +45,8 @@ namespace TDGame.Core.Game
 
         public GameEngine(Guid mapID, Guid styleID)
         {
-            CurrentEnemies = new List<EnemyInstance>();
-            Turrets = new List<TurretInstance>();
+            CurrentEnemies = new HashSet<EnemyInstance>();
+            Turrets = new HashSet<TurretInstance>();
             EnemiesToSpawn = new List<List<Guid>>();
 
             Map = ResourceManager.Maps.GetResource(mapID);
@@ -99,7 +99,7 @@ namespace TDGame.Core.Game
 
         private void MainLoop()
         {
-            UpdateSpawnQueue();
+            UpdateSpawnQueue(_mainLoopTimer.Target);
             AOETurretsModule.Update(_mainLoopTimer.Target);
             LaserTurretsModule.Update(_mainLoopTimer.Target);
             ProjectileTurretsModule.Update(_mainLoopTimer.Target);
@@ -208,9 +208,9 @@ namespace TDGame.Core.Game
                 for (int j = 0; j < waveSize; j++)
                 {
                     if (Spawned++ % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
-                        wave.Add(SingleEnemiesModule.EnemyOptions[_rnd.Next(0, SingleEnemiesModule.EnemyOptions.Count)]);
+                        wave.Add(SingleEnemiesModule.EnemyOptions.ElementAt(_rnd.Next(0, SingleEnemiesModule.EnemyOptions.Count)));
                     else if (WaveEnemiesModule.EnemyOptions.Count > 0)
-                        wave.Add(WaveEnemiesModule.EnemyOptions[_rnd.Next(0, WaveEnemiesModule.EnemyOptions.Count)]);
+                        wave.Add(WaveEnemiesModule.EnemyOptions.ElementAt(_rnd.Next(0, WaveEnemiesModule.EnemyOptions.Count)));
                 }
                 EnemiesToSpawn.Add(wave);
             }
@@ -220,6 +220,7 @@ namespace TDGame.Core.Game
         {
             Money += GameStyle.MoneyPrWave;
 
+            //for(int i = 0; i < 100; i++)
             foreach (var item in EnemiesToSpawn[0])
             {
                 if (WaveEnemiesModule.EnemyOptions.Contains(item))
@@ -231,10 +232,10 @@ namespace TDGame.Core.Game
             UpdateEnemiesToSpawnList();
         }
 
-        private void UpdateSpawnQueue()
+        private void UpdateSpawnQueue(TimeSpan passed)
         {
-            var newToAdd = WaveEnemiesModule.UpdateSpawnQueue(_spawnQueue);
-            newToAdd.AddRange(SingleEnemiesModule.UpdateSpawnQueue(_spawnQueue));
+            var newToAdd = WaveEnemiesModule.UpdateSpawnQueue(passed, _spawnQueue);
+            newToAdd.AddRange(SingleEnemiesModule.UpdateSpawnQueue(passed, _spawnQueue));
             foreach (var enemy in newToAdd)
             {
                 CurrentEnemies.Add(enemy);

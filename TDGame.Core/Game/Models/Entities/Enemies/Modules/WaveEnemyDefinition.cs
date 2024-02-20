@@ -7,19 +7,21 @@ namespace TDGame.Core.Game.Models.Entities.Enemies.Modules
     {
         public float Speed { get; set; }
         public int WaveSize { get; set; }
+        public float SpawnDelay { get; set; }
         [JsonIgnore]
         public float SlowingFactor { get; set; } = 1;
         [JsonIgnore]
         public int SlowingDuration { get; set; } = 0;
         [JsonIgnore]
-        public Guid GroupID { get; set; }
+        public List<EnemyInstance> Group { get; set; }
 
         public IEnemyModule Copy()
         {
             return new WaveEnemyDefinition()
             {
                 Speed = Speed,
-                WaveSize = WaveSize
+                WaveSize = WaveSize,
+                SpawnDelay = SpawnDelay,
             };
         }
 
