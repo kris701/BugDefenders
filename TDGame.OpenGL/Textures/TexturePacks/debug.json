@@ -142,6 +142,11 @@
       {
         "ID": "02f8c9e2-e4c0-4310-934a-62c84cbb7384",
         "Content": "GameSetup/descriptionBox"
+      },
+
+      {
+        "ID": "cf85361b-abcc-42c6-8a8e-60df3c44fbe5",
+        "Content": "AchivementsView/background"
       }
     ],
     "TextureSets": [

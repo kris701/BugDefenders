@@ -70,10 +70,21 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView.AchivementsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 500,
+                Width = 300,
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "Achivements",
+                FontColor = Color.White,
+                FillClickedColor = BasicTextures.GetClickedTexture()
+            });
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = 550,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
