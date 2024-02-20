@@ -376,7 +376,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void UpdateTurretPurchaseButtons()
         {
-            foreach (var turret in _turretButtons)
+            foreach (var turret in _turretPages[_currentTurretPage])
             {
                 if (turret.Tag is Guid turretName)
                 {

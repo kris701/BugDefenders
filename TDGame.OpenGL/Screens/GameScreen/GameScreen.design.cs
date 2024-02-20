@@ -25,8 +25,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private TileControl _turretSelectRangeTile;
 
-        private List<ButtonControl> _turretButtons = new List<ButtonControl>();
-
         private List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
 
         private List<ButtonControl> _turretTargetingModes = new List<ButtonControl>();
@@ -288,6 +286,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 {
                     FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    FillDisabledColor = TextureManager.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                     Font = BasicFonts.GetFont(10),
                     Text = $"[{turret.Cost}$] {turret.Name}",
                     FontColor = Color.White,
