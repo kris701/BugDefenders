@@ -86,19 +86,14 @@ namespace TDGame.Core.Game.Modules.Turrets
             foreach (var projectile in Projectiles)
             {
                 var projectileDef = projectile.GetDefinition();
+                if (projectileDef.IsGuided && projectile.Target == null)
+                    projectile.Target = Game.GetBestEnemy(projectile);
                 if (projectileDef.IsGuided && projectile.Target != null)
                 {
                     if (!Game.CurrentEnemies.Contains(projectile.Target))
-                    {
-                        var best = Game.GetBestEnemy(projectile);
-                        if (best == null)
-                        {
-                            toRemove.Add(projectile);
-                            continue;
-                        }
-                        projectile.Target = best;
-                    }
-                    projectile.Angle = Game.GetAngle(projectile.Target, projectile);
+                        projectile.Target = null;
+                    else
+                        projectile.Angle = Game.GetAngle(projectile.Target, projectile);
                 }
 
                 var xMod = Math.Cos(projectile.Angle);

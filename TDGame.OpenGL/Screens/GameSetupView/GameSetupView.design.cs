@@ -234,7 +234,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                     Text = $"{ResourceManager.Maps.GetResource(mapID).Name}",
                     FontColor = Color.White,
                     X = 70,
-                    Y = 620 + offset++ * 50,
+                    Y = 610 + offset++ * 50,
                     Height = 50,
                     Width = 400,
                     Tag = mapID,

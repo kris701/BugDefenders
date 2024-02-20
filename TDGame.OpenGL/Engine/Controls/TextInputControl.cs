@@ -59,7 +59,7 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEnabled)
+            if (IsEnabled && Parent.IsActive)
             {
                 if (_captured)
                 {

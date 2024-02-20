@@ -51,7 +51,7 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEnabled && IsVisible)
+            if (IsEnabled && IsVisible && Parent.IsActive)
             {
                 var mouseState = Mouse.GetState();
                 if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&

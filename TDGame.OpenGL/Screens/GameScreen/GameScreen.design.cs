@@ -273,7 +273,21 @@ namespace TDGame.OpenGL.Screens.GameScreen
             int page = 0;
             int offset = 0;
             _turretPages.Add(new List<ButtonControl>());
-            foreach (var turretID in ResourceManager.Turrets.GetResources())
+            var options = ResourceManager.Turrets.GetResources();
+            var orderedList = new SortedList<int, List<Guid>>();
+            foreach (var option in options)
+            {
+                var target = ResourceManager.Turrets.GetResource(option).AvailableAtWave;
+                if (orderedList.ContainsKey(target))
+                    orderedList[target].Add(option);
+                else
+                    orderedList.Add(target, new List<Guid>() { option });
+            }
+            var ordered = new List<Guid>();
+            foreach (var key in orderedList.Keys)
+                ordered.AddRange(orderedList[key]);
+
+            foreach (var turretID in ordered)
             {
                 if (count++ % (_turretSelectionsPrPage + 1) == 0)
                 {
