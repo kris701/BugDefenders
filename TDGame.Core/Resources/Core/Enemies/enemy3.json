@@ -12,5 +12,6 @@
     "SpawnDelay": 300
   },
   "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
-  "TerrainType": 1
+  "TerrainType": 1,
+  "AvailableAtWave": 10
 }

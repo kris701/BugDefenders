@@ -1,12 +1,12 @@
 # TDGame
 
 ## TODO List
-- [ ] Progressive turret unlocks
 - [ ] Encrypt user data
     - Just so that you cant just as easily give yourself buffs and stuff
     - Maybe only do this in release mode, since it will be a hassle while debugging
 - [ ] Improve the game integrity checker
     - Right now, it only rly checks IDs of turrets and enemy types
+- [X] Progressive turret and enemy unlocks
 - [X] Achivement list
 - [X] Fix turrets not being disabled with insufficient funds
 - [X] Multiple "pages" of turret upgrades

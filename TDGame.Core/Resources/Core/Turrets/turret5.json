@@ -19,6 +19,7 @@
     ]
   },
   "CanDamage": [ 1 ],
+  "AvailableAtWave": 20,
   "Upgrades": [
     {
       "UpgradeType": "AOETurret",

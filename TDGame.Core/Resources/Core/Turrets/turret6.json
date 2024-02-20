@@ -9,6 +9,7 @@
     "MoneyPrWave": 250
   },
   "CanDamage": [],
+  "AvailableAtWave": 30,
   "Upgrades": [
     {
       "UpgradeType": "InvestmentTurret",

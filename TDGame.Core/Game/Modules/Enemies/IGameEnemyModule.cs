@@ -7,5 +7,6 @@ namespace TDGame.Core.Game.Modules.Enemies
         public HashSet<Guid> EnemyOptions { get; }
         public List<EnemyInstance> QueueEnemies(Guid id);
         public List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, List<EnemyInstance> queue);
+        public Guid? GetRandomEnemy(int wave);
     }
 }

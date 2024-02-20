@@ -9,15 +9,28 @@ namespace TDGame.Core.Game.Modules.Enemies
     {
         public GameEngine Game { get; }
         public HashSet<Guid> EnemyOptions { get; }
+        private Dictionary<int, List<Guid>> _enemyLevels = new Dictionary<int, List<Guid>>();
+        private Random _rnd = new Random();
         public BaseEnemyModule(GameEngine game)
         {
             Game = game;
             var options = ResourceManager.Enemies.GetResources();
             EnemyOptions = new HashSet<Guid>();
             foreach (var option in options)
+            {
                 if (!Game.GameStyle.EnemyBlackList.Contains(option))
-                    if (ResourceManager.Enemies.GetResource(option).ModuleInfo is T)
+                {
+                    var enemy = ResourceManager.Enemies.GetResource(option);
+                    if (enemy.ModuleInfo is T)
+                    {
                         EnemyOptions.Add(option);
+                        if (_enemyLevels.ContainsKey(enemy.AvailableAtWave))
+                            _enemyLevels[enemy.AvailableAtWave].Add(option);
+                        else
+                            _enemyLevels.Add(enemy.AvailableAtWave, new List<Guid>() { option });
+                    }
+                }
+            }
         }
 
         public abstract void Update(TimeSpan passed);
@@ -44,6 +57,18 @@ namespace TDGame.Core.Game.Modules.Enemies
             enemy.X += change.X;
             enemy.Y += change.Y;
             return false;
+        }
+
+        public Guid? GetRandomEnemy(int wave)
+        {
+            var options = _enemyLevels.Keys.Where(x => x <= wave).ToList();
+            if (options.Count == 0)
+                return null;
+            var targetLevel = options[_rnd.Next(0, options.Count)];
+            if (_enemyLevels[targetLevel].Count == 0)
+                return null;
+            var targetEnemy = _enemyLevels[targetLevel][_rnd.Next(0, _enemyLevels[targetLevel].Count)];
+            return targetEnemy;
         }
     }
 }

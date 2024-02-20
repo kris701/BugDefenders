@@ -35,6 +35,7 @@ namespace TDGame.Core.Game
         public int Score { get; set; }
         public HashSet<TurretInstance> Turrets { get; set; }
 
+        public int Wave { get; internal set; }
         public bool GameOver { get; set; }
         public TimeSpan GameTime { get; set; }
 

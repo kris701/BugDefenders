@@ -231,7 +231,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             _moneyLabel.Text = $"Money: {_game.Money}$";
             _hpLabel.Text = $"HP: {_game.HP}";
-            _scoreLabel.Text = $"Score: {_game.Score}";
+            _scoreLabel.Text = $"Wave {_game.Wave},Score {_game.Score}";
 
             UpdateTurretPurchaseButtons();
             UpdateNextEnemies();
@@ -378,9 +378,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             foreach (var turret in _turretPages[_currentTurretPage])
             {
-                if (turret.Tag is Guid turretName)
+                if (turret.Tag is TurretDefinition def)
                 {
-                    if (_game.Money < ResourceManager.Turrets.GetResource(turretName).Cost)
+                    if (_game.Money < def.Cost || _game.Wave < def.AvailableAtWave)
                         turret.IsEnabled = false;
                     else
                         turret.IsEnabled = true;
@@ -488,21 +488,20 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void BuyTurret_Click(ButtonControl parent)
         {
-            if (parent.Tag is Guid turretID)
+            if (parent.Tag is TurretDefinition def)
             {
-                _buyingTurret = turretID;
-                var turret = ResourceManager.Turrets.GetResource(turretID);
-                var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(turretID).OnIdle;
+                _buyingTurret = def.ID;
+                var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(def.ID).OnIdle;
                 var textureSet = TextureManager.GetTextureSet(animation);
                 _buyingPreviewTile.TileSet = textureSet.LoadedContents;
                 _buyingPreviewTile.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
-                _buyingPreviewTile.Width = turret.Size;
-                _buyingPreviewTile.Height = turret.Size;
+                _buyingPreviewTile.Width = def.Size;
+                _buyingPreviewTile.Height = def.Size;
                 _buyingPreviewTile.Initialize();
-                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(turret) * 2));
+                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(def) * 2));
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
-                _turretStatesTextbox.Text = new TurretInstance(turret).GetDescriptionString();
+                _turretStatesTextbox.Text = new TurretInstance(def).GetDescriptionString();
             }
         }
 

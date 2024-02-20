@@ -12,6 +12,7 @@
     "IsTrailing": true
   },
   "CanDamage": [ 1 ],
+  "AvailableAtWave": 0,
   "Upgrades": [
     {
       "UpgradeType": "ProjectileTurret",

@@ -15,5 +15,6 @@ namespace TDGame.Core.Game.Models.Entities.Enemies
         public IEnemyModule ModuleInfo { get; set; }
         public Guid EnemyType { get; set; }
         public EnemyTerrrainTypes TerrainType { get; set; }
+        public int AvailableAtWave { get; set; }
     }
 }

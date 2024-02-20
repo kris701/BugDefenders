@@ -119,7 +119,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             });
             _scoreLabel = new LabelControl(Parent)
             {
-                Text = $"Score : 0",
+                Text = $"Wave 0, Score 0",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 5,
@@ -294,7 +294,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     Y = yOffset + 35 + (offset++ * 35),
                     Height = 30,
                     Width = width - 20,
-                    Tag = turretID,
+                    Tag = turret,
                     IsVisible = false
                 };
                 _turretPages[page].Add(newButton);

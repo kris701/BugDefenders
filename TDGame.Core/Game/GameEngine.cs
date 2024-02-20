@@ -31,9 +31,7 @@ namespace TDGame.Core.Game
         private GameTimer _enemySpawnTimer;
         private GameTimer _evolutionTimer;
         private GameTimer _mainLoopTimer;
-        private Random _rnd = new Random();
-
-        public int Spawned { get; internal set; } = 1;
+        private int _waveQueue = 0;
 
         public AOETurretsModule AOETurretsModule { get; }
         public LaserTurretsModule LaserTurretsModule { get; }
@@ -207,11 +205,17 @@ namespace TDGame.Core.Game
                 var wave = new List<Guid>();
                 for (int j = 0; j < waveSize; j++)
                 {
-                    if (Spawned++ % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
-                        wave.Add(SingleEnemiesModule.EnemyOptions.ElementAt(_rnd.Next(0, SingleEnemiesModule.EnemyOptions.Count)));
-                    else if (WaveEnemiesModule.EnemyOptions.Count > 0)
-                        wave.Add(WaveEnemiesModule.EnemyOptions.ElementAt(_rnd.Next(0, WaveEnemiesModule.EnemyOptions.Count)));
+                    Guid? newEnemy = null;
+
+                    if (_waveQueue != 0 && _waveQueue % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
+                        newEnemy = SingleEnemiesModule.GetRandomEnemy(_waveQueue);
+                    if (WaveEnemiesModule.EnemyOptions.Count > 0 && newEnemy == null)
+                        newEnemy = WaveEnemiesModule.GetRandomEnemy(_waveQueue);
+
+                    if (newEnemy != null)
+                        wave.Add((Guid)newEnemy);
                 }
+                _waveQueue++;
                 EnemiesToSpawn.Add(wave);
             }
         }
@@ -219,8 +223,7 @@ namespace TDGame.Core.Game
         public void QueueEnemies()
         {
             Money += GameStyle.MoneyPrWave;
-
-            //for(int i = 0; i < 100; i++)
+            Wave++;
             foreach (var item in EnemiesToSpawn[0])
             {
                 if (WaveEnemiesModule.EnemyOptions.Contains(item))
@@ -295,6 +298,8 @@ namespace TDGame.Core.Game
         public bool AddTurret(TurretDefinition turretDef, FloatPoint at)
         {
             if (Money < turretDef.Cost)
+                return false;
+            if (Wave < turretDef.AvailableAtWave)
                 return false;
             if (GameStyle.TurretBlackList.Contains(turretDef.ID))
                 return false;

@@ -13,8 +13,8 @@ namespace TDGame.Core.Game.Models.Entities.Turrets
         public int Cost { get; set; }
         public ITurretModule ModuleInfo { get; set; }
         public List<EnemyTerrrainTypes> CanDamage { get; set; }
-
         public List<IUpgrade> Upgrades { get; set; }
+        public int AvailableAtWave { get; set; }
 
         public string GetDescriptionString()
         {

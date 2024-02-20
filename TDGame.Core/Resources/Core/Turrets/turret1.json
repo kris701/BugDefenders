@@ -19,6 +19,7 @@
     ]
   },
   "CanDamage": [ 1, 2 ],
+  "AvailableAtWave": 0,
   "Upgrades": [
     {
       "UpgradeType": "LaserTurret",

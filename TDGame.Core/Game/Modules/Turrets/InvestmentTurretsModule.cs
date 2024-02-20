@@ -16,11 +16,11 @@ namespace TDGame.Core.Game.Modules.Turrets
             {
                 if (turret.TurretInfo is InvestmentTurretDefinition def)
                 {
-                    if (Game.Spawned != _currentWave)
+                    if (Game.Wave != _currentWave)
                         Game.Money += def.MoneyPrWave;
                 }
             }
-            _currentWave = Game.Spawned;
+            _currentWave = Game.Wave;
         }
     }
 }

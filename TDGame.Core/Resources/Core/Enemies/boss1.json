@@ -10,5 +10,6 @@
     "Speed": 2
   },
   "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
-  "TerrainType": 1
+  "TerrainType": 1,
+  "AvailableAtWave": 0
 }
