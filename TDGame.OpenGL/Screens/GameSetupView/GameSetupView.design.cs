@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 using System.Runtime;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
@@ -15,6 +16,12 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private LabelControl _mapNameLabel;
         private TextboxControl _mapDescriptionTextbox;
         private ButtonControl _startButton;
+
+        private int _selectionsPrPage = 5;
+        private List<List<ButtonControl>> _mapPages = new List<List<ButtonControl>>();
+        private int _currentMapPage = 0;
+        private List<List<ButtonControl>> _gameStylePages = new List<List<ButtonControl>>();
+        private int _currentGameStylePage = 0;
 
         public override void Initialize()
         {
@@ -100,11 +107,19 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void SetupPreviewPanel()
         {
+            AddControl(1, new TileControl(Parent)
+            {
+                X = 50,
+                Y = 210,
+                Height = 350,
+                Width = 900,
+                FillColor = TextureManager.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
+            });
             _mapPreviewTile = new TileControl(Parent)
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
-                X = 60,
-                Y = 230,
+                X = 75,
+                Y = 235,
                 Width = 300,
                 Height = 300,
             };
@@ -124,7 +139,6 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Height = 50,
                 Width = 400,
                 FontColor = Color.White,
-                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
             };
             AddControl(1, _mapNameLabel);
             _mapDescriptionTextbox = new TextboxControl(Parent)
@@ -141,72 +155,191 @@ namespace TDGame.OpenGL.Screens.GameSetupView
 
         private void SetupMapsView()
         {
+            AddControl(1, new TileControl(Parent)
+            {
+                X = 50,
+                Y = 550,
+                Height = 350,
+                Width = 440,
+                FillColor = TextureManager.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
+            });
             AddControl(1, new LabelControl(Parent)
             {
                 Font = BasicFonts.GetFont(24),
                 Text = "Maps",
-                X = 70,
-                Y = 550,
+                X = 80,
+                Y = 560,
                 Height = 50,
                 Width = 400,
-                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FontColor = Color.White
             });
-
-            var maps = ResourceManager.Maps.GetResources();
-            int offset = 0;
-            foreach (var mapName in maps)
+            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+                _currentMapPage--;
+                if (_currentMapPage < 0)
+                    _currentMapPage = 0;
+                if (_currentMapPage >= _mapPages.Count)
+                    _currentMapPage = _mapPages.Count - 1;
+                UpdateMapSelectionPages();
+            })
             {
-                AddControl(1, new ButtonControl(Parent, clicked: SelectMap_Click)
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(16),
+                Text = $"<",
+                X = 70,
+                Y = 560,
+                Height = 50,
+                Width = 50,
+                IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
+            });
+            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+                _currentMapPage++;
+                if (_currentMapPage < 0)
+                    _currentMapPage = 0;
+                if (_currentMapPage >= _mapPages.Count)
+                    _currentMapPage = _mapPages.Count - 1;
+                UpdateMapSelectionPages();
+            })
+            {
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(16),
+                Text = $">",
+                X = 420,
+                Y = 560,
+                Height = 50,
+                Width = 50,
+                IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
+            });
+
+            int count = 1;
+            int page = 0;
+            int offset = 0;
+            _mapPages.Add(new List<ButtonControl>());
+            foreach (var mapID in ResourceManager.Maps.GetResources())
+            {
+                if (count++ % (_selectionsPrPage + 1) == 0)
+                {
+                    page++;
+                    _mapPages.Add(new List<ButtonControl>());
+                    offset = 0;
+                }
+                var newButton = new ButtonControl(Parent, clicked: SelectMap_Click)
                 {
                     FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                     Font = BasicFonts.GetFont(16),
-                    Text = $"{ResourceManager.Maps.GetResource(mapName).Name}",
+                    Text = $"{ResourceManager.Maps.GetResource(mapID).Name}",
                     FontColor = Color.White,
                     X = 70,
-                    Y = 610 + offset * 50,
+                    Y = 620 + offset++ * 50,
                     Height = 50,
                     Width = 400,
-                    Tag = mapName
-                });
-                offset++;
+                    Tag = mapID,
+                    IsVisible = false
+                };
+                _mapPages[page].Add(newButton);
+                AddControl(2, newButton);
             }
+
+            UpdateMapSelectionPages();
         }
 
         private void SetupGameStyleView()
         {
+            AddControl(1, new TileControl(Parent)
+            {
+                X = 510,
+                Y = 550,
+                Height = 350,
+                Width = 440,
+                FillColor = TextureManager.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
+            });
             AddControl(1, new LabelControl(Parent)
             {
                 Font = BasicFonts.GetFont(24),
                 Text = "Game Styles",
-                X = 520,
-                Y = 550,
+                X = 540,
+                Y = 560,
                 Height = 50,
                 Width = 400,
-                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FontColor = Color.White
             });
 
-            var gameStyles = ResourceManager.GameStyles.GetResources();
-            int offset = 0;
-            foreach (var gameStyle in gameStyles)
+            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+                _currentGameStylePage--;
+                if (_currentGameStylePage < 0)
+                    _currentGameStylePage = 0;
+                if (_currentGameStylePage >= _gameStylePages.Count)
+                    _currentGameStylePage = _gameStylePages.Count - 1;
+                UpdateMapSelectionPages();
+            })
             {
-                AddControl(1, new ButtonControl(Parent, clicked: SelectGameStyle_Click)
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(16),
+                Text = $"<",
+                X = 530,
+                Y = 560,
+                Height = 50,
+                Width = 50,
+                IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
+            });
+            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+                _currentGameStylePage++;
+                if (_currentGameStylePage < 0)
+                    _currentGameStylePage = 0;
+                if (_currentGameStylePage >= _gameStylePages.Count)
+                    _currentGameStylePage = _gameStylePages.Count - 1;
+                UpdateMapSelectionPages();
+            })
+            {
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(16),
+                Text = $">",
+                X = 880,
+                Y = 560,
+                Height = 50,
+                Width = 50,
+                IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
+            });
+
+            int count = 1;
+            int page = 0;
+            int offset = 0;
+            _gameStylePages.Add(new List<ButtonControl>());
+            foreach (var gameStyleID in ResourceManager.GameStyles.GetResources())
+            {
+                if (count++ % (_selectionsPrPage + 1) == 0)
+                {
+                    page++;
+                    _gameStylePages.Add(new List<ButtonControl>());
+                    offset = 0;
+                }
+                var newButton = new ButtonControl(Parent, clicked: SelectGameStyle_Click)
                 {
                     FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    FontColor = Color.White,
                     Font = BasicFonts.GetFont(16),
-                    Text = $"{ResourceManager.GameStyles.GetResource(gameStyle).Name}",
-                    X = 520,
-                    Y = 610 + offset * 50,
+                    Text = $"{ResourceManager.GameStyles.GetResource(gameStyleID).Name}",
+                    FontColor = Color.White,
+                    X = 530,
+                    Y = 610 + offset++ * 50,
                     Height = 50,
                     Width = 400,
-                    Tag = gameStyle
-                });
-                offset++;
+                    Tag = gameStyleID,
+                    IsVisible = false
+                };
+                _gameStylePages[page].Add(newButton);
+                AddControl(2, newButton);
             }
+
+            UpdateGameStyleSelectionPages();
         }
     }
 }

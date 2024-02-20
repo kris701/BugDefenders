@@ -73,5 +73,25 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                     _startButton.IsEnabled = true;
             }
         }
+
+        private void UpdateMapSelectionPages()
+        {
+            foreach (var buttons in _mapPages)
+                foreach (var control in buttons)
+                    control.IsVisible = false;
+
+            foreach (var control in _mapPages[_currentMapPage])
+                control.IsVisible = true;
+        }
+
+        private void UpdateGameStyleSelectionPages()
+        {
+            foreach (var buttons in _gameStylePages)
+                foreach (var control in buttons)
+                    control.IsVisible = false;
+
+            foreach (var control in _gameStylePages[_currentGameStylePage])
+                control.IsVisible = true;
+        }
     }
 }

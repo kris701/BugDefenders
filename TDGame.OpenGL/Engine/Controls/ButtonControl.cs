@@ -31,6 +31,9 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (!IsVisible)
+                return;
+
             DrawTile(gameTime, spriteBatch, FillColor);
             DrawString(gameTime, spriteBatch);
             if (_holding)
@@ -41,7 +44,7 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEnabled)
+            if (IsEnabled && IsVisible)
             {
                 var mouseState = Mouse.GetState();
                 if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&

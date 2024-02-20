@@ -98,6 +98,24 @@
       {
         "ID": "61bcf9c3-a78d-4521-8534-5690bdc2d6db",
         "Content": "Common/buttonExtraWide"
+      },
+
+      {
+        "ID": "d86347e3-3834-4161-9bbe-0d761d1d27ae",
+        "Content": "Common/buttonSquare"
+      },
+      {
+        "ID": "2c220d3f-5e7a-44ec-b4da-459f104c1e4a",
+        "Content": "Common/buttonSquareClick"
+      },
+
+      {
+        "ID": "e5cb13c4-39e1-4906-b1d1-52e353fb0546",
+        "Content": "GameSetup/selectionBox"
+      },
+      {
+        "ID": "02f8c9e2-e4c0-4310-934a-62c84cbb7384",
+        "Content": "GameSetup/descriptionBox"
       }
     ],
     "TextureSets": [

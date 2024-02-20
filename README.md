@@ -3,13 +3,13 @@
 ## TODO List
 - [ ] Achivement list
 - [ ] Multiple "pages" of turrets
-- [ ] Multiple "pages" of maps
-- [ ] Multiple "pages" of gamestyles
 - [ ] Encrypt user data
     - Just so that you cant just as easily give yourself buffs and stuff
     - Maybe only do this in release mode, since it will be a hassle while debugging
 - [ ] Improve the game integrity checker
     - Right now, it only rly checks IDs of turrets and enemy types
+- [X] Multiple "pages" of maps
+- [X] Multiple "pages" of gamestyles
 - [X] Achievements 
 - [X] Carry over system
     - Something like, each game if you kill `n` amount of enemies you can permanently do 1% more damage across all following games (or something like it)
