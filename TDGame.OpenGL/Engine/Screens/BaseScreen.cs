@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Screens
@@ -16,11 +17,11 @@ namespace TDGame.OpenGL.Engine.Screens
         private int fadeValue = 255;
         private IScreen _switchTo;
         private Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
-        private Dictionary<int, List<IControl>> _viewLayers;
+        private SortedDictionary<int, List<IControl>> _viewLayers;
 
         public BaseScreen(UIEngine parent) : base(parent)
         {
-            _viewLayers = new Dictionary<int, List<IControl>>() {
+            _viewLayers = new SortedDictionary<int, List<IControl>>() {
                 { 0, new List<IControl>() }
             };
         }

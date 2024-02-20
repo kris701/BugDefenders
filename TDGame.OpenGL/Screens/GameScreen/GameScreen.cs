@@ -56,12 +56,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _game.OnTurretIdle += OnTurretIdling;
             ResourceManager.CheckGameIntegrity();
 
-            _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(4, this, _gameArea.X, _gameArea.Y);
+            _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(7, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
             _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(5, this, _gameArea.X, _gameArea.Y);
             _projectileUpdater.OnDelete += OnProjectileDeleted;
             _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this, _gameArea.X, _gameArea.Y);
-            _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(7, this, _gameArea.X, _gameArea.Y);
+            _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(4, this, _gameArea.X, _gameArea.Y);
 
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave.DoClick(); });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
