@@ -1,0 +1,55 @@
+﻿{
+  "ID": "df2fded0-2a01-4350-bd87-cda973e1886c",
+  "Name": "Slow Glow",
+  "Description": "A simple map with a few turns. Shouldnt be too hard!",
+  "Width": 650,
+  "Height": 650,
+  "WayPoints": [
+    {
+      "X": 0,
+      "Y": 135
+    },
+    {
+      "X": 190,
+      "Y": 135
+    },
+    {
+      "X": 190,
+      "Y": 465
+    },
+    {
+      "X": 565,
+      "Y": 465
+    },
+    {
+      "X": 565,
+      "Y": 0
+    }
+  ],
+  "BlockingTiles": [
+    {
+      "X": 0,
+      "Y": 110,
+      "Width": 215,
+      "Height": 50
+    },
+    {
+      "X": 168,
+      "Y": 110,
+      "Width": 50,
+      "Height": 380
+    },
+    {
+      "X": 168,
+      "Y": 442,
+      "Width": 425,
+      "Height": 50
+    },
+    {
+      "X": 545,
+      "Y": 0,
+      "Width": 50,
+      "Height": 490
+    }
+  ]
+}

@@ -43,6 +43,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private KeyWatcher _switchTurretWatcher;
         private KeyWatcher _escapeKeyWatcher;
         private bool _gameOver = false;
+        private bool _unselectTurret = false;
+        private bool _selectTurret = false;
 
         public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(parent)
         {
@@ -69,8 +71,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 tabIndex++;
                 if (tabIndex >= _game.Turrets.Count)
                     tabIndex = 0;
-                UnselectTurret();
-                SelectTurret(_game.Turrets[tabIndex]);
+                _unselectTurret = true;
+                _selectTurret = true;
+                _selectedTurret = _game.Turrets[tabIndex];
             });
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, UnselectTurret);
             Initialize();
@@ -96,7 +99,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (_selectedTurret != null)
             {
                 _game.SellTurret(_selectedTurret);
-                UnselectTurret();
+                _selectedTurret = null;
+                _unselectTurret = true;
             }
         }
 
@@ -116,7 +120,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void UnselectTurret()
         {
-            _selectedTurret = null;
             _turretSelectRangeTile.IsVisible = false;
             _turretStatesTextbox.Text = "Select a Turret";
             _sellTurretButton.IsEnabled = false;
@@ -128,7 +131,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             }
             foreach (var buttons in _turretUpgradePages)
                 foreach (var control in buttons)
-                    RemoveControl(2, control);
+                    RemoveControl(10, control);
             _upgradesLeftButton.IsVisible = false;
             _upgradesRightButton.IsVisible = false;
         }
@@ -138,31 +141,33 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (_buyingPreviewTile.IsVisible)
                 return;
             if (_turretSelectRangeTile.IsVisible)
-                UnselectTurret();
-            else if (parent.Tag is TurretInstance turretDef)
-                SelectTurret(turretDef);
+                _unselectTurret = true;
+            else if (parent.Tag is TurretInstance turret)
+            {
+                _selectedTurret = turret;
+                _selectTurret = true;
+            }
         }
 
-        private void SelectTurret(TurretInstance turret)
+        private void SelectTurret()
         {
-            _selectedTurret = turret;
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(turret) * 2));
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(_selectedTurret) * 2));
             _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
             _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
-            _turretSelectRangeTile.X = turret.CenterX + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
-            _turretSelectRangeTile.Y = turret.CenterY + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
+            _turretSelectRangeTile.X = _selectedTurret.CenterX + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
+            _turretSelectRangeTile.Y = _selectedTurret.CenterY + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
             _turretSelectRangeTile.IsVisible = true;
 
-            SetTurretUpgradeField(turret);
+            SetTurretUpgradeField(_selectedTurret);
 
-            _turretStatesTextbox.Text = turret.GetDescriptionString();
+            _turretStatesTextbox.Text = _selectedTurret.GetDescriptionString();
             _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
 
             foreach (var button in _turretTargetingModes)
             {
                 button.IsEnabled = true;
-                if (Enum.GetName(typeof(TargetingTypes), turret.TargetingType) == button.Text)
+                if (Enum.GetName(typeof(TargetingTypes), _selectedTurret.TargetingType) == button.Text)
                     button.FillColor = TextureManager.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
             }
         }
@@ -175,7 +180,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 {
                     _game.LevelUpTurret(_selectedTurret, upg.ID);
                     _turretUpdater.GetItem(_selectedTurret).UpgradeTurretLevels(_selectedTurret);
-                    UnselectTurret();
+                    _selectTurret = true;
+                    _unselectTurret = true;
                 }
             }
         }
@@ -205,6 +211,17 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             var mouseState = Mouse.GetState();
             var keyState = Keyboard.GetState();
+
+            if (_unselectTurret)
+            {
+                UnselectTurret();
+                _unselectTurret = false;
+            }
+            if (_selectTurret)
+            {
+                SelectTurret();
+                _selectTurret = false;
+            }
 
             _waveKeyWatcher.Update(keyState);
             _switchTurretWatcher.Update(keyState);
@@ -426,7 +443,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 }
             }
             if (_selectedTurret != null && mouseState.RightButton == ButtonState.Pressed)
-                UnselectTurret();
+            {
+                _selectedTurret = null;
+                _unselectTurret = true;
+            }
         }
 
         private void UpdateLasers()
@@ -563,7 +583,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     _upgradesLeftButton.IsVisible = true;
                     _upgradesRightButton.IsVisible = true;
                 }
-                var upgradePanel = new UpgradePanel(Parent, BuyTurret_Click, upgrade, _game.CanLevelUpTurret(turret, upgrade.ID))
+                var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.CanLevelUpTurret(turret, upgrade.ID))
                 {
                     FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     X = _gameArea.X + 10 + (offset++ * 210),
@@ -575,7 +595,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 };
                 _turretUpgradePages[page].Add(upgradePanel);
                 upgradePanel.Initialize();
-                AddControl(2, upgradePanel);
+                AddControl(10, upgradePanel);
             }
 
             UpdateTurretUpgradeSelectionPages();
