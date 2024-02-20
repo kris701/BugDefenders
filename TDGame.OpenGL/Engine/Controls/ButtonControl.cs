@@ -42,6 +42,13 @@ namespace TDGame.OpenGL.Engine.Controls
                 DrawTile(gameTime, spriteBatch, FillDisabledColor);
         }
 
+        public void DoClick()
+        {
+            _holding = true;
+            if (Clicked != null)
+                Clicked.Invoke(this);
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (IsEnabled && IsVisible)

@@ -61,14 +61,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this, _gameArea.X, _gameArea.Y);
             _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(7, this, _gameArea.X, _gameArea.Y);
 
-            _waveKeyWatcher = new KeyWatcher(Keys.Space, () =>
-            {
-                _game.QueueEnemies();
-                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.DarkGray);
-            }, () =>
-            {
-                _sendWave.FillColor = BasicTextures.GetBasicRectange(Color.Gray);
-            });
+            _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave.DoClick(); });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
             {
                 if (_game.Turrets.Count == 0)
@@ -536,6 +529,16 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 case ProjectileTurretDefinition def: return def.Range;
             }
             return 1;
+        }
+
+        private void UpdateTurretSelectionPages()
+        {
+            foreach (var buttons in _turretPages)
+                foreach (var control in buttons)
+                    control.IsVisible = false;
+
+            foreach (var control in _turretPages[_currentTurretPage])
+                control.IsVisible = true;
         }
     }
 }

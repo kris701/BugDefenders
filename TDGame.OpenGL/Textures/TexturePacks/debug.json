@@ -29,10 +29,32 @@
         "ID": "1db411e4-8599-464b-923c-0e23bc031435",
         "Content": "Entities/Projectiles/bullet"
       },
+
       {
         "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
         "Content": "Game/background"
       },
+      {
+        "ID": "c20d95f4-517c-4fbd-aa25-115ea05539de",
+        "Content": "Game/controlsField"
+      },
+      {
+        "ID": "2712c649-3e74-44ca-b8a9-c3032aba217e",
+        "Content": "Game/nextEnemyField"
+      },
+      {
+        "ID": "98e37f25-6313-4e41-8805-2eabcde084ff",
+        "Content": "Game/purchasingField"
+      },
+      {
+        "ID": "90447608-bd7a-478c-9bfd-fddb26c731b7",
+        "Content": "Game/turretStatsField"
+      },
+      {
+        "ID": "f367b2e1-0b9f-40da-95af-dac50b16a0ad",
+        "Content": "Game/upgradeField"
+      },
+
       {
         "ID": "1d50ad58-0503-4fc6-95e4-1d18abb8c485",
         "Content": "GameOver/background"

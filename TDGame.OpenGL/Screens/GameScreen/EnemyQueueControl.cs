@@ -33,10 +33,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var sb = new StringBuilder();
             if (wave.Count > 1)
             {
-                sb.AppendLine($"{def.Name} + {wave.Count - 1} more");
-                sb.Append($"Types: {ResourceManager.EnemyTypes.GetResource(def.EnemyType).Name}");
-                foreach (var enemy in wave.Skip(1))
-                    sb.Append($", {ResourceManager.EnemyTypes.GetResource(ResourceManager.Enemies.GetResource(enemy).EnemyType).Name}");
+                sb.AppendLine($"{def.Name}+{wave.Count - 1} more");
                 sb.AppendLine();
                 var hp = instance.Health;
                 foreach (var enemy in wave.Skip(1))
@@ -44,7 +41,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 sb.AppendLine($"Total HP: {Math.Round(hp, 0)}");
             }
             else
-            {
+            {   
                 sb.AppendLine(def.Name);
                 sb.AppendLine(def.Description);
                 sb.AppendLine($"Type: {ResourceManager.EnemyTypes.GetResource(def.EnemyType).Name}");

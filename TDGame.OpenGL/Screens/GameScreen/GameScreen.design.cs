@@ -35,6 +35,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
+        private int _selectionsPrPage = 13;
+        private List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
+        private int _currentTurretPage = 0;
+
         public override void Initialize()
         {
             AddControl(0, new TileControl(Parent)
@@ -45,8 +49,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             });
 
             SetupGameField();
-            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 205);
-            SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 215, 320, 435);
+            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y - 5, 320, 160);
+            SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 490);
             SetupUpgradeField(_gameArea.X, _gameArea.Y + _gameArea.Height + 10, _gameArea.Width, 200);
             SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 20 + 200, _gameArea.Width, 110);
             SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 320);
@@ -71,6 +75,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             AddControl(0, new BorderControl(Parent)
             {
+                Thickness = 2,
+                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue),
                 Child = new TileControl(Parent)
                 {
                     FillColor = TextureManager.GetTexture(_game.Map.ID),
@@ -90,186 +96,210 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupGameControlsField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(Parent)
+            AddControl(0, new TileControl(Parent)
             {
-                Child = new TileControl(Parent)
-                {
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    Alpha = 100,
-                    X = xOffset,
-                    Y = yOffset,
-                    Height = height,
-                    Width = width
-                }
+                FillColor = TextureManager.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
+                Alpha = 100,
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
             });
             AddControl(1, new LabelControl(Parent)
             {
                 Text = "TDGame",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(16),
                 X = xOffset,
-                Y = yOffset,
+                Y = yOffset + 5,
                 Height = 30,
                 Width = width
             });
             _scoreLabel = new LabelControl(Parent)
             {
                 Text = $"Score : 0",
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
                 X = xOffset + 5,
-                Y = yOffset + 30,
+                Y = yOffset + 25,
                 Height = 30,
                 Width = width - 10
             };
-            AddControl(1, new BorderControl(Parent)
-            {
-                Child = _scoreLabel
-            });
-            _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
-            {
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                FillDisabledColor = BasicTextures.GetDisabledTexture(),
-                Text = $"Pause",
-                Font = BasicFonts.GetFont(16),
-                X = xOffset + 5,
-                Y = yOffset + 135,
-                Height = 30,
-                Width = 100
-            };
-            AddControl(1, new BorderControl(Parent)
-            {
-                Child = _startButton
-            });
-
-            AddControl(1, new BorderControl(Parent)
-            {
-                Child = new ButtonControl(Parent, clicked: (x) => { GameOver(); })
-                {
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    FillClickedColor = BasicTextures.GetClickedTexture(),
-                    FillDisabledColor = BasicTextures.GetDisabledTexture(),
-                    Text = $"End Game",
-                    Font = BasicFonts.GetFont(16),
-                    X = xOffset + 5,
-                    Y = yOffset + 170,
-                    Height = 30,
-                    Width = 100
-                }
-            });
-
+            AddControl(1, _scoreLabel);
             _moneyLabel = new LabelControl(Parent)
             {
                 Text = $"Money: {_game.Money}$",
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                X = xOffset + 5,
+                Y = yOffset + 45,
+                Height = 30,
+                Width = 310
+            };
+            AddControl(1, _moneyLabel);
+            _hpLabel = new LabelControl(Parent)
+            {
+                Text = $"HP: {_game.HP}",
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
                 X = xOffset + 5,
                 Y = yOffset + 65,
                 Height = 30,
                 Width = 310
             };
-            AddControl(1, new BorderControl(Parent)
-            {
-                Child = _moneyLabel
-            });
+            AddControl(1, _hpLabel);
 
-            _hpLabel = new LabelControl(Parent)
+            _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
             {
-                Text = $"HP: {_game.HP}",
-                Font = BasicFonts.GetFont(16),
-                X = xOffset + 5,
-                Y = yOffset + 100,
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                Text = $"Pause",
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                X = xOffset + 10,
+                Y = yOffset + 90,
                 Height = 30,
-                Width = 310
+                Width = 100
             };
-            AddControl(1, new BorderControl(Parent)
+            AddControl(1, _startButton);
+
+            AddControl(1, new ButtonControl(Parent, clicked: (x) => { GameOver(); })
             {
-                Child = _hpLabel
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                Text = $"End Game",
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                X = xOffset + 10,
+                Y = yOffset + 120,
+                Height = 30,
+                Width = 100
             });
 
             _autoRunButton = new ButtonControl(Parent, clicked: AutoRunButton_Click)
             {
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                FillDisabledColor = BasicTextures.GetDisabledTexture(),
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 Text = $"[ ] Auto-Wave",
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
                 X = xOffset + 110,
-                Y = yOffset + 135,
+                Y = yOffset + 90,
                 Height = 30,
-                Width = 205
+                Width = 200
             };
-            AddControl(1, new BorderControl(Parent)
-            {
-                Child = _autoRunButton
-            });
+            AddControl(1, _autoRunButton);
 
             _sendWave = new ButtonControl(Parent, clicked: (s) => { _game.QueueEnemies(); })
             {
-                FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                FillDisabledColor = BasicTextures.GetDisabledTexture(),
+                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 Text = $"Send Wave",
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
                 X = xOffset + 110,
-                Y = yOffset + 170,
+                Y = yOffset + 120,
                 Height = 30,
-                Width = 205
+                Width = 200
             };
-            AddControl(1, new BorderControl(Parent)
-            {
-                Child = _sendWave
-            });
+            AddControl(1, _sendWave);
         }
 
         private void SetupPurchasingField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(Parent)
+            AddControl(0, new TileControl(Parent)
             {
-                Child = new TileControl(Parent)
-                {
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    Alpha = 100,
-                    X = xOffset,
-                    Y = yOffset,
-                    Height = height,
-                    Width = width
-                }
+                FillColor = TextureManager.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
+                Alpha = 100,
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
             });
             AddControl(1, new LabelControl(Parent)
             {
                 Text = "Turrets",
-                Font = BasicFonts.GetFont(24),
-                FillColor = BasicTextures.GetBasicRectange(Color.LightGray),
+                Font = BasicFonts.GetFont(16),
+                FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset,
+                Y = yOffset + 5,
                 Height = 30,
                 Width = width
             });
 
-            var turrets = ResourceManager.Turrets.GetResources();
-            int offset = 0;
-            foreach (var turretName in turrets)
+            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+                _currentTurretPage--;
+                if (_currentTurretPage < 0)
+                    _currentTurretPage = 0;
+                if (_currentTurretPage >= _turretPages.Count)
+                    _currentTurretPage = _turretPages.Count - 1;
+                UpdateTurretSelectionPages();
+            })
             {
-                var turret = ResourceManager.Turrets.GetResource(turretName);
-                var newTurretButton = new ButtonControl(Parent, clicked: BuyTurret_Click)
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(10),
+                Text = $"<",
+                X = xOffset + 10,
+                Y = yOffset + 10,
+                Height = 25,
+                Width = 25,
+                IsVisible = ResourceManager.Turrets.GetResources().Count > _selectionsPrPage
+            });
+            AddControl(1, new ButtonControl(Parent, clicked: (s) => {
+                _currentTurretPage++;
+                if (_currentTurretPage < 0)
+                    _currentTurretPage = 0;
+                if (_currentTurretPage >= _turretPages.Count)
+                    _currentTurretPage = _turretPages.Count - 1;
+                UpdateTurretSelectionPages();
+            })
+            {
+                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(10),
+                Text = $">",
+                X = xOffset + 285,
+                Y = yOffset + 10,
+                Height = 25,
+                Width = 25,
+                IsVisible = ResourceManager.Turrets.GetResources().Count > _selectionsPrPage
+            });
+
+            int count = 1;
+            int page = 0;
+            int offset = 0;
+            _turretPages.Add(new List<ButtonControl>());
+            foreach (var turretID in ResourceManager.Turrets.GetResources())
+            {
+                if (count++ % (_selectionsPrPage + 1) == 0)
                 {
+                    page++;
+                    _turretPages.Add(new List<ButtonControl>());
+                    offset = 0;
+                }
+                var turret = ResourceManager.Turrets.GetResource(turretID);
+                var newButton = new ButtonControl(Parent, clicked: BuyTurret_Click)
+                {
+                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    Font = BasicFonts.GetFont(10),
                     Text = $"[{turret.Cost}$] {turret.Name}",
-                    Font = BasicFonts.GetFont(12),
-                    FillColor = BasicTextures.GetBasicRectange(Color.Gray),
-                    FillClickedColor = BasicTextures.GetClickedTexture(),
-                    FillDisabledColor = BasicTextures.GetDisabledTexture(),
-                    X = xOffset + 5,
+                    FontColor = Color.White,
+                    X = xOffset + 10,
                     Y = yOffset + 35 + (offset++ * 35),
                     Height = 30,
-                    Width = width - 10,
-                    Tag = turretName
+                    Width = width - 20,
+                    Tag = turretID,
+                    IsVisible = false
                 };
-                _turretButtons.Add(newTurretButton);
-                AddControl(1, new BorderControl(Parent)
-                {
-                    Child = newTurretButton
-                });
+                _turretPages[page].Add(newButton);
+                AddControl(2, newButton);
             }
+
+            UpdateTurretSelectionPages();
 
             _buyingPreviewRangeTile = new TileControl(Parent)
             {

@@ -2,12 +2,13 @@
 
 ## TODO List
 - [ ] Achivement list
-- [ ] Multiple "pages" of turrets
 - [ ] Encrypt user data
+- [ ] Multiple "pages" of turret upgrades
     - Just so that you cant just as easily give yourself buffs and stuff
     - Maybe only do this in release mode, since it will be a hassle while debugging
 - [ ] Improve the game integrity checker
     - Right now, it only rly checks IDs of turrets and enemy types
+- [X] Multiple "pages" of turrets
 - [X] Multiple "pages" of maps
 - [X] Multiple "pages" of gamestyles
 - [X] Achievements 
