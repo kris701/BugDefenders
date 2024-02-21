@@ -23,6 +23,7 @@ namespace TDGame.Core.Game
 
         public TurretEventHandler? OnTurretPurchased;
         public TurretEventHandler? OnTurretSold;
+        public TurretEventHandler? OnBeforeTurretUpgraded;
         public TurretEventHandler? OnTurretUpgraded;
         public TurretEventHandler? OnTurretShooting;
         public TurretEventHandler? OnTurretIdle;
@@ -37,6 +38,7 @@ namespace TDGame.Core.Game
         public LaserTurretsModule LaserTurretsModule { get; }
         public ProjectileTurretsModule ProjectileTurretsModule { get; }
         public InvestmentTurretsModule InvestmentTurretsModule { get; }
+        public PassiveTurretsModule PassiveTurretsModule { get; }
 
         public ExplosiveProjectileModule ExplosiveProjectileModule { get; }
         public DirectProjectileModule DirectProjectileModule { get; }
@@ -63,6 +65,7 @@ namespace TDGame.Core.Game
             LaserTurretsModule = new LaserTurretsModule(this);
             ProjectileTurretsModule = new ProjectileTurretsModule(this);
             InvestmentTurretsModule = new InvestmentTurretsModule(this);
+            PassiveTurretsModule = new PassiveTurretsModule(this);
 
             ExplosiveProjectileModule = new ExplosiveProjectileModule(this);
             DirectProjectileModule = new DirectProjectileModule(this);
@@ -76,6 +79,7 @@ namespace TDGame.Core.Game
                 LaserTurretsModule,
                 ProjectileTurretsModule,
                 InvestmentTurretsModule,
+                PassiveTurretsModule,
 
                 ExplosiveProjectileModule,
                 DirectProjectileModule,
@@ -282,6 +286,9 @@ namespace TDGame.Core.Game
             var upgrade = turret.GetDefinition().Upgrades.First(x => x.ID == id);
             if (upgrade == null)
                 return false;
+            if (OnBeforeTurretUpgraded != null)
+                OnBeforeTurretUpgraded.Invoke(turret);
+
             upgrade.ApplyUpgrade(turret);
             Money -= upgrade.Cost;
 

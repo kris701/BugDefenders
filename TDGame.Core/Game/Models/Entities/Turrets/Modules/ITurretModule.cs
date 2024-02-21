@@ -7,6 +7,7 @@ namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
     [JsonDerivedType(typeof(LaserTurretDefinition), typeDiscriminator: "LaserTurret")]
     [JsonDerivedType(typeof(ProjectileTurretDefinition), typeDiscriminator: "ProjectileTurret")]
     [JsonDerivedType(typeof(InvestmentTurretDefinition), typeDiscriminator: "InvestmentTurret")]
+    [JsonDerivedType(typeof(PassiveTurretDefinition), typeDiscriminator: "PassiveTurret")]
     public interface ITurretModule : IModuleInfo<ITurretModule>
     {
     }

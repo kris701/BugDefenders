@@ -540,6 +540,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 case AOETurretDefinition def: return def.Range;
                 case LaserTurretDefinition def: return def.Range;
                 case ProjectileTurretDefinition def: return def.Range;
+                case PassiveTurretDefinition def: return def.Range;
             }
             return 1;
         }
@@ -551,6 +552,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 case AOETurretDefinition def: return def.Range;
                 case LaserTurretDefinition def: return def.Range;
                 case ProjectileTurretDefinition def: return def.Range;
+                case PassiveTurretDefinition def: return def.Range;
             }
             return 1;
         }

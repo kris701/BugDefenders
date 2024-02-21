@@ -238,6 +238,14 @@
           "Entities/Turrets/turret5/turret5_shoot_2"
         ]
       },
+      {
+        "ID": "265c5fb7-baea-47eb-bd97-dd6855b382ae",
+        "FrameTime": 1000,
+        "Contents": [
+          "Entities/Turrets/turret7/turret7_idle_1",
+          "Entities/Turrets/turret7/turret7_idle_2"
+        ]
+      },
 
       {
         "ID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
@@ -332,6 +340,12 @@
       "Target": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
       "OnShoot": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
       "OnIdle": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "265c5fb7-baea-47eb-bd97-dd6855b382ae",
+      "OnShoot": "265c5fb7-baea-47eb-bd97-dd6855b382ae",
+      "OnIdle": "265c5fb7-baea-47eb-bd97-dd6855b382ae"
     },
 
     {

@@ -1,0 +1,48 @@
+﻿{
+  "id": "265c5fb7-baea-47eb-bd97-dd6855b382ae",
+  "Name": "Range Turret",
+  "Description": "asfdasfasf",
+  "Size": 50,
+  "Cost": 500,
+  "ModuleInfo": {
+    "TurretModule": "PassiveTurret",
+    "Range": 100,
+    "RangeModifier": 2,
+    "DamageModifier": 1,
+    "CooldownModifier": 1,
+    "SlowingFactorModifier": 1,
+    "SlowingDurationModifier": 1
+  },
+  "CanDamage": [],
+  "AvailableAtWave": 0,
+  "Upgrades": [
+    {
+      "UpgradeType": "PassiveTurret",
+      "id": "eb52a632-0e95-4d9b-81f3-10edff81075f",
+      "requires": null,
+      "Name": "Upgrade 1",
+      "Description": "More Range!",
+      "Cost": 1000,
+      "RangeModifier": 1.2,
+      "RangeModifierModifier": 1,
+      "DamageModifierModifier": 1,
+      "CooldownModifierModifier": 1,
+      "SlowingFactorModifierModifier": 1,
+      "SlowingDurationModifierModifier": 1
+    },
+    {
+      "UpgradeType": "PassiveTurret",
+      "id": "92901667-d2d1-48cb-841c-3b737142d66c",
+      "requires": "eb52a632-0e95-4d9b-81f3-10edff81075f",
+      "Name": "Upgrade 2",
+      "Description": "Better modifier",
+      "Cost": 2000,
+      "RangeModifier": 1,
+      "RangeModifierModifier": 1.5,
+      "DamageModifierModifier": 1,
+      "CooldownModifierModifier": 1,
+      "SlowingFactorModifierModifier": 1,
+      "SlowingDurationModifierModifier": 1
+    }
+  ]
+}

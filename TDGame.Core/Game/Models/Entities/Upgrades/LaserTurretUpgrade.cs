@@ -43,6 +43,10 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
                 sb.AppendLine($"Range {RangeModifier}x");
             if (CooldownModifier != 1)
                 sb.AppendLine($"Cooldown {CooldownModifier}x");
+            if (SlowingFactorModifier != 1)
+                sb.AppendLine($"Slowing Factor: {SlowingFactorModifier}x");
+            if (SlowingDurationModifier != 1)
+                sb.AppendLine($"Slowing Duration: {SlowingDurationModifier}x");
 
             return sb.ToString();
         }

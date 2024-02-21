@@ -22,6 +22,7 @@
     <None Remove="Resources\Core\Turrets\turret4.json" />
     <None Remove="Resources\Core\Turrets\turret5.json" />
     <None Remove="Resources\Core\Turrets\turret6.json" />
+    <None Remove="Resources\Core\Turrets\turret7.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -108,6 +109,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Turrets\turret3.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\turret4.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\turret7.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\turret6.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\turret5.json" />
   </ItemGroup>

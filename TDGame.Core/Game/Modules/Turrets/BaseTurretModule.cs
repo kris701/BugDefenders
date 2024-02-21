@@ -22,7 +22,6 @@ namespace TDGame.Core.Game.Modules.Turrets
         }
 
         public abstract void UpdateTurret(TimeSpan passed, TurretInstance turret, T def);
-
         internal float GetModifiedDamage(EnemyDefinition enemyDef, float damage, List<DamageModifier> modifiers)
         {
             foreach (var modifier in modifiers)
