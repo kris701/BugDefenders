@@ -13,10 +13,10 @@ namespace TDGame.Core.Game.Modules.Turrets
 
         public PassiveTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
-            Game.OnTurretPurchased += TurretAdded;
-            Game.OnTurretSold += TurretRemoved;
-            Game.OnBeforeTurretUpgraded += TurretBeforeUpgraded;
-            Game.OnTurretUpgraded += TurretUpgraded;
+            Game.TurretsModule.OnTurretPurchased += TurretAdded;
+            Game.TurretsModule.OnTurretSold += TurretRemoved;
+            Game.TurretsModule.OnBeforeTurretUpgraded += TurretBeforeUpgraded;
+            Game.TurretsModule.OnTurretUpgraded += TurretUpgraded;
         }
 
         private void UpdateEffectedList(bool unApply = true, bool apply = true)

@@ -16,13 +16,13 @@ namespace TDGame.Core.Game.Modules.Projectiles
         public override bool UpdateProjectile(TimeSpan passed, ProjectileInstance projectile, ExplosiveProjectileDefinition def)
         {
             if (def.IsGuided && projectile.Target == null)
-                projectile.Target = Game.GetBestEnemy(projectile);
+                projectile.Target = Game.EnemiesModule.GetBestEnemy(projectile);
             if (def.IsGuided && projectile.Target != null)
             {
                 if (!Context.CurrentEnemies.Contains(projectile.Target))
                     projectile.Target = null;
                 else
-                    projectile.Angle = Game.GetAngle(projectile.Target, projectile);
+                    projectile.Angle = MathHelpers.GetAngle(projectile.Target, projectile);
             }
 
             var xMod = Math.Cos(projectile.Angle);
@@ -80,7 +80,7 @@ namespace TDGame.Core.Game.Modules.Projectiles
                     {
                         if (Context.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
                             SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                        if (Game.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers)))
+                        if (Game.EnemiesModule.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers)))
                         {
                             if (projectile.Source != null)
                                 projectile.Source.Kills++;

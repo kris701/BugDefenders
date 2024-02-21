@@ -193,7 +193,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             };
             AddControl(1, _autoRunButton);
 
-            _sendWave = new ButtonControl(Parent, clicked: (s) => { _game.QueueEnemies(); })
+            _sendWave = new ButtonControl(Parent, clicked: (s) => { _game.EnemiesModule.QueueEnemies(); })
             {
                 FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),

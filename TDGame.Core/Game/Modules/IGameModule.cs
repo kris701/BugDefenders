@@ -8,5 +8,6 @@ namespace TDGame.Core.Game.Modules
         public GameContext Context { get; }
         public GameEngine Game { get; }
         public void Update(TimeSpan passed);
+        public void Initialize();
     }
 }

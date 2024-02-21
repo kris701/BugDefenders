@@ -41,24 +41,24 @@ namespace TDGame.Core.Game.Modules.Turrets
 
             if (best != null)
             {
-                if (Game.OnTurretShooting != null && turret.Targeting == null)
-                    Game.OnTurretShooting.Invoke(turret);
+                if (Game.TurretsModule.OnTurretShooting != null && turret.Targeting == null)
+                    Game.TurretsModule.OnTurretShooting.Invoke(turret);
                 turret.Targeting = best;
 
                 foreach (var enemy in targeting)
                 {
                     if (enemy.ModuleInfo is ISlowable slow)
                         SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                    if (Game.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def)))
+                    if (Game.EnemiesModule.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def)))
                         turret.Kills++;
                 }
-                turret.Angle = Game.GetAngle(best, turret);
+                turret.Angle = MathHelpers.GetAngle(best, turret);
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
             }
             else
             {
-                if (Game.OnTurretIdle != null && turret.Targeting != null)
-                    Game.OnTurretIdle.Invoke(turret);
+                if (Game.TurretsModule.OnTurretIdle != null && turret.Targeting != null)
+                    Game.TurretsModule.OnTurretIdle.Invoke(turret);
                 turret.Targeting = null;
             }
         }

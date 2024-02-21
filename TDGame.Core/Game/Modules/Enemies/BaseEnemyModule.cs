@@ -62,7 +62,7 @@ namespace TDGame.Core.Game.Modules.Enemies
                 }
                 target = Context.Map.Paths[enemy.PathID][enemy.WayPointID];
             }
-            enemy.Angle = Game.GetAngle(target, enemy);
+            enemy.Angle = MathHelpers.GetAngle(target, enemy);
             var change = MathHelpers.GetPredictedLocation(enemy.Angle, def.GetSpeed(), Context.GameStyle.EnemySpeedMultiplier);
             enemy.X += change.X;
             enemy.Y += change.Y;

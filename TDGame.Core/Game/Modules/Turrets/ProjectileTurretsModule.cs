@@ -22,11 +22,11 @@ namespace TDGame.Core.Game.Modules.Turrets
             if (def.CoolingFor > TimeSpan.Zero)
                 return;
 
-            var best = Game.GetBestEnemy(turret, def.Range);
+            var best = Game.EnemiesModule.GetBestEnemy(turret, def.Range);
             if (best != null)
             {
-                if (Game.OnTurretShooting != null && turret.Targeting == null)
-                    Game.OnTurretShooting.Invoke(turret);
+                if (Game.TurretsModule.OnTurretShooting != null && turret.Targeting == null)
+                    Game.TurretsModule.OnTurretShooting.Invoke(turret);
                 turret.Targeting = best;
 
                 var projectile = new ProjectileInstance(def.ProjectileID, def.ProjectileInfo);
@@ -35,19 +35,19 @@ namespace TDGame.Core.Game.Modules.Turrets
                 projectile.Source = turret;
                 projectile.Target = best;
                 if (def.IsTrailing)
-                    projectile.Angle = Game.GetAngle(
+                    projectile.Angle = MathHelpers.GetAngle(
                         GetTrailingPoint(best, projectile),
                         turret);
                 else
-                    projectile.Angle = Game.GetAngle(best, turret);
+                    projectile.Angle = MathHelpers.GetAngle(best, turret);
                 turret.Angle = projectile.Angle;
                 Context.Projectiles.Add(projectile);
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
             }
             else
             {
-                if (Game.OnTurretIdle != null && turret.Targeting != null)
-                    Game.OnTurretIdle.Invoke(turret);
+                if (Game.TurretsModule.OnTurretIdle != null && turret.Targeting != null)
+                    Game.TurretsModule.OnTurretIdle.Invoke(turret);
                 turret.Targeting = null;
             }
         }

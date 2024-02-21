@@ -20,5 +20,9 @@ namespace TDGame.Core.Game.Modules
         }
 
         public abstract void Update(TimeSpan passed);
+        public virtual void Initialize()
+        {
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
+﻿using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 using TDGame.Core.Game.Models.GameStyles;
@@ -18,25 +19,25 @@ namespace TDGame.Core.Game.Modules.Turrets
             if (def.CoolingFor > TimeSpan.Zero)
                 return;
 
-            var best = Game.GetBestEnemy(turret, def.Range);
+            var best = Game.EnemiesModule.GetBestEnemy(turret, def.Range);
             if (best != null)
             {
-                if (Game.OnTurretShooting != null && turret.Targeting == null)
-                    Game.OnTurretShooting.Invoke(turret);
+                if (Game.TurretsModule.OnTurretShooting != null && turret.Targeting == null)
+                    Game.TurretsModule.OnTurretShooting.Invoke(turret);
                 turret.Targeting = best;
 
                 if (best.ModuleInfo is ISlowable slow)
                     SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                if (!Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def.Damage, def.DamageModifiers)))
-                    turret.Angle = Game.GetAngle(best, turret);
+                if (!Game.EnemiesModule.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def.Damage, def.DamageModifiers)))
+                    turret.Angle = MathHelpers.GetAngle(best, turret);
                 else
                     turret.Kills++;
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
             }
             else
             {
-                if (Game.OnTurretIdle != null && turret.Targeting != null)
-                    Game.OnTurretIdle.Invoke(turret);
+                if (Game.TurretsModule.OnTurretIdle != null && turret.Targeting != null)
+                    Game.TurretsModule.OnTurretIdle.Invoke(turret);
                 turret.Targeting = null;
             }
         }

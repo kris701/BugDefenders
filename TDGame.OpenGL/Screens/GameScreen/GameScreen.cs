@@ -54,8 +54,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _currentMap = mapID;
             ScaleValue = parent.CurrentUser.UserData.Scale;
             _game = new GameEngine(mapID, gameStyleID);
-            _game.OnTurretShooting += OnTurretFiring;
-            _game.OnTurretIdle += OnTurretIdling;
+            _game.TurretsModule.OnTurretShooting += OnTurretFiring;
+            _game.TurretsModule.OnTurretIdle += OnTurretIdling;
 
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(7, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
@@ -99,7 +99,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (_selectedTurret != null)
             {
-                _game.SellTurret(_selectedTurret);
+                _game.TurretsModule.SellTurret(_selectedTurret);
                 _selectedTurret = null;
                 _unselectTurret = true;
             }
@@ -182,9 +182,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (_selectedTurret != null && !_unselectTurret && parent.Tag is IUpgrade upg)
             {
-                if (_game.CanLevelUpTurret(_selectedTurret, upg.ID))
+                if (_game.TurretsModule.CanLevelUpTurret(_selectedTurret, upg.ID))
                 {
-                    _game.LevelUpTurret(_selectedTurret, upg.ID);
+                    _game.TurretsModule.LevelUpTurret(_selectedTurret, upg.ID);
                     _turretUpdater.GetItem(_selectedTurret).UpgradeTurretLevels(_selectedTurret);
                     _selectTurret = true;
                     _unselectTurret = true;
@@ -430,7 +430,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     var at = new FloatPoint(
                         relativeMousePosition.X - turretDef.Size / 2,
                         relativeMousePosition.Y - turretDef.Size / 2);
-                    if (_game.AddTurret(turretDef, at))
+                    if (_game.TurretsModule.AddTurret(turretDef, at))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
@@ -574,7 +574,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     _upgradesLeftButton.IsVisible = true;
                     _upgradesRightButton.IsVisible = true;
                 }
-                var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.CanLevelUpTurret(turret, upgrade.ID))
+                var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanLevelUpTurret(turret, upgrade.ID))
                 {
                     FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     X = _gameArea.X + 10 + (offset++ * 210),

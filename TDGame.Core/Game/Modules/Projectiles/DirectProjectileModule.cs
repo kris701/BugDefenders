@@ -1,4 +1,5 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
+﻿using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.GameStyles;
@@ -18,13 +19,13 @@ namespace TDGame.Core.Game.Modules.Projectiles
                 return true;
 
             if (def.IsGuided && projectile.Target == null)
-                projectile.Target = Game.GetBestEnemy(projectile);
+                projectile.Target = Game.EnemiesModule.GetBestEnemy(projectile);
             if (def.IsGuided && projectile.Target != null)
             {
                 if (!Context.CurrentEnemies.Contains(projectile.Target))
                     projectile.Target = null;
                 else
-                    projectile.Angle = Game.GetAngle(projectile.Target, projectile);
+                    projectile.Angle = MathHelpers.GetAngle(projectile.Target, projectile);
             }
 
             var xMod = Math.Cos(projectile.Angle);
@@ -61,12 +62,12 @@ namespace TDGame.Core.Game.Modules.Projectiles
         {
             if (projectile.Source == null)
                 return false;
-            var best = Game.GetBestEnemy(projectile, projectile.Size / 2, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
+            var best = Game.EnemiesModule.GetBestEnemy(projectile, projectile.Size / 2, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
             if (best != null)
             {
                 if (best.ModuleInfo is ISlowable slow)
                     SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def.Damage, def.DamageModifiers));
+                Game.EnemiesModule.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def.Damage, def.DamageModifiers));
                 return true;
             }
             else if (
