@@ -35,8 +35,9 @@ namespace TDGame.Core.Game.Modules.Enemies
                     var enemy = new EnemyInstance(template, Game.Evolution);
                     if (enemy.ModuleInfo is WaveEnemyDefinition def2)
                     {
-                        enemy.X = Game.Map.WayPoints[0].X - enemy.Size / 2;
-                        enemy.Y = Game.Map.WayPoints[0].Y - enemy.Size / 2;
+                        enemy.PathID = _rnd.Next(0, Game.Map.Paths.Count);
+                        enemy.X = Game.Map.Paths[enemy.PathID][0].X - enemy.Size / 2;
+                        enemy.Y = Game.Map.Paths[enemy.PathID][0].Y - enemy.Size / 2;
                         def2.Group = new List<EnemyInstance>();
                         enemies.Add(enemy);
                     }

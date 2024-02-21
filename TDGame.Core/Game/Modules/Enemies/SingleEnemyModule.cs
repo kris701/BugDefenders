@@ -29,8 +29,9 @@ namespace TDGame.Core.Game.Modules.Enemies
             var enemies = new List<EnemyInstance>();
             var template = ResourceManager.Enemies.GetResource(id);
             var enemy = new EnemyInstance(template, Game.Evolution);
-            enemy.X = Game.Map.WayPoints[0].X - enemy.Size / 2;
-            enemy.Y = Game.Map.WayPoints[0].Y - enemy.Size / 2;
+            enemy.PathID = _rnd.Next(0, Game.Map.Paths.Count);
+            enemy.X = Game.Map.Paths[enemy.PathID][0].X - enemy.Size / 2;
+            enemy.Y = Game.Map.Paths[enemy.PathID][0].Y - enemy.Size / 2;
             enemies.Add(enemy);
             return enemies;
         }

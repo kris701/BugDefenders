@@ -10,7 +10,7 @@ namespace TDGame.Core.Game.Modules.Enemies
         public GameEngine Game { get; }
         public HashSet<Guid> EnemyOptions { get; }
         private Dictionary<int, List<Guid>> _enemyLevels = new Dictionary<int, List<Guid>>();
-        private Random _rnd = new Random();
+        internal Random _rnd = new Random();
         public BaseEnemyModule(GameEngine game)
         {
             Game = game;
@@ -41,16 +41,16 @@ namespace TDGame.Core.Game.Modules.Enemies
         {
             if (def.SlowingDuration > 0)
                 def.SlowingDuration -= passed.Milliseconds;
-            var target = Game.Map.WayPoints[enemy.WayPointID];
+            var target = Game.Map.Paths[enemy.PathID][enemy.WayPointID];
             if (MathHelpers.Distance(enemy, target) < 5)
             {
                 enemy.WayPointID++;
-                if (enemy.WayPointID >= Game.Map.WayPoints.Count)
+                if (enemy.WayPointID >= Game.Map.Paths[enemy.PathID].Count)
                 {
                     Game.DamagePlayer();
                     return true;
                 }
-                target = Game.Map.WayPoints[enemy.WayPointID];
+                target = Game.Map.Paths[enemy.PathID][enemy.WayPointID];
             }
             enemy.Angle = Game.GetAngle(target, enemy);
             var change = MathHelpers.GetPredictedLocation(enemy.Angle, def.GetSpeed(), Game.GameStyle.EnemySpeedMultiplier);

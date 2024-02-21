@@ -4,27 +4,29 @@
   "Description": "A simple map with a few turns. Shouldnt be too hard!",
   "Width": 650,
   "Height": 650,
-  "WayPoints": [
-    {
-      "X": 0,
-      "Y": 135
-    },
-    {
-      "X": 190,
-      "Y": 135
-    },
-    {
-      "X": 190,
-      "Y": 465
-    },
-    {
-      "X": 565,
-      "Y": 465
-    },
-    {
-      "X": 565,
-      "Y": 0
-    }
+  "Paths": [
+    [
+      {
+        "X": 0,
+        "Y": 135
+      },
+      {
+        "X": 190,
+        "Y": 135
+      },
+      {
+        "X": 190,
+        "Y": 465
+      },
+      {
+        "X": 565,
+        "Y": 465
+      },
+      {
+        "X": 565,
+        "Y": 0
+      }
+    ]
   ],
   "BlockingTiles": [
     {

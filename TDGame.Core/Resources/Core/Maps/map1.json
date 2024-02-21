@@ -4,19 +4,21 @@
   "Description": "abavsdabavsd<tr<dsfsdfsdfksfsfsfabavsd<tr<dsfsdfsdfksfsfsfabavsd<tr<dsfsdfsdfksfsfsfabavsd<tr<dsfsdfsdfksfsfsfabavsd<tr<dsfsdfsdfksfsfsfabavsd<tr<dsfsdfsdfksfsfsf<tr<dsfsdfsdfksfsfsf",
   "Width": 650,
   "Height": 650,
-  "WayPoints": [
-    {
-      "X": 150,
-      "Y": 0
-    },
-    {
-      "X": 150,
-      "Y": 370
-    },
-    {
-      "X": 650,
-      "Y": 370
-    }
+  "Paths": [
+    [
+      {
+        "X": 150,
+        "Y": 0
+      },
+      {
+        "X": 150,
+        "Y": 370
+      },
+      {
+        "X": 650,
+        "Y": 370
+      }
+    ]
   ],
   "BlockingTiles": [
     {

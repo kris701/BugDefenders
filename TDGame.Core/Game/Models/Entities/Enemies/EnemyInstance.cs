@@ -9,6 +9,7 @@ namespace TDGame.Core.Game.Models.Entities.Enemies
         public Guid DefinitionID { get; set; }
         public float Health { get; set; }
         public IEnemyModule ModuleInfo { get; set; }
+        public int PathID { get; set; } = 0;
         public int WayPointID { get; set; } = 0;
 
         public EnemyInstance(Guid enemyDefinition, float evolution) : this(ResourceManager.Enemies.GetResource(enemyDefinition), evolution)
