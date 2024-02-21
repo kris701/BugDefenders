@@ -62,14 +62,19 @@ namespace TDGame.OpenGL.Engine.Controls
         private bool _usesViewPort = false;
         private Rectangle _actualViewPort;
         private Rectangle _viewPort;
-        public Rectangle ViewPort { get {
+        public Rectangle ViewPort
+        {
+            get
+            {
                 return _viewPort;
-            } set {
+            }
+            set
+            {
                 var copy = new Rectangle(Scale(value.X), Scale(value.Y), Scale(value.Width), Scale(value.Height));
                 _viewPort = copy;
                 _usesViewPort = true;
                 CalculateViewPort();
-            } 
+            }
         }
 
         public void CalculateViewPort()

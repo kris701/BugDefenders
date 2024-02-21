@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using TDGame.Core.Game.Models.Entities.Enemies;
+﻿using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Resources;

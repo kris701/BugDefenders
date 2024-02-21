@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
-using TDGame.Core.Game.Models.Entities.Turrets;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {

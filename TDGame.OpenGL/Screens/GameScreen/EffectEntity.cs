@@ -1,6 +1,5 @@
 ﻿using System;
 using TDGame.Core.Game.Models;
-using TDGame.Core.Game.Models.Entities.Projectiles;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {

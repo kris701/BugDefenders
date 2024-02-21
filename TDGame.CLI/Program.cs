@@ -1,6 +1,5 @@
 ﻿using CommandLine;
 using CommandLine.Text;
-using System;
 using TDGame.Core.Resources;
 using TDGame.Core.Resources.Integrity;
 
@@ -26,7 +25,7 @@ namespace TDGame.CLI
             ResourceManager.UnloadExternalResources();
 
             Console.WriteLine("Loading mod into resource manager...");
-            foreach(var mod in mods)
+            foreach (var mod in mods)
                 ResourceManager.LoadResource(new DirectoryInfo(mod));
 
             Console.WriteLine("Checking mod integrity...");
@@ -41,7 +40,7 @@ namespace TDGame.CLI
             {
                 Console.WriteLine($"{checker.Errors.Count} issues found!");
                 Console.WriteLine();
-                foreach(var error in checker.Errors)
+                foreach (var error in checker.Errors)
                     Console.WriteLine(error.ToString());
             }
         }

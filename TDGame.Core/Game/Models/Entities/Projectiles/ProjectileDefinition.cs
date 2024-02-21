@@ -1,7 +1,5 @@
 ﻿using System.Text;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Resources;
 using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace TDGame.Core.Game.Models.Entities.Projectiles

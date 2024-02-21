@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Game.Models.Entities.Enemies.Modules;
+﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
-using TDGame.Core.Game.Models.Entities.Upgrades;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TDGame.Core.Resources.Integrity
 {
@@ -261,7 +254,7 @@ namespace TDGame.Core.Resources.Integrity
                 Errors.Add(new IntegrityError(
                     $"Some buff IDs are not unique!",
                     IntegrityError.SeverityLevel.Critical));
-            foreach(var id in buffs)
+            foreach (var id in buffs)
             {
                 var buff = ResourceManager.Buffs.GetResource(id);
                 if (buff.Requires != null && !buffs.Contains((Guid)buff.Requires))

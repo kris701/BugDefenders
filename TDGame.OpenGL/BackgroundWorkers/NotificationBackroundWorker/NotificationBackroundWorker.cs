@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using TDGame.Core.Game.Models;
 using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using TDGame.OpenGL.Engine.BackgroundWorkers;

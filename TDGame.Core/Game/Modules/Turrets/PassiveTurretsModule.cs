@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TDGame.Core.Game.Helpers;
+﻿using TDGame.Core.Game.Helpers;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
@@ -31,7 +26,7 @@ namespace TDGame.Core.Game.Modules.Turrets
                             UnApplyEffect(def, effected);
 
             _effectedTurrets.Clear();
-            foreach(var turret in Game.Turrets)
+            foreach (var turret in Game.Turrets)
             {
                 if (turret.TurretInfo is PassiveTurretDefinition def)
                 {

@@ -118,7 +118,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                         Size = def.SplashRange,
                         X = projectile.CenterX - def.SplashRange / 2,
                         Y = projectile.CenterY - def.SplashRange / 2
-                });
+                    });
                 }
             }
         }
@@ -156,7 +156,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SelectTurret()
         {
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50,50,50), (int)Scale(GetRangeOfTurret(_selectedTurret.TurretInfo) * 2));
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)Scale(GetRangeOfTurret(_selectedTurret.TurretInfo) * 2));
             _turretSelectRangeTile._width = _turretSelectRangeTile.FillColor.Width;
             _turretSelectRangeTile._height = _turretSelectRangeTile.FillColor.Height;
             _turretSelectRangeTile._x = Scale(_selectedTurret.CenterX) + Scale(_gameArea.X) - _turretSelectRangeTile.FillColor.Width / 2;
