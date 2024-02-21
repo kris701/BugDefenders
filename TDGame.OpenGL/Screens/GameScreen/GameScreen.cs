@@ -56,7 +56,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _game = new GameEngine(mapID, gameStyleID);
             _game.OnTurretShooting += OnTurretFiring;
             _game.OnTurretIdle += OnTurretIdling;
-            ResourceManager.CheckGameIntegrity();
 
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(7, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);

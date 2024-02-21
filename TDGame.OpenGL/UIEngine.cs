@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using TDGame.Core.Resources;
+using TDGame.Core.Resources.Integrity;
 using TDGame.Core.Users;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker;
@@ -158,6 +159,13 @@ namespace TDGame.OpenGL
                     }
                 }
             }
+
+            var checker = new ResourceIntegrityChecker();
+            checker.CheckGameIntegrity();
+            if (checker.Errors.Count > 0)
+                _notificationWorker.AddManualNotification("Game Integrity", $"There where errors in the game integrity! Remove your mods or use the CLI tool to find the problem with your mods.");
+            if (ResourceManager.LoadedResources.Count > 1)
+                _notificationWorker.AddManualNotification("Mods", $"Currently have {ResourceManager.LoadedResources.Count - 1} loaded!");
         }
 
         protected override void LoadContent()

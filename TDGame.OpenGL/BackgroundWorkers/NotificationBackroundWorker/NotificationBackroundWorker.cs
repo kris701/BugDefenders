@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using TDGame.Core.Game.Models;
 using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using TDGame.OpenGL.Engine.BackgroundWorkers;
 
@@ -25,6 +27,20 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
 
         public NotificationBackroundWorker(UIEngine parent) : base(parent)
         {
+        }
+
+        public void AddManualNotification(string name, string description)
+        {
+            _notificationStack.Add(new NotificationItem()
+            {
+                Definition = new ManualDefinition()
+                {
+                    Name = name,
+                    Description = description
+                },
+                HasImage = false,
+                PreFix = ""
+            });
         }
 
         public override void Update(GameTime gameTime)
@@ -93,6 +109,13 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
         {
             if (_notification != null)
                 _notification.Draw(gameTime, spriteBatch);
+        }
+
+        private class ManualDefinition : IDefinition
+        {
+            public Guid ID { get; set; }
+            public string Name { get; set; }
+            public string Description { get; set; }
         }
     }
 }

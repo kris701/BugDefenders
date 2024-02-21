@@ -6,6 +6,7 @@
     - Maybe only do this in release mode, since it will be a hassle while debugging
 - [ ] Improve the game integrity checker
     - Right now, it only rly checks IDs of turrets and enemy types
+- [X] CLI tool for checking mods
 - [X] Viewport the range circle
     - So it stays within the game field
 - [X] Make attribute interfaces for modules
