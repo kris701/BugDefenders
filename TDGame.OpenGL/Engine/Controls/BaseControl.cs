@@ -59,6 +59,46 @@ namespace TDGame.OpenGL.Engine.Controls
         }
         public int Alpha { get; set; } = 255;
         public object Tag { get; set; }
+        private bool _usesViewPort = false;
+        private Rectangle _actualViewPort;
+        private Rectangle _viewPort;
+        public Rectangle ViewPort { get {
+                return _viewPort;
+            } set {
+                var copy = new Rectangle(Scale(value.X), Scale(value.Y), Scale(value.Width), Scale(value.Height));
+                _viewPort = copy;
+                _usesViewPort = true;
+                CalculateViewPort();
+            } 
+        }
+
+        public void CalculateViewPort()
+        {
+            var viewPortX = 0f;
+            var viewPortY = 0f;
+            var viewPortWidth = Width;
+            var viewPortHeight = Height;
+            if (X < _viewPort.X)
+            {
+                viewPortX = -(X - _viewPort.X);
+                if (!(X + Width > _viewPort.X + _viewPort.Width))
+                    viewPortWidth -= viewPortX;
+                _x = _viewPort.X;
+            }
+            if (Y < _viewPort.Y)
+            {
+                viewPortY = -(Y - _viewPort.Y);
+                if (!(Y + Height > _viewPort.Y + _viewPort.Height))
+                    viewPortHeight -= viewPortY;
+                _y = _viewPort.Y;
+            }
+            if (X + Width > _viewPort.X + _viewPort.Width + viewPortX)
+                viewPortWidth += _viewPort.X + _viewPort.Width - (X + Width);
+            if (Y + Height > _viewPort.Y + _viewPort.Height + viewPortY)
+                viewPortHeight += _viewPort.Y + _viewPort.Height - (Y + Height);
+
+            _actualViewPort = new Rectangle((int)viewPortX, (int)viewPortY, (int)viewPortWidth, (int)viewPortHeight);
+        }
 
         protected BaseControl(UIEngine parent) : base(parent)
         {
@@ -89,32 +129,56 @@ namespace TDGame.OpenGL.Engine.Controls
         {
             if (texture.Width == 1 && texture.Height == 1)
             {
-                spriteBatch.Draw(
-                    texture,
-                    new Vector2(X + Width / 2, Y + Height / 2),
-                    new Rectangle(0, 0, (int)Width, (int)Height),
-                    GetAlphaColor(),
-                    Rotation,
-                    new Vector2(Width / 2, Height / 2),
-                    1,
-                    SpriteEffects.None,
-                    0);
+                if (_usesViewPort)
+                    spriteBatch.Draw(
+                        texture,
+                        new Vector2(X + Width / 2, Y + Height / 2),
+                        _actualViewPort,
+                        GetAlphaColor(),
+                        Rotation,
+                        new Vector2(Width / 2, Height / 2),
+                        1,
+                        SpriteEffects.None,
+                        0);
+                else
+                    spriteBatch.Draw(
+                        texture,
+                        new Vector2(X + Width / 2, Y + Height / 2),
+                        new Rectangle(0, 0, (int)Width, (int)Height),
+                        GetAlphaColor(),
+                        Rotation,
+                        new Vector2(Width / 2, Height / 2),
+                        1,
+                        SpriteEffects.None,
+                        0);
             }
             else
             {
                 var xFit = Width / texture.Width;
                 var yFit = Height / texture.Height;
 
-                spriteBatch.Draw(
-                    texture,
-                    new Vector2(X + Width / 2, Y + Height / 2),
-                    null,
-                    GetAlphaColor(),
-                    Rotation,
-                    new Vector2(texture.Width / 2, texture.Height / 2),
-                    new Vector2(xFit, yFit),
-                    SpriteEffects.None,
-                    0);
+                if (_usesViewPort)
+                    spriteBatch.Draw(
+                        texture,
+                        new Vector2(X + Width / 2, Y + Height / 2),
+                        _actualViewPort,
+                        GetAlphaColor(),
+                        Rotation,
+                        new Vector2(texture.Width / 2, texture.Height / 2),
+                        new Vector2(xFit, yFit),
+                        SpriteEffects.None,
+                        0);
+                else
+                    spriteBatch.Draw(
+                        texture,
+                        new Vector2(X + Width / 2, Y + Height / 2),
+                        null,
+                        GetAlphaColor(),
+                        Rotation,
+                        new Vector2(texture.Width / 2, texture.Height / 2),
+                        new Vector2(xFit, yFit),
+                        SpriteEffects.None,
+                        0);
             }
 #if CENTERPOINT
             spriteBatch.Draw(

@@ -157,11 +157,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SelectTurret()
         {
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(_selectedTurret.GetDefinition()) * 2));
-            _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
-            _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
-            _turretSelectRangeTile.X = _selectedTurret.CenterX + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
-            _turretSelectRangeTile.Y = _selectedTurret.CenterY + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)Scale(GetRangeOfTurret(_selectedTurret.TurretInfo) * 2));
+            _turretSelectRangeTile._width = _turretSelectRangeTile.FillColor.Width;
+            _turretSelectRangeTile._height = _turretSelectRangeTile.FillColor.Height;
+            _turretSelectRangeTile._x = Scale(_selectedTurret.CenterX) + Scale(_gameArea.X) - _turretSelectRangeTile.FillColor.Width / 2;
+            _turretSelectRangeTile._y = Scale(_selectedTurret.CenterY) + Scale(_gameArea.Y) - _turretSelectRangeTile.FillColor.Height / 2;
+            _turretSelectRangeTile.CalculateViewPort();
             _turretSelectRangeTile.IsVisible = true;
 
             SetTurretUpgradeField(_selectedTurret);
@@ -180,7 +181,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void BuyUpgrade_Click(ButtonControl parent)
         {
-            if (_selectedTurret != null && parent.Tag is IUpgrade upg)
+            if (_selectedTurret != null && !_unselectTurret && parent.Tag is IUpgrade upg)
             {
                 if (_game.CanLevelUpTurret(_selectedTurret, upg.ID))
                 {
@@ -422,6 +423,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.IsVisible = true;
                 _buyingPreviewRangeTile._x = mouseState.X - _buyingPreviewRangeTile.Width / 2;
                 _buyingPreviewRangeTile._y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;
+                _buyingPreviewRangeTile.CalculateViewPort();
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
@@ -504,9 +506,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.Width = def.Size;
                 _buyingPreviewTile.Height = def.Size;
                 _buyingPreviewTile.Initialize();
-                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(def) * 2));
-                _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
-                _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
+                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)Scale(GetRangeOfTurret(def.ModuleInfo) * 2));
+                _buyingPreviewRangeTile._width = _buyingPreviewRangeTile.FillColor.Width;
+                _buyingPreviewRangeTile._height = _buyingPreviewRangeTile.FillColor.Height;
                 _turretStatesTextbox.Text = new TurretInstance(def).GetDescriptionString();
             }
         }
@@ -534,9 +536,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
             }
         }
 
-        private float GetRangeOfTurret(TurretDefinition def)
+        private float GetRangeOfTurret(ITurretModule mod)
         {
-            if (def.ModuleInfo is IRangeAttribute range)
+            if (mod is IRangeAttribute range)
                 return range.Range;
             return 1;
         }

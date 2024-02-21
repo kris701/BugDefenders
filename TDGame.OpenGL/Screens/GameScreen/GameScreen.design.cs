@@ -92,7 +92,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _turretSelectRangeTile = new TileControl(Parent)
             {
                 IsVisible = false,
-                Alpha = 25
+                Alpha = 25,
+                ViewPort = _gameArea
             };
             AddControl(0, _turretSelectRangeTile);
         }
@@ -322,7 +323,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _buyingPreviewRangeTile = new TileControl(Parent)
             {
                 IsVisible = false,
-                Alpha = 25
+                Alpha = 25,
+                ViewPort = _gameArea
             };
             AddControl(10, _buyingPreviewRangeTile);
             _buyingPreviewTile = new AnimatedTileControl(Parent)

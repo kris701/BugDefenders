@@ -26,7 +26,6 @@ namespace TDGame.OpenGL.Engine.Helpers
             return texture;
         }
         public static Texture2D GetClickedTexture() => GetBasicRectange(new Color(64, 64, 64, 100));
-        public static Texture2D GetDisabledTexture() => GetBasicRectange(new Color(10, 10, 10, 100));
 
         private class CircleKey
         {

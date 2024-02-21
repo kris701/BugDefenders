@@ -1,13 +1,13 @@
 # TDGame
 
 ## TODO List
-- [ ] Viewport the range circle
-    - So it stays within the game field
 - [ ] Encrypt user data
     - Just so that you cant just as easily give yourself buffs and stuff
     - Maybe only do this in release mode, since it will be a hassle while debugging
 - [ ] Improve the game integrity checker
     - Right now, it only rly checks IDs of turrets and enemy types
+- [X] Viewport the range circle
+    - So it stays within the game field
 - [X] Make attribute interfaces for modules
 - [X] Multipathed maps
 - [X] Passive turret
