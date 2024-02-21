@@ -9,7 +9,7 @@ namespace TDGame.CLI
 {
     public class Options
     {
-        [Option("path", Required = true, HelpText = "Path to your current mod")]
-        public string ModPath { get; set; } = "";
+        [Option("mods", Required = true, HelpText = "Paths to your mods")]
+        public IEnumerable<string> ModPath { get; set; } = new List<string>();
     }
 }

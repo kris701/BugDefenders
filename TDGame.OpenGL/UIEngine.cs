@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using TDGame.Core.Resources;
 using TDGame.Core.Resources.Integrity;
@@ -162,7 +163,7 @@ namespace TDGame.OpenGL
 
             var checker = new ResourceIntegrityChecker();
             checker.CheckGameIntegrity();
-            if (checker.Errors.Count > 0)
+            if (checker.Errors.Where(x => x.Severity > IntegrityError.SeverityLevel.Critical).Count() > 0)
                 _notificationWorker.AddManualNotification("Game Integrity", $"There where errors in the game integrity! Remove your mods or use the CLI tool to find the problem with your mods.");
             if (ResourceManager.LoadedResources.Count > 1)
                 _notificationWorker.AddManualNotification("Mods", $"Currently have {ResourceManager.LoadedResources.Count - 1} loaded!");

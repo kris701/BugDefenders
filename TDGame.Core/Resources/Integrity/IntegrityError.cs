@@ -8,7 +8,7 @@ namespace TDGame.Core.Resources.Integrity
 {
     public class IntegrityError
     {
-        public enum SeverityLevel { None, Low, Medium, Critical }
+        public enum SeverityLevel { None, Message, Critical }
         public string Error { get; set; }
         public SeverityLevel Severity { get; set; }
 

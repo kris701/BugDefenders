@@ -18,13 +18,16 @@ namespace TDGame.CLI
 
         private static void Run(Options opts)
         {
-            opts.ModPath = RootPath(opts.ModPath);
+            var mods = opts.ModPath.ToList();
+            for (int i = 0; i < mods.Count; i++)
+                mods[i] = RootPath(mods[i]);
 
             Console.WriteLine("Resetting resource manager...");
             ResourceManager.UnloadExternalResources();
 
             Console.WriteLine("Loading mod into resource manager...");
-            ResourceManager.LoadResource(new DirectoryInfo(opts.ModPath));
+            foreach(var mod in mods)
+                ResourceManager.LoadResource(new DirectoryInfo(mod));
 
             Console.WriteLine("Checking mod integrity...");
             var checker = new ResourceIntegrityChecker();
