@@ -210,7 +210,7 @@ namespace TDGame.Core.Game
         private void UpdateEnemiesToSpawnList()
         {
             int waveSize = (int)(1 * Evolution);
-            for (int i = EnemiesToSpawn.Count; i < 5; i++)
+            for (int i = EnemiesToSpawn.Count; i < 3; i++)
             {
                 var wave = new List<Guid>();
                 for (int j = 0; j < waveSize; j++)
