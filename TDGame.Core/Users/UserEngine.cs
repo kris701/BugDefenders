@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using TDGame.Core.Resources;
+using TDGame.Core.Users.Helpers;
 using TDGame.Core.Users.Models;
 using TDGame.Core.Users.Models.Buffs.BuffEffects;
 
@@ -8,6 +9,7 @@ namespace TDGame.Core.Users
     public class UserEngine<T>
     {
         public string UsersPath { get; } = "Users";
+
         public UserEngine()
         {
             if (!Directory.Exists(UsersPath))
@@ -21,7 +23,7 @@ namespace TDGame.Core.Users
             {
                 foreach (var file in new DirectoryInfo(UsersPath).GetFiles())
                 {
-                    var parsed = JsonSerializer.Deserialize<UserDefinition<T>>(File.ReadAllText(file.FullName));
+                    var parsed = Deserialize(File.ReadAllText(file.FullName));
                     if (parsed != null && parsed.ID != Guid.Empty)
                         retList.Add(parsed);
                 }
@@ -67,7 +69,7 @@ namespace TDGame.Core.Users
             var target = Path.Combine(UsersPath, $"{user.ID}.json");
             if (File.Exists(target))
                 throw new Exception("User already exists!");
-            File.WriteAllText(target, JsonSerializer.Serialize(user));
+            File.WriteAllText(target, Serialize(user));
         }
 
         public void RemoveUser(UserDefinition<T> user)
@@ -82,7 +84,40 @@ namespace TDGame.Core.Users
             var target = Path.Combine(UsersPath, $"{user.ID}.json");
             if (File.Exists(target))
                 File.Delete(target);
-            File.WriteAllText(target, JsonSerializer.Serialize(user));
+            File.WriteAllText(target, Serialize(user));
+        }
+
+        private string Serialize(UserDefinition<T> user)
+        {
+#if DEBUG
+            return JsonSerializer.Serialize(user);
+#else
+            return StringCompressor.CompressString(JsonSerializer.Serialize(user));
+#endif
+        }
+
+        private UserDefinition<T> Deserialize(string data)
+        {
+            UserDefinition<T>? parsed = null;
+#if DEBUG
+            try
+            {
+                parsed = JsonSerializer.Deserialize<UserDefinition<T>>(data);
+            }
+            catch { }
+            if (parsed == null)
+                throw new Exception("Error deserializing user data!");
+            return parsed;
+#else
+            try
+            {
+                parsed = JsonSerializer.Deserialize<UserDefinition<T>>(StringCompressor.DecompressString(data));
+            }
+            catch { }
+            if (parsed == null)
+                throw new Exception("Error deserializing user data!");
+            return parsed;
+#endif
         }
     }
 }

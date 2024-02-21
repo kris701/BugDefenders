@@ -12,7 +12,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
     public partial class UsersScreen : BaseScreen
     {
         private KeyWatcher _escapeKeyWatcher;
-        private int _hash = 1;
+        private bool _update = false;
         public UsersScreen(UIEngine parent) : base(parent)
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
@@ -24,14 +24,10 @@ namespace TDGame.OpenGL.Screens.UsersScreen
         {
             var keyState = Keyboard.GetState();
             _escapeKeyWatcher.Update(keyState);
-            var allUsers = Parent.UserManager.GetAllUsers();
-            var newHash = 1;
-            foreach (var user in allUsers)
-                newHash *= user.ID.GetHashCode();
-            if (newHash != _hash)
+            if (_update)
             {
-                _hash = newHash;
                 UpdateUsersList();
+                _update = false;
             }
         }
 
@@ -41,6 +37,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
             {
                 Parent.CreateNewUser(_nameInputBox.Text);
                 _nameInputBox.Text = "";
+                _update = true;
             }
             CheckValidUserInput();
         }
@@ -57,7 +54,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                     Parent.ChangeUser(allUsers.First(x => x.ID != Parent.CurrentUser.ID));
                 }
                 Parent.UserManager.RemoveUser(user);
-                SwitchView(new UsersScreen(Parent));
+                _update = true;
                 CheckValidUserInput();
             }
         }
@@ -69,7 +66,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 if (Parent.CurrentUser.ID != user.ID)
                 {
                     Parent.ChangeUser(user);
-                    SwitchView(new UsersScreen(Parent));
+                    _update = true;
                 }
             }
         }

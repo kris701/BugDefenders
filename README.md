@@ -1,11 +1,11 @@
 # TDGame
 
 ## TODO List
-- [ ] Encrypt user data
-    - Just so that you cant just as easily give yourself buffs and stuff
-    - Maybe only do this in release mode, since it will be a hassle while debugging
 
 ## Done
+- [X] Encrypt user data
+    - Just so that you cant just as easily give yourself buffs and stuff
+    - Maybe only do this in release mode, since it will be a hassle while debugging
 - [X] Improve the game integrity checker
     - Right now, it only rly checks IDs of turrets and enemy types
 - [X] CLI tool for checking mods
