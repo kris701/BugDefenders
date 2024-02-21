@@ -1,6 +1,9 @@
 # TDGame
 
 ## TODO List
+- [ ] Make attribute interfaces for modules
+- [ ] Viewport the range circle
+    - So it stays within the game field
 - [ ] Encrypt user data
     - Just so that you cant just as easily give yourself buffs and stuff
     - Maybe only do this in release mode, since it will be a hassle while debugging
