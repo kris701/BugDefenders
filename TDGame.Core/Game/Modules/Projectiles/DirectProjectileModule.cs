@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 
@@ -67,6 +68,8 @@ namespace TDGame.Core.Game.Modules.Projectiles
             var best = Game.GetBestEnemy(projectile, projectile.Size / 2, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
             if (best != null)
             {
+                if (best.ModuleInfo is ISlowable slow)
+                    SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
                 Game.DamageEnemy(best, GetModifiedDamage(best.GetDefinition(), def.Damage, def.DamageModifiers));
                 return true;
             }

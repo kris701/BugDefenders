@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Game.Models.Entities.Enemies;
+using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
@@ -44,5 +45,13 @@ namespace TDGame.Core.Game.Modules.Projectiles
             return damage;
         }
 
+        internal void SetSlowingFactor(ISlowable item, float slowingFactor, int slowingDuration)
+        {
+            if (slowingFactor <= item.SlowingFactor)
+            {
+                item.SlowingFactor = slowingFactor;
+                item.SlowingDuration = slowingDuration;
+            }
+        }
     }
 }

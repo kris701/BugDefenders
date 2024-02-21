@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 
@@ -80,6 +81,8 @@ namespace TDGame.Core.Game.Modules.Projectiles
                     var dist = MathHelpers.Distance(projectile, Game.CurrentEnemies.ElementAt(i));
                     if (dist < def.SplashRange)
                     {
+                        if (Game.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
+                            SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
                         if (Game.DamageEnemy(Game.CurrentEnemies.ElementAt(i), GetModifiedDamage(Game.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers)))
                         {
                             if (projectile.Source != null)
