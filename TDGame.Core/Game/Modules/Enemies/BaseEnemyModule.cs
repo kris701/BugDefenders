@@ -1,8 +1,6 @@
 ﻿using TDGame.Core.Game.Helpers;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
-using TDGame.Core.Game.Models.GameStyles;
-using TDGame.Core.Game.Models.Maps;
 using TDGame.Core.Resources;
 
 namespace TDGame.Core.Game.Modules.Enemies

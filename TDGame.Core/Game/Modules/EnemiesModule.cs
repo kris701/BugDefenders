@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
-using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
-using TDGame.Core.Game.Helpers;
+﻿using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models;
 using TDGame.Core.Game.Modules.Enemies;
+using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
+using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.Core.Game.Modules
 {

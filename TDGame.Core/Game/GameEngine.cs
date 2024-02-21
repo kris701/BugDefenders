@@ -1,16 +1,6 @@
 ﻿using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Maps;
 using TDGame.Core.Game.Modules;
-using TDGame.Core.Game.Modules.Enemies;
-using TDGame.Core.Game.Modules.Projectiles;
-using TDGame.Core.Game.Modules.Turrets;
 using TDGame.Core.Resources;
-using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
-using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.Core.Game
 {

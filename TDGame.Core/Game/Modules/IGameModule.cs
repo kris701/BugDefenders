@@ -1,7 +1,4 @@
-﻿using TDGame.Core.Game.Models.GameStyles;
-using TDGame.Core.Game.Models.Maps;
-
-namespace TDGame.Core.Game.Modules
+﻿namespace TDGame.Core.Game.Modules
 {
     public interface IGameModule
     {
