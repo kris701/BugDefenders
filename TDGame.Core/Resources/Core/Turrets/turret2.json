@@ -25,7 +25,7 @@
       "CooldownModifier": 0.5
     },
     {
-      "UpgradeType": "Projectile",
+      "UpgradeType": "ExplosiveProjectile",
       "id": "8e6fc0ac-6487-4e43-b9f0-ecd1f0766169",
       "requires": null,
       "Name": "Upgrade 3",

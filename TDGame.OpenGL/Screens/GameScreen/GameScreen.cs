@@ -6,6 +6,7 @@ using System.Linq;
 using TDGame.Core.Game;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles;
+using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 using TDGame.Core.Game.Models.Entities.Upgrades;
@@ -108,13 +109,17 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (parent.Tag is ProjectileInstance projectile)
             {
-                if (!projectile.GetDefinition().IsExplosive)
-                    return;
-                _effects.Add(new EffectEntity(projectile)
+                if (projectile.ProjectileInfo is ExplosiveProjectileDefinition def)
                 {
-                    ID = new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
-                    LifeTime = TimeSpan.FromMilliseconds(250)
+                    _effects.Add(new EffectEntity()
+                    {
+                        ID = new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
+                        LifeTime = TimeSpan.FromMilliseconds(250),
+                        Size = def.SplashRange,
+                        X = projectile.CenterX - def.SplashRange / 2,
+                        Y = projectile.CenterY - def.SplashRange / 2
                 });
+                }
             }
         }
 
@@ -238,7 +243,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             _turretUpdater.UpdateEntities(_game.Turrets, gameTime, CreateNewTurretControl);
             _enemyUpdater.UpdateEntities(_game.CurrentEnemies, gameTime, CreateNewEnemyControl, UpdateEnemyControl);
-            _projectileUpdater.UpdateEntities(_game.ProjectileTurretsModule.Projectiles, gameTime, CreateNewProjectileControl);
+            _projectileUpdater.UpdateEntities(_game.Projectiles, gameTime, CreateNewProjectileControl);
             _effectsUpdater.UpdateEntities(_effects, gameTime, CreateNewEffect);
             _laserUpdater.UpdateEntities(_lasers.Values.ToHashSet(), gameTime, CreateNewLaser, UpdateLaserControl);
             UpdateEffectLifetimes(gameTime);

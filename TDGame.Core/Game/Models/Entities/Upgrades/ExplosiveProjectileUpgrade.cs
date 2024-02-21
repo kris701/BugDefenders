@@ -1,10 +1,11 @@
 ﻿using System.Text;
+using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Game.Models.Entities.Upgrades
 {
-    public class ProjectileUpgrade : IUpgrade
+    public class ExplosiveProjectileUpgrade : IUpgrade
     {
         public Guid ID { get; set; }
         public Guid? Requires { get; set; }
@@ -19,13 +20,13 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
 
         public void ApplyUpgrade(TurretInstance on)
         {
-            if (on.TurretInfo is ProjectileTurretDefinition item)
+            if (on.TurretInfo is ProjectileTurretDefinition tur && tur.ProjectileInfo is ExplosiveProjectileDefinition item)
             {
-                item.ProjectileDefinition.Damage *= DamageModifier;
-                item.ProjectileDefinition.SplashRange *= SplashRangeModifier;
-                item.ProjectileDefinition.TriggerRange *= TriggerRangeModifier;
-                item.ProjectileDefinition.SlowingFactor *= SlowingFactorModifier;
-                item.ProjectileDefinition.SlowingDuration = (int)(item.ProjectileDefinition.SlowingDuration * SlowingDurationModifier);
+                item.Damage *= DamageModifier;
+                item.SplashRange *= SplashRangeModifier;
+                item.TriggerRange *= TriggerRangeModifier;
+                item.SlowingFactor *= SlowingFactorModifier;
+                item.SlowingDuration = (int)(item.SlowingDuration * SlowingDurationModifier);
                 on.HasUpgrades.Add(ID);
             }
             else

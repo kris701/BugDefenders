@@ -6,27 +6,18 @@ using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
-    public class AOETurretsModule : BaseTurretModule
+    public class AOETurretsModule : BaseTurretModule<AOETurretDefinition>
     {
         public AOETurretsModule(GameEngine game) : base(game)
         {
         }
 
-        public override void Update(TimeSpan passed)
+        public override void UpdateTurret(TimeSpan passed, TurretInstance turret, AOETurretDefinition def)
         {
-            foreach (var turret in Game.Turrets)
-            {
-                if (turret.TurretInfo is AOETurretDefinition def)
-                {
-                    def.CoolingFor -= passed;
-                    if (def.CoolingFor <= TimeSpan.Zero)
-                        UpdateTurret(turret, def);
-                }
-            }
-        }
+            def.CoolingFor -= passed;
+            if (def.CoolingFor > TimeSpan.Zero)
+                return;
 
-        private void UpdateTurret(TurretInstance turret, AOETurretDefinition def)
-        {
             var closest = float.MaxValue;
             EnemyInstance? best = null;
             var targeting = new List<EnemyInstance>();

@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
 using TDGame.Core.Game.Models.Entities.Projectiles;
+using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Resources;
 
 namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
@@ -15,7 +16,7 @@ namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
         [JsonIgnore]
         public TimeSpan CoolingFor { get; set; }
         [JsonIgnore]
-        public ProjectileDefinition ProjectileDefinition { get; set; }
+        public IProjectileModule ProjectileInfo { get; set; }
 
         public ProjectileTurretDefinition(float range, int cooldown, Guid projectileID, bool isTrailing)
         {
@@ -23,12 +24,15 @@ namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
             Cooldown = cooldown;
             ProjectileID = projectileID;
             IsTrailing = isTrailing;
-            ProjectileDefinition = ResourceManager.Projectiles.GetResource(ProjectileID).Copy();
+            ProjectileInfo = ResourceManager.Projectiles.GetResource(ProjectileID).ModuleInfo.Copy();
         }
 
         public ITurretModule Copy()
         {
-            return new ProjectileTurretDefinition(Range, Cooldown, ProjectileID, IsTrailing);
+            return new ProjectileTurretDefinition(Range, Cooldown, ProjectileID, IsTrailing)
+            {
+                ProjectileInfo = ProjectileInfo.Copy()
+            };
         }
 
         public string GetDescriptionString()
@@ -41,7 +45,7 @@ namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
             sb.AppendLine($"Cooldown: {Cooldown}");
             sb.AppendLine();
             sb.AppendLine("Projectile:");
-            sb.AppendLine(ProjectileDefinition.GetDescriptionString());
+            sb.AppendLine(ProjectileInfo.GetDescriptionString());
 
             return sb.ToString();
         }

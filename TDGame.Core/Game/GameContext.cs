@@ -1,4 +1,5 @@
 ﻿using TDGame.Core.Game.Models.Entities.Enemies;
+using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.GameStyles;
 using TDGame.Core.Game.Models.Maps;
@@ -33,6 +34,7 @@ namespace TDGame.Core.Game
         public int Money { get; set; }
         public int Score { get; set; }
         public HashSet<TurretInstance> Turrets { get; set; }
+        public HashSet<ProjectileInstance> Projectiles { get; set; }
 
         public int Wave { get; internal set; }
         public bool GameOver { get; set; }

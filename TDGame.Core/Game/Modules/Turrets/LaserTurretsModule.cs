@@ -4,27 +4,18 @@ using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
-    public class LaserTurretsModule : BaseTurretModule
+    public class LaserTurretsModule : BaseTurretModule<LaserTurretDefinition>
     {
         public LaserTurretsModule(GameEngine game) : base(game)
         {
         }
 
-        public override void Update(TimeSpan passed)
+        public override void UpdateTurret(TimeSpan passed, TurretInstance turret, LaserTurretDefinition def)
         {
-            foreach (var turret in Game.Turrets)
-            {
-                if (turret.TurretInfo is LaserTurretDefinition def)
-                {
-                    def.CoolingFor -= passed;
-                    if (def.CoolingFor <= TimeSpan.Zero)
-                        UpdateTurret(turret, def);
-                }
-            }
-        }
+            def.CoolingFor -= passed;
+            if (def.CoolingFor > TimeSpan.Zero)
+                return;
 
-        private void UpdateTurret(TurretInstance turret, LaserTurretDefinition def)
-        {
             var best = Game.GetBestEnemy(turret, def.Range);
             if (best != null)
             {

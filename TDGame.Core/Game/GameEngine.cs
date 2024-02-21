@@ -6,6 +6,7 @@ using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Maps;
 using TDGame.Core.Game.Modules;
 using TDGame.Core.Game.Modules.Enemies;
+using TDGame.Core.Game.Modules.Projectiles;
 using TDGame.Core.Game.Modules.Turrets;
 using TDGame.Core.Resources;
 using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
@@ -37,6 +38,9 @@ namespace TDGame.Core.Game
         public ProjectileTurretsModule ProjectileTurretsModule { get; }
         public InvestmentTurretsModule InvestmentTurretsModule { get; }
 
+        public ExplosiveProjectileModule ExplosiveProjectileModule { get; }
+        public DirectProjectileModule DirectProjectileModule { get; }
+
         public WaveEnemyModule WaveEnemiesModule { get; }
         public SingleEnemyModule SingleEnemiesModule { get; }
 
@@ -44,6 +48,7 @@ namespace TDGame.Core.Game
         {
             CurrentEnemies = new HashSet<EnemyInstance>();
             Turrets = new HashSet<TurretInstance>();
+            Projectiles = new HashSet<ProjectileInstance>();
             EnemiesToSpawn = new List<List<Guid>>();
 
             Map = ResourceManager.Maps.GetResource(mapID);
@@ -59,6 +64,9 @@ namespace TDGame.Core.Game
             ProjectileTurretsModule = new ProjectileTurretsModule(this);
             InvestmentTurretsModule = new InvestmentTurretsModule(this);
 
+            ExplosiveProjectileModule = new ExplosiveProjectileModule(this);
+            DirectProjectileModule = new DirectProjectileModule(this);
+
             WaveEnemiesModule = new WaveEnemyModule(this);
             SingleEnemiesModule = new SingleEnemyModule(this);
 
@@ -68,6 +76,9 @@ namespace TDGame.Core.Game
                 LaserTurretsModule,
                 ProjectileTurretsModule,
                 InvestmentTurretsModule,
+
+                ExplosiveProjectileModule,
+                DirectProjectileModule,
 
                 WaveEnemiesModule,
                 SingleEnemiesModule
@@ -97,12 +108,8 @@ namespace TDGame.Core.Game
         private void MainLoop()
         {
             UpdateSpawnQueue(_mainLoopTimer.Target);
-            AOETurretsModule.Update(_mainLoopTimer.Target);
-            LaserTurretsModule.Update(_mainLoopTimer.Target);
-            ProjectileTurretsModule.Update(_mainLoopTimer.Target);
-            InvestmentTurretsModule.Update(_mainLoopTimer.Target);
-            WaveEnemiesModule.Update(_mainLoopTimer.Target);
-            SingleEnemiesModule.Update(_mainLoopTimer.Target);
+            foreach (var module in GameModules)
+                module.Update(_mainLoopTimer.Target);
         }
 
         internal float GetAngle(FloatPoint target, IPosition item) => MathHelpers.GetAngle(target.X, target.Y, item.CenterX, item.CenterY);

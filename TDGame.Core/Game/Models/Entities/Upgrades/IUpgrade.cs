@@ -7,7 +7,8 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
     [JsonDerivedType(typeof(AOETurretUpgrade), typeDiscriminator: "AOETurret")]
     [JsonDerivedType(typeof(LaserTurretUpgrade), typeDiscriminator: "LaserTurret")]
     [JsonDerivedType(typeof(ProjectileTurretUpgrade), typeDiscriminator: "ProjectileTurret")]
-    [JsonDerivedType(typeof(ProjectileUpgrade), typeDiscriminator: "Projectile")]
+    [JsonDerivedType(typeof(ExplosiveProjectileUpgrade), typeDiscriminator: "ExplosiveProjectile")]
+    [JsonDerivedType(typeof(DirectProjectileUpgrade), typeDiscriminator: "DirectProjectile")]
     [JsonDerivedType(typeof(InvestmentTurretUpgrade), typeDiscriminator: "InvestmentTurret")]
     public interface IUpgrade : IDefinition
     {

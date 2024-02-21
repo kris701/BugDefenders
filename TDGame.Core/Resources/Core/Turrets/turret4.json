@@ -27,7 +27,7 @@
       "SlowingDurationModifier": 1
     },
     {
-      "UpgradeType": "Projectile",
+      "UpgradeType": "DirectProjectile",
       "id": "5b5630c8-9343-4c1a-9feb-507cf25aa79a",
       "requires": "a02a9478-1de6-4dfe-9ad9-8d22ae21b104",
       "Name": "Upgrade 3",

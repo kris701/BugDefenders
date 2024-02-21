@@ -20,6 +20,7 @@ namespace TDGame.Core.Game.Models.Entities.Turrets
         {
             var sb = new StringBuilder();
 
+            sb.AppendLine($"Name: {Name}");
             if (CanDamage.Count != 0)
             {
                 sb.AppendLine("Can Damage:");

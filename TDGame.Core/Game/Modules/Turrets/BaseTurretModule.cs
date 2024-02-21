@@ -1,10 +1,11 @@
 ﻿using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
+using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
-    public abstract class BaseTurretModule : IGameModule
+    public abstract class BaseTurretModule<T> : IGameTurretModule<T> where T : ITurretModule
     {
         public GameEngine Game { get; }
 
@@ -13,7 +14,14 @@ namespace TDGame.Core.Game.Modules.Turrets
             Game = game;
         }
 
-        public abstract void Update(TimeSpan passed);
+        public void Update(TimeSpan passed)
+        {
+            foreach (var turret in Game.Turrets)
+                if (turret.TurretInfo is T def)
+                    UpdateTurret(passed, turret, def);
+        }
+
+        public abstract void UpdateTurret(TimeSpan passed, TurretInstance turret, T def);
 
         internal float GetModifiedDamage(EnemyDefinition enemyDef, float damage, List<DamageModifier> modifiers)
         {

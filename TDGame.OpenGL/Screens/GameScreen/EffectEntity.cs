@@ -8,12 +8,5 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         public Guid ID { get; set; }
         public TimeSpan LifeTime { get; set; } = TimeSpan.FromSeconds(1);
-
-        public EffectEntity(ProjectileInstance projectile)
-        {
-            Size = projectile.GetDefinition().SplashRange;
-            X = projectile.CenterX - Size / 2;
-            Y = projectile.CenterY - Size / 2;
-        }
     }
 }

@@ -28,7 +28,7 @@
       "SlowingDurationModifier": 1
     },
     {
-      "UpgradeType": "Projectile",
+      "UpgradeType": "ExplosiveProjectile",
       "id": "a60d424c-c86f-498d-aef1-ed59e9d1c8b0",
       "requires": null,
       "Name": "Upgrade 3",

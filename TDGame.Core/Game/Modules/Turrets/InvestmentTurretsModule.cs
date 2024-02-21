@@ -1,8 +1,9 @@
-﻿using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+﻿using TDGame.Core.Game.Models.Entities.Turrets;
+using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
-    public class InvestmentTurretsModule : BaseTurretModule
+    public class InvestmentTurretsModule : BaseTurretModule<InvestmentTurretDefinition>
     {
         private int _currentWave = 0;
 
@@ -10,17 +11,10 @@ namespace TDGame.Core.Game.Modules.Turrets
         {
         }
 
-        public override void Update(TimeSpan passed)
+        public override void UpdateTurret(TimeSpan passed, TurretInstance turret, InvestmentTurretDefinition def)
         {
-            foreach (var turret in Game.Turrets)
-            {
-                if (turret.TurretInfo is InvestmentTurretDefinition def)
-                {
-                    if (Game.Wave != _currentWave)
-                        Game.Money += def.MoneyPrWave;
-                }
-            }
-            _currentWave = Game.Wave;
+            if (Game.Wave != _currentWave)
+                Game.Money += def.MoneyPrWave;
         }
     }
 }
