@@ -6,7 +6,7 @@ using TDGame.Core.Resources;
 
 namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
 {
-    public class ProjectileTurretDefinition : ITurretModule
+    public class ProjectileTurretDefinition : ITurretModule, IRangeAttribute, ICooldownAttribute
     {
         public float Range { get; set; }
         public int Cooldown { get; set; }

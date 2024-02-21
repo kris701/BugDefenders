@@ -1,7 +1,6 @@
 # TDGame
 
 ## TODO List
-- [ ] Make attribute interfaces for modules
 - [ ] Viewport the range circle
     - So it stays within the game field
 - [ ] Encrypt user data
@@ -9,6 +8,7 @@
     - Maybe only do this in release mode, since it will be a hassle while debugging
 - [ ] Improve the game integrity checker
     - Right now, it only rly checks IDs of turrets and enemy types
+- [X] Make attribute interfaces for modules
 - [X] Multipathed maps
 - [X] Passive turret
     - E.g. a turret that does not shoot but increases range of others. 

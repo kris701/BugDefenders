@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDGame.Core.Game.Models.Entities.Projectiles.Modules
+namespace TDGame.Core.Game.Models.Entities
 {
-    public interface IMovingProjectile
+    public interface ISpeedAttribute
     {
         public float Speed { get; set; }
     }

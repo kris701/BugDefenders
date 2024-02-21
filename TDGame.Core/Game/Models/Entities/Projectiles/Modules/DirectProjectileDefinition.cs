@@ -13,7 +13,7 @@ using System.Text.Json.Serialization;
 
 namespace TDGame.Core.Game.Models.Entities.Projectiles.Modules
 {
-    public class DirectProjectileDefinition : IProjectileModule, IMovingProjectile
+    public class DirectProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute, IDamageAttribute
     {
         public float Speed { get; set; }
         public float Damage { get; set; }

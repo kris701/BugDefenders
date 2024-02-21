@@ -4,7 +4,7 @@ using TDGame.Core.Resources;
 
 namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
 {
-    public class AOETurretDefinition : ITurretModule
+    public class AOETurretDefinition : ITurretModule, IRangeAttribute, ISlowingAttribute, ICooldownAttribute, IDamageAttribute
     {
         public float Range { get; set; }
         public float Damage { get; set; }

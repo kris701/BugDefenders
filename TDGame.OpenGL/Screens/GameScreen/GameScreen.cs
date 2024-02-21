@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TDGame.Core.Game;
+using TDGame.Core.Game.Models.Entities;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
@@ -156,7 +157,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SelectTurret()
         {
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(_selectedTurret) * 2));
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(Color.Gray, (int)(GetRangeOfTurret(_selectedTurret.GetDefinition()) * 2));
             _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
             _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
             _turretSelectRangeTile.X = _selectedTurret.CenterX + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
@@ -533,27 +534,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
             }
         }
 
-        private float GetRangeOfTurret(TurretInstance turret)
+        private float GetRangeOfTurret(TurretDefinition def)
         {
-            switch (turret.TurretInfo)
-            {
-                case AOETurretDefinition def: return def.Range;
-                case LaserTurretDefinition def: return def.Range;
-                case ProjectileTurretDefinition def: return def.Range;
-                case PassiveTurretDefinition def: return def.Range;
-            }
-            return 1;
-        }
-
-        private float GetRangeOfTurret(TurretDefinition turret)
-        {
-            switch (turret.ModuleInfo)
-            {
-                case AOETurretDefinition def: return def.Range;
-                case LaserTurretDefinition def: return def.Range;
-                case ProjectileTurretDefinition def: return def.Range;
-                case PassiveTurretDefinition def: return def.Range;
-            }
+            if (def.ModuleInfo is IRangeAttribute range)
+                return range.Range;
             return 1;
         }
 

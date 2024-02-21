@@ -1,4 +1,5 @@
 ﻿using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models.Entities;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
@@ -53,7 +54,7 @@ namespace TDGame.Core.Game.Modules.Turrets
 
         private FloatPoint GetTrailingPoint(EnemyInstance enemy, ProjectileInstance projectile)
         {
-            if (enemy.ModuleInfo is ISlowable slow && projectile.ProjectileInfo is IMovingProjectile speed)
+            if (enemy.ModuleInfo is ISlowable slow && projectile.ProjectileInfo is ISpeedAttribute speed)
             {
                 float x = enemy.CenterX;
                 float y = enemy.CenterY;

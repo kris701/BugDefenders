@@ -7,7 +7,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
 {
-    public class PassiveTurretDefinition : ITurretModule
+    public class PassiveTurretDefinition : ITurretModule, IRangeAttribute
     {
         public float Range { get; set; }
         public float RangeModifier { get; set; } = 1;

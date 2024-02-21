@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace TDGame.Core.Game.Models.Entities.Enemies.Modules
 {
-    public class WaveEnemyDefinition : IEnemyModule, ISlowable
+    public class WaveEnemyDefinition : IEnemyModule, ISpeedAttribute, ISlowable
     {
         public float Speed { get; set; }
         public int WaveSize { get; set; }

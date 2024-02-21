@@ -24,6 +24,8 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
                 item.Range *= RangeModifier;
                 item.Damage *= DamageModifier;
                 item.Cooldown = (int)(item.Cooldown * CooldownModifier);
+                item.SlowingFactor *= SlowingFactorModifier;
+                item.SlowingDuration = (int)(item.SlowingDuration * SlowingDurationModifier);
                 on.HasUpgrades.Add(ID);
             }
             else
@@ -41,6 +43,10 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
                 sb.AppendLine($"Range {RangeModifier}x");
             if (CooldownModifier != 1)
                 sb.AppendLine($"Cooldown {CooldownModifier}x");
+            if (SlowingFactorModifier != 1)
+                sb.AppendLine($"Slowing Factor: {SlowingFactorModifier}x");
+            if (SlowingDurationModifier != 1)
+                sb.AppendLine($"Slowing Duration: {SlowingDurationModifier}x");
 
             return sb.ToString();
         }

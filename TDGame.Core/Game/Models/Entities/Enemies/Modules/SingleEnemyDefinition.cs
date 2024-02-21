@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace TDGame.Core.Game.Models.Entities.Enemies.Modules
 {
-    public class SingleEnemyDefinition : IEnemyModule, ISlowable
+    public class SingleEnemyDefinition : IEnemyModule, ISpeedAttribute, ISlowable
     {
         public float Speed { get; set; }
         [JsonIgnore]
