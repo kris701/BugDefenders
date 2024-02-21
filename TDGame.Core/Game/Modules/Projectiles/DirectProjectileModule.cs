@@ -1,12 +1,14 @@
 ﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Projectiles
 {
     public class DirectProjectileModule : BaseProjectileModule<DirectProjectileDefinition>
     {
-        public DirectProjectileModule(GameEngine game) : base(game)
+        public DirectProjectileModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
 
@@ -19,7 +21,7 @@ namespace TDGame.Core.Game.Modules.Projectiles
                 projectile.Target = Game.GetBestEnemy(projectile);
             if (def.IsGuided && projectile.Target != null)
             {
-                if (!Game.CurrentEnemies.Contains(projectile.Target))
+                if (!Context.CurrentEnemies.Contains(projectile.Target))
                     projectile.Target = null;
                 else
                     projectile.Angle = Game.GetAngle(projectile.Target, projectile);
@@ -30,8 +32,8 @@ namespace TDGame.Core.Game.Modules.Projectiles
             if (def.Acceleration != 1)
             {
                 def.Speed = (float)Math.Ceiling(def.Speed * def.Acceleration);
-                if (def.Speed > Game.GameStyle.ProjectileSpeedCap)
-                    def.Speed = Game.GameStyle.ProjectileSpeedCap;
+                if (def.Speed > Context.GameStyle.ProjectileSpeedCap)
+                    def.Speed = Context.GameStyle.ProjectileSpeedCap;
             }
 
             if (projectile.Size >= 10)
@@ -68,8 +70,8 @@ namespace TDGame.Core.Game.Modules.Projectiles
                 return true;
             }
             else if (
-                projectile.X < 0 || projectile.X > Game.Map.Width ||
-                projectile.Y < 0 || projectile.Y > Game.Map.Height)
+                projectile.X < 0 || projectile.X > Context.Map.Width ||
+                projectile.Y < 0 || projectile.Y > Context.Map.Height)
                 return true;
             return false;
         }

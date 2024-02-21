@@ -2,21 +2,20 @@
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
-    public abstract class BaseTurretModule<T> : IGameTurretModule<T> where T : ITurretModule
+    public abstract class BaseTurretModule<T> : BaseGameModule, IGameTurretModule<T> where T : ITurretModule
     {
-        public GameEngine Game { get; }
-
-        public BaseTurretModule(GameEngine game)
+        protected BaseTurretModule(GameContext context, GameEngine game) : base(context, game)
         {
-            Game = game;
         }
 
-        public void Update(TimeSpan passed)
+        public override void Update(TimeSpan passed)
         {
-            foreach (var turret in Game.Turrets)
+            foreach (var turret in Context.Turrets)
                 if (turret.TurretInfo is T def)
                     UpdateTurret(passed, turret, def);
         }

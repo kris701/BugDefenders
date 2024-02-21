@@ -67,14 +67,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave.DoClick(); });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
             {
-                if (_game.Turrets.Count == 0)
+                if (_game.Context.Turrets.Count == 0)
                     return;
                 tabIndex++;
-                if (tabIndex >= _game.Turrets.Count)
+                if (tabIndex >= _game.Context.Turrets.Count)
                     tabIndex = 0;
                 _unselectTurret = true;
                 _selectTurret = true;
-                _selectedTurret = _game.Turrets.ToList()[tabIndex];
+                _selectedTurret = _game.Context.Turrets.ToList()[tabIndex];
             });
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, UnselectTurret);
             Initialize();
@@ -203,8 +203,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void AutoRunButton_Click(ButtonControl parent)
         {
-            _game.AutoSpawn = !_game.AutoSpawn;
-            if (_game.AutoSpawn)
+            _game.Context.AutoSpawn = !_game.Context.AutoSpawn;
+            if (_game.Context.AutoSpawn)
                 _autoRunButton.Text = "[X] Auto-Wave";
             else
                 _autoRunButton.Text = "[ ] Auto-Wave";
@@ -235,16 +235,16 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             _game.Update(gameTime.ElapsedGameTime);
 
-            _moneyLabel.Text = $"Money: {_game.Money}$";
-            _hpLabel.Text = $"HP: {_game.HP}";
-            _scoreLabel.Text = $"Wave {_game.Wave},Score {_game.Score}";
+            _moneyLabel.Text = $"Money: {_game.Context.Money}$";
+            _hpLabel.Text = $"HP: {_game.Context.HP}";
+            _scoreLabel.Text = $"Wave {_game.Context.Wave},Score {_game.Context.Score}";
 
             UpdateTurretPurchaseButtons();
             UpdateNextEnemies();
 
-            _turretUpdater.UpdateEntities(_game.Turrets, gameTime, CreateNewTurretControl);
-            _enemyUpdater.UpdateEntities(_game.CurrentEnemies, gameTime, CreateNewEnemyControl, UpdateEnemyControl);
-            _projectileUpdater.UpdateEntities(_game.Projectiles, gameTime, CreateNewProjectileControl);
+            _turretUpdater.UpdateEntities(_game.Context.Turrets, gameTime, CreateNewTurretControl);
+            _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies, gameTime, CreateNewEnemyControl, UpdateEnemyControl);
+            _projectileUpdater.UpdateEntities(_game.Context.Projectiles, gameTime, CreateNewProjectileControl);
             _effectsUpdater.UpdateEntities(_effects, gameTime, CreateNewEffect);
             _laserUpdater.UpdateEntities(_lasers.Values.ToHashSet(), gameTime, CreateNewLaser, UpdateLaserControl);
             UpdateEffectLifetimes(gameTime);
@@ -386,7 +386,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 if (turret.Tag is TurretDefinition def)
                 {
-                    if (_game.Money < def.Cost || _game.Wave < def.AvailableAtWave)
+                    if (_game.Context.Money < def.Cost || _game.Context.Wave < def.AvailableAtWave)
                         turret.IsEnabled = false;
                     else
                         turret.IsEnabled = true;
@@ -459,7 +459,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private void UpdateLasers()
         {
             var found = new List<Guid>();
-            foreach (var turret in _game.Turrets)
+            foreach (var turret in _game.Context.Turrets)
             {
                 if (turret.TurretInfo is LaserTurretDefinition)
                 {
@@ -489,8 +489,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void UpdateNextEnemies()
         {
-            for (int i = 0; i < _game.EnemiesToSpawn.Count && i < _nextEnemyPanels.Count; i++)
-                _nextEnemyPanels[i].UpdateToEnemy(_game.EnemiesToSpawn[i], _game.Evolution);
+            for (int i = 0; i < _game.Context.EnemiesToSpawn.Count && i < _nextEnemyPanels.Count; i++)
+                _nextEnemyPanels[i].UpdateToEnemy(_game.Context.EnemiesToSpawn[i], _game.Context.Evolution);
         }
 
         private void BuyTurret_Click(ButtonControl parent)
@@ -518,7 +518,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 _gameOver = true;
 
-                Parent.CurrentUser.Stats.Combine(_game.Outcome);
+                Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
                 var achivements = ResourceManager.Achivements.GetResources();
                 foreach (var id in achivements)
                 {
@@ -531,7 +531,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 }
 
                 var screen = Parent.TakeScreenCap();
-                SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Score, _game.GameTime));
+                SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Context.Score, _game.Context.GameTime));
             }
         }
 

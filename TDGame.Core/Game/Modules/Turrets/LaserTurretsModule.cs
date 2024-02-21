@@ -1,12 +1,14 @@
 ﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
     public class LaserTurretsModule : BaseTurretModule<LaserTurretDefinition>
     {
-        public LaserTurretsModule(GameEngine game) : base(game)
+        public LaserTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
 

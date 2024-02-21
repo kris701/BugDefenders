@@ -1,5 +1,7 @@
 ﻿using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
@@ -7,14 +9,14 @@ namespace TDGame.Core.Game.Modules.Turrets
     {
         private int _currentWave = 0;
 
-        public InvestmentTurretsModule(GameEngine game) : base(game)
+        public InvestmentTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
 
         public override void UpdateTurret(TimeSpan passed, TurretInstance turret, InvestmentTurretDefinition def)
         {
-            if (Game.Wave != _currentWave)
-                Game.Money += def.MoneyPrWave;
+            if (Context.Wave != _currentWave)
+                Context.Money += def.MoneyPrWave;
         }
     }
 }

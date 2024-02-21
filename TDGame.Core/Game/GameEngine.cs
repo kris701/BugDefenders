@@ -34,6 +34,23 @@ namespace TDGame.Core.Game
         private GameTimer _mainLoopTimer;
         private int _waveQueue = 0;
 
+        public bool GameOver { get; set; }
+        private bool _running = true;
+        public bool Running
+        {
+            get
+            {
+                return _running;
+            }
+            set
+            {
+                if (!GameOver)
+                    _running = value;
+            }
+        }
+        public GameContext Context { get; }
+        public List<IGameModule> GameModules { get; }
+
         public AOETurretsModule AOETurretsModule { get; }
         public LaserTurretsModule LaserTurretsModule { get; }
         public ProjectileTurretsModule ProjectileTurretsModule { get; }
@@ -48,30 +65,24 @@ namespace TDGame.Core.Game
 
         public GameEngine(Guid mapID, Guid styleID)
         {
-            CurrentEnemies = new HashSet<EnemyInstance>();
-            Turrets = new HashSet<TurretInstance>();
-            Projectiles = new HashSet<ProjectileInstance>();
-            EnemiesToSpawn = new List<List<Guid>>();
-
-            Map = ResourceManager.Maps.GetResource(mapID);
-            GameStyle = ResourceManager.GameStyles.GetResource(styleID);
-            HP = GameStyle.StartingHP;
-            Money = GameStyle.StartingMoney;
-            _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (CurrentEnemies.Count == 0) QueueEnemies(); });
-            _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Evolution *= GameStyle.EvolutionRate; });
+            Context = new GameContext(
+                ResourceManager.Maps.GetResource(mapID),
+                ResourceManager.GameStyles.GetResource(styleID));
+            _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (Context.CurrentEnemies.Count == 0) QueueEnemies(); });
+            _evolutionTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { Context.Evolution *= Context.GameStyle.EvolutionRate; });
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
 
-            AOETurretsModule = new AOETurretsModule(this);
-            LaserTurretsModule = new LaserTurretsModule(this);
-            ProjectileTurretsModule = new ProjectileTurretsModule(this);
-            InvestmentTurretsModule = new InvestmentTurretsModule(this);
-            PassiveTurretsModule = new PassiveTurretsModule(this);
+            AOETurretsModule = new AOETurretsModule(Context, this);
+            LaserTurretsModule = new LaserTurretsModule(Context, this);
+            ProjectileTurretsModule = new ProjectileTurretsModule(Context, this);
+            InvestmentTurretsModule = new InvestmentTurretsModule(Context, this);
+            PassiveTurretsModule = new PassiveTurretsModule(Context, this);
 
-            ExplosiveProjectileModule = new ExplosiveProjectileModule(this);
-            DirectProjectileModule = new DirectProjectileModule(this);
+            ExplosiveProjectileModule = new ExplosiveProjectileModule(Context, this);
+            DirectProjectileModule = new DirectProjectileModule(Context, this);
 
-            WaveEnemiesModule = new WaveEnemyModule(this);
-            SingleEnemiesModule = new SingleEnemyModule(this);
+            WaveEnemiesModule = new WaveEnemyModule(Context, this);
+            SingleEnemiesModule = new SingleEnemyModule(Context, this);
 
             GameModules = new List<IGameModule>()
             {
@@ -91,21 +102,15 @@ namespace TDGame.Core.Game
             UpdateEnemiesToSpawnList();
         }
 
-        private void EndGame()
-        {
-            Running = false;
-            GameOver = true;
-        }
-
         public void Update(TimeSpan passed)
         {
             if (Running)
             {
-                if (AutoSpawn)
+                if (Context.AutoSpawn)
                     _enemySpawnTimer.Update(passed);
                 _evolutionTimer.Update(passed);
                 _mainLoopTimer.Update(passed);
-                GameTime += passed;
+                Context.GameTime += passed;
             }
         }
 
@@ -123,11 +128,12 @@ namespace TDGame.Core.Game
 
         internal void DamagePlayer()
         {
-            HP--;
-            if (HP <= 0)
+            Context.HP--;
+            if (Context.HP <= 0)
             {
-                HP = 0;
-                EndGame();
+                Context.HP = 0;
+                Running = false;
+                GameOver = true;
             }
         }
 
@@ -140,7 +146,7 @@ namespace TDGame.Core.Game
             {
                 case TargetingTypes.Closest:
                     var minDist = float.MaxValue;
-                    foreach (var enemy in CurrentEnemies)
+                    foreach (var enemy in Context.CurrentEnemies)
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
@@ -154,7 +160,7 @@ namespace TDGame.Core.Game
                     break;
                 case TargetingTypes.Weakest:
                     var lowestHP = float.MaxValue;
-                    foreach (var enemy in CurrentEnemies)
+                    foreach (var enemy in Context.CurrentEnemies)
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
@@ -168,7 +174,7 @@ namespace TDGame.Core.Game
                     break;
                 case TargetingTypes.Strongest:
                     var highestHP = 0f;
-                    foreach (var enemy in CurrentEnemies)
+                    foreach (var enemy in Context.CurrentEnemies)
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
@@ -190,17 +196,17 @@ namespace TDGame.Core.Game
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {
-                Money += (int)(enemy.GetDefinition().Reward * GameStyle.MoneyMultiplier);
-                Score += enemy.GetDefinition().Reward;
-                CurrentEnemies.Remove(enemy);
+                Context.Money += (int)(enemy.GetDefinition().Reward * Context.GameStyle.MoneyMultiplier);
+                Context.Score += enemy.GetDefinition().Reward;
+                Context.CurrentEnemies.Remove(enemy);
                 if (OnEnemyKilled != null)
                     OnEnemyKilled.Invoke(enemy);
 
-                Outcome.TotalKills++;
-                if (!Outcome.KillsOfType.ContainsKey(enemy.DefinitionID))
-                    Outcome.KillsOfType.Add(enemy.DefinitionID, 1);
+                Context.Outcome.TotalKills++;
+                if (!Context.Outcome.KillsOfType.ContainsKey(enemy.DefinitionID))
+                    Context.Outcome.KillsOfType.Add(enemy.DefinitionID, 1);
                 else
-                    Outcome.KillsOfType[enemy.DefinitionID] += 1;
+                    Context.Outcome.KillsOfType[enemy.DefinitionID] += 1;
 
                 return true;
             }
@@ -209,15 +215,15 @@ namespace TDGame.Core.Game
 
         private void UpdateEnemiesToSpawnList()
         {
-            int waveSize = (int)(1 * Evolution);
-            for (int i = EnemiesToSpawn.Count; i < 3; i++)
+            int waveSize = (int)(1 * Context.Evolution);
+            for (int i = Context.EnemiesToSpawn.Count; i < 3; i++)
             {
                 var wave = new List<Guid>();
                 for (int j = 0; j < waveSize; j++)
                 {
                     Guid? newEnemy = null;
 
-                    if (_waveQueue != 0 && _waveQueue % GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
+                    if (_waveQueue != 0 && _waveQueue % Context.GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
                         newEnemy = SingleEnemiesModule.GetRandomEnemy(_waveQueue);
                     if (WaveEnemiesModule.EnemyOptions.Count > 0 && newEnemy == null)
                         newEnemy = WaveEnemiesModule.GetRandomEnemy(_waveQueue);
@@ -226,22 +232,22 @@ namespace TDGame.Core.Game
                         wave.Add((Guid)newEnemy);
                 }
                 _waveQueue++;
-                EnemiesToSpawn.Add(wave);
+                Context.EnemiesToSpawn.Add(wave);
             }
         }
 
         public void QueueEnemies()
         {
-            Money += GameStyle.MoneyPrWave;
-            Wave++;
-            foreach (var item in EnemiesToSpawn[0])
+            Context.Money += Context.GameStyle.MoneyPrWave;
+            Context.Wave++;
+            foreach (var item in Context.EnemiesToSpawn[0])
             {
                 if (WaveEnemiesModule.EnemyOptions.Contains(item))
                     _spawnQueue.AddRange(WaveEnemiesModule.QueueEnemies(item));
                 else if (SingleEnemiesModule.EnemyOptions.Contains(item))
                     _spawnQueue.AddRange(SingleEnemiesModule.QueueEnemies(item));
             }
-            EnemiesToSpawn.RemoveAt(0);
+            Context.EnemiesToSpawn.RemoveAt(0);
             UpdateEnemiesToSpawnList();
         }
 
@@ -251,7 +257,7 @@ namespace TDGame.Core.Game
             newToAdd.AddRange(SingleEnemiesModule.UpdateSpawnQueue(passed, _spawnQueue));
             foreach (var enemy in newToAdd)
             {
-                CurrentEnemies.Add(enemy);
+                Context.CurrentEnemies.Add(enemy);
                 if (OnEnemySpawned != null)
                     OnEnemySpawned.Invoke(enemy);
             }
@@ -265,12 +271,12 @@ namespace TDGame.Core.Game
 
         public bool CanLevelUpTurret(TurretInstance turret, Guid id)
         {
-            if (!Turrets.Contains(turret))
+            if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
             var upgrade = turret.GetDefinition().Upgrades.FirstOrDefault(x => x.ID == id);
             if (upgrade == null)
                 return false;
-            if (Money < upgrade.Cost)
+            if (Context.Money < upgrade.Cost)
                 return false;
             if (upgrade.Requires != null && !turret.HasUpgrades.Contains((Guid)upgrade.Requires))
                 return false;
@@ -279,7 +285,7 @@ namespace TDGame.Core.Game
 
         public bool LevelUpTurret(TurretInstance turret, Guid id)
         {
-            if (!Turrets.Contains(turret))
+            if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
             if (!CanLevelUpTurret(turret, id))
                 return false;
@@ -290,7 +296,7 @@ namespace TDGame.Core.Game
                 OnBeforeTurretUpgraded.Invoke(turret);
 
             upgrade.ApplyUpgrade(turret);
-            Money -= upgrade.Cost;
+            Context.Money -= upgrade.Cost;
 
             if (OnTurretUpgraded != null)
                 OnTurretUpgraded.Invoke(turret);
@@ -299,10 +305,10 @@ namespace TDGame.Core.Game
 
         public void SellTurret(TurretInstance turret)
         {
-            if (!Turrets.Contains(turret))
+            if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
-            Money += turret.GetTurretWorth();
-            Turrets.Remove(turret);
+            Context.Money += turret.GetTurretWorth();
+            Context.Turrets.Remove(turret);
 
             if (OnTurretSold != null)
                 OnTurretSold.Invoke(turret);
@@ -310,42 +316,42 @@ namespace TDGame.Core.Game
 
         public bool AddTurret(TurretDefinition turretDef, FloatPoint at)
         {
-            if (Money < turretDef.Cost)
+            if (Context.Money < turretDef.Cost)
                 return false;
-            if (Wave < turretDef.AvailableAtWave)
+            if (Context.Wave < turretDef.AvailableAtWave)
                 return false;
-            if (GameStyle.TurretBlackList.Contains(turretDef.ID))
+            if (Context.GameStyle.TurretBlackList.Contains(turretDef.ID))
                 return false;
             if (at.X < 0)
                 return false;
-            if (at.X > Map.Width - turretDef.Size)
+            if (at.X > Context.Map.Width - turretDef.Size)
                 return false;
             if (at.Y < 0)
                 return false;
-            if (at.Y > Map.Height - turretDef.Size)
+            if (at.Y > Context.Map.Height - turretDef.Size)
                 return false;
 
-            foreach (var block in Map.BlockingTiles)
+            foreach (var block in Context.Map.BlockingTiles)
                 if (MathHelpers.Intersects(turretDef, at, block))
                     return false;
 
-            foreach (var otherTurret in Turrets)
+            foreach (var otherTurret in Context.Turrets)
                 if (MathHelpers.Intersects(turretDef, at, otherTurret))
                     return false;
 
             var newInstance = new TurretInstance(turretDef);
             newInstance.X = at.X;
             newInstance.Y = at.Y;
-            Money -= turretDef.Cost;
-            Turrets.Add(newInstance);
+            Context.Money -= turretDef.Cost;
+            Context.Turrets.Add(newInstance);
             if (OnTurretPurchased != null)
                 OnTurretPurchased.Invoke(newInstance);
 
-            Outcome.TotalTurretsPlaced++;
-            if (!Outcome.TotalTurretsPlacedOfType.ContainsKey(newInstance.DefinitionID))
-                Outcome.TotalTurretsPlacedOfType.Add(newInstance.DefinitionID, 1);
+            Context.Outcome.TotalTurretsPlaced++;
+            if (!Context.Outcome.TotalTurretsPlacedOfType.ContainsKey(newInstance.DefinitionID))
+                Context.Outcome.TotalTurretsPlacedOfType.Add(newInstance.DefinitionID, 1);
             else
-                Outcome.TotalTurretsPlacedOfType[newInstance.DefinitionID] += 1;
+                Context.Outcome.TotalTurretsPlacedOfType[newInstance.DefinitionID] += 1;
 
             return true;
         }

@@ -3,22 +3,21 @@ using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Projectiles
 {
-    public abstract class BaseProjectileModule<T> : IGameProjectileModule<T> where T : IProjectileModule
+    public abstract class BaseProjectileModule<T> : BaseGameModule, IGameProjectileModule<T> where T : IProjectileModule
     {
-        public GameEngine Game { get; }
-
-        public BaseProjectileModule(GameEngine game)
+        protected BaseProjectileModule(GameContext context, GameEngine game) : base(context, game)
         {
-            Game = game;
         }
 
-        public void Update(TimeSpan passed)
+        public override void Update(TimeSpan passed)
         {
             var toRemove = new List<ProjectileInstance>();
-            foreach (var projectile in Game.Projectiles)
+            foreach (var projectile in Context.Projectiles)
             {
                 if (projectile.ProjectileInfo is T def)
                 {
@@ -27,7 +26,7 @@ namespace TDGame.Core.Game.Modules.Projectiles
                 }
             }
             foreach (var remove in toRemove)
-                Game.Projectiles.Remove(remove);
+                Context.Projectiles.Remove(remove);
         }
 
         public abstract bool UpdateProjectile(TimeSpan passed, ProjectileInstance projectile, T def);

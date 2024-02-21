@@ -2,12 +2,14 @@
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Projectiles
 {
     public class ExplosiveProjectileModule : BaseProjectileModule<ExplosiveProjectileDefinition>
     {
-        public ExplosiveProjectileModule(GameEngine game) : base(game)
+        public ExplosiveProjectileModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
 
@@ -17,7 +19,7 @@ namespace TDGame.Core.Game.Modules.Projectiles
                 projectile.Target = Game.GetBestEnemy(projectile);
             if (def.IsGuided && projectile.Target != null)
             {
-                if (!Game.CurrentEnemies.Contains(projectile.Target))
+                if (!Context.CurrentEnemies.Contains(projectile.Target))
                     projectile.Target = null;
                 else
                     projectile.Angle = Game.GetAngle(projectile.Target, projectile);
@@ -28,8 +30,8 @@ namespace TDGame.Core.Game.Modules.Projectiles
             if (def.Acceleration != 1)
             {
                 def.Speed = (float)Math.Ceiling(def.Speed * def.Acceleration);
-                if (def.Speed > Game.GameStyle.ProjectileSpeedCap)
-                    def.Speed = Game.GameStyle.ProjectileSpeedCap;
+                if (def.Speed > Context.GameStyle.ProjectileSpeedCap)
+                    def.Speed = Context.GameStyle.ProjectileSpeedCap;
             }
 
             if (projectile.Size >= 10)
@@ -38,8 +40,8 @@ namespace TDGame.Core.Game.Modules.Projectiles
                 projectile.Y += (float)yMod * def.Speed;
 
                 if (IsWithinTriggerRange(projectile, def) ||
-                    projectile.X < 0 || projectile.X > Game.Map.Width ||
-                    projectile.Y < 0 || projectile.Y > Game.Map.Height)
+                    projectile.X < 0 || projectile.X > Context.Map.Width ||
+                    projectile.Y < 0 || projectile.Y > Context.Map.Height)
                     return true;
             }
             else
@@ -50,8 +52,8 @@ namespace TDGame.Core.Game.Modules.Projectiles
                     projectile.Y += (float)yMod * ((float)def.Speed / 5);
 
                     if (IsWithinTriggerRange(projectile, def) ||
-                        projectile.X < 0 || projectile.X > Game.Map.Width ||
-                        projectile.Y < 0 || projectile.Y > Game.Map.Height)
+                        projectile.X < 0 || projectile.X > Context.Map.Width ||
+                        projectile.Y < 0 || projectile.Y > Context.Map.Height)
                         return true;
                 }
             }
@@ -61,7 +63,7 @@ namespace TDGame.Core.Game.Modules.Projectiles
         private bool IsWithinTriggerRange(ProjectileInstance projectile, ExplosiveProjectileDefinition def)
         {
             bool isWithin = false;
-            foreach (var enemy in Game.CurrentEnemies)
+            foreach (var enemy in Context.CurrentEnemies)
             {
                 if (MathHelpers.Distance(projectile.CenterX, projectile.CenterY, enemy.CenterX, enemy.CenterY) < def.TriggerRange)
                 {
@@ -71,14 +73,14 @@ namespace TDGame.Core.Game.Modules.Projectiles
             }
             if (isWithin)
             {
-                for (int i = 0; i < Game.CurrentEnemies.Count; i++)
+                for (int i = 0; i < Context.CurrentEnemies.Count; i++)
                 {
-                    var dist = MathHelpers.Distance(projectile, Game.CurrentEnemies.ElementAt(i));
+                    var dist = MathHelpers.Distance(projectile, Context.CurrentEnemies.ElementAt(i));
                     if (dist < def.SplashRange)
                     {
-                        if (Game.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
+                        if (Context.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
                             SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                        if (Game.DamageEnemy(Game.CurrentEnemies.ElementAt(i), GetModifiedDamage(Game.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers)))
+                        if (Game.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers)))
                         {
                             if (projectile.Source != null)
                                 projectile.Source.Kills++;

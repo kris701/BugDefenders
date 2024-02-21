@@ -5,13 +5,14 @@ using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using TDGame.Core.Game.Models.GameStyles;
 using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
     public class ProjectileTurretsModule : BaseTurretModule<ProjectileTurretDefinition>
     {
-        public ProjectileTurretsModule(GameEngine game) : base(game)
+        public ProjectileTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
 
@@ -40,7 +41,7 @@ namespace TDGame.Core.Game.Modules.Turrets
                 else
                     projectile.Angle = Game.GetAngle(best, turret);
                 turret.Angle = projectile.Angle;
-                Game.Projectiles.Add(projectile);
+                Context.Projectiles.Add(projectile);
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
             }
             else
@@ -59,7 +60,7 @@ namespace TDGame.Core.Game.Modules.Turrets
                 float y = enemy.CenterY;
                 var dist = MathHelpers.Distance(enemy, projectile);
                 var steps = dist / speed.Speed;
-                var change = MathHelpers.GetPredictedLocation(enemy.Angle, slow.GetSpeed(), Game.GameStyle.EnemySpeedMultiplier);
+                var change = MathHelpers.GetPredictedLocation(enemy.Angle, slow.GetSpeed(), Context.GameStyle.EnemySpeedMultiplier);
                 return new FloatPoint(x + change.X * (float)steps, y + change.Y * (float)steps);
             }
             else

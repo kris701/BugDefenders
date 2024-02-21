@@ -2,6 +2,8 @@
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
@@ -9,7 +11,7 @@ namespace TDGame.Core.Game.Modules.Turrets
     {
         private Dictionary<TurretInstance, HashSet<TurretInstance>> _effectedTurrets = new Dictionary<TurretInstance, HashSet<TurretInstance>>();
 
-        public PassiveTurretsModule(GameEngine game) : base(game)
+        public PassiveTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
             Game.OnTurretPurchased += TurretAdded;
             Game.OnTurretSold += TurretRemoved;
@@ -26,12 +28,12 @@ namespace TDGame.Core.Game.Modules.Turrets
                             UnApplyEffect(def, effected);
 
             _effectedTurrets.Clear();
-            foreach (var turret in Game.Turrets)
+            foreach (var turret in Context.Turrets)
             {
                 if (turret.TurretInfo is PassiveTurretDefinition def)
                 {
                     _effectedTurrets.Add(turret, new HashSet<TurretInstance>());
-                    foreach (var other in Game.Turrets)
+                    foreach (var other in Context.Turrets)
                     {
                         if (other == turret || other.TurretInfo is PassiveTurretDefinition)
                             continue;

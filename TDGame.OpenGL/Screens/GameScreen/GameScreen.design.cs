@@ -82,7 +82,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 BorderBrush = BasicTextures.GetBasicRectange(Color.Blue),
                 Child = new TileControl(Parent)
                 {
-                    FillColor = TextureManager.GetTexture(_game.Map.ID),
+                    FillColor = TextureManager.GetTexture(_game.Context.Map.ID),
                     X = _gameArea.X,
                     Y = _gameArea.Y,
                     Height = _gameArea.Height,
@@ -131,7 +131,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             AddControl(1, _scoreLabel);
             _moneyLabel = new LabelControl(Parent)
             {
-                Text = $"Money: {_game.Money}$",
+                Text = $"Money: {_game.Context.Money}$",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 5,
@@ -142,7 +142,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             AddControl(1, _moneyLabel);
             _hpLabel = new LabelControl(Parent)
             {
-                Text = $"HP: {_game.HP}",
+                Text = $"HP: {_game.Context.HP}",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 5,

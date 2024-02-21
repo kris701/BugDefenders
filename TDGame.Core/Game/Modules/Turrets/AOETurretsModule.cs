@@ -3,12 +3,14 @@ using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using TDGame.Core.Game.Models.GameStyles;
+using TDGame.Core.Game.Models.Maps;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
     public class AOETurretsModule : BaseTurretModule<AOETurretDefinition>
     {
-        public AOETurretsModule(GameEngine game) : base(game)
+        public AOETurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
 
@@ -21,7 +23,7 @@ namespace TDGame.Core.Game.Modules.Turrets
             var closest = float.MaxValue;
             EnemyInstance? best = null;
             var targeting = new List<EnemyInstance>();
-            foreach (var enemy in Game.CurrentEnemies)
+            foreach (var enemy in Context.CurrentEnemies)
             {
                 if (!turret.GetDefinition().CanDamage.Contains(enemy.GetDefinition().TerrainType))
                     continue;
