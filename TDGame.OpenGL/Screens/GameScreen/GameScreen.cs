@@ -80,7 +80,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             Initialize();
 
 #if DRAWBLOCKINGTILES
-            foreach (var blockingTile in _game.Map.BlockingTiles)
+            foreach (var blockingTile in _game.Context.Map.BlockingTiles)
             {
                 AddControl(99, new TileControl(Parent)
                 {
@@ -91,6 +91,24 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     FillColor = BasicTextures.GetBasicRectange(Color.Red),
                     Alpha = 50
                 });
+            }
+#endif
+#if DRAWMAPPATHS
+            foreach (var path in _game.Context.Map.Paths)
+            {
+                var from = path[0];
+                foreach (var waypoint in path.Skip(1))
+                {
+                    AddControl(99, new LineControl(Parent)
+                    {
+                        X = from.X + _gameArea.X,
+                        Y = from.Y + _gameArea.Y,
+                        X2 = waypoint.X + _gameArea.X,
+                        Y2 = waypoint.Y + _gameArea.Y,
+                        Alpha = 50
+                    });
+                    from = waypoint;
+                }
             }
 #endif
         }
@@ -293,7 +311,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 Y = _gameArea.Y + entity.Y,
                 Width = entity.Size,
                 Height = entity.Size,
-                Rotation = entity.Angle,
+                Rotation = entity.Angle + (float)Math.PI / 2,
                 Tag = entity
             };
         }

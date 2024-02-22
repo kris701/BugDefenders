@@ -100,6 +100,7 @@ namespace TDGame.Core.Game.Modules.Turrets
             var newInstance = new TurretInstance(turretDef);
             newInstance.X = at.X;
             newInstance.Y = at.Y;
+            newInstance.Angle = -(float)Math.PI / 2;
             Context.Money -= turretDef.Cost;
             Context.Turrets.Add(newInstance);
             if (OnTurretPurchased != null)

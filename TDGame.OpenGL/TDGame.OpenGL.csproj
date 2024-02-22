@@ -16,6 +16,7 @@
 	  <!--<DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);TEXTBORDER</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
+	  <!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
