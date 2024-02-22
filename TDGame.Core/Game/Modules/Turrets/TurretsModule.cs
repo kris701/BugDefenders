@@ -1,9 +1,8 @@
 ﻿using TDGame.Core.Game.Helpers;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Maps;
-using TDGame.Core.Game.Modules.Turrets;
 
-namespace TDGame.Core.Game.Modules
+namespace TDGame.Core.Game.Modules.Turrets
 {
     public delegate void TurretEventHandler(TurretInstance turret);
     public class TurretsModule : BaseSuperGameModule

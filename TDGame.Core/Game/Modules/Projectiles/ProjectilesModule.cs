@@ -1,6 +1,4 @@
-﻿using TDGame.Core.Game.Modules.Projectiles;
-
-namespace TDGame.Core.Game.Modules
+﻿namespace TDGame.Core.Game.Modules.Projectiles
 {
     public class ProjectilesModule : BaseSuperGameModule
     {

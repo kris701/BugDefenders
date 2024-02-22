@@ -1,7 +1,7 @@
 ﻿using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 
-namespace TDGame.Core.Game.Modules.Projectiles
+namespace TDGame.Core.Game.Modules.Projectiles.SubModules
 {
     public interface IGameProjectileModule<T> : IGameModule where T : IProjectileModule
     {

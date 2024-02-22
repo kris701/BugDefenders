@@ -3,11 +3,11 @@ using TDGame.Core.Game.Models;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Modules.Enemies;
+using TDGame.Core.Game.Modules.Enemies.SubModules;
 using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
-namespace TDGame.Core.Game.Modules
+namespace TDGame.Core.Game.Modules.Enemies
 {
     public delegate void EnemyEventHandler(EnemyInstance enemy);
     public class EnemiesModule : BaseSuperGameModule

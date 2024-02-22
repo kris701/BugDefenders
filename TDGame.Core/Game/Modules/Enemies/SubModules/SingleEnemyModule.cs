@@ -2,7 +2,7 @@
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Resources;
 
-namespace TDGame.Core.Game.Modules.Enemies
+namespace TDGame.Core.Game.Modules.Enemies.SubModules
 {
     public class SingleEnemyModule : BaseEnemyModule<SingleEnemyDefinition>
     {

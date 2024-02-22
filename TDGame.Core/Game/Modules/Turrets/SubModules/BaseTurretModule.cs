@@ -3,7 +3,7 @@ using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 
-namespace TDGame.Core.Game.Modules.Turrets
+namespace TDGame.Core.Game.Modules.Turrets.SubModules
 {
     public abstract class BaseTurretModule<T> : BaseGameModule, IGameTurretModule<T> where T : ITurretModule
     {

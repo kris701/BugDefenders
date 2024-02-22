@@ -3,7 +3,7 @@ using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 
-namespace TDGame.Core.Game.Modules.Turrets
+namespace TDGame.Core.Game.Modules.Turrets.SubModules
 {
     public class PassiveTurretsModule : BaseTurretModule<PassiveTurretDefinition>
     {
@@ -90,14 +90,14 @@ namespace TDGame.Core.Game.Modules.Turrets
                     def.Range /= passive.RangeModifier;
                     def.Cooldown = (int)(def.Cooldown / passive.CooldownModifier);
                     def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration / passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
                     break;
                 case LaserTurretDefinition def:
                     def.Damage /= passive.DamageModifier;
                     def.Range /= passive.RangeModifier;
                     def.Cooldown = (int)(def.Cooldown / passive.CooldownModifier);
                     def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration / passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
                     break;
                 case ProjectileTurretDefinition def:
                     def.Range /= passive.RangeModifier;
@@ -114,12 +114,12 @@ namespace TDGame.Core.Game.Modules.Turrets
                 case DirectProjectileDefinition def:
                     def.Damage /= passive.DamageModifier;
                     def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration / passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
                     break;
                 case ExplosiveProjectileDefinition def:
                     def.Damage /= passive.DamageModifier;
                     def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration / passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
                     break;
             }
         }
@@ -133,14 +133,14 @@ namespace TDGame.Core.Game.Modules.Turrets
                     def.Range *= passive.RangeModifier;
                     def.Cooldown = (int)(def.Cooldown * passive.CooldownModifier);
                     def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration * passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
                     break;
                 case LaserTurretDefinition def:
                     def.Damage *= passive.DamageModifier;
                     def.Range *= passive.RangeModifier;
                     def.Cooldown = (int)(def.Cooldown * passive.CooldownModifier);
                     def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration * passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
                     break;
                 case ProjectileTurretDefinition def:
                     def.Range *= passive.RangeModifier;
@@ -157,12 +157,12 @@ namespace TDGame.Core.Game.Modules.Turrets
                 case DirectProjectileDefinition def:
                     def.Damage *= passive.DamageModifier;
                     def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration * passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
                     break;
                 case ExplosiveProjectileDefinition def:
                     def.Damage *= passive.DamageModifier;
                     def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = (int)(def.SlowingDuration * passive.SlowingDurationModifier);
+                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
                     break;
             }
         }

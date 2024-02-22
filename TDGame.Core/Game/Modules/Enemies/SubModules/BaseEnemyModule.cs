@@ -3,7 +3,7 @@ using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Resources;
 
-namespace TDGame.Core.Game.Modules.Enemies
+namespace TDGame.Core.Game.Modules.Enemies.SubModules
 {
     public abstract class BaseEnemyModule<T> : BaseGameModule where T : IEnemyModule, ISlowable
     {

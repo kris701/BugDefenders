@@ -3,7 +3,7 @@ using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 
-namespace TDGame.Core.Game.Modules.Projectiles
+namespace TDGame.Core.Game.Modules.Projectiles.SubModules
 {
     public class DirectProjectileModule : BaseProjectileModule<DirectProjectileDefinition>
     {

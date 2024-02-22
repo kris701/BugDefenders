@@ -4,7 +4,7 @@ using TDGame.Core.Game.Models.Entities.Projectiles;
 using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 
-namespace TDGame.Core.Game.Modules.Projectiles
+namespace TDGame.Core.Game.Modules.Projectiles.SubModules
 {
     public abstract class BaseProjectileModule<T> : BaseGameModule, IGameProjectileModule<T> where T : IProjectileModule
     {
