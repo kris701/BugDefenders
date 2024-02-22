@@ -52,6 +52,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                     if (allUsers.Count == 1)
                         return;
                     Parent.ChangeUser(allUsers.First(x => x.ID != Parent.CurrentUser.ID));
+                    SwitchView(new UsersScreen(Parent));
                 }
                 Parent.UserManager.RemoveUser(user);
                 _update = true;
@@ -66,7 +67,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 if (Parent.CurrentUser.ID != user.ID)
                 {
                     Parent.ChangeUser(user);
-                    _update = true;
+                    SwitchView(new UsersScreen(Parent));
                 }
             }
         }
