@@ -2,18 +2,16 @@
 {
     public class EvolutionModule : BaseGameModule
     {
-        public TimeSpan TickRate { get; set; } = TimeSpan.FromSeconds(1);
-        private TimeSpan _current = TimeSpan.Zero;
+        private int _currentWave = 0;
         public EvolutionModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
 
         public override void Update(TimeSpan passed)
         {
-            _current -= passed;
-            if (_current <= TimeSpan.Zero)
+            if (Context.Wave != _currentWave)
             {
-                _current = TickRate;
+                _currentWave = Context.Wave;
                 Context.Evolution *= Context.GameStyle.EvolutionRate;
             }
         }

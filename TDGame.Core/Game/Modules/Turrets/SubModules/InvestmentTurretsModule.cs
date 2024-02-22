@@ -11,6 +11,14 @@ namespace TDGame.Core.Game.Modules.Turrets.SubModules
         {
         }
 
+        public override void Update(TimeSpan passed)
+        {
+            foreach (var turret in Context.Turrets)
+                if (turret.TurretInfo is InvestmentTurretDefinition def)
+                    UpdateTurret(passed, turret, def);
+            _currentWave = Context.Wave;
+        }
+
         public override void UpdateTurret(TimeSpan passed, TurretInstance turret, InvestmentTurretDefinition def)
         {
             if (Context.Wave != _currentWave)

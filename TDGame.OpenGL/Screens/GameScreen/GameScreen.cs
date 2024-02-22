@@ -117,7 +117,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                         LifeTime = TimeSpan.FromMilliseconds(250),
                         Size = def.SplashRange,
                         X = projectile.CenterX - def.SplashRange / 2,
-                        Y = projectile.CenterY - def.SplashRange / 2
+                        Y = projectile.CenterY - def.SplashRange / 2,
+                        Angle = parent.Rotation
                     });
                 }
             }
@@ -352,7 +353,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 AutoPlay = true,
                 Width = entity.Size,
                 Height = entity.Size,
-                Tag = entity
+                Tag = entity,
+                Rotation = entity.Angle
             };
             return newTile;
         }
@@ -489,8 +491,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void UpdateNextEnemies()
         {
+            var rollingEvolution = _game.Context.Evolution;
             for (int i = 0; i < _game.Context.EnemiesToSpawn.Count && i < _nextEnemyPanels.Count; i++)
-                _nextEnemyPanels[i].UpdateToEnemy(_game.Context.EnemiesToSpawn[i], _game.Context.Evolution);
+            {
+                _nextEnemyPanels[i].UpdateToEnemy(_game.Context.EnemiesToSpawn[i], rollingEvolution);
+                rollingEvolution *= _game.Context.GameStyle.EvolutionRate;
+            }
         }
 
         private void BuyTurret_Click(ButtonControl parent)
