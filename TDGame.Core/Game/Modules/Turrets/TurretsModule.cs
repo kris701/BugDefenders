@@ -1,6 +1,7 @@
 ﻿using TDGame.Core.Game.Helpers;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Maps;
+using TDGame.Core.Game.Modules.Turrets.SubModules;
 
 namespace TDGame.Core.Game.Modules.Turrets
 {
@@ -16,10 +17,6 @@ namespace TDGame.Core.Game.Modules.Turrets
 
         public TurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
-        }
-
-        public override void Initialize()
-        {
             Modules = new List<IGameModule>()
             {
                 new AOETurretsModule(Context, Game),
@@ -28,7 +25,6 @@ namespace TDGame.Core.Game.Modules.Turrets
                 new InvestmentTurretsModule(Context, Game),
                 new PassiveTurretsModule(Context, Game),
             };
-            base.Initialize();
         }
 
         public bool CanLevelUpTurret(TurretInstance turret, Guid id)

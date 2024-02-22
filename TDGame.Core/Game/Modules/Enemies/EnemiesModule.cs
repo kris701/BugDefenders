@@ -24,10 +24,6 @@ namespace TDGame.Core.Game.Modules.Enemies
 
         public EnemiesModule(GameContext context, GameEngine game) : base(context, game)
         {
-        }
-
-        public override void Initialize()
-        {
             _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (Context.CurrentEnemies.Count == 0) QueueEnemies(); });
             WaveEnemiesModule = new WaveEnemyModule(Context, Game);
             SingleEnemiesModule = new SingleEnemyModule(Context, Game);
@@ -36,7 +32,6 @@ namespace TDGame.Core.Game.Modules.Enemies
                 WaveEnemiesModule,
                 SingleEnemiesModule
             };
-            base.Initialize();
             UpdateEnemiesToSpawnList();
         }
 

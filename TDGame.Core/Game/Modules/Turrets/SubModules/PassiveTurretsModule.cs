@@ -11,6 +11,10 @@ namespace TDGame.Core.Game.Modules.Turrets.SubModules
 
         public PassiveTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
+        }
+
+        public override void Initialize()
+        {
             Game.TurretsModule.OnTurretPurchased += TurretAdded;
             Game.TurretsModule.OnTurretSold += TurretRemoved;
             Game.TurretsModule.OnBeforeTurretUpgraded += TurretBeforeUpgraded;
