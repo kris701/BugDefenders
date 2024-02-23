@@ -15,7 +15,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = TextureManager.GetTexture(new Guid("1ba73c85-76b6-4fa1-9cd6-680598c6163b")),
+                FillColor = UIResourceManager.GetTexture(new Guid("1ba73c85-76b6-4fa1-9cd6-680598c6163b")),
                 Width = 1000,
                 Height = 1000
             });
@@ -61,7 +61,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                     Text = buff.Name,
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 });
                 AddControl(0, new TextboxControl(Parent)
                 {
@@ -72,7 +72,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                     Text = buff.Description,
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = TextureManager.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
+                    FillColor = UIResourceManager.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                     Margin = 15
                 });
                 AddControl(0, new ButtonControl(Parent, clicked: (x) =>
@@ -88,8 +88,8 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                     Text = "Claim",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = UIResourceManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                 });
                 count++;
             }
@@ -120,8 +120,8 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView(Parent)))

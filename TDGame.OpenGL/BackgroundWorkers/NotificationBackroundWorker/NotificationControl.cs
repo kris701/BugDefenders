@@ -30,7 +30,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
                 {
                     Width = 75,
                     Height = 75,
-                    FillColor = TextureManager.GetTexture(Item.Definition.ID)
+                    FillColor = UIResourceManager.GetTexture(Item.Definition.ID)
                 };
                 _iconTile._x = _x + Scale(20);
                 _iconTile._y = _y + Scale(20);

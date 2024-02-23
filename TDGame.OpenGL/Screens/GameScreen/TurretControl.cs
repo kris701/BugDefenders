@@ -20,7 +20,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public override void Initialize()
         {
-            var baseTexture = TextureManager.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d"));
+            var baseTexture = UIResourceManager.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d"));
             baseControl = new TileControl(Parent)
             {
                 FillColor = baseTexture,
@@ -46,7 +46,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public void SetTurretAnimation(Guid id)
         {
-            var textureSet = TextureManager.GetTextureSet(id);
+            var textureSet = UIResourceManager.GetTextureSet(id);
             TileSet = textureSet.LoadedContents;
             FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
         }

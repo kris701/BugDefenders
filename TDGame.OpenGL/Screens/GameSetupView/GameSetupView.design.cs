@@ -26,7 +26,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = TextureManager.GetTexture(new Guid("756430ea-46e1-4c3d-95a0-a232919b7876")),
+                FillColor = UIResourceManager.GetTexture(new Guid("756430ea-46e1-4c3d-95a0-a232919b7876")),
                 Width = 1000,
                 Height = 1000
             });
@@ -65,9 +65,9 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Text = "Start",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = TextureManager.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = UIResourceManager.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
                 IsEnabled = false
             };
             AddControl(0, _startButton);
@@ -83,8 +83,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG
@@ -112,7 +112,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Y = 210,
                 Height = 350,
                 Width = 900,
-                FillColor = TextureManager.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
+                FillColor = UIResourceManager.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
             });
             _mapPreviewTile = new TileControl(Parent)
             {
@@ -160,7 +160,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Y = 550,
                 Height = 350,
                 Width = 440,
-                FillColor = TextureManager.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
+                FillColor = UIResourceManager.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
             AddControl(1, new LabelControl(Parent)
             {
@@ -182,8 +182,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 UpdateMapSelectionPages();
             })
             {
-                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = UIResourceManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $"<",
@@ -203,8 +203,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 UpdateMapSelectionPages();
             })
             {
-                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = UIResourceManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $">",
@@ -229,8 +229,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 }
                 var newButton = new ButtonControl(Parent, clicked: SelectMap_Click)
                 {
-                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = UIResourceManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                     Font = BasicFonts.GetFont(16),
                     Text = $"{ResourceManager.Maps.GetResource(mapID).Name}",
                     FontColor = Color.White,
@@ -256,7 +256,7 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Y = 550,
                 Height = 350,
                 Width = 440,
-                FillColor = TextureManager.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
+                FillColor = UIResourceManager.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
             AddControl(1, new LabelControl(Parent)
             {
@@ -279,8 +279,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 UpdateMapSelectionPages();
             })
             {
-                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = UIResourceManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $"<",
@@ -300,8 +300,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 UpdateMapSelectionPages();
             })
             {
-                FillColor = TextureManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = UIResourceManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $">",
@@ -326,8 +326,8 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 }
                 var newButton = new ButtonControl(Parent, clicked: SelectGameStyle_Click)
                 {
-                    FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = UIResourceManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                     Font = BasicFonts.GetFont(16),
                     Text = $"{ResourceManager.GameStyles.GetResource(gameStyleID).Name}",
                     FontColor = Color.White,

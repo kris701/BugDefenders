@@ -18,7 +18,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = TextureManager.GetTexture(new Guid("fc3e4de1-331e-4a52-baee-e2f3c40962b4")),
+                FillColor = UIResourceManager.GetTexture(new Guid("fc3e4de1-331e-4a52-baee-e2f3c40962b4")),
                 Width = 1000,
                 Height = 1000
             });
@@ -63,7 +63,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                     Text = $"User: {allUsers.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
                     FontColor = Color.White,
                     Font = BasicFonts.GetFont(10),
-                    FillColor = TextureManager.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
+                    FillColor = UIResourceManager.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                 });
             }
 
@@ -79,8 +79,8 @@ namespace TDGame.OpenGL.Screens.HighScoresView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = TextureManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG

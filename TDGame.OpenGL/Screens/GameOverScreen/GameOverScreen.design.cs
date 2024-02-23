@@ -13,7 +13,7 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = TextureManager.GetTexture(new Guid("1d50ad58-0503-4fc6-95e4-1d18abb8c485")),
+                FillColor = UIResourceManager.GetTexture(new Guid("1d50ad58-0503-4fc6-95e4-1d18abb8c485")),
                 Width = 1000,
                 Height = 1000
             });
@@ -66,8 +66,8 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 Text = "Main Menu",
-                FillColor = TextureManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = TextureManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = UIResourceManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
             });
 
 #if DEBUG

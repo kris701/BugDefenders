@@ -27,7 +27,7 @@ namespace TDGame.OpenGL.Screens.AchivementsView
             {
                 Width = 75,
                 Height = 75,
-                FillColor = TextureManager.GetTexture(Achivement.ID)
+                FillColor = UIResourceManager.GetTexture(Achivement.ID)
             };
             _iconTile._x = _x + Scale(20);
             _iconTile._y = _y + Scale(20);

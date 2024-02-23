@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text.Json;
 using TDGame.Core.Resources;
 using TDGame.Core.Resources.Integrity;
@@ -14,6 +15,7 @@ using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
 using TDGame.OpenGL.Engine.BackgroundWorkers;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.ResourcePacks;
 using TDGame.OpenGL.Settings;
 using TDGame.OpenGL.Textures;
 
@@ -119,7 +121,7 @@ namespace TDGame.OpenGL
 
             Window.Title = "TDGame";
 
-            TextureManager.Initialize(Content);
+            UIResourceManager.Initialize(Content);
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
             ApplySettings();
@@ -149,12 +151,49 @@ namespace TDGame.OpenGL
                     {
                         foreach (var file in subFolder.GetFiles())
                         {
-                            var textureSetDef = JsonSerializer.Deserialize<TexturesDefinition>(File.ReadAllText(file.FullName));
-                            foreach (var texture in textureSetDef.Textures)
+                            var textureDef = JsonSerializer.Deserialize<List<TextureDefinition>>(File.ReadAllText(file.FullName));
+                            foreach (var texture in textureDef)
                             {
-                                var textureFile = new FileInfo(Path.Combine(subFolder.Parent.FullName, "Content", texture.Content));
-                                texture.Content = textureFile.FullName;
-                                TextureManager.LoadTexture(texture);
+                                texture.Content = Path.Combine(subFolder.Parent.FullName, "Content", texture.Content);
+                                UIResourceManager.LoadTexture(texture);
+                            }
+                        }
+                    }
+                    else if (subFolder.Name.ToUpper() == "TEXTURESETS")
+                    {
+                        foreach (var file in subFolder.GetFiles())
+                        {
+                            var textureSetDef = JsonSerializer.Deserialize<List<TextureSetDefinition>>(File.ReadAllText(file.FullName));
+                            foreach (var textureSet in textureSetDef)
+                            {
+                                for (int i = 0; i < textureSet.Contents.Count; i++)
+                                    textureSet.Contents[i] = Path.Combine(subFolder.Parent.FullName, "Content", textureSet.Contents[i]);
+                                foreach (var content in textureSet.Contents)
+                                    UIResourceManager.LoadTextureSet(textureSet);
+                            }
+                        }
+                    }
+                    else if (subFolder.Name.ToUpper() == "SONGS")
+                    {
+                        foreach (var file in subFolder.GetFiles())
+                        {
+                            var songsDef = JsonSerializer.Deserialize<List<SongDefinition>>(File.ReadAllText(file.FullName));
+                            foreach (var song in songsDef)
+                            {
+                                song.Content = Path.Combine(subFolder.Parent.FullName, "Content", song.Content);
+                                UIResourceManager.LoadSong(song);
+                            }
+                        }
+                    }
+                    else if (subFolder.Name.ToUpper() == "SOUNDEFFECTS")
+                    {
+                        foreach (var file in subFolder.GetFiles())
+                        {
+                            var soundEffectsDef = JsonSerializer.Deserialize<List<SoundEffectDefinition>>(File.ReadAllText(file.FullName));
+                            foreach (var soundEffect in soundEffectsDef)
+                            {
+                                soundEffect.Content = Path.Combine(subFolder.Parent.FullName, "Content", soundEffect.Content);
+                                UIResourceManager.LoadSoundEffect(soundEffect);
                             }
                         }
                     }
@@ -218,7 +257,7 @@ namespace TDGame.OpenGL
             Device.PreferredBackBufferWidth = (int)(CurrentUser.UserData.Scale * 1000);
             Device.SynchronizeWithVerticalRetrace = CurrentUser.UserData.IsVsync;
             Device.IsFullScreen = CurrentUser.UserData.IsFullscreen;
-            TextureManager.LoadTexturePack(CurrentUser.UserData.TexturePack);
+            UIResourceManager.LoadTexturePack(CurrentUser.UserData.TexturePack);
             Device.ApplyChanges();
             LoadMods();
         }

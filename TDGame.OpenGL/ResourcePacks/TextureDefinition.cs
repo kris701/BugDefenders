@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TDGame.OpenGL.Textures
 {
@@ -6,5 +9,8 @@ namespace TDGame.OpenGL.Textures
     {
         public Guid ID { get; set; }
         public string Content { get; set; }
+
+        [JsonIgnore]
+        public Texture2D LoadedContent { get; set; }
     }
 }
