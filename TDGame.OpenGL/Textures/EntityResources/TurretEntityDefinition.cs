@@ -2,7 +2,7 @@
 
 namespace TDGame.OpenGL.Textures.Animations
 {
-    public class TurretAnimationDefinition : IAnimationDefinition
+    public class TurretEntityDefinition : IEntityResource
     {
         public Guid Target { get; set; }
         public Guid OnShoot { get; set; }

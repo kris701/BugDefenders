@@ -2,7 +2,7 @@
 
 namespace TDGame.OpenGL.Textures.Animations
 {
-    public class EnemyAnimationDefinition : IAnimationDefinition
+    public class ProjectileEntityDefinition : IEntityResource
     {
         public Guid Target { get; set; }
         public Guid OnCreate { get; set; }

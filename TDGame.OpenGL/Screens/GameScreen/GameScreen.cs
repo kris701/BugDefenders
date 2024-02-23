@@ -298,7 +298,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private TurretControl CreateNewTurretControl(TurretInstance entity)
         {
-            var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(entity.DefinitionID).OnIdle;
+            var animation = TextureManager.GetAnimation<TurretEntityDefinition>(entity.DefinitionID).OnIdle;
             var textureSet = TextureManager.GetTextureSet(animation);
             return new TurretControl(Parent, entity, clicked: Turret_Click)
             {
@@ -318,7 +318,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private EnemyControl CreateNewEnemyControl(EnemyInstance entity)
         {
-            var animation = TextureManager.GetAnimation<EnemyAnimationDefinition>(entity.DefinitionID).OnCreate;
+            var animation = TextureManager.GetAnimation<EnemyEntityDefinition>(entity.DefinitionID).OnCreate;
             var textureSet = TextureManager.GetTextureSet(animation);
             return new EnemyControl(Parent, entity)
             {
@@ -343,7 +343,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewProjectileControl(ProjectileInstance entity)
         {
-            var animation = TextureManager.GetAnimation<ProjectileAnimationDefinition>(entity.DefinitionID).OnCreate;
+            var animation = TextureManager.GetAnimation<ProjectileEntityDefinition>(entity.DefinitionID).OnCreate;
             var textureSet = TextureManager.GetTextureSet(animation);
             return new AnimatedTileControl(Parent)
             {
@@ -360,7 +360,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewEffect(EffectEntity entity)
         {
-            var animation = TextureManager.GetAnimation<EffectAnimationDefinition>(entity.ID).OnCreate;
+            var animation = TextureManager.GetAnimation<EffectEntityDefinition>(entity.ID).OnCreate;
             var textureSet = TextureManager.GetTextureSet(animation);
             var newTile = new AnimatedTileControl(Parent)
             {
@@ -419,7 +419,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            control.SetTurretAnimation(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnShoot);
+            control.SetTurretAnimation(TextureManager.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             control.Initialize();
         }
 
@@ -428,7 +428,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            control.SetTurretAnimation(TextureManager.GetAnimation<TurretAnimationDefinition>(turret.DefinitionID).OnIdle);
+            control.SetTurretAnimation(TextureManager.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnIdle);
             control.Initialize();
         }
 
@@ -522,7 +522,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (parent.Tag is TurretDefinition def)
             {
                 _buyingTurret = def.ID;
-                var animation = TextureManager.GetAnimation<TurretAnimationDefinition>(def.ID).OnIdle;
+                var animation = TextureManager.GetAnimation<TurretEntityDefinition>(def.ID).OnIdle;
                 var textureSet = TextureManager.GetTextureSet(animation);
                 _buyingPreviewTile.TileSet = textureSet.LoadedContents;
                 _buyingPreviewTile.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);

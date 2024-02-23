@@ -17,7 +17,7 @@ namespace TDGame.OpenGL
         private static TextureSetDefinition _noTextureSet;
 
         private static ContentManager _contentManager;
-        private static Dictionary<Guid, IAnimationDefinition> _animations = new Dictionary<Guid, IAnimationDefinition>();
+        private static Dictionary<Guid, IEntityResource> _animations = new Dictionary<Guid, IEntityResource>();
         private static Dictionary<Guid, Texture2D> _textures = new Dictionary<Guid, Texture2D>();
         private static Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
 
@@ -56,7 +56,7 @@ namespace TDGame.OpenGL
                 LoadAnimation(item);
         }
 
-        public static void LoadAnimation(IAnimationDefinition item)
+        public static void LoadAnimation(IEntityResource item)
         {
             if (_animations.ContainsKey(item.Target))
                 _animations[item.Target] = item;
@@ -111,7 +111,7 @@ namespace TDGame.OpenGL
             return _noTextureSet;
         }
 
-        public static T GetAnimation<T>(Guid id) where T : IAnimationDefinition
+        public static T GetAnimation<T>(Guid id) where T : IEntityResource
         {
             if (_animations.ContainsKey(id))
             {
