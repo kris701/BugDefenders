@@ -384,5 +384,8 @@
       "Target": "1db411e4-8599-464b-923c-0e23bc031435",
       "OnCreate": "1db411e4-8599-464b-923c-0e23bc031435"
     }
+  ],
+  "AudioDefinition": [
+
   ]
 }

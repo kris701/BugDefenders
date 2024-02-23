@@ -21,12 +21,12 @@
   <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
-    <None Remove="Textures\TexturePacks\debug.json" />
+    <None Remove="ResourcePacks\TexturePacks\debug.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
-    <EmbeddedResource Include="Textures\TexturePacks\debug.json">
+    <EmbeddedResource Include="ResourcePacks\TexturePacks\debug.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
