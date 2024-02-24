@@ -296,7 +296,12 @@
       ]
     }
   ],
-  "Songs": [],
+  "Songs": [
+    {
+      "ID": "9c52281c-3202-4b22-bfc9-dfc187fdbeb3",
+      "Content": "MainMenu/song"
+    }
+  ],
   "SoundEffects": [],
   "AnimationsEntities": [
     {

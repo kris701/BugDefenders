@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
@@ -9,9 +10,10 @@ namespace TDGame.OpenGL.Screens.SettingsView
 {
     public partial class SettingsView : BaseScreen
     {
+        private static Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
         private SettingsDefinition _settings;
         private KeyWatcher _escapeKeyWatcher;
-        public SettingsView(UIEngine parent) : base(parent)
+        public SettingsView(UIEngine parent) : base(parent, _id)
         {
             _settings = parent.CurrentUser.UserData.Copy();
             ScaleValue = parent.CurrentUser.UserData.Scale;

@@ -7,10 +7,12 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
 {
     public partial class GameOverScreen : BaseScreen
     {
+        private static Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
+
         private Texture2D _screen;
         private int _score;
         private TimeSpan _gameTime;
-        public GameOverScreen(UIEngine parent, Texture2D screen, int score, TimeSpan gameTime) : base(parent)
+        public GameOverScreen(UIEngine parent, Texture2D screen, int score, TimeSpan gameTime) : base(parent, _id)
         {
             _screen = screen;
             _score = score;

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -125,6 +127,7 @@ namespace TDGame.OpenGL
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
             ApplySettings();
+            MediaPlayer.IsRepeating = true;
 
             foreach (var worker in BackroundWorkers)
                 worker.Initialize();
@@ -258,6 +261,8 @@ namespace TDGame.OpenGL
             Device.SynchronizeWithVerticalRetrace = CurrentUser.UserData.IsVsync;
             Device.IsFullScreen = CurrentUser.UserData.IsFullscreen;
             UIResourceManager.LoadTexturePack(CurrentUser.UserData.TexturePack);
+            MediaPlayer.Volume = CurrentUser.UserData.MusicVolume;
+            SoundEffect.MasterVolume = CurrentUser.UserData.EffectsVolume;
             Device.ApplyChanges();
             LoadMods();
         }

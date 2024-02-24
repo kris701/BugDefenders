@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace TDGame.OpenGL.Engine.Screens
 {
     public enum FadeState { FadeIn, Hold, FadeOut, PostHold }
     public interface IScreen : IScalable
     {
+        public Guid ID { get; set; }
         public int FadeInTime { get; }
         public int FadeOutTime { get; }
         public FadeState State { get; set; }

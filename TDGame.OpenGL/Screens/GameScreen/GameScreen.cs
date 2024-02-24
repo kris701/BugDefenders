@@ -24,6 +24,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseScreen
     {
+        private static Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
 
         private EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
@@ -48,7 +49,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
 
-        public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(parent)
+        public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(parent, _id)
         {
             _currentGameStyle = gameStyleID;
             _currentMap = mapID;

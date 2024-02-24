@@ -1,12 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Screens
 {
     public abstract class BaseScreen : BaseScalable, IScreen
     {
+        public Guid ID { get; set; }
         public FadeState State { get; set; } = FadeState.FadeIn;
 
         public int FadeInTime { get; set; } = 200;
@@ -18,11 +22,12 @@ namespace TDGame.OpenGL.Engine.Screens
         private Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
         private SortedDictionary<int, List<IControl>> _viewLayers;
 
-        public BaseScreen(UIEngine parent) : base(parent)
+        public BaseScreen(UIEngine parent, Guid id) : base(parent)
         {
             _viewLayers = new SortedDictionary<int, List<IControl>>() {
                 { 0, new List<IControl>() }
             };
+            ID = id;
         }
 
         public void ClearLayer(int layer)

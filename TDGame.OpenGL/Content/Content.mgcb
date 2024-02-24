@@ -818,6 +818,12 @@
 /processorParam:TextureFormat=Color
 /build:MainMenu/background.png
 
+#begin MainMenu/song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:MainMenu/song.mp3
+
 #begin Maps/map1.png
 /importer:TextureImporter
 /processor:TextureProcessor

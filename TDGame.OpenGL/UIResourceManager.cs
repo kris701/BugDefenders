@@ -108,7 +108,6 @@ namespace TDGame.OpenGL
         {
             if (_songs.ContainsKey(item.ID))
                 _songs.Remove(item.ID);
-            _songs.Add(item.ID, item);
             item.LoadedContent = _contentManager.Load<Song>(item.Content);
             _songs.Add(item.ID, item);
         }
@@ -117,7 +116,6 @@ namespace TDGame.OpenGL
         {
             if (_soundEffects.ContainsKey(item.ID))
                 _soundEffects.Remove(item.ID);
-            _soundEffects.Add(item.ID, item);
             item.LoadedContent = _contentManager.Load<SoundEffect>(item.Content);
             _soundEffects.Add(item.ID, item);
         }
@@ -163,18 +161,24 @@ namespace TDGame.OpenGL
             throw new Exception("Animation not found!");
         }
 
-        public static Song GetSong(Guid id)
+        private static string _playing = "";
+        public static void PlaySong(Guid id)
         {
-            if (_songs.ContainsKey(id))
-                return _songs[id].LoadedContent;
-            throw new Exception("Song not found!");
+            if (!_songs.ContainsKey(id))
+                return;
+            var song = _songs[id];
+            if (song.Content == _playing)
+                return;
+            _playing = song.Content;
+            MediaPlayer.Stop();
+            MediaPlayer.Play(song.LoadedContent);
         }
 
-        public static SoundEffect GetSoundEffect(Guid id)
+        public static void PlaySoundEffect(Guid id)
         {
             if (_soundEffects.ContainsKey(id))
-                return _soundEffects[id].LoadedContent;
-            throw new Exception("Sound effect not found!");
+                return;
+            _soundEffects[id].LoadedContent.Play();
         }
     }
 }

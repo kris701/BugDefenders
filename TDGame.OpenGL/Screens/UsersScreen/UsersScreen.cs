@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Linq;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Controls;
@@ -11,9 +12,10 @@ namespace TDGame.OpenGL.Screens.UsersScreen
 {
     public partial class UsersScreen : BaseScreen
     {
+        private static Guid _id = new Guid("0dd63d81-e49c-44d2-868e-7db6fb4634d7");
         private KeyWatcher _escapeKeyWatcher;
         private bool _update = false;
-        public UsersScreen(UIEngine parent) : base(parent)
+        public UsersScreen(UIEngine parent) : base(parent, _id)
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();

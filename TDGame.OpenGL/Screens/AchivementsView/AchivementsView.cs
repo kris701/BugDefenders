@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
 
@@ -7,8 +8,9 @@ namespace TDGame.OpenGL.Screens.AchivementsView
 {
     public partial class AchivementsView : BaseScreen
     {
+        private static Guid _id = new Guid("14b01cd7-8a0d-40ad-961e-562a915448d1");
         private KeyWatcher _escapeKeyWatcher;
-        public AchivementsView(UIEngine parent) : base(parent)
+        public AchivementsView(UIEngine parent) : base(parent, _id)
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
