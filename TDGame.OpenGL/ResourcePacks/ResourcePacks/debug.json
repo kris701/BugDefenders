@@ -302,7 +302,16 @@
       "Content": "MainMenu/song"
     }
   ],
-  "SoundEffects": [],
+  "SoundEffects": [
+    {
+      "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+      "Content": "Entities/Turrets/turret4/shoot"
+    },
+    {
+      "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+      "Content": "Entities/Turrets/turret1/shoot"
+    }
+  ],
   "AnimationsEntities": [
     {
       "TargetType": "Effect",
@@ -391,6 +400,15 @@
     }
   ],
   "SoundEffectEntities": [
-
+    {
+      "TargetType": "Turret",
+      "Target": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+      "OnShoot": "1a252e16-8c8c-4179-8b1c-75b2b8f47704"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+      "OnShoot": "468b3259-bd65-4aa1-9e40-5fb5e455b847"
+    }
   ]
 }

@@ -10,9 +10,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
     public class TurretControl : AnimatedButtonControl
     {
         public TurretInstance Instance { get; }
+        public Guid CurrentSoundEffect { get; set; }
 
         private TileControl baseControl;
         private LabelControl turretLevelControl;
+        private Guid _currentAnimation;
         public TurretControl(UIEngine parent, TurretInstance instance, ClickedHandler clicked = null) : base(parent, clicked, null, null)
         {
             Instance = instance;
@@ -46,6 +48,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public void SetTurretAnimation(Guid id)
         {
+            if (id == _currentAnimation)
+                return;
+            _currentAnimation = id;
             var textureSet = UIResourceManager.GetTextureSet(id);
             TileSet = textureSet.LoadedContents;
             FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);

@@ -362,6 +362,12 @@
 /processorParam:TextureFormat=Color
 /build:Entities/Projectiles/rocket/rocket_move_2.png
 
+#begin Entities/Turrets/turret1/shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Entities/Turrets/turret1/shoot.wav
+
 #begin Entities/Turrets/turret1/turret1_idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -505,6 +511,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/turret3/turret3_shoot_2.png
+
+#begin Entities/Turrets/turret4/shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Entities/Turrets/turret4/shoot.wav
 
 #begin Entities/Turrets/turret4/turret4_idle_1.png
 /importer:TextureImporter

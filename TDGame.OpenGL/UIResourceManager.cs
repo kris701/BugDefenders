@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TDGame.Core.Game.Helpers;
+using TDGame.Core.Game.Models;
 using TDGame.OpenGL.ResourcePacks;
 using TDGame.OpenGL.Textures;
 
@@ -18,6 +19,9 @@ namespace TDGame.OpenGL
         private static string _noTextureName = "notexture";
         private static Texture2D _noTexture;
         private static TextureSetDefinition _noTextureSet;
+        private static TimeSpan _passed;
+        private static TimeSpan _target = TimeSpan.FromSeconds(1);
+        private static Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
 
         private static ContentManager _contentManager;
         private static Dictionary<Guid, IEntityResource> _animationEntities = new Dictionary<Guid, IEntityResource>();
@@ -174,11 +178,43 @@ namespace TDGame.OpenGL
             MediaPlayer.Play(song.LoadedContent);
         }
 
-        public static void PlaySoundEffect(Guid id)
+        public static Guid PlaySoundEffect(Guid id)
         {
-            if (_soundEffects.ContainsKey(id))
+            if (!_soundEffects.ContainsKey(id))
+                return Guid.Empty;
+            var newEffect = Guid.NewGuid();
+            _instances.Add(newEffect, _soundEffects[id].LoadedContent.CreateInstance());
+            _instances[newEffect].Volume = SoundEffect.MasterVolume;
+            _instances[newEffect].IsLooped = true;
+            _instances[newEffect].Play();
+            return newEffect;
+        }
+
+        public static void StopSoundEffect(Guid id)
+        {
+            if (!_instances.ContainsKey(id))
                 return;
-            _soundEffects[id].LoadedContent.Play();
+            _instances[id].Stop();
+            _instances.Remove(id);
+        }
+
+        public static void Update(TimeSpan passed)
+        {
+            _passed += passed;
+            if (_passed >= _target)
+            {
+                _passed = TimeSpan.Zero;
+
+                if (_instances.Count > 0)
+                {
+                    var toRemove = new List<Guid>();
+                    foreach (var key in _instances.Keys)
+                        if (_instances[key].State == SoundState.Stopped)
+                            toRemove.Add(key);
+                    foreach (var key in toRemove)
+                        _instances.Remove(key);
+                }
+            }
         }
     }
 }

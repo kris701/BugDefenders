@@ -128,6 +128,7 @@ namespace TDGame.OpenGL
             BasicFonts.Initialize(Content);
             ApplySettings();
             MediaPlayer.IsRepeating = true;
+            SoundEffect.Initialize();
 
             foreach (var worker in BackroundWorkers)
                 worker.Initialize();
@@ -221,6 +222,8 @@ namespace TDGame.OpenGL
             CurrentScreen.Update(gameTime);
             foreach (var worker in BackroundWorkers)
                 worker.Update(gameTime);
+
+            UIResourceManager.Update(gameTime.ElapsedGameTime);
 
             base.Update(gameTime);
         }

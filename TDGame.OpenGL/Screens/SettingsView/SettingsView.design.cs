@@ -22,7 +22,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
         };
         private List<ButtonControl> _scaleButtons = new List<ButtonControl>();
 
-        private List<float> _soundOptions = new List<float>()
+        private List<float> _musicOptions = new List<float>()
         {
             0,
             0.2f,
@@ -32,6 +32,17 @@ namespace TDGame.OpenGL.Screens.SettingsView
             1f
         };
         private List<ButtonControl> _musicButtons = new List<ButtonControl>();
+
+        private List<float> _soundEffectOptions = new List<float>()
+        {
+            0,
+            0.05f,
+            0.1f,
+            0.15f,
+            0.20f,
+            0.50f,
+            1f
+        };
         private List<ButtonControl> _soundEffectsButtons = new List<ButtonControl>();
 
         private ButtonControl _isFullScreen;
@@ -257,7 +268,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FontColor = Color.White
             });
 
-            for (int i = 0; i < _soundOptions.Count; i++)
+            for (int i = 0; i < _musicOptions.Count; i++)
             {
                 var newControl = new ButtonControl(Parent, clicked: (s) =>
                 {
@@ -267,15 +278,15 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _soundOptions.Count + 10)),
-                    Width = 710 / _soundOptions.Count,
+                    X = 110 + (i * (710 / _musicOptions.Count + 10)),
+                    Width = 710 / _musicOptions.Count,
                     Height = 40,
-                    Text = $"{Math.Round(_soundOptions[i] * 100, 0)}%",
+                    Text = $"{Math.Round(_musicOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
                     FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                     FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    Tag = _soundOptions[i]
+                    Tag = _musicOptions[i]
                 };
                 AddControl(1, newControl);
                 _musicButtons.Add(newControl);
@@ -295,7 +306,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FontColor = Color.White
             });
 
-            for (int i = 0; i < _soundOptions.Count; i++)
+            for (int i = 0; i < _soundEffectOptions.Count; i++)
             {
                 var newControl = new ButtonControl(Parent, clicked: (s) =>
                 {
@@ -305,15 +316,15 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _soundOptions.Count + 10)),
-                    Width = 710 / _soundOptions.Count,
+                    X = 110 + (i * (710 / _soundEffectOptions.Count + 10)),
+                    Width = 710 / _soundEffectOptions.Count,
                     Height = 40,
-                    Text = $"{Math.Round(_soundOptions[i] * 100, 0)}%",
+                    Text = $"{Math.Round(_soundEffectOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
                     FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                     FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    Tag = _soundOptions[i]
+                    Tag = _soundEffectOptions[i]
                 };
                 AddControl(1, newControl);
                 _soundEffectsButtons.Add(newControl);

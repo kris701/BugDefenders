@@ -422,6 +422,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 return;
             control.SetTurretAnimation(UIResourceManager.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             control.Initialize();
+            UIResourceManager.StopSoundEffect(control.CurrentSoundEffect);
+            control.CurrentSoundEffect = UIResourceManager.PlaySoundEffect(turret.DefinitionID);
         }
 
         public void OnTurretIdling(TurretInstance turret)
@@ -431,6 +433,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 return;
             control.SetTurretAnimation(UIResourceManager.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnIdle);
             control.Initialize();
+            UIResourceManager.StopSoundEffect(control.CurrentSoundEffect);
         }
 
         private void UpdateWithinGameField(MouseState mouseState, FloatPoint relativeMousePosition, KeyboardState keyState)
