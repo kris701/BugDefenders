@@ -165,6 +165,17 @@ namespace TDGame.OpenGL
             throw new Exception("Animation not found!");
         }
 
+        public static T GetSoundEffects<T>(Guid id) where T : IEntityResource
+        {
+            if (_soundEffectEntities.ContainsKey(id))
+            {
+                var target = _soundEffectEntities[id];
+                if (target is T)
+                    return (T)target;
+            }
+            throw new Exception("Sound effect not found!");
+        }
+
         private static string _playing = "";
         public static void PlaySong(Guid id)
         {
@@ -183,6 +194,7 @@ namespace TDGame.OpenGL
             if (!_soundEffects.ContainsKey(id))
                 return Guid.Empty;
             var newEffect = Guid.NewGuid();
+            var test = _soundEffects[id].LoadedContent.Duration;
             _instances.Add(newEffect, _soundEffects[id].LoadedContent.CreateInstance());
             _instances[newEffect].Volume = SoundEffect.MasterVolume;
             _instances[newEffect].IsLooped = true;
@@ -198,23 +210,18 @@ namespace TDGame.OpenGL
             _instances.Remove(id);
         }
 
-        public static void Update(TimeSpan passed)
+        public static void PauseSounds()
         {
-            _passed += passed;
-            if (_passed >= _target)
-            {
-                _passed = TimeSpan.Zero;
+            foreach (var key in _instances.Keys)
+                _instances[key].Pause();
+            MediaPlayer.Pause();
+        }
 
-                if (_instances.Count > 0)
-                {
-                    var toRemove = new List<Guid>();
-                    foreach (var key in _instances.Keys)
-                        if (_instances[key].State == SoundState.Stopped)
-                            toRemove.Add(key);
-                    foreach (var key in toRemove)
-                        _instances.Remove(key);
-                }
-            }
+        public static void ResumeSounds()
+        {
+            foreach (var key in _instances.Keys)
+                _instances[key].Resume();
+            MediaPlayer.Resume();
         }
     }
 }

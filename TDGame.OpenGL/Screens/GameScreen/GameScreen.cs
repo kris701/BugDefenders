@@ -216,9 +216,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             _game.Running = !_game.Running;
             if (_game.Running)
+            {
+                UIResourceManager.ResumeSounds();
                 _startButton.Text = "Pause";
+            }
             else
+            {
+                UIResourceManager.PauseSounds();
                 _startButton.Text = "Start";
+            }
         }
 
         private void AutoRunButton_Click(ButtonControl parent)
@@ -423,7 +429,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             control.SetTurretAnimation(UIResourceManager.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             control.Initialize();
             UIResourceManager.StopSoundEffect(control.CurrentSoundEffect);
-            control.CurrentSoundEffect = UIResourceManager.PlaySoundEffect(turret.DefinitionID);
+            control.CurrentSoundEffect = UIResourceManager.PlaySoundEffect(UIResourceManager.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
         }
 
         public void OnTurretIdling(TurretInstance turret)

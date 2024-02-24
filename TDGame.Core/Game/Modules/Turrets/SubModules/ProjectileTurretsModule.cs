@@ -24,7 +24,7 @@ namespace TDGame.Core.Game.Modules.Turrets.SubModules
             var best = Game.EnemiesModule.GetBestEnemy(turret, def.Range);
             if (best != null)
             {
-                if (Game.TurretsModule.OnTurretShooting != null)
+                if (Game.TurretsModule.OnTurretShooting != null && turret.Targeting == null)
                     Game.TurretsModule.OnTurretShooting.Invoke(turret);
                 turret.Targeting = best;
 

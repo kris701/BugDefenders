@@ -1,9 +1,9 @@
 # TDGame
 
 ## TODO List
-- [ ] Audio system 
 
 ## Done
+- [X] Audio system 
 - [X] Encrypt user data
     - Just so that you cant just as easily give yourself buffs and stuff
     - Maybe only do this in release mode, since it will be a hassle while debugging

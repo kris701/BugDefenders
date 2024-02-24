@@ -223,8 +223,6 @@ namespace TDGame.OpenGL
             foreach (var worker in BackroundWorkers)
                 worker.Update(gameTime);
 
-            UIResourceManager.Update(gameTime.ElapsedGameTime);
-
             base.Update(gameTime);
         }
 
