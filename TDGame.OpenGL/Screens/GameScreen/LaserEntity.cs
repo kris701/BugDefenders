@@ -6,5 +6,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         public IPosition From { get; set; }
         public IPosition To { get; set; }
+
+        public LaserEntity(IPosition from, IPosition to)
+        {
+            From = from;
+            To = to;
+        }
     }
 }

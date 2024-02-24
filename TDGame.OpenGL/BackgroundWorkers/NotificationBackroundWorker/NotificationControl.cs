@@ -19,6 +19,8 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
             Item = item;
             Width = 300;
             Height = 120;
+            _iconTile = new TileControl(Parent);
+            _descriptionTextbox = new TextboxControl(Parent);
         }
 
         public override void Initialize()
@@ -26,25 +28,19 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
             base.Initialize();
             if (Item.HasImage)
             {
-                _iconTile = new TileControl(Parent)
-                {
-                    Width = 75,
-                    Height = 75,
-                    FillColor = UIResourceManager.GetTexture(Item.Definition.ID)
-                };
+                _iconTile.Width = 75;
+                _iconTile.Height = 75;
+                _iconTile.FillColor = Parent.UIResources.GetTexture(Item.Definition.ID);
                 _iconTile._x = _x + Scale(20);
                 _iconTile._y = _y + Scale(20);
                 _iconTile.Initialize();
             }
 
-            _descriptionTextbox = new TextboxControl(Parent)
-            {
-                Width = 200,
-                Height = 100,
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                Text = $"{Item.PreFix}{Environment.NewLine}{Item.Definition.Name}{Environment.NewLine}{Item.Definition.Description}"
-            };
+            _descriptionTextbox.Width = 200;
+            _descriptionTextbox.Height = 100;
+            _descriptionTextbox.Font = BasicFonts.GetFont(10);
+            _descriptionTextbox.FontColor = Color.White;
+            _descriptionTextbox.Text = $"{Item.PreFix}{Environment.NewLine}{Item.Definition.Name}{Environment.NewLine}{Item.Definition.Description}";
             if (!Item.HasImage)
             {
                 _descriptionTextbox._width = 280;

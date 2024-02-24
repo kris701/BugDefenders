@@ -152,7 +152,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             foreach (var button in _turretTargetingModes)
             {
                 button.IsEnabled = false;
-                button.FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                button.FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
             foreach (var buttons in _turretUpgradePages)
                 foreach (var control in buttons)
@@ -176,6 +176,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SelectTurret()
         {
+            if (_selectedTurret == null)
+                return;
+
             _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)Scale(GetRangeOfTurret(_selectedTurret.TurretInfo) * 2));
             _turretSelectRangeTile._width = _turretSelectRangeTile.FillColor.Width;
             _turretSelectRangeTile._height = _turretSelectRangeTile.FillColor.Height;
@@ -194,7 +197,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 button.IsEnabled = true;
                 if (Enum.GetName(typeof(TargetingTypes), _selectedTurret.TargetingType) == button.Text)
-                    button.FillColor = UIResourceManager.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
+                    button.FillColor = Parent.UIResources.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
             }
         }
 
@@ -205,7 +208,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 if (_game.TurretsModule.CanLevelUpTurret(_selectedTurret, upg.ID))
                 {
                     _game.TurretsModule.LevelUpTurret(_selectedTurret, upg.ID);
-                    _turretUpdater.GetItem(_selectedTurret).UpgradeTurretLevels(_selectedTurret);
+                    var control = _turretUpdater.GetItem(_selectedTurret);
+                    if (control != null)
+                        control.UpgradeTurretLevels(_selectedTurret);
                     _selectTurret = true;
                     _unselectTurret = true;
                 }
@@ -217,12 +222,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _game.Running = !_game.Running;
             if (_game.Running)
             {
-                UIResourceManager.ResumeSounds();
+                Parent.UIResources.ResumeSounds();
                 _startButton.Text = "Pause";
             }
             else
             {
-                UIResourceManager.PauseSounds();
+                Parent.UIResources.PauseSounds();
                 _startButton.Text = "Start";
             }
         }
@@ -305,8 +310,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private TurretControl CreateNewTurretControl(TurretInstance entity)
         {
-            var animation = UIResourceManager.GetAnimation<TurretEntityDefinition>(entity.DefinitionID).OnIdle;
-            var textureSet = UIResourceManager.GetTextureSet(animation);
+            var animation = Parent.UIResources.GetAnimation<TurretEntityDefinition>(entity.DefinitionID).OnIdle;
+            var textureSet = Parent.UIResources.GetTextureSet(animation);
             return new TurretControl(Parent, entity, clicked: Turret_Click)
             {
                 IsEnabled = true,
@@ -325,8 +330,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private EnemyControl CreateNewEnemyControl(EnemyInstance entity)
         {
-            var animation = UIResourceManager.GetAnimation<EnemyEntityDefinition>(entity.DefinitionID).OnCreate;
-            var textureSet = UIResourceManager.GetTextureSet(animation);
+            var animation = Parent.UIResources.GetAnimation<EnemyEntityDefinition>(entity.DefinitionID).OnCreate;
+            var textureSet = Parent.UIResources.GetTextureSet(animation);
             return new EnemyControl(Parent, entity)
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
@@ -350,8 +355,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewProjectileControl(ProjectileInstance entity)
         {
-            var animation = UIResourceManager.GetAnimation<ProjectileEntityDefinition>(entity.DefinitionID).OnCreate;
-            var textureSet = UIResourceManager.GetTextureSet(animation);
+            var animation = Parent.UIResources.GetAnimation<ProjectileEntityDefinition>(entity.DefinitionID).OnCreate;
+            var textureSet = Parent.UIResources.GetTextureSet(animation);
             return new AnimatedTileControl(Parent)
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
@@ -367,8 +372,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewEffect(EffectEntity entity)
         {
-            var animation = UIResourceManager.GetAnimation<EffectEntityDefinition>(entity.ID).OnCreate;
-            var textureSet = UIResourceManager.GetTextureSet(animation);
+            var animation = Parent.UIResources.GetAnimation<EffectEntityDefinition>(entity.ID).OnCreate;
+            var textureSet = Parent.UIResources.GetTextureSet(animation);
             var newTile = new AnimatedTileControl(Parent)
             {
                 X = _gameArea.X + entity.X,
@@ -426,10 +431,10 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            control.SetTurretAnimation(UIResourceManager.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
+            control.SetTurretAnimation(Parent.UIResources.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             control.Initialize();
-            UIResourceManager.StopSoundEffect(control.CurrentSoundEffect);
-            control.CurrentSoundEffect = UIResourceManager.PlaySoundEffect(UIResourceManager.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
+            Parent.UIResources.StopSoundEffect(control.CurrentSoundEffect);
+            control.CurrentSoundEffect = Parent.UIResources.PlaySoundEffect(Parent.UIResources.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
         }
 
         public void OnTurretIdling(TurretInstance turret)
@@ -437,9 +442,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var control = _turretUpdater.GetItem(turret);
             if (control == null)
                 return;
-            control.SetTurretAnimation(UIResourceManager.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnIdle);
+            control.SetTurretAnimation(Parent.UIResources.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnIdle);
             control.Initialize();
-            UIResourceManager.StopSoundEffect(control.CurrentSoundEffect);
+            Parent.UIResources.StopSoundEffect(control.CurrentSoundEffect);
         }
 
         private void UpdateWithinGameField(MouseState mouseState, FloatPoint relativeMousePosition, KeyboardState keyState)
@@ -502,11 +507,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                             _lasers.Remove(turret.ID);
                     }
                     else if (!_lasers.ContainsKey(turret.ID) && turret.Targeting != null)
-                        _lasers.Add(turret.ID, new LaserEntity()
-                        {
-                            From = turret,
-                            To = turret.Targeting
-                        });
+                        _lasers.Add(turret.ID, new LaserEntity(turret, turret.Targeting));
                 }
             }
             var toRemove = new List<Guid>();
@@ -532,8 +533,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (parent.Tag is TurretDefinition def)
             {
                 _buyingTurret = def.ID;
-                var animation = UIResourceManager.GetAnimation<TurretEntityDefinition>(def.ID).OnIdle;
-                var textureSet = UIResourceManager.GetTextureSet(animation);
+                var animation = Parent.UIResources.GetAnimation<TurretEntityDefinition>(def.ID).OnIdle;
+                var textureSet = Parent.UIResources.GetTextureSet(animation);
                 _buyingPreviewTile.TileSet = textureSet.LoadedContents;
                 _buyingPreviewTile.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
                 _buyingPreviewTile.Width = def.Size;
@@ -610,7 +611,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 }
                 var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanLevelUpTurret(turret, upgrade.ID))
                 {
-                    FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     X = _gameArea.X + 10 + (offset++ * 210),
                     Y = _gameArea.Y + _gameArea.Height + 45,
                     Height = 30,

@@ -6,9 +6,10 @@ namespace TDGame.Core.Game.Helpers
 {
     public class BaseBuilder<T> where T : IDefinition
     {
-        private string _resourceDir;
-        private Dictionary<Guid, T> _resources = new Dictionary<Guid, T>();
-        private Assembly _assembly;
+        private readonly string _resourceDir;
+        private readonly Dictionary<Guid, T> _resources = new Dictionary<Guid, T>();
+        private readonly Assembly _assembly;
+        private readonly JsonSerializerOptions _options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
         public BaseBuilder(string resourceDir, Assembly assembly)
         {
@@ -37,7 +38,7 @@ namespace TDGame.Core.Game.Helpers
         {
             foreach (var item in items)
             {
-                var parsed = JsonSerializer.Deserialize<T>(File.ReadAllText(item.FullName), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                var parsed = JsonSerializer.Deserialize<T>(File.ReadAllText(item.FullName), _options);
                 if (parsed == null)
                     throw new Exception($"Error parsing resource: {item.FullName}");
 
@@ -60,7 +61,7 @@ namespace TDGame.Core.Game.Helpers
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string result = reader.ReadToEnd();
-                    var item = JsonSerializer.Deserialize<T>(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    var item = JsonSerializer.Deserialize<T>(result, _options);
                     if (item == null)
                         throw new Exception($"Resource not found: {resource}");
                     return item;

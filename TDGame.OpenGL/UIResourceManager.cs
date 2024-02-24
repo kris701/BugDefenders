@@ -11,31 +11,29 @@ using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL
 {
-    public static class UIResourceManager
+    public class UIResourceManager
     {
-        public static BaseBuilder<ResourcePackDefinition> TexturePacks = new BaseBuilder<ResourcePackDefinition>("ResourcePacks.ResourcePacks", Assembly.GetExecutingAssembly());
+        public BaseBuilder<ResourcePackDefinition> TexturePacks = new BaseBuilder<ResourcePackDefinition>("ResourcePacks.ResourcePacks", Assembly.GetExecutingAssembly());
 
-        private static string _noTextureName = "notexture";
-        private static Texture2D _noTexture;
-        private static TextureSetDefinition _noTextureSet;
-        private static Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
+        private string _noTextureName = "notexture";
+        private Texture2D _noTexture;
+        private TextureSetDefinition _noTextureSet;
+        private Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
+        private string _playing = "";
+        private ContentManager _contentManager;
+        private Dictionary<Guid, IEntityResource> _animationEntities = new Dictionary<Guid, IEntityResource>();
+        private Dictionary<Guid, IEntityResource> _soundEffectEntities = new Dictionary<Guid, IEntityResource>();
+        private Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
+        private Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
+        private Dictionary<Guid, SongDefinition> _songs = new Dictionary<Guid, SongDefinition>();
+        private Dictionary<Guid, SoundEffectDefinition> _soundEffects = new Dictionary<Guid, SoundEffectDefinition>();
 
-        private static ContentManager _contentManager;
-        private static Dictionary<Guid, IEntityResource> _animationEntities = new Dictionary<Guid, IEntityResource>();
-        private static Dictionary<Guid, IEntityResource> _soundEffectEntities = new Dictionary<Guid, IEntityResource>();
-        private static Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
-        private static Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
-        private static Dictionary<Guid, SongDefinition> _songs = new Dictionary<Guid, SongDefinition>();
-        private static Dictionary<Guid, SoundEffectDefinition> _soundEffects = new Dictionary<Guid, SoundEffectDefinition>();
-
-        public static void Initialize(ContentManager contentManager)
+        public UIResourceManager(ContentManager contentManager)
         {
             _contentManager = contentManager;
             _noTexture = _contentManager.Load<Texture2D>(_noTextureName);
-            _noTextureSet = new TextureSetDefinition()
+            _noTextureSet = new TextureSetDefinition(Guid.Empty, 1000, new List<string>())
             {
-                ID = Guid.Empty,
-                FrameTime = 1000,
                 LoadedContents = new List<Texture2D>()
                 {
                     _noTexture
@@ -43,15 +41,15 @@ namespace TDGame.OpenGL
             };
         }
 
-        public static List<Guid> GetTexturePacks() => TexturePacks.GetResources();
+        public List<Guid> GetTexturePacks() => TexturePacks.GetResources();
 
-        public static void LoadTexturePack(Guid texturePack)
+        public void LoadTexturePack(Guid texturePack)
         {
             _textures.Clear();
             LoadTexturePack(TexturePacks.GetResource(texturePack));
         }
 
-        private static void LoadTexturePack(ResourcePackDefinition pack)
+        private void LoadTexturePack(ResourcePackDefinition pack)
         {
             if (pack.BasedOn != null)
                 LoadTexturePack(TexturePacks.GetResource((Guid)pack.BasedOn));
@@ -69,7 +67,7 @@ namespace TDGame.OpenGL
                 LoadSoundEffectEntity(item);
         }
 
-        public static void LoadAnimationEntity(IEntityResource item)
+        public void LoadAnimationEntity(IEntityResource item)
         {
             if (_animationEntities.ContainsKey(item.Target))
                 _animationEntities[item.Target] = item;
@@ -77,7 +75,7 @@ namespace TDGame.OpenGL
                 _animationEntities.Add(item.Target, item);
         }
 
-        public static void LoadSoundEffectEntity(IEntityResource item)
+        public void LoadSoundEffectEntity(IEntityResource item)
         {
             if (_soundEffectEntities.ContainsKey(item.Target))
                 _soundEffectEntities[item.Target] = item;
@@ -85,7 +83,7 @@ namespace TDGame.OpenGL
                 _soundEffectEntities.Add(item.Target, item);
         }
 
-        public static void LoadTexture(TextureDefinition item)
+        public void LoadTexture(TextureDefinition item)
         {
             if (_textures.ContainsKey(item.ID))
                 _textures[item.ID].LoadedContent = _contentManager.Load<Texture2D>(item.Content);
@@ -96,7 +94,7 @@ namespace TDGame.OpenGL
             }
         }
 
-        public static void LoadTextureSet(TextureSetDefinition item)
+        public void LoadTextureSet(TextureSetDefinition item)
         {
             if (_textureSets.ContainsKey(item.ID))
                 _textureSets.Remove(item.ID);
@@ -105,7 +103,7 @@ namespace TDGame.OpenGL
                 _textureSets[item.ID].LoadedContents.Add(_contentManager.Load<Texture2D>(content));
         }
 
-        public static void LoadSong(SongDefinition item)
+        public void LoadSong(SongDefinition item)
         {
             if (_songs.ContainsKey(item.ID))
                 _songs.Remove(item.ID);
@@ -113,7 +111,7 @@ namespace TDGame.OpenGL
             _songs.Add(item.ID, item);
         }
 
-        public static void LoadSoundEffect(SoundEffectDefinition item)
+        public void LoadSoundEffect(SoundEffectDefinition item)
         {
             if (_soundEffects.ContainsKey(item.ID))
                 _soundEffects.Remove(item.ID);
@@ -121,25 +119,23 @@ namespace TDGame.OpenGL
             _soundEffects.Add(item.ID, item);
         }
 
-        public static ResourcePackDefinition GetTexturePack(Guid texturePack) => TexturePacks.GetResource(texturePack);
+        public ResourcePackDefinition GetTexturePack(Guid texturePack) => TexturePacks.GetResource(texturePack);
 
-        public static Texture2D GetTexture(Guid id)
+        public Texture2D GetTexture(Guid id)
         {
             if (_textures.ContainsKey(id))
                 return _textures[id].LoadedContent;
             return _noTexture;
         }
 
-        public static TextureSetDefinition GetTextureSet(Guid id)
+        public TextureSetDefinition GetTextureSet(Guid id)
         {
             if (_textureSets.ContainsKey(id))
                 return _textureSets[id];
             if (_textures.ContainsKey(id))
             {
-                var newSet = new TextureSetDefinition()
+                var newSet = new TextureSetDefinition(id, 0, new List<string>())
                 {
-                    ID = id,
-                    FrameTime = 0,
                     LoadedContents = new List<Texture2D>()
                     {
                         _textures[id].LoadedContent
@@ -151,7 +147,7 @@ namespace TDGame.OpenGL
             return _noTextureSet;
         }
 
-        public static T GetAnimation<T>(Guid id) where T : IEntityResource
+        public T GetAnimation<T>(Guid id) where T : IEntityResource
         {
             if (_animationEntities.ContainsKey(id))
             {
@@ -162,7 +158,7 @@ namespace TDGame.OpenGL
             throw new Exception("Animation not found!");
         }
 
-        public static T GetSoundEffects<T>(Guid id) where T : IEntityResource
+        public T GetSoundEffects<T>(Guid id) where T : IEntityResource
         {
             if (_soundEffectEntities.ContainsKey(id))
             {
@@ -173,8 +169,7 @@ namespace TDGame.OpenGL
             throw new Exception("Sound effect not found!");
         }
 
-        private static string _playing = "";
-        public static void PlaySong(Guid id)
+        public void PlaySong(Guid id)
         {
             if (!_songs.ContainsKey(id))
                 return;
@@ -186,7 +181,7 @@ namespace TDGame.OpenGL
             MediaPlayer.Play(song.LoadedContent);
         }
 
-        public static Guid PlaySoundEffect(Guid id)
+        public Guid PlaySoundEffect(Guid id)
         {
             if (!_soundEffects.ContainsKey(id))
                 return Guid.Empty;
@@ -199,7 +194,7 @@ namespace TDGame.OpenGL
             return newEffect;
         }
 
-        public static void StopSoundEffect(Guid id)
+        public void StopSoundEffect(Guid id)
         {
             if (!_instances.ContainsKey(id))
                 return;
@@ -207,14 +202,14 @@ namespace TDGame.OpenGL
             _instances.Remove(id);
         }
 
-        public static void PauseSounds()
+        public void PauseSounds()
         {
             foreach (var key in _instances.Keys)
                 _instances[key].Pause();
             MediaPlayer.Pause();
         }
 
-        public static void ResumeSounds()
+        public void ResumeSounds()
         {
             foreach (var key in _instances.Keys)
                 _instances[key].Resume();

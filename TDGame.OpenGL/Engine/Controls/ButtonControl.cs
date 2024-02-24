@@ -9,11 +9,7 @@ namespace TDGame.OpenGL.Engine.Controls
     {
         public delegate void ClickedHandler(ButtonControl parent);
         public event ClickedHandler? Clicked;
-        public event ClickedHandler? ClickedModifierA;
-        public event ClickedHandler? ClickedModifierB;
 
-        public Keys ModifierKeyA { get; set; } = Keys.LeftShift;
-        public Keys ModifierKeyB { get; set; } = Keys.LeftControl;
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
         public bool IsEnabled { get; set; } = true;
@@ -21,11 +17,9 @@ namespace TDGame.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public ButtonControl(UIEngine parent, ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null) : base(parent)
+        public ButtonControl(UIEngine parent, ClickedHandler? clicked = null) : base(parent)
         {
             Clicked += clicked;
-            ClickedModifierA += clickedModifierA;
-            ClickedModifierB += clickedModifierB;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -60,22 +54,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         _holding = true;
                     else if (_holding && mouseState.LeftButton == ButtonState.Released)
                     {
-                        var keyState = Keyboard.GetState();
-                        if (keyState.IsKeyDown(ModifierKeyA))
-                        {
-                            if (ClickedModifierA != null)
-                                ClickedModifierA.Invoke(this);
-                        }
-                        else if (keyState.IsKeyDown(ModifierKeyB))
-                        {
-                            if (ClickedModifierB != null)
-                                ClickedModifierB.Invoke(this);
-                        }
-                        else
-                        {
-                            if (Clicked != null)
-                                Clicked.Invoke(this);
-                        }
+                        Clicked?.Invoke(this);
                         _holding = false;
                     }
                 }

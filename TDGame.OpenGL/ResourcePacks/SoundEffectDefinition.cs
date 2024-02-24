@@ -11,5 +11,11 @@ namespace TDGame.OpenGL.ResourcePacks
 
         [JsonIgnore]
         public SoundEffect LoadedContent { get; set; }
+
+        public SoundEffectDefinition(Guid iD, string content)
+        {
+            ID = iD;
+            Content = content;
+        }
     }
 }

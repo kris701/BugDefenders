@@ -7,7 +7,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public class EntityUpdater<T, U> where U : IControl
+    public class EntityUpdater<T, U> where U : IControl where T : notnull
     {
         public delegate void EntityHandler(U parent);
         public EntityHandler? OnDelete;
@@ -34,7 +34,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             YOffset = yOffset;
         }
 
-        public void UpdateEntities(HashSet<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime> updateOverride = null)
+        public void UpdateEntities(HashSet<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime>? updateOverride = null)
         {
             foreach (var entity in entities)
             {

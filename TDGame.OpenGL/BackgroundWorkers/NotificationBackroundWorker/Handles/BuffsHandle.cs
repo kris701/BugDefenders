@@ -9,7 +9,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
         public UIEngine Parent { get; }
 
         private Guid _currentUserGuid;
-        private List<Guid> _previousBuffs = new List<Guid>();
+        private readonly List<Guid> _previousBuffs = new List<Guid>();
 
         public BuffsHandle(UIEngine parent)
         {
@@ -37,12 +37,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
                 if (buff.IsValid(Parent.CurrentUser))
                 {
                     _previousBuffs.Add(buff.ID);
-                    return new NotificationItem()
-                    {
-                        Definition = buff,
-                        HasImage = false,
-                        PreFix = "Buff Available!"
-                    };
+                    return new NotificationItem("Buff Available!", buff, false);
                 }
             }
             return null;

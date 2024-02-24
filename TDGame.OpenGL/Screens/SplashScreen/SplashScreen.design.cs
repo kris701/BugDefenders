@@ -10,7 +10,7 @@ namespace TDGame.OpenGL.Screens.SplashScreen
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = UIResourceManager.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
                 Width = 1000,
                 Height = 1000
             });

@@ -24,8 +24,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             var def = ResourceManager.Enemies.GetResource(wave[0]);
             var instance = new EnemyInstance(def, evolution);
-            var animation = UIResourceManager.GetAnimation<EnemyEntityDefinition>(def.ID);
-            var textureSet = UIResourceManager.GetTextureSet(animation.OnCreate);
+            var animation = Parent.UIResources.GetAnimation<EnemyEntityDefinition>(def.ID);
+            var textureSet = Parent.UIResources.GetTextureSet(animation.OnCreate);
             iconControl.TileSet = textureSet.LoadedContents;
             iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
 

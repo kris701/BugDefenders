@@ -11,5 +11,11 @@ namespace TDGame.OpenGL.ResourcePacks
 
         [JsonIgnore]
         public Song LoadedContent { get; set; }
+
+        public SongDefinition(Guid iD, string content)
+        {
+            ID = iD;
+            Content = content;
+        }
     }
 }

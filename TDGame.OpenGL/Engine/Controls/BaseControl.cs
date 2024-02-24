@@ -58,7 +58,7 @@ namespace TDGame.OpenGL.Engine.Controls
             }
         }
         public int Alpha { get; set; } = 255;
-        public object Tag { get; set; }
+        public object? Tag { get; set; }
         private bool _usesViewPort = false;
         private Rectangle _actualViewPort;
         private Rectangle _viewPort;

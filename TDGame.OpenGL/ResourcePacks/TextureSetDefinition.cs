@@ -13,5 +13,12 @@ namespace TDGame.OpenGL.Textures
 
         [JsonIgnore]
         public List<Texture2D> LoadedContents { get; set; } = new List<Texture2D>();
+
+        public TextureSetDefinition(Guid iD, int frameTime, List<string> contents)
+        {
+            ID = iD;
+            FrameTime = frameTime;
+            Contents = contents;
+        }
     }
 }

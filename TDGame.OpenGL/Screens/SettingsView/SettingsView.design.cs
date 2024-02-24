@@ -53,7 +53,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = UIResourceManager.GetTexture(new Guid("0739c674-5f0e-497a-a619-8ba39fd545b3")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("0739c674-5f0e-497a-a619-8ba39fd545b3")),
                 Width = 1000,
                 Height = 1000
             });
@@ -99,8 +99,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Text = "Apply",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
@@ -115,8 +115,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Text = "Cancel",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG
@@ -163,8 +163,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                     Text = $"{Math.Round(_scaleOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                     Tag = _scaleOptions[i]
                 };
                 AddControl(1, newControl);
@@ -193,8 +193,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Text = "Fullscreen",
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isFullScreen);
             _isVSync = new ButtonControl(Parent, clicked: (x) =>
@@ -210,8 +210,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 Text = "VSync",
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isVSync);
 
@@ -229,7 +229,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FontColor = Color.White
             });
 
-            var packs = UIResourceManager.GetTexturePacks();
+            var packs = Parent.UIResources.GetTexturePacks();
             for (int i = 0; i < packs.Count; i++)
             {
                 var newControl = new ButtonControl(Parent, clicked: (s) =>
@@ -243,11 +243,11 @@ namespace TDGame.OpenGL.Screens.SettingsView
                     X = 110 + (i * (770 / packs.Count + 10)),
                     Width = 770 / packs.Count,
                     Height = 50,
-                    Text = UIResourceManager.GetTexturePack(packs[i]).Name,
+                    Text = Parent.UIResources.GetTexturePack(packs[i]).Name,
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                     Tag = packs[i]
                 };
                 AddControl(1, newControl);
@@ -284,8 +284,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                     Text = $"{Math.Round(_musicOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                     Tag = _musicOptions[i]
                 };
                 AddControl(1, newControl);
@@ -322,8 +322,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
                     Text = $"{Math.Round(_soundEffectOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                     Tag = _soundEffectOptions[i]
                 };
                 AddControl(1, newControl);

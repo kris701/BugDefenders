@@ -28,8 +28,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         public void UpdateScreenSettingsButtons()
         {
-            var normal = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"));
-            var selected = UIResourceManager.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
+            var normal = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"));
+            var selected = Parent.UIResources.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
             _isFullScreen.FillColor = normal;
             _isVSync.FillColor = normal;
             foreach (var button in _texturePacksButtons)

@@ -7,11 +7,9 @@ using TDGame.Core.Resources;
 
 namespace TDGame.Core.Game
 {
-
-
     public partial class GameEngine
     {
-        private GameTimer _mainLoopTimer;
+        private readonly GameTimer _mainLoopTimer;
 
         public bool GameOver { get; set; }
         private bool _running = true;

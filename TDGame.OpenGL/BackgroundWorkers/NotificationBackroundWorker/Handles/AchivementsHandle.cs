@@ -10,7 +10,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
         public UIEngine Parent { get; }
 
         private Guid _currentUserGuid;
-        private List<Guid> _previousAchivements = new List<Guid>();
+        private readonly List<Guid> _previousAchivements = new List<Guid>();
 
         public AchivementsHandle(UIEngine parent)
         {
@@ -33,12 +33,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
             if (newItem != Guid.Empty)
             {
                 _previousAchivements.Add(newItem);
-                return new NotificationItem()
-                {
-                    Definition = ResourceManager.Achivements.GetResource(newItem),
-                    HasImage = true,
-                    PreFix = "Achivement Unlocked!"
-                };
+                return new NotificationItem("Achivement Unlocked!", ResourceManager.Achivements.GetResource(newItem), true);
             }
             return null;
         }

@@ -42,14 +42,14 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             if (sender.Tag is Guid mapName)
             {
                 if (_selectedMapButton != null)
-                    _selectedMapButton.FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    _selectedMapButton.FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                 _selectedMapButton = sender;
-                _selectedMapButton.FillColor = UIResourceManager.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                _selectedMapButton.FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                 _selectedMap = mapName;
                 var map = ResourceManager.Maps.GetResource(mapName);
-                _mapPreviewTile.FillColor = UIResourceManager.GetTexture(map.ID);
+                _mapPreviewTile.FillColor = Parent.UIResources.GetTexture(map.ID);
                 _mapNameLabel.Text = map.Name;
                 _mapDescriptionTextbox.Text = map.Description;
 
@@ -63,10 +63,10 @@ namespace TDGame.OpenGL.Screens.GameSetupView
             if (sender.Tag is Guid gameStyleName)
             {
                 if (_selectedGameStyleButton != null)
-                    _selectedGameStyleButton.FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    _selectedGameStyleButton.FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                 _selectedGameStyleButton = sender;
-                _selectedGameStyleButton.FillColor = UIResourceManager.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                _selectedGameStyleButton.FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                 _selectedGameStyle = gameStyleName;
 

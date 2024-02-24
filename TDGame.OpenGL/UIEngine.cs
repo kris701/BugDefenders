@@ -40,6 +40,7 @@ namespace TDGame.OpenGL
         public UserEngine<SettingsDefinition> UserManager { get; set; }
         public UserDefinition<SettingsDefinition> CurrentUser { get; set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; }
+        public UIResourceManager UIResources { get; set; }
 
         private Func<UIEngine, IScreen> _screenToLoad;
         private SpriteBatch? _spriteBatch;
@@ -122,7 +123,7 @@ namespace TDGame.OpenGL
 
             Window.Title = "TDGame";
 
-            UIResourceManager.Initialize(Content);
+            UIResources = new UIResourceManager(Content);
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
             ApplySettings();
@@ -150,15 +151,20 @@ namespace TDGame.OpenGL
                 // Load textures
                 foreach (var subFolder in folder.GetDirectories())
                 {
+                    if (subFolder.Parent == null)
+                        continue;
                     if (subFolder.Name.ToUpper() == "TEXTURES")
                     {
                         foreach (var file in subFolder.GetFiles())
                         {
                             var textureDef = JsonSerializer.Deserialize<List<TextureDefinition>>(File.ReadAllText(file.FullName));
-                            foreach (var texture in textureDef)
+                            if (textureDef != null)
                             {
-                                texture.Content = Path.Combine(subFolder.Parent.FullName, "Content", texture.Content);
-                                UIResourceManager.LoadTexture(texture);
+                                foreach (var texture in textureDef)
+                                {
+                                    texture.Content = Path.Combine(subFolder.Parent.FullName, "Content", texture.Content);
+                                    UIResources.LoadTexture(texture);
+                                }
                             }
                         }
                     }
@@ -167,12 +173,15 @@ namespace TDGame.OpenGL
                         foreach (var file in subFolder.GetFiles())
                         {
                             var textureSetDef = JsonSerializer.Deserialize<List<TextureSetDefinition>>(File.ReadAllText(file.FullName));
-                            foreach (var textureSet in textureSetDef)
+                            if (textureSetDef != null)
                             {
-                                for (int i = 0; i < textureSet.Contents.Count; i++)
-                                    textureSet.Contents[i] = Path.Combine(subFolder.Parent.FullName, "Content", textureSet.Contents[i]);
-                                foreach (var content in textureSet.Contents)
-                                    UIResourceManager.LoadTextureSet(textureSet);
+                                foreach (var textureSet in textureSetDef)
+                                {
+                                    for (int i = 0; i < textureSet.Contents.Count; i++)
+                                        textureSet.Contents[i] = Path.Combine(subFolder.Parent.FullName, "Content", textureSet.Contents[i]);
+                                    foreach (var content in textureSet.Contents)
+                                        UIResources.LoadTextureSet(textureSet);
+                                }
                             }
                         }
                     }
@@ -181,10 +190,13 @@ namespace TDGame.OpenGL
                         foreach (var file in subFolder.GetFiles())
                         {
                             var songsDef = JsonSerializer.Deserialize<List<SongDefinition>>(File.ReadAllText(file.FullName));
-                            foreach (var song in songsDef)
+                            if (songsDef != null)
                             {
-                                song.Content = Path.Combine(subFolder.Parent.FullName, "Content", song.Content);
-                                UIResourceManager.LoadSong(song);
+                                foreach (var song in songsDef)
+                                {
+                                    song.Content = Path.Combine(subFolder.Parent.FullName, "Content", song.Content);
+                                    UIResources.LoadSong(song);
+                                }
                             }
                         }
                     }
@@ -193,10 +205,13 @@ namespace TDGame.OpenGL
                         foreach (var file in subFolder.GetFiles())
                         {
                             var soundEffectsDef = JsonSerializer.Deserialize<List<SoundEffectDefinition>>(File.ReadAllText(file.FullName));
-                            foreach (var soundEffect in soundEffectsDef)
+                            if (soundEffectsDef != null)
                             {
-                                soundEffect.Content = Path.Combine(subFolder.Parent.FullName, "Content", soundEffect.Content);
-                                UIResourceManager.LoadSoundEffect(soundEffect);
+                                foreach (var soundEffect in soundEffectsDef)
+                                {
+                                    soundEffect.Content = Path.Combine(subFolder.Parent.FullName, "Content", soundEffect.Content);
+                                    UIResources.LoadSoundEffect(soundEffect);
+                                }
                             }
                         }
                     }
@@ -260,7 +275,7 @@ namespace TDGame.OpenGL
             Device.PreferredBackBufferWidth = (int)(CurrentUser.UserData.Scale * 1000);
             Device.SynchronizeWithVerticalRetrace = CurrentUser.UserData.IsVsync;
             Device.IsFullScreen = CurrentUser.UserData.IsFullscreen;
-            UIResourceManager.LoadTexturePack(CurrentUser.UserData.TexturePack);
+            UIResources.LoadTexturePack(CurrentUser.UserData.TexturePack);
             MediaPlayer.Volume = CurrentUser.UserData.MusicVolume;
             SoundEffect.MasterVolume = CurrentUser.UserData.EffectsVolume;
             Device.ApplyChanges();

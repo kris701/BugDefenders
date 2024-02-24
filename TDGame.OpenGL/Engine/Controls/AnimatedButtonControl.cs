@@ -15,8 +15,6 @@ namespace TDGame.OpenGL.Engine.Controls
 
         public delegate void ClickedHandler(AnimatedButtonControl parent);
         public event ClickedHandler? Clicked;
-        public event ClickedHandler? ClickedModifierA;
-        public event ClickedHandler? ClickedModifierB;
 
         public List<Texture2D> TileSet { get; set; } = new List<Texture2D>();
         public int Frame { get; set; } = 0;
@@ -24,8 +22,6 @@ namespace TDGame.OpenGL.Engine.Controls
         public TimeSpan FrameTime { get; set; } = TimeSpan.FromMilliseconds(500);
         private bool _finished = false;
         private TimeSpan _currentFrameTime = TimeSpan.Zero;
-        public Keys ModifierKeyA { get; set; } = Keys.LeftShift;
-        public Keys ModifierKeyB { get; set; } = Keys.LeftControl;
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
         public bool IsEnabled { get; set; } = true;
@@ -67,11 +63,9 @@ namespace TDGame.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public AnimatedButtonControl(UIEngine parent, ClickedHandler? clicked = null, ClickedHandler? clickedModifierA = null, ClickedHandler? clickedModifierB = null) : base(parent)
+        public AnimatedButtonControl(UIEngine parent, ClickedHandler? clicked = null) : base(parent)
         {
             Clicked += clicked;
-            ClickedModifierA += clickedModifierA;
-            ClickedModifierB += clickedModifierB;
         }
 
         internal void UpdateTextPositions()
@@ -138,22 +132,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         _holding = true;
                     else if (_holding && mouseState.LeftButton == ButtonState.Released)
                     {
-                        var keyState = Keyboard.GetState();
-                        if (keyState.IsKeyDown(ModifierKeyA))
-                        {
-                            if (ClickedModifierA != null)
-                                ClickedModifierA.Invoke(this);
-                        }
-                        else if (keyState.IsKeyDown(ModifierKeyB))
-                        {
-                            if (ClickedModifierB != null)
-                                ClickedModifierB.Invoke(this);
-                        }
-                        else
-                        {
-                            if (Clicked != null)
-                                Clicked.Invoke(this);
-                        }
+                        Clicked?.Invoke(this);
                         _holding = false;
                     }
                 }
@@ -179,8 +158,7 @@ namespace TDGame.OpenGL.Engine.Controls
                             Frame = 0;
                         else
                             _finished = true;
-                        if (OnAnimationDone != null)
-                            OnAnimationDone.Invoke(this);
+                        OnAnimationDone?.Invoke(this);
                     }
                     _currentFrameTime = TimeSpan.Zero;
                 }

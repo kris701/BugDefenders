@@ -19,9 +19,9 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
         private MoveState _currentMoveState = MoveState.Hold;
         private TimeSpan _currentHoldTime = TimeSpan.Zero;
         private float _currentY = 1000f;
-        private List<NotificationItem> _notificationStack = new List<NotificationItem>();
-        private NotificationControl _notification;
-        private TimeSpan _waitTarget = TimeSpan.FromSeconds(1);
+        private readonly List<NotificationItem> _notificationStack = new List<NotificationItem>();
+        private NotificationControl? _notification;
+        private readonly TimeSpan _waitTarget = TimeSpan.FromSeconds(1);
         private TimeSpan _waitingFor = TimeSpan.FromSeconds(1);
 
         public NotificationBackroundWorker(UIEngine parent) : base(parent)
@@ -30,16 +30,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
 
         public void AddManualNotification(string name, string description)
         {
-            _notificationStack.Add(new NotificationItem()
-            {
-                Definition = new ManualDefinition()
-                {
-                    Name = name,
-                    Description = description
-                },
-                HasImage = false,
-                PreFix = ""
-            });
+            _notificationStack.Add(new NotificationItem("", new ManualDefinition(name, description), false));
         }
 
         public override void Update(GameTime gameTime)
@@ -65,7 +56,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
                     {
                         X = 0,
                         Y = _currentY,
-                        FillColor = UIResourceManager.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"))
+                        FillColor = Parent.UIResources.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"))
                     };
                     _notification.Initialize();
                     _currentMoveState = MoveState.Up;
@@ -115,6 +106,20 @@ namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
             public Guid ID { get; set; }
             public string Name { get; set; }
             public string Description { get; set; }
+
+            public ManualDefinition(string name, string description)
+            {
+                ID = Guid.NewGuid();
+                Name = name;
+                Description = description;
+            }
+
+            public ManualDefinition(Guid iD, string name, string description)
+            {
+                ID = iD;
+                Name = name;
+                Description = description;
+            }
         }
     }
 }

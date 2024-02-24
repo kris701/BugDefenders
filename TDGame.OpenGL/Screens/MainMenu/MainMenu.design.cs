@@ -13,7 +13,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = UIResourceManager.GetTexture(new Guid("4a39d624-3171-41cd-b172-c853cea36d14")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("4a39d624-3171-41cd-b172-c853cea36d14")),
                 Width = 1000,
                 Height = 1000
             });
@@ -101,7 +101,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 Text = $"Current User: {Parent.CurrentUser.Name}",
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreen(Parent)))
             {
@@ -112,8 +112,8 @@ namespace TDGame.OpenGL.Screens.MainMenu
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 Text = "Users",
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG

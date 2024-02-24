@@ -9,9 +9,6 @@ namespace TDGame.OpenGL.Engine.Controls
 {
     public class TextInputControl : LabelControl
     {
-        public delegate void ClickedHandler(ButtonControl parent);
-        public event ClickedHandler? Clicked;
-
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public bool IsEnabled { get; set; } = true;

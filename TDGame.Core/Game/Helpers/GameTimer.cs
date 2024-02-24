@@ -4,7 +4,7 @@
     {
         public TimeSpan Target { get; }
         private TimeSpan _last = TimeSpan.Zero;
-        private Action _func;
+        private readonly Action _func;
 
         public GameTimer(TimeSpan target, Action func)
         {

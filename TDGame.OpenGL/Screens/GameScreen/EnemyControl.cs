@@ -41,7 +41,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public void SetEnemyAnimation(Guid id)
         {
-            var textureSet = UIResourceManager.GetTextureSet(id);
+            var textureSet = Parent.UIResources.GetTextureSet(id);
             TileSet = textureSet.LoadedContents;
             FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
             Initialize();

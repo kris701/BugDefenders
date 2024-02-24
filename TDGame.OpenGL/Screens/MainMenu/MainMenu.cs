@@ -10,7 +10,7 @@ namespace TDGame.OpenGL.Screens.MainMenu
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
-            UIResourceManager.PlaySong(ID);
+            Parent.UIResources.PlaySong(ID);
         }
     }
 }

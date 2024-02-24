@@ -18,21 +18,12 @@ namespace TDGame.OpenGL.Screens.AchivementsView
             Achivement = achivement;
             Width = 800;
             Height = 120;
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
             _iconTile = new TileControl(Parent)
             {
                 Width = 75,
                 Height = 75,
-                FillColor = UIResourceManager.GetTexture(Achivement.ID)
+                FillColor = Parent.UIResources.GetTexture(Achivement.ID)
             };
-            _iconTile._x = _x + Scale(20);
-            _iconTile._y = _y + Scale(20);
-            _iconTile.Initialize();
-
             _descriptionTextbox = new TextboxControl(Parent)
             {
                 Width = 600,
@@ -41,6 +32,15 @@ namespace TDGame.OpenGL.Screens.AchivementsView
                 FontColor = Color.White,
                 Text = $"{Achivement.Name}{Environment.NewLine}{Achivement.Description}"
             };
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _iconTile._x = _x + Scale(20);
+            _iconTile._y = _y + Scale(20);
+            _iconTile.Initialize();
+
             _descriptionTextbox._x = _x + Scale(10) + Scale(100);
             _descriptionTextbox._y = _y + Scale(10);
             _descriptionTextbox.Initialize();

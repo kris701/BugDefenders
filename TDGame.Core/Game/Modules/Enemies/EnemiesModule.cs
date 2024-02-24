@@ -18,8 +18,8 @@ namespace TDGame.Core.Game.Modules.Enemies
         public WaveEnemyModule WaveEnemiesModule { get; private set; }
         public SingleEnemyModule SingleEnemiesModule { get; private set; }
 
-        private GameTimer _enemySpawnTimer;
-        private List<EnemyInstance> _spawnQueue = new List<EnemyInstance>();
+        private readonly GameTimer _enemySpawnTimer;
+        private readonly List<EnemyInstance> _spawnQueue = new List<EnemyInstance>();
         private int _waveQueue = 0;
 
         public EnemiesModule(GameContext context, GameEngine game) : base(context, game)
@@ -106,8 +106,7 @@ namespace TDGame.Core.Game.Modules.Enemies
                 Context.Money += (int)(enemy.GetDefinition().Reward * Context.GameStyle.MoneyMultiplier);
                 Context.Score += enemy.GetDefinition().Reward;
                 Context.CurrentEnemies.Remove(enemy);
-                if (OnEnemyKilled != null)
-                    OnEnemyKilled.Invoke(enemy);
+                OnEnemyKilled?.Invoke(enemy);
 
                 Context.Outcome.TotalKills++;
                 if (!Context.Outcome.KillsOfType.ContainsKey(enemy.DefinitionID))
@@ -165,8 +164,7 @@ namespace TDGame.Core.Game.Modules.Enemies
             foreach (var enemy in newToAdd)
             {
                 Context.CurrentEnemies.Add(enemy);
-                if (OnEnemySpawned != null)
-                    OnEnemySpawned.Invoke(enemy);
+                OnEnemySpawned?.Invoke(enemy);
             }
             foreach (var remove in newToAdd)
                 _spawnQueue.Remove(remove);

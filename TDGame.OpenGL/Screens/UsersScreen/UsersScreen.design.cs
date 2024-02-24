@@ -18,7 +18,7 @@ namespace TDGame.OpenGL.Screens.UsersScreen
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = UIResourceManager.GetTexture(new Guid("46ce91a9-78bc-4d77-95c1-46adfce971b2")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("46ce91a9-78bc-4d77-95c1-46adfce971b2")),
                 Width = 1000,
                 Height = 1000
             });
@@ -43,9 +43,9 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 Limit = 10,
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = UIResourceManager.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
             };
             AddControl(0, _nameInputBox);
             _acceptButton = new ButtonControl(Parent, AddUserButton_Click)
@@ -57,9 +57,9 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 Text = "Add User",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = UIResourceManager.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968"))
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968"))
             };
             AddControl(0, _acceptButton);
             CheckValidUserInput();
@@ -78,8 +78,8 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG
@@ -117,13 +117,13 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                     Text = $"{user.Name}",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
-                    FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = UIResourceManager.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    FillDisabledColor = UIResourceManager.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                     Tag = user
                 };
                 if (user.IsPrimary)
-                    newControl.FillColor = UIResourceManager.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    newControl.FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 _usersButtons.Add(newControl);
                 AddControl(1, newControl);
 
@@ -136,9 +136,9 @@ namespace TDGame.OpenGL.Screens.UsersScreen
                     Text = "Delete",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.Red,
-                    FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    FillDisabledColor = UIResourceManager.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
                     Tag = user
                 };
                 _usersDeleteButtons.Add(newDeleteControl);

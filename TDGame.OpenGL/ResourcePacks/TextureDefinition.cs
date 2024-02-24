@@ -11,5 +11,11 @@ namespace TDGame.OpenGL.Textures
 
         [JsonIgnore]
         public Texture2D LoadedContent { get; set; }
+
+        public TextureDefinition(Guid iD, string content)
+        {
+            ID = iD;
+            Content = content;
+        }
     }
 }

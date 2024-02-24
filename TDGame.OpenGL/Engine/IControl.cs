@@ -14,7 +14,7 @@ namespace TDGame.OpenGL.Engine
         public float Width { get; set; }
         public float Height { get; set; }
         public int Alpha { get; set; }
-        public object Tag { get; set; }
+        public object? Tag { get; set; }
         public float Rotation { get; set; }
         public Rectangle ViewPort { get; set; }
 

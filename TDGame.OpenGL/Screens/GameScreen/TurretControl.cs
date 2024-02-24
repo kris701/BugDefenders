@@ -15,24 +15,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
         private TileControl baseControl;
         private LabelControl turretLevelControl;
         private Guid _currentAnimation;
-        public TurretControl(UIEngine parent, TurretInstance instance, ClickedHandler clicked = null) : base(parent, clicked, null, null)
+        public TurretControl(UIEngine parent, TurretInstance instance, ClickedHandler clicked) : base(parent, clicked)
         {
             Instance = instance;
-        }
-
-        public override void Initialize()
-        {
-            var baseTexture = UIResourceManager.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d"));
             baseControl = new TileControl(Parent)
             {
-                FillColor = baseTexture,
+                FillColor = Parent.UIResources.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d")),
                 Width = 35,
                 Height = 35,
             };
-            baseControl._x = _x + (Width - baseControl.Width) / 2;
-            baseControl._y = _y + (Height - baseControl.Height) / 2;
-            baseControl.Initialize();
-
             turretLevelControl = new LabelControl(Parent)
             {
                 Font = BasicFonts.GetFont(10),
@@ -40,6 +31,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 IsVisible = Instance.HasUpgrades.Count > 0,
                 Text = $"{Instance.HasUpgrades.Count}"
             };
+        }
+
+        public override void Initialize()
+        {
+            baseControl._x = _x + (Width - baseControl.Width) / 2;
+            baseControl._y = _y + (Height - baseControl.Height) / 2;
+            baseControl.Initialize();
+
             turretLevelControl._x = _x + Width;
             turretLevelControl._y = _y;
             turretLevelControl.Initialize();
@@ -51,7 +50,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (id == _currentAnimation)
                 return;
             _currentAnimation = id;
-            var textureSet = UIResourceManager.GetTextureSet(id);
+            var textureSet = Parent.UIResources.GetTextureSet(id);
             TileSet = textureSet.LoadedContents;
             FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
         }

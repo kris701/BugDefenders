@@ -18,7 +18,7 @@ namespace TDGame.OpenGL.Screens.AchivementsView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = UIResourceManager.GetTexture(new Guid("cf85361b-abcc-42c6-8a8e-60df3c44fbe5")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("cf85361b-abcc-42c6-8a8e-60df3c44fbe5")),
                 Width = 1000,
                 Height = 1000
             });
@@ -60,7 +60,7 @@ namespace TDGame.OpenGL.Screens.AchivementsView
                 }
                 var newButton = new AchivementControl(Parent, ResourceManager.Achivements.GetResource(achivementID))
                 {
-                    FillColor = UIResourceManager.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     X = 100,
                     Y = 270 + offset++ * 120,
                     IsVisible = false
@@ -94,8 +94,8 @@ namespace TDGame.OpenGL.Screens.AchivementsView
                 UpdateAchivementSelectionPages();
             })
             {
-                FillColor = UIResourceManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $"<",
@@ -115,8 +115,8 @@ namespace TDGame.OpenGL.Screens.AchivementsView
                 UpdateAchivementSelectionPages();
             })
             {
-                FillColor = UIResourceManager.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $">",
@@ -139,8 +139,8 @@ namespace TDGame.OpenGL.Screens.AchivementsView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView(Parent)))

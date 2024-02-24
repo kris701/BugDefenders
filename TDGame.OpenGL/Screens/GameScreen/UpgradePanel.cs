@@ -39,8 +39,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 Text = $"[{upgrade.Cost}$] Buy",
                 Height = 35,
