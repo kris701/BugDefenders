@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models;
 using TDGame.OpenGL.ResourcePacks;
 using TDGame.OpenGL.Textures;
 
@@ -19,8 +18,6 @@ namespace TDGame.OpenGL
         private static string _noTextureName = "notexture";
         private static Texture2D _noTexture;
         private static TextureSetDefinition _noTextureSet;
-        private static TimeSpan _passed;
-        private static TimeSpan _target = TimeSpan.FromSeconds(1);
         private static Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
 
         private static ContentManager _contentManager;

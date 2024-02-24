@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text.Json;
 using TDGame.Core.Resources;
 using TDGame.Core.Resources.Integrity;

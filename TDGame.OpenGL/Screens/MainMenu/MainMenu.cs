@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Media;
-using System;
+﻿using System;
 using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.MainMenu
