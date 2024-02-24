@@ -37,6 +37,10 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 button.FillColor = normal;
             foreach (var button in _scaleButtons)
                 button.FillColor = normal;
+            foreach (var button in _musicButtons)
+                button.FillColor = normal;
+            foreach (var button in _soundEffectsButtons)
+                button.FillColor = normal;
 
             if (_settings.IsFullscreen)
                 _isFullScreen.FillColor = selected;
@@ -54,6 +58,22 @@ namespace TDGame.OpenGL.Screens.SettingsView
             foreach (var button in _scaleButtons)
             {
                 if (button.Tag is float value && value == _settings.Scale)
+                {
+                    button.FillColor = selected;
+                    break;
+                }
+            }
+            foreach (var button in _musicButtons)
+            {
+                if (button.Tag is float value && value == _settings.MusicVolume)
+                {
+                    button.FillColor = selected;
+                    break;
+                }
+            }
+            foreach (var button in _soundEffectsButtons)
+            {
+                if (button.Tag is float value && value == _settings.EffectsVolume)
                 {
                     button.FillColor = selected;
                     break;

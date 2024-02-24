@@ -22,6 +22,18 @@ namespace TDGame.OpenGL.Screens.SettingsView
         };
         private List<ButtonControl> _scaleButtons = new List<ButtonControl>();
 
+        private List<float> _soundOptions = new List<float>()
+        {
+            0,
+            0.2f,
+            0.4f,
+            0.6f,
+            0.8f,
+            1f
+        };
+        private List<ButtonControl> _musicButtons = new List<ButtonControl>();
+        private List<ButtonControl> _soundEffectsButtons = new List<ButtonControl>();
+
         private ButtonControl _isFullScreen;
         private ButtonControl _isVSync;
         private List<ButtonControl> _texturePacksButtons = new List<ButtonControl>();
@@ -58,6 +70,8 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
             SetupScreenSettingsView(220);
             SetupTextureSettingsView(390);
+            SetupMusicSettingsView(500);
+            SetupSoundEffectsSettingsView(600);
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
@@ -227,6 +241,82 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 };
                 AddControl(1, newControl);
                 _texturePacksButtons.Add(newControl);
+            }
+
+            UpdateScreenSettingsButtons();
+        }
+
+        private void SetupMusicSettingsView(int yOffset)
+        {
+            AddControl(1, new LabelControl(Parent)
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = yOffset,
+                Text = "Music Volume",
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White
+            });
+
+            for (int i = 0; i < _soundOptions.Count; i++)
+            {
+                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                {
+                    if (s.Tag is float value)
+                        _settings.MusicVolume = value;
+                    UpdateScreenSettingsButtons();
+                })
+                {
+                    Y = yOffset + 35,
+                    X = 110 + (i * (710 / _soundOptions.Count + 10)),
+                    Width = 710 / _soundOptions.Count,
+                    Height = 40,
+                    Text = $"{Math.Round(_soundOptions[i] * 100, 0)}%",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.White,
+                    FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    Tag = _soundOptions[i]
+                };
+                AddControl(1, newControl);
+                _musicButtons.Add(newControl);
+            }
+
+            UpdateScreenSettingsButtons();
+        }
+
+        private void SetupSoundEffectsSettingsView(int yOffset)
+        {
+            AddControl(1, new LabelControl(Parent)
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = yOffset,
+                Text = "Sound Effects Volume",
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White
+            });
+
+            for (int i = 0; i < _soundOptions.Count; i++)
+            {
+                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                {
+                    if (s.Tag is float value)
+                        _settings.EffectsVolume = value;
+                    UpdateScreenSettingsButtons();
+                })
+                {
+                    Y = yOffset + 35,
+                    X = 110 + (i * (710 / _soundOptions.Count + 10)),
+                    Width = 710 / _soundOptions.Count,
+                    Height = 40,
+                    Text = $"{Math.Round(_soundOptions[i] * 100, 0)}%",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.White,
+                    FillColor = UIResourceManager.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = UIResourceManager.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    Tag = _soundOptions[i]
+                };
+                AddControl(1, newControl);
+                _soundEffectsButtons.Add(newControl);
             }
 
             UpdateScreenSettingsButtons();
