@@ -1,6 +1,7 @@
 # TDGame
 
 ## TODO List
+- [ ] Come up with an actual name for the game
 - [ ] Setup a good base game
 - [ ] AOE turret effects
     - Maybe a circle that increases in size?
