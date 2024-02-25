@@ -17,6 +17,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Helpers;
 using TDGame.OpenGL.ResourcePacks.EntityResources;
 using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
@@ -579,7 +580,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 }
 
                 Parent.UIResources.StopSounds();
-                var screen = Parent.TakeScreenCap();
+                var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
                 SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Context.Score, _game.Context.GameTime));
             }
         }
