@@ -1,6 +1,9 @@
 # TDGame
 
 ## TODO List
+- [ ] Setup a good base game
+- [ ] AOE turret effects
+    - Maybe a circle that increases in size?
 
 ## Done
 - [X] Audio system 
