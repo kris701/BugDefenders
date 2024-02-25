@@ -9,5 +9,13 @@ namespace TDGame.Core.Users.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public IUserCriteria Criteria { get; set; }
+
+        public AchivementDefinition(Guid iD, string name, string description, IUserCriteria criteria)
+        {
+            ID = iD;
+            Name = name;
+            Description = description;
+            Criteria = criteria;
+        }
     }
 }

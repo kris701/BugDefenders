@@ -18,6 +18,21 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
         public float SlowingFactorModifierModifier { get; set; }
         public float SlowingDurationModifierModifier { get; set; }
 
+        public PassiveTurretUpgrade(Guid iD, Guid? requires, string name, string description, int cost, float rangeModifier, float rangeModifierModifier, float damageModifierModifier, float cooldownModifierModifier, float slowingFactorModifierModifier, float slowingDurationModifierModifier)
+        {
+            ID = iD;
+            Requires = requires;
+            Name = name;
+            Description = description;
+            Cost = cost;
+            RangeModifier = rangeModifier;
+            RangeModifierModifier = rangeModifierModifier;
+            DamageModifierModifier = damageModifierModifier;
+            CooldownModifierModifier = cooldownModifierModifier;
+            SlowingFactorModifierModifier = slowingFactorModifierModifier;
+            SlowingDurationModifierModifier = slowingDurationModifierModifier;
+        }
+
         public void ApplyUpgrade(TurretInstance on)
         {
             if (on.TurretInfo is PassiveTurretDefinition item)

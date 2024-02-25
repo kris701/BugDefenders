@@ -18,6 +18,20 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
         public float SlowingFactorModifier { get; set; }
         public float SlowingDurationModifier { get; set; }
 
+        public ExplosiveProjectileUpgrade(Guid iD, Guid? requires, string name, string description, int cost, float damageModifier, float splashRangeModifier, float triggerRangeModifier, float slowingFactorModifier, float slowingDurationModifier)
+        {
+            ID = iD;
+            Requires = requires;
+            Name = name;
+            Description = description;
+            Cost = cost;
+            DamageModifier = damageModifier;
+            SplashRangeModifier = splashRangeModifier;
+            TriggerRangeModifier = triggerRangeModifier;
+            SlowingFactorModifier = slowingFactorModifier;
+            SlowingDurationModifier = slowingDurationModifier;
+        }
+
         public void ApplyUpgrade(TurretInstance on)
         {
             if (on.TurretInfo is ProjectileTurretDefinition tur && tur.ProjectileInfo is ExplosiveProjectileDefinition item)

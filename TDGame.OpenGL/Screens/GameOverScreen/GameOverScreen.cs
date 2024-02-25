@@ -19,12 +19,11 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
             _gameTime = gameTime;
             ScaleValue = parent.CurrentUser.UserData.Scale;
 
-            Parent.CurrentUser.HighScores.Add(new Core.Users.Models.ScoreDefinition()
-            {
-                Score = _score,
-                GameTime = gameTime.ToString("hh\\:mm\\:ss"),
-                Date = DateTime.Now.Date.ToShortDateString(),
-            });
+            Parent.CurrentUser.HighScores.Add(new ScoreDefinition(
+                _score,
+                gameTime.ToString("hh\\:mm\\:ss"),
+                DateTime.Now.Date.ToShortDateString()
+            ));
             if (Parent.CurrentUser.HighScores.Count > 10)
             {
                 var smallest = int.MaxValue;

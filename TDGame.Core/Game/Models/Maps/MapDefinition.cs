@@ -9,5 +9,16 @@
         public List<BlockedTile> BlockingTiles { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+
+        public MapDefinition(Guid iD, string name, string description, List<List<FloatPoint>> paths, List<BlockedTile> blockingTiles, int width, int height)
+        {
+            ID = iD;
+            Name = name;
+            Description = description;
+            Paths = paths;
+            BlockingTiles = blockingTiles;
+            Width = width;
+            Height = height;
+        }
     }
 }

@@ -17,6 +17,20 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
         public float SlowingFactorModifier { get; set; }
         public float SlowingDurationModifier { get; set; }
 
+        public AOETurretUpgrade(Guid iD, Guid? requires, string name, string description, int cost, float rangeModifier, float damageModifier, float cooldownModifier, float slowingFactorModifier, float slowingDurationModifier)
+        {
+            ID = iD;
+            Requires = requires;
+            Name = name;
+            Description = description;
+            Cost = cost;
+            RangeModifier = rangeModifier;
+            DamageModifier = damageModifier;
+            CooldownModifier = cooldownModifier;
+            SlowingFactorModifier = slowingFactorModifier;
+            SlowingDurationModifier = slowingDurationModifier;
+        }
+
         public void ApplyUpgrade(TurretInstance on)
         {
             if (on.TurretInfo is AOETurretDefinition item)

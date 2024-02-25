@@ -57,13 +57,15 @@ namespace TDGame.OpenGL
             var allUsers = UserManager.GetAllUsers();
             if (allUsers.Count == 0)
             {
-                var newUser = new UserDefinition<SettingsDefinition>()
-                {
-                    ID = Guid.NewGuid(),
-                    Name = "Default",
-                    IsPrimary = true,
-                    UserData = new SettingsDefinition()
-                };
+                var newUser = new UserDefinition<SettingsDefinition>(
+                    Guid.NewGuid(), 
+                    "Default", 
+                    new List<Guid>(), 
+                    new List<Guid>(), 
+                    new List<ScoreDefinition>(), 
+                    true, 
+                    new StatsDefinition(), 
+                    new SettingsDefinition());
                 UserManager.AddNewUser(newUser);
                 ChangeUser(newUser);
             }
@@ -91,13 +93,15 @@ namespace TDGame.OpenGL
 
         public void CreateNewUser(string name)
         {
-            var newUser = new UserDefinition<SettingsDefinition>()
-            {
-                ID = Guid.NewGuid(),
-                Name = name,
-                IsPrimary = false,
-                UserData = new SettingsDefinition()
-            };
+            var newUser = new UserDefinition<SettingsDefinition>(
+                Guid.NewGuid(),
+                name,
+                new List<Guid>(),
+                new List<Guid>(),
+                new List<ScoreDefinition>(),
+                false,
+                new StatsDefinition(),
+                new SettingsDefinition());
             UserManager.AddNewUser(newUser);
         }
 

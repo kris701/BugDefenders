@@ -13,6 +13,16 @@ namespace TDGame.Core.Game.Models.Entities.Projectiles
         public IProjectileModule ModuleInfo { get; set; }
         public List<EnemyTerrrainTypes> CanDamage { get; set; }
 
+        public ProjectileDefinition(Guid iD, string name, string description, float size, IProjectileModule moduleInfo, List<EnemyTerrrainTypes> canDamage)
+        {
+            ID = iD;
+            Name = name;
+            Description = description;
+            Size = size;
+            ModuleInfo = moduleInfo;
+            CanDamage = canDamage;
+        }
+
         public string GetDescriptionString()
         {
             var sb = new StringBuilder();

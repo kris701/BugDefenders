@@ -14,6 +14,17 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
         public float RangeModifier { get; set; }
         public float CooldownModifier { get; set; }
 
+        public ProjectileTurretUpgrade(Guid iD, Guid? requires, string name, string description, int cost, float rangeModifier, float cooldownModifier)
+        {
+            ID = iD;
+            Requires = requires;
+            Name = name;
+            Description = description;
+            Cost = cost;
+            RangeModifier = rangeModifier;
+            CooldownModifier = cooldownModifier;
+        }
+
         public void ApplyUpgrade(TurretInstance on)
         {
             if (on.TurretInfo is ProjectileTurretDefinition item)

@@ -23,7 +23,6 @@ namespace TDGame.Core.Users.Models.Buffs
             Requires = requires;
             Criteria = criteria;
             Effect = effect;
-            Effect.BuffID = ID;
         }
 
         public bool IsValid<T>(UserDefinition<T> user)

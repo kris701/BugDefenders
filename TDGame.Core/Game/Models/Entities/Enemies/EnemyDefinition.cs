@@ -16,5 +16,19 @@ namespace TDGame.Core.Game.Models.Entities.Enemies
         public Guid EnemyType { get; set; }
         public EnemyTerrrainTypes TerrainType { get; set; }
         public int AvailableAtWave { get; set; }
+
+        public EnemyDefinition(Guid iD, string name, string description, float health, float size, int reward, IEnemyModule moduleInfo, Guid enemyType, EnemyTerrrainTypes terrainType, int availableAtWave)
+        {
+            ID = iD;
+            Name = name;
+            Description = description;
+            Health = health;
+            Size = size;
+            Reward = reward;
+            ModuleInfo = moduleInfo;
+            EnemyType = enemyType;
+            TerrainType = terrainType;
+            AvailableAtWave = availableAtWave;
+        }
     }
 }

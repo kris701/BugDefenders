@@ -10,6 +10,14 @@ namespace TDGame.Core.Resources
         public string Name { get; set; }
         public string Description { get; set; }
         [JsonIgnore]
-        public string Path { get; set; }
+        public string Path { get; set; } = "";
+
+        public ResourceDefinition(Guid iD, string version, string name, string description)
+        {
+            ID = iD;
+            Version = version;
+            Name = name;
+            Description = description;
+        }
     }
 }

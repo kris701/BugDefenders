@@ -10,5 +10,17 @@
         public bool IsPrimary { get; set; } = false;
         public StatsDefinition Stats { get; set; } = new StatsDefinition();
         public T UserData { get; set; }
+
+        public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, T userData)
+        {
+            ID = iD;
+            Name = name;
+            Buffs = buffs;
+            Achivements = achivements;
+            HighScores = highScores;
+            IsPrimary = isPrimary;
+            Stats = stats;
+            UserData = userData;
+        }
     }
 }

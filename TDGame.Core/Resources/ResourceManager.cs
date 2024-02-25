@@ -28,13 +28,7 @@ namespace TDGame.Core.Resources
         public static BaseBuilder<AchivementDefinition> Achivements = new BaseBuilder<AchivementDefinition>("Resources.Core.Achivements", Assembly.GetExecutingAssembly());
 
         public static List<ResourceDefinition> LoadedResources { get; internal set; } = new List<ResourceDefinition>() {
-            new ResourceDefinition()
-            {
-                ID = _coreID,
-                Version = "1.0.0",
-                Name = "Core",
-                Description = "Core game components"
-            }
+            new ResourceDefinition(_coreID, "1.0.0", "Core", "Core Game Components")
         };
 
         public static void LoadResource(DirectoryInfo path)
@@ -96,13 +90,7 @@ namespace TDGame.Core.Resources
 
             LoadedResources.Clear();
             LoadedResources = new List<ResourceDefinition>() {
-                new ResourceDefinition()
-                {
-                    ID = _coreID,
-                    Version = "1.0.0",
-                    Name = "Core",
-                    Description = "Core game components"
-                }
+                new ResourceDefinition(_coreID, "1.0.0", "Core", "Core Game Components")
             };
         }
 

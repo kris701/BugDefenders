@@ -14,20 +14,19 @@ namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
         public List<DamageModifier> DamageModifiers { get; set; }
 
         [JsonIgnore]
-        public TimeSpan CoolingFor { get; set; }
+        public TimeSpan CoolingFor { get; set; } = TimeSpan.Zero;
 
-        public ITurretModule Copy()
+        public AOETurretDefinition(float range, float damage, int cooldown, float slowingFactor, int slowingDuration, List<DamageModifier> damageModifiers)
         {
-            return new AOETurretDefinition()
-            {
-                Range = Range,
-                Damage = Damage,
-                Cooldown = Cooldown,
-                SlowingFactor = SlowingFactor,
-                SlowingDuration = SlowingDuration,
-                DamageModifiers = DamageModifiers
-            };
+            Range = range;
+            Damage = damage;
+            Cooldown = cooldown;
+            SlowingFactor = slowingFactor;
+            SlowingDuration = slowingDuration;
+            DamageModifiers = damageModifiers;
         }
+
+        public ITurretModule Copy() => new AOETurretDefinition(Range, Damage, Cooldown, SlowingFactor, SlowingDuration, DamageModifiers);
 
         public string GetDescriptionString()
         {

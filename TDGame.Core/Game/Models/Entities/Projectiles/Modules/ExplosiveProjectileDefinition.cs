@@ -16,21 +16,20 @@ namespace TDGame.Core.Game.Models.Entities.Projectiles.Modules
         public int SlowingDuration { get; set; }
         public List<DamageModifier> DamageModifiers { get; set; }
 
-        public IProjectileModule Copy()
+        public ExplosiveProjectileDefinition(float speed, float damage, float splashRange, float triggerRange, double acceleration, bool isGuided, float slowingFactor, int slowingDuration, List<DamageModifier> damageModifiers)
         {
-            return new ExplosiveProjectileDefinition()
-            {
-                Speed = Speed,
-                Damage = Damage,
-                SplashRange = SplashRange,
-                TriggerRange = TriggerRange,
-                Acceleration = Acceleration,
-                IsGuided = IsGuided,
-                SlowingFactor = SlowingFactor,
-                SlowingDuration = SlowingDuration,
-                DamageModifiers = DamageModifiers
-            };
+            Speed = speed;
+            Damage = damage;
+            SplashRange = splashRange;
+            TriggerRange = triggerRange;
+            Acceleration = acceleration;
+            IsGuided = isGuided;
+            SlowingFactor = slowingFactor;
+            SlowingDuration = slowingDuration;
+            DamageModifiers = damageModifiers;
         }
+
+        public IProjectileModule Copy() => new ExplosiveProjectileDefinition(Speed, Damage, SplashRange, TriggerRange, Acceleration, IsGuided, SlowingFactor, SlowingDuration, DamageModifiers);
 
         public string GetDescriptionString()
         {

@@ -566,8 +566,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 _gameOver = true;
 
-                Parent.UIResources.StopSounds();
-
                 Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
                 var achivements = ResourceManager.Achivements.GetResources();
                 foreach (var id in achivements)
@@ -580,6 +578,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     }
                 }
 
+                Parent.UIResources.StopSounds();
                 var screen = Parent.TakeScreenCap();
                 SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Context.Score, _game.Context.GameTime));
             }

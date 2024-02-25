@@ -13,6 +13,16 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
         public int Cost { get; set; }
         public float MoneyPrWaveModifier { get; set; }
 
+        public InvestmentTurretUpgrade(Guid iD, Guid? requires, string name, string description, int cost, float moneyPrWaveModifier)
+        {
+            ID = iD;
+            Requires = requires;
+            Name = name;
+            Description = description;
+            Cost = cost;
+            MoneyPrWaveModifier = moneyPrWaveModifier;
+        }
+
         public void ApplyUpgrade(TurretInstance on)
         {
             if (on.TurretInfo is InvestmentTurretDefinition item)

@@ -16,6 +16,19 @@ namespace TDGame.Core.Game.Models.Entities.Turrets
         public List<IUpgrade> Upgrades { get; set; }
         public int AvailableAtWave { get; set; }
 
+        public TurretDefinition(Guid iD, string name, string description, float size, int cost, ITurretModule moduleInfo, List<EnemyTerrrainTypes> canDamage, List<IUpgrade> upgrades, int availableAtWave)
+        {
+            ID = iD;
+            Name = name;
+            Description = description;
+            Size = size;
+            Cost = cost;
+            ModuleInfo = moduleInfo;
+            CanDamage = canDamage;
+            Upgrades = upgrades;
+            AvailableAtWave = availableAtWave;
+        }
+
         public string GetDescriptionString()
         {
             var sb = new StringBuilder();

@@ -14,19 +14,18 @@ namespace TDGame.Core.Game.Models.Entities.Projectiles.Modules
         public int SlowingDuration { get; set; }
         public List<DamageModifier> DamageModifiers { get; set; }
 
-        public IProjectileModule Copy()
+        public DirectProjectileDefinition(float speed, float damage, double acceleration, bool isGuided, float slowingFactor, int slowingDuration, List<DamageModifier> damageModifiers)
         {
-            return new DirectProjectileDefinition()
-            {
-                Speed = Speed,
-                Damage = Damage,
-                Acceleration = Acceleration,
-                IsGuided = IsGuided,
-                SlowingFactor = SlowingFactor,
-                SlowingDuration = SlowingDuration,
-                DamageModifiers = DamageModifiers
-            };
+            Speed = speed;
+            Damage = damage;
+            Acceleration = acceleration;
+            IsGuided = isGuided;
+            SlowingFactor = slowingFactor;
+            SlowingDuration = slowingDuration;
+            DamageModifiers = damageModifiers;
         }
+
+        public IProjectileModule Copy() => new DirectProjectileDefinition(Speed, Damage, Acceleration, IsGuided, SlowingFactor, SlowingDuration, DamageModifiers);
 
         public string GetDescriptionString()
         {

@@ -8,7 +8,10 @@ namespace TDGame.Core.Users.Models.Buffs.BuffEffects
         public Guid EnemyID { get; set; }
         public IEnemyModule Module { get; set; }
 
-        [JsonIgnore]
-        public Guid BuffID { get; set; }
+        public EnemyBuffEffect(Guid enemyID, IEnemyModule module)
+        {
+            EnemyID = enemyID;
+            Module = module;
+        }
     }
 }
