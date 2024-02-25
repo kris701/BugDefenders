@@ -11,8 +11,8 @@ namespace TDGame.OpenGL.Screens.AchivementsView
     {
         public AchivementDefinition Achivement { get; }
 
-        private TileControl _iconTile;
-        private TextboxControl _descriptionTextbox;
+        private readonly TileControl _iconTile;
+        private readonly TextboxControl _descriptionTextbox;
         public AchivementControl(UIEngine parent, AchivementDefinition achivement) : base(parent)
         {
             Achivement = achivement;

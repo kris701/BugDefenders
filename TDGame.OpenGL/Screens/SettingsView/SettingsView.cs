@@ -9,9 +9,9 @@ namespace TDGame.OpenGL.Screens.SettingsView
 {
     public partial class SettingsView : BaseScreen
     {
-        private static Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
-        private SettingsDefinition _settings;
-        private KeyWatcher _escapeKeyWatcher;
+        private static readonly Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
+        private readonly SettingsDefinition _settings;
+        private readonly KeyWatcher _escapeKeyWatcher;
         public SettingsView(UIEngine parent) : base(parent, _id)
         {
             _settings = parent.CurrentUser.UserData.Copy();

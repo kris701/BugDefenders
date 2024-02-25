@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using TDGame.Core.Game.Helpers;
 using TDGame.OpenGL.ResourcePacks;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL
 {
@@ -15,18 +14,18 @@ namespace TDGame.OpenGL
     {
         public BaseBuilder<ResourcePackDefinition> TexturePacks = new BaseBuilder<ResourcePackDefinition>("ResourcePacks.ResourcePacks", Assembly.GetExecutingAssembly());
 
-        private string _noTextureName = "notexture";
-        private Texture2D _noTexture;
-        private TextureSetDefinition _noTextureSet;
-        private Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
+        private readonly string _noTextureName = "notexture";
+        private readonly Texture2D _noTexture;
+        private readonly TextureSetDefinition _noTextureSet;
+        private readonly Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
         private string _playing = "";
-        private ContentManager _contentManager;
-        private Dictionary<Guid, List<IEntityResource>> _animationEntities = new Dictionary<Guid, List<IEntityResource>>();
-        private Dictionary<Guid, List<IEntityResource>> _soundEffectEntities = new Dictionary<Guid, List<IEntityResource>>();
-        private Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
-        private Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
-        private Dictionary<Guid, SongDefinition> _songs = new Dictionary<Guid, SongDefinition>();
-        private Dictionary<Guid, SoundEffectDefinition> _soundEffects = new Dictionary<Guid, SoundEffectDefinition>();
+        private readonly ContentManager _contentManager;
+        private readonly Dictionary<Guid, List<IEntityResource>> _animationEntities = new Dictionary<Guid, List<IEntityResource>>();
+        private readonly Dictionary<Guid, List<IEntityResource>> _soundEffectEntities = new Dictionary<Guid, List<IEntityResource>>();
+        private readonly Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
+        private readonly Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
+        private readonly Dictionary<Guid, SongDefinition> _songs = new Dictionary<Guid, SongDefinition>();
+        private readonly Dictionary<Guid, SoundEffectDefinition> _soundEffects = new Dictionary<Guid, SoundEffectDefinition>();
 
         public UIResourceManager(ContentManager contentManager)
         {

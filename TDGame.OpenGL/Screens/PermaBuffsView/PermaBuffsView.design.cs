@@ -10,7 +10,7 @@ namespace TDGame.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseScreen
     {
-        private int _upgradeViewCount = 5;
+        private readonly int _upgradeViewCount = 5;
         public override void Initialize()
         {
             AddControl(0, new TileControl(Parent)

@@ -8,14 +8,14 @@ using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Textures.Animations;
+using TDGame.OpenGL.ResourcePacks.EntityResources;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
     public class EnemyQueueControl : TileControl
     {
-        private AnimatedTileControl _iconControl;
-        private TextboxControl _descriptionControl;
+        private readonly AnimatedTileControl _iconControl;
+        private readonly TextboxControl _descriptionControl;
         public EnemyQueueControl(UIEngine parent) : base(parent)
         {
             _iconControl = new AnimatedTileControl(Parent)

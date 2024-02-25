@@ -17,34 +17,34 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
 using TDGame.OpenGL.Engine.Screens;
-using TDGame.OpenGL.Textures.Animations;
+using TDGame.OpenGL.ResourcePacks.EntityResources;
 using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseScreen
     {
-        private static Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
+        private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
 
-        private EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
-        private EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
-        private EntityUpdater<ProjectileInstance, AnimatedTileControl> _projectileUpdater;
-        private EntityUpdater<EffectEntity, AnimatedTileControl> _effectsUpdater;
-        private EntityUpdater<LaserEntity, LineControl> _laserUpdater;
+        private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
+        private readonly EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
+        private readonly EntityUpdater<ProjectileInstance, AnimatedTileControl> _projectileUpdater;
+        private readonly EntityUpdater<EffectEntity, AnimatedTileControl> _effectsUpdater;
+        private readonly EntityUpdater<LaserEntity, LineControl> _laserUpdater;
 
-        private Guid _currentMap;
-        private Guid _currentGameStyle;
-        private GameEngine _game;
+        private readonly Guid _currentMap;
+        private readonly Guid _currentGameStyle;
+        private readonly GameEngine _game;
         private Guid? _buyingTurret;
         private TurretInstance? _selectedTurret;
-        private HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
-        private Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
+        private readonly HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
+        private readonly Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
 
-        private KeyWatcher _waveKeyWatcher;
+        private readonly KeyWatcher _waveKeyWatcher;
         private int tabIndex = 0;
-        private KeyWatcher _switchTurretWatcher;
-        private KeyWatcher _escapeKeyWatcher;
+        private readonly KeyWatcher _switchTurretWatcher;
+        private readonly KeyWatcher _escapeKeyWatcher;
         private bool _gameOver = false;
         private bool _unselectTurret = false;
         private bool _selectTurret = false;

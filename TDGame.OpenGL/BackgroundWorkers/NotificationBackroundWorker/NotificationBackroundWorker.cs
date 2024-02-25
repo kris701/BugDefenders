@@ -3,10 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using TDGame.Core.Game.Models;
-using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using TDGame.OpenGL.Engine.BackgroundWorkers;
 
-namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
+namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public class NotificationBackroundWorker : BaseBackroundWorker
     {

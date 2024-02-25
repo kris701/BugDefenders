@@ -9,8 +9,8 @@ namespace TDGame.OpenGL.Screens.UsersScreen
 {
     public partial class UsersScreen : BaseScreen
     {
-        private List<ButtonControl> _usersButtons = new List<ButtonControl>();
-        private List<ButtonControl> _usersDeleteButtons = new List<ButtonControl>();
+        private readonly List<ButtonControl> _usersButtons = new List<ButtonControl>();
+        private readonly List<ButtonControl> _usersDeleteButtons = new List<ButtonControl>();
         private TextInputControl _nameInputBox;
         private ButtonControl _acceptButton;
 

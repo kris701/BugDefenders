@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using TDGame.Core.Game.Models;
-using TDGame.OpenGL.ResourcePacks;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.OpenGL.ResourcePacks
 {
     public class ResourcePackDefinition : IDefinition
     {

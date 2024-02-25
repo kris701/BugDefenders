@@ -24,7 +24,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             return default(U);
         }
 
-        private Dictionary<T, U> _entities = new Dictionary<T, U>();
+        private readonly Dictionary<T, U> _entities = new Dictionary<T, U>();
 
         public EntityUpdater(int layer, IScreen screen, int xOffset, int yOffset)
         {

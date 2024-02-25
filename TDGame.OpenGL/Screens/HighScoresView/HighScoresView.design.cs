@@ -12,7 +12,7 @@ namespace TDGame.OpenGL.Screens.HighScoresView
 {
     public partial class HighScoresView : BaseScreen
     {
-        private static int _showCount = 13;
+        private static readonly int _showCount = 13;
 
         public override void Initialize()
         {

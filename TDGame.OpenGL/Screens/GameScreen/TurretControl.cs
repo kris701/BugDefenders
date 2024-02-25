@@ -12,8 +12,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
         public TurretInstance Instance { get; }
         public Guid CurrentSoundEffect { get; set; }
 
-        private TileControl baseControl;
-        private LabelControl turretLevelControl;
+        private readonly TileControl baseControl;
+        private readonly LabelControl turretLevelControl;
         private Guid _currentAnimation;
         public TurretControl(UIEngine parent, TurretInstance instance, ClickedHandler clicked) : base(parent, clicked)
         {

@@ -12,9 +12,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         public FloatPoint VisualOffset { get; }
         private TileControl _healthBar;
-        private float _initialHP;
-        private EnemyInstance _enemy;
-        private int _legalOffset = 5;
+        private readonly float _initialHP;
+        private readonly EnemyInstance _enemy;
+        private readonly int _legalOffset = 5;
         public EnemyControl(UIEngine parent, EnemyInstance enemy) : base(parent)
         {
             _initialHP = enemy.Health;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-using TDGame.OpenGL.Textures.Animations;
+using TDGame.OpenGL.ResourcePacks.EntityResources;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.OpenGL.ResourcePacks
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "TargetType")]
     [JsonDerivedType(typeof(TurretEntityDefinition), typeDiscriminator: "Turret")]

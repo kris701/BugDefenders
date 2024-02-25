@@ -11,8 +11,8 @@ namespace TDGame.OpenGL.Screens.AchivementsView
 {
     public partial class AchivementsView : BaseScreen
     {
-        private int _selectionsPrPage = 5;
-        private List<List<AchivementControl>> _achivementsPages = new List<List<AchivementControl>>();
+        private readonly int _selectionsPrPage = 5;
+        private readonly List<List<AchivementControl>> _achivementsPages = new List<List<AchivementControl>>();
         private int _currentAchivementsPage = 0;
         public override void Initialize()
         {

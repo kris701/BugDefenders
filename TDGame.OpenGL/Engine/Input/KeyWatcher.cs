@@ -7,8 +7,8 @@ namespace TDGame.OpenGL.Engine.Input
     {
         public Keys Key { get; set; }
         private bool _isDown = false;
-        private Action? _pressAction;
-        private Action? _unpressAction;
+        private readonly Action? _pressAction;
+        private readonly Action? _unpressAction;
 
         public KeyWatcher(Keys key, Action? pressAction = null, Action? unpresAction = null)
         {

@@ -14,9 +14,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
     {
         public event ClickedHandler Buy;
         public List<IControl> Children { get; set; }
-        private LabelControl _nameLabel;
-        private TextboxControl _descriptionTextbox;
-        private ButtonControl _buyUpgradeButton;
+        private readonly LabelControl _nameLabel;
+        private readonly TextboxControl _descriptionTextbox;
+        private readonly ButtonControl _buyUpgradeButton;
 
         public UpgradePanel(UIEngine parent, ClickedHandler buy, IUpgrade upgrade, bool canUpgrade) : base(parent)
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TDGame.OpenGL.Textures.Animations
+namespace TDGame.OpenGL.ResourcePacks.EntityResources
 {
     public class EffectEntityDefinition : IEntityResource
     {

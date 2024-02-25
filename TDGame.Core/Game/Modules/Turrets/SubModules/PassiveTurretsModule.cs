@@ -7,7 +7,7 @@ namespace TDGame.Core.Game.Modules.Turrets.SubModules
 {
     public class PassiveTurretsModule : BaseTurretModule<PassiveTurretDefinition>
     {
-        private Dictionary<TurretInstance, HashSet<TurretInstance>> _effectedTurrets = new Dictionary<TurretInstance, HashSet<TurretInstance>>();
+        private readonly Dictionary<TurretInstance, HashSet<TurretInstance>> _effectedTurrets = new Dictionary<TurretInstance, HashSet<TurretInstance>>();
 
         public PassiveTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {

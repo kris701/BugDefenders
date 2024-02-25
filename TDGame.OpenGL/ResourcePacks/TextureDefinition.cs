@@ -2,7 +2,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.OpenGL.ResourcePacks
 {
     public class TextureDefinition
     {

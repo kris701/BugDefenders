@@ -1,18 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker
+namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public class NotificationControl : TileControl
     {
         public NotificationItem Item { get; set; }
 
-        private TileControl _iconTile;
-        private TextboxControl _descriptionTextbox;
+        private readonly TileControl _iconTile;
+        private readonly TextboxControl _descriptionTextbox;
 
         public NotificationControl(UIEngine parent, NotificationItem item) : base(parent)
         {

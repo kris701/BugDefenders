@@ -25,21 +25,21 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private TileControl _turretSelectRangeTile;
 
-        private List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
+        private readonly List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
 
-        private List<ButtonControl> _turretTargetingModes = new List<ButtonControl>();
+        private readonly List<ButtonControl> _turretTargetingModes = new List<ButtonControl>();
 
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private int _turretSelectionsPrPage = 13;
-        private List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
+        private readonly int _turretSelectionsPrPage = 13;
+        private readonly List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
         private int _currentTurretPage = 0;
 
         private ButtonControl _upgradesLeftButton;
         private ButtonControl _upgradesRightButton;
-        private int _upgradeSelectionsPrPage = 3;
-        private List<List<UpgradePanel>> _turretUpgradePages = new List<List<UpgradePanel>>();
+        private readonly int _upgradeSelectionsPrPage = 3;
+        private readonly List<List<UpgradePanel>> _turretUpgradePages = new List<List<UpgradePanel>>();
         private int _currentTurretUpgradePage = 0;
 
         public override void Initialize()

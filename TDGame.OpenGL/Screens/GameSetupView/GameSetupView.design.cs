@@ -16,10 +16,10 @@ namespace TDGame.OpenGL.Screens.GameSetupView
         private TextboxControl _mapDescriptionTextbox;
         private ButtonControl _startButton;
 
-        private int _selectionsPrPage = 5;
-        private List<List<ButtonControl>> _mapPages = new List<List<ButtonControl>>();
+        private readonly int _selectionsPrPage = 5;
+        private readonly List<List<ButtonControl>> _mapPages = new List<List<ButtonControl>>();
         private int _currentMapPage = 0;
-        private List<List<ButtonControl>> _gameStylePages = new List<List<ButtonControl>>();
+        private readonly List<List<ButtonControl>> _gameStylePages = new List<List<ButtonControl>>();
         private int _currentGameStylePage = 0;
 
         public override void Initialize()

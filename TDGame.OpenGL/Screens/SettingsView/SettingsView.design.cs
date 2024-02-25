@@ -10,7 +10,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
 {
     public partial class SettingsView : BaseScreen
     {
-        private List<float> _scaleOptions = new List<float>()
+        private readonly List<float> _scaleOptions = new List<float>()
         {
             0.25f,
             0.50f,
@@ -20,9 +20,9 @@ namespace TDGame.OpenGL.Screens.SettingsView
             1.5f,
             1.75f
         };
-        private List<ButtonControl> _scaleButtons = new List<ButtonControl>();
+        private readonly List<ButtonControl> _scaleButtons = new List<ButtonControl>();
 
-        private List<float> _musicOptions = new List<float>()
+        private readonly List<float> _musicOptions = new List<float>()
         {
             0,
             0.2f,
@@ -31,9 +31,9 @@ namespace TDGame.OpenGL.Screens.SettingsView
             0.8f,
             1f
         };
-        private List<ButtonControl> _musicButtons = new List<ButtonControl>();
+        private readonly List<ButtonControl> _musicButtons = new List<ButtonControl>();
 
-        private List<float> _soundEffectOptions = new List<float>()
+        private readonly List<float> _soundEffectOptions = new List<float>()
         {
             0,
             0.05f,
@@ -43,11 +43,11 @@ namespace TDGame.OpenGL.Screens.SettingsView
             0.50f,
             1f
         };
-        private List<ButtonControl> _soundEffectsButtons = new List<ButtonControl>();
+        private readonly List<ButtonControl> _soundEffectsButtons = new List<ButtonControl>();
 
         private ButtonControl _isFullScreen;
         private ButtonControl _isVSync;
-        private List<ButtonControl> _texturePacksButtons = new List<ButtonControl>();
+        private readonly List<ButtonControl> _texturePacksButtons = new List<ButtonControl>();
 
         public override void Initialize()
         {

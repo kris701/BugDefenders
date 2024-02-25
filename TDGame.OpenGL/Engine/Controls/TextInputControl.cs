@@ -18,7 +18,7 @@ namespace TDGame.OpenGL.Engine.Controls
         private List<Keys> _lastKeys = new List<Keys>();
         private bool _holding = false;
         private bool _blocked = false;
-        private List<Keys> _legalCharacters = new List<Keys>()
+        private readonly List<Keys> _legalCharacters = new List<Keys>()
         {
             Keys.A, Keys.B, Keys.C,
             Keys.D, Keys.E, Keys.F,

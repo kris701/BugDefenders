@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TDGame.OpenGL.Textures
+namespace TDGame.OpenGL.ResourcePacks
 {
     public class TextureSetDefinition
     {

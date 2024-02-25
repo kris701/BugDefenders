@@ -9,7 +9,7 @@ namespace TDGame.Core.Game.Modules.Enemies.SubModules
     {
         public HashSet<Guid> EnemyOptions { get; }
 
-        private Dictionary<int, List<Guid>> _enemyLevels = new Dictionary<int, List<Guid>>();
+        private readonly Dictionary<int, List<Guid>> _enemyLevels = new Dictionary<int, List<Guid>>();
         internal Random _rnd = new Random();
         public BaseEnemyModule(GameContext context, GameEngine game) : base(context, game)
         {

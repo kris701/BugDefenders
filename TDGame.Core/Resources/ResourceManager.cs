@@ -14,7 +14,7 @@ namespace TDGame.Core.Resources
 {
     public static class ResourceManager
     {
-        private static Guid _coreID = new Guid("e142d037-51ea-45a4-bcf5-45e5c559234d");
+        private static readonly Guid _coreID = new Guid("e142d037-51ea-45a4-bcf5-45e5c559234d");
 
         public static BaseBuilder<EnemyTypeDefinition> EnemyTypes = new BaseBuilder<EnemyTypeDefinition>("Resources.Core.EnemyTypes", Assembly.GetExecutingAssembly());
         public static BaseBuilder<GameStyleDefinition> GameStyles = new BaseBuilder<GameStyleDefinition>("Resources.Core.GameStyles", Assembly.GetExecutingAssembly());

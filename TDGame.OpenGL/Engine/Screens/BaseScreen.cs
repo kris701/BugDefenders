@@ -17,8 +17,8 @@ namespace TDGame.OpenGL.Engine.Screens
         private double fadeTimer = 0;
         private int fadeValue = 255;
         private IScreen _switchTo;
-        private Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
-        private SortedDictionary<int, List<IControl>> _viewLayers;
+        private readonly Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
+        private readonly SortedDictionary<int, List<IControl>> _viewLayers;
 
         public BaseScreen(UIEngine parent, Guid id) : base(parent)
         {

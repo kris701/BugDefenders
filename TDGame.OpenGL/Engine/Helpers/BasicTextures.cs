@@ -13,7 +13,7 @@ namespace TDGame.OpenGL.Engine.Helpers
             _graphicsDevice = graphicsDevice;
         }
 
-        private static Dictionary<Color, Texture2D> _rectangleCache = new Dictionary<Color, Texture2D>();
+        private static readonly Dictionary<Color, Texture2D> _rectangleCache = new Dictionary<Color, Texture2D>();
         public static Texture2D GetBasicRectange(Color target)
         {
             if (_rectangleCache.ContainsKey(target))
@@ -52,7 +52,7 @@ namespace TDGame.OpenGL.Engine.Helpers
                 return HashCode.Combine(Color, Radius);
             }
         }
-        private static Dictionary<CircleKey, Texture2D> _circleCache = new Dictionary<CircleKey, Texture2D>();
+        private static readonly Dictionary<CircleKey, Texture2D> _circleCache = new Dictionary<CircleKey, Texture2D>();
         public static Texture2D GetBasicCircle(Color target, int radius)
         {
             var key = new CircleKey(target, radius);

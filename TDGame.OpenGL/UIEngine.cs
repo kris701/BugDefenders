@@ -11,21 +11,20 @@ using TDGame.Core.Resources;
 using TDGame.Core.Resources.Integrity;
 using TDGame.Core.Users;
 using TDGame.Core.Users.Models;
-using TDGame.OpenGL.BackgroundWorkers.AchivementBackroundWorker;
+using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
 using TDGame.OpenGL.Engine.BackgroundWorkers;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Screens;
 using TDGame.OpenGL.ResourcePacks;
 using TDGame.OpenGL.Settings;
-using TDGame.OpenGL.Textures;
 
 namespace TDGame.OpenGL
 {
     public class UIEngine : Game
     {
-        private static string _contentDir = "Content";
-        private static string _modsDir = "Mods";
+        private static readonly string _contentDir = "Content";
+        private static readonly string _modsDir = "Mods";
 
 #if FPS
         private TimeSpan _passed = TimeSpan.Zero;
@@ -42,10 +41,10 @@ namespace TDGame.OpenGL
         public List<IBackgroundWorker> BackroundWorkers { get; set; }
         public UIResourceManager UIResources { get; set; }
 
-        private Func<UIEngine, IScreen> _screenToLoad;
+        private readonly Func<UIEngine, IScreen> _screenToLoad;
         private SpriteBatch? _spriteBatch;
         private bool _isInitialized = false;
-        private NotificationBackroundWorker _notificationWorker;
+        private readonly NotificationBackroundWorker _notificationWorker;
 
         public UIEngine(Func<UIEngine, IScreen> screen)
         {

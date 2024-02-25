@@ -7,7 +7,7 @@ namespace TDGame.OpenGL.Screens.SplashScreen
 {
     public partial class SplashScreen : BaseScreen
     {
-        private static Guid _id = new Guid("65ac71fc-1863-4a86-bc7b-2e24afe2fba7");
+        private static readonly Guid _id = new Guid("65ac71fc-1863-4a86-bc7b-2e24afe2fba7");
         public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(5);
 
         public SplashScreen(UIEngine parent) : base(parent, _id)
