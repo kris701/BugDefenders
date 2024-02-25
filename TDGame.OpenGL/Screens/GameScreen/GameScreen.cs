@@ -118,6 +118,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (_selectedTurret != null)
             {
+                var control = _turretUpdater.GetItem(_selectedTurret);
+                if (control != null)
+                    Parent.UIResources.StopSoundEffect(control.CurrentSoundEffect);
                 _game.TurretsModule.SellTurret(_selectedTurret);
                 _selectedTurret = null;
                 _unselectTurret = true;
@@ -383,9 +386,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 AutoPlay = true,
                 Width = entity.Size,
                 Height = entity.Size,
-                Tag = entity,
-                Rotation = entity.Angle
+                Tag = entity
             };
+            newTile.ViewPort = _gameArea;
             return newTile;
         }
 
@@ -435,6 +438,16 @@ namespace TDGame.OpenGL.Screens.GameScreen
             control.Initialize();
             Parent.UIResources.StopSoundEffect(control.CurrentSoundEffect);
             control.CurrentSoundEffect = Parent.UIResources.PlaySoundEffect(Parent.UIResources.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
+            if (turret.TurretInfo is AOETurretDefinition def)
+            {
+                _effects.Add(new EffectEntity()
+                {
+                    ID = turret.DefinitionID,
+                    X = turret.CenterX - def.Range,
+                    Y = turret.CenterY - def.Range,
+                    Size = def.Range * 2
+                });
+            }
         }
 
         public void OnTurretIdling(TurretInstance turret)
@@ -552,6 +565,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (!_gameOver)
             {
                 _gameOver = true;
+
+                Parent.UIResources.StopSounds();
 
                 Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
                 var achivements = ResourceManager.Achivements.GetResources();

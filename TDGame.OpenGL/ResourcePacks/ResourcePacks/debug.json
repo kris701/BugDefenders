@@ -294,6 +294,16 @@
         "Entities/Projectiles/missile/missile_move_1",
         "Entities/Projectiles/missile/missile_move_2"
       ]
+    },
+    {
+      "ID": "bb696b04-60e5-464e-b46b-2f5a8377b68e",
+      "FrameTime": 250,
+      "Contents": [
+        "Entities/Turrets/turret5/shoot_effect_1",
+        "Entities/Turrets/turret5/shoot_effect_2",
+        "Entities/Turrets/turret5/shoot_effect_3",
+        "Entities/Turrets/turret5/shoot_effect_4"
+      ]
     }
   ],
   "Songs": [
@@ -317,6 +327,11 @@
       "TargetType": "Effect",
       "Target": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
       "OnCreate": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b"
+    },
+    {
+      "TargetType": "Effect",
+      "Target": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+      "OnCreate": "bb696b04-60e5-464e-b46b-2f5a8377b68e"
     },
 
     {

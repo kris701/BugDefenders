@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
@@ -73,7 +74,6 @@ namespace TDGame.OpenGL.Engine.Controls
                 var copy = new Rectangle(Scale(value.X), Scale(value.Y), Scale(value.Width), Scale(value.Height));
                 _viewPort = copy;
                 _usesViewPort = true;
-                CalculateViewPort();
             }
         }
 
@@ -83,24 +83,26 @@ namespace TDGame.OpenGL.Engine.Controls
             var viewPortY = 0f;
             var viewPortWidth = Width;
             var viewPortHeight = Height;
+            if (Width > _viewPort.Width)
+                viewPortWidth = _viewPort.Width;
+            if (Height > _viewPort.Height)
+                viewPortHeight = _viewPort.Height;
             if (X < _viewPort.X)
             {
-                viewPortX = -(X - _viewPort.X);
-                if (!(X + Width > _viewPort.X + _viewPort.Width))
-                    viewPortWidth -= viewPortX;
-                _x = _viewPort.X;
+                viewPortX -= X - _viewPort.X;
+                if (X + Width < _viewPort.X + _viewPort.Width)
+                    viewPortWidth -= viewPortWidth - (X + Width - _viewPort.X);
             }
             if (Y < _viewPort.Y)
             {
-                viewPortY = -(Y - _viewPort.Y);
-                if (!(Y + Height > _viewPort.Y + _viewPort.Height))
-                    viewPortHeight -= viewPortY;
-                _y = _viewPort.Y;
+                viewPortY -= Y - _viewPort.Y;
+                if (Y + Height < _viewPort.Y + _viewPort.Height)
+                    viewPortHeight -= viewPortHeight - (Y + Width - _viewPort.Y);
             }
-            if (X + Width > _viewPort.X + _viewPort.Width + viewPortX)
-                viewPortWidth += _viewPort.X + _viewPort.Width - (X + Width);
-            if (Y + Height > _viewPort.Y + _viewPort.Height + viewPortY)
-                viewPortHeight += _viewPort.Y + _viewPort.Height - (Y + Height);
+            if (X + viewPortWidth > _viewPort.X + _viewPort.Width)
+                viewPortWidth -= (X + viewPortWidth) - (_viewPort.X + _viewPort.Width);
+            if (Y + viewPortHeight > _viewPort.Y + _viewPort.Height)
+                viewPortHeight -= (Y + viewPortHeight) - (_viewPort.Y + _viewPort.Height);
 
             _actualViewPort = new Rectangle((int)viewPortX, (int)viewPortY, (int)viewPortWidth, (int)viewPortHeight);
         }
@@ -122,6 +124,8 @@ namespace TDGame.OpenGL.Engine.Controls
         public virtual void Initialize()
         {
             ReAlign();
+            if (_usesViewPort)
+                CalculateViewPort();
         }
         public virtual void Update(GameTime gameTime)
         {
@@ -140,7 +144,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         new Vector2(X + Width / 2, Y + Height / 2),
                         _actualViewPort,
                         GetAlphaColor(),
-                        Rotation,
+                        0,
                         new Vector2(Width / 2, Height / 2),
                         1,
                         SpriteEffects.None,
@@ -163,16 +167,23 @@ namespace TDGame.OpenGL.Engine.Controls
                 var yFit = Height / texture.Height;
 
                 if (_usesViewPort)
+                {
+                    var scaledViewPort = new Rectangle(
+                        (int)(_actualViewPort.X / xFit),
+                        (int)(_actualViewPort.Y / yFit),
+                        (int)(_actualViewPort.Width / xFit),
+                        (int)(_actualViewPort.Height / yFit));
                     spriteBatch.Draw(
                         texture,
                         new Vector2(X + Width / 2, Y + Height / 2),
-                        _actualViewPort,
+                        scaledViewPort,
                         GetAlphaColor(),
-                        Rotation,
-                        new Vector2(texture.Width / 2, texture.Height / 2),
-                        new Vector2(xFit, yFit),
+                        0,
+                        new Vector2(texture.Width / 2 - scaledViewPort.X, texture.Height / 2 - scaledViewPort.Y),
+                        new Vector2(xFit,yFit),
                         SpriteEffects.None,
                         0);
+                }
                 else
                     spriteBatch.Draw(
                         texture,

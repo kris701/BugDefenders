@@ -39,7 +39,7 @@ namespace TDGame.Core.Game.Modules.Turrets.SubModules
 
             if (best != null)
             {
-                if (Game.TurretsModule.OnTurretShooting != null && turret.Targeting == null)
+                if (Game.TurretsModule.OnTurretShooting != null)
                     Game.TurretsModule.OnTurretShooting.Invoke(turret);
                 turret.Targeting = best;
 

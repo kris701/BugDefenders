@@ -21,8 +21,8 @@ namespace TDGame.OpenGL
         private Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
         private string _playing = "";
         private ContentManager _contentManager;
-        private Dictionary<Guid, IEntityResource> _animationEntities = new Dictionary<Guid, IEntityResource>();
-        private Dictionary<Guid, IEntityResource> _soundEffectEntities = new Dictionary<Guid, IEntityResource>();
+        private Dictionary<Guid, List<IEntityResource>> _animationEntities = new Dictionary<Guid, List<IEntityResource>>();
+        private Dictionary<Guid, List<IEntityResource>> _soundEffectEntities = new Dictionary<Guid, List<IEntityResource>>();
         private Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
         private Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
         private Dictionary<Guid, SongDefinition> _songs = new Dictionary<Guid, SongDefinition>();
@@ -70,17 +70,17 @@ namespace TDGame.OpenGL
         public void LoadAnimationEntity(IEntityResource item)
         {
             if (_animationEntities.ContainsKey(item.Target))
-                _animationEntities[item.Target] = item;
+                _animationEntities[item.Target].Add(item);
             else
-                _animationEntities.Add(item.Target, item);
+                _animationEntities.Add(item.Target, new List<IEntityResource>() { item });
         }
 
         public void LoadSoundEffectEntity(IEntityResource item)
         {
             if (_soundEffectEntities.ContainsKey(item.Target))
-                _soundEffectEntities[item.Target] = item;
+                _soundEffectEntities[item.Target].Add(item);
             else
-                _soundEffectEntities.Add(item.Target, item);
+                _soundEffectEntities.Add(item.Target, new List<IEntityResource>() { item });
         }
 
         public void LoadTexture(TextureDefinition item)
@@ -152,8 +152,9 @@ namespace TDGame.OpenGL
             if (_animationEntities.ContainsKey(id))
             {
                 var target = _animationEntities[id];
-                if (target is T)
-                    return (T)target;
+                foreach (var item in target)
+                    if (item is T)
+                        return (T)item;
             }
             throw new Exception("Animation not found!");
         }
@@ -163,8 +164,9 @@ namespace TDGame.OpenGL
             if (_soundEffectEntities.ContainsKey(id))
             {
                 var target = _soundEffectEntities[id];
-                if (target is T)
-                    return (T)target;
+                foreach (var item in target)
+                    if (item is T)
+                        return (T)item;
             }
             throw new Exception("Sound effect not found!");
         }
@@ -214,6 +216,14 @@ namespace TDGame.OpenGL
             foreach (var key in _instances.Keys)
                 _instances[key].Resume();
             MediaPlayer.Resume();
+        }
+
+        public void StopSounds()
+        {
+            foreach (var key in _instances.Keys)
+                _instances[key].Stop();
+            _instances.Clear();
+            MediaPlayer.Stop();
         }
     }
 }

@@ -566,6 +566,66 @@
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/turret4/turret4_shoot_2.png
 
+#begin Entities/Turrets/turret5/shoot_effect_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/shoot_effect_1.png
+
+#begin Entities/Turrets/turret5/shoot_effect_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/shoot_effect_2.png
+
+#begin Entities/Turrets/turret5/shoot_effect_3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/shoot_effect_3.png
+
+#begin Entities/Turrets/turret5/shoot_effect_4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/shoot_effect_4.png
+
+#begin Entities/Turrets/turret5/turret5_idle_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/turret5_idle_1.png
+
 #begin Entities/Turrets/turret5/turret5_idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -590,6 +650,18 @@
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/turret5/turret5_idle_2.png
 
+#begin Entities/Turrets/turret5/turret5_idle_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/turret5_idle_2.png
+
 #begin Entities/Turrets/turret5/turret5_shoot_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -601,6 +673,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/turret5/turret5_shoot_1.png
+
+#begin Entities/Turrets/turret5/turret5_shoot_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/turret5_shoot_1.png
+
+#begin Entities/Turrets/turret5/turret5_shoot_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/turret5/turret5_shoot_2.png
 
 #begin Entities/Turrets/turret5/turret5_shoot_2.png
 /importer:TextureImporter

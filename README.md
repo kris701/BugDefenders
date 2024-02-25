@@ -3,10 +3,9 @@
 ## TODO List
 - [ ] Come up with an actual name for the game
 - [ ] Setup a good base game
-- [ ] AOE turret effects
-    - Maybe a circle that increases in size?
 
 ## Done
+- [X] AOE turret effects
 - [X] Audio system 
 - [X] Encrypt user data
     - Just so that you cant just as easily give yourself buffs and stuff
