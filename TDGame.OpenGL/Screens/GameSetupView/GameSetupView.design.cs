@@ -122,11 +122,10 @@ namespace TDGame.OpenGL.Screens.GameSetupView
                 Width = 300,
                 Height = 300,
             };
-            AddControl(1, new BorderControl(Parent)
+            AddControl(1, new BorderControl(Parent, _mapPreviewTile)
             {
                 Thickness = 3,
-                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue),
-                Child = _mapPreviewTile
+                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
 
             _mapNameLabel = new LabelControl(Parent)

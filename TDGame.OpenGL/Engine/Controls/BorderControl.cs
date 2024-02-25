@@ -21,8 +21,9 @@ namespace TDGame.OpenGL.Engine.Controls
         }
         public IControl Child { get; set; }
 
-        public BorderControl(UIEngine parent) : base(parent)
+        public BorderControl(UIEngine parent, IControl child) : base(parent)
         {
+            Child = child;
         }
 
         public override void Initialize()

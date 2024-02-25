@@ -65,7 +65,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this, _gameArea.X, _gameArea.Y);
             _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(4, this, _gameArea.X, _gameArea.Y);
 
-            _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave.DoClick(); });
+            _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave?.DoClick(); });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
             {
                 if (_game.Context.Turrets.Count == 0)

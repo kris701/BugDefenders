@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
@@ -180,7 +179,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         GetAlphaColor(),
                         0,
                         new Vector2(texture.Width / 2 - scaledViewPort.X, texture.Height / 2 - scaledViewPort.Y),
-                        new Vector2(xFit,yFit),
+                        new Vector2(xFit, yFit),
                         SpriteEffects.None,
                         0);
                 }

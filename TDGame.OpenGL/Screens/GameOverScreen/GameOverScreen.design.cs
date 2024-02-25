@@ -43,18 +43,17 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
                 Font = BasicFonts.GetFont(24),
             });
 
-            AddControl(1, new BorderControl(Parent)
+            AddControl(1, new BorderControl(Parent, new TileControl(Parent)
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = 350,
+                Width = 500,
+                Height = 500,
+                FillColor = _screen
+            })
             {
                 Thickness = 5,
-                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue),
-                Child = new TileControl(Parent)
-                {
-                    HorizontalAlignment = Alignment.Middle,
-                    Y = 350,
-                    Width = 500,
-                    Height = 500,
-                    FillColor = _screen
-                }
+                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
 
             AddControl(1, new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenu(Parent)); })

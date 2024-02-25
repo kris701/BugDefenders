@@ -58,13 +58,13 @@ namespace TDGame.OpenGL
             if (allUsers.Count == 0)
             {
                 var newUser = new UserDefinition<SettingsDefinition>(
-                    Guid.NewGuid(), 
-                    "Default", 
-                    new List<Guid>(), 
-                    new List<Guid>(), 
-                    new List<ScoreDefinition>(), 
-                    true, 
-                    new StatsDefinition(), 
+                    Guid.NewGuid(),
+                    "Default",
+                    new List<Guid>(),
+                    new List<Guid>(),
+                    new List<ScoreDefinition>(),
+                    true,
+                    new StatsDefinition(),
                     new SettingsDefinition());
                 UserManager.AddNewUser(newUser);
                 ChangeUser(newUser);

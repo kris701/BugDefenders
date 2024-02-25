@@ -76,18 +76,17 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private void SetupGameField()
         {
-            AddControl(0, new BorderControl(Parent)
+            AddControl(0, new BorderControl(Parent, new TileControl(Parent)
+            {
+                FillColor = Parent.UIResources.GetTexture(_game.Context.Map.ID),
+                X = _gameArea.X,
+                Y = _gameArea.Y,
+                Height = _gameArea.Height,
+                Width = _gameArea.Width
+            })
             {
                 Thickness = 2,
-                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue),
-                Child = new TileControl(Parent)
-                {
-                    FillColor = Parent.UIResources.GetTexture(_game.Context.Map.ID),
-                    X = _gameArea.X,
-                    Y = _gameArea.Y,
-                    Height = _gameArea.Height,
-                    Width = _gameArea.Width
-                }
+                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
             _turretSelectRangeTile = new TileControl(Parent)
             {

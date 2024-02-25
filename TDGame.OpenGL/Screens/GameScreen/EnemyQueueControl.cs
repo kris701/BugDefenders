@@ -14,10 +14,24 @@ namespace TDGame.OpenGL.Screens.GameScreen
 {
     public class EnemyQueueControl : TileControl
     {
-        private AnimatedTileControl iconControl;
-        private TextboxControl descriptionControl;
+        private AnimatedTileControl _iconControl;
+        private TextboxControl _descriptionControl;
         public EnemyQueueControl(UIEngine parent) : base(parent)
         {
+            _iconControl = new AnimatedTileControl(Parent)
+            {
+                Width = 25,
+                Height = 25,
+            };
+            _descriptionControl = new TextboxControl(Parent)
+            {
+                Margin = 1,
+                Font = BasicFonts.GetFont(8),
+                FontColor = Color.White,
+                Height = 50,
+                Width = 150,
+                Text = ""
+            };
         }
 
         public void UpdateToEnemy(List<Guid> wave, float evolution)
@@ -26,8 +40,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
             var instance = new EnemyInstance(def, evolution);
             var animation = Parent.UIResources.GetAnimation<EnemyEntityDefinition>(def.ID);
             var textureSet = Parent.UIResources.GetTextureSet(animation.OnCreate);
-            iconControl.TileSet = textureSet.LoadedContents;
-            iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
+            _iconControl.TileSet = textureSet.LoadedContents;
+            _iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
 
             var sb = new StringBuilder();
             if (wave.Count > 1)
@@ -47,41 +61,26 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 sb.AppendLine($"HP: {Math.Round(instance.Health, 0)}");
             }
 
-            descriptionControl.Text = sb.ToString();
+            _descriptionControl.Text = sb.ToString();
         }
 
         public override void Initialize()
         {
-            iconControl = new AnimatedTileControl(Parent)
-            {
-                Width = 25,
-                Height = 25,
-            };
-            iconControl._x = _x + Scale(10);
-            iconControl._y = _y + Height / 2 - iconControl.Height / 2;
-            iconControl.Initialize();
+            _iconControl._x = _x + Scale(10);
+            _iconControl._y = _y + Height / 2 - _iconControl.Height / 2;
+            _iconControl.Initialize();
 
-            descriptionControl = new TextboxControl(Parent)
-            {
-                Margin = 1,
-                Font = BasicFonts.GetFont(8),
-                FontColor = Color.White,
-                Height = 50,
-                Width = 150,
-                Text = ""
-            };
-
-            descriptionControl._x = _x + Scale(10) + iconControl.Width;
-            descriptionControl._y = _y + Scale(10);
-            descriptionControl.Initialize();
+            _descriptionControl._x = _x + Scale(10) + _iconControl.Width;
+            _descriptionControl._y = _y + Scale(10);
+            _descriptionControl.Initialize();
 
             base.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
-            iconControl.Update(gameTime);
-            descriptionControl.Update(gameTime);
+            _iconControl.Update(gameTime);
+            _descriptionControl.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -91,8 +90,8 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 return;
 
             base.Draw(gameTime, spriteBatch);
-            iconControl.Draw(gameTime, spriteBatch);
-            descriptionControl.Draw(gameTime, spriteBatch);
+            _iconControl.Draw(gameTime, spriteBatch);
+            _descriptionControl.Draw(gameTime, spriteBatch);
         }
     }
 }

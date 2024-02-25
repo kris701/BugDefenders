@@ -7,7 +7,7 @@ namespace TDGame.OpenGL.Engine.Helpers
     public static class BasicFonts
     {
         private static ContentManager _content;
-        private static Dictionary<int, SpriteFont> _cache;
+        private static Dictionary<int, SpriteFont> _cache = new Dictionary<int, SpriteFont>();
 
         public static void Initialize(ContentManager content)
         {

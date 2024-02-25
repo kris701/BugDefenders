@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using TDGame.Core.Game.Models.Entities.Enemies.Modules;
+﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
 
 namespace TDGame.Core.Users.Models.Buffs.BuffEffects
 {
