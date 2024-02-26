@@ -17,7 +17,7 @@ jobs:
         run: dotnet restore
 
       - name: Build All
-        run: dotnet run
+        run: dotnet build
 
   WindowsBuild:
     needs: BuildTest
