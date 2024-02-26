@@ -19,7 +19,7 @@ jobs:
       - name: Publish (Windows)
         run: dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
       - name: Zip artifact for deployment
-        run: zip windows.zip . -i ./TDGame.OpenGL/bin/Release/net7.0/publish/win-x64/* -r
+        run: zip windows.zip . -i ./TDGame.OpenGL/bin/Release/net7.0/publish/win-x64 -r
         
       - name: Get Package version
         id: get-version
