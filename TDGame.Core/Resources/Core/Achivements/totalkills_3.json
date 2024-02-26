@@ -2,8 +2,10 @@
   "id": "279c4d26-f1a1-4107-8bb8-fc458b7ed1d3",
   "Name": "Mass Murderer!",
   "description": "You killed 10000 enemies!",
-  "Criteria": {
-    "CriteriaType": "Kills",
-    "Quantity": 10000
-  }
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 10000
+    }
+  ]
 }

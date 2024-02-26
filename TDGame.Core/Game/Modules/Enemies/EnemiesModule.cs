@@ -103,26 +103,15 @@ namespace TDGame.Core.Game.Modules.Enemies
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {
-                Context.Money += (int)(enemy.GetDefinition().Reward * Context.GameStyle.MoneyMultiplier);
+                var amount = (int)(enemy.GetDefinition().Reward * Context.GameStyle.MoneyMultiplier);
+                Context.Money += amount;
+                Context.Outcome.MoneyEarned(amount);
+
                 Context.Score += enemy.GetDefinition().Reward;
                 Context.CurrentEnemies.Remove(enemy);
                 OnEnemyKilled?.Invoke(enemy);
 
-                Context.Outcome.TotalKills++;
-                if (!Context.Outcome.KillsOfType.ContainsKey(enemy.DefinitionID))
-                    Context.Outcome.KillsOfType.Add(enemy.DefinitionID, 0);
-                Context.Outcome.KillsOfType[enemy.DefinitionID] += 1;
-
-                if (!Context.Outcome.TotalTurretKills.ContainsKey(turretDefinitionID))
-                    Context.Outcome.TotalTurretKills.Add(turretDefinitionID, 0);
-                Context.Outcome.TotalTurretKills[turretDefinitionID] += 1;
-
-                if (!Context.Outcome.TotalTurretKillsOfType.ContainsKey(turretDefinitionID))
-                    Context.Outcome.TotalTurretKillsOfType.Add(turretDefinitionID, new Dictionary<Guid, int>());
-                if (!Context.Outcome.TotalTurretKillsOfType[turretDefinitionID].ContainsKey(enemy.DefinitionID))
-                    Context.Outcome.TotalTurretKillsOfType[turretDefinitionID].Add(enemy.DefinitionID, 0);
-                Context.Outcome.TotalTurretKillsOfType[turretDefinitionID][enemy.DefinitionID] += 1;
-
+                Context.Outcome.EnemyKilled(enemy.ID, turretDefinitionID);
                 return true;
             }
             return false;
@@ -155,6 +144,7 @@ namespace TDGame.Core.Game.Modules.Enemies
         {
             Context.Money += Context.GameStyle.MoneyPrWave;
             Context.Wave++;
+            Context.Outcome.WaveStarted();
             foreach (var item in Context.EnemiesToSpawn[0])
             {
                 if (WaveEnemiesModule.EnemyOptions.Contains(item))

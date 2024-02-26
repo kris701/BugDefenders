@@ -3,11 +3,13 @@
   "Name": "Laser Turret Upgrade",
   "description": "Permanently gives the laser turret 2% more damage",
   "Requires": "01c1b070-605a-4cf2-9e5c-9ae5b7f7159f",
-  "Criteria": {
-    "CriteriaType": "TurretKills",
-    "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
-    "Quantity": 5000
-  },
+  "Criteria": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+      "Quantity": 5000
+    }
+  ],
   "Effect": {
     "BuffType": "Turret",
     "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",

@@ -27,7 +27,7 @@ namespace TDGame.Core.Game.Modules.Turrets
             };
         }
 
-        public bool CanLevelUpTurret(TurretInstance turret, Guid id)
+        public bool CanUpgradeTurret(TurretInstance turret, Guid id)
         {
             if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
@@ -41,11 +41,11 @@ namespace TDGame.Core.Game.Modules.Turrets
             return true;
         }
 
-        public bool LevelUpTurret(TurretInstance turret, Guid id)
+        public bool UpgradeTurret(TurretInstance turret, Guid id)
         {
             if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
-            if (!CanLevelUpTurret(turret, id))
+            if (!CanUpgradeTurret(turret, id))
                 return false;
             var upgrade = turret.GetDefinition().Upgrades.First(x => x.ID == id);
             if (upgrade == null)
@@ -55,9 +55,9 @@ namespace TDGame.Core.Game.Modules.Turrets
 
             upgrade.ApplyUpgrade(turret);
             Context.Money -= upgrade.Cost;
+            Context.Outcome.TurretUpgraded(turret.DefinitionID);
 
-            if (OnTurretUpgraded != null)
-                OnTurretUpgraded.Invoke(turret);
+            OnTurretUpgraded?.Invoke(turret);
             return true;
         }
 
@@ -67,9 +67,9 @@ namespace TDGame.Core.Game.Modules.Turrets
                 throw new Exception("Turret not in game!");
             Context.Money += turret.GetTurretWorth();
             Context.Turrets.Remove(turret);
+            Context.Outcome.TurretSold(turret.DefinitionID);
 
-            if (OnTurretSold != null)
-                OnTurretSold.Invoke(turret);
+            OnTurretSold?.Invoke(turret);
         }
 
         public bool AddTurret(TurretDefinition turretDef, FloatPoint at)
@@ -103,15 +103,10 @@ namespace TDGame.Core.Game.Modules.Turrets
             newInstance.Angle = -(float)Math.PI / 2;
             Context.Money -= turretDef.Cost;
             Context.Turrets.Add(newInstance);
-            if (OnTurretPurchased != null)
-                OnTurretPurchased.Invoke(newInstance);
+            OnTurretPurchased?.Invoke(newInstance);
 
-            Context.Outcome.TotalTurretsPlaced++;
-            if (!Context.Outcome.TotalTurretsPlacedOfType.ContainsKey(newInstance.DefinitionID))
-                Context.Outcome.TotalTurretsPlacedOfType.Add(newInstance.DefinitionID, 1);
-            else
-                Context.Outcome.TotalTurretsPlacedOfType[newInstance.DefinitionID] += 1;
-
+            Context.Outcome.PlacedTurret(newInstance.DefinitionID);
+            
             return true;
         }
     }

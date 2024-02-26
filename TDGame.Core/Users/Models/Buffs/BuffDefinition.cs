@@ -12,16 +12,16 @@ namespace TDGame.Core.Users.Models.Buffs
         public string Description { get; set; }
         public Guid? Requires { get; set; }
 
-        public IUserCriteria Criteria { get; set; }
+        public List<IUserCriteria> Criterias { get; set; }
         public IBuffEffect Effect { get; set; }
 
-        public BuffDefinition(Guid iD, string name, string description, Guid? requires, IUserCriteria criteria, IBuffEffect effect)
+        public BuffDefinition(Guid iD, string name, string description, Guid? requires, List<IUserCriteria> criterias, IBuffEffect effect)
         {
             ID = iD;
             Name = name;
             Description = description;
             Requires = requires;
-            Criteria = criteria;
+            Criterias = criterias;
             Effect = effect;
         }
 
@@ -29,7 +29,10 @@ namespace TDGame.Core.Users.Models.Buffs
         {
             if (Requires != null && !user.Buffs.Contains((Guid)Requires))
                 return false;
-            return Criteria.IsValid(user.Stats);
+            foreach (var criteria in Criterias)
+                if (!criteria.IsValid(user.Stats))
+                    return false;
+            return true;
         }
 
         public string GetDescriptionString()

@@ -222,9 +222,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (_selectedTurret != null && !_unselectTurret && parent.Tag is IUpgrade upg)
             {
-                if (_game.TurretsModule.CanLevelUpTurret(_selectedTurret, upg.ID))
+                if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID))
                 {
-                    _game.TurretsModule.LevelUpTurret(_selectedTurret, upg.ID);
+                    _game.TurretsModule.UpgradeTurret(_selectedTurret, upg.ID);
                     var control = _turretUpdater.GetItem(_selectedTurret);
                     if (control != null)
                         control.UpgradeTurretLevels(_selectedTurret);
@@ -452,14 +452,15 @@ namespace TDGame.OpenGL.Screens.GameScreen
             control.CurrentSoundEffect = Parent.UIResources.PlaySoundEffect(Parent.UIResources.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             if (turret.TurretInfo is AOETurretDefinition def)
             {
-                var entityDef = Parent.UIResources.GetAnimation<TurretEntityDefinition>(turret.DefinitionID);
-                if (entityDef.OnShoot != Guid.Empty) 
+                var entityDef = Parent.UIResources.GetAnimation<EffectEntityDefinition>(turret.DefinitionID);
+                if (entityDef.OnCreate != Guid.Empty) 
                 {
-                    var effect = Parent.UIResources.GetTextureSet(entityDef.OnShoot);
-                    _effects.Add(new EffectEntity(entityDef.OnShoot, TimeSpan.FromSeconds(1), effect)
+                    var effect = Parent.UIResources.GetTextureSet(entityDef.OnCreate);
+                    _effects.Add(new EffectEntity(entityDef.OnCreate, TimeSpan.FromSeconds(1), effect)
                     {
                         X = turret.CenterX - def.Range,
-                        Y = turret.CenterY - def.Range
+                        Y = turret.CenterY - def.Range,
+                        Size = def.Range * 2
                     });
                 }
             }
@@ -582,17 +583,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 _gameOver = true;
 
                 Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
-                var achivements = ResourceManager.Achivements.GetResources();
-                foreach (var id in achivements)
-                {
-                    if (!Parent.CurrentUser.Achivements.Contains(id))
-                    {
-                        var achivement = ResourceManager.Achivements.GetResource(id);
-                        if (achivement.Criteria.IsValid(Parent.CurrentUser.Stats))
-                            Parent.CurrentUser.Achivements.Add(id);
-                    }
-                }
-
+                Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
                 Parent.UIResources.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
                 SwitchView(new GameOverScreen.GameOverScreen(Parent, screen, _game.Context.Score, _game.Context.GameTime));
@@ -638,7 +629,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     _upgradesLeftButton.IsVisible = true;
                     _upgradesRightButton.IsVisible = true;
                 }
-                var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanLevelUpTurret(turret, upgrade.ID))
+                var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID))
                 {
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     X = _gameArea.X + 10 + (offset++ * 210),

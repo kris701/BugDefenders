@@ -79,6 +79,20 @@ namespace TDGame.Core.Users
             }
         }
 
+        public void CheckAndApplyAchivements(UserDefinition<T> user)
+        {
+            var achivements = ResourceManager.Achivements.GetResources();
+            foreach (var id in achivements)
+            {
+                if (!user.Achivements.Contains(id))
+                {
+                    var achivement = ResourceManager.Achivements.GetResource(id);
+                    if (achivement.IsValid(user))
+                        user.Achivements.Add(id);
+                }
+            }
+        }
+
         public void AddNewUser(UserDefinition<T> user)
         {
             var target = Path.Combine(UsersPath, $"{user.ID}.json");

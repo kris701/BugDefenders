@@ -3,11 +3,13 @@
   "Name": "Gatling Turret Upgrade",
   "description": "Permanently make the gatling turrets bullets go towards enemies!",
   "Requires": "ede7db0c-6de0-4931-bf1b-0e50e2b4b5e3",
-  "Criteria": {
-    "CriteriaType": "TurretKills",
-    "TurretID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
-    "Quantity": 1
-  },
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+      "Quantity": 1
+    }
+  ],
   "Effect": {
     "BuffType": "Projectile",
     "ProjectileID": "1db411e4-8599-464b-923c-0e23bc031435",

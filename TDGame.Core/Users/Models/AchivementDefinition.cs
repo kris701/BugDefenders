@@ -8,14 +8,22 @@ namespace TDGame.Core.Users.Models
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public IUserCriteria Criteria { get; set; }
+        public List<IUserCriteria> Criterias { get; set; }
 
-        public AchivementDefinition(Guid iD, string name, string description, IUserCriteria criteria)
+        public AchivementDefinition(Guid iD, string name, string description, List<IUserCriteria> criterias)
         {
             ID = iD;
             Name = name;
             Description = description;
-            Criteria = criteria;
+            Criterias = criterias;
+        }
+
+        public bool IsValid<T>(UserDefinition<T> user)
+        {
+            foreach (var criteria in Criterias)
+                if (!criteria.IsValid(user.Stats))
+                    return false;
+            return true;
         }
     }
 }

@@ -4,11 +4,6 @@
     {
         public int Quantity { get; set; }
 
-        public bool IsValid(StatsDefinition stats)
-        {
-            if (stats.TotalKills >= Quantity)
-                return true;
-            return false;
-        }
+        public bool IsValid(StatsDefinition stats) => stats.TotalKills >= Quantity;
     }
 }

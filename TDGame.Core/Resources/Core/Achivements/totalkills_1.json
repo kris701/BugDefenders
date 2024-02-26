@@ -2,8 +2,10 @@
   "id": "62a25083-8ce2-4783-b303-cf8d745cfd49",
   "Name": "Murder!",
   "description": "You killed 100 enemies!",
-  "Criteria": {
-    "CriteriaType": "Kills",
-    "Quantity": 100
-  }
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 100
+    }
+  ]
 }

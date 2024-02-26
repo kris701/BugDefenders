@@ -2,8 +2,10 @@
   "id": "7a4ab642-e363-4917-82a4-2888362a9636",
   "Name": "Weapon of Mass Destruction",
   "description": "You killed 1000000 enemies!",
-  "Criteria": {
-    "CriteriaType": "Kills",
-    "Quantity": 1000000
-  }
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 1000000
+    }
+  ]
 }
