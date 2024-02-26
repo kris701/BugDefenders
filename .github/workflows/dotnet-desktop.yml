@@ -8,7 +8,7 @@ on:
 jobs:
   BuildAndPublish:
     runs-on: ubuntu-latest
-    name: Update NuGet 
+    name: Create new Release 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish (Windows)
-        run: dotnet --project TDGame.OpenGL publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
+        run: dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
       - name: Zip artifact for deployment
         run: zip windows.zip ./TDGame.OpenGL/bin/Release/win-x64 -r
         
