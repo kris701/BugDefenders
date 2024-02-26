@@ -18,11 +18,11 @@ jobs:
 
       - name: Publish Game (Windows)
         run: dotnet publish TDGame.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-      - name: Zip artifact for deployment
+      - name: Zip artifact
         run: |
              cd ./TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
              zip windows-toolkit.zip ./* -r
-             cp windows.zip ../../../../../../windows.zip
+             mv windows.zip ../../../../../../windows.zip
              cd ../../../../../../
 
       - name: Publish Toolkit (Windows)
@@ -31,7 +31,7 @@ jobs:
         run: |
              cd ./TDGame.CLI/bin/Release/net7.0/win-x64/publish/
              zip windows-toolkit.zip ./* -r
-             cp windows-toolkit.zip ../../../../../../windows-toolkit.zip
+             mv windows-toolkit.zip ../../../../../../windows-toolkit.zip
              cd ../../../../../../
 
       - name: Publish Game (Linux)
