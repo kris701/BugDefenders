@@ -17,6 +17,8 @@
     <None Remove="Resources\Core\Buffs\buff5.json" />
     <None Remove="Resources\Core\Buffs\buff6.json" />
     <None Remove="Resources\Core\Buffs\buff7.json" />
+    <None Remove="Resources\Core\GameStyles\extreme.json" />
+    <None Remove="Resources\Core\GameStyles\hard.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
     <None Remove="Resources\Core\Turrets\turret3.json" />
     <None Remove="Resources\Core\Turrets\turret4.json" />
@@ -75,6 +77,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\enemy1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\extreme.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\hard.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\medium.json">

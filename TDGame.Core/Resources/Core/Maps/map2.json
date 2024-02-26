@@ -1,99 +1,43 @@
 ﻿{
   "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
-  "Name": "test 2",
-  "Description": "simple map test",
+  "Name": "Criss Cross",
+  "Description": "A map with two paths that the enemies can take!",
   "Width": 650,
   "Height": 650,
   "Paths": [
     [
       {
         "X": 0,
-        "Y": 90
+        "Y": 325
       },
       {
-        "X": 275,
-        "Y": 90
-      },
-      {
-        "X": 275,
-        "Y": 330
-      },
-      {
-        "X": 115,
-        "Y": 330
-      },
-      {
-        "X": 115,
-        "Y": 540
-      },
-      {
-        "X": 505,
-        "Y": 540
-      },
-      {
-        "X": 505,
-        "Y": 0
+        "X": 650,
+        "Y": 325
       }
     ],
     [
       {
-        "X": 0,
-        "Y": 90
-      },
-      {
-        "X": 115,
-        "Y": 90
-      },
-      {
-        "X": 115,
-        "Y": 540
-      },
-      {
-        "X": 505,
-        "Y": 540
-      },
-      {
-        "X": 505,
+        "X": 320,
         "Y": 0
+      },
+      {
+        "X": 320,
+        "Y": 650
       }
     ]
   ],
   "BlockingTiles": [
     {
       "X": 0,
-      "Y": 64,
-      "Width": 303,
-      "Height": 45
+      "Y": 300,
+      "Width": 650,
+      "Height": 50
     },
     {
-      "X": 250,
-      "Y": 70,
-      "Width": 47,
-      "Height": 290
-    },
-    {
-      "X": 88,
-      "Y": 305,
-      "Width": 215,
-      "Height": 55
-    },
-    {
-      "X": 88,
-      "Y": 70,
-      "Width": 55,
-      "Height": 500
-    },
-    {
-      "X": 88,
-      "Y": 510,
-      "Width": 445,
-      "Height": 56
-    },
-    {
-      "X": 490,
+      "X": 295,
       "Y": 0,
-      "Width": 45,
-      "Height": 565
+      "Width": 50,
+      "Height": 650
     }
   ]
 }
