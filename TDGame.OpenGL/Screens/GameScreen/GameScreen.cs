@@ -81,7 +81,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, UnselectTurret);
             Initialize();
 
-#if DRAWBLOCKINGTILES
+#if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
             {
                 AddControl(99, new TileControl(Parent)
@@ -95,7 +95,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 });
             }
 #endif
-#if DRAWMAPPATHS
+#if DEBUG && DRAWMAPPATHS
             foreach (var path in _game.Context.Map.Paths)
             {
                 var from = path[0];

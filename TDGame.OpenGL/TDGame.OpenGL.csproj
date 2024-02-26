@@ -12,11 +12,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <!--<DefineConstants>$(DefineConstants);CENTERPOINT</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);TEXTBORDER</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
+	  <DefineConstants>$(DefineConstants);CENTERPOINT</DefineConstants>
+	  <DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>
+	  <DefineConstants>$(DefineConstants);TEXTBORDER</DefineConstants>
+	  <DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>
+	  <DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />

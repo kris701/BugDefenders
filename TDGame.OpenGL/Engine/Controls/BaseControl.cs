@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Controls
 {
@@ -195,7 +196,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         SpriteEffects.None,
                         0);
             }
-#if CENTERPOINT
+#if DEBUG && CENTERPOINT
             spriteBatch.Draw(
                 BasicTextures.GetBasicRectange(Color.Black),
                 new Vector2(X, Y),
@@ -207,7 +208,7 @@ namespace TDGame.OpenGL.Engine.Controls
                 SpriteEffects.None,
                 0);
 #endif
-#if TILEBORDER
+#if DEBUG && TILEBORDER
             spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(X, Y), new Rectangle((int)X, (int)Y, (int)Width, 1), GetAlphaColor());
             spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(X, Y), new Rectangle((int)X, (int)Y, 1, (int)Height), GetAlphaColor());
             spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(X + Width, Y), new Rectangle((int)(X + Width), (int)Y, 1, (int)Height), GetAlphaColor());
