@@ -7,7 +7,7 @@ on:
 
 jobs:
   BuildAndPublish:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     name: Create new Release 
     steps:
       - name: Checkout repository
@@ -75,6 +75,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           skipIfReleaseExists: true
-          artifacts: "*.zip,TDGame.OpenGL/setup.exe"
+          artifacts: "*.zip,TDGame.OpenGL/Output/*.exe"
           tag: "v${{ steps.get-version.outputs.package-version }}"
             
