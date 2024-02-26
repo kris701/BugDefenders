@@ -17,7 +17,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish (Windows)
-        run: dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish TDGame.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Zip artifact for deployment
         run: zip windows.zip ./TDGame.OpenGL/bin/Release/net7.0/publish/win-x64 -r
         
