@@ -7,16 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Core\Achivements\achivement1.json" />
-    <None Remove="Resources\Core\Achivements\achivement2.json" />
-    <None Remove="Resources\Core\Achivements\achivement3.json" />
-    <None Remove="Resources\Core\Buffs\buff1.json" />
-    <None Remove="Resources\Core\Buffs\buff2.json" />
-    <None Remove="Resources\Core\Buffs\buff3.json" />
-    <None Remove="Resources\Core\Buffs\buff4.json" />
-    <None Remove="Resources\Core\Buffs\buff5.json" />
-    <None Remove="Resources\Core\Buffs\buff6.json" />
-    <None Remove="Resources\Core\Buffs\buff7.json" />
+    <None Remove="Resources\Core\Achivements\totalkills_1.json" />
+    <None Remove="Resources\Core\Achivements\totalkills_2.json" />
+    <None Remove="Resources\Core\Achivements\totalkills_3.json" />
+    <None Remove="Resources\Core\Achivements\totalkills_4.json" />
+    <None Remove="Resources\Core\Achivements\turretsplaced_1.json" />
+    <None Remove="Resources\Core\Achivements\turretsplaced_2.json" />
+    <None Remove="Resources\Core\Achivements\turretsplaced_3.json" />
+    <None Remove="Resources\Core\Buffs\gatlingturret_1.json" />
+    <None Remove="Resources\Core\Buffs\gatlingturret_2.json" />
+    <None Remove="Resources\Core\Buffs\laserturret_1.json" />
+    <None Remove="Resources\Core\Buffs\laserturret_2.json" />
     <None Remove="Resources\Core\Enemies\boss1_2.json" />
     <None Remove="Resources\Core\Enemies\enemy1_2.json" />
     <None Remove="Resources\Core\Enemies\enemy1_3.json" />
@@ -36,34 +37,37 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Core\Achivements\achivement3.json">
+    <EmbeddedResource Include="Resources\Core\Achivements\turretsplaced_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Achivements\achivement2.json">
+    <EmbeddedResource Include="Resources\Core\Achivements\turretsplaced_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Achivements\achivement1.json">
+    <EmbeddedResource Include="Resources\Core\Achivements\turretsplaced_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Buffs\buff7.json">
+    <EmbeddedResource Include="Resources\Core\Achivements\totalkills_4.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Buffs\buff5.json">
+    <EmbeddedResource Include="Resources\Core\Achivements\totalkills_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Buffs\buff6.json">
+    <EmbeddedResource Include="Resources\Core\Achivements\totalkills_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Buffs\buff4.json">
+    <EmbeddedResource Include="Resources\Core\Achivements\totalkills_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Buffs\buff3.json">
+    <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Buffs\buff2.json">
+    <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Buffs\buff1.json">
+    <EmbeddedResource Include="Resources\Core\Buffs\laserturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\boss1_2.json">

@@ -1,11 +1,12 @@
 ﻿{
-  "id": "93384fdc-c69d-415f-a20a-e5e39c8f6dba",
-  "Name": "Perma Buff Test 5",
-  "description": "abav",
+  "id": "7dd06467-3347-4e5d-8ee9-b5f42d41082e",
+  "Name": "Laser Turret Upgrade",
+  "description": "Permanently gives the laser turret 2% more damage",
   "Requires": "01c1b070-605a-4cf2-9e5c-9ae5b7f7159f",
   "Criteria": {
-    "CriteriaType": "TotalKills",
-    "Quantity": 100
+    "CriteriaType": "TurretKills",
+    "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+    "Quantity": 5000
   },
   "Effect": {
     "BuffType": "Turret",
@@ -13,7 +14,7 @@
     "Module": {
       "TurretModule": "LaserTurret",
       "Range": 200,
-      "Damage": 20,
+      "Damage": 10.2,
       "Cooldown": 10,
       "SlowingFactor": 1,
       "SlowingDuration": 0,

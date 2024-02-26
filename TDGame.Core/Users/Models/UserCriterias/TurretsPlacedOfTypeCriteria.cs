@@ -1,6 +1,6 @@
 ﻿namespace TDGame.Core.Users.Models.UserCriterias
 {
-    public class TurretPlacedCriteria : IUserCriteria
+    public class TurretsPlacedOfTypeCriteria : IUserCriteria
     {
         public Guid TurretID { get; set; }
         public int Quantity { get; set; }

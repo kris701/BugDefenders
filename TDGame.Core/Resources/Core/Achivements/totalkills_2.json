@@ -1,0 +1,9 @@
+﻿{
+  "id": "0242dd8b-6079-444d-a077-6ffe5e556ec9",
+  "Name": "Serial Killer!",
+  "description": "You killed 1000 enemies!",
+  "Criteria": {
+    "CriteriaType": "Kills",
+    "Quantity": 1000
+  }
+}

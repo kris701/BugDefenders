@@ -1,0 +1,9 @@
+﻿{
+  "id": "fcd8f51c-66e7-4609-b37e-153f528faf1e",
+  "Name": "Architect",
+  "description": "You have placed 100 turrets!",
+  "Criteria": {
+    "CriteriaType": "PlacedTurrets",
+    "Quantity": 100
+  }
+}

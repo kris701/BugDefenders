@@ -3,7 +3,7 @@
   "Name": "Murder!",
   "description": "You killed 100 enemies!",
   "Criteria": {
-    "CriteriaType": "TotalKills",
+    "CriteriaType": "Kills",
     "Quantity": 100
   }
 }

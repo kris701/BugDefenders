@@ -98,7 +98,7 @@ namespace TDGame.Core.Game.Modules.Enemies
             return best;
         }
 
-        internal bool DamageEnemy(EnemyInstance enemy, float damage)
+        internal bool DamageEnemy(EnemyInstance enemy, float damage, Guid turretDefinitionID)
         {
             enemy.Health -= damage;
             if (enemy.Health <= 0)
@@ -110,9 +110,18 @@ namespace TDGame.Core.Game.Modules.Enemies
 
                 Context.Outcome.TotalKills++;
                 if (!Context.Outcome.KillsOfType.ContainsKey(enemy.DefinitionID))
-                    Context.Outcome.KillsOfType.Add(enemy.DefinitionID, 1);
-                else
-                    Context.Outcome.KillsOfType[enemy.DefinitionID] += 1;
+                    Context.Outcome.KillsOfType.Add(enemy.DefinitionID, 0);
+                Context.Outcome.KillsOfType[enemy.DefinitionID] += 1;
+
+                if (!Context.Outcome.TotalTurretKills.ContainsKey(turretDefinitionID))
+                    Context.Outcome.TotalTurretKills.Add(turretDefinitionID, 0);
+                Context.Outcome.TotalTurretKills[turretDefinitionID] += 1;
+
+                if (!Context.Outcome.TotalTurretKillsOfType.ContainsKey(turretDefinitionID))
+                    Context.Outcome.TotalTurretKillsOfType.Add(turretDefinitionID, new Dictionary<Guid, int>());
+                if (!Context.Outcome.TotalTurretKillsOfType[turretDefinitionID].ContainsKey(enemy.DefinitionID))
+                    Context.Outcome.TotalTurretKillsOfType[turretDefinitionID].Add(enemy.DefinitionID, 0);
+                Context.Outcome.TotalTurretKillsOfType[turretDefinitionID][enemy.DefinitionID] += 1;
 
                 return true;
             }

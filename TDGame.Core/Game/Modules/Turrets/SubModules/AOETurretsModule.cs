@@ -47,7 +47,7 @@ namespace TDGame.Core.Game.Modules.Turrets.SubModules
                 {
                     if (enemy.ModuleInfo is ISlowable slow)
                         SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                    if (Game.EnemiesModule.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def)))
+                    if (Game.EnemiesModule.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def), turret.DefinitionID))
                         turret.Kills++;
                 }
                 turret.Angle = MathHelpers.GetAngle(best, turret);

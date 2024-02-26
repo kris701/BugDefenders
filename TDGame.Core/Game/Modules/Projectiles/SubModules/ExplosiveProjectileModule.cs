@@ -60,6 +60,8 @@ namespace TDGame.Core.Game.Modules.Projectiles.SubModules
 
         private bool IsWithinTriggerRange(ProjectileInstance projectile, ExplosiveProjectileDefinition def)
         {
+            if (projectile.Source == null)
+                return false;
             bool isWithin = false;
             foreach (var enemy in Context.CurrentEnemies)
             {
@@ -78,7 +80,7 @@ namespace TDGame.Core.Game.Modules.Projectiles.SubModules
                     {
                         if (Context.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
                             SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                        if (Game.EnemiesModule.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers)))
+                        if (Game.EnemiesModule.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers), projectile.Source.DefinitionID))
                         {
                             if (projectile.Source != null)
                                 projectile.Source.Kills++;

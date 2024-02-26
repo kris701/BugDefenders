@@ -45,6 +45,22 @@ namespace TDGame.Core.Users
         {
             ResourceManager.ReloadResources();
 
+            // Need to load projectile buffs first, since the projectile turret modules contain a projectile module
+            bool any = false;
+            foreach (var id in user.Buffs)
+            {
+                var buff = ResourceManager.Buffs.GetResource(id).Effect;
+                if (buff is ProjectileBuffEffect projectileBuff)
+                {
+                    var target = ResourceManager.Projectiles.GetResource(projectileBuff.ProjectileID);
+                    if (target.ModuleInfo.GetType() == projectileBuff.Module.GetType())
+                        target.ModuleInfo = projectileBuff.Module;
+                    any = true;
+                }
+            }
+            if (any)
+                ResourceManager.Turrets.Reload();
+
             foreach (var id in user.Buffs)
             {
                 var buff = ResourceManager.Buffs.GetResource(id).Effect;

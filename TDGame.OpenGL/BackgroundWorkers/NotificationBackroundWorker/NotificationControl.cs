@@ -42,7 +42,7 @@ namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             _descriptionTextbox.Text = $"{Item.PreFix}{Environment.NewLine}{Item.Definition.Name}{Environment.NewLine}{Item.Definition.Description}";
             if (!Item.HasImage)
             {
-                _descriptionTextbox._width = 280;
+                _descriptionTextbox._width = 260;
                 _descriptionTextbox._x = _x + Scale(10);
             }
             else
