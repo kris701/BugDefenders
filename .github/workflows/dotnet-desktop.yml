@@ -21,7 +21,7 @@ jobs:
       - name: Zip artifact
         run: |
              cd ./TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
-             zip windows-toolkit.zip ./* -r
+             zip windows.zip ./* -r
              mv windows.zip ../../../../../../windows.zip
              cd ../../../../../../
 
@@ -36,13 +36,21 @@ jobs:
 
       - name: Publish Game (Linux)
         run: dotnet publish TDGame.OpenGL -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-      - name: Zip artifact for deployment
-        run: zip linux.zip ./TDGame.OpenGL/bin/Release/net7.0/linux-x64/publish/* -r
+      - name: Zip artifact
+        run: |
+             cd ./TDGame.OpenGL/bin/Release/net7.0/linux-x64/publish/
+             zip linux.zip ./* -r
+             mv linux.zip ../../../../../../linux.zip
+             cd ../../../../../../
 
       - name: Publish Toolkit (Linux)
         run: dotnet publish TDGame.CLI -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-      - name: Zip artifact for deployment
-        run: zip linux-toolkit.zip ./TDGame.CLI/bin/Release/net7.0/linux-x64/publish/* -r
+      - name: Zip artifact
+        run: |
+             cd ./TDGame.CLI/bin/Release/net7.0/linux-x64/publish/
+             zip linux-toolkit.zip ./* -r
+             mv linux-toolkit.zip ../../../../../../linux-toolkit.zip
+             cd ../../../../../../
         
       - name: Get Package version
         id: get-version
