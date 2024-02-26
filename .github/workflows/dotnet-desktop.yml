@@ -1,0 +1,43 @@
+name: Build and Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  BuildAndPublish:
+    runs-on: ubuntu-latest
+    name: Update NuGet 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+          
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Publish (Windows)
+        run: dotnet --project TDGame.OpenGL publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
+      - name: Zip artifact for deployment
+        run: zip windows.zip ./TDGame.OpenGL/bin/Release/win-x64 -r
+        
+      - name: Get Package version
+        id: get-version
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
+        with:
+          proj-path: TDGame.OpenGL/TDGame.OpenGL.csproj
+
+      - name: Generate tag
+        continue-on-error: true
+        uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: "v${{ steps.get-version.outputs.package-version }}"
+          message: "Latest release"
+
+      - name: Generate Release
+        uses: ncipollo/release-action@v1
+        with:
+          skipIfReleaseExists: true
+          artifacts: "./TDGame.OpenGL/bin/Release/*.zip"
+          tag: "v${{ steps.get-version.outputs.package-version }}"
