@@ -61,6 +61,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(7, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
+            _enemyUpdater.OnDelete += OnEnemyDeath;
             _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(5, this, _gameArea.X, _gameArea.Y);
             _projectileUpdater.OnDelete += OnProjectileDeleted;
             _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this, _gameArea.X, _gameArea.Y);
@@ -132,18 +133,30 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (parent.Tag is ProjectileInstance projectile)
             {
-                if (projectile.ProjectileInfo is ExplosiveProjectileDefinition def)
+                var entityDef = Parent.UIResources.GetAnimation<ProjectileEntityDefinition>(projectile.DefinitionID);
+                if (entityDef.OnDestroyed != Guid.Empty)
                 {
-                    _effects.Add(new EffectEntity()
+                    var effect = Parent.UIResources.GetTextureSet(entityDef.OnDestroyed);
+                    _effects.Add(new EffectEntity(entityDef.OnDestroyed, TimeSpan.FromMilliseconds(250), effect)
                     {
-                        ID = new Guid("ebca3566-e0bf-4aa1-9a29-74be54f3e96b"),
-                        LifeTime = TimeSpan.FromMilliseconds(250),
-                        Size = def.SplashRange,
-                        X = projectile.CenterX - def.SplashRange / 2,
-                        Y = projectile.CenterY - def.SplashRange / 2,
-                        Angle = parent.Rotation
+                        X = projectile.CenterX - effect.LoadedContents[0].Width / 2,
+                        Y = projectile.CenterY - effect.LoadedContents[0].Height / 2
                     });
                 }
+            }
+        }
+
+        private void OnEnemyDeath(EnemyControl parent)
+        {
+            var entityDef = Parent.UIResources.GetAnimation<EnemyEntityDefinition>(parent.Enemy.DefinitionID);
+            if (entityDef.OnDeath != Guid.Empty)
+            {
+                var effect = Parent.UIResources.GetTextureSet(entityDef.OnDeath);
+                _effects.Add(new EffectEntity(entityDef.OnDeath, TimeSpan.FromMilliseconds(250), effect)
+                {
+                    X = parent.Enemy.CenterX - effect.LoadedContents[0].Width / 2,
+                    Y = parent.Enemy.CenterY - effect.LoadedContents[0].Height / 2
+                });
             }
         }
 
@@ -376,14 +389,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewEffect(EffectEntity entity)
         {
-            var animation = Parent.UIResources.GetAnimation<EffectEntityDefinition>(entity.ID).OnCreate;
-            var textureSet = Parent.UIResources.GetTextureSet(animation);
             var newTile = new AnimatedTileControl(Parent)
             {
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y,
-                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
-                TileSet = textureSet.LoadedContents,
+                FrameTime = TimeSpan.FromMilliseconds(entity.TextureSetDefinition.FrameTime),
+                TileSet = entity.TextureSetDefinition.LoadedContents,
                 AutoPlay = true,
                 Width = entity.Size,
                 Height = entity.Size,
@@ -441,13 +452,16 @@ namespace TDGame.OpenGL.Screens.GameScreen
             control.CurrentSoundEffect = Parent.UIResources.PlaySoundEffect(Parent.UIResources.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             if (turret.TurretInfo is AOETurretDefinition def)
             {
-                _effects.Add(new EffectEntity()
+                var entityDef = Parent.UIResources.GetAnimation<TurretEntityDefinition>(turret.DefinitionID);
+                if (entityDef.OnShoot != Guid.Empty) 
                 {
-                    ID = turret.DefinitionID,
-                    X = turret.CenterX - def.Range,
-                    Y = turret.CenterY - def.Range,
-                    Size = def.Range * 2
-                });
+                    var effect = Parent.UIResources.GetTextureSet(entityDef.OnShoot);
+                    _effects.Add(new EffectEntity(entityDef.OnShoot, TimeSpan.FromSeconds(1), effect)
+                    {
+                        X = turret.CenterX - def.Range,
+                        Y = turret.CenterY - def.Range
+                    });
+                }
             }
         }
 

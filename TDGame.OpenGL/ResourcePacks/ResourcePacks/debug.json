@@ -368,6 +368,15 @@
         "Entities/Turrets/turret5/shoot_effect_3",
         "Entities/Turrets/turret5/shoot_effect_4"
       ]
+    },
+
+    {
+      "ID": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c",
+      "FrameTime": 100,
+      "Contents": [
+        "Entities/Enemies/splat_1",
+        "Entities/Enemies/splat_2"
+      ]
     }
   ],
   "Songs": [
@@ -450,68 +459,81 @@
     {
       "TargetType": "Enemy",
       "Target": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
-      "OnCreate": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3"
+      "OnCreate": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "3cbe1917-c00b-4b12-a0f3-0b78035a5cf1",
-      "OnCreate": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3"
+      "OnCreate": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
-      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f"
+      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "c0f67fc5-b5a4-4e0c-9607-8623861baf56",
-      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f"
+      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "37d7c4a9-1479-4146-88a2-ebc4a1ba53ea",
-      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f"
+      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
-      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2"
+      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "366dd4c1-dd3c-419d-85dd-452f2d45597c",
-      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2"
+      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "292f065c-8f4b-4140-ad13-c38179b8b9fa",
-      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2"
+      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
-      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07"
+      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "ae76b377-f010-4fcc-8f85-3d13aacd238a",
-      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07"
+      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "b82e41ce-c032-4ecc-ac65-83f1372663b6",
-      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07"
+      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
 
     {
       "TargetType": "Projectile",
       "Target": "6ee45409-1dd2-4190-938b-90848cf0ec52",
-      "OnCreate": "6ee45409-1dd2-4190-938b-90848cf0ec52"
+      "OnCreate": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+      "OnDestroyed": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b"
     },
     {
       "TargetType": "Projectile",
       "Target": "24be3e70-c410-443b-9e91-75d9f3a4270f",
-      "OnCreate": "24be3e70-c410-443b-9e91-75d9f3a4270f"
+      "OnCreate": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+      "OnDestroyed": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b"
     },
     {
       "TargetType": "Projectile",

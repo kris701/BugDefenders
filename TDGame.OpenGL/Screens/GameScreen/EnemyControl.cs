@@ -11,14 +11,14 @@ namespace TDGame.OpenGL.Screens.GameScreen
     public class EnemyControl : AnimatedTileControl
     {
         public FloatPoint VisualOffset { get; }
+        public EnemyInstance Enemy { get; }
         private TileControl _healthBar;
         private readonly float _initialHP;
-        private readonly EnemyInstance _enemy;
         private readonly int _legalOffset = 5;
         public EnemyControl(UIEngine parent, EnemyInstance enemy) : base(parent)
         {
             _initialHP = enemy.Health;
-            _enemy = enemy;
+            Enemy = enemy;
             var rnd = new Random();
             VisualOffset = new FloatPoint(
                 rnd.Next(-_legalOffset, _legalOffset),
@@ -49,7 +49,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         public override void Update(GameTime gameTime)
         {
-            _healthBar._width = _width * (_enemy.Health / _initialHP);
+            _healthBar._width = _width * (Enemy.Health / _initialHP);
             _healthBar._x = _x;
             _healthBar._y = _y - 5;
 
