@@ -80,7 +80,7 @@ namespace TDGame.Core.Game.Modules.Projectiles.SubModules
                     {
                         if (Context.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
                             SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                        if (Game.EnemiesModule.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers), projectile.Source.DefinitionID))
+                        if (Game.EnemiesModule.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers), projectile.Source!.DefinitionID))
                         {
                             if (projectile.Source != null)
                                 projectile.Source.Kills++;

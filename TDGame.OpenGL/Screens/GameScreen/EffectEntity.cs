@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using TDGame.Core.Game.Models;
 using TDGame.OpenGL.ResourcePacks;
 

@@ -7,7 +7,6 @@ using TDGame.Core.Game;
 using TDGame.Core.Game.Models.Entities;
 using TDGame.Core.Game.Models.Entities.Enemies;
 using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
 using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 using TDGame.Core.Game.Models.Entities.Upgrades;
@@ -453,7 +452,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             if (turret.TurretInfo is AOETurretDefinition def)
             {
                 var entityDef = Parent.UIResources.GetAnimation<EffectEntityDefinition>(turret.DefinitionID);
-                if (entityDef.OnCreate != Guid.Empty) 
+                if (entityDef.OnCreate != Guid.Empty)
                 {
                     var effect = Parent.UIResources.GetTextureSet(entityDef.OnCreate);
                     _effects.Add(new EffectEntity(entityDef.OnCreate, TimeSpan.FromSeconds(1), effect)

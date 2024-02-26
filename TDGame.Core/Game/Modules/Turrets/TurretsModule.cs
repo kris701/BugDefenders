@@ -106,7 +106,7 @@ namespace TDGame.Core.Game.Modules.Turrets
             OnTurretPurchased?.Invoke(newInstance);
 
             Context.Outcome.PlacedTurret(newInstance.DefinitionID);
-            
+
             return true;
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Controls
 {

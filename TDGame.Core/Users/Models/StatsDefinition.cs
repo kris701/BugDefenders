@@ -39,12 +39,12 @@
                 else
                     TotalTurretsPlacedOfType[key] += outcome.TotalTurretsPlacedOfType[key];
             }
-            foreach(var key in outcome.TotalTurretKillsOfType.Keys)
+            foreach (var key in outcome.TotalTurretKillsOfType.Keys)
             {
                 if (!TotalTurretKillsOfType.ContainsKey(key))
                     TotalTurretKillsOfType.Add(key, new Dictionary<Guid, int>());
                 if (!TotalTurretKills.ContainsKey(key))
-                    TotalTurretKills.Add(key,0);
+                    TotalTurretKills.Add(key, 0);
                 TotalTurretKills[key] += outcome.TotalTurretKills[key];
 
                 foreach (var turret in outcome.TotalTurretKillsOfType[key].Keys)
