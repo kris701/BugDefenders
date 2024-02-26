@@ -7,7 +7,7 @@ on:
 
 jobs:
   BuildAndPublish:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     name: Create new Release 
     steps:
       - name: Checkout repository
@@ -18,17 +18,17 @@ jobs:
 
       - name: Publish Game (Windows)
         run: dotnet publish TDGame.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-build
+          path: TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
       - name: Zip artifact
         run: |
              cd ./TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
              zip windows.zip ./* -r
              mv windows.zip ../../../../../../windows.zip
              cd ../../../../../../
-
-      - name: Compile windows installer
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
-        with:
-          path: TDGame.OpenGL/inno.iss
 
       - name: Publish Toolkit (Windows)
         run: dotnet publish TDGame.CLI -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
@@ -71,6 +71,34 @@ jobs:
           tag: "v${{ steps.get-version.outputs.package-version }}"
           message: "Latest release"
 
+      - name: Generate Release
+        uses: ncipollo/release-action@v1
+        with:
+          skipIfReleaseExists: true
+          artifacts: "*.zip,TDGame.OpenGL/Output/*.exe"
+          tag: "v${{ steps.get-version.outputs.package-version }}"
+
+  CreateWindowsInstaller:
+    needs: BuildAndPublish
+    runs-on: windows-latest
+    name: Create new Release 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+          
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Download Windows Build
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-build
+
+      - name: Compile windows installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: TDGame.OpenGL/inno.iss
+          
       - name: Generate Release
         uses: ncipollo/release-action@v1
         with:
