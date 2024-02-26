@@ -50,8 +50,7 @@ namespace TDGame.Core.Game.Modules.Turrets
             var upgrade = turret.GetDefinition().Upgrades.First(x => x.ID == id);
             if (upgrade == null)
                 return false;
-            if (OnBeforeTurretUpgraded != null)
-                OnBeforeTurretUpgraded.Invoke(turret);
+            OnBeforeTurretUpgraded?.Invoke(turret);
 
             upgrade.ApplyUpgrade(turret);
             Context.Money -= upgrade.Cost;
@@ -97,10 +96,12 @@ namespace TDGame.Core.Game.Modules.Turrets
                 if (MathHelpers.Intersects(turretDef, at, otherTurret))
                     return false;
 
-            var newInstance = new TurretInstance(turretDef);
-            newInstance.X = at.X;
-            newInstance.Y = at.Y;
-            newInstance.Angle = -(float)Math.PI / 2;
+            var newInstance = new TurretInstance(turretDef)
+            {
+                X = at.X,
+                Y = at.Y,
+                Angle = -(float)Math.PI / 2
+            };
             Context.Money -= turretDef.Cost;
             Context.Turrets.Add(newInstance);
             OnTurretPurchased?.Invoke(newInstance);

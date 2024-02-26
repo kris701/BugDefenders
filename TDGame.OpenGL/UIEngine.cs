@@ -221,7 +221,7 @@ namespace TDGame.OpenGL
 
             var checker = new ResourceIntegrityChecker();
             checker.CheckGameIntegrity();
-            if (checker.Errors.Where(x => x.Severity > IntegrityError.SeverityLevel.Critical).Count() > 0)
+            if (checker.Errors.Any(x => x.Severity > IntegrityError.SeverityLevel.Critical))
                 _notificationWorker.AddManualNotification("Game Integrity", $"There where errors in the game integrity! Remove your mods or use the CLI tool to find the problem with your mods.");
             if (ResourceManager.LoadedResources.Count > 1)
                 _notificationWorker.AddManualNotification("Mods", $"Currently have {ResourceManager.LoadedResources.Count - 1} loaded!");
