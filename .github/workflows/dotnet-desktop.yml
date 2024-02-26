@@ -25,6 +25,11 @@ jobs:
              mv windows.zip ../../../../../../windows.zip
              cd ../../../../../../
 
+      - name: Compile windows installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: TDGame.OpenGL/inno.iss
+
       - name: Publish Toolkit (Windows)
         run: dotnet publish TDGame.CLI -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Zip artifact
@@ -70,5 +75,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           skipIfReleaseExists: true
-          artifacts: "*.zip"
+          artifacts: "*.zip,TDGame.OpenGL/setup.exe"
           tag: "v${{ steps.get-version.outputs.package-version }}"
+            
