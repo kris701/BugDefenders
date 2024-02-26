@@ -19,7 +19,7 @@ jobs:
       - name: Publish (Windows)
         run: dotnet publish TDGame.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Zip artifact for deployment
-        run: zip windows.zip ./TDGame.OpenGL/bin/Release/net7.0/publish/win-x64/* -r
+        run: zip windows.zip ./TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/* -r
         
       - name: Get Package version
         id: get-version
@@ -39,5 +39,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           skipIfReleaseExists: true
-          artifacts: "./TDGame.OpenGL/bin/Release/net7.0/publish/*.zip"
+          artifacts: "*.zip"
           tag: "v${{ steps.get-version.outputs.package-version }}"
