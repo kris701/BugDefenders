@@ -148,7 +148,7 @@ jobs:
   PublishAll:
     needs: [BuildTest, WindowsBuild, LinuxBuild, CreateWindowsInstaller]
     runs-on: ubuntu-latest
-    name: Create new Release 
+    name: Publish All
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
