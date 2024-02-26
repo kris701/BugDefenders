@@ -39,5 +39,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           skipIfReleaseExists: true
-          artifacts: "./TDGame.OpenGL/bin/Release/*.zip"
+          artifacts: "./TDGame.OpenGL/bin/Release/net7.0/publish/win-x64/*.zip"
           tag: "v${{ steps.get-version.outputs.package-version }}"
