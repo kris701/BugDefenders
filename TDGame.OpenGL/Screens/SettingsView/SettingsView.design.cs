@@ -47,6 +47,7 @@ namespace TDGame.OpenGL.Screens.SettingsView
 
         private ButtonControl _isFullScreen;
         private ButtonControl _isVSync;
+        private ButtonControl _isFPSCounter;
         private readonly List<ButtonControl> _texturePacksButtons = new List<ButtonControl>();
 
         public override void Initialize()
@@ -214,6 +215,23 @@ namespace TDGame.OpenGL.Screens.SettingsView
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isVSync);
+            _isFPSCounter = new ButtonControl(Parent, clicked: (x) =>
+            {
+                _settings.FPSCounter = !_settings.FPSCounter;
+                UpdateScreenSettingsButtons();
+            })
+            {
+                Y = yOffset + 110,
+                X = 530,
+                Width = 200,
+                Height = 50,
+                Text = "FPS Counter",
+                Font = BasicFonts.GetFont(16),
+                FontColor = Color.White,
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+            };
+            AddControl(1, _isFPSCounter);
 
             UpdateScreenSettingsButtons();
         }

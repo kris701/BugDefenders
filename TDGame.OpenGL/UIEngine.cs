@@ -26,11 +26,9 @@ namespace TDGame.OpenGL
         private static readonly string _contentDir = "Content";
         private static readonly string _modsDir = "Mods";
 
-#if FPS
         private TimeSpan _passed = TimeSpan.Zero;
         private int _currentFrames = 0;
         private int _frames = 0;
-#endif
 
         public GraphicsDeviceManager Device { get; }
         public int ScreenWidth() => Window.ClientBounds.Width;
@@ -254,17 +252,20 @@ namespace TDGame.OpenGL
             CurrentScreen.Draw(gameTime, _spriteBatch);
             foreach (var worker in BackroundWorkers)
                 worker.Draw(gameTime, _spriteBatch);
-#if FPS
-            _currentFrames++;
-            _passed += gameTime.ElapsedGameTime;
-            if (_passed >= TimeSpan.FromSeconds(1))
+
+            if (CurrentUser.UserData.FPSCounter)
             {
-                _passed = TimeSpan.Zero;
-                _frames = _currentFrames;
-                _currentFrames = 0;
+                _currentFrames++;
+                _passed += gameTime.ElapsedGameTime;
+                if (_passed >= TimeSpan.FromSeconds(1))
+                {
+                    _passed = TimeSpan.Zero;
+                    _frames = _currentFrames;
+                    _currentFrames = 0;
+                }
+                _spriteBatch.DrawString(BasicFonts.GetFont(16), $"FPS: {_frames}", new Vector2(0, 0), new Color(255, 0, 0, 255));
             }
-            _spriteBatch.DrawString(BasicFonts.GetFont(16), $"FPS: {_frames}", new Vector2(0,0), new Color(255, 0, 0, 255));
-#endif
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

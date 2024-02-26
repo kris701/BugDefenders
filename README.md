@@ -3,6 +3,7 @@
 ## TODO List
 - [ ] Come up with an actual name for the game
 - [ ] Setup a good base game
+- [ ] Cheats
 
 ## Done
 - [X] AOE turret effects
