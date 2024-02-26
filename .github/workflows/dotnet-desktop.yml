@@ -143,7 +143,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
-          path: DGame.OpenGL/Output/*.exe
+          path: TDGame.OpenGL/Output/*.exe
             
   PublishAll:
     needs: [BuildTest, WindowsBuild, LinuxBuild, CreateWindowsInstaller]
