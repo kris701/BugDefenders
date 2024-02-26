@@ -132,7 +132,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: windows-build
-          path: TDGame.OpenGL/bin/Release/net7.0/linux-x64/publish/
+          path: TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
 
       - name: Compile windows installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
