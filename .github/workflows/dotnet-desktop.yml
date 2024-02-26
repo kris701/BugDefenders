@@ -16,10 +16,25 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
 
-      - name: Publish (Windows)
+      - name: Publish Game (Windows)
         run: dotnet publish TDGame.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Zip artifact for deployment
         run: zip windows.zip ./TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/* -r
+
+      - name: Publish Toolkit (Windows)
+        run: dotnet publish TDGame.CLI -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+      - name: Zip artifact for deployment
+        run: zip windows-toolkit.zip ./TDGame.CLI/bin/Release/net7.0/win-x64/publish/* -r
+
+      - name: Publish Game (Linux)
+        run: dotnet publish TDGame.OpenGL -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+      - name: Zip artifact for deployment
+        run: zip linux.zip ./TDGame.OpenGL/bin/Release/net7.0/linux-x64/publish/* -r
+
+      - name: Publish Toolkit (Linux)
+        run: dotnet publish TDGame.CLI -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+      - name: Zip artifact for deployment
+        run: zip linux-toolkit.zip ./TDGame.CLI/bin/Release/net7.0/linux-x64/publish/* -r
         
       - name: Get Package version
         id: get-version
