@@ -1,0 +1,17 @@
+﻿{
+  "id": "ae76b377-f010-4fcc-8f85-3d13aacd238a",
+  "Name": "Long Legs Hive",
+  "description": "",
+  "Health": 500,
+  "Size": 30,
+  "Reward": 10,
+  "ModuleInfo": {
+    "EnemyModule": "Wave",
+    "Speed": 4,
+    "WaveSize": 6,
+    "SpawnDelay": 300
+  },
+  "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+  "TerrainType": 1,
+  "AvailableAtWave": 20
+}

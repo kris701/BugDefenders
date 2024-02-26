@@ -1,16 +1,16 @@
 ﻿{
   "id": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
-  "Name": "Wave Turret",
-  "Description": "asfdasfasf",
+  "Name": "Slowing Turret",
+  "Description": "Area of Effect turret that slows all enemies within its range.",
   "Size": 50,
-  "Cost": 300,
+  "Cost": 1000,
   "ModuleInfo": {
     "TurretModule": "AOETurret",
     "Range": 100,
-    "Damage": 25,
+    "Damage": 0,
     "Cooldown": 2000,
-    "SlowingFactor": 0.5,
-    "SlowingDuration": 1000,
+    "SlowingFactor": 0.3,
+    "SlowingDuration": 1500,
     "DamageModifiers": [
       {
         "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
@@ -25,13 +25,39 @@
       "UpgradeType": "AOETurret",
       "id": "5ce6344e-a814-4acf-953e-ed5304de3bed",
       "requires": null,
-      "Name": "Upgrade 1",
-      "Description": "fast turret",
-      "Cost": 50,
+      "Name": "Range",
+      "Description": "Increases the range of the turret.",
+      "Cost": 500,
       "RangeModifier": 2,
-      "DamageModifier": 2,
+      "DamageModifier": 1,
       "CooldownModifier": 1,
       "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
+    },
+    {
+      "UpgradeType": "AOETurret",
+      "id": "582d339d-4477-4a85-8421-8793a100d6b8",
+      "requires": null,
+      "Name": "Slowing Duration",
+      "Description": "Increases the slowing duration of the turret.",
+      "Cost": 750,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 1,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 2
+    },
+    {
+      "UpgradeType": "AOETurret",
+      "id": "ebfdea94-b451-4332-b8f0-b789603d3398",
+      "requires": "582d339d-4477-4a85-8421-8793a100d6b8",
+      "Name": "Slowing Factor",
+      "Description": "Improves the slowing factor against enemies",
+      "Cost": 750,
+      "RangeModifier": 1,
+      "DamageModifier": 1,
+      "CooldownModifier": 1,
+      "SlowingFactorModifier": 0.5,
       "SlowingDurationModifier": 1
     }
   ]

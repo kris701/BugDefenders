@@ -1,0 +1,17 @@
+﻿{
+  "id": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+  "Name": "Slow Crawler Nest",
+  "description": "",
+  "Health": 100,
+  "Size": 10,
+  "Reward": 2,
+  "ModuleInfo": {
+    "EnemyModule": "Wave",
+    "Speed": 3,
+    "WaveSize": 7,
+    "SpawnDelay": 100
+  },
+  "EnemyType": "5102185e-16e4-4c2b-8311-3c1548d344d0",
+  "TerrainType": 1,
+  "AvailableAtWave": 0
+} 

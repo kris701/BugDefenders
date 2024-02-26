@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TDGame.Core.Game.Models.Entities.Turrets;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -275,21 +276,13 @@ namespace TDGame.OpenGL.Screens.GameScreen
             int page = 0;
             int offset = 0;
             _turretPages.Add(new List<ButtonControl>());
-            var options = ResourceManager.Turrets.GetResources();
-            var orderedList = new SortedList<int, List<Guid>>();
-            foreach (var option in options)
-            {
-                var target = ResourceManager.Turrets.GetResource(option).AvailableAtWave;
-                if (orderedList.ContainsKey(target))
-                    orderedList[target].Add(option);
-                else
-                    orderedList.Add(target, new List<Guid>() { option });
-            }
-            var ordered = new List<Guid>();
-            foreach (var key in orderedList.Keys)
-                ordered.AddRange(orderedList[key]);
+            var optionIDs = ResourceManager.Turrets.GetResources();
+            var turretDefs = new List<TurretDefinition>();
+            foreach (var id in optionIDs)
+                turretDefs.Add(ResourceManager.Turrets.GetResource(id));
+            turretDefs = turretDefs.OrderBy(x => x.AvailableAtWave).ThenByDescending(x => x.Cost).ToList();
 
-            foreach (var turretID in ordered)
+            foreach (var turret in turretDefs)
             {
                 if (count++ % (_turretSelectionsPrPage + 1) == 0)
                 {
@@ -297,7 +290,6 @@ namespace TDGame.OpenGL.Screens.GameScreen
                     _turretPages.Add(new List<ButtonControl>());
                     offset = 0;
                 }
-                var turret = ResourceManager.Turrets.GetResource(turretID);
                 var newButton = new ButtonControl(Parent, clicked: BuyTurret_Click)
                 {
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),

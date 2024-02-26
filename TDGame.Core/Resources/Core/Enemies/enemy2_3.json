@@ -1,0 +1,17 @@
+﻿{
+  "id": "366dd4c1-dd3c-419d-85dd-452f2d45597c",
+  "Name": "Flying Bug Colony",
+  "description": "",
+  "Health": 200,
+  "Size": 20,
+  "Reward": 5,
+  "ModuleInfo": {
+    "EnemyModule": "Wave",
+    "Speed": 5,
+    "WaveSize": 15,
+    "SpawnDelay": 200
+  },
+  "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
+  "TerrainType": 2,
+  "AvailableAtWave": 25
+}

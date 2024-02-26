@@ -48,6 +48,10 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
             sb.AppendLine("Projectile get:");
             if (DamageModifier != 1)
                 sb.AppendLine($"Damage {DamageModifier}x");
+            if (SlowingFactorModifier != 1)
+                sb.AppendLine($"Slowing Factor {SlowingFactorModifier}x");
+            if (SlowingDurationModifier != 1)
+                sb.AppendLine($"Slowing Duration {SlowingDurationModifier}x");
 
             return sb.ToString();
         }

@@ -17,6 +17,13 @@
     <None Remove="Resources\Core\Buffs\buff5.json" />
     <None Remove="Resources\Core\Buffs\buff6.json" />
     <None Remove="Resources\Core\Buffs\buff7.json" />
+    <None Remove="Resources\Core\Enemies\boss1_2.json" />
+    <None Remove="Resources\Core\Enemies\enemy1_2.json" />
+    <None Remove="Resources\Core\Enemies\enemy1_3.json" />
+    <None Remove="Resources\Core\Enemies\enemy2_2.json" />
+    <None Remove="Resources\Core\Enemies\enemy2_3.json" />
+    <None Remove="Resources\Core\Enemies\enemy3_2.json" />
+    <None Remove="Resources\Core\Enemies\enemy3_3.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
@@ -25,6 +32,7 @@
     <None Remove="Resources\Core\Turrets\turret5.json" />
     <None Remove="Resources\Core\Turrets\turret6.json" />
     <None Remove="Resources\Core\Turrets\turret7.json" />
+    <None Remove="Resources\Core\Turrets\turret8.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +66,27 @@
     <EmbeddedResource Include="Resources\Core\Buffs\buff1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\boss1_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy1_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy1_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy2_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy2_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy3_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy3_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\EnemyTypes\type3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -67,16 +96,16 @@
     <EmbeddedResource Include="Resources\Core\EnemyTypes\type1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Enemies\boss1.json">
+    <EmbeddedResource Include="Resources\Core\Enemies\boss1_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Enemies\enemy3.json">
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy3_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Enemies\enemy2.json">
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy2_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Enemies\enemy1.json">
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy1_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\extreme.json">
@@ -117,6 +146,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Turrets\turret3.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\turret4.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\turret8.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\turret7.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\turret6.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\turret5.json" />

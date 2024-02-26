@@ -58,6 +58,10 @@ namespace TDGame.Core.Game.Models.Entities.Upgrades
                 sb.AppendLine($"Splash Range {SplashRangeModifier}x");
             if (TriggerRangeModifier != 1)
                 sb.AppendLine($"Trigger Range {TriggerRangeModifier}x");
+            if (SlowingFactorModifier != 1)
+                sb.AppendLine($"Slowing Factor {SlowingFactorModifier}x");
+            if (SlowingDurationModifier != 1)
+                sb.AppendLine($"Slowing Duration {SlowingDurationModifier}x");
 
             return sb.ToString();
         }

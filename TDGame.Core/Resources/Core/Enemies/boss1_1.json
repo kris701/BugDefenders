@@ -1,10 +1,10 @@
 ﻿{
   "id": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
-  "Name": "Boss 1",
-  "description": "abav",
+  "Name": "Baby Crawler Boss",
+  "description": "",
   "Health": 5000,
   "Size": 50,
-  "Reward": 1000,
+  "Reward": 250,
   "ModuleInfo": {
     "EnemyModule": "Single",
     "Speed": 2

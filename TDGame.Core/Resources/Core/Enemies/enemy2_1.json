@@ -1,10 +1,10 @@
 ﻿{
   "id": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
-  "Name": "Enemy Type 2",
-  "description": "abav",
+  "Name": "Flying Bug Nest",
+  "description": "",
   "Health": 200,
   "Size": 20,
-  "Reward": 20,
+  "Reward": 5,
   "ModuleInfo": {
     "EnemyModule": "Wave",
     "Speed": 5,

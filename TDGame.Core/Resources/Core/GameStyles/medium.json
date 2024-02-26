@@ -12,5 +12,5 @@
   "BossEveryNWave": 5,
   "TurretBlackList": [],
   "EnemyBlackList": [],
-  "MoneyPrWave": 250
+  "MoneyPrWave": 100
 }

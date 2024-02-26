@@ -10,7 +10,7 @@
   "EnemyWaveMultiplier": 5,
   "ProjectileSpeedCap": 20,
   "BossEveryNWave": 5,
-  "TurretBlackList": [],
+  "TurretBlackList": [ "22be929c-5f6e-4d7a-9fd7-6a7385f88b20" ],
   "EnemyBlackList": [],
   "MoneyPrWave": 0
 }
