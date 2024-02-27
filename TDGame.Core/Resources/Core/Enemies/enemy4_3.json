@@ -1,0 +1,17 @@
+﻿{
+  "id": "54f21020-ee69-4b93-bce5-a8a2257a9573",
+  "Name": "Water Bug Colony",
+  "description": "",
+  "Health": 300,
+  "Size": 20,
+  "Reward": 5,
+  "ModuleInfo": {
+    "EnemyModule": "Wave",
+    "Speed": 3,
+    "WaveSize": 10,
+    "SpawnDelay": 200
+  },
+  "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
+  "TerrainType": 1,
+  "AvailableAtWave": 3
+} 

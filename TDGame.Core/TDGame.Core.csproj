@@ -25,6 +25,12 @@
     <None Remove="Resources\Core\Enemies\enemy2_3.json" />
     <None Remove="Resources\Core\Enemies\enemy3_2.json" />
     <None Remove="Resources\Core\Enemies\enemy3_3.json" />
+    <None Remove="Resources\Core\Enemies\enemy4_1.json" />
+    <None Remove="Resources\Core\Enemies\enemy4_2.json" />
+    <None Remove="Resources\Core\Enemies\enemy4_3.json" />
+    <None Remove="Resources\Core\Enemies\enemy5_1.json" />
+    <None Remove="Resources\Core\Enemies\enemy5_2.json" />
+    <None Remove="Resources\Core\Enemies\enemy5_3.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
@@ -71,6 +77,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\boss1_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy5_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy5_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy5_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy4_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy4_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Enemies\enemy4_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\enemy1_3.json">

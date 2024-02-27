@@ -271,7 +271,7 @@
       ]
     },
     {
-      "ID": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "ID": "7b52472d-65da-4d86-b1e5-097c4cfebd72",
       "FrameTime": 250,
       "Contents": [
         "Entities/Enemies/enemy1/enemy1_walk_1",
@@ -279,23 +279,7 @@
       ]
     },
     {
-      "ID": "c0f67fc5-b5a4-4e0c-9607-8623861baf56",
-      "FrameTime": 250,
-      "Contents": [
-        "Entities/Enemies/enemy1/enemy1_walk_1",
-        "Entities/Enemies/enemy1/enemy1_walk_2"
-      ]
-    },
-    {
-      "ID": "37d7c4a9-1479-4146-88a2-ebc4a1ba53ea",
-      "FrameTime": 250,
-      "Contents": [
-        "Entities/Enemies/enemy1/enemy1_walk_1",
-        "Entities/Enemies/enemy1/enemy1_walk_2"
-      ]
-    },
-    {
-      "ID": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "ID": "569c3061-645f-4691-a1bc-3372462f3ada",
       "FrameTime": 500,
       "Contents": [
         "Entities/Enemies/enemy2/enemy2_walk_1",
@@ -303,23 +287,7 @@
       ]
     },
     {
-      "ID": "292f065c-8f4b-4140-ad13-c38179b8b9fa",
-      "FrameTime": 500,
-      "Contents": [
-        "Entities/Enemies/enemy2/enemy2_walk_1",
-        "Entities/Enemies/enemy2/enemy2_walk_2"
-      ]
-    },
-    {
-      "ID": "366dd4c1-dd3c-419d-85dd-452f2d45597c",
-      "FrameTime": 500,
-      "Contents": [
-        "Entities/Enemies/enemy2/enemy2_walk_1",
-        "Entities/Enemies/enemy2/enemy2_walk_2"
-      ]
-    },
-    {
-      "ID": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "ID": "359cca80-cab0-4fa9-9356-5de15b6031c4",
       "FrameTime": 500,
       "Contents": [
         "Entities/Enemies/enemy3/enemy3_walk_1",
@@ -327,19 +295,19 @@
       ]
     },
     {
-      "ID": "ae76b377-f010-4fcc-8f85-3d13aacd238a",
-      "FrameTime": 500,
+      "ID": "ddbe95fe-59d0-4da9-99f6-9e36ebfd1fb3",
+      "FrameTime": 50,
       "Contents": [
-        "Entities/Enemies/enemy3/enemy3_walk_1",
-        "Entities/Enemies/enemy3/enemy3_walk_2"
+        "Entities/Enemies/enemy4/walk_1",
+        "Entities/Enemies/enemy4/walk_2"
       ]
     },
     {
-      "ID": "b82e41ce-c032-4ecc-ac65-83f1372663b6",
-      "FrameTime": 500,
+      "ID": "6972a7b6-913d-4be9-a912-4875f24f21cd",
+      "FrameTime": 100,
       "Contents": [
-        "Entities/Enemies/enemy3/enemy3_walk_1",
-        "Entities/Enemies/enemy3/enemy3_walk_2"
+        "Entities/Enemies/enemy5/walk_1",
+        "Entities/Enemies/enemy5/walk_2"
       ]
     },
 
@@ -468,58 +436,99 @@
       "OnCreate": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
+
     {
       "TargetType": "Enemy",
       "Target": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
-      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "OnCreate": "7b52472d-65da-4d86-b1e5-097c4cfebd72",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "c0f67fc5-b5a4-4e0c-9607-8623861baf56",
-      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "OnCreate": "7b52472d-65da-4d86-b1e5-097c4cfebd72",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "37d7c4a9-1479-4146-88a2-ebc4a1ba53ea",
-      "OnCreate": "709a9b8d-7a8b-488c-827f-bc7ed266226f",
+      "OnCreate": "7b52472d-65da-4d86-b1e5-097c4cfebd72",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
+
     {
       "TargetType": "Enemy",
       "Target": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
-      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "OnCreate": "569c3061-645f-4691-a1bc-3372462f3ada",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "366dd4c1-dd3c-419d-85dd-452f2d45597c",
-      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "OnCreate": "569c3061-645f-4691-a1bc-3372462f3ada",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "292f065c-8f4b-4140-ad13-c38179b8b9fa",
-      "OnCreate": "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+      "OnCreate": "569c3061-645f-4691-a1bc-3372462f3ada",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
+
     {
       "TargetType": "Enemy",
       "Target": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
-      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "OnCreate": "359cca80-cab0-4fa9-9356-5de15b6031c4",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "ae76b377-f010-4fcc-8f85-3d13aacd238a",
-      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "OnCreate": "359cca80-cab0-4fa9-9356-5de15b6031c4",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
     {
       "TargetType": "Enemy",
       "Target": "b82e41ce-c032-4ecc-ac65-83f1372663b6",
-      "OnCreate": "0511ffe4-1be3-489b-a0c3-066935cd7a07",
+      "OnCreate": "359cca80-cab0-4fa9-9356-5de15b6031c4",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+
+    {
+      "TargetType": "Enemy",
+      "Target": "10fe6761-0602-4f3d-9ef3-71536d16fcd1",
+      "OnCreate": "ddbe95fe-59d0-4da9-99f6-9e36ebfd1fb3",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "a9e9ac0d-e443-42dc-bf3c-cc1778b409f6",
+      "OnCreate": "ddbe95fe-59d0-4da9-99f6-9e36ebfd1fb3",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "54f21020-ee69-4b93-bce5-a8a2257a9573",
+      "OnCreate": "ddbe95fe-59d0-4da9-99f6-9e36ebfd1fb3",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+
+    {
+      "TargetType": "Enemy",
+      "Target": "87dfe24d-655b-4ce1-b3c2-33350e115e0e",
+      "OnCreate": "6972a7b6-913d-4be9-a912-4875f24f21cd",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "f2e4af0a-37fd-42d8-8e71-dd943a3cd6f7",
+      "OnCreate": "6972a7b6-913d-4be9-a912-4875f24f21cd",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "8cf476cd-d950-4f76-9455-afdb77e443e4",
+      "OnCreate": "6972a7b6-913d-4be9-a912-4875f24f21cd",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
 
