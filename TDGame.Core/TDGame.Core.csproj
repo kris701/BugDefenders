@@ -28,12 +28,12 @@
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
-    <None Remove="Resources\Core\Turrets\turret3.json" />
-    <None Remove="Resources\Core\Turrets\turret4.json" />
-    <None Remove="Resources\Core\Turrets\turret5.json" />
-    <None Remove="Resources\Core\Turrets\turret6.json" />
-    <None Remove="Resources\Core\Turrets\turret7.json" />
-    <None Remove="Resources\Core\Turrets\turret8.json" />
+    <None Remove="Resources\Core\Turrets\gatlingturret.json" />
+    <None Remove="Resources\Core\Turrets\missileturret.json" />
+    <None Remove="Resources\Core\Turrets\moneyturret.json" />
+    <None Remove="Resources\Core\Turrets\passivedamageturret.json" />
+    <None Remove="Resources\Core\Turrets\passiverangeturret.json" />
+    <None Remove="Resources\Core\Turrets\slowingturret.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -91,13 +91,13 @@
     <EmbeddedResource Include="Resources\Core\Enemies\enemy3_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\EnemyTypes\type3.json">
+    <EmbeddedResource Include="Resources\Core\EnemyTypes\wind.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\EnemyTypes\type2.json">
+    <EmbeddedResource Include="Resources\Core\EnemyTypes\fire.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\EnemyTypes\type1.json">
+    <EmbeddedResource Include="Resources\Core\EnemyTypes\water.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\boss1_1.json">
@@ -142,18 +142,18 @@
     <EmbeddedResource Include="Resources\Core\Projectiles\rocket.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Turrets\turret2.json">
+    <EmbeddedResource Include="Resources\Core\Turrets\rocketturret.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Turrets\turret1.json">
+    <EmbeddedResource Include="Resources\Core\Turrets\laserturret.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Turrets\turret3.json" />
-    <EmbeddedResource Include="Resources\Core\Turrets\turret4.json" />
-    <EmbeddedResource Include="Resources\Core\Turrets\turret8.json" />
-    <EmbeddedResource Include="Resources\Core\Turrets\turret7.json" />
-    <EmbeddedResource Include="Resources\Core\Turrets\turret6.json" />
-    <EmbeddedResource Include="Resources\Core\Turrets\turret5.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\missileturret.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\gatlingturret.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\passivedamageturret.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\passiverangeturret.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\moneyturret.json" />
+    <EmbeddedResource Include="Resources\Core\Turrets\slowingturret.json" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
