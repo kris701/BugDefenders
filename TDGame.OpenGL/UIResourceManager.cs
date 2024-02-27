@@ -158,6 +158,18 @@ namespace TDGame.OpenGL
             throw new Exception("Animation not found!");
         }
 
+        public bool HasSoundEffects<T>(Guid id) where T : IEntityResource
+        {
+            if (_soundEffectEntities.ContainsKey(id))
+            {
+                var target = _soundEffectEntities[id];
+                foreach (var item in target)
+                    if (item is T)
+                        return true;
+            }
+            return false;
+        }
+
         public T GetSoundEffects<T>(Guid id) where T : IEntityResource
         {
             if (_soundEffectEntities.ContainsKey(id))
@@ -187,12 +199,18 @@ namespace TDGame.OpenGL
             if (!_soundEffects.ContainsKey(id))
                 return Guid.Empty;
             var newEffect = Guid.NewGuid();
-            var test = _soundEffects[id].LoadedContent.Duration;
             _instances.Add(newEffect, _soundEffects[id].LoadedContent.CreateInstance());
             _instances[newEffect].Volume = SoundEffect.MasterVolume;
             _instances[newEffect].IsLooped = true;
             _instances[newEffect].Play();
             return newEffect;
+        }
+
+        public void PlaySoundEffectOnce(Guid id)
+        {
+            if (!_soundEffects.ContainsKey(id))
+                return;
+            _soundEffects[id].LoadedContent.Play();
         }
 
         public void StopSoundEffect(Guid id)
@@ -223,6 +241,7 @@ namespace TDGame.OpenGL
                 _instances[key].Stop();
             _instances.Clear();
             MediaPlayer.Stop();
+            _playing = "";
         }
     }
 }

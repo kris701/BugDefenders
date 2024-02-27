@@ -7,8 +7,12 @@ using TDGame.Core.Resources;
 
 namespace TDGame.Core.Game
 {
+    public delegate void GameEventHandler();
+
     public partial class GameEngine
     {
+        public GameEventHandler? OnPlayerDamaged;
+
         private readonly GameTimer _mainLoopTimer;
 
         public bool GameOver { get; set; }
@@ -72,6 +76,7 @@ namespace TDGame.Core.Game
 
         internal void DamagePlayer()
         {
+            OnPlayerDamaged?.Invoke();
             Context.HP--;
             if (Context.HP <= 0)
             {

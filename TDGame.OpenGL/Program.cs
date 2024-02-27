@@ -8,7 +8,7 @@ namespace TDGame.OpenGL
         [STAThread]
         static void Main()
         {
-            using (var game = new UIEngine((g) => new SplashScreen(g)))
+            using (var game = new UIEngine((g) => new SplashScreenView(g)))
                 game.Run();
         }
     }
