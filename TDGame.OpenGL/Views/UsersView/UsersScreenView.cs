@@ -5,7 +5,7 @@ using System.Linq;
 using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Input;
-using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Engine.Views;
 using TDGame.OpenGL.Settings;
 
 namespace TDGame.OpenGL.Screens.UsersScreen

@@ -8,7 +8,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using static TDGame.OpenGL.Engine.Controls.ButtonControl;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace TDGame.OpenGL.Views.GameView
 {
     public class UpgradePanel : TileControl
     {

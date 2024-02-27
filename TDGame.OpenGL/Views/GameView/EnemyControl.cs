@@ -6,7 +6,7 @@ using TDGame.Core.Game.Models.Maps;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace TDGame.OpenGL.Views.GameView
 {
     public class EnemyControl : AnimatedTileControl
     {

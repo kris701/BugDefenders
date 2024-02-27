@@ -15,9 +15,10 @@ using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.Engine.Input;
-using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Engine.Views;
 using TDGame.OpenGL.Helpers;
 using TDGame.OpenGL.ResourcePacks.EntityResources;
+using TDGame.OpenGL.Views.GameView;
 using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen

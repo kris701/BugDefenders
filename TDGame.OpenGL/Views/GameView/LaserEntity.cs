@@ -1,6 +1,6 @@
 ﻿using TDGame.Core.Game.Models;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace TDGame.OpenGL.Views.GameView
 {
     public class LaserEntity
     {

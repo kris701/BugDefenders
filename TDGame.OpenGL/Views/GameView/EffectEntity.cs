@@ -2,7 +2,7 @@
 using TDGame.Core.Game.Models;
 using TDGame.OpenGL.ResourcePacks;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace TDGame.OpenGL.Views.GameView
 {
     public class EffectEntity : BasePositionModel, IIdentifiable
     {

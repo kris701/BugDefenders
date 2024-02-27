@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Engine.Views;
 
 namespace TDGame.OpenGL.Screens.SplashScreen
 {

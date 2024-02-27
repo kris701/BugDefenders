@@ -10,7 +10,7 @@ using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 using TDGame.OpenGL.ResourcePacks.EntityResources;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace TDGame.OpenGL.Views.GameView
 {
     public class EnemyQueueControl : TileControl
     {

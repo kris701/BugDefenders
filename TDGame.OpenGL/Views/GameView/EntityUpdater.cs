@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using TDGame.Core.Game.Models;
 using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace TDGame.OpenGL.Views.GameView
 {
     public class EntityUpdater<T, U> where U : IControl where T : notnull
     {
@@ -21,7 +21,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         {
             if (_entities.ContainsKey(index))
                 return _entities[index];
-            return default(U);
+            return default;
         }
 
         private readonly Dictionary<T, U> _entities = new Dictionary<T, U>();

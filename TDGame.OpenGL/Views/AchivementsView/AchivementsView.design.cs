@@ -5,7 +5,8 @@ using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Engine.Views;
+using TDGame.OpenGL.Views.AchivementsView;
 
 namespace TDGame.OpenGL.Screens.AchivementsView
 {

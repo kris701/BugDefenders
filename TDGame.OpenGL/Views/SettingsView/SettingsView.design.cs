@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TDGame.OpenGL.Engine;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Screens;
+using TDGame.OpenGL.Engine.Views;
 
 namespace TDGame.OpenGL.Screens.SettingsView
 {

@@ -5,7 +5,7 @@ using TDGame.Core.Users.Models;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Screens.AchivementsView
+namespace TDGame.OpenGL.Views.AchivementsView
 {
     public class AchivementControl : TileControl
     {

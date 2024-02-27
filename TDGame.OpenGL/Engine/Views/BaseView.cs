@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using TDGame.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Engine.Screens
+namespace TDGame.OpenGL.Engine.Views
 {
     public abstract class BaseView : BaseScalable, IView
     {
@@ -74,7 +74,7 @@ namespace TDGame.OpenGL.Engine.Screens
             {
                 case FadeState.FadeIn:
                     fadeTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-                    fadeValue = 255 - (int)((fadeTimer / (double)FadeInTime) * 255);
+                    fadeValue = 255 - (int)(fadeTimer / FadeInTime * 255);
                     if (fadeTimer >= FadeInTime)
                     {
                         fadeTimer = 0;
@@ -84,7 +84,7 @@ namespace TDGame.OpenGL.Engine.Screens
                     break;
                 case FadeState.FadeOut:
                     fadeTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-                    fadeValue = (int)((fadeTimer / (double)FadeOutTime) * 255);
+                    fadeValue = (int)(fadeTimer / FadeOutTime * 255);
                     if (fadeTimer >= FadeOutTime)
                     {
                         if (_switchTo != null)
