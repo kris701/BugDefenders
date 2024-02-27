@@ -1,6 +1,6 @@
-﻿using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
+﻿using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
 
-namespace TDGame.Core.Users.Models.Buffs.BuffEffects
+namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
 {
     public class ProjectileBuffEffect : IBuffEffect
     {

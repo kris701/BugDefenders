@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json.Serialization;
-using TDGame.Core.Resources;
+using BugDefender.Core.Resources;
 
-namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
+namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
     public class LaserTurretDefinition : ITurretModule, IRangeAttribute, ISlowingAttribute, ICooldownAttribute, IDamageAttribute
     {

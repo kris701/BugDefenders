@@ -1,4 +1,4 @@
-﻿namespace TDGame.OpenGL.Engine
+﻿namespace BugDefender.OpenGL.Engine
 {
     public abstract class BaseScalable : IScalable
     {

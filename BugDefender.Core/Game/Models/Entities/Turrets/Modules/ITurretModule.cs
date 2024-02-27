@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TDGame.Core.Game.Models.Entities.Turrets.Modules
+namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "TurretModule")]
     [JsonDerivedType(typeof(AOETurretDefinition), typeDiscriminator: "AOETurret")]

@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Models.Entities.Turrets
+﻿namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
     public class DamageModifier
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using TDGame.Core.Game.Models;
-using TDGame.OpenGL.ResourcePacks;
+using BugDefender.Core.Game.Models;
+using BugDefender.OpenGL.ResourcePacks;
 
-namespace TDGame.OpenGL.Views.GameView
+namespace BugDefender.OpenGL.Views.GameView
 {
     public class EffectEntity : BasePositionModel, IIdentifiable
     {

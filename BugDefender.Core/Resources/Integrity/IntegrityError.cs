@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Resources.Integrity
+﻿namespace BugDefender.Core.Resources.Integrity
 {
     public class IntegrityError
     {

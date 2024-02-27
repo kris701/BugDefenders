@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Views.GameView
+namespace BugDefender.OpenGL.Views.GameView
 {
     public class TurretControl : AnimatedButtonControl
     {

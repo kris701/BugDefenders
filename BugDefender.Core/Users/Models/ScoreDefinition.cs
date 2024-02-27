@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Users.Models
+﻿namespace BugDefender.Core.Users.Models
 {
     public class ScoreDefinition
     {

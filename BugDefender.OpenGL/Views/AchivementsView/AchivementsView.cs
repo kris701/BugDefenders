@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using TDGame.OpenGL.Engine.Input;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.AchivementsView
+namespace BugDefender.OpenGL.Screens.AchivementsView
 {
     public partial class AchivementsView : BaseView
     {

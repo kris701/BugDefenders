@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Resources;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Resources;
 
-namespace TDGame.Core.Game.Models.Entities.Projectiles.Modules
+namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {
     public class DirectProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute, IDamageAttribute
     {

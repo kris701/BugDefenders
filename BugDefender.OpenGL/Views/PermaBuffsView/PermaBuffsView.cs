@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using TDGame.OpenGL.Engine.Input;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.PermaBuffsView
+namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseView
     {

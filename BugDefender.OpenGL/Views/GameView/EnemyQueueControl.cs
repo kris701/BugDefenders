@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.ResourcePacks.EntityResources;
+using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.ResourcePacks.EntityResources;
 
-namespace TDGame.OpenGL.Views.GameView
+namespace BugDefender.OpenGL.Views.GameView
 {
     public class EnemyQueueControl : TileControl
     {

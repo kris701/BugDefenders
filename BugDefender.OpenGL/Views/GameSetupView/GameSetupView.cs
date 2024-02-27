@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Input;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.GameSetupView
+namespace BugDefender.OpenGL.Screens.GameSetupView
 {
     public partial class GameSetupView : BaseView
     {

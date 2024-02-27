@@ -1,11 +1,11 @@
-﻿using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Modules;
-using TDGame.Core.Game.Modules.Enemies;
-using TDGame.Core.Game.Modules.Projectiles;
-using TDGame.Core.Game.Modules.Turrets;
-using TDGame.Core.Resources;
+﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Modules;
+using BugDefender.Core.Game.Modules.Enemies;
+using BugDefender.Core.Game.Modules.Projectiles;
+using BugDefender.Core.Game.Modules.Turrets;
+using BugDefender.Core.Resources;
 
-namespace TDGame.Core.Game
+namespace BugDefender.Core.Game
 {
     public delegate void GameEventHandler();
 

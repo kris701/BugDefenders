@@ -1,6 +1,6 @@
-﻿using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+﻿using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 
-namespace TDGame.Core.Users.Models.Buffs.BuffEffects
+namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
 {
     public class TurretBuffEffect : IBuffEffect
     {

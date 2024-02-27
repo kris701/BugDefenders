@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TDGame.Core.Game.Models.Entities.Enemies.Modules
+namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "EnemyModule")]
     [JsonDerivedType(typeof(WaveEnemyDefinition), typeDiscriminator: "Wave")]

@@ -1,6 +1,6 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 
-namespace TDGame.Core.Game.Models.Entities.Enemies
+namespace BugDefender.Core.Game.Models.Entities.Enemies
 {
     public class EnemyDefinition : IDefinition
     {

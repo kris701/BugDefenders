@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using TDGame.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Engine.Views
+namespace BugDefender.OpenGL.Engine.Views
 {
     public abstract class BaseView : BaseScalable, IView
     {

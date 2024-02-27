@@ -1,16 +1,16 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models.EnemyTypes;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.GameStyles;
-using TDGame.Core.Game.Models.Maps;
-using TDGame.Core.Users.Models;
-using TDGame.Core.Users.Models.Buffs;
+using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Models.EnemyTypes;
+using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Projectiles;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.GameStyles;
+using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Users.Models;
+using BugDefender.Core.Users.Models.Buffs;
 
-namespace TDGame.Core.Resources
+namespace BugDefender.Core.Resources
 {
     public static class ResourceManager
     {

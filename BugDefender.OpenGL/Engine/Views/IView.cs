@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace TDGame.OpenGL.Engine.Views
+namespace BugDefender.OpenGL.Engine.Views
 {
     public enum FadeState { FadeIn, Hold, FadeOut, PostHold }
     public interface IView : IScalable

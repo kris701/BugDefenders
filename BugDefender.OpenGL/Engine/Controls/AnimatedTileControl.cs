@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TDGame.OpenGL.Engine.Controls
+namespace BugDefender.OpenGL.Engine.Controls
 {
     public class AnimatedTileControl : BaseControl
     {

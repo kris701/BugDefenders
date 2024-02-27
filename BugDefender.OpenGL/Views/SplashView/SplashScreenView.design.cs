@@ -1,8 +1,8 @@
 ﻿using System;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.SplashScreen
+namespace BugDefender.OpenGL.Screens.SplashScreen
 {
     public partial class SplashScreenView : BaseView
     {

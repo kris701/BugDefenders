@@ -2,7 +2,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace TDGame.OpenGL.ResourcePacks
+namespace BugDefender.OpenGL.ResourcePacks
 {
     public class SongDefinition
     {

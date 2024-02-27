@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using TDGame.Core.Game.Models.Entities.Upgrades;
-using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using static TDGame.OpenGL.Engine.Controls.ButtonControl;
+using BugDefender.Core.Game.Models.Entities.Upgrades;
+using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
-namespace TDGame.OpenGL.Views.GameView
+namespace BugDefender.OpenGL.Views.GameView
 {
     public class UpgradePanel : TileControl
     {

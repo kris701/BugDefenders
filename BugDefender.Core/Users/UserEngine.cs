@@ -1,12 +1,12 @@
 ﻿using System.Text.Json;
-using TDGame.Core.Resources;
+using BugDefender.Core.Resources;
 #if RELEASE
 using TDGame.Core.Users.Helpers;
 #endif
-using TDGame.Core.Users.Models;
-using TDGame.Core.Users.Models.Buffs.BuffEffects;
+using BugDefender.Core.Users.Models;
+using BugDefender.Core.Users.Models.Buffs.BuffEffects;
 
-namespace TDGame.Core.Users
+namespace BugDefender.Core.Users
 {
     public class UserEngine<T>
     {

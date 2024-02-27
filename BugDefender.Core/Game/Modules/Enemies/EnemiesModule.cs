@@ -1,13 +1,13 @@
-﻿using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Modules.Enemies.SubModules;
-using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
-using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
+﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Models;
+using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Projectiles;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Modules.Enemies.SubModules;
+using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
+using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
-namespace TDGame.Core.Game.Modules.Enemies
+namespace BugDefender.Core.Game.Modules.Enemies
 {
     public delegate void EnemyEventHandler(EnemyInstance enemy);
     public class EnemiesModule : BaseSuperGameModule

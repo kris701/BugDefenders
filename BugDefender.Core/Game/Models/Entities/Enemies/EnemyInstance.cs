@@ -1,7 +1,7 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
-using TDGame.Core.Resources;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
+using BugDefender.Core.Resources;
 
-namespace TDGame.Core.Game.Models.Entities.Enemies
+namespace BugDefender.Core.Game.Models.Entities.Enemies
 {
     public class EnemyInstance : BasePositionModel, IInstance<EnemyDefinition>
     {

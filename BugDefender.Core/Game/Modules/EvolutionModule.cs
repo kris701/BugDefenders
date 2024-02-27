@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Modules
+﻿namespace BugDefender.Core.Game.Modules
 {
     public class EvolutionModule : BaseGameModule
     {

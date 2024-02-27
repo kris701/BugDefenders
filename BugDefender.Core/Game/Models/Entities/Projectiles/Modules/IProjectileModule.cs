@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TDGame.Core.Game.Models.Entities.Projectiles.Modules
+namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "ProjectileModule")]
     [JsonDerivedType(typeof(ExplosiveProjectileDefinition), typeDiscriminator: "Explosive")]

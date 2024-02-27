@@ -3,25 +3,25 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TDGame.Core.Game;
-using TDGame.Core.Game.Models.Entities;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
-using TDGame.Core.Game.Models.Entities.Upgrades;
-using TDGame.Core.Game.Models.Maps;
-using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Input;
-using TDGame.OpenGL.Engine.Views;
-using TDGame.OpenGL.Helpers;
-using TDGame.OpenGL.ResourcePacks.EntityResources;
-using TDGame.OpenGL.Views.GameView;
-using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
+using BugDefender.Core.Game;
+using BugDefender.Core.Game.Models.Entities;
+using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Projectiles;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Game.Models.Entities.Upgrades;
+using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Helpers;
+using BugDefender.OpenGL.ResourcePacks.EntityResources;
+using BugDefender.OpenGL.Views.GameView;
+using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace BugDefender.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseView
     {

@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
-using TDGame.Core.Resources;
+using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Resources;
 
-namespace TDGame.Core.Game.Models.Entities.Turrets
+namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
     public class TurretInstance : BasePositionModel, IInstance<TurretDefinition>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.MainMenu
+namespace BugDefender.OpenGL.Screens.MainMenu
 {
     public partial class MainMenuView : BaseView
     {

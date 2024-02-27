@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Helpers
+﻿namespace BugDefender.Core.Game.Helpers
 {
     public class GameTimer
     {

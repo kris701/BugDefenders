@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Models.Entities.Enemies.Modules
+﻿namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
 {
     public interface ISlowable
     {

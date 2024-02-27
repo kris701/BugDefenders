@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TDGame.Core.Users.Models;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
+using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Views.AchivementsView
+namespace BugDefender.OpenGL.Views.AchivementsView
 {
     public class AchivementControl : TileControl
     {

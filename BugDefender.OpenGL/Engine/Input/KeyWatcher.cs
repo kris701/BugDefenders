@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace TDGame.OpenGL.Engine.Input
+namespace BugDefender.OpenGL.Engine.Input
 {
     public class KeyWatcher
     {

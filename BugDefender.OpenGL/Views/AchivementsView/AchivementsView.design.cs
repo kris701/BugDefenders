@@ -1,14 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Views;
-using TDGame.OpenGL.Views.AchivementsView;
+using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views.AchivementsView;
 
-namespace TDGame.OpenGL.Screens.AchivementsView
+namespace BugDefender.OpenGL.Screens.AchivementsView
 {
     public partial class AchivementsView : BaseView
     {

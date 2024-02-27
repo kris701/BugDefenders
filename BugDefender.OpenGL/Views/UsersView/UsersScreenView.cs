@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Linq;
-using TDGame.Core.Users.Models;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Input;
-using TDGame.OpenGL.Engine.Views;
-using TDGame.OpenGL.Settings;
+using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Settings;
 
-namespace TDGame.OpenGL.Screens.UsersScreen
+namespace BugDefender.OpenGL.Screens.UsersScreen
 {
     public partial class UsersScreenView : BaseView
     {

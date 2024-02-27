@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TDGame.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Engine.Controls
+namespace BugDefender.OpenGL.Engine.Controls
 {
     public class TextboxControl : TileControl
     {

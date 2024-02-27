@@ -1,6 +1,6 @@
-﻿using TDGame.Core.Game.Models;
+﻿using BugDefender.Core.Game.Models;
 
-namespace TDGame.OpenGL.Views.GameView
+namespace BugDefender.OpenGL.Views.GameView
 {
     public class LaserEntity
     {

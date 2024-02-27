@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using TDGame.Core.Game.Models;
+using BugDefender.Core.Game.Models;
 
-namespace TDGame.Core.Resources
+namespace BugDefender.Core.Resources
 {
     public class ResourceDefinition : IDefinition
     {

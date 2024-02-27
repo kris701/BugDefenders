@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TDGame.Core.Game.Models;
+using BugDefender.Core.Game.Models;
 
-namespace TDGame.OpenGL.ResourcePacks
+namespace BugDefender.OpenGL.ResourcePacks
 {
     public class ResourcePackDefinition : IDefinition
     {

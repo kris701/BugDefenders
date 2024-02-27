@@ -1,7 +1,7 @@
 ﻿using System;
-using TDGame.OpenGL.Screens.SplashScreen;
+using BugDefender.OpenGL.Screens.SplashScreen;
 
-namespace TDGame.OpenGL
+namespace BugDefender.OpenGL
 {
     public static class Program
     {

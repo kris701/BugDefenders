@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Models.Entities
+﻿namespace BugDefender.Core.Game.Models.Entities
 {
     public interface IDamageAttribute
     {

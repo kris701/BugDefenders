@@ -1,10 +1,10 @@
 ﻿using System.Drawing;
-using TDGame.Core.Game.Models;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Maps;
+using BugDefender.Core.Game.Models;
+using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Maps;
 
-namespace TDGame.Core.Game.Helpers
+namespace BugDefender.Core.Game.Helpers
 {
     public static class MathHelpers
     {

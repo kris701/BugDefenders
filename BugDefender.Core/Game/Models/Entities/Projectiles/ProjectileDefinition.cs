@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
-using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
+using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
-namespace TDGame.Core.Game.Models.Entities.Projectiles
+namespace BugDefender.Core.Game.Models.Entities.Projectiles
 {
     public class ProjectileDefinition : IDefinition
     {

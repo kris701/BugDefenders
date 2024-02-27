@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TDGame.OpenGL.Engine
+namespace BugDefender.OpenGL.Engine
 {
     public enum Alignment { None, Left, Middle, Right }
     public interface IControl : IScalable

@@ -1,9 +1,9 @@
-﻿using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 
-namespace TDGame.Core.Game.Modules.Turrets.SubModules
+namespace BugDefender.Core.Game.Modules.Turrets.SubModules
 {
     public class PassiveTurretsModule : BaseTurretModule<PassiveTurretDefinition>
     {

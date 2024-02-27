@@ -1,9 +1,9 @@
 ﻿using CommandLine;
 using CommandLine.Text;
-using TDGame.Core.Resources;
-using TDGame.Core.Resources.Integrity;
+using BugDefender.Core.Resources;
+using BugDefender.Core.Resources.Integrity;
 
-namespace TDGame.CLI
+namespace BugDefender.CLI
 {
     internal class Program
     {

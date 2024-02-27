@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.PermaBuffsView
+namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseView
     {

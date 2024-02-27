@@ -2,10 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using TDGame.Core.Game.Models;
-using TDGame.OpenGL.Engine.BackgroundWorkers;
+using BugDefender.Core.Game.Models;
+using BugDefender.OpenGL.Engine.BackgroundWorkers;
 
-namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker
+namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public class NotificationBackroundWorker : BaseBackroundWorker
     {

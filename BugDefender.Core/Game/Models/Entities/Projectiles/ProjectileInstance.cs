@@ -1,9 +1,9 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Resources;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Resources;
 
-namespace TDGame.Core.Game.Models.Entities.Projectiles
+namespace BugDefender.Core.Game.Models.Entities.Projectiles
 {
     public class ProjectileInstance : BasePositionModel, IInstance<ProjectileDefinition>
     {

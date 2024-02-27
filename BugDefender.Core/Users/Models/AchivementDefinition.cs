@@ -1,7 +1,7 @@
-﻿using TDGame.Core.Game.Models;
-using TDGame.Core.Users.Models.UserCriterias;
+﻿using BugDefender.Core.Game.Models;
+using BugDefender.Core.Users.Models.UserCriterias;
 
-namespace TDGame.Core.Users.Models
+namespace BugDefender.Core.Users.Models
 {
     public class AchivementDefinition : IDefinition
     {

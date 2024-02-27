@@ -1,10 +1,10 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Enemies.Modules;
-using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
-using TDGame.Core.Game.Models.Entities.Turrets;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
+using BugDefender.Core.Game.Models.Entities.Projectiles;
+using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using BugDefender.Core.Game.Models.Entities.Turrets;
 
-namespace TDGame.Core.Game.Modules.Projectiles.SubModules
+namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
 {
     public abstract class BaseProjectileModule<T> : BaseGameModule, IGameProjectileModule<T> where T : IProjectileModule
     {

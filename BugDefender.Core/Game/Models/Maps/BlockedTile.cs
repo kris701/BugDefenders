@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Models.Maps
+﻿namespace BugDefender.Core.Game.Models.Maps
 {
     public class BlockedTile
     {

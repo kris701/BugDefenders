@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.UsersScreen
+namespace BugDefender.OpenGL.Screens.UsersScreen
 {
     public partial class UsersScreenView : BaseView
     {

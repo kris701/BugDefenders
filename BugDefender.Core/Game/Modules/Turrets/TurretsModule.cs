@@ -1,9 +1,9 @@
-﻿using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Maps;
-using TDGame.Core.Game.Modules.Turrets.SubModules;
+﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Game.Modules.Turrets.SubModules;
 
-namespace TDGame.Core.Game.Modules.Turrets
+namespace BugDefender.Core.Game.Modules.Turrets
 {
     public delegate void TurretEventHandler(TurretInstance turret);
     public class TurretsModule : BaseSuperGameModule

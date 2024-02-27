@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker
+namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public class NotificationControl : TileControl
     {

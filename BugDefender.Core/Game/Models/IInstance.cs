@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Models
+﻿namespace BugDefender.Core.Game.Models
 {
     public interface IInstance<T> : IIdentifiable where T : IDefinition
     {

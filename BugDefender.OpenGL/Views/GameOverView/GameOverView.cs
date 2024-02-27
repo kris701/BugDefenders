@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
-using TDGame.Core.Users.Models;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.GameOverScreen
+namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
     public partial class GameOverView : BaseView
     {

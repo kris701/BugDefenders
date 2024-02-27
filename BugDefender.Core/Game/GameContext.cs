@@ -1,11 +1,11 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.GameStyles;
-using TDGame.Core.Game.Models.Maps;
-using TDGame.Core.Users.Models;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Projectiles;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.GameStyles;
+using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Users.Models;
 
-namespace TDGame.Core.Game
+namespace BugDefender.Core.Game
 {
     public class GameContext
     {

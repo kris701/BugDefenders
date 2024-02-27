@@ -1,13 +1,13 @@
-﻿using TDGame.Core.Game.Helpers;
-using TDGame.Core.Game.Models.Entities;
-using TDGame.Core.Game.Models.Entities.Enemies;
-using TDGame.Core.Game.Models.Entities.Enemies.Modules;
-using TDGame.Core.Game.Models.Entities.Projectiles;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
-using TDGame.Core.Game.Models.Maps;
+﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Models.Entities;
+using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
+using BugDefender.Core.Game.Models.Entities.Projectiles;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Game.Models.Maps;
 
-namespace TDGame.Core.Game.Modules.Turrets.SubModules
+namespace BugDefender.Core.Game.Modules.Turrets.SubModules
 {
     public class ProjectileTurretsModule : BaseTurretModule<ProjectileTurretDefinition>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TDGame.OpenGL.Settings
+namespace BugDefender.OpenGL.Settings
 {
     public class SettingsDefinition
     {

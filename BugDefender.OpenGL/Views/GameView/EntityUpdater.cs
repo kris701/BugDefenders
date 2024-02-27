@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using TDGame.Core.Game.Models;
-using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.Core.Game.Models;
+using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Views.GameView
+namespace BugDefender.OpenGL.Views.GameView
 {
     public class EntityUpdater<T, U> where U : IControl where T : notnull
     {

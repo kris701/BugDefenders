@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TDGame.OpenGL.Engine.Controls
+namespace BugDefender.OpenGL.Engine.Controls
 {
     public abstract class BaseControl : BaseScalable, IControl
     {

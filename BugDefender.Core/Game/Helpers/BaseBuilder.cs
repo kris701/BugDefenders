@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Text.Json;
-using TDGame.Core.Game.Models;
+using BugDefender.Core.Game.Models;
 
-namespace TDGame.Core.Game.Helpers
+namespace BugDefender.Core.Game.Helpers
 {
     public class BaseBuilder<T> where T : IDefinition
     {

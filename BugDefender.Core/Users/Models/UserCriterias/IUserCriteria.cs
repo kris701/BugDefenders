@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TDGame.Core.Users.Models.UserCriterias
+namespace BugDefender.Core.Users.Models.UserCriterias
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "CriteriaType")]
     [JsonDerivedType(typeof(EnemiesKilledOfTypeCriteria), typeDiscriminator: "KillsOfType")]

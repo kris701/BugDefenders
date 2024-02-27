@@ -7,19 +7,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using TDGame.Core.Resources;
-using TDGame.Core.Resources.Integrity;
-using TDGame.Core.Users;
-using TDGame.Core.Users.Models;
-using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
-using TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
-using TDGame.OpenGL.Engine.BackgroundWorkers;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Views;
-using TDGame.OpenGL.ResourcePacks;
-using TDGame.OpenGL.Settings;
+using BugDefender.Core.Resources;
+using BugDefender.Core.Resources.Integrity;
+using BugDefender.Core.Users;
+using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
+using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
+using BugDefender.OpenGL.Engine.BackgroundWorkers;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.ResourcePacks;
+using BugDefender.OpenGL.Settings;
 
-namespace TDGame.OpenGL
+namespace BugDefender.OpenGL
 {
     public class UIEngine : Game
     {
@@ -122,7 +122,7 @@ namespace TDGame.OpenGL
         {
             base.Initialize();
 
-            Window.Title = "TDGame";
+            Window.Title = "Bug Defender";
 
             UIResources = new UIResourceManager(Content);
             BasicTextures.Initialize(GraphicsDevice);

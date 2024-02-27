@@ -1,9 +1,9 @@
 ﻿using System.Text;
-using TDGame.Core.Game.Models;
-using TDGame.Core.Users.Models.Buffs.BuffEffects;
-using TDGame.Core.Users.Models.UserCriterias;
+using BugDefender.Core.Game.Models;
+using BugDefender.Core.Users.Models.Buffs.BuffEffects;
+using BugDefender.Core.Users.Models.UserCriterias;
 
-namespace TDGame.Core.Users.Models.Buffs
+namespace BugDefender.Core.Users.Models.Buffs
 {
     public class BuffDefinition : IDefinition
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using TDGame.OpenGL.Engine.Views;
-using TDGame.OpenGL.Screens.MainMenu;
+using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Screens.MainMenu;
 
-namespace TDGame.OpenGL.Screens.SplashScreen
+namespace BugDefender.OpenGL.Screens.SplashScreen
 {
     public partial class SplashScreenView : BaseView
     {

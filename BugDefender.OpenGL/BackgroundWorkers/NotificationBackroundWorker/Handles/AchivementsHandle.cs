@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TDGame.Core.Resources;
+using BugDefender.Core.Resources;
 
-namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
+namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
 {
     public class AchivementsHandle : INotificationHandle
     {

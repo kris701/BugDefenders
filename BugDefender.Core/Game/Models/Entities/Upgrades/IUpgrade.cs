@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using TDGame.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Entities.Turrets;
 
-namespace TDGame.Core.Game.Models.Entities.Upgrades
+namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "UpgradeType")]
     [JsonDerivedType(typeof(AOETurretUpgrade), typeDiscriminator: "AOETurret")]

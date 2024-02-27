@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TDGame.OpenGL.ResourcePacks.EntityResources
+namespace BugDefender.OpenGL.ResourcePacks.EntityResources
 {
     public class EffectEntityDefinition : IEntityResource
     {

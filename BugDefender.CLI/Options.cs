@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace TDGame.CLI
+namespace BugDefender.CLI
 {
     public class Options
     {

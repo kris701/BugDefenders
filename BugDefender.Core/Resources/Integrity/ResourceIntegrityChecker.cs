@@ -1,8 +1,8 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies.Modules;
-using TDGame.Core.Game.Models.Entities.Projectiles.Modules;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
+using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 
-namespace TDGame.Core.Resources.Integrity
+namespace BugDefender.Core.Resources.Integrity
 {
     public class ResourceIntegrityChecker
     {

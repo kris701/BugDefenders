@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TDGame.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Helpers;
 
-namespace TDGame.OpenGL.Engine.Controls
+namespace BugDefender.OpenGL.Engine.Controls
 {
     public class BorderControl : TileControl
     {

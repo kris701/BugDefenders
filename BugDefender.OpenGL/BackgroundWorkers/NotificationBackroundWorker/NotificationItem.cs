@@ -1,6 +1,6 @@
-﻿using TDGame.Core.Game.Models;
+﻿using BugDefender.Core.Game.Models;
 
-namespace TDGame.OpenGL.BackgroundWorkers.NotificationBackroundWorker
+namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public class NotificationItem
     {

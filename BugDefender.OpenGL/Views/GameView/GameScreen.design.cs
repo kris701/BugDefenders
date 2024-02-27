@@ -2,16 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
-using TDGame.Core.Resources;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Views;
-using TDGame.OpenGL.Views.GameView;
-using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views.GameView;
+using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
-namespace TDGame.OpenGL.Screens.GameScreen
+namespace BugDefender.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseView
     {

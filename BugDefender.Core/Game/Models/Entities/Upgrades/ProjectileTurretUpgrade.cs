@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using TDGame.Core.Game.Models.Entities.Turrets;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 
-namespace TDGame.Core.Game.Models.Entities.Upgrades
+namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {
     public class ProjectileTurretUpgrade : IUpgrade
     {

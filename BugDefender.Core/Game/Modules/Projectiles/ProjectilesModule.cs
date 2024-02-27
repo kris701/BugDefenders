@@ -1,6 +1,6 @@
-﻿using TDGame.Core.Game.Modules.Projectiles.SubModules;
+﻿using BugDefender.Core.Game.Modules.Projectiles.SubModules;
 
-namespace TDGame.Core.Game.Modules.Projectiles
+namespace BugDefender.Core.Game.Modules.Projectiles
 {
     public class ProjectilesModule : BaseSuperGameModule
     {

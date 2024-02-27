@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using TDGame.Core.Game.Models.Entities.Turrets.Modules;
-using TDGame.Core.Game.Models.Entities.Upgrades;
-using static TDGame.Core.Game.Models.Entities.Enemies.EnemyDefinition;
-namespace TDGame.Core.Game.Models.Entities.Turrets
+using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Game.Models.Entities.Upgrades;
+using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
+namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
     public class TurretDefinition : IDefinition
     {

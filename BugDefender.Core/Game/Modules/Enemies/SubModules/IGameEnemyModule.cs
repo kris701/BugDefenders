@@ -1,6 +1,6 @@
-﻿using TDGame.Core.Game.Models.Entities.Enemies;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies;
 
-namespace TDGame.Core.Game.Modules.Enemies.SubModules
+namespace BugDefender.Core.Game.Modules.Enemies.SubModules
 {
     public interface IGameEnemyModule : IGameModule
     {

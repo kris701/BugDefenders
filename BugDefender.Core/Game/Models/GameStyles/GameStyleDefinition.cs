@@ -1,4 +1,4 @@
-﻿namespace TDGame.Core.Game.Models.GameStyles
+﻿namespace BugDefender.Core.Game.Models.GameStyles
 {
     public class GameStyleDefinition : IDefinition
     {

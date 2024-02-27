@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TDGame.Core.Users.Models;
-using TDGame.OpenGL.Engine;
-using TDGame.OpenGL.Engine.Controls;
-using TDGame.OpenGL.Engine.Helpers;
-using TDGame.OpenGL.Engine.Views;
+using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.Views;
 
-namespace TDGame.OpenGL.Screens.HighScoresView
+namespace BugDefender.OpenGL.Screens.HighScoresView
 {
     public partial class HighScoresView : BaseView
     {

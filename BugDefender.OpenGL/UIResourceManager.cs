@@ -5,10 +5,10 @@ using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using TDGame.Core.Game.Helpers;
-using TDGame.OpenGL.ResourcePacks;
+using BugDefender.Core.Game.Helpers;
+using BugDefender.OpenGL.ResourcePacks;
 
-namespace TDGame.OpenGL
+namespace BugDefender.OpenGL
 {
     public class UIResourceManager
     {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace TDGame.OpenGL.Engine.Helpers
+namespace BugDefender.OpenGL.Engine.Helpers
 {
     public static class BasicTextures
     {

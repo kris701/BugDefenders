@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace TDGame.OpenGL.Engine.BackgroundWorkers
+namespace BugDefender.OpenGL.Engine.BackgroundWorkers
 {
     public abstract class BaseBackroundWorker : BaseScalable, IBackgroundWorker
     {

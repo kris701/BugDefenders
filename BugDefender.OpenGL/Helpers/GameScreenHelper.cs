@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TDGame.OpenGL.Helpers
+namespace BugDefender.OpenGL.Helpers
 {
     public static class GameScreenHelper
     {

@@ -1,7 +1,7 @@
 ﻿using System.IO.Compression;
 using System.Text;
 
-namespace TDGame.Core.Users.Helpers
+namespace BugDefender.Core.Users.Helpers
 {
     // https://stackoverflow.com/a/17993002
     public static class StringCompressor
