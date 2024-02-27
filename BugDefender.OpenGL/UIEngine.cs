@@ -18,6 +18,7 @@ using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks;
 using BugDefender.OpenGL.Settings;
+using System.Reflection;
 
 namespace BugDefender.OpenGL
 {
@@ -83,6 +84,7 @@ namespace BugDefender.OpenGL
             _notificationWorker = new NotificationBackroundWorker(this);
             _notificationWorker.Handles.Add(new AchivementsHandle(this));
             _notificationWorker.Handles.Add(new BuffsHandle(this));
+            _notificationWorker.Handles.Add(new GameUpdateHandle(this));
             BackroundWorkers = new List<IBackgroundWorker>() {
                 _notificationWorker
             };
@@ -122,7 +124,9 @@ namespace BugDefender.OpenGL
         {
             base.Initialize();
 
-            Window.Title = "Bug Defender";
+            var thisVersion = Assembly.GetEntryAssembly()?.GetName().Version!;
+            var thisVersionStr = $"v{thisVersion.Major}.{thisVersion.Minor}.{thisVersion.Build}";
+            Window.Title = $"Bug Defender {thisVersionStr}";
 
             UIResources = new UIResourceManager(Content);
             BasicTextures.Initialize(GraphicsDevice);
