@@ -112,7 +112,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             AddControl(1, new LabelControl(Parent)
             {
-                Text = "TDGame",
+                Text = "Bug Defender",
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 X = xOffset,

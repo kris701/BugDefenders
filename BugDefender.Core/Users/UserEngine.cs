@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using BugDefender.Core.Resources;
 #if RELEASE
-using TDGame.Core.Users.Helpers;
+using BugDefender.Core.Users.Helpers;
 #endif
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Buffs.BuffEffects;

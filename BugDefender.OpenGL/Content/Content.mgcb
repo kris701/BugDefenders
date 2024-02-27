@@ -818,12 +818,6 @@
 /processorParam:Quality=Best
 /build:Entities/Turrets/rocketturret/explode5.wav
 
-#begin Entities/Turrets/rocketturret/explode5.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Entities/Turrets/rocketturret/explode5.wav
-
 #begin Entities/Turrets/rocketturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor

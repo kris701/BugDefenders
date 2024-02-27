@@ -31,15 +31,15 @@ jobs:
         run: dotnet restore
 
       - name: Publish Game (Windows)
-        run: dotnet publish TDGame.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
+          path: BugDefender.OpenGL/bin/Release/net7.0/win-x64/publish/
       - name: Zip artifact
         run: |
-             cd ./TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
+             cd ./BugDefender.OpenGL/bin/Release/net7.0/win-x64/publish/
              zip windows.zip ./* -r
              mv windows.zip ../../../../../../windows.zip
              cd ../../../../../../
@@ -50,15 +50,15 @@ jobs:
           path: windows.zip
 
       - name: Publish Toolkit (Windows)
-        run: dotnet publish TDGame.CLI -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.CLI -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-toolkit-build
-          path: TDGame.CLI/bin/Release/net7.0/win-x64/publish/
+          path: BugDefender.CLI/bin/Release/net7.0/win-x64/publish/
       - name: Zip artifact
         run: |
-             cd ./TDGame.CLI/bin/Release/net7.0/win-x64/publish/
+             cd ./BugDefender.CLI/bin/Release/net7.0/win-x64/publish/
              zip windows-toolkit.zip ./* -r
              mv windows-toolkit.zip ../../../../../../windows-toolkit.zip
              cd ../../../../../../
@@ -80,15 +80,15 @@ jobs:
         run: dotnet restore
 
       - name: Publish Game (Linux)
-        run: dotnet publish TDGame.OpenGL -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.OpenGL -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux-build
-          path: TDGame.OpenGL/bin/Release/net7.0/linux-x64/publish/
+          path: BugDefender.OpenGL/bin/Release/net7.0/linux-x64/publish/
       - name: Zip artifact
         run: |
-             cd ./TDGame.OpenGL/bin/Release/net7.0/linux-x64/publish/
+             cd ./BugDefender.OpenGL/bin/Release/net7.0/linux-x64/publish/
              zip linux.zip ./* -r
              mv linux.zip ../../../../../../linux.zip
              cd ../../../../../../
@@ -99,15 +99,15 @@ jobs:
           path: linux.zip
 
       - name: Publish Toolkit (Linux)
-        run: dotnet publish TDGame.CLI -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.CLI -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux-toolkit-build
-          path: TDGame.CLI/bin/Release/net7.0/linux-x64/publish/
+          path: BugDefender.CLI/bin/Release/net7.0/linux-x64/publish/
       - name: Zip artifact
         run: |
-             cd ./TDGame.CLI/bin/Release/net7.0/linux-x64/publish/
+             cd ./BugDefender.CLI/bin/Release/net7.0/linux-x64/publish/
              zip linux-toolkit.zip ./* -r
              mv linux-toolkit.zip ../../../../../../linux-toolkit.zip
              cd ../../../../../../
@@ -132,18 +132,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: windows-build
-          path: TDGame.OpenGL/bin/Release/net7.0/win-x64/publish/
+          path: BugDefender.OpenGL/bin/Release/net7.0/win-x64/publish/
 
       - name: Compile windows installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
-          path: TDGame.OpenGL/inno.iss
+          path: BugDefender.OpenGL/inno.iss
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
-          path: TDGame.OpenGL/Output/*.exe
+          path: BugDefender.OpenGL/Output/*.exe
             
   PublishAll:
     needs: [BuildTest, WindowsBuild, LinuxBuild, CreateWindowsInstaller]
@@ -180,7 +180,7 @@ jobs:
         id: get-version
         uses: kzrnm/get-net-sdk-project-versions-action@v1
         with:
-          proj-path: TDGame.OpenGL/TDGame.OpenGL.csproj
+          proj-path: BugDefender.OpenGL/BugDefender.OpenGL.csproj
 
       - name: Generate tag
         continue-on-error: true
