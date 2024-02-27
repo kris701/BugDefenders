@@ -6,7 +6,7 @@ using BugDefender.OpenGL.Engine.Helpers;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
-    public class NotificationControl : TileControl
+    public class NotificationControl : ButtonControl
     {
         public NotificationItem Item { get; set; }
 
@@ -20,6 +20,9 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             Height = 120;
             _iconTile = new TileControl(Parent);
             _descriptionTextbox = new TextboxControl(Parent);
+            Clicked += item.Clicked;
+            FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent);
+            FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent);
         }
 
         public override void Initialize()

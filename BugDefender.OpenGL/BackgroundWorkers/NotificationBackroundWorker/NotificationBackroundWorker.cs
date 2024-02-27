@@ -10,7 +10,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
     public class NotificationBackroundWorker : BaseBackroundWorker
     {
         public override Guid ID { get; } = new Guid("50249fa6-d417-435e-be97-910940531f13");
-        public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(2);
+        public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(4);
         public float Speed { get; set; } = 3;
         public List<INotificationHandle> Handles { get; set; } = new List<INotificationHandle>();
 
@@ -20,8 +20,8 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         private float _currentY = 1000f;
         private readonly List<NotificationItem> _notificationStack = new List<NotificationItem>();
         private NotificationControl? _notification;
-        private readonly TimeSpan _waitTarget = TimeSpan.FromSeconds(1);
-        private TimeSpan _waitingFor = TimeSpan.FromSeconds(1);
+        private readonly TimeSpan _waitTarget = TimeSpan.FromSeconds(3);
+        private TimeSpan _waitingFor = TimeSpan.FromSeconds(0);
 
         public NotificationBackroundWorker(UIEngine parent) : base(parent)
         {
@@ -94,31 +94,16 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             }
         }
 
+        public void Skip()
+        {
+            if (_notification != null)
+                _waitingFor = TimeSpan.Zero;
+        }
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (_notification != null)
                 _notification.Draw(gameTime, spriteBatch);
-        }
-
-        private class ManualDefinition : IDefinition
-        {
-            public Guid ID { get; set; }
-            public string Name { get; set; }
-            public string Description { get; set; }
-
-            public ManualDefinition(string name, string description)
-            {
-                ID = Guid.NewGuid();
-                Name = name;
-                Description = description;
-            }
-
-            public ManualDefinition(Guid iD, string name, string description)
-            {
-                ID = iD;
-                Name = name;
-                Description = description;
-            }
         }
     }
 }

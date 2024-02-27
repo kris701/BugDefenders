@@ -46,7 +46,7 @@ namespace BugDefender.OpenGL.Engine.Controls
 
         public override void Update(GameTime gameTime)
         {
-            if (IsEnabled && IsVisible && Parent.IsActive)
+            if (IsEnabled && IsVisible && Parent.IsActive && Clicked != null)
             {
                 var mouseState = Mouse.GetState();
                 if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&

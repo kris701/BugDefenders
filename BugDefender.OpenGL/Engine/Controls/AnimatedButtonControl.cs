@@ -123,7 +123,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                 _textChanged = false;
                 UpdateTextPositions();
             }
-            if (IsEnabled)
+            if (IsEnabled && IsVisible && Parent.IsActive && Clicked != null)
             {
                 var mouseState = Mouse.GetState();
                 if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&

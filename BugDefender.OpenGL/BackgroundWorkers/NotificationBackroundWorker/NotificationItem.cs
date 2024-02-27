@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models;
+using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
@@ -7,12 +8,21 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         public string PreFix { get; set; }
         public IDefinition Definition { get; set; }
         public bool HasImage { get; set; }
+        public ClickedHandler? Clicked { get; set; }
 
         public NotificationItem(string preFix, IDefinition definition, bool hasImage)
         {
             PreFix = preFix;
             Definition = definition;
             HasImage = hasImage;
+        }
+
+        public NotificationItem(string preFix, IDefinition definition, bool hasImage, ClickedHandler clicked)
+        {
+            PreFix = preFix;
+            Definition = definition;
+            HasImage = hasImage;
+            Clicked = clicked;
         }
     }
 }

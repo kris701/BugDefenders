@@ -1,8 +1,10 @@
-﻿namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
+﻿using BugDefender.OpenGL.Engine.BackgroundWorkers;
+
+namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public interface INotificationHandle
     {
-        public UIEngine Parent { get; }
+        public NotificationBackroundWorker Parent { get; }
         public NotificationItem? GetNewNotification();
     }
 }
