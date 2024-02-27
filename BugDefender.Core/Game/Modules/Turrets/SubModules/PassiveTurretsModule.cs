@@ -21,13 +21,12 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
             Game.TurretsModule.OnTurretUpgraded += TurretUpgraded;
         }
 
-        private void UpdateEffectedList(bool unApply = true, bool apply = true)
+        private void UpdateEffectedList(PassiveTurretDefinition? unApply = null, PassiveTurretDefinition? apply = null)
         {
-            if (unApply)
-                foreach (var key in _effectedTurrets.Keys)
-                    if (key.TurretInfo is PassiveTurretDefinition def)
-                        foreach (var effected in _effectedTurrets[key])
-                            UnApplyEffect(def, effected);
+            foreach (var key in _effectedTurrets.Keys)
+                if (key.TurretInfo is PassiveTurretDefinition def && unApply != def)
+                    foreach (var effected in _effectedTurrets[key])
+                        UnApplyEffect(def, effected);
 
             _effectedTurrets.Clear();
             foreach (var turret in Context.Turrets)
@@ -46,11 +45,10 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
                 }
             }
 
-            if (apply)
-                foreach (var key in _effectedTurrets.Keys)
-                    if (key.TurretInfo is PassiveTurretDefinition def)
-                        foreach (var effected in _effectedTurrets[key])
-                            ApplyEffect(def, effected);
+            foreach (var key in _effectedTurrets.Keys)
+                if (key.TurretInfo is PassiveTurretDefinition def && apply != def)
+                    foreach (var effected in _effectedTurrets[key])
+                        ApplyEffect(def, effected);
         }
 
         private void TurretAdded(TurretInstance turret)
@@ -82,7 +80,7 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
         private void TurretUpgraded(TurretInstance turret)
         {
             if (turret.TurretInfo is PassiveTurretDefinition def)
-                UpdateEffectedList(false);
+                UpdateEffectedList(def);
         }
 
         private void UnApplyEffect(PassiveTurretDefinition passive, TurretInstance turret)

@@ -57,6 +57,11 @@ namespace BugDefender.Core.Game
 
             foreach (var module in GameModules)
                 module.Initialize();
+
+#if DEBUG
+            Context.Money = 9999999;
+            Context.Wave = 99999;
+#endif
         }
 
         public void Update(TimeSpan passed)

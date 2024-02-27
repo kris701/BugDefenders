@@ -6,6 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);DONTCOMPRESSUSERDATA</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);DONTCOMPRESSUSERDATA</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Resources\Core\Achivements\totalkills_1.json" />
     <None Remove="Resources\Core\Achivements\totalkills_2.json" />
