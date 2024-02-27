@@ -1,7 +1,7 @@
 ﻿{
   "id": "7dd06467-3347-4e5d-8ee9-b5f42d41082e",
   "Name": "Laser Turret Upgrade",
-  "description": "Permanently gives the laser turret 2% more damage",
+  "description": "Permanently gives the laser turret 2% more range",
   "Requires": "01c1b070-605a-4cf2-9e5c-9ae5b7f7159f",
   "Criteria": [
     {
@@ -15,7 +15,7 @@
     "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
     "Module": {
       "TurretModule": "LaserTurret",
-      "Range": 200,
+      "Range": 202,
       "Damage": 10.2,
       "Cooldown": 10,
       "SlowingFactor": 1,
