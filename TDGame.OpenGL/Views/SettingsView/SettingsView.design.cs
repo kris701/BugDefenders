@@ -25,10 +25,15 @@ namespace TDGame.OpenGL.Screens.SettingsView
         private readonly List<float> _musicOptions = new List<float>()
         {
             0,
+            0.1f,
             0.2f,
+            0.3f,
             0.4f,
+            0.5f,
             0.6f,
+            0.7f,
             0.8f,
+            0.9f,
             1f
         };
         private readonly List<ButtonControl> _musicButtons = new List<ButtonControl>();
@@ -36,11 +41,15 @@ namespace TDGame.OpenGL.Screens.SettingsView
         private readonly List<float> _soundEffectOptions = new List<float>()
         {
             0,
-            0.05f,
             0.1f,
-            0.15f,
-            0.20f,
-            0.50f,
+            0.2f,
+            0.3f,
+            0.4f,
+            0.5f,
+            0.6f,
+            0.7f,
+            0.8f,
+            0.9f,
             1f
         };
         private readonly List<ButtonControl> _soundEffectsButtons = new List<ButtonControl>();

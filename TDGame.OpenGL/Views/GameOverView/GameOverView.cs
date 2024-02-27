@@ -42,6 +42,8 @@ namespace TDGame.OpenGL.Screens.GameOverScreen
             Parent.UserManager.SaveUser(Parent.CurrentUser);
 
             Initialize();
+
+            Parent.UIResources.PlaySong(ID);
         }
     }
 }

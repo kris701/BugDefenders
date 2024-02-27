@@ -375,7 +375,15 @@
   "Songs": [
     {
       "ID": "9c52281c-3202-4b22-bfc9-dfc187fdbeb3",
-      "Content": "Views/MainMenuView/song"
+      "Content": "Views/MainMenuView/mainmenu"
+    },
+    {
+      "ID": "2222e50b-cfcd-429b-9a21-3a3b77b4d87b",
+      "Content": "Views/GameView/maingame"
+    },
+    {
+      "ID": "f2320690-8061-4f95-8373-972825f97d83",
+      "Content": "Views/GameOverView/gameover"
     }
   ],
   "SoundEffects": [

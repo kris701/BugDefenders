@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using TDGame.OpenGL.Engine.Views;
+using TDGame.OpenGL.Screens.MainMenu;
 
 namespace TDGame.OpenGL.Screens.SplashScreen
 {
@@ -16,6 +17,7 @@ namespace TDGame.OpenGL.Screens.SplashScreen
             FadeOutTime = 1000;
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
+            Parent.UIResources.PlaySong(MainMenuView._id);
         }
 
         public override void OnUpdate(GameTime gameTime)

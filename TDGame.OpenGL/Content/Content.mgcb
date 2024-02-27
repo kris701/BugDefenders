@@ -992,6 +992,12 @@
 /processorParam:TextureFormat=Color
 /build:Views/GameOverView/background.png
 
+#begin Views/GameOverView/gameover.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Views/GameOverView/gameover.mp3
+
 #begin Views/GameSetupView/background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1051,6 +1057,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Views/GameView/controlsField.png
+
+#begin Views/GameView/maingame.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Views/GameView/maingame.mp3
 
 #begin Views/GameView/nextEnemyField.png
 /importer:TextureImporter
@@ -1124,11 +1136,11 @@
 /processorParam:TextureFormat=Color
 /build:Views/MainMenuView/background.png
 
-#begin Views/MainMenuView/song.mp3
+#begin Views/MainMenuView/mainmenu.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Views/MainMenuView/song.mp3
+/build:Views/MainMenuView/mainmenu.mp3
 
 #begin Views/PermaBuffsView/background.png
 /importer:TextureImporter

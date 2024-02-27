@@ -187,7 +187,6 @@ namespace TDGame.OpenGL
             if (!_soundEffects.ContainsKey(id))
                 return Guid.Empty;
             var newEffect = Guid.NewGuid();
-            var test = _soundEffects[id].LoadedContent.Duration;
             _instances.Add(newEffect, _soundEffects[id].LoadedContent.CreateInstance());
             _instances[newEffect].Volume = SoundEffect.MasterVolume;
             _instances[newEffect].IsLooped = true;
@@ -223,6 +222,7 @@ namespace TDGame.OpenGL
                 _instances[key].Stop();
             _instances.Clear();
             MediaPlayer.Stop();
+            _playing = "";
         }
     }
 }

@@ -81,6 +81,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             });
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, UnselectTurret);
             Initialize();
+            Parent.UIResources.PlaySong(ID);
 
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
