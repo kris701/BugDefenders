@@ -82,9 +82,9 @@ namespace BugDefender.OpenGL
             }
 
             _notificationWorker = new NotificationBackroundWorker(this);
-            _notificationWorker.Handles.Add(new AchivementsHandle(this));
-            _notificationWorker.Handles.Add(new BuffsHandle(this));
-            _notificationWorker.Handles.Add(new GameUpdateHandle(this));
+            _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
+            _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
+            _notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));
             BackroundWorkers = new List<IBackgroundWorker>() {
                 _notificationWorker
             };
