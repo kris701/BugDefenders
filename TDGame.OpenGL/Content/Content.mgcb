@@ -194,6 +194,30 @@
 /processorParam:TextureFormat=Compressed
 /build:DefaultFonts/DefaultFont8.spritefont
 
+#begin Entities/Effects/BossSplat/splat_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Effects/BossSplat/splat_1.png
+
+#begin Entities/Effects/BossSplat/splat_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Effects/BossSplat/splat_2.png
+
 #begin Entities/Effects/EnemySplat/splat_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
