@@ -1,0 +1,31 @@
+﻿{
+  "id": "1db411e4-8599-464b-923c-0e23bc031435",
+  "Name": "Bullet",
+  "Description": "asfdasfasf",
+  "Size": 5,
+  "ModuleInfo": {
+    "ProjectileModule": "Direct",
+    "Speed": 15,
+    "Damage": 10,
+    "Range": 600,
+    "Acceleration": 1,
+    "SlowingFactor": 0.8,
+    "SlowingDuration": 250,
+    "IsGuided": false,
+    "DamageModifiers": [
+      {
+        "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+        "Modifier": 2
+      },
+      {
+        "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
+        "Modifier": 0.5
+      },
+      {
+        "EnemyType": "5102185e-16e4-4c2b-8311-3c1548d344d0",
+        "Modifier": 0.5
+      }
+    ]
+  },
+  "CanDamage": [ 1 ]
+}

@@ -1,0 +1,69 @@
+﻿{
+  "id": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+  "Name": "Gatling Turret",
+  "Description": "Shoots unguided bullets at a fast rate. This turret also slightly slows enemies.",
+  "Size": 50,
+  "Cost": 150,
+  "ModuleInfo": {
+    "TurretModule": "ProjectileTurret",
+    "Range": 200,
+    "Cooldown": 100,
+    "ProjectileID": "1db411e4-8599-464b-923c-0e23bc031435",
+    "IsTrailing": true
+  },
+  "CanDamage": [ 1 ],
+  "AvailableAtWave": 0,
+  "Upgrades": [
+    {
+      "UpgradeType": "ProjectileTurret",
+      "id": "a02a9478-1de6-4dfe-9ad9-8d22ae21b104",
+      "requires": null,
+      "Name": "Firing Rate",
+      "Description": "Increases the firing rate of the turret.",
+      "Cost": 500,
+      "RangeModifier": 1.2,
+      "CooldownModifier": 0.5,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
+    },
+    {
+      "UpgradeType": "DirectProjectile",
+      "id": "5b5630c8-9343-4c1a-9feb-507cf25aa79a",
+      "requires": "a02a9478-1de6-4dfe-9ad9-8d22ae21b104",
+      "Name": "Bullet Damage",
+      "Description": "Makes the turrets bullets do more damage.",
+      "Cost": 500,
+      "DamageModifier": 2,
+      "SplashRangeModifier": 1,
+      "TriggerRangeModifier": 1,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
+    },
+    {
+      "UpgradeType": "DirectProjectile",
+      "id": "69f5fbdb-f17a-4429-8742-700b30a7aea0",
+      "requires": "5b5630c8-9343-4c1a-9feb-507cf25aa79a",
+      "Name": "Bullet Damage",
+      "Description": "Makes the turrets bullets do more damage.",
+      "Cost": 500,
+      "DamageModifier": 2,
+      "SplashRangeModifier": 1,
+      "TriggerRangeModifier": 1,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 1
+    },
+    {
+      "UpgradeType": "DirectProjectile",
+      "id": "ce0b43d1-bade-473f-9c16-c68c921dd1f5",
+      "requires": "5b5630c8-9343-4c1a-9feb-507cf25aa79a",
+      "Name": "Bullet Slowing Duration",
+      "Description": "Makes the turrets bullets slow enemies for longer.",
+      "Cost": 500,
+      "DamageModifier": 1,
+      "SplashRangeModifier": 1,
+      "TriggerRangeModifier": 1,
+      "SlowingFactorModifier": 1,
+      "SlowingDurationModifier": 2
+    }
+  ]
+}

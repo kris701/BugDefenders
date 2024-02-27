@@ -1,11 +1,12 @@
-# TDGame
+# Bug Defender
 
 ## TODO List
-- [ ] Come up with an actual name for the game
 - [ ] Setup a good base game
 - [ ] Cheats
 
 ## Done
+- [X] Add MonoGame and Inno Setup licenses
+- [X] Come up with an actual name for the game
 - [X] AOE turret effects
 - [X] Audio system 
 - [X] Encrypt user data

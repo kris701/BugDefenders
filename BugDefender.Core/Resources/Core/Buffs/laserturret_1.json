@@ -1,0 +1,31 @@
+﻿{
+  "id": "01c1b070-605a-4cf2-9e5c-9ae5b7f7159f",
+  "Name": "Laser Turret Upgrade",
+  "description": "Permanently gives the laser turret 2% more damage",
+  "Requires": null,
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+      "Quantity": 1000
+    }
+  ],
+  "Effect": {
+    "BuffType": "Turret",
+    "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+    "Module": {
+      "TurretModule": "LaserTurret",
+      "Range": 200,
+      "Damage": 10.2,
+      "Cooldown": 10,
+      "SlowingFactor": 1,
+      "SlowingDuration": 0,
+      "DamageModifiers": [
+        {
+          "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+          "Modifier": 2
+        }
+      ]
+    }
+  }
+}

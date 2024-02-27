@@ -1,0 +1,17 @@
+﻿{
+  "id": "3c9ec15c-3a79-45f3-a492-75ac0bfc3482",
+  "Name": "Fire Worm Cplony",
+  "description": "",
+  "Health": 1000,
+  "Size": 30,
+  "Reward": 20,
+  "ModuleInfo": {
+    "EnemyModule": "Wave",
+    "Speed": 1,
+    "WaveSize": 6,
+    "SpawnDelay": 1000
+  },
+  "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+  "TerrainType": 1,
+  "AvailableAtWave": 50
+}
