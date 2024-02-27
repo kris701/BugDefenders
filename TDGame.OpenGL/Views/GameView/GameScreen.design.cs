@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TDGame.Core.Game.Models.Entities.Turrets;
+using TDGame.Core.Game.Models.Entities.Turrets.Modules;
 using TDGame.Core.Resources;
 using TDGame.OpenGL.Engine.Controls;
 using TDGame.OpenGL.Engine.Helpers;
@@ -194,7 +195,11 @@ namespace TDGame.OpenGL.Screens.GameScreen
             };
             AddControl(1, _autoRunButton);
 
-            _sendWave = new ButtonControl(Parent, clicked: (s) => { _game.EnemiesModule.QueueEnemies(); })
+            _sendWave = new ButtonControl(Parent, clicked: (s) => { 
+                _game.EnemiesModule.QueueEnemies();
+                if (_game.Context.GameStyle.MoneyPrWave > 0 || _game.Context.Turrets.Any(x => x.TurretInfo is InvestmentTurretDefinition))
+                    Parent.UIResources.PlaySoundEffectOnce(new Guid("e6908fa1-85b3-4f18-9bf0-cc4fa97a29c1"));
+            })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),

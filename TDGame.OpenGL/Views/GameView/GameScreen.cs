@@ -58,6 +58,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
             _game = new GameEngine(mapID, gameStyleID);
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
+            _game.OnPlayerDamaged += () => {
+                Parent.UIResources.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
+            };
 
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(7, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
@@ -137,6 +140,9 @@ namespace TDGame.OpenGL.Screens.GameScreen
                 var entityDef = Parent.UIResources.GetAnimation<ProjectileEntityDefinition>(projectile.DefinitionID);
                 if (entityDef.OnDestroyed != Guid.Empty)
                 {
+                    var soundDef = Parent.UIResources.GetSoundEffects<ProjectileEntityDefinition>(projectile.DefinitionID);
+                    if (soundDef.OnDestroyed != Guid.Empty)
+                        Parent.UIResources.PlaySoundEffectOnce(soundDef.OnDestroyed);
                     var effect = Parent.UIResources.GetTextureSet(entityDef.OnDestroyed);
                     _effects.Add(new EffectEntity(entityDef.OnDestroyed, TimeSpan.FromMilliseconds(250), effect)
                     {
@@ -225,6 +231,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
             {
                 if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID))
                 {
+                    Parent.UIResources.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
                     _game.TurretsModule.UpgradeTurret(_selectedTurret, upg.ID);
                     var control = _turretUpdater.GetItem(_selectedTurret);
                     if (control != null)
@@ -373,6 +380,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewProjectileControl(ProjectileInstance entity)
         {
+            if (Parent.UIResources.HasSoundEffects<EffectEntityDefinition>(entity.DefinitionID))
+            {
+                var entityDef = Parent.UIResources.GetSoundEffects<ProjectileEntityDefinition>(entity.DefinitionID);
+                if (entityDef.OnCreate != Guid.Empty)
+                    Parent.UIResources.PlaySoundEffectOnce(entityDef.OnCreate);
+            }
             var animation = Parent.UIResources.GetAnimation<ProjectileEntityDefinition>(entity.DefinitionID).OnCreate;
             var textureSet = Parent.UIResources.GetTextureSet(animation);
             return new AnimatedTileControl(Parent)
@@ -390,6 +403,12 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl CreateNewEffect(EffectEntity entity)
         {
+            if (Parent.UIResources.HasSoundEffects<EffectEntityDefinition>(entity.ID))
+            {
+                var entityDef = Parent.UIResources.GetSoundEffects<EffectEntityDefinition>(entity.ID);
+                if (entityDef.OnCreate != Guid.Empty)
+                    Parent.UIResources.PlaySoundEffectOnce(entityDef.OnCreate);
+            }
             var newTile = new AnimatedTileControl(Parent)
             {
                 X = _gameArea.X + entity.X,

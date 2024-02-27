@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Controls
@@ -10,6 +11,7 @@ namespace TDGame.OpenGL.Engine.Controls
         public delegate void ClickedHandler(ButtonControl parent);
         public event ClickedHandler? Clicked;
 
+        public Guid ClickSound { get; set; } = new Guid("2e3a4bbb-c0e5-4617-aee1-070e02e4b8ea");
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
         public bool IsEnabled { get; set; } = true;
@@ -38,8 +40,8 @@ namespace TDGame.OpenGL.Engine.Controls
         public void DoClick()
         {
             _holding = true;
-            if (Clicked != null)
-                Clicked.Invoke(this);
+            Parent.UIResources.PlaySoundEffectOnce(ClickSound);
+            Clicked?.Invoke(this);
         }
 
         public override void Update(GameTime gameTime)
@@ -54,6 +56,7 @@ namespace TDGame.OpenGL.Engine.Controls
                         _holding = true;
                     else if (_holding && mouseState.LeftButton == ButtonState.Released)
                     {
+                        Parent.UIResources.PlaySoundEffectOnce(ClickSound);
                         Clicked?.Invoke(this);
                         _holding = false;
                     }

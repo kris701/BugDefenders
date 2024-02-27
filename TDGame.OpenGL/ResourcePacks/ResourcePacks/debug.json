@@ -388,12 +388,48 @@
   ],
   "SoundEffects": [
     {
+      "ID": "2e3a4bbb-c0e5-4617-aee1-070e02e4b8ea",
+      "Content": "Common/click"
+    },
+    {
+      "ID": "130c17d8-7cab-4fc0-8256-18092609f8d5",
+      "Content": "Views/GameView/hitHurt"
+    },
+    {
+      "ID": "aebfa031-8a3c-46c1-82dd-13a39d3caf36",
+      "Content": "Views/GameView/powerUp"
+    },
+    {
+      "ID": "e6908fa1-85b3-4f18-9bf0-cc4fa97a29c1",
+      "Content": "Views/GameView/pickupCoin"
+    },
+    {
       "ID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
       "Content": "Entities/Turrets/gatlingturret/shoot"
     },
     {
       "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
       "Content": "Entities/Turrets/laserturret/shoot"
+    },
+    {
+      "ID": "f99911ba-af48-43cc-ab20-15013a62de87",
+      "Content": "Entities/Turrets/slowingturret/shoot"
+    },
+    {
+      "ID": "4c8f7401-7dbb-4c3a-8107-fafe72bf18ee",
+      "Content": "Entities/Turrets/missileturret/shoot"
+    },
+    {
+      "ID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+      "Content": "Entities/Turrets/missileturret/explode5"
+    },
+    {
+      "ID": "7c7149b8-16ed-4480-83da-5236f6d92a5d",
+      "Content": "Entities/Turrets/rocketturret/shoot"
+    },
+    {
+      "ID": "88edf648-6434-4413-893b-ed21470231e7",
+      "Content": "Entities/Turrets/rocketturret/explode5"
     }
   ],
   "AnimationsEntities": [
@@ -662,6 +698,29 @@
     {
       "TargetType": "Turret",
       "Target": "9ffa5d69-6949-4f38-9bdb-36ba51edea81"
+    },
+
+    {
+      "TargetType": "Projectile",
+      "Target": "1db411e4-8599-464b-923c-0e23bc031435"
+    },
+    {
+      "TargetType": "Projectile",
+      "Target": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+      "OnCreate": "4c8f7401-7dbb-4c3a-8107-fafe72bf18ee",
+      "OnDestroyed": "24be3e70-c410-443b-9e91-75d9f3a4270f"
+    },
+    {
+      "TargetType": "Projectile",
+      "Target": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+      "OnCreate": "7c7149b8-16ed-4480-83da-5236f6d92a5d",
+      "OnDestroyed": "88edf648-6434-4413-893b-ed21470231e7"
+    },
+
+    {
+      "TargetType": "Effect",
+      "Target": "bb696b04-60e5-464e-b46b-2f5a8377b68e",
+      "OnCreate": "f99911ba-af48-43cc-ab20-15013a62de87"
     }
   ]
 }

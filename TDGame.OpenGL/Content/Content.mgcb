@@ -145,6 +145,12 @@
 /processorParam:TextureFormat=Color
 /build:Common/buttonWideGreen.png
 
+#begin Common/click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Common/click.wav
+
 #begin DefaultFonts/DefaultFont10.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -686,6 +692,12 @@
 /processorParam:Quality=Best
 /build:Entities/Turrets/laserturret/shoot.wav
 
+#begin Entities/Turrets/missileturret/explode5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Entities/Turrets/missileturret/explode5.wav
+
 #begin Entities/Turrets/missileturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -733,6 +745,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/missileturret/shoot_2.png
+
+#begin Entities/Turrets/missileturret/shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Entities/Turrets/missileturret/shoot.wav
 
 #begin Entities/Turrets/moneyturret/idle.png
 /importer:TextureImporter
@@ -800,6 +818,12 @@
 /processorParam:Quality=Best
 /build:Entities/Turrets/rocketturret/explode5.wav
 
+#begin Entities/Turrets/rocketturret/explode5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Entities/Turrets/rocketturret/explode5.wav
+
 #begin Entities/Turrets/rocketturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -847,6 +871,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/rocketturret/shoot_2.png
+
+#begin Entities/Turrets/rocketturret/shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Entities/Turrets/rocketturret/shoot.wav
 
 #begin Entities/Turrets/slowingturret/idle_1.png
 /importer:TextureImporter
@@ -943,6 +973,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/slowingturret/shoot_effect_4.png
+
+#begin Entities/Turrets/slowingturret/shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Entities/Turrets/slowingturret/shoot.wav
 
 #begin Entities/Turrets/turretBase.png
 /importer:TextureImporter
@@ -1058,6 +1094,12 @@
 /processorParam:TextureFormat=Color
 /build:Views/GameView/controlsField.png
 
+#begin Views/GameView/hitHurt.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Views/GameView/hitHurt.wav
+
 #begin Views/GameView/maingame.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -1075,6 +1117,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Views/GameView/nextEnemyField.png
+
+#begin Views/GameView/pickupCoin.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Views/GameView/pickupCoin.wav
+
+#begin Views/GameView/powerUp.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Views/GameView/powerUp.wav
 
 #begin Views/GameView/purchasingField.png
 /importer:TextureImporter

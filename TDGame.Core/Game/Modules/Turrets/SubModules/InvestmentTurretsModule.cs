@@ -22,7 +22,10 @@ namespace TDGame.Core.Game.Modules.Turrets.SubModules
         public override void UpdateTurret(TimeSpan passed, TurretInstance turret, InvestmentTurretDefinition def)
         {
             if (Context.Wave != _currentWave)
+            {
                 Context.Money += def.MoneyPrWave;
+                Game.TurretsModule.OnTurretShooting?.Invoke(turret);
+            }
         }
     }
 }
