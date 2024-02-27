@@ -39,6 +39,12 @@
     <ProjectReference Include="..\BugDefender.Core\BugDefender.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="Licences\INNO-SETUP-LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Licences\MONOGAME-LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Mods\readme.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

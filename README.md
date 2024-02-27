@@ -5,6 +5,7 @@
 - [ ] Cheats
 
 ## Done
+- [X] Add MonoGame and Inno Setup licenses
 - [X] Come up with an actual name for the game
 - [X] AOE turret effects
 - [X] Audio system 
