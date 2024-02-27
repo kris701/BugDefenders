@@ -121,7 +121,7 @@ namespace BugDefender.Core.Users
 
         private string Serialize(UserDefinition<T> user)
         {
-#if DEBUG
+#if DEBUG || DONTCOMPRESSUSERDATA
             return JsonSerializer.Serialize(user);
 #else
             return StringCompressor.CompressString(JsonSerializer.Serialize(user));
@@ -131,7 +131,7 @@ namespace BugDefender.Core.Users
         private UserDefinition<T> Deserialize(string data)
         {
             UserDefinition<T>? parsed = null;
-#if DEBUG
+#if DEBUG || DONTCOMPRESSUSERDATA
             try
             {
                 parsed = JsonSerializer.Deserialize<UserDefinition<T>>(data);
