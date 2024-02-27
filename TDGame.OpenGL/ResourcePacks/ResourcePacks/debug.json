@@ -280,7 +280,7 @@
     },
     {
       "ID": "569c3061-645f-4691-a1bc-3372462f3ada",
-      "FrameTime": 500,
+      "FrameTime": 50,
       "Contents": [
         "Entities/Enemies/enemy2/enemy2_walk_1",
         "Entities/Enemies/enemy2/enemy2_walk_2"
@@ -296,7 +296,7 @@
     },
     {
       "ID": "ddbe95fe-59d0-4da9-99f6-9e36ebfd1fb3",
-      "FrameTime": 50,
+      "FrameTime": 250,
       "Contents": [
         "Entities/Enemies/enemy4/walk_1",
         "Entities/Enemies/enemy4/walk_2"
@@ -308,6 +308,14 @@
       "Contents": [
         "Entities/Enemies/enemy5/walk_1",
         "Entities/Enemies/enemy5/walk_2"
+      ]
+    },
+    {
+      "ID": "7f1c6d72-441d-4a21-95f6-531d5aa0459e",
+      "FrameTime": 500,
+      "Contents": [
+        "Entities/Enemies/enemy6/walk_1",
+        "Entities/Enemies/enemy6/walk_2"
       ]
     },
 
@@ -529,6 +537,25 @@
       "TargetType": "Enemy",
       "Target": "8cf476cd-d950-4f76-9455-afdb77e443e4",
       "OnCreate": "6972a7b6-913d-4be9-a912-4875f24f21cd",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+
+    {
+      "TargetType": "Enemy",
+      "Target": "2f0c66b3-0b40-4c02-bac5-dc93d647388b",
+      "OnCreate": "7f1c6d72-441d-4a21-95f6-531d5aa0459e",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "b888af9c-7cd8-4038-86cc-7b4775017195",
+      "OnCreate": "7f1c6d72-441d-4a21-95f6-531d5aa0459e",
+      "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
+    },
+    {
+      "TargetType": "Enemy",
+      "Target": "3c9ec15c-3a79-45f3-a492-75ac0bfc3482",
+      "OnCreate": "7f1c6d72-441d-4a21-95f6-531d5aa0459e",
       "OnDeath": "c7f51d9e-bb78-4ca5-b12c-8248672cd08c"
     },
 
