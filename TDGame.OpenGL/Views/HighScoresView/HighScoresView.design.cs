@@ -10,7 +10,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.HighScoresView
 {
-    public partial class HighScoresView : BaseScreen
+    public partial class HighScoresView : BaseView
     {
         private static readonly int _showCount = 13;
 

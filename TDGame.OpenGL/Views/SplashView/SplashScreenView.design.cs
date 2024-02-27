@@ -4,7 +4,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.SplashScreen
 {
-    public partial class SplashScreenView : BaseScreen
+    public partial class SplashScreenView : BaseView
     {
         public override void Initialize()
         {

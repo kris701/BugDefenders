@@ -5,7 +5,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameOverScreen
 {
-    public partial class GameOverView : BaseScreen
+    public partial class GameOverView : BaseView
     {
         private static Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
 

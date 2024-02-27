@@ -6,7 +6,7 @@ using TDGame.OpenGL.Engine.Helpers;
 
 namespace TDGame.OpenGL.Engine.Screens
 {
-    public abstract class BaseScreen : BaseScalable, IScreen
+    public abstract class BaseView : BaseScalable, IView
     {
         public Guid ID { get; set; }
         public FadeState State { get; set; } = FadeState.FadeIn;
@@ -16,11 +16,11 @@ namespace TDGame.OpenGL.Engine.Screens
 
         private double fadeTimer = 0;
         private int fadeValue = 255;
-        private IScreen _switchTo;
+        private IView _switchTo;
         private readonly Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
         private readonly SortedDictionary<int, List<IControl>> _viewLayers;
 
-        public BaseScreen(UIEngine parent, Guid id) : base(parent)
+        public BaseView(UIEngine parent, Guid id) : base(parent)
         {
             _viewLayers = new SortedDictionary<int, List<IControl>>() {
                 { 0, new List<IControl>() }
@@ -101,7 +101,7 @@ namespace TDGame.OpenGL.Engine.Screens
 
         }
 
-        public void SwitchView(IScreen screen)
+        public void SwitchView(IView screen)
         {
             if (_switchTo == null)
             {

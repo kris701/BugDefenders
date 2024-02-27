@@ -6,7 +6,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.HighScoresView
 {
-    public partial class HighScoresView : BaseScreen
+    public partial class HighScoresView : BaseView
     {
         private static readonly Guid _id = new Guid("9f04f94c-75e6-413c-ba40-5582e78d4baa");
 

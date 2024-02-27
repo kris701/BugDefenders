@@ -12,7 +12,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
         public delegate void EntityHandler(U parent);
         public EntityHandler? OnDelete;
         public int Layer { get; set; }
-        public IScreen Screen { get; set; }
+        public IView Screen { get; set; }
         public int XOffset { get; set; }
         public int YOffset { get; set; }
 
@@ -26,7 +26,7 @@ namespace TDGame.OpenGL.Screens.GameScreen
 
         private readonly Dictionary<T, U> _entities = new Dictionary<T, U>();
 
-        public EntityUpdater(int layer, IScreen screen, int xOffset, int yOffset)
+        public EntityUpdater(int layer, IView screen, int xOffset, int yOffset)
         {
             Layer = layer;
             Screen = screen;

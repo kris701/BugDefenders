@@ -9,7 +9,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
 {
-    public partial class GameSetupView : BaseScreen
+    public partial class GameSetupView : BaseView
     {
         private TileControl _mapPreviewTile;
         private LabelControl _mapNameLabel;

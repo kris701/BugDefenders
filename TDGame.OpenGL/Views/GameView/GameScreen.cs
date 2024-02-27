@@ -22,7 +22,7 @@ using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public partial class GameScreen : BaseScreen
+    public partial class GameScreen : BaseView
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);

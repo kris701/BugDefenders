@@ -8,7 +8,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameSetupView
 {
-    public partial class GameSetupView : BaseScreen
+    public partial class GameSetupView : BaseView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
 

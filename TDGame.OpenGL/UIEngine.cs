@@ -33,18 +33,18 @@ namespace TDGame.OpenGL
         public GraphicsDeviceManager Device { get; }
         public int ScreenWidth() => Window.ClientBounds.Width;
         public int ScreenHeight() => Window.ClientBounds.Height;
-        public IScreen CurrentScreen { get; set; }
+        public IView CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; set; }
         public UserDefinition<SettingsDefinition> CurrentUser { get; set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; }
         public UIResourceManager UIResources { get; set; }
 
-        private readonly Func<UIEngine, IScreen> _screenToLoad;
+        private readonly Func<UIEngine, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
         private bool _isInitialized = false;
         private readonly NotificationBackroundWorker _notificationWorker;
 
-        public UIEngine(Func<UIEngine, IScreen> screen)
+        public UIEngine(Func<UIEngine, IView> screen)
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;

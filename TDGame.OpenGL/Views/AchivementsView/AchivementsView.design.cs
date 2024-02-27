@@ -9,7 +9,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.AchivementsView
 {
-    public partial class AchivementsView : BaseScreen
+    public partial class AchivementsView : BaseView
     {
         private readonly int _selectionsPrPage = 5;
         private readonly List<List<AchivementControl>> _achivementsPages = new List<List<AchivementControl>>();

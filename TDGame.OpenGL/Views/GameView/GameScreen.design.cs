@@ -11,7 +11,7 @@ using static TDGame.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace TDGame.OpenGL.Screens.GameScreen
 {
-    public partial class GameScreen : BaseScreen
+    public partial class GameScreen : BaseView
     {
         private LabelControl _moneyLabel;
         private LabelControl _hpLabel;

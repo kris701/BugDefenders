@@ -6,7 +6,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.AchivementsView
 {
-    public partial class AchivementsView : BaseScreen
+    public partial class AchivementsView : BaseView
     {
         private static readonly Guid _id = new Guid("14b01cd7-8a0d-40ad-961e-562a915448d1");
         private readonly KeyWatcher _escapeKeyWatcher;

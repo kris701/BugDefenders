@@ -7,7 +7,7 @@ using TDGame.OpenGL.Settings;
 
 namespace TDGame.OpenGL.Screens.SettingsView
 {
-    public partial class SettingsView : BaseScreen
+    public partial class SettingsView : BaseView
     {
         private static readonly Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
         private readonly SettingsDefinition _settings;

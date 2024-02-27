@@ -7,7 +7,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.GameOverScreen
 {
-    public partial class GameOverView : BaseScreen
+    public partial class GameOverView : BaseView
     {
         public override void Initialize()
         {

@@ -8,7 +8,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.SettingsView
 {
-    public partial class SettingsView : BaseScreen
+    public partial class SettingsView : BaseView
     {
         private readonly List<float> _scaleOptions = new List<float>()
         {

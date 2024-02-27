@@ -7,7 +7,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.MainMenu
 {
-    public partial class MainMenuView : BaseScreen
+    public partial class MainMenuView : BaseView
     {
         public override void Initialize()
         {

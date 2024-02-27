@@ -10,7 +10,7 @@ using TDGame.OpenGL.Settings;
 
 namespace TDGame.OpenGL.Screens.UsersScreen
 {
-    public partial class UsersScreenView : BaseScreen
+    public partial class UsersScreenView : BaseView
     {
         private static readonly Guid _id = new Guid("0dd63d81-e49c-44d2-868e-7db6fb4634d7");
         private readonly KeyWatcher _escapeKeyWatcher;

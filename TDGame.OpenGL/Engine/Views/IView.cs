@@ -5,7 +5,7 @@ using System;
 namespace TDGame.OpenGL.Engine.Screens
 {
     public enum FadeState { FadeIn, Hold, FadeOut, PostHold }
-    public interface IScreen : IScalable
+    public interface IView : IScalable
     {
         public Guid ID { get; set; }
         public int FadeInTime { get; }

@@ -8,7 +8,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.PermaBuffsView
 {
-    public partial class PermaBuffsView : BaseScreen
+    public partial class PermaBuffsView : BaseView
     {
         private readonly int _upgradeViewCount = 5;
         public override void Initialize()

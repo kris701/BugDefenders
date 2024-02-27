@@ -7,7 +7,7 @@ using TDGame.OpenGL.Engine.Screens;
 
 namespace TDGame.OpenGL.Screens.UsersScreen
 {
-    public partial class UsersScreenView : BaseScreen
+    public partial class UsersScreenView : BaseView
     {
         private readonly List<ButtonControl> _usersButtons = new List<ButtonControl>();
         private readonly List<ButtonControl> _usersDeleteButtons = new List<ButtonControl>();
