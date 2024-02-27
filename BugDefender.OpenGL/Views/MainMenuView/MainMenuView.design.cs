@@ -22,7 +22,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 HorizontalAlignment = Alignment.Middle,
                 Y = 200,
                 Font = BasicFonts.GetFont(72),
-                Text = "TD Game",
+                Text = "Bug Defenders",
                 FontColor = Color.White,
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
