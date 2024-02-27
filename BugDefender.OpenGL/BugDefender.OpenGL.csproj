@@ -6,7 +6,7 @@
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
 	  <Nullable>enable</Nullable>
-	  <Version>0.0.3</Version>
+	  <Version>0.0.4</Version>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -20,13 +20,15 @@
 	  <!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Icon.ico" />
-    <None Remove="Icon.bmp" />
     <None Remove="ResourcePacks\ResourcePacks\debug.json" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icon.ico" />
-    <EmbeddedResource Include="Icon.bmp" />
+	  <EmbeddedResource Include="Icon.bmp">
+		  <LogicalName>Icon.bmp</LogicalName>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Icon.ico">
+		  <LogicalName>Icon.ico</LogicalName>
+	  </EmbeddedResource>
     <EmbeddedResource Include="ResourcePacks\ResourcePacks\debug.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
