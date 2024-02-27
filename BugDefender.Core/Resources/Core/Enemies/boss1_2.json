@@ -1,0 +1,15 @@
+﻿{
+  "id": "3cbe1917-c00b-4b12-a0f3-0b78035a5cf1",
+  "Name": "Young Water Boss",
+  "description": "",
+  "Health": 7500,
+  "Size": 50,
+  "Reward": 250,
+  "ModuleInfo": {
+    "EnemyModule": "Single",
+    "Speed": 3
+  },
+  "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
+  "TerrainType": 1,
+  "AvailableAtWave": 10
+}

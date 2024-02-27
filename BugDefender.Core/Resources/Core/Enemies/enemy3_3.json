@@ -1,0 +1,17 @@
+﻿{
+  "id": "b82e41ce-c032-4ecc-ac65-83f1372663b6",
+  "Name": "Long Legs Colony",
+  "description": "",
+  "Health": 500,
+  "Size": 30,
+  "Reward": 10,
+  "ModuleInfo": {
+    "EnemyModule": "Wave",
+    "Speed": 4,
+    "WaveSize": 12,
+    "SpawnDelay": 300
+  },
+  "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+  "TerrainType": 1,
+  "AvailableAtWave": 30
+}

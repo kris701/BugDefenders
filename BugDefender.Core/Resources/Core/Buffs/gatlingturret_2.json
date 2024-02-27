@@ -1,0 +1,37 @@
+﻿{
+  "id": "3c9854f3-da98-4618-b5bc-ed4c67b09430",
+  "Name": "Gatling Turret Upgrade",
+  "description": "Permanently make the gatling turrets bullets go towards enemies!",
+  "Requires": "ede7db0c-6de0-4931-bf1b-0e50e2b4b5e3",
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+      "Quantity": 1000
+    }
+  ],
+  "Effect": {
+    "BuffType": "Projectile",
+    "ProjectileID": "1db411e4-8599-464b-923c-0e23bc031435",
+    "Module": {
+      "ProjectileModule": "Direct",
+      "Speed": 15,
+      "Damage": 10.5,
+      "Range": 600,
+      "Acceleration": 1,
+      "SlowingFactor": 0.8,
+      "SlowingDuration": 250,
+      "IsGuided": true,
+      "DamageModifiers": [
+        {
+          "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+          "Modifier": 2
+        },
+        {
+          "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
+          "Modifier": 0.5
+        }
+      ]
+    }
+  }
+}
