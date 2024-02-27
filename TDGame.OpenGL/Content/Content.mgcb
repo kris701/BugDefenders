@@ -194,11 +194,6 @@
 /processorParam:TextureFormat=Compressed
 /build:DefaultFonts/DefaultFont8.spritefont
 
-#begin DefaultFonts/lucon.ttf
-/importer:
-/processor:
-/build:DefaultFonts/lucon.ttf
-
 #begin Entities/Effects/EnemySplat/splat_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -379,7 +374,7 @@
 /processorParam:TextureFormat=Color
 /build:Entities/Maps/map3.png
 
-#begin Entities/Projectiles/bullet.png
+#begin Entities/Projectiles/bullet/bullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -389,7 +384,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Projectiles/bullet.png
+/build:Entities/Projectiles/bullet/bullet.png
 
 #begin Entities/Projectiles/missile/missile_move_1.png
 /importer:TextureImporter
@@ -439,13 +434,61 @@
 /processorParam:TextureFormat=Color
 /build:Entities/Projectiles/rocket/rocket_move_2.png
 
+#begin Entities/Turrets/gatlingturret/idle_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/gatlingturret/idle_1.png
+
+#begin Entities/Turrets/gatlingturret/idle_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/gatlingturret/idle_2.png
+
+#begin Entities/Turrets/gatlingturret/shoot_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/gatlingturret/shoot_1.png
+
+#begin Entities/Turrets/gatlingturret/shoot_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/gatlingturret/shoot_2.png
+
 #begin Entities/Turrets/gatlingturret/shoot.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Entities/Turrets/gatlingturret/shoot.wav
 
-#begin Entities/Turrets/gatlingturret/turret4_idle_1.png
+#begin Entities/Turrets/laserturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -455,9 +498,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/gatlingturret/turret4_idle_1.png
+/build:Entities/Turrets/laserturret/idle_1.png
 
-#begin Entities/Turrets/gatlingturret/turret4_idle_2.png
+#begin Entities/Turrets/laserturret/idle_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -467,9 +510,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/gatlingturret/turret4_idle_2.png
+/build:Entities/Turrets/laserturret/idle_2.png
 
-#begin Entities/Turrets/gatlingturret/turret4_shoot_1.png
+#begin Entities/Turrets/laserturret/shoot_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -479,9 +522,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/gatlingturret/turret4_shoot_1.png
+/build:Entities/Turrets/laserturret/shoot_1.png
 
-#begin Entities/Turrets/gatlingturret/turret4_shoot_2.png
+#begin Entities/Turrets/laserturret/shoot_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -491,7 +534,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/gatlingturret/turret4_shoot_2.png
+/build:Entities/Turrets/laserturret/shoot_2.png
 
 #begin Entities/Turrets/laserturret/shoot.wav
 /importer:WavImporter
@@ -499,7 +542,7 @@
 /processorParam:Quality=Best
 /build:Entities/Turrets/laserturret/shoot.wav
 
-#begin Entities/Turrets/laserturret/turret1_idle_1.png
+#begin Entities/Turrets/missileturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -509,9 +552,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/laserturret/turret1_idle_1.png
+/build:Entities/Turrets/missileturret/idle_1.png
 
-#begin Entities/Turrets/laserturret/turret1_idle_2.png
+#begin Entities/Turrets/missileturret/idle_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -521,9 +564,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/laserturret/turret1_idle_2.png
+/build:Entities/Turrets/missileturret/idle_2.png
 
-#begin Entities/Turrets/laserturret/turret1_shoot_1.png
+#begin Entities/Turrets/missileturret/shoot_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -533,9 +576,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/laserturret/turret1_shoot_1.png
+/build:Entities/Turrets/missileturret/shoot_1.png
 
-#begin Entities/Turrets/laserturret/turret1_shoot_2.png
+#begin Entities/Turrets/missileturret/shoot_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -545,9 +588,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/laserturret/turret1_shoot_2.png
+/build:Entities/Turrets/missileturret/shoot_2.png
 
-#begin Entities/Turrets/missileturret/turret3_idle_1.png
+#begin Entities/Turrets/moneyturret/idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -557,9 +600,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/missileturret/turret3_idle_1.png
+/build:Entities/Turrets/moneyturret/idle.png
 
-#begin Entities/Turrets/missileturret/turret3_idle_2.png
+#begin Entities/Turrets/passivedamageturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -569,9 +612,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/missileturret/turret3_idle_2.png
+/build:Entities/Turrets/passivedamageturret/idle_1.png
 
-#begin Entities/Turrets/missileturret/turret3_shoot_1.png
+#begin Entities/Turrets/passivedamageturret/idle_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -581,9 +624,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/missileturret/turret3_shoot_1.png
+/build:Entities/Turrets/passivedamageturret/idle_2.png
 
-#begin Entities/Turrets/missileturret/turret3_shoot_2.png
+#begin Entities/Turrets/passiverangeturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -593,9 +636,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/missileturret/turret3_shoot_2.png
+/build:Entities/Turrets/passiverangeturret/idle_1.png
 
-#begin Entities/Turrets/moneyturret/turret6.png
+#begin Entities/Turrets/passiverangeturret/idle_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -605,55 +648,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/moneyturret/turret6.png
-
-#begin Entities/Turrets/passivedamageturret/turret8_idle_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/passivedamageturret/turret8_idle_1.png
-
-#begin Entities/Turrets/passivedamageturret/turret8_idle_2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/passivedamageturret/turret8_idle_2.png
-
-#begin Entities/Turrets/passiverangeturret/turret7_idle_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/passiverangeturret/turret7_idle_1.png
-
-#begin Entities/Turrets/passiverangeturret/turret7_idle_2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/passiverangeturret/turret7_idle_2.png
+/build:Entities/Turrets/passiverangeturret/idle_2.png
 
 #begin Entities/Turrets/rocketturret/explode5.wav
 /importer:WavImporter
@@ -661,7 +656,7 @@
 /processorParam:Quality=Best
 /build:Entities/Turrets/rocketturret/explode5.wav
 
-#begin Entities/Turrets/rocketturret/turret2_idle_1.png
+#begin Entities/Turrets/rocketturret/idle_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -671,9 +666,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/rocketturret/turret2_idle_1.png
+/build:Entities/Turrets/rocketturret/idle_1.png
 
-#begin Entities/Turrets/rocketturret/turret2_idle_2.png
+#begin Entities/Turrets/rocketturret/idle_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -683,9 +678,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/rocketturret/turret2_idle_2.png
+/build:Entities/Turrets/rocketturret/idle_2.png
 
-#begin Entities/Turrets/rocketturret/turret2_shoot_1.png
+#begin Entities/Turrets/rocketturret/shoot_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -695,9 +690,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/rocketturret/turret2_shoot_1.png
+/build:Entities/Turrets/rocketturret/shoot_1.png
 
-#begin Entities/Turrets/rocketturret/turret2_shoot_2.png
+#begin Entities/Turrets/rocketturret/shoot_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -707,7 +702,55 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Entities/Turrets/rocketturret/turret2_shoot_2.png
+/build:Entities/Turrets/rocketturret/shoot_2.png
+
+#begin Entities/Turrets/slowingturret/idle_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/slowingturret/idle_1.png
+
+#begin Entities/Turrets/slowingturret/idle_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/slowingturret/idle_2.png
+
+#begin Entities/Turrets/slowingturret/shoot_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/slowingturret/shoot_1.png
+
+#begin Entities/Turrets/slowingturret/shoot_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Turrets/slowingturret/shoot_2.png
 
 #begin Entities/Turrets/slowingturret/shoot_effect_1.png
 /importer:TextureImporter
@@ -756,54 +799,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/slowingturret/shoot_effect_4.png
-
-#begin Entities/Turrets/slowingturret/turret5_idle_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/slowingturret/turret5_idle_1.png
-
-#begin Entities/Turrets/slowingturret/turret5_idle_2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/slowingturret/turret5_idle_2.png
-
-#begin Entities/Turrets/slowingturret/turret5_shoot_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/slowingturret/turret5_shoot_1.png
-
-#begin Entities/Turrets/slowingturret/turret5_shoot_2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Entities/Turrets/slowingturret/turret5_shoot_2.png
 
 #begin Entities/Turrets/turretBase.png
 /importer:TextureImporter
