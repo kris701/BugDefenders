@@ -7,7 +7,7 @@
   "ModuleInfo": {
     "TurretModule": "LaserTurret",
     "Range": 200,
-    "Damage": 10,
+    "Damage": 2,
     "Cooldown": 10,
     "SlowingFactor": 1,
     "SlowingDuration": 0,

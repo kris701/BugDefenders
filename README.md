@@ -3,6 +3,7 @@
 ## TODO List
 - [ ] Setup a good base game
 - [ ] Cheats
+- [ ] Bundle the toolkit into the game
 
 ## Done
 - [X] Make an icon for the game

@@ -6,6 +6,8 @@
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
 	  <Nullable>enable</Nullable>
+	  <Authors>Kristian Skov Johansen</Authors>
+	  <Product>Bug Defenders</Product>
 	  <Version>0.0.6</Version>
   </PropertyGroup>
   <PropertyGroup>
