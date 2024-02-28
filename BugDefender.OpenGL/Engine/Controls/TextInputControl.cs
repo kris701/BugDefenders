@@ -9,6 +9,8 @@ namespace BugDefender.OpenGL.Engine.Controls
 {
     public class TextInputControl : LabelControl
     {
+        public delegate void EnterHandler(TextInputControl parent);
+        public event EnterHandler? OnEnter;
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public bool IsEnabled { get; set; } = true;
@@ -35,12 +37,16 @@ namespace BugDefender.OpenGL.Engine.Controls
             Keys.D9
         };
 
-        public TextInputControl(UIEngine parent) : base(parent)
+        public TextInputControl(UIEngine parent, EnterHandler? onEnter = null) : base(parent)
         {
+            OnEnter += onEnter;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (!IsVisible)
+                return;
+
             DrawTile(gameTime, spriteBatch, FillColor);
             DrawString(gameTime, spriteBatch);
             if (_holding)
@@ -88,6 +94,13 @@ namespace BugDefender.OpenGL.Engine.Controls
                                         break;
                                 }
                             }
+                        }
+                        if (key == Keys.Enter)
+                        {
+                            OnEnter?.Invoke(this);
+                            _captured = false;
+                            _holding = false;
+                            return;
                         }
                     }
                     Text = newText;

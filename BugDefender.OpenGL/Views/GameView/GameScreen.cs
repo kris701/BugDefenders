@@ -16,10 +16,10 @@ using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using BugDefender.OpenGL.Views.GameView;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
+using BugDefender.Core.Game.Helpers;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
 {
@@ -602,8 +602,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _gameOver = true;
 
-                Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
-                Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+                if (CheatsHelper.Cheats.Count == 0)
+                {
+                    Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
+                    Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+                }
                 Parent.UIResources.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
                 SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, _game.Context.GameTime));

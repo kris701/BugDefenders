@@ -59,8 +59,7 @@ namespace BugDefender.Core.Game
                 module.Initialize();
 
 #if DEBUG
-            Context.Money = 9999999;
-            Context.Wave = 99999;
+            CheatsHelper.Cheats.Add(CheatTypes.InfiniteMoney);
 #endif
         }
 
@@ -77,12 +76,18 @@ namespace BugDefender.Core.Game
         {
             foreach (var module in GameModules)
                 module.Update(_mainLoopTimer.Target);
+
+            if (CheatsHelper.Cheats.Contains(CheatTypes.InfiniteMoney))
+                Context.Money = 99999999;
+            if (CheatsHelper.Cheats.Contains(CheatTypes.MaxWaves))
+                Context.Wave = 99999999;
         }
 
         internal void DamagePlayer()
         {
             OnPlayerDamaged?.Invoke();
-            Context.HP--;
+            if (!CheatsHelper.Cheats.Contains(CheatTypes.Invincibility))
+                Context.HP--;
             if (Context.HP <= 0)
             {
                 Context.HP = 0;

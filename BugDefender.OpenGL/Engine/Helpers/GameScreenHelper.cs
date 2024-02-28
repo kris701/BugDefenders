@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BugDefender.OpenGL.Helpers
+namespace BugDefender.OpenGL.Engine.Helpers
 {
     public static class GameScreenHelper
     {

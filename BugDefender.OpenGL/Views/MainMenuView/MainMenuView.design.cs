@@ -9,6 +9,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
 {
     public partial class MainMenuView : BaseView
     {
+        private TextInputControl _cheatsInput;
         public override void Initialize()
         {
             AddControl(0, new TileControl(Parent)
@@ -115,6 +116,22 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
+
+            _cheatsInput = new TextInputControl(Parent, OnEnterCheat)
+            {
+                Width = 400,
+                Height = 50,
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                Limit = 50,
+                IsVisible = false,
+                HorizontalAlignment = Alignment.Middle,
+                Y = 700
+            };
+            AddControl(1, _cheatsInput);
 
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new MainMenuView(Parent)))

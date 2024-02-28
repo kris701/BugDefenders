@@ -34,7 +34,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 Font = BasicFonts.GetFont(48)
             });
 
-            _nameInputBox = new TextInputControl(Parent)
+            _nameInputBox = new TextInputControl(Parent, AddUserInputTextBox_Enter)
             {
                 X = 200,
                 Y = 200,
