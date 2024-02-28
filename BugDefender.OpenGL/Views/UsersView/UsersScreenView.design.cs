@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.UsersScreen
 {
@@ -34,7 +34,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 Font = BasicFonts.GetFont(48)
             });
 
-            _nameInputBox = new TextInputControl(Parent)
+            _nameInputBox = new TextInputControl(Parent, AddUserInputTextBox_Enter)
             {
                 X = 200,
                 Y = 200,

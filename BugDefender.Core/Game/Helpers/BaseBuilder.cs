@@ -1,6 +1,6 @@
-﻿using System.Reflection;
+﻿using BugDefender.Core.Game.Models;
+using System.Reflection;
 using System.Text.Json;
-using BugDefender.Core.Game.Models;
 
 namespace BugDefender.Core.Game.Helpers
 {

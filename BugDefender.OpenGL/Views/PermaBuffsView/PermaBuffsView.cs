@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using BugDefender.OpenGL.Engine.Input;
-using BugDefender.OpenGL.Engine.Views;
 
 namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {

@@ -1,10 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using BugDefender.OpenGL.Engine;
+﻿using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
@@ -96,10 +96,11 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
-                Parent.CurrentUser.UserData = _settings;
+                var oldSettings = Parent.CurrentUser.UserData.Copy();
+                var newSettings = _settings.Copy();
+                Parent.CurrentUser.UserData = newSettings;
                 Parent.ApplySettings();
-                Parent.UserManager.SaveUser(Parent.CurrentUser);
-                SwitchView(new MainMenu.MainMenuView(Parent));
+                SwitchView(new AcceptView.AcceptView(Parent, oldSettings, newSettings));
             })
             {
                 X = 50,

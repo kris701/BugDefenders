@@ -1,13 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
-using BugDefender.Core.Resources;
+﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Resources.Integrity;
 using BugDefender.Core.Users;
 using BugDefender.Core.Users.Models;
@@ -18,7 +9,16 @@ using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks;
 using BugDefender.OpenGL.Settings;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 
 namespace BugDefender.OpenGL
 {

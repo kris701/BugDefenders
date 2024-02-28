@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using System.Text.Json;
-using BugDefender.Core.Game.Helpers;
+﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.EnemyTypes;
 using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
@@ -9,6 +7,8 @@ using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Buffs;
+using System.Reflection;
+using System.Text.Json;
 
 namespace BugDefender.Core.Resources
 {

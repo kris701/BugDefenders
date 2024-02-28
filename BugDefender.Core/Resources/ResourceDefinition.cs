@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using BugDefender.Core.Game.Models;
+﻿using BugDefender.Core.Game.Models;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Resources
 {

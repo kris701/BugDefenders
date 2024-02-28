@@ -1,12 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Linq;
-using BugDefender.Core.Users.Models;
+﻿using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Settings;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.UsersScreen
 {
@@ -37,11 +37,26 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
         {
             if (_nameInputBox.Text != "")
             {
-                Parent.CreateNewUser(_nameInputBox.Text);
+                AddUser(_nameInputBox.Text);
                 _nameInputBox.Text = "";
-                _update = true;
             }
             CheckValidUserInput();
+        }
+
+        private void AddUserInputTextBox_Enter(TextInputControl sender)
+        {
+            if (_nameInputBox.Text != "")
+            {
+                AddUser(_nameInputBox.Text);
+                _nameInputBox.Text = "";
+            }
+            CheckValidUserInput();
+        }
+
+        private void AddUser(string text)
+        {
+            Parent.CreateNewUser(text);
+            _update = true;
         }
 
         private void RemoveUserButton_Click(ButtonControl sender)
@@ -53,12 +68,16 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                     var allUsers = Parent.UserManager.GetAllUsers();
                     if (allUsers.Count == 1)
                         return;
-                    Parent.ChangeUser(allUsers.First(x => x.ID != Parent.CurrentUser.ID));
+                    Parent.ChangeUser(allUsers.First(x => x.ID != user.ID));
+                    Parent.UserManager.RemoveUser(user);
                     SwitchView(new UsersScreenView(Parent));
                 }
-                Parent.UserManager.RemoveUser(user);
-                _update = true;
-                CheckValidUserInput();
+                else
+                {
+                    Parent.UserManager.RemoveUser(user);
+                    _update = true;
+                    CheckValidUserInput();
+                }
             }
         }
 

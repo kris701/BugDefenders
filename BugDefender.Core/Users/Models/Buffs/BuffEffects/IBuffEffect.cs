@@ -8,5 +8,6 @@ namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
     [JsonDerivedType(typeof(ProjectileBuffEffect), typeDiscriminator: "Projectile")]
     public interface IBuffEffect
     {
+        public List<ChangeTarget> Changes { get; set; }
     }
 }

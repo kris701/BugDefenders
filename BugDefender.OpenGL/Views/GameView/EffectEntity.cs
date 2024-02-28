@@ -1,6 +1,6 @@
-﻿using System;
-using BugDefender.Core.Game.Models;
+﻿using BugDefender.Core.Game.Models;
 using BugDefender.OpenGL.ResourcePacks;
+using System;
 
 namespace BugDefender.OpenGL.Views.GameView
 {

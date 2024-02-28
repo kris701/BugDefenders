@@ -1,5 +1,5 @@
-﻿using System;
-using BugDefender.OpenGL.Screens.SplashScreen;
+﻿using BugDefender.OpenGL.Screens.SplashScreen;
+using System;
 
 namespace BugDefender.OpenGL
 {

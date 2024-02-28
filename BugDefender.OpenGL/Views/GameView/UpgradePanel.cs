@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using BugDefender.Core.Game.Models.Entities.Upgrades;
+﻿using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.Views.GameView

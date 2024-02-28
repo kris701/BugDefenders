@@ -1,7 +1,7 @@
-﻿using System.Text;
-using BugDefender.Core.Game.Models.Entities.Enemies;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
+using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets
 {

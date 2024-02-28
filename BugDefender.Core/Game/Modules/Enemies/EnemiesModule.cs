@@ -100,6 +100,8 @@ namespace BugDefender.Core.Game.Modules.Enemies
 
         internal bool DamageEnemy(EnemyInstance enemy, float damage, Guid turretDefinitionID)
         {
+            if (CheatsHelper.Cheats.Contains(CheatTypes.DamageX10))
+                damage *= 10;
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {

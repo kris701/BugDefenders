@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BugDefender.Core.Game;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities;
 using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
@@ -16,9 +12,13 @@ using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using BugDefender.OpenGL.Views.GameView;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
@@ -58,7 +58,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _game = new GameEngine(mapID, gameStyleID);
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
-            _game.OnPlayerDamaged += () => {
+            _game.OnPlayerDamaged += () =>
+            {
                 Parent.UIResources.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
             };
 
@@ -602,8 +603,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _gameOver = true;
 
-                Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
-                Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+                if (CheatsHelper.Cheats.Count == 0)
+                {
+                    Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
+                    Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+                }
                 Parent.UIResources.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
                 SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, _game.Context.GameTime));

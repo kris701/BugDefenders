@@ -1,5 +1,5 @@
-﻿using System.Text;
-using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+﻿using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using System.Text;
 using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles

@@ -1,12 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using BugDefender.Core.Resources;
+﻿using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views.AchivementsView;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.AchivementsView
 {

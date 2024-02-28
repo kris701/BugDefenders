@@ -13,19 +13,11 @@
   "Effect": {
     "BuffType": "Turret",
     "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
-    "Module": {
-      "TurretModule": "LaserTurret",
-      "Range": 200,
-      "Damage": 10.2,
-      "Cooldown": 10,
-      "SlowingFactor": 1,
-      "SlowingDuration": 0,
-      "DamageModifiers": [
-        {
-          "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
-          "Modifier": 2
-        }
-      ]
-    }
+    "Changes": [
+      {
+        "Target": "Damage",
+        "Modifier": 1.02
+      }
+    ]
   }
 }

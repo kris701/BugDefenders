@@ -1,7 +1,7 @@
-﻿using System.Text;
-using BugDefender.Core.Game.Models;
+﻿using BugDefender.Core.Game.Models;
 using BugDefender.Core.Users.Models.Buffs.BuffEffects;
 using BugDefender.Core.Users.Models.UserCriterias;
+using System.Text;
 
 namespace BugDefender.Core.Users.Models.Buffs
 {

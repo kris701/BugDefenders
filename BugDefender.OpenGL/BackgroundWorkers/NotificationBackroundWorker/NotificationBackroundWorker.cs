@@ -1,9 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BugDefender.OpenGL.Engine.BackgroundWorkers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using BugDefender.Core.Game.Models;
-using BugDefender.OpenGL.Engine.BackgroundWorkers;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {

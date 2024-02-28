@@ -1,10 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using BugDefender.Core.Resources;
+﻿using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {

@@ -1,6 +1,6 @@
-﻿using System.Text;
+﻿using BugDefender.Core.Resources;
+using System.Text;
 using System.Text.Json.Serialization;
-using BugDefender.Core.Resources;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
