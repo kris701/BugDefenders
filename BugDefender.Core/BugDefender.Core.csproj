@@ -7,6 +7,10 @@
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Product>Bug Defenders Core</Product>
 	  <Version>1.0.0</Version>
+	  <SelfContained>true</SelfContained>
+	  <DebugType>embedded</DebugType>
+	  <PublishReadyToRun>false</PublishReadyToRun>
+	  <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

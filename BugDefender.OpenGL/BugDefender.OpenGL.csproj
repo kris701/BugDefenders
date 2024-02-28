@@ -9,6 +9,11 @@
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Product>Bug Defenders</Product>
 	  <Version>0.0.6</Version>
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <SelfContained>true</SelfContained>
+	  <DebugType>embedded</DebugType>
+	  <PublishReadyToRun>false</PublishReadyToRun>
+	  <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>

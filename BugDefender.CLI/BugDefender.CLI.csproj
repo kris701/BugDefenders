@@ -8,6 +8,11 @@
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Product>Bug Defenders CLI Toolkit</Product>
 	  <Version>1.0.0</Version>
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <SelfContained>true</SelfContained>
+	  <DebugType>embedded</DebugType>
+	  <PublishReadyToRun>false</PublishReadyToRun>
+	  <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
 
   <ItemGroup>

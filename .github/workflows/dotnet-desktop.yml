@@ -31,7 +31,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish Game (Windows)
-        run: dotnet publish BugDefender.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.OpenGL -c Release -r win-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -50,7 +50,7 @@ jobs:
           path: windows.zip
 
       - name: Publish Toolkit (Windows)
-        run: dotnet publish BugDefender.CLI -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.CLI -c Release -r win-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -80,7 +80,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish Game (Linux)
-        run: dotnet publish BugDefender.OpenGL -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.OpenGL -c Release -r linux-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -99,7 +99,7 @@ jobs:
           path: linux.zip
 
       - name: Publish Toolkit (Linux)
-        run: dotnet publish BugDefender.CLI -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.CLI -c Release -r linux-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
