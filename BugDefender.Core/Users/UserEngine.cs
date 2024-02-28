@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Nodes;
 using BugDefender.Core.Resources;
 #if RELEASE
 using BugDefender.Core.Users.Helpers;
@@ -56,8 +57,7 @@ namespace BugDefender.Core.Users
                 if (buff is ProjectileBuffEffect projectileBuff)
                 {
                     var target = ResourceManager.Projectiles.GetResource(projectileBuff.ProjectileID);
-                    if (target.ModuleInfo.GetType() == projectileBuff.Module.GetType())
-                        target.ModuleInfo = projectileBuff.Module;
+                    ApplyChangesOnObject(target.ModuleInfo, projectileBuff.Changes);
                     any = true;
                 }
             }
@@ -70,15 +70,41 @@ namespace BugDefender.Core.Users
                 if (buff is EnemyBuffEffect enemyBuff)
                 {
                     var target = ResourceManager.Enemies.GetResource(enemyBuff.EnemyID);
-                    if (target.ModuleInfo.GetType() == enemyBuff.Module.GetType())
-                        target.ModuleInfo = enemyBuff.Module;
+                    ApplyChangesOnObject(target.ModuleInfo, enemyBuff.Changes);
                 }
                 else if (buff is TurretBuffEffect turretBuff)
                 {
                     var target = ResourceManager.Turrets.GetResource(turretBuff.TurretID);
-                    if (target.ModuleInfo.GetType() == turretBuff.Module.GetType())
-                        target.ModuleInfo = turretBuff.Module;
+                    ApplyChangesOnObject(target.ModuleInfo, turretBuff.Changes);
                 }
+            }
+        }
+
+        private void ApplyChangesOnObject<U>(U item, List<ChangeTarget> changes) where U : notnull
+        {
+            var propInfo = item.GetType().GetProperties();
+            foreach(var change in changes)
+            {
+                var first = propInfo.First(x => x.Name == change.Target);
+                if (first != null)
+                {
+                    var current = first.GetValue(item);
+                    if (current == null)
+                        throw new Exception("Unknown buff change attempted on object!");
+                    if (change.Value != null)
+                    {
+                        var newValue = JsonSerializer.Deserialize((dynamic)change.Value, current.GetType());
+                        first.SetValue(item, newValue);
+                    }
+                    else if (change.Modifier != 1 && current.GetType() == typeof(float))
+                    {
+                        first.SetValue(item, (float)current * change.Modifier);
+                    }
+                    else
+                        throw new Exception("Unknown buff change attempted on object!");
+                }
+                else
+                    throw new Exception("Unknown buff change attempted on object!");
             }
         }
 

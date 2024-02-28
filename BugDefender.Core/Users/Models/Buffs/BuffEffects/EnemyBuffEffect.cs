@@ -5,12 +5,12 @@ namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
     public class EnemyBuffEffect : IBuffEffect
     {
         public Guid EnemyID { get; set; }
-        public IEnemyModule Module { get; set; }
+        public List<ChangeTarget> Changes { get; set; }
 
-        public EnemyBuffEffect(Guid enemyID, IEnemyModule module)
+        public EnemyBuffEffect(Guid enemyID, List<ChangeTarget> changes)
         {
             EnemyID = enemyID;
-            Module = module;
+            Changes = changes;
         }
     }
 }

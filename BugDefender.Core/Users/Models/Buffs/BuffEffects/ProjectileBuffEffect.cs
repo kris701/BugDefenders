@@ -5,12 +5,12 @@ namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
     public class ProjectileBuffEffect : IBuffEffect
     {
         public Guid ProjectileID { get; set; }
-        public IProjectileModule Module { get; set; }
+        public List<ChangeTarget> Changes { get; set; }
 
-        public ProjectileBuffEffect(Guid projectileID, IProjectileModule module)
+        public ProjectileBuffEffect(Guid projectileID, List<ChangeTarget> changes)
         {
             ProjectileID = projectileID;
-            Module = module;
+            Changes = changes;
         }
     }
 }
