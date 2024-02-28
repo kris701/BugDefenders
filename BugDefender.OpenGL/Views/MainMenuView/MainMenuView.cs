@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using BugDefender.Core.Game.Helpers;
+﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
-using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.MainMenu
 {
     public partial class MainMenuView : BaseView
     {
         public static readonly Guid _id = new Guid("9c52281c-3202-4b22-bfc9-dfc187fdbeb3");
-        private KeysWatcher _cheatsInputWatcher;
-        private KeyWatcher _escapeInputWatcher;
+        private readonly KeysWatcher _cheatsInputWatcher;
+        private readonly KeyWatcher _escapeInputWatcher;
         public MainMenuView(UIEngine parent) : base(parent, _id)
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;

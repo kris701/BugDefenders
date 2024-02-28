@@ -1,7 +1,7 @@
-﻿using System.Text;
-using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+﻿using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {

@@ -1,7 +1,7 @@
-﻿using System.Text;
-using System.Text.Json.Serialization;
-using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+﻿using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
 using BugDefender.Core.Resources;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {

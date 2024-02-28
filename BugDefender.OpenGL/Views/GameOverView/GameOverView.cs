@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using BugDefender.Core.Users.Models;
+﻿using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine.Views;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {

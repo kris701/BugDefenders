@@ -1,6 +1,6 @@
-﻿using System.Text;
-using BugDefender.Core.Game.Models.Entities.Turrets;
+﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Resources;
+using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {

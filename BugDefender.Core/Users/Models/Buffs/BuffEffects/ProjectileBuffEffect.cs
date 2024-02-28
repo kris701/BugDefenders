@@ -1,6 +1,4 @@
-﻿using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
-
-namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
+﻿namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
 {
     public class ProjectileBuffEffect : IBuffEffect
     {

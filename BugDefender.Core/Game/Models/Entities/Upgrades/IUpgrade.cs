@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using BugDefender.Core.Game.Models.Entities.Turrets;
+﻿using BugDefender.Core.Game.Models.Entities.Turrets;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {

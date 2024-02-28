@@ -1,14 +1,14 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using BugDefender.Core.Game.Models.Entities.Turrets;
+﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views.GameView;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
@@ -195,7 +195,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             };
             AddControl(1, _autoRunButton);
 
-            _sendWave = new ButtonControl(Parent, clicked: (s) => { 
+            _sendWave = new ButtonControl(Parent, clicked: (s) =>
+            {
                 _game.EnemiesModule.QueueEnemies();
                 if (_game.Context.GameStyle.MoneyPrWave > 0 || _game.Context.Turrets.Any(x => x.TurretInfo is InvestmentTurretDefinition))
                     Parent.UIResources.PlaySoundEffectOnce(new Guid("e6908fa1-85b3-4f18-9bf0-cc4fa97a29c1"));

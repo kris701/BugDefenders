@@ -1,6 +1,4 @@
-﻿using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
-
-namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
+﻿namespace BugDefender.Core.Users.Models.Buffs.BuffEffects
 {
     public class EnemyBuffEffect : IBuffEffect
     {

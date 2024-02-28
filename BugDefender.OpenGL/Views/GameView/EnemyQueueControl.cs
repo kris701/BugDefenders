@@ -1,14 +1,14 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BugDefender.Core.Game.Models.Entities.Enemies;
+using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.ResourcePacks.EntityResources;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BugDefender.Core.Game.Models.Entities.Enemies;
-using BugDefender.Core.Resources;
-using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.ResourcePacks.EntityResources;
 
 namespace BugDefender.OpenGL.Views.GameView
 {

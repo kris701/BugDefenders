@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using BugDefender.Core.Game.Models.Entities.Turrets;
+﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace BugDefender.OpenGL.Views.GameView
 {

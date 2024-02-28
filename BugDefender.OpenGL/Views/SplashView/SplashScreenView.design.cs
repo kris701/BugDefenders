@@ -1,6 +1,6 @@
-﻿using System;
-using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Views;
+using System;
 
 namespace BugDefender.OpenGL.Screens.SplashScreen
 {

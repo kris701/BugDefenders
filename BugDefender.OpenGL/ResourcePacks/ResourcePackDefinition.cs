@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BugDefender.Core.Game.Models;
+using System;
 using System.Collections.Generic;
-using BugDefender.Core.Game.Models;
 
 namespace BugDefender.OpenGL.ResourcePacks
 {

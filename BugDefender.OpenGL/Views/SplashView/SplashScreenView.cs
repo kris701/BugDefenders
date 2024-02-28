@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Screens.MainMenu;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Screens.MainMenu;
 
 namespace BugDefender.OpenGL.Screens.SplashScreen
 {

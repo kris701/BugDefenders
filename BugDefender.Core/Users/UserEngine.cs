@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Nodes;
 using BugDefender.Core.Resources;
 #if RELEASE
 using BugDefender.Core.Users.Helpers;
@@ -83,7 +82,7 @@ namespace BugDefender.Core.Users
         private void ApplyChangesOnObject<U>(U item, List<ChangeTarget> changes) where U : notnull
         {
             var propInfo = item.GetType().GetProperties();
-            foreach(var change in changes)
+            foreach (var change in changes)
             {
                 var first = propInfo.First(x => x.Name == change.Target);
                 if (first != null)

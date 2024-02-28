@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BugDefender.OpenGL.ResourcePacks.EntityResources;
+using System;
 using System.Text.Json.Serialization;
-using BugDefender.OpenGL.ResourcePacks.EntityResources;
 
 namespace BugDefender.OpenGL.ResourcePacks
 {

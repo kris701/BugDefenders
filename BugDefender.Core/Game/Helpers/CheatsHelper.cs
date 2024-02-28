@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BugDefender.Core.Game.Helpers
+﻿namespace BugDefender.Core.Game.Helpers
 {
     public enum CheatTypes { None, InfiniteMoney, MaxWaves, DamageX10, Invincibility }
     public static class CheatsHelper

@@ -1,12 +1,12 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.OpenGL.ResourcePacks;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using BugDefender.Core.Game.Helpers;
-using BugDefender.OpenGL.ResourcePacks;
 
 namespace BugDefender.OpenGL
 {

@@ -1,6 +1,4 @@
-﻿using BugDefender.OpenGL.Engine.BackgroundWorkers;
-
-namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
+﻿namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public interface INotificationHandle
     {

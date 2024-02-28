@@ -1,8 +1,7 @@
-﻿using System;
+﻿using BugDefender.Core.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BugDefender.Core.Resources;
-using BugDefender.OpenGL.Engine.BackgroundWorkers;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
 {

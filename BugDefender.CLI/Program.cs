@@ -1,7 +1,7 @@
-﻿using CommandLine;
-using CommandLine.Text;
-using BugDefender.Core.Resources;
+﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Resources.Integrity;
+using CommandLine;
+using CommandLine.Text;
 
 namespace BugDefender.CLI
 {

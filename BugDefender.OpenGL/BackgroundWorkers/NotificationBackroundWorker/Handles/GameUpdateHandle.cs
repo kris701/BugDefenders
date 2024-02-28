@@ -1,17 +1,8 @@
-﻿using BugDefender.OpenGL.Engine.BackgroundWorkers;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Reflection;
-using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
 {
@@ -47,7 +38,8 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
                         if (thisVersionStr != content)
                             return new NotificationItem("", new ManualDefinition($"Update Available", $"Version {content} is available! Click here to go to the download page."), false, (s) => { OpenUrl("https://github.com/kris701/BugDefenders.Public/releases"); });
                     }
-                } catch
+                }
+                catch
                 {
                     return new NotificationItem("", new ManualDefinition($"Update Check Failed", $"An error occured while checking for updates...."), false);
                 }
