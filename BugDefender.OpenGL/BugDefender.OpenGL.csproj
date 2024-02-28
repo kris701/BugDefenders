@@ -15,6 +15,7 @@
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	  <TieredCompilation>false</TieredCompilation>
 	  <AssemblyName>BugDefender</AssemblyName>
+	  <OutputPath>../Publish/</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>

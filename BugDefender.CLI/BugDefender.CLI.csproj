@@ -13,6 +13,8 @@
 	  <DebugType>embedded</DebugType>
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	  <TieredCompilation>false</TieredCompilation>
+	  <AssemblyName>BugDefender_tools</AssemblyName>
+	  <OutputPath>../Publish/</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
