@@ -14,8 +14,7 @@
 	  <DebugType>embedded</DebugType>
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	  <TieredCompilation>false</TieredCompilation>
-	  <AssemblyName>BugDefender</AssemblyName>
-	  <OutputPath>../Publish/</OutputPath>
+	  <OutputPath>../Output/</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -28,9 +27,6 @@
 	  <!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="ResourcePacks\ResourcePacks\debug.json" />
-  </ItemGroup>
   <ItemGroup>
 	  <EmbeddedResource Include="Icon.bmp">
 		  <LogicalName>Icon.bmp</LogicalName>
