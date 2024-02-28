@@ -6,7 +6,16 @@
     <PublishReadyToRun>false</PublishReadyToRun>
     <TieredCompilation>false</TieredCompilation>
 	  <Nullable>enable</Nullable>
-	  <Version>0.0.6</Version>
+	  <Authors>Kristian Skov Johansen</Authors>
+	  <Product>Bug Defenders</Product>
+	  <Version>0.0.7</Version>
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <SelfContained>true</SelfContained>
+	  <DebugType>embedded</DebugType>
+	  <PublishReadyToRun>false</PublishReadyToRun>
+	  <TieredCompilation>false</TieredCompilation>
+	  <AssemblyName>BugDefender</AssemblyName>
+	  <OutputPath>../Publish/</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>

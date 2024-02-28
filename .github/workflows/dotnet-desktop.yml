@@ -31,42 +31,25 @@ jobs:
         run: dotnet restore
 
       - name: Publish Game (Windows)
-        run: dotnet publish BugDefender.OpenGL -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.OpenGL -c Release -r win-x64
+      - name: Publish Toolkit (Windows)
+        run: dotnet publish BugDefender.CLI -c Release -r win-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: BugDefender.OpenGL/bin/Release/net7.0/win-x64/publish/
+          path: Publish/net7.0/win-x64/publish/
       - name: Zip artifact
         run: |
-             cd ./BugDefender.OpenGL/bin/Release/net7.0/win-x64/publish/
+             cd ./Publish/net7.0/win-x64/publish/
              zip windows.zip ./* -r
-             mv windows.zip ../../../../../../windows.zip
-             cd ../../../../../../
+             mv windows.zip ../../../../windows.zip
+             cd ../../../../
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-build-zip
           path: windows.zip
-
-      - name: Publish Toolkit (Windows)
-        run: dotnet publish BugDefender.CLI -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-toolkit-build
-          path: BugDefender.CLI/bin/Release/net7.0/win-x64/publish/
-      - name: Zip artifact
-        run: |
-             cd ./BugDefender.CLI/bin/Release/net7.0/win-x64/publish/
-             zip windows-toolkit.zip ./* -r
-             mv windows-toolkit.zip ../../../../../../windows-toolkit.zip
-             cd ../../../../../../
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-toolkit-build-zip
-          path: windows-toolkit.zip
 
   LinuxBuild:
     needs: BuildTest
@@ -79,43 +62,27 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
 
+
       - name: Publish Game (Linux)
-        run: dotnet publish BugDefender.OpenGL -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+        run: dotnet publish BugDefender.OpenGL -c Release -r linux-x64
+      - name: Publish Toolkit (Linux)
+        run: dotnet publish BugDefender.CLI -c Release -r linux-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux-build
-          path: BugDefender.OpenGL/bin/Release/net7.0/linux-x64/publish/
+          path: Publish/net7.0/linux-x64/publish/
       - name: Zip artifact
         run: |
-             cd ./BugDefender.OpenGL/bin/Release/net7.0/linux-x64/publish/
+             cd ./Publish/net7.0/linux-x64/publish/
              zip linux.zip ./* -r
-             mv linux.zip ../../../../../../linux.zip
-             cd ../../../../../../
+             mv linux.zip ../../../../linux.zip
+             cd ../../../../
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux-build-zip
           path: linux.zip
-
-      - name: Publish Toolkit (Linux)
-        run: dotnet publish BugDefender.CLI -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-toolkit-build
-          path: BugDefender.CLI/bin/Release/net7.0/linux-x64/publish/
-      - name: Zip artifact
-        run: |
-             cd ./BugDefender.CLI/bin/Release/net7.0/linux-x64/publish/
-             zip linux-toolkit.zip ./* -r
-             mv linux-toolkit.zip ../../../../../../linux-toolkit.zip
-             cd ../../../../../../
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-toolkit-build-zip
-          path: linux-toolkit.zip
 
   CreateWindowsInstaller:
     needs: [BuildTest, WindowsBuild]
@@ -132,18 +99,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: windows-build
-          path: BugDefender.OpenGL/bin/Release/net7.0/win-x64/publish/
+          path: Publish/net7.0/win-x64/publish/
 
       - name: Compile windows installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
-          path: BugDefender.OpenGL/inno.iss
+          path: inno.iss
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
-          path: BugDefender.OpenGL/Output/*.exe
+          path: Output/*.exe
             
   PublishAll:
     needs: [BuildTest, WindowsBuild, LinuxBuild, CreateWindowsInstaller]
@@ -157,19 +124,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: windows-build-zip
-      - name: Download Windows Toolkit Build
-        uses: actions/download-artifact@v4
-        with:
-          name: windows-toolkit-build-zip
 
       - name: Download Linux Build
         uses: actions/download-artifact@v4
         with:
           name: linux-build-zip
-      - name: Download Linux Toolkit Build
-        uses: actions/download-artifact@v4
-        with:
-          name: linux-toolkit-build-zip
 
       - name: Download Windows Installer
         uses: actions/download-artifact@v4
