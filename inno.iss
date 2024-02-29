@@ -5,7 +5,7 @@
 #define MyAppVersion "0.0.9"
 #define MyAppPublisher "Kristian Skov Johansen"
 #define MyAppExeName "BugDefender.OpenGL.exe"
-#define MyAppIcoName "BugDefender.OpenGL/Icon.ico"
+#define MyAppIcoName "Icon.ico"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
