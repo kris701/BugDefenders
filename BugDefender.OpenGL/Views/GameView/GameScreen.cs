@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities;
 using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
@@ -607,8 +606,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 if (CheatsHelper.Cheats.Count == 0)
                 {
 #endif
-                    Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
-                    Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+                Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
+                Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
 #if RELEASE
                 }
 #endif

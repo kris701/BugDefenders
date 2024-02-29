@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Resources;
 #if RELEASE
 using BugDefender.Core.Users.Helpers;

@@ -1,6 +1,4 @@
-﻿using BugDefender.Core.Game.Models.Entities.Turrets;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {

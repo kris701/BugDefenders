@@ -1,10 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Upgrades;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Users.Models.Buffs
 {

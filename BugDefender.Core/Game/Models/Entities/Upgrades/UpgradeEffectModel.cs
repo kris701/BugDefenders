@@ -1,12 +1,7 @@
 ﻿using BugDefender.Core.Users.Models.Buffs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {
@@ -35,14 +30,14 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
                     while (targetText.Contains('.'))
                     {
                         var split = targetText.Split('.');
-                        targetInfo = innerPropInfo.First(x => x.Name == split[0]);
-                        targetObject = targetInfo.GetValue(targetObject);
+                        targetInfo = innerPropInfo?.First(x => x.Name == split[0]);
+                        targetObject = targetInfo?.GetValue(targetObject);
                         innerPropInfo = targetObject?.GetType().GetProperties();
                         targetText = targetText.Substring(targetText.IndexOf('.') + 1);
                     }
+                    targetInfo = innerPropInfo?.First(x => x.Name == targetText);
                     if (targetObject == null || targetInfo == null)
                         throw new Exception("Unknown change attempted on object!");
-                    targetInfo = innerPropInfo.First(x => x.Name == targetText);
                     ApplyEffect(targetObject, targetInfo, effect);
                 }
                 else
