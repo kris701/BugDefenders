@@ -3,16 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace BugDefender.Core.Users.Models.Buffs
 {
+    [JsonConverter(typeof(JsonStringEnumConverter<BuffEffectTypes>))]
+    public enum BuffEffectTypes { Enemy, Projectile, Turret }
     public class BuffEffect : UpgradeEffectModel
     {
-        public string TargetType { get; set; }
+        public BuffEffectTypes TargetType { get; set; }
         public Guid Target { get; set; }
 
-        public BuffEffect(string targetType, Guid target, List<EffectTarget> effects) : base(effects)
+        public BuffEffect(BuffEffectTypes targetType, Guid target, List<EffectTarget> effects) : base(effects)
         {
             TargetType = targetType;
             Target = target;

@@ -603,11 +603,15 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _gameOver = true;
 
+#if RELEASE
                 if (CheatsHelper.Cheats.Count == 0)
                 {
+#endif
                     Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
                     Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+#if RELEASE
                 }
+#endif
                 Parent.UIResources.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
                 SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, _game.Context.GameTime));
