@@ -1,4 +1,7 @@
 ﻿using BugDefender.Core.Game;
+#if RELEASE
+using BugDefender.Core.Game.Helpers;
+#endif
 using BugDefender.Core.Game.Models.Entities;
 using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Projectiles;

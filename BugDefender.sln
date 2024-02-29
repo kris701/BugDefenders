@@ -10,9 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{233BAAAB-DFB6-46A6-87AC-64DADCB2A0B0}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		.github\workflows\dotnet-desktop.yml = .github\workflows\dotnet-desktop.yml
 		inno.iss = inno.iss
 		README.md = README.md
+		.github\workflows\publish.yml = .github\workflows\publish.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugDefender.CLI", "BugDefender.CLI\BugDefender.CLI.csproj", "{47CFECEC-0BD9-45D2-9F80-C1A5800344E7}"
