@@ -51,11 +51,10 @@ namespace BugDefender.Core.Users
             bool any = false;
             foreach (var id in user.Buffs)
             {
-                var buff = ResourceManager.Buffs.GetResource(id).Effect;
-                if (buff.TargetType == Models.Buffs.BuffEffectTypes.Projectile)
+                var buff = ResourceManager.Buffs.GetResource(id);
+                if (buff.Effect.TargetType == Models.Buffs.BuffEffectTypes.Projectile)
                 {
-                    var target = ResourceManager.Projectiles.GetResource(buff.Target);
-                    buff.ApplyUpgradeEffectOnObject(target.ModuleInfo);
+                    buff.Apply();
                     any = true;
                 }
             }
@@ -64,17 +63,9 @@ namespace BugDefender.Core.Users
 
             foreach (var id in user.Buffs)
             {
-                var buff = ResourceManager.Buffs.GetResource(id).Effect;
-                if (buff.TargetType == Models.Buffs.BuffEffectTypes.Enemy)
-                {
-                    var target = ResourceManager.Enemies.GetResource(buff.Target);
-                    buff.ApplyUpgradeEffectOnObject(target.ModuleInfo);
-                }
-                else if (buff.TargetType == Models.Buffs.BuffEffectTypes.Turret)
-                {
-                    var target = ResourceManager.Turrets.GetResource(buff.Target);
-                    buff.ApplyUpgradeEffectOnObject(target.ModuleInfo);
-                }
+                var buff = ResourceManager.Buffs.GetResource(id);
+                if (buff.Effect.TargetType != Models.Buffs.BuffEffectTypes.Projectile)
+                    buff.Apply();
             }
         }
 

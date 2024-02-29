@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {
-    [JsonDerivedType(typeof(UpdateModel))]
+    [JsonDerivedType(typeof(UpgradeDefinition))]
     [JsonDerivedType(typeof(BuffEffect))]
     public class UpgradeEffectModel
     {

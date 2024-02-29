@@ -227,7 +227,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void BuyUpgrade_Click(ButtonControl parent)
         {
-            if (_selectedTurret != null && !_unselectTurret && parent.Tag is UpdateModel upg)
+            if (_selectedTurret != null && !_unselectTurret && parent.Tag is UpgradeDefinition upg)
             {
                 if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID))
                 {

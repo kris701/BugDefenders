@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models;
+using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.UserCriterias;
 using System.Text;
 
@@ -32,6 +33,17 @@ namespace BugDefender.Core.Users.Models.Buffs
                 if (!criteria.IsValid(user.Stats))
                     return false;
             return true;
+        }
+
+        public void Apply()
+        {
+            var buff = ResourceManager.Buffs.GetResource(ID).Effect;
+            switch (buff.TargetType)
+            {
+                case BuffEffectTypes.Enemy: buff.ApplyUpgradeEffectOnObject(ResourceManager.Enemies.GetResource(buff.Target).ModuleInfo); break;
+                case BuffEffectTypes.Turret: buff.ApplyUpgradeEffectOnObject(ResourceManager.Turrets.GetResource(buff.Target).ModuleInfo); break;
+                case BuffEffectTypes.Projectile: buff.ApplyUpgradeEffectOnObject(ResourceManager.Projectiles.GetResource(buff.Target).ModuleInfo); break;
+            }
         }
 
         public string GetDescriptionString()

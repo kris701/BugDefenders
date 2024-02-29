@@ -1,8 +1,9 @@
-﻿using System.Text;
+﻿using BugDefender.Core.Game.Models.Entities.Turrets;
+using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Upgrades
 {
-    public class UpdateModel : UpgradeEffectModel, IDefinition
+    public class UpgradeDefinition : UpgradeEffectModel, IDefinition
     {
         public Guid ID { get; set; }
         public Guid? Requires { get; set; }
@@ -10,13 +11,19 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
         public string Description { get; set; }
         public int Cost { get; set; }
 
-        public UpdateModel(Guid iD, Guid? requires, string name, string description, int cost, List<EffectTarget> effects) : base(effects)
+        public UpgradeDefinition(Guid iD, Guid? requires, string name, string description, int cost, List<EffectTarget> effects) : base(effects)
         {
             ID = iD;
             Requires = requires;
             Name = name;
             Description = description;
             Cost = cost;
+        }
+
+        public void Apply(TurretInstance instance)
+        {
+            ApplyUpgradeEffectOnObject(instance.TurretInfo);
+            instance.HasUpgrades.Add(ID);
         }
 
         public string GetDescriptionString()
