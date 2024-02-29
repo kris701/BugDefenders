@@ -11,9 +11,9 @@
     }
   ],
   "Effect": {
-    "BuffType": "Turret",
-    "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
-    "Changes": [
+    "TargetType": "Turret",
+    "Target": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+    "Effects": [
       {
         "Target": "Range",
         "Modifier": 1.02

@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Game.Models;
-using BugDefender.Core.Users.Models.Buffs.BuffEffects;
 using BugDefender.Core.Users.Models.UserCriterias;
 using System.Text;
 
@@ -13,9 +12,9 @@ namespace BugDefender.Core.Users.Models.Buffs
         public Guid? Requires { get; set; }
 
         public List<IUserCriteria> Criterias { get; set; }
-        public IBuffEffect Effect { get; set; }
+        public BuffEffect Effect { get; set; }
 
-        public BuffDefinition(Guid iD, string name, string description, Guid? requires, List<IUserCriteria> criterias, IBuffEffect effect)
+        public BuffDefinition(Guid iD, string name, string description, Guid? requires, List<IUserCriteria> criterias, BuffEffect effect)
         {
             ID = iD;
             Name = name;

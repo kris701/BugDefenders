@@ -1,10 +1,10 @@
 ﻿using System.Text.Json;
+using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Resources;
 #if RELEASE
 using BugDefender.Core.Users.Helpers;
 #endif
 using BugDefender.Core.Users.Models;
-using BugDefender.Core.Users.Models.Buffs.BuffEffects;
 
 namespace BugDefender.Core.Users
 {
@@ -53,10 +53,10 @@ namespace BugDefender.Core.Users
             foreach (var id in user.Buffs)
             {
                 var buff = ResourceManager.Buffs.GetResource(id).Effect;
-                if (buff is ProjectileBuffEffect projectileBuff)
+                if (buff.TargetType.ToUpper() == "PROJECTILE")
                 {
-                    var target = ResourceManager.Projectiles.GetResource(projectileBuff.ProjectileID);
-                    ApplyChangesOnObject(target.ModuleInfo, projectileBuff.Changes);
+                    var target = ResourceManager.Projectiles.GetResource(buff.Target);
+                    buff.ApplyUpgradeEffectOnObject(target.ModuleInfo);
                     any = true;
                 }
             }
@@ -66,44 +66,16 @@ namespace BugDefender.Core.Users
             foreach (var id in user.Buffs)
             {
                 var buff = ResourceManager.Buffs.GetResource(id).Effect;
-                if (buff is EnemyBuffEffect enemyBuff)
+                if (buff.TargetType.ToUpper() == "ENEMY")
                 {
-                    var target = ResourceManager.Enemies.GetResource(enemyBuff.EnemyID);
-                    ApplyChangesOnObject(target.ModuleInfo, enemyBuff.Changes);
+                    var target = ResourceManager.Enemies.GetResource(buff.Target);
+                    buff.ApplyUpgradeEffectOnObject(target.ModuleInfo);
                 }
-                else if (buff is TurretBuffEffect turretBuff)
+                else if (buff.TargetType.ToUpper() == "TURRET")
                 {
-                    var target = ResourceManager.Turrets.GetResource(turretBuff.TurretID);
-                    ApplyChangesOnObject(target.ModuleInfo, turretBuff.Changes);
+                    var target = ResourceManager.Turrets.GetResource(buff.Target);
+                    buff.ApplyUpgradeEffectOnObject(target.ModuleInfo);
                 }
-            }
-        }
-
-        private void ApplyChangesOnObject<U>(U item, List<ChangeTarget> changes) where U : notnull
-        {
-            var propInfo = item.GetType().GetProperties();
-            foreach (var change in changes)
-            {
-                var first = propInfo.First(x => x.Name == change.Target);
-                if (first != null)
-                {
-                    var current = first.GetValue(item);
-                    if (current == null)
-                        throw new Exception("Unknown buff change attempted on object!");
-                    if (change.Value != null)
-                    {
-                        var newValue = JsonSerializer.Deserialize((dynamic)change.Value, current.GetType());
-                        first.SetValue(item, newValue);
-                    }
-                    else if (change.Modifier != 1 && current.GetType() == typeof(float))
-                    {
-                        first.SetValue(item, (float)current * change.Modifier);
-                    }
-                    else
-                        throw new Exception("Unknown buff change attempted on object!");
-                }
-                else
-                    throw new Exception("Unknown buff change attempted on object!");
             }
         }
 
