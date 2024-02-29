@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Bug Defender"
-#define MyAppVersion "0.0.8"
+#define MyAppVersion "0.0.9"
 #define MyAppPublisher "Kristian Skov Johansen"
 #define MyAppExeName "BugDefender.OpenGL.exe"
 #define MyAppIcoName "BugDefender.OpenGL/Icon.ico"
