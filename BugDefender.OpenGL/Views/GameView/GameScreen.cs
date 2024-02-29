@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities;
 using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
@@ -228,7 +227,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void BuyUpgrade_Click(ButtonControl parent)
         {
-            if (_selectedTurret != null && !_unselectTurret && parent.Tag is IUpgrade upg)
+            if (_selectedTurret != null && !_unselectTurret && parent.Tag is UpgradeDefinition upg)
             {
                 if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID))
                 {
@@ -603,11 +602,15 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _gameOver = true;
 
+#if RELEASE
                 if (CheatsHelper.Cheats.Count == 0)
                 {
-                    Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
-                    Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+#endif
+                Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
+                Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+#if RELEASE
                 }
+#endif
                 Parent.UIResources.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
                 SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, _game.Context.GameTime));

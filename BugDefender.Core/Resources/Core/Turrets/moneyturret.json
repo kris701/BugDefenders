@@ -12,22 +12,30 @@
   "AvailableAtWave": 30,
   "Upgrades": [
     {
-      "UpgradeType": "InvestmentTurret",
       "id": "fb819c31-1dca-4fe6-8e57-264391f1b51a",
       "requires": null,
       "Name": "Money",
       "Description": "More Money pr wave!",
       "Cost": 1000,
-      "MoneyPrWaveModifier": 1.2
+      "Effects": [
+        {
+          "Target": "MoneyPrWave",
+          "Modifier": 1.2
+        }
+      ]
     },
     {
-      "UpgradeType": "InvestmentTurret",
       "id": "bc9c3ea1-afca-4ac1-89d7-afa54727d51b",
       "requires": "fb819c31-1dca-4fe6-8e57-264391f1b51a",
       "Name": "Money",
       "Description": "Even More Money pr wave!",
       "Cost": 2000,
-      "MoneyPrWaveModifier": 1.2
+      "Effects": [
+        {
+          "Target": "MoneyPrWave",
+          "Modifier": 1.2
+        }
+      ]
     }
   ]
 }

@@ -52,7 +52,7 @@ namespace BugDefender.Core.Game.Modules.Turrets
                 return false;
             OnBeforeTurretUpgraded?.Invoke(turret);
 
-            upgrade.ApplyUpgrade(turret);
+            upgrade.Apply(turret);
             Context.Money -= upgrade.Cost;
             Context.Outcome.TurretUpgraded(turret.DefinitionID);
 

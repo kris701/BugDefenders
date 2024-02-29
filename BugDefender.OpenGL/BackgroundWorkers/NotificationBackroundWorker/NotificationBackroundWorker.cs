@@ -96,7 +96,10 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         public void Skip()
         {
             if (_notification != null)
-                _waitingFor = TimeSpan.Zero;
+            {
+                _currentMoveState = MoveState.Down;
+                _currentHoldTime = TimeSpan.Zero;
+            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

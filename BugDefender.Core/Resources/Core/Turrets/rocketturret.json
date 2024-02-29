@@ -15,27 +15,30 @@
   "AvailableAtWave": 5,
   "Upgrades": [
     {
-      "UpgradeType": "ProjectileTurret",
       "id": "1d5bfdd5-470b-4037-a434-cdc6bb8a4367",
       "requires": null,
       "Name": "Firing Rate",
       "Description": "Increases the firing rate of the turret.",
       "Cost": 1000,
-      "RangeModifier": 1,
-      "CooldownModifier": 0.5
+      "Effects": [
+        {
+          "Target": "Cooldown",
+          "Modifier": 0.5
+        }
+      ]
     },
     {
-      "UpgradeType": "ExplosiveProjectile",
       "id": "8e6fc0ac-6487-4e43-b9f0-ecd1f0766169",
       "requires": null,
       "Name": "Rocket Damage",
       "Description": "Makes the turrets rockets do more damage.",
       "Cost": 1500,
-      "DamageModifier": 2,
-      "SplashRangeModifier": 1,
-      "TriggerRangeModifier": 1,
-      "SlowingFactorModifier": 1,
-      "SlowingDurationModifier": 1
+      "Effects": [
+        {
+          "Target": "ProjectileInfo.Damage",
+          "Modifier": 2
+        }
+      ]
     }
   ]
 }

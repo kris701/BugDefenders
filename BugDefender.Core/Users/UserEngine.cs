@@ -4,7 +4,6 @@ using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Helpers;
 #endif
 using BugDefender.Core.Users.Models;
-using BugDefender.Core.Users.Models.Buffs.BuffEffects;
 
 namespace BugDefender.Core.Users
 {
@@ -52,11 +51,10 @@ namespace BugDefender.Core.Users
             bool any = false;
             foreach (var id in user.Buffs)
             {
-                var buff = ResourceManager.Buffs.GetResource(id).Effect;
-                if (buff is ProjectileBuffEffect projectileBuff)
+                var buff = ResourceManager.Buffs.GetResource(id);
+                if (buff.Effect.TargetType == Models.Buffs.BuffEffectTypes.Projectile)
                 {
-                    var target = ResourceManager.Projectiles.GetResource(projectileBuff.ProjectileID);
-                    ApplyChangesOnObject(target.ModuleInfo, projectileBuff.Changes);
+                    buff.Apply();
                     any = true;
                 }
             }
@@ -65,45 +63,9 @@ namespace BugDefender.Core.Users
 
             foreach (var id in user.Buffs)
             {
-                var buff = ResourceManager.Buffs.GetResource(id).Effect;
-                if (buff is EnemyBuffEffect enemyBuff)
-                {
-                    var target = ResourceManager.Enemies.GetResource(enemyBuff.EnemyID);
-                    ApplyChangesOnObject(target.ModuleInfo, enemyBuff.Changes);
-                }
-                else if (buff is TurretBuffEffect turretBuff)
-                {
-                    var target = ResourceManager.Turrets.GetResource(turretBuff.TurretID);
-                    ApplyChangesOnObject(target.ModuleInfo, turretBuff.Changes);
-                }
-            }
-        }
-
-        private void ApplyChangesOnObject<U>(U item, List<ChangeTarget> changes) where U : notnull
-        {
-            var propInfo = item.GetType().GetProperties();
-            foreach (var change in changes)
-            {
-                var first = propInfo.First(x => x.Name == change.Target);
-                if (first != null)
-                {
-                    var current = first.GetValue(item);
-                    if (current == null)
-                        throw new Exception("Unknown buff change attempted on object!");
-                    if (change.Value != null)
-                    {
-                        var newValue = JsonSerializer.Deserialize((dynamic)change.Value, current.GetType());
-                        first.SetValue(item, newValue);
-                    }
-                    else if (change.Modifier != 1 && current.GetType() == typeof(float))
-                    {
-                        first.SetValue(item, (float)current * change.Modifier);
-                    }
-                    else
-                        throw new Exception("Unknown buff change attempted on object!");
-                }
-                else
-                    throw new Exception("Unknown buff change attempted on object!");
+                var buff = ResourceManager.Buffs.GetResource(id);
+                if (buff.Effect.TargetType != Models.Buffs.BuffEffectTypes.Projectile)
+                    buff.Apply();
             }
         }
 

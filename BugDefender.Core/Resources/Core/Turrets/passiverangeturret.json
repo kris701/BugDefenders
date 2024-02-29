@@ -17,32 +17,30 @@
   "AvailableAtWave": 20,
   "Upgrades": [
     {
-      "UpgradeType": "PassiveTurret",
       "id": "eb52a632-0e95-4d9b-81f3-10edff81075f",
       "requires": null,
       "Name": "Range",
       "Description": "Increases the range of the turret.",
       "Cost": 2000,
-      "RangeModifier": 1.2,
-      "RangeModifierModifier": 1,
-      "DamageModifierModifier": 1,
-      "CooldownModifierModifier": 1,
-      "SlowingFactorModifierModifier": 1,
-      "SlowingDurationModifierModifier": 1
+      "Effects": [
+        {
+          "Target": "Range",
+          "Modifier": 1.2
+        }
+      ]
     },
     {
-      "UpgradeType": "PassiveTurret",
       "id": "92901667-d2d1-48cb-841c-3b737142d66c",
       "requires": "eb52a632-0e95-4d9b-81f3-10edff81075f",
       "Name": "Range Modifier",
       "Description": "Increases the range modifier of the turret.",
       "Cost": 4000,
-      "RangeModifier": 1,
-      "RangeModifierModifier": 1.25,
-      "DamageModifierModifier": 1,
-      "CooldownModifierModifier": 1,
-      "SlowingFactorModifierModifier": 1,
-      "SlowingDurationModifierModifier": 1
+      "Effects": [
+        {
+          "Target": "RangeModifier",
+          "Modifier": 1.25
+        }
+      ]
     }
   ]
 }

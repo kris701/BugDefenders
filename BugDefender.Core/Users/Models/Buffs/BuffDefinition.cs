@@ -1,5 +1,5 @@
 ﻿using BugDefender.Core.Game.Models;
-using BugDefender.Core.Users.Models.Buffs.BuffEffects;
+using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.UserCriterias;
 using System.Text;
 
@@ -13,9 +13,9 @@ namespace BugDefender.Core.Users.Models.Buffs
         public Guid? Requires { get; set; }
 
         public List<IUserCriteria> Criterias { get; set; }
-        public IBuffEffect Effect { get; set; }
+        public BuffEffect Effect { get; set; }
 
-        public BuffDefinition(Guid iD, string name, string description, Guid? requires, List<IUserCriteria> criterias, IBuffEffect effect)
+        public BuffDefinition(Guid iD, string name, string description, Guid? requires, List<IUserCriteria> criterias, BuffEffect effect)
         {
             ID = iD;
             Name = name;
@@ -33,6 +33,17 @@ namespace BugDefender.Core.Users.Models.Buffs
                 if (!criteria.IsValid(user.Stats))
                     return false;
             return true;
+        }
+
+        public void Apply()
+        {
+            var buff = ResourceManager.Buffs.GetResource(ID).Effect;
+            switch (buff.TargetType)
+            {
+                case BuffEffectTypes.Enemy: buff.ApplyUpgradeEffectOnObject(ResourceManager.Enemies.GetResource(buff.Target).ModuleInfo); break;
+                case BuffEffectTypes.Turret: buff.ApplyUpgradeEffectOnObject(ResourceManager.Turrets.GetResource(buff.Target).ModuleInfo); break;
+                case BuffEffectTypes.Projectile: buff.ApplyUpgradeEffectOnObject(ResourceManager.Projectiles.GetResource(buff.Target).ModuleInfo); break;
+            }
         }
 
         public string GetDescriptionString()

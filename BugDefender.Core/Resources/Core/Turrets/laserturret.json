@@ -30,69 +30,73 @@
   "AvailableAtWave": 0,
   "Upgrades": [
     {
-      "UpgradeType": "LaserTurret",
       "id": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
       "requires": null,
       "Name": "Range and Damage",
       "Description": "Increases the range and damage of the turret.",
       "Cost": 500,
-      "RangeModifier": 2,
-      "DamageModifier": 2,
-      "CooldownModifier": 1,
-      "SlowingFactorModifier": 1,
-      "SlowingDurationModifier": 1
+      "Effects": [
+        {
+          "Target": "Range",
+          "Modifier": 1.2
+        },
+        {
+          "Target": "Damage",
+          "Modifier": 2
+        }
+      ]
     },
     {
-      "UpgradeType": "LaserTurret",
       "id": "9715ffbf-75c7-48c2-a05f-8b31c638e02c",
       "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
       "Name": "Firing Rate",
       "Description": "Increases the firing rate of the turret.",
       "Cost": 500,
-      "RangeModifier": 1,
-      "DamageModifier": 1,
-      "CooldownModifier": 0.5,
-      "SlowingFactorModifier": 1,
-      "SlowingDurationModifier": 1
+      "Effects": [
+        {
+          "Target": "Cooldown",
+          "Modifier": 0.5
+        }
+      ]
     },
     {
-      "UpgradeType": "LaserTurret",
       "id": "c44f33ca-bb55-495c-9307-066fa8a1ad78",
       "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
       "Name": "Firing Rate",
       "Description": "Increases the firing rate of the turret.",
       "Cost": 1000,
-      "RangeModifier": 1,
-      "DamageModifier": 1,
-      "CooldownModifier": 0.5,
-      "SlowingFactorModifier": 1,
-      "SlowingDurationModifier": 1
+      "Effects": [
+        {
+          "Target": "Cooldown",
+          "Modifier": 0.5
+        }
+      ]
     },
     {
-      "UpgradeType": "LaserTurret",
       "id": "825afcf6-10b7-42e3-b18f-9925f998d058",
       "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
       "Name": "Firing Rate",
       "Description": "Increases the firing rate of the turret.",
       "Cost": 1500,
-      "RangeModifier": 1,
-      "DamageModifier": 1,
-      "CooldownModifier": 0.5,
-      "SlowingFactorModifier": 1,
-      "SlowingDurationModifier": 1
+      "Effects": [
+        {
+          "Target": "Cooldown",
+          "Modifier": 0.5
+        }
+      ]
     },
     {
-      "UpgradeType": "LaserTurret",
       "id": "78b3606d-f4a6-465b-a5bf-625308dbeb45",
       "requires": "b76f72a7-87cc-4b0a-9929-a1ecc1b26ab0",
       "Name": "Firing Rate",
       "Description": "Increases the firing rate of the turret.",
       "Cost": 2000,
-      "RangeModifier": 1,
-      "DamageModifier": 1,
-      "CooldownModifier": 0.5,
-      "SlowingFactorModifier": 1,
-      "SlowingDurationModifier": 1
+      "Effects": [
+        {
+          "Target": "Cooldown",
+          "Modifier": 0.5
+        }
+      ]
     }
   ]
 }
