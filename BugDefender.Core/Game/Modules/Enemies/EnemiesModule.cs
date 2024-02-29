@@ -19,7 +19,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
         public SingleEnemyModule SingleEnemiesModule { get; private set; }
 
         private readonly GameTimer _enemySpawnTimer;
-        private readonly List<EnemyInstance> _spawnQueue = new List<EnemyInstance>();
+        private readonly HashSet<EnemyInstance> _spawnQueue = new HashSet<EnemyInstance>();
         private int _waveQueue = 0;
 
         public EnemiesModule(GameContext context, GameEngine game) : base(context, game)

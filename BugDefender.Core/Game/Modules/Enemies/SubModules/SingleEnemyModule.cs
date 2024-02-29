@@ -10,12 +10,12 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
         {
         }
 
-        public override List<EnemyInstance> QueueEnemies(Guid id)
+        public override HashSet<EnemyInstance> QueueEnemies(Guid id)
         {
             if (!EnemyOptions.Contains(id))
                 throw new Exception("Module attempted to queue enemies that does not match its module type!");
 
-            var enemies = new List<EnemyInstance>();
+            var enemies = new HashSet<EnemyInstance>();
             var template = ResourceManager.Enemies.GetResource(id);
             var enemy = new EnemyInstance(template, Context.Evolution)
             {
@@ -27,7 +27,7 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
             return enemies;
         }
 
-        public override List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, List<EnemyInstance> queue)
+        public override List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, HashSet<EnemyInstance> queue)
         {
             if (queue.Count > 0)
             {
