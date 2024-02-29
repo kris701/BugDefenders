@@ -7,12 +7,16 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
-    public partial class SettingsView : BaseView
+    public partial class SettingsView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
         private readonly SettingsDefinition _settings;
         private readonly KeyWatcher _escapeKeyWatcher;
-        public SettingsView(UIEngine parent) : base(parent, _id)
+        public SettingsView(UIEngine parent) : base(
+            parent,
+            _id,
+            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             _settings = parent.CurrentUser.UserData.Copy();
             ScaleValue = parent.CurrentUser.UserData.Scale;

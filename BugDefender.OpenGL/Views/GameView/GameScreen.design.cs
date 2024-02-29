@@ -13,7 +13,7 @@ using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
 {
-    public partial class GameScreen : BaseView
+    public partial class GameScreen : BaseAnimatedView
     {
         private LabelControl _moneyLabel;
         private LabelControl _hpLabel;

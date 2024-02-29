@@ -1,0 +1,22 @@
+name: Build And Test
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  BuildTest:
+    runs-on: ubuntu-latest
+    name: Build Test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+          
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build All
+        run: dotnet build -c Release
+
+      - name: Test All
+        run: dotnet test

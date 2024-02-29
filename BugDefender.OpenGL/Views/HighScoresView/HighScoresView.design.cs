@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.HighScoresView
 {
-    public partial class HighScoresView : BaseView
+    public partial class HighScoresView : BaseAnimatedView
     {
         private static readonly int _showCount = 13;
 

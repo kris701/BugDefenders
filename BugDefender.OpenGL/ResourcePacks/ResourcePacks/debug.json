@@ -150,6 +150,39 @@
   ],
   "TextureSets": [
     {
+      "ID": "1c960708-4fd0-4313-8763-8191b6818bb4",
+      "FrameTime": 10,
+      "Contents": [
+        "Views/Transitions/in_1",
+        "Views/Transitions/in_2",
+        "Views/Transitions/in_3",
+        "Views/Transitions/in_4",
+        "Views/Transitions/in_5",
+        "Views/Transitions/in_6",
+        "Views/Transitions/in_7",
+        "Views/Transitions/in_8",
+        "Views/Transitions/in_9",
+        "Views/Transitions/in_10"
+      ]
+    },
+    {
+      "ID": "9eb83a7f-5244-4ccc-8ef3-e88225ff1c18",
+      "FrameTime": 10,
+      "Contents": [
+        "Views/Transitions/in_10",
+        "Views/Transitions/in_9",
+        "Views/Transitions/in_8",
+        "Views/Transitions/in_7",
+        "Views/Transitions/in_6",
+        "Views/Transitions/in_5",
+        "Views/Transitions/in_4",
+        "Views/Transitions/in_3",
+        "Views/Transitions/in_2",
+        "Views/Transitions/in_1"
+      ]
+    },
+
+    {
       "ID": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b",
       "FrameTime": 50,
       "Contents": [

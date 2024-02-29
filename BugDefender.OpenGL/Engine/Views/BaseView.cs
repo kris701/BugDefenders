@@ -1,23 +1,16 @@
-﻿using BugDefender.OpenGL.Engine.Helpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.Engine.Views
 {
     public abstract class BaseView : BaseScalable, IView
     {
         public Guid ID { get; set; }
-        public FadeState State { get; set; } = FadeState.FadeIn;
-
-        public int FadeInTime { get; set; } = 200;
-        public int FadeOutTime { get; set; } = 200;
-
-        private double fadeTimer = 0;
-        private int fadeValue = 255;
-        private IView _switchTo;
-        private readonly Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
         private readonly SortedDictionary<int, List<IControl>> _viewLayers;
 
         public BaseView(UIEngine parent, Guid id) : base(parent)
@@ -54,7 +47,6 @@ namespace BugDefender.OpenGL.Engine.Views
             foreach (var key in _viewLayers.Keys)
                 foreach (var control in _viewLayers[key])
                     control.Draw(gameTime, spriteBatch);
-            spriteBatch.FillScreen(_fillColor, Parent.ScreenWidth(), Parent.ScreenHeight(), fadeValue);
         }
 
         public virtual void Initialize()
@@ -69,30 +61,6 @@ namespace BugDefender.OpenGL.Engine.Views
             foreach (var key in _viewLayers.Keys)
                 foreach (var control in _viewLayers[key])
                     control.Update(gameTime);
-
-            switch (State)
-            {
-                case FadeState.FadeIn:
-                    fadeTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-                    fadeValue = 255 - (int)(fadeTimer / FadeInTime * 255);
-                    if (fadeTimer >= FadeInTime)
-                    {
-                        fadeTimer = 0;
-                        State = FadeState.Hold;
-                        fadeValue = 0;
-                    }
-                    break;
-                case FadeState.FadeOut:
-                    fadeTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-                    fadeValue = (int)(fadeTimer / FadeOutTime * 255);
-                    if (fadeTimer >= FadeOutTime)
-                    {
-                        if (_switchTo != null)
-                            Parent.CurrentScreen = _switchTo;
-                        State = FadeState.PostHold;
-                    }
-                    break;
-            }
             OnUpdate(gameTime);
         }
 
@@ -101,13 +69,9 @@ namespace BugDefender.OpenGL.Engine.Views
 
         }
 
-        public void SwitchView(IView screen)
+        public virtual void SwitchView(IView screen)
         {
-            if (_switchTo == null)
-            {
-                _switchTo = screen;
-                State = FadeState.FadeOut;
-            }
+            Parent.CurrentScreen = screen;
         }
     }
 }

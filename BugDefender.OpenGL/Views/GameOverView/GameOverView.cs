@@ -5,14 +5,18 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
-    public partial class GameOverView : BaseView
+    public partial class GameOverView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
 
         private readonly Texture2D _screen;
         private readonly int _score;
         private readonly TimeSpan _gameTime;
-        public GameOverView(UIEngine parent, Texture2D screen, int score, TimeSpan gameTime) : base(parent, _id)
+        public GameOverView(UIEngine parent, Texture2D screen, int score, TimeSpan gameTime) : base(
+            parent,
+            _id,
+            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             _screen = screen;
             _score = score;

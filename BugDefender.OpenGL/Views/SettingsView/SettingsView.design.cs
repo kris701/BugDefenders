@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
-    public partial class SettingsView : BaseView
+    public partial class SettingsView : BaseAnimatedView
     {
         private readonly List<float> _scaleOptions = new List<float>()
         {

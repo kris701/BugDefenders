@@ -7,7 +7,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 {
-    public partial class AcceptView : BaseView
+    public partial class AcceptView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("937b4268-87fc-4f72-a180-e53ebd47a18d");
         private readonly SettingsDefinition _newSettings;
@@ -15,7 +15,11 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
         private readonly KeyWatcher _escapeKeyWatcher;
         private TimeSpan _waitFor = TimeSpan.FromSeconds(10);
         private int _secsLeft = 10;
-        public AcceptView(UIEngine parent, SettingsDefinition oldSettings, SettingsDefinition newSettings) : base(parent, _id)
+        public AcceptView(UIEngine parent, SettingsDefinition oldSettings, SettingsDefinition newSettings) : base(
+            parent,
+            _id,
+            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             _oldSettings = oldSettings;
             _newSettings = newSettings;

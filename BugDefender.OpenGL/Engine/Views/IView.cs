@@ -4,13 +4,9 @@ using System;
 
 namespace BugDefender.OpenGL.Engine.Views
 {
-    public enum FadeState { FadeIn, Hold, FadeOut, PostHold }
     public interface IView : IScalable
     {
         public Guid ID { get; set; }
-        public int FadeInTime { get; }
-        public int FadeOutTime { get; }
-        public FadeState State { get; set; }
 
         public void ClearLayer(int layer);
         public void AddControl(int layer, IControl control);
@@ -20,5 +16,6 @@ namespace BugDefender.OpenGL.Engine.Views
         public void Update(GameTime gameTime);
         public void OnUpdate(GameTime gameTime);
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        public void SwitchView(IView screen);
     }
 }

@@ -7,7 +7,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.MainMenu
 {
-    public partial class MainMenuView : BaseView
+    public partial class MainMenuView : BaseAnimatedView
     {
         private TextInputControl _cheatsInput;
         public override void Initialize()

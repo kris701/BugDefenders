@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.AchivementsView
 {
-    public partial class AchivementsView : BaseView
+    public partial class AchivementsView : BaseAnimatedView
     {
         private readonly int _selectionsPrPage = 5;
         private readonly List<List<AchivementControl>> _achivementsPages = new List<List<AchivementControl>>();
