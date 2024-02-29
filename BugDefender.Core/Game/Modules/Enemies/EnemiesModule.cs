@@ -46,7 +46,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
 
         internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanDamage);
         internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanDamage);
-        internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, List<EnemyTerrrainTypes> canDamage)
+        internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canDamage)
         {
             EnemyInstance? best = null;
             switch (targetingType)
@@ -57,7 +57,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
-                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        var dist = MathHelpers.Distance(item, enemy);
                         if (dist <= range && dist < minDist)
                         {
                             minDist = dist;
@@ -71,7 +71,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
-                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        var dist = MathHelpers.Distance(item, enemy);
                         if (dist <= range && enemy.Health < lowestHP)
                         {
                             lowestHP = enemy.Health;
@@ -85,7 +85,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
-                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        var dist = MathHelpers.Distance(item, enemy);
                         if (dist <= range && enemy.Health > highestHP)
                         {
                             highestHP = enemy.Health;

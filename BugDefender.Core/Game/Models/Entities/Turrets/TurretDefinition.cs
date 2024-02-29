@@ -12,11 +12,11 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets
         public float Size { get; set; }
         public int Cost { get; set; }
         public ITurretModule ModuleInfo { get; set; }
-        public List<EnemyTerrrainTypes> CanDamage { get; set; }
+        public HashSet<EnemyTerrrainTypes> CanDamage { get; set; }
         public List<UpgradeDefinition> Upgrades { get; set; }
         public int AvailableAtWave { get; set; }
 
-        public TurretDefinition(Guid iD, string name, string description, float size, int cost, ITurretModule moduleInfo, List<EnemyTerrrainTypes> canDamage, List<UpgradeDefinition> upgrades, int availableAtWave)
+        public TurretDefinition(Guid iD, string name, string description, float size, int cost, ITurretModule moduleInfo, HashSet<EnemyTerrrainTypes> canDamage, List<UpgradeDefinition> upgrades, int availableAtWave)
         {
             ID = iD;
             Name = name;

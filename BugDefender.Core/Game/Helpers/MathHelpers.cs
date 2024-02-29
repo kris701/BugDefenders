@@ -19,8 +19,8 @@ namespace BugDefender.Core.Game.Helpers
                 new Rectangle((int)e2.X, (int)e2.Y, (int)e2.Size, (int)e2.Size));
         }
 
-        public static float Distance(IPosition e1, IPosition e2) => Distance(e1.CenterX, e1.CenterY, e2.CenterX, e2.CenterY);
-        public static float Distance(EnemyInstance e1, FloatPoint w2) => Distance(e1.CenterX, e1.CenterY, w2.X, w2.Y);
+        public static float Distance(IPosition p1, IPosition p2) => Distance(p1.CenterX, p1.CenterY, p2.CenterX, p2.CenterY);
+        public static float Distance(IPosition p1, FloatPoint p2) => Distance(p1.CenterX, p1.CenterY, p2.X, p2.Y);
         public static float Distance(double x1, double y1, double x2, double y2) => (float)Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
         public static float GetAngle(FloatPoint target, IPosition item) => GetAngle(target.X, target.Y, item.CenterX, item.CenterY);

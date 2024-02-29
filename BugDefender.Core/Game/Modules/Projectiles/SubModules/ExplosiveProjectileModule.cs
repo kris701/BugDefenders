@@ -65,7 +65,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             bool isWithin = false;
             foreach (var enemy in Context.CurrentEnemies)
             {
-                if (MathHelpers.Distance(projectile.CenterX, projectile.CenterY, enemy.CenterX, enemy.CenterY) < def.TriggerRange)
+                if (MathHelpers.Distance(projectile, enemy) < def.TriggerRange)
                 {
                     isWithin = true;
                     break;

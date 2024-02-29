@@ -59,8 +59,8 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
                     return true;
                 }
                 target = Context.Map.Paths[enemy.PathID][enemy.WayPointID];
+                enemy.Angle = MathHelpers.GetAngle(target, enemy);
             }
-            enemy.Angle = MathHelpers.GetAngle(target, enemy);
             var change = MathHelpers.GetPredictedLocation(enemy.Angle, def.GetSpeed(), Context.GameStyle.EnemySpeedMultiplier);
             enemy.X += change.X;
             enemy.Y += change.Y;

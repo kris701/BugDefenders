@@ -4,6 +4,7 @@ using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -36,40 +37,43 @@ namespace BugDefender.OpenGL.Views.GameView
 
         public void UpdateEntities(HashSet<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime>? updateOverride = null)
         {
-            foreach (var entity in entities)
+            if (!entities.SetEquals(_entities.Keys))
             {
-                if (_entities.ContainsKey(entity))
+                foreach (var entity in entities)
                 {
-                    var toUpdate = _entities[entity];
-                    if (updateOverride != null)
-                        updateOverride(entity, toUpdate, passed);
-                    else if (entity is IPosition pos)
+                    if (!_entities.ContainsKey(entity))
                     {
-                        toUpdate.X = pos.X + XOffset;
-                        toUpdate.Y = pos.Y + YOffset;
-                        toUpdate.Rotation = pos.Angle + (float)Math.PI / 2;
+                        U newControl = toControl(entity);
+                        newControl.Initialize();
+                        Screen.AddControl(Layer, newControl);
+                        _entities.Add(entity, newControl);
                     }
-                    else
-                        throw new NotImplementedException("Entity update not set for this type!");
                 }
-                else
+                var toRemove = new List<T>();
+                foreach (var entity in _entities.Keys)
+                    if (!entities.Contains(entity))
+                        toRemove.Add(entity);
+                foreach (var entity in toRemove)
                 {
-                    U newControl = toControl(entity);
-                    newControl.Initialize();
-                    Screen.AddControl(Layer, newControl);
-                    _entities.Add(entity, newControl);
+                    if (OnDelete != null)
+                        OnDelete.Invoke(_entities[entity]);
+                    Screen.RemoveControl(Layer, _entities[entity]);
+                    _entities.Remove(entity);
                 }
             }
-            var toRemove = new List<T>();
-            foreach (var entity in _entities.Keys)
-                if (!entities.Contains(entity))
-                    toRemove.Add(entity);
-            foreach (var entity in toRemove)
+
+            foreach (var entity in entities)
             {
-                if (OnDelete != null)
-                    OnDelete.Invoke(_entities[entity]);
-                Screen.RemoveControl(Layer, _entities[entity]);
-                _entities.Remove(entity);
+                if (updateOverride != null)
+                    updateOverride(entity, _entities[entity], passed);
+                else if (entity is IPosition pos)
+                {
+                    _entities[entity].X = pos.X + XOffset;
+                    _entities[entity].Y = pos.Y + YOffset;
+                    _entities[entity].Rotation = pos.Angle + (float)Math.PI / 2;
+                }
+                else
+                    throw new NotImplementedException("Entity update not set for this type!");
             }
         }
     }
