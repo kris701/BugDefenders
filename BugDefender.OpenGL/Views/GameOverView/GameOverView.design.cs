@@ -7,7 +7,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
-    public partial class GameOverView : BaseView
+    public partial class GameOverView : BaseAnimatedView
     {
         public override void Initialize()
         {

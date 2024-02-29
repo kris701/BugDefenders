@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
-    public partial class GameSetupView : BaseView
+    public partial class GameSetupView : BaseAnimatedView
     {
         private TileControl _mapPreviewTile;
         private LabelControl _mapNameLabel;

@@ -8,7 +8,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
-    public partial class PermaBuffsView : BaseView
+    public partial class PermaBuffsView : BaseAnimatedView
     {
         private readonly int _upgradeViewCount = 5;
         public override void Initialize()

@@ -25,7 +25,7 @@ using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
 {
-    public partial class GameScreen : BaseView
+    public partial class GameScreen : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
@@ -52,7 +52,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
 
-        public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(parent, _id)
+        public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(
+            parent,
+            _id,
+            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             _currentGameStyle = gameStyleID;
             _currentMap = mapID;

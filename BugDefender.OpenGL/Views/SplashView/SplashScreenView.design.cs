@@ -4,7 +4,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.SplashScreen
 {
-    public partial class SplashScreenView : BaseView
+    public partial class SplashScreenView : BaseFadeView
     {
         public override void Initialize()
         {

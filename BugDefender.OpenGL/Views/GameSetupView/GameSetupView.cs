@@ -8,7 +8,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
-    public partial class GameSetupView : BaseView
+    public partial class GameSetupView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
 
@@ -18,7 +18,11 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private ButtonControl? _selectedMapButton;
         private readonly KeyWatcher _escapeKeyWatcher;
 
-        public GameSetupView(UIEngine parent) : base(parent, _id)
+        public GameSetupView(UIEngine parent) : base(
+            parent,
+            _id,
+            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();

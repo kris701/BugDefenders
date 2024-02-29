@@ -7,7 +7,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 {
-    public partial class AcceptView : BaseView
+    public partial class AcceptView : BaseAnimatedView
     {
         private LabelControl _timeLeftLabel;
         public override void Initialize()

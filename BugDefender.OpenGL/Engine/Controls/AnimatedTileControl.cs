@@ -37,6 +37,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                 if (Height == 0)
                     Height = TileSet[0].Height;
             }
+            _finished = false;
             base.Initialize();
         }
 

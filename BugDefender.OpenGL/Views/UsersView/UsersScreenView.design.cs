@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.UsersScreen
 {
-    public partial class UsersScreenView : BaseView
+    public partial class UsersScreenView : BaseAnimatedView
     {
         private readonly List<ButtonControl> _usersButtons = new List<ButtonControl>();
         private readonly List<ButtonControl> _usersDeleteButtons = new List<ButtonControl>();
