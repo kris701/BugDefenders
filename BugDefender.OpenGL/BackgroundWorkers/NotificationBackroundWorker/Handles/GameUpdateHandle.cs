@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles
 {
@@ -11,16 +12,19 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
         public NotificationBackroundWorker Parent { get; }
 
         private bool _checked = false;
+        private bool _isDoneCheckingForUpdate = false;
+        private bool _hasUpdate = false;
+        private string _availableUpdateVersion = "";
         public GameUpdateHandle(NotificationBackroundWorker parent)
         {
             Parent = parent;
+            CheckForUpdate();
         }
 
-        public NotificationItem? GetNewNotification()
+        private void CheckForUpdate()
         {
-            if (!_checked)
+            Task.Run(() =>
             {
-                _checked = true;
                 try
                 {
                     var thisVersion = Assembly.GetEntryAssembly()?.GetName().Version!;
@@ -35,14 +39,26 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
                         content = content.Substring(0, content.IndexOf(','));
                         content = content.Replace("\"", "");
 
+                        _availableUpdateVersion = content;
                         if (thisVersionStr != content)
-                            return new NotificationItem("", new ManualDefinition($"Update Available", $"Version {content} is available! Click here to go to the download page."), false, (s) => { OpenUrl("https://github.com/kris701/BugDefenders.Public/releases"); });
+                            _hasUpdate = true;
                     }
                 }
                 catch
                 {
-                    return new NotificationItem("", new ManualDefinition($"Update Check Failed", $"An error occured while checking for updates...."), false);
+                    _hasUpdate = false;
                 }
+            });
+            _isDoneCheckingForUpdate = true;
+        }
+
+        public NotificationItem? GetNewNotification()
+        {
+            if (!_checked && _isDoneCheckingForUpdate)
+            {
+                _checked = true;
+                if (_hasUpdate)
+                    return new NotificationItem("", new ManualDefinition($"Update Available", $"Version {_availableUpdateVersion} is available! Click here to go to the download page."), false, (s) => { OpenUrl("https://github.com/kris701/BugDefenders.Public/releases"); });
             }
             return null;
         }
