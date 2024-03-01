@@ -32,7 +32,14 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets
             HasUpgrades = new List<Guid>();
         }
 
-        public TurretDefinition GetDefinition() => ResourceManager.Turrets.GetResource(DefinitionID);
+        private TurretDefinition? _definition;
+        public TurretDefinition GetDefinition()
+        {
+            if (_definition != null)
+                return _definition;
+            _definition = ResourceManager.Turrets.GetResource(DefinitionID);
+            return _definition;
+        }
 
         public int GetTurretWorth()
         {

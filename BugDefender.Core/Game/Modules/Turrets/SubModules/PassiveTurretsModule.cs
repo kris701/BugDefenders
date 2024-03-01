@@ -34,12 +34,13 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
                 if (turret.TurretInfo is PassiveTurretDefinition def)
                 {
                     _effectedTurrets.Add(turret, new HashSet<TurretInstance>());
+                    var range = (float)Math.Pow(def.Range, 2);
                     foreach (var other in Context.Turrets)
                     {
                         if (other == turret || other.TurretInfo is PassiveTurretDefinition)
                             continue;
-                        var dist = MathHelpers.Distance(turret, other);
-                        if (dist < def.Range)
+                        var dist = MathHelpers.SqrDistance(turret, other);
+                        if (dist < range)
                             _effectedTurrets[turret].Add(other);
                     }
                 }

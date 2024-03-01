@@ -2,6 +2,7 @@
 using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using System;
 
 namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
 {
@@ -37,7 +38,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                 projectile.X += (float)xMod * def.Speed;
                 projectile.Y += (float)yMod * def.Speed;
 
-                if (IsWithinTriggerRange(projectile, def) ||
+                if (IsWithinTriggerRange(projectile, def, def.TriggerRange) ||
                     projectile.X < 0 || projectile.X > Context.Map.Width ||
                     projectile.Y < 0 || projectile.Y > Context.Map.Height)
                     return true;
@@ -49,7 +50,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                     projectile.X += (float)xMod * ((float)def.Speed / 5);
                     projectile.Y += (float)yMod * ((float)def.Speed / 5);
 
-                    if (IsWithinTriggerRange(projectile, def) ||
+                    if (IsWithinTriggerRange(projectile, def, def.TriggerRange) ||
                         projectile.X < 0 || projectile.X > Context.Map.Width ||
                         projectile.Y < 0 || projectile.Y > Context.Map.Height)
                         return true;
@@ -58,14 +59,15 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             return false;
         }
 
-        private bool IsWithinTriggerRange(ProjectileInstance projectile, ExplosiveProjectileDefinition def)
+        private bool IsWithinTriggerRange(ProjectileInstance projectile, ExplosiveProjectileDefinition def, float triggerRange)
         {
             if (projectile.Source == null)
                 return false;
+            triggerRange = (float)Math.Pow(triggerRange, 2);
             bool isWithin = false;
             foreach (var enemy in Context.CurrentEnemies)
             {
-                if (MathHelpers.Distance(projectile, enemy) < def.TriggerRange)
+                if (MathHelpers.SqrDistance(projectile, enemy) < triggerRange)
                 {
                     isWithin = true;
                     break;
@@ -75,8 +77,8 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             {
                 for (int i = 0; i < Context.CurrentEnemies.Count; i++)
                 {
-                    var dist = MathHelpers.Distance(projectile, Context.CurrentEnemies.ElementAt(i));
-                    if (dist < def.SplashRange)
+                    var dist = MathHelpers.SqrDistance(projectile, Context.CurrentEnemies.ElementAt(i));
+                    if (dist < triggerRange)
                     {
                         if (Context.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
                             SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);

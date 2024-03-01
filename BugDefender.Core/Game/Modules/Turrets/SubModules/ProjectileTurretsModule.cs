@@ -28,19 +28,22 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
                     Game.TurretsModule.OnTurretShooting.Invoke(turret);
                 turret.Targeting = best;
 
-                var projectile = new ProjectileInstance(def.ProjectileID, def.ProjectileInfo);
-                projectile.X = turret.CenterX - projectile.Size / 2;
-                projectile.Y = turret.CenterY - projectile.Size / 2;
-                projectile.Source = turret;
-                projectile.Target = best;
-                if (def.IsTrailing)
-                    projectile.Angle = MathHelpers.GetAngle(
-                        GetTrailingPoint(best, projectile),
-                        turret);
-                else
-                    projectile.Angle = MathHelpers.GetAngle(best, turret);
-                turret.Angle = projectile.Angle;
-                Context.Projectiles.Add(projectile);
+                for (int i = 0; i < 1000; i++)
+                {
+                    var projectile = new ProjectileInstance(def.ProjectileID, def.ProjectileInfo);
+                    projectile.X = turret.CenterX - projectile.Size / 2;
+                    projectile.Y = turret.CenterY - projectile.Size / 2;
+                    projectile.Source = turret;
+                    projectile.Target = best;
+                    if (def.IsTrailing)
+                        projectile.Angle = MathHelpers.GetAngle(
+                            GetTrailingPoint(best, projectile),
+                            turret);
+                    else
+                        projectile.Angle = MathHelpers.GetAngle(best, turret);
+                    turret.Angle = projectile.Angle;
+                    Context.Projectiles.Add(projectile);
+                }
                 def.CoolingFor = TimeSpan.FromMilliseconds(def.Cooldown);
             }
             else
