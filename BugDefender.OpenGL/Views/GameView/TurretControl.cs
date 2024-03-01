@@ -15,7 +15,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly TileControl baseControl;
         private readonly LabelControl turretLevelControl;
         private Guid _currentAnimation;
-        public TurretControl(UIEngine parent, TurretInstance instance, ClickedHandler clicked) : base(parent, clicked)
+        public TurretControl(GameWindow parent, TurretInstance instance, ClickedHandler clicked) : base(parent, clicked)
         {
             Instance = instance;
             baseControl = new TileControl(Parent)

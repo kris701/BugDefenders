@@ -21,7 +21,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         }
         public IControl Child { get; set; }
 
-        public BorderControl(UIEngine parent, IControl child) : base(parent)
+        public BorderControl(GameWindow parent, IControl child) : base(parent)
         {
             Child = child;
         }

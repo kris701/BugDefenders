@@ -8,7 +8,7 @@ namespace BugDefender.OpenGL.Engine.BackgroundWorkers
     {
         public abstract Guid ID { get; }
 
-        public BaseBackroundWorker(UIEngine parent) : base(parent)
+        public BaseBackroundWorker(GameWindow parent) : base(parent)
         {
         }
 

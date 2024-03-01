@@ -10,7 +10,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
     {
         private static readonly Guid _id = new Guid("14b01cd7-8a0d-40ad-961e-562a915448d1");
         private readonly KeyWatcher _escapeKeyWatcher;
-        public AchivementsView(UIEngine parent) : base(
+        public AchivementsView(GameWindow parent) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

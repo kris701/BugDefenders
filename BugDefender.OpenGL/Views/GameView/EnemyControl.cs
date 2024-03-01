@@ -15,7 +15,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private TileControl _healthBar;
         private readonly float _initialHP;
         private readonly int _legalOffset = 5;
-        public EnemyControl(UIEngine parent, EnemyInstance enemy) : base(parent)
+        public EnemyControl(GameWindow parent, EnemyInstance enemy) : base(parent)
         {
             _initialHP = enemy.Health;
             Enemy = enemy;

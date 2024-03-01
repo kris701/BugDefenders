@@ -16,7 +16,7 @@ namespace BugDefender.OpenGL.Engine.Views
         private readonly TextureSetDefinition _out;
 
         private IView? _switchTo;
-        public BaseAnimatedView(UIEngine parent, Guid id, TextureSetDefinition inSet, TextureSetDefinition outSet) : base(parent, id)
+        public BaseAnimatedView(GameWindow parent, Guid id, TextureSetDefinition inSet, TextureSetDefinition outSet) : base(parent, id)
         {
             _in = inSet;
             _out = outSet;

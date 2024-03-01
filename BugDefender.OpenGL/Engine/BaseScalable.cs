@@ -3,9 +3,9 @@
     public abstract class BaseScalable : IScalable
     {
         public float ScaleValue { get; set; } = 1;
-        public UIEngine Parent { get; set; }
+        public GameWindow Parent { get; set; }
 
-        protected BaseScalable(UIEngine parent)
+        protected BaseScalable(GameWindow parent)
         {
             Parent = parent;
             ScaleValue = parent.CurrentUser.UserData.Scale;

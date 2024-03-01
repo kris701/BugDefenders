@@ -22,7 +22,7 @@ using System.Text.Json;
 
 namespace BugDefender.OpenGL
 {
-    public class UIEngine : Game
+    public class GameWindow : Game
     {
         private static readonly string _contentDir = "Content";
         private static readonly string _modsDir = "Mods";
@@ -40,12 +40,12 @@ namespace BugDefender.OpenGL
         public List<IBackgroundWorker> BackroundWorkers { get; set; }
         public UIResourceManager UIResources { get; set; }
 
-        private readonly Func<UIEngine, IView> _screenToLoad;
+        private readonly Func<GameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
         private bool _isInitialized = false;
         private readonly NotificationBackroundWorker _notificationWorker;
 
-        public UIEngine(Func<UIEngine, IView> screen)
+        public GameWindow(Func<GameWindow, IView> screen)
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;

@@ -14,7 +14,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         public static readonly Guid _id = new Guid("9c52281c-3202-4b22-bfc9-dfc187fdbeb3");
         private readonly KeysWatcher _cheatsInputWatcher;
         private readonly KeyWatcher _escapeInputWatcher;
-        public MainMenuView(UIEngine parent) : base(
+        public MainMenuView(GameWindow parent) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

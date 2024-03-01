@@ -19,7 +19,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public ButtonControl(UIEngine parent, ClickedHandler? clicked = null) : base(parent)
+        public ButtonControl(GameWindow parent, ClickedHandler? clicked = null) : base(parent)
         {
             Clicked += clicked;
         }

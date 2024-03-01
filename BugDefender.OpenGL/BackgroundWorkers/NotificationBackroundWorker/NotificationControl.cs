@@ -13,7 +13,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         private readonly TileControl _iconTile;
         private readonly TextboxControl _descriptionTextbox;
 
-        public NotificationControl(UIEngine parent, NotificationItem item) : base(parent)
+        public NotificationControl(GameWindow parent, NotificationItem item) : base(parent)
         {
             Item = item;
             Width = 300;

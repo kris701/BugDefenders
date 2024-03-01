@@ -8,7 +8,7 @@ namespace BugDefender.OpenGL.Engine.Controls
     {
         public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
 
-        public TileControl(UIEngine parent) : base(parent)
+        public TileControl(GameWindow parent) : base(parent)
         {
         }
 

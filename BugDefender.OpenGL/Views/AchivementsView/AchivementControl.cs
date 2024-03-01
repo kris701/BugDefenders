@@ -13,7 +13,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
 
         private readonly TileControl _iconTile;
         private readonly TextboxControl _descriptionTextbox;
-        public AchivementControl(UIEngine parent, AchivementDefinition achivement) : base(parent)
+        public AchivementControl(GameWindow parent, AchivementDefinition achivement) : base(parent)
         {
             Achivement = achivement;
             Width = 800;

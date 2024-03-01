@@ -2,7 +2,7 @@
 {
     public interface IScalable
     {
-        public UIEngine Parent { get; set; }
+        public GameWindow Parent { get; set; }
         public float ScaleValue { get; set; }
 
         public int Scale(int value);

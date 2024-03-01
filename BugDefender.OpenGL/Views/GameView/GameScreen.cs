@@ -52,7 +52,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
 
-        public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(
+        public GameScreen(GameWindow parent, Guid mapID, Guid gameStyleID) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

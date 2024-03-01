@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Engine.Views
         private IView? _switchTo;
         private readonly Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
 
-        public BaseFadeView(UIEngine parent, Guid id) : base(parent, id)
+        public BaseFadeView(GameWindow parent, Guid id) : base(parent, id)
         {
         }
 
