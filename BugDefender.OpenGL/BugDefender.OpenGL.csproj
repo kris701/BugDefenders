@@ -8,7 +8,7 @@
 	  <Nullable>enable</Nullable>
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Product>Bug Defenders</Product>
-	  <Version>0.0.11</Version>
+	  <Version>0.0.12</Version>
 	  <PublishSingleFile>true</PublishSingleFile>
 	  <SelfContained>true</SelfContained>
 	  <DebugType>embedded</DebugType>
