@@ -1,10 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Tests.Game.Models.Entities.Upgrades
 {
@@ -16,7 +11,7 @@ namespace BugDefender.Core.Tests.Game.Models.Entities.Upgrades
             foreach (var turretId in ResourceManager.Turrets.GetResources())
             {
                 var turret = ResourceManager.Turrets.GetResource(turretId);
-                foreach(var upgrades in turret.Upgrades)
+                foreach (var upgrades in turret.Upgrades)
                     yield return new object[] { turretId, upgrades.ID };
             }
         }

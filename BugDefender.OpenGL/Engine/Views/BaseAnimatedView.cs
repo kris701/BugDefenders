@@ -1,13 +1,8 @@
 ﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.ResourcePacks;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BugDefender.Core.Game.Helpers;
 
 namespace BugDefender.OpenGL.Engine.Views
 {
@@ -16,9 +11,9 @@ namespace BugDefender.OpenGL.Engine.Views
         public enum FadeState { AnimateIn, Hold, AnimateOut, PostHold }
         public FadeState State { get; set; } = FadeState.AnimateIn;
 
-        private AnimatedTileControl _tile;
-        private TextureSetDefinition _in;
-        private TextureSetDefinition _out;
+        private readonly AnimatedTileControl _tile;
+        private readonly TextureSetDefinition _in;
+        private readonly TextureSetDefinition _out;
 
         private IView? _switchTo;
         public BaseAnimatedView(UIEngine parent, Guid id, TextureSetDefinition inSet, TextureSetDefinition outSet) : base(parent, id)
@@ -33,14 +28,15 @@ namespace BugDefender.OpenGL.Engine.Views
                 FrameTime = TimeSpan.FromMilliseconds(_in.FrameTime),
                 AutoPlay = false
             };
-            _tile.OnAnimationDone += (s) => {
+            _tile.OnAnimationDone += (s) =>
+            {
                 switch (State)
                 {
-                    case FadeState.AnimateIn: 
+                    case FadeState.AnimateIn:
                         State = FadeState.Hold;
                         _tile.IsVisible = false;
                         break;
-                    case FadeState.AnimateOut: 
+                    case FadeState.AnimateOut:
                         State = FadeState.PostHold;
                         break;
                 }

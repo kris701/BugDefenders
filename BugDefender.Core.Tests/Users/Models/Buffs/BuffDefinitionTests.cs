@@ -1,9 +1,4 @@
 ﻿using BugDefender.Core.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Tests.Users.Models.Buffs
 {
@@ -12,7 +7,7 @@ namespace BugDefender.Core.Tests.Users.Models.Buffs
     {
         public static IEnumerable<object[]> BuffIDs()
         {
-            foreach(var id in ResourceManager.Buffs.GetResources())
+            foreach (var id in ResourceManager.Buffs.GetResources())
                 yield return new object[] { id };
         }
 
