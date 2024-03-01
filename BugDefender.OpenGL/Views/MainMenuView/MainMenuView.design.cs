@@ -14,7 +14,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("4a39d624-3171-41cd-b172-c853cea36d14")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });

@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("46ce91a9-78bc-4d77-95c1-46adfce971b2")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });

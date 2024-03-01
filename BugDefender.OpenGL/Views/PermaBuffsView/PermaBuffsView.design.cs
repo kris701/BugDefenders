@@ -15,7 +15,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("1ba73c85-76b6-4fa1-9cd6-680598c6163b")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });
