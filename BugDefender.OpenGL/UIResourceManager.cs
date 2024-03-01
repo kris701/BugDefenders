@@ -44,7 +44,12 @@ namespace BugDefender.OpenGL
 
         public void LoadTexturePack(Guid texturePack)
         {
+            _animationEntities.Clear();
+            _soundEffectEntities.Clear();
             _textures.Clear();
+            _textureSets.Clear();
+            _songs.Clear();
+            _soundEffects.Clear();
             LoadTexturePack(TexturePacks.GetResource(texturePack));
         }
 
@@ -98,6 +103,7 @@ namespace BugDefender.OpenGL
             if (_textureSets.ContainsKey(item.ID))
                 _textureSets.Remove(item.ID);
             _textureSets.Add(item.ID, item);
+            _textureSets[item.ID].LoadedContents.Clear();
             foreach (var content in item.Contents)
                 _textureSets[item.ID].LoadedContents.Add(_contentManager.Load<Texture2D>(content));
         }
