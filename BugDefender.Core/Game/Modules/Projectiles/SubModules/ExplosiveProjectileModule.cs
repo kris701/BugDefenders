@@ -2,7 +2,6 @@
 using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
-using System;
 
 namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
 {

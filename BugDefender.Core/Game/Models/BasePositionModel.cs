@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace BugDefender.Core.Game.Models
+﻿namespace BugDefender.Core.Game.Models
 {
     public abstract class BasePositionModel : IPosition
     {
