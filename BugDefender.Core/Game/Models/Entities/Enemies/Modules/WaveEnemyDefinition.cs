@@ -13,7 +13,7 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
         [JsonIgnore]
         public int SlowingDuration { get; set; } = 0;
         [JsonIgnore]
-        public List<EnemyInstance> Group { get; set; } = new List<EnemyInstance>();
+        public HashSet<EnemyInstance> Group { get; set; } = new HashSet<EnemyInstance>();
 
         public WaveEnemyDefinition(float speed, int waveSize, float spawnDelay)
         {

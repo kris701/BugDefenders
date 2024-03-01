@@ -40,7 +40,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         internal bool _textChanged = true;
         internal List<LabelControl> lines = new List<LabelControl>();
 
-        public TextboxControl(UIEngine parent) : base(parent)
+        public TextboxControl(GameWindow parent) : base(parent)
         {
         }
 

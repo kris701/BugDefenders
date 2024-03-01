@@ -2,6 +2,7 @@
 using BugDefender.Core.Resources.Integrity;
 using BugDefender.Core.Users;
 using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
 using BugDefender.OpenGL.Engine.BackgroundWorkers;
@@ -22,14 +23,10 @@ using System.Text.Json;
 
 namespace BugDefender.OpenGL
 {
-    public class UIEngine : Game
+    public class GameWindow : Game
     {
         private static readonly string _contentDir = "Content";
         private static readonly string _modsDir = "Mods";
-
-        private TimeSpan _passed = TimeSpan.Zero;
-        private int _currentFrames = 0;
-        private int _frames = 0;
 
         public GraphicsDeviceManager Device { get; }
         public int ScreenWidth() => Window.ClientBounds.Width;
@@ -40,12 +37,12 @@ namespace BugDefender.OpenGL
         public List<IBackgroundWorker> BackroundWorkers { get; set; }
         public UIResourceManager UIResources { get; set; }
 
-        private readonly Func<UIEngine, IView> _screenToLoad;
+        private readonly Func<GameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
         private bool _isInitialized = false;
         private readonly NotificationBackroundWorker _notificationWorker;
 
-        public UIEngine(Func<UIEngine, IView> screen)
+        public GameWindow(Func<GameWindow, IView> screen)
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;
@@ -86,7 +83,8 @@ namespace BugDefender.OpenGL
             _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
             _notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));
             BackroundWorkers = new List<IBackgroundWorker>() {
-                _notificationWorker
+                _notificationWorker,
+                new FPSBackgroundWorker(this)
             };
         }
 
@@ -256,20 +254,6 @@ namespace BugDefender.OpenGL
             CurrentScreen.Draw(gameTime, _spriteBatch);
             foreach (var worker in BackroundWorkers)
                 worker.Draw(gameTime, _spriteBatch);
-
-            if (CurrentUser.UserData.FPSCounter)
-            {
-                _currentFrames++;
-                _passed += gameTime.ElapsedGameTime;
-                if (_passed >= TimeSpan.FromSeconds(1))
-                {
-                    _passed = TimeSpan.Zero;
-                    _frames = _currentFrames;
-                    _currentFrames = 0;
-                }
-                _spriteBatch.DrawString(BasicFonts.GetFont(16), $"FPS: {_frames}", new Vector2(0, 0), new Color(255, 0, 0, 255));
-            }
-
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -287,7 +271,6 @@ namespace BugDefender.OpenGL
             MediaPlayer.Volume = CurrentUser.UserData.MusicVolume;
             SoundEffect.MasterVolume = CurrentUser.UserData.EffectsVolume;
             Device.ApplyChanges();
-            LoadMods();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("fc3e4de1-331e-4a52-baee-e2f3c40962b4")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });

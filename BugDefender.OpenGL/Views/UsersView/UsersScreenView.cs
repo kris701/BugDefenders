@@ -15,7 +15,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
         private static readonly Guid _id = new Guid("0dd63d81-e49c-44d2-868e-7db6fb4634d7");
         private readonly KeyWatcher _escapeKeyWatcher;
         private bool _update = false;
-        public UsersScreenView(UIEngine parent) : base(
+        public UsersScreenView(GameWindow parent) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

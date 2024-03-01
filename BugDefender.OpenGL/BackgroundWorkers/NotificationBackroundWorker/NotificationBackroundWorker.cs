@@ -22,7 +22,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         private readonly TimeSpan _waitTarget = TimeSpan.FromSeconds(3);
         private TimeSpan _waitingFor = TimeSpan.FromSeconds(0);
 
-        public NotificationBackroundWorker(UIEngine parent) : base(parent)
+        public NotificationBackroundWorker(GameWindow parent) : base(parent)
         {
         }
 

@@ -25,6 +25,13 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies
             Size = definition.Size;
         }
 
-        public EnemyDefinition GetDefinition() => ResourceManager.Enemies.GetResource(DefinitionID);
+        private EnemyDefinition? _definition;
+        public EnemyDefinition GetDefinition()
+        {
+            if (_definition != null)
+                return _definition;
+            _definition = ResourceManager.Enemies.GetResource(DefinitionID);
+            return _definition;
+        }
     }
 }

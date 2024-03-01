@@ -19,7 +19,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("cf85361b-abcc-42c6-8a8e-60df3c44fbe5")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });

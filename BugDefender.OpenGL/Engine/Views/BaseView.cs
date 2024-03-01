@@ -2,9 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.Engine.Views
 {
@@ -13,7 +10,7 @@ namespace BugDefender.OpenGL.Engine.Views
         public Guid ID { get; set; }
         private readonly SortedDictionary<int, List<IControl>> _viewLayers;
 
-        public BaseView(UIEngine parent, Guid id) : base(parent)
+        public BaseView(GameWindow parent, Guid id) : base(parent)
         {
             _viewLayers = new SortedDictionary<int, List<IControl>>() {
                 { 0, new List<IControl>() }

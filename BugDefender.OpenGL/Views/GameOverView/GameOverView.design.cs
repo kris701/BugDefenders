@@ -13,7 +13,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("1d50ad58-0503-4fc6-95e4-1d18abb8c485")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });

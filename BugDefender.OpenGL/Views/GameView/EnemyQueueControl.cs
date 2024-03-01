@@ -16,7 +16,7 @@ namespace BugDefender.OpenGL.Views.GameView
     {
         private readonly AnimatedTileControl _iconControl;
         private readonly TextboxControl _descriptionControl;
-        public EnemyQueueControl(UIEngine parent) : base(parent)
+        public EnemyQueueControl(GameWindow parent) : base(parent)
         {
             _iconControl = new AnimatedTileControl(Parent)
             {

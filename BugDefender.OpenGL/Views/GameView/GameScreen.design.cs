@@ -327,7 +327,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(10, _buyingPreviewRangeTile);
             _buyingPreviewTile = new AnimatedTileControl(Parent)
             {
-                IsVisible = false
+                IsVisible = false,
+                ViewPort = _gameArea
             };
             AddControl(10, _buyingPreviewTile);
         }

@@ -12,7 +12,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         private static readonly Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
         private readonly SettingsDefinition _settings;
         private readonly KeyWatcher _escapeKeyWatcher;
-        public SettingsView(UIEngine parent) : base(
+        public SettingsView(GameWindow parent) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

@@ -44,7 +44,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             }
         }
 
-        public LineControl(UIEngine parent) : base(parent)
+        public LineControl(GameWindow parent) : base(parent)
         {
         }
 

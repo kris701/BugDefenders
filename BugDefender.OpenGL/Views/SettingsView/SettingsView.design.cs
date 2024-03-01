@@ -63,7 +63,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("0739c674-5f0e-497a-a619-8ba39fd545b3")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });

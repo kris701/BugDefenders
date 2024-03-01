@@ -52,7 +52,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
 
-        public GameScreen(UIEngine parent, Guid mapID, Guid gameStyleID) : base(
+        public GameScreen(GameWindow parent, Guid mapID, Guid gameStyleID) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
@@ -510,6 +510,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.IsVisible = true;
                 _buyingPreviewTile._x = mouseState.X - _buyingPreviewTile.Width / 2;
                 _buyingPreviewTile._y = mouseState.Y - _buyingPreviewTile.Height / 2;
+                _buyingPreviewTile.CalculateViewPort();
                 _buyingPreviewRangeTile.IsVisible = true;
                 _buyingPreviewRangeTile._x = mouseState.X - _buyingPreviewRangeTile.Width / 2;
                 _buyingPreviewRangeTile._y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;

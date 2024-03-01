@@ -15,7 +15,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
         private readonly KeyWatcher _escapeKeyWatcher;
         private TimeSpan _waitFor = TimeSpan.FromSeconds(10);
         private int _secsLeft = 10;
-        public AcceptView(UIEngine parent, SettingsDefinition oldSettings, SettingsDefinition newSettings) : base(
+        public AcceptView(GameWindow parent, SettingsDefinition oldSettings, SettingsDefinition newSettings) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

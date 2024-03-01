@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         private bool _finished = false;
         private TimeSpan _currentFrameTime = TimeSpan.Zero;
 
-        public AnimatedTileControl(UIEngine parent) : base(parent)
+        public AnimatedTileControl(GameWindow parent) : base(parent)
         {
         }
 

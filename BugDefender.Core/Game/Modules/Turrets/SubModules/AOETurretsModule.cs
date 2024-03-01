@@ -21,12 +21,13 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
             var closest = float.MaxValue;
             EnemyInstance? best = null;
             var targeting = new List<EnemyInstance>();
+            var range = (float)Math.Pow(def.Range, 2);
             foreach (var enemy in Context.CurrentEnemies)
             {
                 if (!turret.GetDefinition().CanDamage.Contains(enemy.GetDefinition().TerrainType))
                     continue;
-                var dist = MathHelpers.Distance(enemy, turret);
-                if (dist <= def.Range)
+                var dist = MathHelpers.SqrDistance(enemy, turret);
+                if (dist <= range)
                 {
                     targeting.Add(enemy);
                     if (dist < closest)

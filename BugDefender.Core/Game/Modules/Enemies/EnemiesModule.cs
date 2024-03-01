@@ -19,7 +19,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
         public SingleEnemyModule SingleEnemiesModule { get; private set; }
 
         private readonly GameTimer _enemySpawnTimer;
-        private readonly List<EnemyInstance> _spawnQueue = new List<EnemyInstance>();
+        private readonly HashSet<EnemyInstance> _spawnQueue = new HashSet<EnemyInstance>();
         private int _waveQueue = 0;
 
         public EnemiesModule(GameContext context, GameEngine game) : base(context, game)
@@ -46,8 +46,10 @@ namespace BugDefender.Core.Game.Modules.Enemies
 
         internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanDamage);
         internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanDamage);
-        internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, List<EnemyTerrrainTypes> canDamage)
+        internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canDamage)
         {
+            range = (float)Math.Pow(range, 2);
+            float dist = 0;
             EnemyInstance? best = null;
             switch (targetingType)
             {
@@ -57,7 +59,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
-                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        dist = MathHelpers.SqrDistance(item, enemy);
                         if (dist <= range && dist < minDist)
                         {
                             minDist = dist;
@@ -71,7 +73,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
-                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        dist = MathHelpers.SqrDistance(item, enemy);
                         if (dist <= range && enemy.Health < lowestHP)
                         {
                             lowestHP = enemy.Health;
@@ -85,7 +87,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                     {
                         if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
                             continue;
-                        var dist = MathHelpers.Distance(item.CenterX, item.CenterY, enemy.CenterX, enemy.CenterY);
+                        dist = MathHelpers.SqrDistance(item, enemy);
                         if (dist <= range && enemy.Health > highestHP)
                         {
                             highestHP = enemy.Health;

@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Engine.Views
 {
@@ -19,7 +18,7 @@ namespace BugDefender.OpenGL.Engine.Views
         private IView? _switchTo;
         private readonly Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
 
-        public BaseFadeView(UIEngine parent, Guid id) : base(parent, id)
+        public BaseFadeView(GameWindow parent, Guid id) : base(parent, id)
         {
         }
 

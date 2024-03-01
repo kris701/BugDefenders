@@ -23,33 +23,41 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                     projectile.Angle = MathHelpers.GetAngle(projectile.Target, projectile);
             }
 
-            var xMod = Math.Cos(projectile.Angle);
-            var yMod = Math.Sin(projectile.Angle);
+            var xMod = (float)Math.Cos(projectile.Angle);
+            var yMod = (float)Math.Sin(projectile.Angle);
             if (def.Acceleration != 1)
             {
                 def.Speed = (float)Math.Ceiling(def.Speed * def.Acceleration);
                 if (def.Speed > Context.GameStyle.ProjectileSpeedCap)
+                {
                     def.Speed = Context.GameStyle.ProjectileSpeedCap;
+                    def.Acceleration = 1;
+                }
             }
 
             if (projectile.Size >= 10)
             {
-                projectile.X += (float)xMod * def.Speed;
-                projectile.Y += (float)yMod * def.Speed;
+                projectile.X += xMod * def.Speed;
+                projectile.Y += yMod * def.Speed;
 
-                if (IsWithinTriggerRange(projectile, def) ||
+                if (IsWithinTriggerRange(projectile, def, def.TriggerRange) ||
                     projectile.X < 0 || projectile.X > Context.Map.Width ||
                     projectile.Y < 0 || projectile.Y > Context.Map.Height)
                     return true;
             }
             else
             {
-                for (int i = 0; i < 5; i++)
+                var moved = 0f;
+                var stepBy = projectile.Size;
+                if (stepBy > def.Speed)
+                    stepBy = def.Speed;
+                while (moved < def.Speed)
                 {
-                    projectile.X += (float)xMod * ((float)def.Speed / 5);
-                    projectile.Y += (float)yMod * ((float)def.Speed / 5);
+                    moved += stepBy;
+                    projectile.X += xMod * stepBy;
+                    projectile.Y += yMod * stepBy;
 
-                    if (IsWithinTriggerRange(projectile, def) ||
+                    if (IsWithinTriggerRange(projectile, def, def.TriggerRange) ||
                         projectile.X < 0 || projectile.X > Context.Map.Width ||
                         projectile.Y < 0 || projectile.Y > Context.Map.Height)
                         return true;
@@ -58,14 +66,15 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             return false;
         }
 
-        private bool IsWithinTriggerRange(ProjectileInstance projectile, ExplosiveProjectileDefinition def)
+        private bool IsWithinTriggerRange(ProjectileInstance projectile, ExplosiveProjectileDefinition def, float triggerRange)
         {
             if (projectile.Source == null)
                 return false;
+            triggerRange = (float)Math.Pow(triggerRange, 2);
             bool isWithin = false;
             foreach (var enemy in Context.CurrentEnemies)
             {
-                if (MathHelpers.Distance(projectile.CenterX, projectile.CenterY, enemy.CenterX, enemy.CenterY) < def.TriggerRange)
+                if (MathHelpers.SqrDistance(projectile, enemy) < triggerRange)
                 {
                     isWithin = true;
                     break;
@@ -75,8 +84,8 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             {
                 for (int i = 0; i < Context.CurrentEnemies.Count; i++)
                 {
-                    var dist = MathHelpers.Distance(projectile, Context.CurrentEnemies.ElementAt(i));
-                    if (dist < def.SplashRange)
+                    var dist = MathHelpers.SqrDistance(projectile, Context.CurrentEnemies.ElementAt(i));
+                    if (dist < triggerRange)
                     {
                         if (Context.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
                             SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);

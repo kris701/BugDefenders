@@ -10,7 +10,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
     {
         private static readonly Guid _id = new Guid("9db0a8d6-9ffa-4382-a858-bba0929c0b1f");
         private readonly KeyWatcher _escapeKeyWatcher;
-        public PermaBuffsView(UIEngine parent) : base(
+        public PermaBuffsView(GameWindow parent) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

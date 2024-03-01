@@ -8,8 +8,16 @@ namespace BugDefender.OpenGL
         [STAThread]
         static void Main()
         {
-            using (var game = new UIEngine((g) => new SplashScreenView(g)))
-                game.Run();
+            try
+            {
+                using (var mainWindow = new GameWindow((g) => new SplashScreenView(g)))
+                    mainWindow.Run();
+            }
+            catch (Exception e)
+            {
+                using (var crashWindow = new CrashWindow(e))
+                    crashWindow.Run();
+            }
         }
     }
 }

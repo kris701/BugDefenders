@@ -27,6 +27,13 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles
             ProjectileInfo = module.Copy();
         }
 
-        public ProjectileDefinition GetDefinition() => ResourceManager.Projectiles.GetResource(DefinitionID);
+        private ProjectileDefinition? _definition;
+        public ProjectileDefinition GetDefinition()
+        {
+            if (_definition != null)
+                return _definition;
+            _definition = ResourceManager.Projectiles.GetResource(DefinitionID);
+            return _definition;
+        }
     }
 }

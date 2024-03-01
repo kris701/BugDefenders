@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _buyUpgradeButton;
 
-        public UpgradePanel(UIEngine parent, ClickedHandler buy, UpgradeDefinition upgrade, bool canUpgrade) : base(parent)
+        public UpgradePanel(GameWindow parent, ClickedHandler buy, UpgradeDefinition upgrade, bool canUpgrade) : base(parent)
         {
             Buy = buy;
             _nameLabel = new LabelControl(Parent)

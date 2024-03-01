@@ -41,7 +41,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         internal float _textHeight = 0;
         internal bool _textChanged = true;
 
-        public LabelControl(UIEngine parent) : base(parent)
+        public LabelControl(GameWindow parent) : base(parent)
         {
         }
 

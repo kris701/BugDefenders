@@ -106,7 +106,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             _actualViewPort = new Rectangle((int)viewPortX, (int)viewPortY, (int)viewPortWidth, (int)viewPortHeight);
         }
 
-        protected BaseControl(UIEngine parent) : base(parent)
+        protected BaseControl(GameWindow parent) : base(parent)
         {
         }
 

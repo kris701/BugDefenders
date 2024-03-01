@@ -26,7 +26,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         {
             AddControl(0, new TileControl(Parent)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("756430ea-46e1-4c3d-95a0-a232919b7876")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });

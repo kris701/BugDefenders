@@ -37,7 +37,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             Keys.D9
         };
 
-        public TextInputControl(UIEngine parent, EnterHandler? onEnter = null) : base(parent)
+        public TextInputControl(GameWindow parent, EnterHandler? onEnter = null) : base(parent)
         {
             OnEnter += onEnter;
         }

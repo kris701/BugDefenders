@@ -42,15 +42,12 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
             foreach (var enemy in toRemove)
                 Context.CurrentEnemies.Remove(enemy);
         }
-        public abstract List<EnemyInstance> QueueEnemies(Guid id);
-        public abstract List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, List<EnemyInstance> queue);
+        public abstract HashSet<EnemyInstance> QueueEnemies(Guid id);
+        public abstract List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, HashSet<EnemyInstance> queue);
 
         internal bool UpdateEnemy(TimeSpan passed, EnemyInstance enemy, T def)
         {
-            if (def.SlowingDuration > 0)
-                def.SlowingDuration -= passed.Milliseconds;
-            var target = Context.Map.Paths[enemy.PathID][enemy.WayPointID];
-            if (MathHelpers.Distance(enemy, target) < 5)
+            if (MathHelpers.SqrDistance(enemy, Context.Map.Paths[enemy.PathID][enemy.WayPointID]) < 5)
             {
                 enemy.WayPointID++;
                 if (enemy.WayPointID >= Context.Map.Paths[enemy.PathID].Count)
@@ -58,9 +55,10 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
                     Game.DamagePlayer();
                     return true;
                 }
-                target = Context.Map.Paths[enemy.PathID][enemy.WayPointID];
+                enemy.Angle = MathHelpers.GetAngle(Context.Map.Paths[enemy.PathID][enemy.WayPointID], enemy);
             }
-            enemy.Angle = MathHelpers.GetAngle(target, enemy);
+            if (def.SlowingDuration > 0)
+                def.SlowingDuration -= passed.Milliseconds;
             var change = MathHelpers.GetPredictedLocation(enemy.Angle, def.GetSpeed(), Context.GameStyle.EnemySpeedMultiplier);
             enemy.X += change.X;
             enemy.Y += change.Y;
