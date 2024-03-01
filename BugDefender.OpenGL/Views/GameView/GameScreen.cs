@@ -510,6 +510,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.IsVisible = true;
                 _buyingPreviewTile._x = mouseState.X - _buyingPreviewTile.Width / 2;
                 _buyingPreviewTile._y = mouseState.Y - _buyingPreviewTile.Height / 2;
+                _buyingPreviewTile.CalculateViewPort();
                 _buyingPreviewRangeTile.IsVisible = true;
                 _buyingPreviewRangeTile._x = mouseState.X - _buyingPreviewRangeTile.Width / 2;
                 _buyingPreviewRangeTile._y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;
