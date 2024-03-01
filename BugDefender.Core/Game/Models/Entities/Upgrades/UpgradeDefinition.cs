@@ -30,8 +30,14 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine(Name);
             sb.AppendLine(Description);
+            foreach(var effect in Effects)
+            {
+                if (effect.Value != null)
+                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Value}");
+                else
+                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Modifier}x");
+            }
 
             return sb.ToString();
         }

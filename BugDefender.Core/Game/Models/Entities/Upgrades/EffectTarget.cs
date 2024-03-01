@@ -12,5 +12,25 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
         {
             Target = target;
         }
+
+        private string? _displayName;
+        public string GetDisplayName()
+        {
+            if (_displayName != null)
+                return _displayName;
+            _displayName = Target;
+            if (_displayName.Contains('.'))
+                _displayName = _displayName.Substring(_displayName.LastIndexOf('.') + 1);
+            for(int i = 0; i < _displayName.Length; i++)
+            {
+                if (char.IsUpper(_displayName[i]))
+                {
+                    _displayName = _displayName.Insert(i, " ");
+                    i++;
+                }
+            }
+            _displayName = _displayName.Trim();
+            return _displayName;
+        }
     }
 }
