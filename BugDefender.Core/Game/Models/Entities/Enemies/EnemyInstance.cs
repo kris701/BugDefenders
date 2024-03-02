@@ -12,6 +12,16 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies
         public int PathID { get; set; } = 0;
         public int WayPointID { get; set; } = 0;
 
+        public EnemyInstance(Guid iD, Guid definitionID, float health, IEnemyModule moduleInfo, int pathID, int wayPointID)
+        {
+            ID = iD;
+            DefinitionID = definitionID;
+            Health = health;
+            ModuleInfo = moduleInfo;
+            PathID = pathID;
+            WayPointID = wayPointID;
+        }
+
         public EnemyInstance(Guid enemyDefinition, float evolution) : this(ResourceManager.Enemies.GetResource(enemyDefinition), evolution)
         {
         }

@@ -1,4 +1,5 @@
-﻿using BugDefender.Core.Game.Models.Entities.Turrets;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine.Controls;
@@ -21,6 +22,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private ButtonControl _startButton;
         private ButtonControl _sendWave;
+        private ButtonControl _mainMenuButton;
         private ButtonControl _autoRunButton;
 
         private AnimatedTileControl _buyingPreviewTile;
@@ -62,7 +64,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 320);
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, _currentMap, _currentGameStyle)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext()
+            {
+                Map = _game.Context.Map,
+                GameStyle = _game.Context.GameStyle
+            })))
             {
                 X = 0,
                 Y = 0,
@@ -168,18 +174,21 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             };
             AddControl(1, _startButton);
 
-            AddControl(1, new ButtonControl(Parent, clicked: (x) => { GameOver(); })
+            _mainMenuButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                Text = $"End Game",
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                Text = $"Main Menu",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 10,
                 Y = yOffset + 120,
                 Height = 30,
-                Width = 100
-            });
+                Width = 100,
+                IsEnabled = false
+            };
+            AddControl(1, _mainMenuButton);
 
             _autoRunButton = new ButtonControl(Parent, clicked: AutoRunButton_Click)
             {

@@ -2,12 +2,14 @@
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.IO;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
     public partial class GameOverView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
+        private static string _saveDir = "Saves";
 
         private readonly Texture2D _screen;
         private readonly int _score;
@@ -48,6 +50,10 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             Initialize();
 
             Parent.UIResources.PlaySong(ID);
+
+            var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
+            if (File.Exists(saveFile))
+                File.Delete(saveFile);
         }
     }
 }

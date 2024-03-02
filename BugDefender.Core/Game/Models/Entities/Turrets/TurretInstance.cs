@@ -2,6 +2,7 @@
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
@@ -14,13 +15,21 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets
 
         public ITurretModule TurretInfo { get; set; }
 
+        [JsonIgnore]
         public EnemyInstance? Targeting { get; set; }
         public int Kills { get; set; } = 0;
         public List<Guid> HasUpgrades { get; set; }
         public TargetingTypes TargetingType { get; set; } = TargetingTypes.Closest;
 
-        public TurretInstance(Guid definitionID) : this(ResourceManager.Turrets.GetResource(definitionID))
+        [JsonConstructor]
+        public TurretInstance(Guid iD, Guid definitionID, ITurretModule turretInfo, int kills, List<Guid> hasUpgrades, TargetingTypes targetingType)
         {
+            ID = iD;
+            DefinitionID = definitionID;
+            TurretInfo = turretInfo;
+            Kills = kills;
+            HasUpgrades = hasUpgrades;
+            TargetingType = targetingType;
         }
 
         public TurretInstance(TurretDefinition definition)

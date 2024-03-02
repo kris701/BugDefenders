@@ -7,8 +7,6 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
 {
     public class PassiveTurretsModule : BaseTurretModule<PassiveTurretDefinition>
     {
-        private readonly Dictionary<TurretInstance, HashSet<TurretInstance>> _effectedTurrets = new Dictionary<TurretInstance, HashSet<TurretInstance>>();
-
         public PassiveTurretsModule(GameContext context, GameEngine game) : base(context, game)
         {
         }
@@ -19,21 +17,17 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
             Game.TurretsModule.OnTurretSold += TurretRemoved;
             Game.TurretsModule.OnBeforeTurretUpgraded += TurretBeforeUpgraded;
             Game.TurretsModule.OnTurretUpgraded += TurretUpgraded;
+            if (Context.Turrets.Count > 0)
+                UpdateEffectedList();
         }
 
-        private void UpdateEffectedList(PassiveTurretDefinition? unApply = null, PassiveTurretDefinition? apply = null)
+        private void UpdateEffectedList()
         {
-            foreach (var key in _effectedTurrets.Keys)
-                if (key.TurretInfo is PassiveTurretDefinition def && unApply != def)
-                    foreach (var effected in _effectedTurrets[key])
-                        UnApplyEffect(def, effected);
-
-            _effectedTurrets.Clear();
             foreach (var turret in Context.Turrets)
             {
                 if (turret.TurretInfo is PassiveTurretDefinition def)
                 {
-                    _effectedTurrets.Add(turret, new HashSet<TurretInstance>());
+                    def.Affected.Clear();
                     var range = (float)Math.Pow(def.Range, 2);
                     foreach (var other in Context.Turrets)
                     {
@@ -41,133 +35,67 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
                             continue;
                         var dist = MathHelpers.SqrDistance(turret, other);
                         if (dist < range)
-                            _effectedTurrets[turret].Add(other);
+                            def.Affected.Add(other);
                     }
                 }
             }
+        }
 
-            foreach (var key in _effectedTurrets.Keys)
-                if (key.TurretInfo is PassiveTurretDefinition def && apply != def)
-                    foreach (var effected in _effectedTurrets[key])
-                        ApplyEffect(def, effected);
+        private void UpdateEffectedListAndApply(PassiveTurretDefinition? unApply = null, PassiveTurretDefinition? apply = null)
+        {
+            foreach (var other in Context.Turrets)
+                if (other.TurretInfo is PassiveTurretDefinition def && unApply != def)
+                    foreach (var effected in def.Affected)
+                        def.TryUnApplyUpgradeEffectOnObject(effected.TurretInfo);
+
+            UpdateEffectedList();
+
+            foreach (var other in Context.Turrets)
+                if (other.TurretInfo is PassiveTurretDefinition def && apply != def)
+                    foreach (var effected in def.Affected)
+                        def.TryApplyUpgradeEffectOnObject(effected.TurretInfo);
         }
 
         private void TurretAdded(TurretInstance turret)
         {
-            UpdateEffectedList();
+            UpdateEffectedListAndApply();
         }
 
         private void TurretRemoved(TurretInstance turret)
         {
-            if (turret.TurretInfo is PassiveTurretDefinition)
+            if (turret.TurretInfo is PassiveTurretDefinition def)
             {
-                UpdateEffectedList();
+                foreach (var effected in def.Affected)
+                    def.TryUnApplyUpgradeEffectOnObject(effected.TurretInfo);
+                UpdateEffectedListAndApply();
             }
             else
             {
-                foreach (var key in _effectedTurrets.Keys)
-                    if (_effectedTurrets[key].Contains(turret))
-                        _effectedTurrets[key].Remove(turret);
+                foreach (var other in Context.Turrets)
+                {
+                    if (other.TurretInfo is PassiveTurretDefinition oDef)
+                    {
+                        if (oDef.Affected.Contains(turret))
+                            oDef.Affected.Remove(turret);
+                    }
+                }
             }
         }
 
         private void TurretBeforeUpgraded(TurretInstance turret)
         {
             if (turret.TurretInfo is PassiveTurretDefinition def)
-                foreach (var effected in _effectedTurrets[turret])
-                    UnApplyEffect(def, effected);
+            {
+                foreach (var effected in def.Affected)
+                    def.TryUnApplyUpgradeEffectOnObject(effected.TurretInfo);
+                UpdateEffectedListAndApply();
+            }
         }
 
         private void TurretUpgraded(TurretInstance turret)
         {
             if (turret.TurretInfo is PassiveTurretDefinition def)
-                UpdateEffectedList(def);
-        }
-
-        private void UnApplyEffect(PassiveTurretDefinition passive, TurretInstance turret)
-        {
-            switch (turret.TurretInfo)
-            {
-                case AOETurretDefinition def:
-                    def.Damage /= passive.DamageModifier;
-                    def.Range /= passive.RangeModifier;
-                    def.Cooldown = (int)(def.Cooldown / passive.CooldownModifier);
-                    def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
-                    break;
-                case LaserTurretDefinition def:
-                    def.Damage /= passive.DamageModifier;
-                    def.Range /= passive.RangeModifier;
-                    def.Cooldown = (int)(def.Cooldown / passive.CooldownModifier);
-                    def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
-                    break;
-                case ProjectileTurretDefinition def:
-                    def.Range /= passive.RangeModifier;
-                    def.Cooldown = (int)(def.Cooldown / passive.CooldownModifier);
-                    UnApplyEffect(passive, def.ProjectileInfo);
-                    break;
-            }
-        }
-
-        private void UnApplyEffect(PassiveTurretDefinition passive, IProjectileModule projectile)
-        {
-            switch (projectile)
-            {
-                case DirectProjectileDefinition def:
-                    def.Damage /= passive.DamageModifier;
-                    def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
-                    break;
-                case ExplosiveProjectileDefinition def:
-                    def.Damage /= passive.DamageModifier;
-                    def.SlowingFactor /= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration / passive.SlowingDurationModifier;
-                    break;
-            }
-        }
-
-        private void ApplyEffect(PassiveTurretDefinition passive, TurretInstance turret)
-        {
-            switch (turret.TurretInfo)
-            {
-                case AOETurretDefinition def:
-                    def.Damage *= passive.DamageModifier;
-                    def.Range *= passive.RangeModifier;
-                    def.Cooldown = (int)(def.Cooldown * passive.CooldownModifier);
-                    def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
-                    break;
-                case LaserTurretDefinition def:
-                    def.Damage *= passive.DamageModifier;
-                    def.Range *= passive.RangeModifier;
-                    def.Cooldown = (int)(def.Cooldown * passive.CooldownModifier);
-                    def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
-                    break;
-                case ProjectileTurretDefinition def:
-                    def.Range *= passive.RangeModifier;
-                    def.Cooldown = (int)(def.Cooldown * passive.CooldownModifier);
-                    ApplyEffect(passive, def.ProjectileInfo);
-                    break;
-            }
-        }
-
-        private void ApplyEffect(PassiveTurretDefinition passive, IProjectileModule projectile)
-        {
-            switch (projectile)
-            {
-                case DirectProjectileDefinition def:
-                    def.Damage *= passive.DamageModifier;
-                    def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
-                    break;
-                case ExplosiveProjectileDefinition def:
-                    def.Damage *= passive.DamageModifier;
-                    def.SlowingFactor *= passive.SlowingFactorModifier;
-                    def.SlowingDuration = def.SlowingDuration * passive.SlowingDurationModifier;
-                    break;
-            }
+                UpdateEffectedListAndApply(def);
         }
 
         public override void UpdateTurret(TimeSpan passed, TurretInstance turret, PassiveTurretDefinition def)
