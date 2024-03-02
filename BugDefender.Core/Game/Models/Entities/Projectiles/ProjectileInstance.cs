@@ -2,6 +2,7 @@
 using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Resources;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles
 {
@@ -12,8 +13,18 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles
 
         public IProjectileModule ProjectileInfo { get; set; }
 
+        [JsonIgnore]
         public EnemyInstance? Target { get; set; }
+        [JsonIgnore]
         public TurretInstance? Source { get; set; }
+
+        [JsonConstructor]
+        public ProjectileInstance(Guid iD, Guid definitionID, IProjectileModule projectileInfo)
+        {
+            ID = iD;
+            DefinitionID = definitionID;
+            ProjectileInfo = projectileInfo;
+        }
 
         public ProjectileInstance(Guid definitionID, IProjectileModule module) : this(ResourceManager.Projectiles.GetResource(definitionID), module)
         {

@@ -36,11 +36,11 @@ namespace BugDefender.Core.Game
         public TurretsModule TurretsModule { get; }
         public ProjectilesModule ProjectilesModule { get; }
 
-        public GameEngine(Guid mapID, Guid styleID)
+        public GameEngine(GameContext fromContext)
         {
-            Context = new GameContext(
-                ResourceManager.Maps.GetResource(mapID),
-                ResourceManager.GameStyles.GetResource(styleID));
+            Context = fromContext;
+            Context.HP = Context.GameStyle.StartingHP;
+            Context.Money = Context.GameStyle.StartingMoney;
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
 
             EnemiesModule = new EnemiesModule(Context, this);
@@ -55,13 +55,18 @@ namespace BugDefender.Core.Game
                 ProjectilesModule
             };
 
-            foreach (var module in GameModules)
-                module.Initialize();
+            Initialize();
 
 #if DEBUG
             CheatsHelper.Cheats.Add(CheatTypes.InfiniteMoney);
-            Context.Wave = 9999;
+            CheatsHelper.Cheats.Add(CheatTypes.MaxWaves);
 #endif
+        }
+
+        public void Initialize()
+        {
+            foreach (var module in GameModules)
+                module.Initialize();
         }
 
         public void Update(TimeSpan passed)

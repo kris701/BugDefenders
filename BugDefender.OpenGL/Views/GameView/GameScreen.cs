@@ -20,6 +20,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
@@ -29,6 +30,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
+        private static string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
         private readonly EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
@@ -36,8 +38,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private readonly EntityUpdater<EffectEntity, AnimatedTileControl> _effectsUpdater;
         private readonly EntityUpdater<LaserEntity, LineControl> _laserUpdater;
 
-        private readonly Guid _currentMap;
-        private readonly Guid _currentGameStyle;
         private readonly GameEngine _game;
         private Guid? _buyingTurret;
         private TurretInstance? _selectedTurret;
@@ -52,16 +52,22 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
 
-        public GameScreen(GameWindow parent, Guid mapID, Guid gameStyleID) : base(
+        public GameScreen(GameWindow parent, Guid mapID, Guid gameStyleID) : this(parent, new GameContext() {
+            Map = ResourceManager.Maps.GetResource(mapID),
+            GameStyle = ResourceManager.GameStyles.GetResource(gameStyleID)
+            })
+        {
+        }
+
+
+        public GameScreen(GameWindow parent, GameContext context) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            _currentGameStyle = gameStyleID;
-            _currentMap = mapID;
             ScaleValue = parent.CurrentUser.UserData.Scale;
-            _game = new GameEngine(mapID, gameStyleID);
+            _game = new GameEngine(context);
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
             _game.OnPlayerDamaged += () =>
@@ -325,6 +331,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.IsVisible = false;
                 _buyingPreviewRangeTile.IsVisible = false;
             }
+
+            _mainMenuButton.IsEnabled = _game.Context.CanSave();                
         }
 
         private void UpdateEffectLifetimes(GameTime gameTime)
@@ -601,6 +609,19 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile._width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile._height = _buyingPreviewRangeTile.FillColor.Height;
                 _turretStatesTextbox.Text = new TurretInstance(def).GetDescriptionString();
+            }
+        }
+
+        private void SaveAndGoToMainMenu()
+        {
+            if (_game.Context.CanSave())
+            {
+                if (!Directory.Exists(_saveDir))
+                    Directory.CreateDirectory(_saveDir);
+                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
+                _game.Context.Save(new FileInfo(saveFile));
+                Parent.UIResources.StopSounds();
+                SwitchView(new MainMenu.MainMenuView(Parent));
             }
         }
 

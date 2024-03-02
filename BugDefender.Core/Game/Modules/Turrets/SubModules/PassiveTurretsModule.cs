@@ -21,13 +21,8 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
                 UpdateEffectedList();
         }
 
-        private void UpdateEffectedList(PassiveTurretDefinition? unApply = null, PassiveTurretDefinition? apply = null)
+        private void UpdateEffectedList()
         {
-            foreach (var other in Context.Turrets)
-                if (other.TurretInfo is PassiveTurretDefinition def && unApply != def)
-                    foreach (var effected in def.Affected)
-                        def.TryUnApplyUpgradeEffectOnObject(effected.TurretInfo);
-
             foreach (var turret in Context.Turrets)
             {
                 if (turret.TurretInfo is PassiveTurretDefinition def)
@@ -44,6 +39,16 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
                     }
                 }
             }
+        }
+
+        private void UpdateEffectedListAndApply(PassiveTurretDefinition? unApply = null, PassiveTurretDefinition? apply = null)
+        {
+            foreach (var other in Context.Turrets)
+                if (other.TurretInfo is PassiveTurretDefinition def && unApply != def)
+                    foreach (var effected in def.Affected)
+                        def.TryUnApplyUpgradeEffectOnObject(effected.TurretInfo);
+
+            UpdateEffectedList();
 
             foreach (var other in Context.Turrets)
                 if (other.TurretInfo is PassiveTurretDefinition def && apply != def)
@@ -53,7 +58,7 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
 
         private void TurretAdded(TurretInstance turret)
         {
-            UpdateEffectedList();
+            UpdateEffectedListAndApply();
         }
 
         private void TurretRemoved(TurretInstance turret)
@@ -62,7 +67,7 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
             {
                 foreach (var effected in def.Affected)
                     def.TryUnApplyUpgradeEffectOnObject(effected.TurretInfo);
-                UpdateEffectedList();
+                UpdateEffectedListAndApply();
             }
             else
             {
@@ -83,14 +88,14 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
             {
                 foreach (var effected in def.Affected)
                     def.TryUnApplyUpgradeEffectOnObject(effected.TurretInfo);
-                UpdateEffectedList();
+                UpdateEffectedListAndApply();
             }
         }
 
         private void TurretUpgraded(TurretInstance turret)
         {
             if (turret.TurretInfo is PassiveTurretDefinition def)
-                UpdateEffectedList(def);
+                UpdateEffectedListAndApply(def);
         }
 
         public override void UpdateTurret(TimeSpan passed, TurretInstance turret, PassiveTurretDefinition def)

@@ -9,6 +9,8 @@ namespace BugDefender.OpenGL.Screens.MainMenu
 {
     public partial class MainMenuView : BaseAnimatedView
     {
+        private ButtonControl _startGame;
+        private ButtonControl _continueButton;
         private TextInputControl _cheatsInput;
         public override void Initialize()
         {
@@ -26,7 +28,20 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Text = "Bug Defenders",
                 FontColor = Color.White,
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
+            _continueButton = new ButtonControl(Parent, ContinueGame)
+            {
+                X = 500,
+                Y = 300,
+                Width = 300,
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "Continue Game",
+                FontColor = Color.White,
+                FillClickedColor = BasicTextures.GetClickedTexture(),
+                IsVisible = false
+            };
+            AddControl(0, _continueButton);
+            _startGame = new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 300,
@@ -36,7 +51,8 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Text = "Start Game",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
-            });
+            };
+            AddControl(0, _startGame);
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,

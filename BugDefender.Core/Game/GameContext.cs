@@ -4,6 +4,7 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models;
+using System.Text.Json;
 
 namespace BugDefender.Core.Game
 {
@@ -25,14 +26,22 @@ namespace BugDefender.Core.Game
         public int Wave { get; internal set; }
         public TimeSpan GameTime { get; set; }
 
-        public GameContext(MapDefinition map, GameStyleDefinition gameStyle)
+        public bool CanSave()
         {
-            Map = map;
-            GameStyle = gameStyle;
+            if (CurrentEnemies.Count > 0)
+                return false;
+            if (Projectiles.Count > 0)
+                return false;
 
-            HP = GameStyle.StartingHP;
-            Money = GameStyle.StartingMoney;
+            return true;
+        }
 
+        public void Save(FileInfo file)
+        {
+            if (file.Exists)
+                file.Delete();
+            var content = JsonSerializer.Serialize(this);
+            File.WriteAllText(file.FullName, content);
         }
     }
 }

@@ -5,12 +5,14 @@ using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.IO;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
     public partial class GameSetupView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
+        private static string _saveDir = "Saves";
 
         private Guid? _selectedGameStyle;
         private ButtonControl? _selectedGameStyleButton;
@@ -38,7 +40,12 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != null && _selectedGameStyle != null)
+            {
+                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
+                if (File.Exists(saveFile))
+                    File.Delete(saveFile);
                 SwitchView(new GameScreen.GameScreen(Parent, (Guid)_selectedMap, (Guid)_selectedGameStyle));
+            }
         }
 
         private void SelectMap_Click(ButtonControl sender)
