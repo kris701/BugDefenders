@@ -19,11 +19,11 @@ namespace BugDefender.Core.Game
         public HashSet<EnemyInstance> CurrentEnemies { get; set; } = new HashSet<EnemyInstance>();
         public HashSet<TurretInstance> Turrets { get; set; } = new HashSet<TurretInstance>();
         public HashSet<ProjectileInstance> Projectiles { get; set; } = new HashSet<ProjectileInstance>();
-        public int HP { get; set; }
-        public int Money { get; set; }
-        public int Score { get; set; }
+        public int HP { get; set; } = -1;
+        public int Money { get; set; } = -1;
+        public int Score { get; set; } = 0;
 
-        public int Wave { get; internal set; }
+        public int Wave { get; set; } = 0;
         public TimeSpan GameTime { get; set; }
 
         public bool CanSave()

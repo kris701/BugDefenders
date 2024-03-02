@@ -55,7 +55,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         public GameScreen(GameWindow parent, Guid mapID, Guid gameStyleID) : this(parent, new GameContext() {
             Map = ResourceManager.Maps.GetResource(mapID),
             GameStyle = ResourceManager.GameStyles.GetResource(gameStyleID)
-            })
+        })
         {
         }
 

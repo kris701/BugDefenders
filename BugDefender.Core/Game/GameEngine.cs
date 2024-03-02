@@ -39,8 +39,10 @@ namespace BugDefender.Core.Game
         public GameEngine(GameContext fromContext)
         {
             Context = fromContext;
-            Context.HP = Context.GameStyle.StartingHP;
-            Context.Money = Context.GameStyle.StartingMoney;
+            if (Context.HP == -1)
+                Context.HP = Context.GameStyle.StartingHP;
+            if (Context.Money == -1)
+                Context.Money = Context.GameStyle.StartingMoney;
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
 
             EnemiesModule = new EnemiesModule(Context, this);
