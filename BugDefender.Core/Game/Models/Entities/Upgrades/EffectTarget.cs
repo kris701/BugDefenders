@@ -13,6 +13,14 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
             Target = target;
         }
 
+        public EffectTarget Copy()
+        {
+            if (Value != null)
+                return new EffectTarget(Target) { Value = Value };
+            else
+                return new EffectTarget(Target) { Modifier = Modifier };
+        }
+
         private string? _displayName;
         public string GetDisplayName()
         {

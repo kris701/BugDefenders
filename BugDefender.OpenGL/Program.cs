@@ -8,6 +8,10 @@ namespace BugDefender.OpenGL
         [STAThread]
         static void Main()
         {
+#if DEBUG
+            using (var mainWindow = new GameWindow((g) => new SplashScreenView(g)))
+                mainWindow.Run();
+#else
             try
             {
                 using (var mainWindow = new GameWindow((g) => new SplashScreenView(g)))
@@ -18,6 +22,7 @@ namespace BugDefender.OpenGL
                 using (var crashWindow = new CrashWindow(e))
                     crashWindow.Run();
             }
+#endif
         }
     }
 }

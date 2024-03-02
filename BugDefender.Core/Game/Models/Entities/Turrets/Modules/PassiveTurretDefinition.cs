@@ -1,28 +1,23 @@
-﻿using System.Text;
+﻿using BugDefender.Core.Game.Models.Entities.Upgrades;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
-    public class PassiveTurretDefinition : ITurretModule, IRangeAttribute
+    public class PassiveTurretDefinition : UpgradeEffectModel, ITurretModule, IRangeAttribute
     {
         public float Range { get; set; }
-        public float RangeModifier { get; set; } = 1;
-        public float DamageModifier { get; set; } = 1;
-        public float CooldownModifier { get; set; } = 1;
-        public float SlowingFactorModifier { get; set; } = 1;
-        public int SlowingDurationModifier { get; set; } = 1;
+        [JsonIgnore]
+        public HashSet<TurretInstance> Affected = new HashSet<TurretInstance>();
 
-        public ITurretModule Copy()
+        public PassiveTurretDefinition(float range, List<EffectTarget> effects) : base(effects)
         {
-            return new PassiveTurretDefinition()
-            {
-                Range = Range,
-                RangeModifier = RangeModifier,
-                DamageModifier = DamageModifier,
-                CooldownModifier = CooldownModifier,
-                SlowingFactorModifier = SlowingFactorModifier,
-                SlowingDurationModifier = SlowingDurationModifier
-            };
+            if (effects.Any(x => x.Value != null))
+                throw new Exception("Passive turrets can only have modifiers!");
+            Range = range;
         }
+
+        public new ITurretModule Copy() => new PassiveTurretDefinition(Range, base.Copy().Effects);
 
         public string GetDescriptionString()
         {
@@ -31,16 +26,13 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
             sb.AppendLine("Type: Passive");
             sb.AppendLine($"Range: {Range}");
             sb.AppendLine("Gives:");
-            if (RangeModifier != 1)
-                sb.AppendLine($"Range: {RangeModifier}x");
-            if (DamageModifier != 1)
-                sb.AppendLine($"Damage: {DamageModifier}x");
-            if (CooldownModifier != 1)
-                sb.AppendLine($"Cooldown: {CooldownModifier}x");
-            if (SlowingFactorModifier != 1)
-                sb.AppendLine($"Slowing Factor: {SlowingFactorModifier}x");
-            if (SlowingDurationModifier != 1)
-                sb.AppendLine($"Slowing Duration: {SlowingDurationModifier}x");
+            foreach (var effect in Effects)
+            {
+                if (effect.Value != null)
+                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Value}");
+                else
+                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Modifier}x");
+            }
 
             return sb.ToString();
         }

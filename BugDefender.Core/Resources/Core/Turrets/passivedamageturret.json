@@ -7,11 +7,16 @@
   "ModuleInfo": {
     "TurretModule": "PassiveTurret",
     "Range": 100,
-    "RangeModifier": 1,
-    "DamageModifier": 2,
-    "CooldownModifier": 1,
-    "SlowingFactorModifier": 1,
-    "SlowingDurationModifier": 1
+    "Effects": [
+      {
+        "Target": "Damage",
+        "Modifier": 2
+      },
+      {
+        "Target": "ProjectileInfo.Damage",
+        "Modifier": 2
+      }
+    ]
   },
   "CanDamage": [],
   "AvailableAtWave": 40,
@@ -37,7 +42,11 @@
       "Cost": 4000,
       "Effects": [
         {
-          "Target": "RangeModifier",
+          "Target": "Effects[Target=Damage].Modifier",
+          "Modifier": 1.5
+        },
+        {
+          "Target": "Effects[Target=ProjectileInfo.Damage].Modifier",
           "Modifier": 1.5
         }
       ]

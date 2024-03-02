@@ -60,6 +60,7 @@ namespace BugDefender.Core.Game
 
 #if DEBUG
             CheatsHelper.Cheats.Add(CheatTypes.InfiniteMoney);
+            Context.Wave = 9999;
 #endif
         }
 
