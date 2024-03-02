@@ -31,7 +31,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
-        private static string _saveDir = "Saves";
+        private static readonly string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
         private readonly EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
@@ -337,7 +337,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.IsVisible = false;
             }
 
-            _mainMenuButton.IsEnabled = _game.Context.CanSave();                
+            _mainMenuButton.IsEnabled = _game.Context.CanSave();
         }
 
         private void UpdateEffectLifetimes(GameTime gameTime)

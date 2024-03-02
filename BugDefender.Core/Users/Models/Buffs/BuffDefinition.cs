@@ -1,7 +1,6 @@
 ﻿using BugDefender.Core.Game.Models;
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.UserCriterias;
-using System.Text;
 
 namespace BugDefender.Core.Users.Models.Buffs
 {

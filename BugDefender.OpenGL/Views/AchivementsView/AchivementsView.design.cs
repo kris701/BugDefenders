@@ -53,7 +53,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
             _achivementsPages.Add(new List<AchivementControl>());
             var ids = ResourceManager.Achivements.GetResources();
             var sorted = new List<AchivementDefinition>();
-            foreach(var id in ids)
+            foreach (var id in ids)
                 sorted.Add(ResourceManager.Achivements.GetResource(id));
             sorted = sorted.OrderByDescending(x => Parent.CurrentUser.Achivements.Contains(x.ID)).ToList();
 

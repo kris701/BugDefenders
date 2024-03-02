@@ -6,7 +6,6 @@ using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views.ChallengeView;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {

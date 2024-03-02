@@ -1,10 +1,5 @@
 ﻿using BugDefender.Core.Game.Models;
 using BugDefender.Core.Users.Models.UserCriterias;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Users.Models.Challenges
 {

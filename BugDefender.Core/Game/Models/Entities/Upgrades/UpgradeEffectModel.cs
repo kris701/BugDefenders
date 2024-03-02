@@ -107,7 +107,7 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
                     if (targetObject is IEnumerable enu)
                     {
                         bool any = false;
-                        foreach(var inner in enu)
+                        foreach (var inner in enu)
                         {
                             var listPropInfo = inner.GetType().GetProperties();
                             var listTargetInfo = listPropInfo.First(x => x.Name == targetProp);

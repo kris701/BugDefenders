@@ -12,7 +12,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
     public partial class GameSetupView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
-        private static string _saveDir = "Saves";
+        private static readonly string _saveDir = "Saves";
 
         private Guid? _selectedGameStyle;
         private ButtonControl? _selectedGameStyleButton;

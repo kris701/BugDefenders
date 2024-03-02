@@ -296,7 +296,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Y = yOffset + 5,
                 Height = 30,
                 Width = width
-            }); 
+            });
 
             AddControl(1, new ButtonControl(Parent, clicked: (s) =>
             {

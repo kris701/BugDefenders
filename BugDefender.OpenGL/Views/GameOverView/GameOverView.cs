@@ -9,7 +9,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
     public partial class GameOverView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
-        private static string _saveDir = "Saves";
+        private static readonly string _saveDir = "Saves";
 
         private readonly Texture2D _screen;
         private readonly int _score;

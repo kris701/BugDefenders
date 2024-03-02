@@ -4,7 +4,6 @@ using BugDefender.Core.Game.Modules.Enemies;
 using BugDefender.Core.Game.Modules.Projectiles;
 using BugDefender.Core.Game.Modules.Turrets;
 using BugDefender.Core.Resources;
-using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Challenges;
 
 namespace BugDefender.Core.Game
@@ -77,10 +76,10 @@ namespace BugDefender.Core.Game
 
             Initialize();
 
-//#if DEBUG
-//            CheatsHelper.Cheats.Add(CheatTypes.InfiniteMoney);
-//            CheatsHelper.Cheats.Add(CheatTypes.MaxWaves);
-//#endif
+            //#if DEBUG
+            //            CheatsHelper.Cheats.Add(CheatTypes.InfiniteMoney);
+            //            CheatsHelper.Cheats.Add(CheatTypes.MaxWaves);
+            //#endif
         }
 
         public void Initialize()

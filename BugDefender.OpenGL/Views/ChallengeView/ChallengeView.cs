@@ -1,12 +1,8 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Resources;
-using BugDefender.Core.Users.Models;
-using BugDefender.Core.Users.Models.Challenges;
+﻿using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -18,10 +14,10 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
     {
         private static readonly Guid _id = new Guid("7fe5d5b5-3be0-4bc9-a27c-08448042b881");
         private readonly KeyWatcher _escapeKeyWatcher;
-        private static string _saveDir = "Saves";
-        private static int _challengeCount = 5;
+        private static readonly string _saveDir = "Saves";
+        private static readonly int _challengeCount = 5;
 
-        private List<Guid> _remainingChallenges;
+        private readonly List<Guid> _remainingChallenges;
         public ChallengeView(GameWindow parent) : base(
             parent,
             _id,
@@ -42,7 +38,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             }
             var challenges = ResourceManager.Challenges.GetResources();
             var rnd = new Random(hashValue);
-            for(int i = 0; i < _challengeCount; i++)
+            for (int i = 0; i < _challengeCount; i++)
             {
                 var target = rnd.Next(0, challenges.Count);
                 var id = challenges[target];
