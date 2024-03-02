@@ -10,6 +10,7 @@ using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
@@ -48,26 +49,30 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private int tabIndex = 0;
         private readonly KeyWatcher _switchTurretWatcher;
         private readonly KeyWatcher _escapeKeyWatcher;
-        private bool _gameOver = false;
+        private bool _gameOverCheck = false;
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
 
-        public GameScreen(GameWindow parent, Guid mapID, Guid gameStyleID) : this(parent, new GameContext() {
-            Map = ResourceManager.Maps.GetResource(mapID),
-            GameStyle = ResourceManager.GameStyles.GetResource(gameStyleID)
-        })
+        public GameScreen(GameWindow parent, ChallengeDefinition challenge) : this(parent, new GameEngine(challenge))
         {
         }
 
+        public GameScreen(GameWindow parent, Guid mapID, Guid gameStyleID) : this(parent, new GameEngine(mapID, gameStyleID))
+        {
+        }
 
-        public GameScreen(GameWindow parent, GameContext context) : base(
+        public GameScreen(GameWindow parent, GameContext context) : this(parent, new GameEngine(context))
+        {
+        }
+
+        private GameScreen(GameWindow parent, GameEngine game) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             ScaleValue = parent.CurrentUser.UserData.Scale;
-            _game = new GameEngine(context);
+            _game = game;
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
             _game.OnPlayerDamaged += () =>
@@ -627,16 +632,27 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void GameOver()
         {
-            if (!_gameOver)
+            if (!_gameOverCheck)
             {
-                _gameOver = true;
+                _gameOverCheck = true;
                 var credits = 0;
+                var result = _game.Result;
+
+                if (_game.Context.Challenge != null)
+                {
+                    if (result == GameResult.ChallengeSuccess)
+                    {
+                        credits += _game.Context.Challenge.Reward;
+                        Parent.CurrentUser.CompletedChallenges.Add(_game.Context.Challenge.ID);
+                    }
+                }
+
 #if RELEASE
                 if (CheatsHelper.Cheats.Count == 0)
                 {
 #endif
-                    Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
-                    credits = (_game.Context.Score / 1000);
+                    Parent.CurrentUser.Stats.Combine(_game.Context.Stats);
+                    credits += (_game.Context.Score / 1000);
                     Parent.CurrentUser.Credits += credits;
                     Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
                     Parent.UserManager.SaveUser(Parent.CurrentUser);

@@ -4,6 +4,8 @@ using BugDefender.Core.Game.Modules.Enemies;
 using BugDefender.Core.Game.Modules.Projectiles;
 using BugDefender.Core.Game.Modules.Turrets;
 using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models;
+using BugDefender.Core.Users.Models.Challenges;
 
 namespace BugDefender.Core.Game
 {
@@ -14,7 +16,9 @@ namespace BugDefender.Core.Game
         public GameEventHandler? OnPlayerDamaged;
 
         private readonly GameTimer _mainLoopTimer;
+        private readonly GameTimer _challengeTimer;
 
+        public GameResult Result { get; private set; } = GameResult.None;
         public bool GameOver { get; set; }
         private bool _running = true;
         public bool Running
@@ -36,14 +40,28 @@ namespace BugDefender.Core.Game
         public TurretsModule TurretsModule { get; }
         public ProjectilesModule ProjectilesModule { get; }
 
+        public GameEngine(ChallengeDefinition challenge) : this(challenge.MapID, challenge.GameStyleID)
+        {
+            Context.Challenge = challenge;
+        }
+
+        public GameEngine(Guid mapID, Guid gameStyleID) : this(
+            new GameContext()
+            {
+                Map = ResourceManager.Maps.GetResource(mapID),
+                GameStyle = ResourceManager.GameStyles.GetResource(gameStyleID)
+            }
+        )
+        {
+            Context.HP = Context.GameStyle.StartingHP;
+            Context.Money = Context.GameStyle.StartingMoney;
+        }
+
         public GameEngine(GameContext fromContext)
         {
             Context = fromContext;
-            if (Context.HP == -1)
-                Context.HP = Context.GameStyle.StartingHP;
-            if (Context.Money == -1)
-                Context.Money = Context.GameStyle.StartingMoney;
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
+            _challengeTimer = new GameTimer(TimeSpan.FromSeconds(1), CheckChallenge);
 
             EnemiesModule = new EnemiesModule(Context, this);
             TurretsModule = new TurretsModule(Context, this);
@@ -59,10 +77,10 @@ namespace BugDefender.Core.Game
 
             Initialize();
 
-#if DEBUG
-            CheatsHelper.Cheats.Add(CheatTypes.InfiniteMoney);
-            CheatsHelper.Cheats.Add(CheatTypes.MaxWaves);
-#endif
+//#if DEBUG
+//            CheatsHelper.Cheats.Add(CheatTypes.InfiniteMoney);
+//            CheatsHelper.Cheats.Add(CheatTypes.MaxWaves);
+//#endif
         }
 
         public void Initialize()
@@ -76,6 +94,8 @@ namespace BugDefender.Core.Game
             if (Running)
             {
                 _mainLoopTimer.Update(passed);
+                if (Context.Challenge != null)
+                    _challengeTimer.Update(passed);
                 Context.GameTime += passed;
             }
         }
@@ -91,6 +111,16 @@ namespace BugDefender.Core.Game
                 Context.Wave = 99999999;
         }
 
+        private void CheckChallenge()
+        {
+            if (Context.Challenge != null && Context.Challenge.IsValid(Context.Stats))
+            {
+                Running = false;
+                GameOver = true;
+                Result = GameResult.ChallengeSuccess;
+            }
+        }
+
         internal void DamagePlayer()
         {
             OnPlayerDamaged?.Invoke();
@@ -101,6 +131,7 @@ namespace BugDefender.Core.Game
                 Context.HP = 0;
                 Running = false;
                 GameOver = true;
+                Result = GameResult.Lost;
             }
         }
     }

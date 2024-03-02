@@ -97,10 +97,21 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new ChallengeView.ChallengeView(Parent)))
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 550,
+                Width = 300,
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "Challenges",
+                FontColor = Color.White,
+                FillClickedColor = BasicTextures.GetClickedTexture()
+            });
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = 600,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),

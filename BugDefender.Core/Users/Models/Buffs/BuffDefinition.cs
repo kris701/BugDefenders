@@ -47,15 +47,5 @@ namespace BugDefender.Core.Users.Models.Buffs
                 case BuffEffectTypes.Projectile: buff.ApplyUpgradeEffectOnObject(ResourceManager.Projectiles.GetResource(buff.Target).ModuleInfo); break;
             }
         }
-
-        public string GetDescriptionString()
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine(Name);
-            sb.AppendLine(Description);
-
-            return sb.ToString();
-        }
     }
 }

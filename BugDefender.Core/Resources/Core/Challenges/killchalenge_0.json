@@ -1,0 +1,14 @@
+﻿{
+  "id": "83b04fae-bd35-45f9-817f-51f90709e43f",
+  "Name": "Murder Time",
+  "description": "Kill 1 enemy!",
+  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+  "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
+  "Reward": 5,
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 1
+    }
+  ]
+}

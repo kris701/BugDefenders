@@ -6,18 +6,22 @@
         public string Name { get; set; }
         public List<Guid> Buffs { get; set; } = new List<Guid>();
         public List<Guid> Achivements { get; set; } = new List<Guid>();
+        public List<Guid> CompletedChallenges { get; set; } = new List<Guid>();
+        public int ChallengeDaySeed { get; set; } = 0;
         public List<ScoreDefinition> HighScores { get; set; } = new List<ScoreDefinition>();
         public bool IsPrimary { get; set; } = false;
         public StatsDefinition Stats { get; set; } = new StatsDefinition();
         public int Credits { get; set; }
         public T UserData { get; set; }
 
-        public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, int credits, T userData)
+        public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<Guid> completedChallenges, int challengeDaySeed, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, int credits, T userData)
         {
             ID = iD;
             Name = name;
             Buffs = buffs;
             Achivements = achivements;
+            CompletedChallenges = completedChallenges;
+            ChallengeDaySeed = challengeDaySeed;
             HighScores = highScores;
             IsPrimary = isPrimary;
             Stats = stats;
