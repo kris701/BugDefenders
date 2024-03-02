@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 225,
-                Text = $"Score: {_score}",
+                Text = $"Score: {_score}, giving you {_credits} credits",
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(24),
             });
@@ -70,7 +70,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _score, _gameTime)))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _score, _credits, _gameTime)))
             {
                 X = 0,
                 Y = 0,

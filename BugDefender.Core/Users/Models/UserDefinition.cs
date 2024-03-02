@@ -9,9 +9,10 @@
         public List<ScoreDefinition> HighScores { get; set; } = new List<ScoreDefinition>();
         public bool IsPrimary { get; set; } = false;
         public StatsDefinition Stats { get; set; } = new StatsDefinition();
+        public int Credits { get; set; }
         public T UserData { get; set; }
 
-        public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, T userData)
+        public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, int credits, T userData)
         {
             ID = iD;
             Name = name;
@@ -20,6 +21,7 @@
             HighScores = highScores;
             IsPrimary = isPrimary;
             Stats = stats;
+            Credits = credits;
             UserData = userData;
         }
     }

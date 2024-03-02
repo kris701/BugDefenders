@@ -630,19 +630,22 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (!_gameOver)
             {
                 _gameOver = true;
-
+                var credits = 0;
 #if RELEASE
                 if (CheatsHelper.Cheats.Count == 0)
                 {
 #endif
-                Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
-                Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+                    Parent.CurrentUser.Stats.Combine(_game.Context.Outcome);
+                    credits = (_game.Context.Score / 1000);
+                    Parent.CurrentUser.Credits += credits;
+                    Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
+                    Parent.UserManager.SaveUser(Parent.CurrentUser);
 #if RELEASE
                 }
 #endif
                 Parent.UIResources.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, _game.Context.GameTime));
+                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, credits, _game.Context.GameTime));
             }
         }
 

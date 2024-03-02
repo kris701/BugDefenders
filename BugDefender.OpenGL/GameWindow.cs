@@ -60,6 +60,7 @@ namespace BugDefender.OpenGL
                     new List<ScoreDefinition>(),
                     true,
                     new StatsDefinition(),
+                    0,
                     new SettingsDefinition());
                 UserManager.AddNewUser(newUser);
                 ChangeUser(newUser);
@@ -98,6 +99,7 @@ namespace BugDefender.OpenGL
                 new List<ScoreDefinition>(),
                 false,
                 new StatsDefinition(),
+                0,
                 new SettingsDefinition());
             UserManager.AddNewUser(newUser);
         }

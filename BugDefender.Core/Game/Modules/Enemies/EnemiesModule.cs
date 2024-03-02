@@ -115,7 +115,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                 Context.CurrentEnemies.Remove(enemy);
                 OnEnemyKilled?.Invoke(enemy);
 
-                Context.Outcome.EnemyKilled(enemy.ID, turretDefinitionID);
+                Context.Outcome.EnemyKilled(enemy.DefinitionID, turretDefinitionID);
                 return true;
             }
             return false;

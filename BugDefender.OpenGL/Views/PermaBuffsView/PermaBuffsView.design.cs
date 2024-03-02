@@ -37,7 +37,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 Y = 175,
                 Height = 35,
                 Width = 700,
-                Text = $"Currently {Parent.CurrentUser.Buffs.Count} buffs are applied",
+                Text = $"Currently {Parent.CurrentUser.Buffs.Count} buffs are applied. You have {Parent.CurrentUser.Credits} credits.",
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White
             });
@@ -49,7 +49,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 if (count >= buffs.Count || count >= _upgradeViewCount)
                     break;
                 var buff = ResourceManager.Buffs.GetResource(id);
-                if (!buff.IsValid(Parent.CurrentUser) || Parent.CurrentUser.Buffs.Contains(id))
+                if (!buff.IsValid(Parent.CurrentUser))
                     continue;
 
                 AddControl(0, new LabelControl(Parent)
@@ -70,27 +70,39 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                     Width = 800,
                     Height = 75,
                     Text = buff.Description,
-                    Font = BasicFonts.GetFont(16),
+                    Font = BasicFonts.GetFont(10),
                     FontColor = Color.White,
                     FillColor = Parent.UIResources.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                     Margin = 15
                 });
-                AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+                var newControl = new ButtonControl(Parent, clicked: (x) =>
                 {
-                    Parent.UserManager.AddBuffUpgrade(Parent.CurrentUser, id);
-                    SwitchView(new PermaBuffsView(Parent));
+                    if (x.Tag is int cost)
+                    {
+                        if (Parent.CurrentUser.Credits >= cost)
+                        {
+                            Parent.UserManager.AddBuffUpgrade(Parent.CurrentUser, id);
+                            SwitchView(new PermaBuffsView(Parent));
+                        }
+                    }
                 })
                 {
                     X = 500,
                     Y = 210 + count * 140 + 5,
                     Width = 400,
                     Height = 50,
-                    Text = "Claim",
+                    Text = $"[{buff.Cost}$] Buy",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                });
+                    FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                    IsEnabled = !Parent.CurrentUser.Buffs.Contains(id) && Parent.CurrentUser.Credits >= buff.Cost,
+                    Tag = buff.Cost
+                };
+                if (Parent.CurrentUser.Buffs.Contains(id))
+                    newControl.Text = "Owned!";
+                AddControl(0, newControl);
                 count++;
             }
 

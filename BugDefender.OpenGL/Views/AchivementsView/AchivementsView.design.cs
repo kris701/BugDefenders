@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
@@ -7,6 +8,7 @@ using BugDefender.OpenGL.Views.AchivementsView;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.AchivementsView
 {
@@ -40,7 +42,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 Y = 175,
                 Height = 35,
                 Width = 700,
-                Text = $"You have {Parent.CurrentUser.Achivements.Count} unlocked! There are still {ResourceManager.Achivements.GetResources().Count - Parent.CurrentUser.Achivements.Count} hidden ones remaining.",
+                Text = $"You have {Parent.CurrentUser.Achivements.Count} unlocked! There are still {ResourceManager.Achivements.GetResources().Count - Parent.CurrentUser.Achivements.Count} to go!",
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White
             });
@@ -49,19 +51,26 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
             int page = 0;
             int offset = 0;
             _achivementsPages.Add(new List<AchivementControl>());
-            foreach (var achivementID in ResourceManager.Achivements.GetResources())
+            var ids = ResourceManager.Achivements.GetResources();
+            var sorted = new List<AchivementDefinition>();
+            foreach(var id in ids)
+                sorted.Add(ResourceManager.Achivements.GetResource(id));
+            sorted = sorted.OrderByDescending(x => Parent.CurrentUser.Achivements.Contains(x.ID)).ToList();
+
+            foreach (var achivement in sorted)
             {
-                if (!Parent.CurrentUser.Achivements.Contains(achivementID))
-                    continue;
+                var unlocked = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                if (!Parent.CurrentUser.Achivements.Contains(achivement.ID))
+                    unlocked = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
                 if (count++ % (_selectionsPrPage + 1) == 0)
                 {
                     page++;
                     _achivementsPages.Add(new List<AchivementControl>());
                     offset = 0;
                 }
-                var newButton = new AchivementControl(Parent, ResourceManager.Achivements.GetResource(achivementID))
+                var newButton = new AchivementControl(Parent, achivement)
                 {
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillColor = unlocked,
                     X = 100,
                     Y = 270 + offset++ * 120,
                     IsVisible = false
