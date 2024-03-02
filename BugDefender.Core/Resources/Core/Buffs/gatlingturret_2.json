@@ -3,7 +3,7 @@
   "Name": "Gatling Turret Upgrade",
   "description": "Permanently make the gatling turrets bullets go towards enemies!",
   "Requires": "ede7db0c-6de0-4931-bf1b-0e50e2b4b5e3",
-  "Cost": 20,
+  "Cost": 100,
   "Criterias": [
     {
       "CriteriaType": "TurretKills",

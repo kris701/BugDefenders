@@ -3,7 +3,7 @@
   "Name": "Laser Turret Upgrade",
   "description": "Permanently gives the laser turret 2% more range",
   "Requires": "01c1b070-605a-4cf2-9e5c-9ae5b7f7159f",
-  "Cost": 5,
+  "Cost": 25,
   "Criteria": [
     {
       "CriteriaType": "TurretKills",

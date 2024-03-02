@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace BugDefender.Core.Game
 {
-    public enum GameResult { None, Lost, ChallengeSuccess }
+    public enum GameResult { None, NormalLost, ChallengeLost, ChallengeSuccess }
     public class GameContext
     {
         public MapDefinition Map { get; set; }

@@ -34,9 +34,14 @@
     <None Remove="Resources\Core\Buffs\gatlingturret_2.json" />
     <None Remove="Resources\Core\Buffs\laserturret_1.json" />
     <None Remove="Resources\Core\Buffs\laserturret_2.json" />
-    <None Remove="Resources\Core\Challenges\killchalenge_0.json" />
-    <None Remove="Resources\Core\Challenges\killchalenge_1.json" />
-    <None Remove="Resources\Core\Challenges\killchalenge_2.json" />
+    <None Remove="Resources\Core\Challenges\easy_1.json" />
+    <None Remove="Resources\Core\Challenges\easy_2.json" />
+    <None Remove="Resources\Core\Challenges\hardcore_1.json" />
+    <None Remove="Resources\Core\Challenges\hardcore_2.json" />
+    <None Remove="Resources\Core\Challenges\medium_1.json" />
+    <None Remove="Resources\Core\Challenges\medium_2.json" />
+    <None Remove="Resources\Core\Challenges\money_1.json" />
+    <None Remove="Resources\Core\Challenges\money_2.json" />
     <None Remove="Resources\Core\Enemies\boss1_2.json" />
     <None Remove="Resources\Core\Enemies\boss2_1.json" />
     <None Remove="Resources\Core\Enemies\boss2_2.json" />
@@ -102,13 +107,28 @@
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Challenges\killchalenge_0.json">
+    <EmbeddedResource Include="Resources\Core\Challenges\easy_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Challenges\killchalenge_2.json">
+    <EmbeddedResource Include="Resources\Core\Challenges\easy_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\Challenges\killchalenge_1.json">
+    <EmbeddedResource Include="Resources\Core\Challenges\hardcore_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\money_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\money_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\hardcore_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\medium_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\medium_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\boss3_2.json">

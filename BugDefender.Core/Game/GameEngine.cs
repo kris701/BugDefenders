@@ -131,7 +131,10 @@ namespace BugDefender.Core.Game
                 Context.HP = 0;
                 Running = false;
                 GameOver = true;
-                Result = GameResult.Lost;
+                if (Context.Challenge != null)
+                    Result = GameResult.ChallengeLost;
+                else
+                    Result = GameResult.NormalLost;
             }
         }
     }

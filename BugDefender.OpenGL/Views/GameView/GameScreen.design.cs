@@ -37,7 +37,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private readonly int _turretSelectionsPrPage = 13;
+        private int _turretSelectionsPrPage = 13;
         private readonly List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
         private int _currentTurretPage = 0;
 
@@ -58,7 +58,16 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             SetupGameField();
             SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y - 5, 320, 160);
-            SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 490);
+
+            if (_game.Context.Challenge != null)
+            {
+                _turretSelectionsPrPage = 9;
+                SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 140);
+                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 300, 320, 350);
+            }
+            else
+                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 490);
+
             SetupUpgradeField(_gameArea.X, _gameArea.Y + _gameArea.Height + 10, _gameArea.Width, 200);
             SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 20 + 200, _gameArea.Width, 110);
             SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 320);
@@ -118,7 +127,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             AddControl(1, new LabelControl(Parent)
             {
-                Text = "Bug Defender",
+                Text = "Bug Defenders",
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 X = xOffset,
@@ -224,6 +233,50 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(1, _sendWave);
         }
 
+        private void SetupChallengeInfoField(int xOffset, int yOffset, int width, int height)
+        {
+            AddControl(0, new TileControl(Parent)
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
+            });
+            AddControl(1, new LabelControl(Parent)
+            {
+                Text = "Challenge Info",
+                Font = BasicFonts.GetFont(16),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 5,
+                Height = 30,
+                Width = width
+            });
+            if (_game.Context.Challenge == null)
+                return;
+            AddControl(1, new LabelControl(Parent)
+            {
+                Text = _game.Context.Challenge.Name,
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 35,
+                Height = 30,
+                Width = width
+            });
+            AddControl(1, new TextboxControl(Parent)
+            {
+                Text = _game.Context.Challenge.Description,
+                Font = BasicFonts.GetFont(8),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 65,
+                Height = 80,
+                Width = width
+            });
+        }
+
         private void SetupPurchasingField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(0, new TileControl(Parent)
@@ -243,7 +296,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Y = yOffset + 5,
                 Height = 30,
                 Width = width
-            });
+            }); 
 
             AddControl(1, new ButtonControl(Parent, clicked: (s) =>
             {

@@ -1,0 +1,14 @@
+﻿{
+  "id": "c678fe2f-63d8-46e9-a414-9a311980ead3",
+  "Name": "Big Money",
+  "description": "Earn at least 1000000 money in a medium game!",
+  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+  "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
+  "Reward": 15,
+  "Criterias": [
+    {
+      "CriteriaType": "MoneyEarned",
+      "Quantity": 1000000
+    }
+  ]
+}

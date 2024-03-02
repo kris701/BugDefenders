@@ -48,7 +48,7 @@ namespace BugDefender.OpenGL.Views.ChallengeView
                 Height = 50,
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = $"Start!",
+                Text = $"[Reward: {challenge.Reward} credits] Start!",
                 FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759"))
             };

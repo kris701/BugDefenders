@@ -1,0 +1,14 @@
+﻿{
+  "id": "d0b78b6d-b408-4da1-8150-de4deb287b94",
+  "Name": "Spicy Game",
+  "description": "Get at least 1000 kills in a extreme game",
+  "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
+  "GameStyleID": "9672b018-ea7c-45fc-87cd-b952437eda74",
+  "Reward": 100,
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 1000
+    }
+  ]
+}

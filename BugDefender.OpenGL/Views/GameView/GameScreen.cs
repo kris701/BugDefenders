@@ -651,11 +651,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 if (CheatsHelper.Cheats.Count == 0)
                 {
 #endif
+                if (result != GameResult.ChallengeLost)
+                {
                     Parent.CurrentUser.Stats.Combine(_game.Context.Stats);
                     credits += (_game.Context.Score / 1000);
                     Parent.CurrentUser.Credits += credits;
                     Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
                     Parent.UserManager.SaveUser(Parent.CurrentUser);
+                }
 #if RELEASE
                 }
 #endif
