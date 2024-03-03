@@ -1,0 +1,23 @@
+﻿{
+  "id": "8c97dafe-2677-404a-a57a-2279029e45ae",
+  "Name": "Missile Turret Upgrade",
+  "description": "Permanently increases the range of the missile damage by 10%",
+  "Cost": 50,
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "9f22ceed-4d97-4ac6-846a-405ece02d64a",
+      "Quantity": 10000
+    }
+  ],
+  "Effect": {
+    "TargetType": "Projectile",
+    "Target": "24be3e70-c410-443b-9e91-75d9f3a4270f",
+    "Effects": [
+      {
+        "Target": "Damage",
+        "Modifier": 1.1
+      }
+    ]
+  }
+}

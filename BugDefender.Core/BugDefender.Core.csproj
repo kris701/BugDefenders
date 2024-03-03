@@ -47,9 +47,19 @@
     <None Remove="Resources\Core\Buffs\laserturret_2.json" />
     <None Remove="Resources\Core\Buffs\laserturret_3.json" />
     <None Remove="Resources\Core\Buffs\missileturret_1.json" />
+    <None Remove="Resources\Core\Buffs\missileturret_2.json" />
+    <None Remove="Resources\Core\Buffs\moneyturret_1.json" />
+    <None Remove="Resources\Core\Buffs\moneyturret_2.json" />
+    <None Remove="Resources\Core\Buffs\moneyturret_3.json" />
+    <None Remove="Resources\Core\Buffs\passivedamageturret_1.json" />
+    <None Remove="Resources\Core\Buffs\passivedamageturret_2.json" />
+    <None Remove="Resources\Core\Buffs\passiverangeturret_1.json" />
+    <None Remove="Resources\Core\Buffs\passiverangeturret_2.json" />
     <None Remove="Resources\Core\Buffs\rocketturret_1.json" />
     <None Remove="Resources\Core\Buffs\rocketturret_2.json" />
     <None Remove="Resources\Core\Buffs\rocketturret_3.json" />
+    <None Remove="Resources\Core\Buffs\slowingturret_1.json" />
+    <None Remove="Resources\Core\Buffs\slowingturret_2.json" />
     <None Remove="Resources\Core\Challenges\easy_1.json" />
     <None Remove="Resources\Core\Challenges\easy_2.json" />
     <None Remove="Resources\Core\Challenges\hardcore_1.json" />
@@ -150,7 +160,37 @@
     <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\moneyturret_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\moneyturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passiverangeturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passiverangeturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passivedamageturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passivedamageturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\missileturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\missileturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\moneyturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\slowingturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\slowingturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\rocketturret_3.json">
