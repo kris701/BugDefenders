@@ -1,0 +1,11 @@
+﻿{
+  "id": "b4ee2d68-a981-4c74-afa0-c361a4fd36e9",
+  "Name": "Just a little plash",
+  "description": "Only a few couple of waves.",
+  "Criterias": [
+    {
+      "CriteriaType": "WavesStarted",
+      "Quantity": 100
+    }
+  ]
+}

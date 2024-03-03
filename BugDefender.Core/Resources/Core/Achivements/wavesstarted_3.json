@@ -1,0 +1,11 @@
+﻿{
+  "id": "a8518315-2963-451b-a908-223ef55118e8",
+  "Name": "One hell of a storm",
+  "description": "So many waves!",
+  "Criterias": [
+    {
+      "CriteriaType": "WavesStarted",
+      "Quantity": 10000
+    }
+  ]
+}

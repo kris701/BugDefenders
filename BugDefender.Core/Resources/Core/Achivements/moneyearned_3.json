@@ -1,0 +1,11 @@
+﻿{
+  "id": "b4e2e147-1d69-4588-ad1d-756c7bbac911",
+  "Name": "Big Business",
+  "description": "Swimming in cash",
+  "Criterias": [
+    {
+      "CriteriaType": "MoneyEarned",
+      "Quantity": 1000000
+    }
+  ]
+}

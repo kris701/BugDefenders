@@ -1,0 +1,11 @@
+﻿{
+  "id": "c034193b-2172-4bc4-8a1e-4c25ad3bc955",
+  "Name": "Medium Business",
+  "description": "This business is getting pretty serious now",
+  "Criterias": [
+    {
+      "CriteriaType": "MoneyEarned",
+      "Quantity": 100000
+    }
+  ]
+}

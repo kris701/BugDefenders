@@ -1,0 +1,11 @@
+﻿{
+  "id": "4b0240d5-8f7c-4f66-8a10-dc069c395cc9",
+  "Name": "Country Demolisher",
+  "description": "Jesus, you must be rich now.",
+  "Criterias": [
+    {
+      "CriteriaType": "SoldTurrets",
+      "Quantity": 100000
+    }
+  ]
+}
