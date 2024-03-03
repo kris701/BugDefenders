@@ -1,5 +1,4 @@
-﻿using BugDefender.Core.Game.Models.Entities.Turrets;
-using BugDefender.Core.Resources;
+﻿using BugDefender.Core.Resources;
 
 namespace BugDefender.Core.Tests.Game.Models.Entities.Enemies
 {
