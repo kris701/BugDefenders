@@ -35,8 +35,6 @@ jobs:
 
       - name: Publish Game (Windows)
         run: dotnet publish BugDefender.OpenGL -c Release -r win-x64
-      - name: Publish Toolkit (Windows)
-        run: dotnet publish BugDefender.CLI -c Release -r win-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
