@@ -24,9 +24,8 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
             Height = 140;
             _titleControl = new LabelControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Text = buff.Name,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
@@ -37,29 +36,24 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
                 sb.AppendLine(req.GetDescriptionString());
             _requirementsTextBox = new TextboxControl()
             {
-                X = 525,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = sb.ToString(),
-                Margin = 15
+                Text = sb.ToString()
             };
             _descriptionTextbox = new TextboxControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = Buff.Description,
-                Margin = 15
+                Text = Buff.Description
             };
             _buyButton = new ButtonControl(parent, click)
             {
-                X = 525,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"[{buff.Cost} credits] Buy",
@@ -87,15 +81,20 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
         {
             base.Initialize();
             _titleControl.Y = Y + 20;
+            _titleControl.X = X + 45;
             _titleControl.Initialize();
 
-            _requirementsTextBox.Y = Y + 45;
-            _requirementsTextBox.Initialize();
-
-            _descriptionTextbox.Y = Y + 45;
+            _descriptionTextbox.Y = Y + 50;
+            _descriptionTextbox.X = X + 45;
             _descriptionTextbox.Initialize();
 
+            _requirementsTextBox.Y = Y + 50;
+            _requirementsTextBox.X = X + 470;
+            _requirementsTextBox.Initialize();
+
             _buyButton.Y = Y + 20;
+            _buyButton.X = X + 470;
+            _buyButton.Tag = Tag;
             _buyButton.Initialize();
         }
 

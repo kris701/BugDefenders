@@ -53,8 +53,8 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 350,
-                Width = 500,
-                Height = 500,
+                Width = 960,
+                Height = 540,
                 FillColor = _screen
             })
             {
@@ -65,7 +65,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             AddControl(1, new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenuView(Parent)); })
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 875,
+                Y = 910,
                 Width = 400,
                 Height = 80,
                 Font = BasicFonts.GetFont(24),

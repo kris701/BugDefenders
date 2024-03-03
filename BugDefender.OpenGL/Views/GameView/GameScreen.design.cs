@@ -58,7 +58,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
 
             SetupGameField();
-            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y - 5, 320, 160);
+            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y - 5, 640, 160);
 
             if (_game.Context.Challenge != null)
             {
@@ -67,11 +67,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 300, 320, 350);
             }
             else
-                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 490);
+                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 320, _gameArea.Y + 160, 320, 570);
 
-            SetupUpgradeField(_gameArea.X, _gameArea.Y + _gameArea.Height + 10, _gameArea.Width, 200);
-            SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 20 + 200, _gameArea.Width, 110);
-            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 320);
+            SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
+            SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 5, _gameArea.Width, 110);
+            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, 750, 640, 320);
 
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext()
@@ -403,7 +403,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f367b2e1-0b9f-40da-95af-dac50b16a0ad")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -457,7 +457,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(10),
                 Text = $">",
-                X = xOffset + 615,
+                X = xOffset + width - 35,
                 Y = yOffset + 10,
                 Height = 25,
                 Width = 25,

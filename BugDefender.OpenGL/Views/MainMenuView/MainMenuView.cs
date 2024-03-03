@@ -33,7 +33,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             if (_continueButton.IsVisible)
             {
                 _startGame!.HorizontalAlignment = Engine.Alignment.None;
-                _startGame!.X = 200;
+                _startGame!.X = 960;
             }
         }
 

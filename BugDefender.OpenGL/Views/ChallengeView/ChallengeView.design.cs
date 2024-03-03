@@ -52,8 +52,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                     StartButton_Click,
                     Parent.CurrentUser.CompletedChallenges.Contains(id))
                 {
-                    X = 50,
-                    Y = 210 + count++ * 135 + 5,
+                    X = 500,
+                    Y = 250 + count++ * 135 + 5,
                     Tag = id
                 };
                 AddControl(1, newControl);
@@ -64,8 +64,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Back",

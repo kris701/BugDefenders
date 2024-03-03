@@ -23,18 +23,16 @@ namespace BugDefender.OpenGL.Views.AchivementsView
             Height = 140;
             _iconTile = new TileControl()
             {
-                X = 75,
                 Width = 75,
                 Height = 75,
                 FillColor = parent.UIResources.GetTexture(Achivement.ID)
             };
             _titleControl = new LabelControl()
             {
-                X = 160,
-                Width = 400,
-                Height = 35,
+                Width = 350,
+                Height = 25,
                 Text = achivement.Name,
-                Font = BasicFonts.GetFont(12),
+                Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
             };
             var sb = new StringBuilder();
@@ -43,23 +41,19 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 sb.AppendLine(req.GetDescriptionString());
             _requirementsTextBox = new TextboxControl()
             {
-                X = 560,
-                Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Width = 350,
+                Height = 100,
+                Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
-                Text = sb.ToString(),
-                Margin = 15
+                Text = sb.ToString()
             };
             _descriptionTextbox = new TextboxControl()
             {
-                X = 160,
-                Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Width = 350,
+                Height = 70,
+                Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
-                Text = achivement.Description,
-                Margin = 15
+                Text = achivement.Description
             };
 
             if (isUnlocked)
@@ -77,15 +71,19 @@ namespace BugDefender.OpenGL.Views.AchivementsView
         {
             base.Initialize();
             _iconTile.Y = Y + 30;
+            _iconTile.X = X + 40;
             _iconTile.Initialize();
 
             _titleControl.Y = Y + 20;
+            _titleControl.X = X + 140;
             _titleControl.Initialize();
 
-            _descriptionTextbox.Y = Y + 45;
+            _descriptionTextbox.Y = Y + 50;
+            _descriptionTextbox.X = X + 140;
             _descriptionTextbox.Initialize();
 
-            _requirementsTextBox.Y = Y + 10;
+            _requirementsTextBox.Y = Y + 20;
+            _requirementsTextBox.X = X + 500;
             _requirementsTextBox.Initialize();
         }
 

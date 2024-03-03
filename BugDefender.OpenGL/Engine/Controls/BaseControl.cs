@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BugDefender.OpenGL.Engine.Helpers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BugDefender.OpenGL.Engine.Controls
@@ -68,7 +69,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             {
                 case Alignment.Left: X = 0; break;
                 case Alignment.Right: X = GameWindow.BaseScreenSize.X - Width; break;
-                case Alignment.Middle: X = GameWindow.BaseScreenSize.Y / 2 - Width / 2; break;
+                case Alignment.Middle: X = GameWindow.BaseScreenSize.X / 2 - Width / 2; break;
             }
         }
 

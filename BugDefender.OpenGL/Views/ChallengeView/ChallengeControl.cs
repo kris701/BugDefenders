@@ -25,11 +25,10 @@ namespace BugDefender.OpenGL.Views.ChallengeView
             Height = 140;
             _titleControl = new LabelControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Text = challenge.Name,
-                Font = BasicFonts.GetFont(12),
+                Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
             };
             var sb = new StringBuilder();
@@ -38,32 +37,27 @@ namespace BugDefender.OpenGL.Views.ChallengeView
                 sb.AppendLine(req.GetDescriptionString());
             _requirementsTextBox = new TextboxControl()
             {
-                X = 525,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = sb.ToString(),
-                Margin = 15
+                Text = sb.ToString()
             };
             var sb2 = new StringBuilder();
             sb2.AppendLine(Challenge.Description);
             sb2.AppendLine($"Map: '{ResourceManager.Maps.GetResource(challenge.MapID).Name}'. Gamestyle: '{ResourceManager.GameStyles.GetResource(challenge.GameStyleID).Name}'");
             _descriptionTextbox = new TextboxControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = sb2.ToString(),
-                Margin = 15
+                Text = sb2.ToString()
             };
             _startButton = new ButtonControl(parent, click)
             {
-                X = 525,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"[Reward: {challenge.Reward} credits] Start!",
@@ -85,15 +79,19 @@ namespace BugDefender.OpenGL.Views.ChallengeView
         {
             base.Initialize();
             _titleControl.Y = Y + 20;
+            _titleControl.X = X + 45;
             _titleControl.Initialize();
 
-            _requirementsTextBox.Y = Y + 45;
-            _requirementsTextBox.Initialize();
-
-            _descriptionTextbox.Y = Y + 45;
+            _descriptionTextbox.Y = Y + 50;
+            _descriptionTextbox.X = X + 45;
             _descriptionTextbox.Initialize();
 
+            _requirementsTextBox.Y = Y + 50;
+            _requirementsTextBox.X = X + 470;
+            _requirementsTextBox.Initialize();
+
             _startButton.Y = Y + 20;
+            _startButton.X = X + 470;
             _startButton.Tag = Tag;
             _startButton.Initialize();
         }

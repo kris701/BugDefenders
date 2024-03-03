@@ -28,7 +28,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
 
             AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Engine.Alignment.Middle,
+                HorizontalAlignment = Alignment.Middle,
                 Y = 100,
                 Height = 75,
                 Width = 800,
@@ -66,8 +66,8 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 }
                 var newButton = new AchivementControl(Parent, achivement, Parent.CurrentUser.Achivements.Contains(achivement.ID))
                 {
-                    X = 50,
-                    Y = 210 + offset++ * 135 + 5,
+                    X = 500,
+                    Y = 250 + offset++ * 135 + 5,
                 };
                 _achivementsPages[page].Add(newButton);
                 AddControl(2, newButton);
@@ -90,8 +90,8 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $"<",
-                X = 70,
-                Y = 150,
+                X = 600,
+                Y = 110,
                 Height = 50,
                 Width = 50,
                 IsVisible = _achivementsPages.Count > 1
@@ -111,8 +111,8 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $">",
-                X = 875,
-                Y = 150,
+                X = 1250,
+                Y = 110,
                 Height = 50,
                 Width = 50,
                 IsVisible = _achivementsPages.Count > 1
@@ -123,8 +123,8 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Back",

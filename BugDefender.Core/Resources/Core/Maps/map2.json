@@ -2,42 +2,42 @@
   "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
   "Name": "Criss Cross",
   "Description": "A map with two paths that the enemies can take!",
-  "Width": 650,
-  "Height": 650,
+  "Width": 950,
+  "Height": 950,
   "Paths": [
     [
       {
         "X": 0,
-        "Y": 325
+        "Y": 471
       },
       {
-        "X": 650,
-        "Y": 325
+        "X": 950,
+        "Y": 471
       }
     ],
     [
       {
-        "X": 320,
+        "X": 465,
         "Y": 0
       },
       {
-        "X": 320,
-        "Y": 650
+        "X": 465,
+        "Y": 950
       }
     ]
   ],
   "BlockingTiles": [
     {
-      "X": 0,
-      "Y": 300,
-      "Width": 650,
-      "Height": 50
+      "X": -37.5,
+      "Y": 433.5,
+      "Width": 1025,
+      "Height": 75
     },
     {
-      "X": 295,
-      "Y": 0,
-      "Width": 50,
-      "Height": 650
+      "X": 427.5,
+      "Y": -37.5,
+      "Width": 75,
+      "Height": 1025
     }
   ]
 }

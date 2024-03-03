@@ -12,9 +12,12 @@ namespace BugDefender.OpenGL.Screens.SettingsView
     {
         private readonly List<Point> _resolutionOptions = new List<Point>()
         {
-            new Point(720, 480),
+            new Point(480, 270),
+            new Point(960, 540),
             new Point(1280, 720),
+            new Point(1600, 900),
             new Point(1920, 1080),
+            new Point(2400, 1350),
             new Point(3840, 2160),
         };
         private readonly List<ButtonControl> _scaleButtons = new List<ButtonControl>();
@@ -101,7 +104,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             })
             {
                 X = 50,
-                Y = 900,
+                Y = 980,
                 Width = 200,
                 Height = 50,
                 Text = "Apply",
@@ -116,8 +119,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Cancel",
@@ -168,8 +171,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _resolutionOptions.Count + 10)),
-                    Width = 710 / _resolutionOptions.Count,
+                    X = 110 + (i * (1585 / _resolutionOptions.Count + 10)),
+                    Width = 1585 / _resolutionOptions.Count,
                     Height = 40,
                     Text = $"{_resolutionOptions[i].X}x{_resolutionOptions[i].Y}",
                     Font = BasicFonts.GetFont(16),
@@ -268,8 +271,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 40,
-                    X = 110 + (i * (770 / packs.Count + 10)),
-                    Width = 770 / packs.Count,
+                    X = 110 + (i * (1585 / packs.Count + 10)),
+                    Width = 1585 / packs.Count,
                     Height = 50,
                     Text = Parent.UIResources.GetTexturePack(packs[i]).Name,
                     Font = BasicFonts.GetFont(16),
@@ -306,8 +309,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _musicOptions.Count + 10)),
-                    Width = 710 / _musicOptions.Count,
+                    X = 110 + (i * (1585 / _musicOptions.Count + 10)),
+                    Width = 1585 / _musicOptions.Count,
                     Height = 40,
                     Text = $"{Math.Round(_musicOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),
@@ -344,8 +347,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _soundEffectOptions.Count + 10)),
-                    Width = 710 / _soundEffectOptions.Count,
+                    X = 110 + (i * (1585 / _soundEffectOptions.Count + 10)),
+                    Width = 1585 / _soundEffectOptions.Count,
                     Height = 40,
                     Text = $"{Math.Round(_soundEffectOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),

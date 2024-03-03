@@ -52,7 +52,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
             AddControl(0, new ButtonControl(Parent, clicked: (x) => { Accept(); })
             {
                 X = 50,
-                Y = 900,
+                Y = 980,
                 Width = 200,
                 Height = 50,
                 Text = "Apply",
@@ -64,8 +64,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) => { Cancel(); })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Cancel",

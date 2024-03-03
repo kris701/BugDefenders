@@ -24,8 +24,8 @@
 	  <!--<DefineConstants>$(DefineConstants);CENTERPOINT</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);TEXTBORDER</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
+	  <DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>
+	  <DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
 	  <EmbeddedResource Include="Icon.bmp">

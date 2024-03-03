@@ -56,13 +56,13 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
             {
                 AddControl(0, new LabelControl()
                 {
-                    HorizontalAlignment = Engine.Alignment.Middle,
-                    Y = 215 + (count++ * 50 + 5),
-                    Height = 50,
-                    Width = 800,
+                    HorizontalAlignment = Alignment.Middle,
+                    Y = 215 + (count++ * 60 + 5),
+                    Height = 60,
+                    Width = 1200,
                     Text = $"User: {allUsers.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
                     FontColor = Color.White,
-                    Font = BasicFonts.GetFont(10),
+                    Font = BasicFonts.GetFont(12),
                     FillColor = Parent.UIResources.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                 });
             }
@@ -72,8 +72,8 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Back",

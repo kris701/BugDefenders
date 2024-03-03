@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     public partial class GameScreen : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
-        private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
+        private Rectangle _gameArea = new Rectangle(180, 10, 950, 950);
         private static readonly string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
@@ -123,13 +123,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 var from = path[0];
                 foreach (var waypoint in path.Skip(1))
                 {
-                    AddControl(99, new LineControl(Parent)
+                    AddControl(99, new LineControl()
                     {
                         X = from.X + _gameArea.X,
                         Y = from.Y + _gameArea.Y,
                         X2 = waypoint.X + _gameArea.X,
                         Y2 = waypoint.Y + _gameArea.Y,
-                        Alpha = 50
+                        Alpha = 50,
+                        Thickness = 5
                     });
                     from = waypoint;
                 }
@@ -532,8 +533,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 {
                     var turretDef = ResourceManager.Turrets.GetResource((Guid)_buyingTurret);
                     var at = new FloatPoint(
-                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X * Parent.XScale,
-                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y * Parent.YScale);
+                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X,
+                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y);
                     if (_game.TurretsModule.AddTurret(turretDef, at))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
@@ -709,10 +710,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID))
                 {
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    X = _gameArea.X + 10 + (offset++ * 210),
-                    Y = _gameArea.Y + _gameArea.Height + 45,
+                    X = _upgradesLeftButton.X,
+                    Y = _upgradesLeftButton.Y + (offset++ * 170) + 30,
                     Height = 30,
-                    Width = 210,
+                    Width = 300,
                     Tag = upgrade,
                     IsVisible = false
                 };

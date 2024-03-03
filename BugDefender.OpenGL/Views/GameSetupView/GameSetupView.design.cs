@@ -16,7 +16,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private TextboxControl _mapDescriptionTextbox;
         private ButtonControl _startButton;
 
-        private readonly int _selectionsPrPage = 5;
+        private readonly int _selectionsPrPage = 13;
         private readonly List<List<ButtonControl>> _mapPages = new List<List<ButtonControl>>();
         private int _currentMapPage = 0;
         private readonly List<List<ButtonControl>> _gameStylePages = new List<List<ButtonControl>>();
@@ -47,19 +47,19 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Y = 175,
                 Height = 35,
                 Width = 700,
-                Text = $"Select a map and a gamemode to start.  ",
+                Text = $"Select a map and a gamestyle to start.",
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White
             });
 
-            SetupPreviewPanel();
-            SetupMapsView();
-            SetupGameStyleView();
+            SetupPreviewPanel(50, 225, 900, 750);
+            SetupMapsView(975, 225, 425, 750);
+            SetupGameStyleView(1425, 225, 425, 750);
 
             _startButton = new ButtonControl(Parent, StartButton_Click)
             {
                 X = 50,
-                Y = 900,
+                Y = 980,
                 Width = 200,
                 Height = 50,
                 Text = "Start",
@@ -76,8 +76,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Back",
@@ -104,23 +104,23 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             base.Initialize();
         }
 
-        private void SetupPreviewPanel()
+        private void SetupPreviewPanel(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
             {
-                X = 50,
-                Y = 210,
-                Height = 350,
-                Width = 900,
+                X = x,
+                Y = y,
+                Height = height,
+                Width = width,
                 FillColor = Parent.UIResources.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
             });
             _mapPreviewTile = new TileControl()
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
-                X = 75,
-                Y = 235,
-                Width = 300,
-                Height = 300,
+                X = x + 50,
+                Y = y + 150,
+                Width = height - 300,
+                Height = height - 300,
             };
             AddControl(1, new BorderControl(_mapPreviewTile)
             {
@@ -132,43 +132,43 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             {
                 Text = "Select A Map",
                 Font = BasicFonts.GetFont(16),
-                X = 450,
-                Y = 220,
+                X = x + 50,
+                Y = y + 50,
                 Height = 50,
-                Width = 400,
+                Width = height - 300,
                 FontColor = Color.White,
             };
             AddControl(1, _mapNameLabel);
             _mapDescriptionTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(10),
-                X = 380,
-                Y = 270,
-                Height = 250,
-                Width = 550,
+                X = x + (height - 300) + 75,
+                Y = y + 50,
+                Height = height - 100,
+                Width = width - 550,
                 FontColor = Color.White
             };
             AddControl(1, _mapDescriptionTextbox);
         }
 
-        private void SetupMapsView()
+        private void SetupMapsView(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
             {
-                X = 50,
-                Y = 550,
-                Height = 350,
-                Width = 440,
+                X = x,
+                Y = y,
+                Height = height,
+                Width = width,
                 FillColor = Parent.UIResources.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
             AddControl(1, new LabelControl()
             {
                 Font = BasicFonts.GetFont(24),
                 Text = "Maps",
-                X = 80,
-                Y = 560,
+                X = x,
+                Y = y + 10,
                 Height = 50,
-                Width = 400,
+                Width = width,
                 FontColor = Color.White
             });
             AddControl(1, new ButtonControl(Parent, clicked: (s) =>
@@ -186,8 +186,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $"<",
-                X = 70,
-                Y = 560,
+                X = x + 30,
+                Y = y + 10,
                 Height = 50,
                 Width = 50,
                 IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
@@ -207,8 +207,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $">",
-                X = 420,
-                Y = 560,
+                X = x + width - 80,
+                Y = y + 10,
                 Height = 50,
                 Width = 50,
                 IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
@@ -229,13 +229,13 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 {
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    Font = BasicFonts.GetFont(16),
+                    Font = BasicFonts.GetFont(12),
                     Text = $"{ResourceManager.Maps.GetResource(mapID).Name}",
                     FontColor = Color.White,
-                    X = 70,
-                    Y = 610 + offset++ * 50,
+                    X = x + 10,
+                    Y = y + 70 + offset++ * 50,
                     Height = 50,
-                    Width = 400,
+                    Width = width - 20,
                     Tag = mapID,
                     IsVisible = false
                 };
@@ -247,24 +247,24 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             UpdateMapSelectionPages();
         }
 
-        private void SetupGameStyleView()
+        private void SetupGameStyleView(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
             {
-                X = 510,
-                Y = 550,
-                Height = 350,
-                Width = 440,
+                X = x,
+                Y = y,
+                Height = height,
+                Width = width,
                 FillColor = Parent.UIResources.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
             AddControl(1, new LabelControl()
             {
                 Font = BasicFonts.GetFont(24),
                 Text = "Game Styles",
-                X = 540,
-                Y = 560,
+                X = x,
+                Y = y + 10,
                 Height = 50,
-                Width = 400,
+                Width = width,
                 FontColor = Color.White
             });
 
@@ -283,8 +283,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $"<",
-                X = 530,
-                Y = 560,
+                X = x + 30,
+                Y = y + 10,
                 Height = 50,
                 Width = 50,
                 IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
@@ -304,8 +304,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(16),
                 Text = $">",
-                X = 880,
-                Y = 560,
+                X = x + width - 80,
+                Y = y + 10,
                 Height = 50,
                 Width = 50,
                 IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
@@ -326,13 +326,13 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 {
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    Font = BasicFonts.GetFont(16),
+                    Font = BasicFonts.GetFont(12),
                     Text = $"{ResourceManager.GameStyles.GetResource(gameStyleID).Name}",
                     FontColor = Color.White,
-                    X = 530,
-                    Y = 610 + offset++ * 50,
+                    X = x + 10,
+                    Y = y + 70 + offset++ * 50,
                     Height = 50,
-                    Width = 400,
+                    Width = width - 20,
                     Tag = gameStyleID,
                     IsVisible = false
                 };

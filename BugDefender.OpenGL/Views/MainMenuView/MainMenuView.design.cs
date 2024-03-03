@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             _continueButton = new ButtonControl(Parent, ContinueGame)
             {
-                X = 500,
+                X = 960 - 300,
                 Y = 300,
                 Width = 300,
                 Height = 50,
@@ -122,19 +122,19 @@ namespace BugDefender.OpenGL.Screens.MainMenu
 
             AddControl(0, new LabelControl()
             {
-                X = 50,
-                Y = 860,
-                Width = 200,
+                X = 250,
+                Y = 980,
+                Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
-                Text = $"Current User: {Parent.CurrentUser.Name}",
+                Text = $"User: {Parent.CurrentUser.Name}",
                 FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreenView(Parent)))
             {
                 X = 50,
-                Y = 905,
+                Y = 980,
                 Width = 200,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
@@ -146,9 +146,9 @@ namespace BugDefender.OpenGL.Screens.MainMenu
 
             _cheatsInput = new TextInputControl(Parent, OnEnterCheat)
             {
-                Width = 400,
-                Height = 50,
-                Font = BasicFonts.GetFont(10),
+                Width = 800,
+                Height = 100,
+                Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
                 FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
