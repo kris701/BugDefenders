@@ -10,15 +10,12 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 {
     public partial class SettingsView : BaseAnimatedView
     {
-        private readonly List<float> _scaleOptions = new List<float>()
+        private readonly List<Point> _resolutionOptions = new List<Point>()
         {
-            0.25f,
-            0.50f,
-            0.75f,
-            1f,
-            1.25f,
-            1.5f,
-            1.75f
+            new Point(720, 480),
+            new Point(1280, 720),
+            new Point(1920, 1080),
+            new Point(3840, 2160),
         };
         private readonly List<ButtonControl> _scaleButtons = new List<ButtonControl>();
 
@@ -64,8 +61,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
             AddControl(0, new LabelControl()
@@ -158,25 +155,28 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FontColor = Color.White
             });
 
-            for (int i = 0; i < _scaleOptions.Count; i++)
+            for (int i = 0; i < _resolutionOptions.Count; i++)
             {
                 var newControl = new ButtonControl(Parent, clicked: (s) =>
                 {
-                    if (s.Tag is float value)
-                        _settings.Scale = value;
+                    if (s.Tag is Point value)
+                    {
+                        _settings.ScreenWidth = value.X;
+                        _settings.ScreenHeight = value.Y;
+                    }
                     UpdateScreenSettingsButtons();
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _scaleOptions.Count + 10)),
-                    Width = 710 / _scaleOptions.Count,
+                    X = 110 + (i * (710 / _resolutionOptions.Count + 10)),
+                    Width = 710 / _resolutionOptions.Count,
                     Height = 40,
-                    Text = $"{Math.Round(_scaleOptions[i] * 100, 0)}%",
+                    Text = $"{_resolutionOptions[i].X}x{_resolutionOptions[i].Y}",
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
                     FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                     FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    Tag = _scaleOptions[i]
+                    Tag = _resolutionOptions[i]
                 };
                 AddControl(1, newControl);
                 _scaleButtons.Add(newControl);

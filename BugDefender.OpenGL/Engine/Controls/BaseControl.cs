@@ -67,8 +67,8 @@ namespace BugDefender.OpenGL.Engine.Controls
             switch (HorizontalAlignment)
             {
                 case Alignment.Left: X = 0; break;
-                case Alignment.Right: X = 1000 - Width; break;
-                case Alignment.Middle: X = 1000 / 2 - Width / 2; break;
+                case Alignment.Right: X = GameWindow.BaseScreenSize.X - Width; break;
+                case Alignment.Middle: X = GameWindow.BaseScreenSize.Y / 2 - Width / 2; break;
             }
         }
 

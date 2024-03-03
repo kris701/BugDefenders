@@ -4,7 +4,8 @@ namespace BugDefender.OpenGL.Settings
 {
     public class SettingsDefinition
     {
-        public float Scale { get; set; } = 1;
+        public int ScreenWidth { get; set; } = 1280;
+        public int ScreenHeight { get; set; } = 720;
         public bool IsFullscreen { get; set; } = false;
         public bool IsVsync { get; set; } = true;
         public bool FPSCounter { get; set; } = false;
@@ -16,7 +17,8 @@ namespace BugDefender.OpenGL.Settings
         {
             return new SettingsDefinition()
             {
-                Scale = Scale,
+                ScreenWidth = ScreenWidth,
+                ScreenHeight = ScreenHeight,
                 IsFullscreen = IsFullscreen,
                 IsVsync = IsVsync,
                 FPSCounter = FPSCounter,

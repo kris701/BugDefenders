@@ -112,7 +112,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                 }
 
                 var mouseState = Mouse.GetState();
-                var translatedPos = InputHelper.GetRelativePosition(Parent.CurrentUser.UserData.Scale);
+                var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
                 if (!_blocked && (translatedPos.X > X && translatedPos.X < X + Width &&
                     translatedPos.Y > Y && translatedPos.Y < Y + Height))
                 {

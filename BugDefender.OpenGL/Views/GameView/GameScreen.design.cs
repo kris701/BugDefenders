@@ -53,8 +53,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("32b08b60-c8b9-450a-90b3-73086261e87f")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
             SetupGameField();

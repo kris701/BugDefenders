@@ -62,7 +62,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             }
             foreach (var button in _scaleButtons)
             {
-                if (button.Tag is float value && value == _settings.Scale)
+                if (button.Tag is Point value && value.X == _settings.ScreenWidth && value.Y == _settings.ScreenHeight)
                 {
                     button.FillColor = selected;
                     break;

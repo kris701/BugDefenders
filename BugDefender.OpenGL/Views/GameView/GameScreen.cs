@@ -324,7 +324,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             UpdateLasers();
 
-            var translatedPos = InputHelper.GetRelativePosition(Parent.CurrentUser.UserData.Scale);
+            var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
             if (translatedPos.X >= _gameArea.X && translatedPos.X <= _gameArea.X + _gameArea.Width &&
                 translatedPos.Y >= _gameArea.Y && translatedPos.Y <= _gameArea.Y + _gameArea.Height)
             {
@@ -532,8 +532,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 {
                     var turretDef = ResourceManager.Turrets.GetResource((Guid)_buyingTurret);
                     var at = new FloatPoint(
-                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X * Parent.CurrentUser.UserData.Scale,
-                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y * Parent.CurrentUser.UserData.Scale);
+                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X * Parent.XScale,
+                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y * Parent.YScale);
                     if (_game.TurretsModule.AddTurret(turretDef, at))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))

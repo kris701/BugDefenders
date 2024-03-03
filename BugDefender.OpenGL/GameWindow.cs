@@ -29,9 +29,11 @@ namespace BugDefender.OpenGL
         private static readonly string _contentDir = "Content";
         private static readonly string _modsDir = "Mods";
 
+        public static readonly Point BaseScreenSize = new Point(1920, 1080);
+        public float XScale { get; private set; }
+        public float YScale { get; private set; }
+
         public GraphicsDeviceManager Device { get; }
-        public int ScreenWidth() => Window.ClientBounds.Width;
-        public int ScreenHeight() => Window.ClientBounds.Height;
         public IView CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; set; }
         public UserDefinition<SettingsDefinition> CurrentUser { get; set; }
@@ -258,7 +260,7 @@ namespace BugDefender.OpenGL
             if (_spriteBatch == null)
                 throw new Exception("Error! Spritebatch was not initialized!");
 
-            var matrix = Matrix.CreateScale(CurrentUser.UserData.Scale, CurrentUser.UserData.Scale, 1.0f);
+            var matrix = Matrix.CreateScale(XScale, YScale, 1.0f);
             _spriteBatch.Begin(transformMatrix: matrix);
             CurrentScreen.Draw(gameTime, _spriteBatch);
             foreach (var worker in BackroundWorkers)
@@ -272,8 +274,10 @@ namespace BugDefender.OpenGL
         {
             UserManager.SaveUser(CurrentUser);
 
-            Device.PreferredBackBufferHeight = (int)(CurrentUser.UserData.Scale * 1000);
-            Device.PreferredBackBufferWidth = (int)(CurrentUser.UserData.Scale * 1000);
+            Device.PreferredBackBufferHeight = CurrentUser.UserData.ScreenHeight;
+            Device.PreferredBackBufferWidth = CurrentUser.UserData.ScreenWidth;
+            XScale = (float)Device.PreferredBackBufferWidth / (float)BaseScreenSize.X;
+            YScale = (float)Device.PreferredBackBufferHeight / (float)BaseScreenSize.Y;
             Device.SynchronizeWithVerticalRetrace = CurrentUser.UserData.IsVsync;
             Device.IsFullScreen = CurrentUser.UserData.IsFullscreen;
             UIResources.LoadTexturePack(CurrentUser.UserData.TexturePack);
