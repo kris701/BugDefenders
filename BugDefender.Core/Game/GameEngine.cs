@@ -74,6 +74,10 @@ namespace BugDefender.Core.Game
                 ProjectilesModule
             };
 
+            if (Context.GameStyle.EnemyBlackList.Count != 0 && Context.GameStyle.EnemyWhiteList.Count != 0 ||
+                Context.GameStyle.TurretBlackList.Count != 0 && Context.GameStyle.TurretWhiteList.Count != 0)
+                throw new Exception("Cant have a black list and a white list at the same time!");
+
             Initialize();
 
             //#if DEBUG

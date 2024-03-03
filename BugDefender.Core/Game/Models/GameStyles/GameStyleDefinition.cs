@@ -15,9 +15,11 @@
         public int BossEveryNWave { get; set; }
         public List<Guid> TurretBlackList { get; set; }
         public List<Guid> EnemyBlackList { get; set; }
+        public List<Guid> TurretWhiteList { get; set; }
+        public List<Guid> EnemyWhiteList { get; set; }
         public int MoneyPrWave { get; set; }
 
-        public GameStyleDefinition(Guid iD, string name, string description, float evolutionRate, float enemySpeedMultiplier, float moneyMultiplier, int startingHP, int startingMoney, float enemyWaveMultiplier, int projectileSpeedCap, int bossEveryNWave, List<Guid> turretBlackList, List<Guid> enemyBlackList, int moneyPrWave)
+        public GameStyleDefinition(Guid iD, string name, string description, float evolutionRate, float enemySpeedMultiplier, float moneyMultiplier, int startingHP, int startingMoney, float enemyWaveMultiplier, int projectileSpeedCap, int bossEveryNWave, List<Guid> turretBlackList, List<Guid> enemyBlackList, List<Guid> turretWhiteList, List<Guid> enemyWhiteList, int moneyPrWave)
         {
             ID = iD;
             Name = name;
@@ -32,6 +34,8 @@
             BossEveryNWave = bossEveryNWave;
             TurretBlackList = turretBlackList;
             EnemyBlackList = enemyBlackList;
+            TurretWhiteList = turretWhiteList;
+            EnemyWhiteList = enemyWhiteList;
             MoneyPrWave = moneyPrWave;
         }
     }

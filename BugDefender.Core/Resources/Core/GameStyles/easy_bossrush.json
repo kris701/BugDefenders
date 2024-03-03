@@ -1,0 +1,25 @@
+﻿{
+  "ID": "fb417695-acc6-4719-8c1f-4c63e9ad5864",
+  "Name": "Boss Rush Easy",
+  "Description": "",
+  "EvolutionRate": 1.01,
+  "EnemySpeedMultiplier": 0.25,
+  "MoneyMultiplier": 2,
+  "StartingHP": 5,
+  "StartingMoney": 3000,
+  "EnemyWaveMultiplier": 1,
+  "ProjectileSpeedCap": 20,
+  "BossEveryNWave": 1,
+  "TurretBlackList": [],
+  "TurretWhiteList": [],
+  "EnemyBlackList": [],
+  "EnemyWhiteList": [
+    "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+    "3cbe1917-c00b-4b12-a0f3-0b78035a5cf1",
+    "ed5cddba-7980-4576-b516-547d4a0eae4e",
+    "ab358fb8-7dea-4bea-934e-440426285bbb",
+    "dfea435c-c8ab-4981-b47a-210b31c5be48",
+    "188bd963-5dac-4d7c-8c98-5d443b81eb7f"
+  ],
+  "MoneyPrWave": 200
+}

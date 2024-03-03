@@ -131,7 +131,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                 {
                     Guid? newEnemy = null;
 
-                    if (_waveQueue != 0 && _waveQueue % Context.GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
+                    if ((_waveQueue + 1) % Context.GameStyle.BossEveryNWave == 0 && SingleEnemiesModule.EnemyOptions.Count > 0)
                         newEnemy = SingleEnemiesModule.GetRandomEnemy(_waveQueue);
                     if (WaveEnemiesModule.EnemyOptions.Count > 0 && newEnemy == null)
                         newEnemy = WaveEnemiesModule.GetRandomEnemy(_waveQueue);

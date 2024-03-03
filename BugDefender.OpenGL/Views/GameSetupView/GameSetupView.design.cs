@@ -275,7 +275,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     _currentGameStylePage = 0;
                 if (_currentGameStylePage >= _gameStylePages.Count)
                     _currentGameStylePage = _gameStylePages.Count - 1;
-                UpdateMapSelectionPages();
+                UpdateGameStyleSelectionPages();
             })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
@@ -296,7 +296,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     _currentGameStylePage = 0;
                 if (_currentGameStylePage >= _gameStylePages.Count)
                     _currentGameStylePage = _gameStylePages.Count - 1;
-                UpdateMapSelectionPages();
+                UpdateGameStyleSelectionPages();
             })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
@@ -314,7 +314,6 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             int count = 0;
             int page = -1;
             int offset = 0;
-            _gameStylePages.Add(new List<ButtonControl>());
             foreach (var gameStyleID in ResourceManager.GameStyles.GetResources())
             {
                 if (count % _selectionsPrPage == 0)

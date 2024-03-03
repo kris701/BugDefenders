@@ -1,0 +1,14 @@
+﻿{
+  "id": "a01ecef8-f7c2-4e58-b2ab-ba3112bf39d5",
+  "Name": "Boss Killer",
+  "description": "Kill at least 5 bosses in a easy boss rush game on the map Snakes Way",
+  "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
+  "GameStyleID": "fb417695-acc6-4719-8c1f-4c63e9ad5864",
+  "Reward": 20,
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 5
+    }
+  ]
+}

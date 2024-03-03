@@ -60,6 +60,9 @@
     <None Remove="Resources\Core\Buffs\rocketturret_3.json" />
     <None Remove="Resources\Core\Buffs\slowingturret_1.json" />
     <None Remove="Resources\Core\Buffs\slowingturret_2.json" />
+    <None Remove="Resources\Core\Challenges\bosskiller_1.json" />
+    <None Remove="Resources\Core\Challenges\bosskiller_2.json" />
+    <None Remove="Resources\Core\Challenges\bosskiller_3.json" />
     <None Remove="Resources\Core\Challenges\easy_1.json" />
     <None Remove="Resources\Core\Challenges\easy_2.json" />
     <None Remove="Resources\Core\Challenges\easy_3.json" />
@@ -91,8 +94,11 @@
     <None Remove="Resources\Core\Enemies\enemy6_1.json" />
     <None Remove="Resources\Core\Enemies\enemy6_2.json" />
     <None Remove="Resources\Core\Enemies\enemy6_3.json" />
+    <None Remove="Resources\Core\GameStyles\easy_bossrush.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
+    <None Remove="Resources\Core\GameStyles\hard_bossrush.json" />
+    <None Remove="Resources\Core\GameStyles\medium_bossrush.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
     <None Remove="Resources\Core\Turrets\gatlingturret.json" />
     <None Remove="Resources\Core\Turrets\missileturret.json" />
@@ -214,6 +220,15 @@
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\bosskiller_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\bosskiller_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\bosskiller_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\easy_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -326,6 +341,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\enemy1_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\hard_bossrush.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\medium_bossrush.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\easy_bossrush.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\extreme.json">

@@ -79,6 +79,8 @@ namespace BugDefender.Core.Game.Modules.Turrets
                 return false;
             if (Context.GameStyle.TurretBlackList.Contains(turretDef.ID))
                 return false;
+            if (Context.GameStyle.TurretWhiteList.Count > 0 && !Context.GameStyle.TurretWhiteList.Contains(turretDef.ID))
+                return false;
             if (at.X < 0)
                 return false;
             if (at.X > Context.Map.Width - turretDef.Size)
