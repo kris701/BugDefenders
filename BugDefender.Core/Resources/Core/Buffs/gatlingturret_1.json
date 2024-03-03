@@ -3,6 +3,7 @@
   "Name": "Gatling Turret Upgrade",
   "description": "Permanently gives the gatling turret 5% more damage",
   "Requires": null,
+  "Cost": 25,
   "Criterias": [
     {
       "CriteriaType": "TurretKills",

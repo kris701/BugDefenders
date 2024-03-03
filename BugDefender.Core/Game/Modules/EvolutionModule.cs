@@ -5,6 +5,7 @@
         private int _currentWave = 0;
         public EvolutionModule(GameContext context, GameEngine game) : base(context, game)
         {
+            _currentWave = context.Wave;
         }
 
         public override void Update(TimeSpan passed)

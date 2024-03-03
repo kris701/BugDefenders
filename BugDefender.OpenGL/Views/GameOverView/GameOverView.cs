@@ -1,4 +1,5 @@
-﻿using BugDefender.Core.Users.Models;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -9,12 +10,14 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
     public partial class GameOverView : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
-        private static string _saveDir = "Saves";
+        private static readonly string _saveDir = "Saves";
 
         private readonly Texture2D _screen;
         private readonly int _score;
+        private readonly int _credits;
         private readonly TimeSpan _gameTime;
-        public GameOverView(GameWindow parent, Texture2D screen, int score, TimeSpan gameTime) : base(
+        private readonly GameResult _gameResult;
+        public GameOverView(GameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result) : base(
             parent,
             _id,
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
@@ -22,7 +25,9 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         {
             _screen = screen;
             _score = score;
+            _credits = credits;
             _gameTime = gameTime;
+            _gameResult = result;
             ScaleValue = parent.CurrentUser.UserData.Scale;
 
             Parent.CurrentUser.HighScores.Add(new ScoreDefinition(

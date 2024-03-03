@@ -7,6 +7,7 @@ using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Buffs;
+using BugDefender.Core.Users.Models.Challenges;
 using System.Reflection;
 using System.Text.Json;
 
@@ -26,6 +27,7 @@ namespace BugDefender.Core.Resources
 
         public static BaseBuilder<BuffDefinition> Buffs = new BaseBuilder<BuffDefinition>("Resources.Core.Buffs", Assembly.GetExecutingAssembly());
         public static BaseBuilder<AchivementDefinition> Achivements = new BaseBuilder<AchivementDefinition>("Resources.Core.Achivements", Assembly.GetExecutingAssembly());
+        public static BaseBuilder<ChallengeDefinition> Challenges = new BaseBuilder<ChallengeDefinition>("Resources.Core.Challenges", Assembly.GetExecutingAssembly());
 
         public static List<ResourceDefinition> LoadedResources { get; internal set; } = new List<ResourceDefinition>() {
             new ResourceDefinition(_coreID, "1.0.0", "Core", "Core Game Components")
@@ -69,6 +71,8 @@ namespace BugDefender.Core.Resources
                     Buffs.LoadExternalResources(folder.GetFiles().ToList());
                 if (folder.Name.ToUpper() == "ACHIVEMENTS")
                     Achivements.LoadExternalResources(folder.GetFiles().ToList());
+                if (folder.Name.ToUpper() == "CHALLENGES")
+                    Challenges.LoadExternalResources(folder.GetFiles().ToList());
             }
 
             if (!LoadedResources.Any(x => x.ID == resourceDefinition.ID))
@@ -87,6 +91,7 @@ namespace BugDefender.Core.Resources
 
             Buffs.Reload();
             Achivements.Reload();
+            Challenges.Reload();
 
             LoadedResources.Clear();
             LoadedResources = new List<ResourceDefinition>() {
@@ -106,6 +111,7 @@ namespace BugDefender.Core.Resources
 
             Buffs.Reload();
             Achivements.Reload();
+            Challenges.Reload();
 
             foreach (var resource in LoadedResources)
                 if (resource.ID != _coreID)

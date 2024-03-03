@@ -1,0 +1,14 @@
+﻿{
+  "id": "59d2ab4a-c256-4d7f-9667-2273dadfed5a",
+  "Name": "Medium Game",
+  "description": "Get at least 100 kills in a medium game",
+  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+  "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
+  "Reward": 10,
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 100
+    }
+  ]
+}

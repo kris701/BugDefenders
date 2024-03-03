@@ -3,6 +3,7 @@
   "Name": "Laser Turret Upgrade",
   "description": "Permanently gives the laser turret 2% more damage",
   "Requires": null,
+  "Cost": 25,
   "Criterias": [
     {
       "CriteriaType": "TurretKills",

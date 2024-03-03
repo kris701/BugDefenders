@@ -1,50 +1,44 @@
-﻿using BugDefender.Core.Users.Models;
+﻿using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Text;
+using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
-namespace BugDefender.OpenGL.Views.AchivementsView
+namespace BugDefender.OpenGL.Views.ChallengeView
 {
-    public class AchivementControl : TileControl
+    public class ChallengeControl : TileControl
     {
-        public AchivementDefinition Achivement { get; }
+        public ChallengeDefinition Challenge { get; }
 
-        private readonly TileControl _iconTile;
         private readonly LabelControl _titleControl;
         private readonly TextboxControl _requirementsTextBox;
         private readonly TextboxControl _descriptionTextbox;
-        public AchivementControl(GameWindow parent, AchivementDefinition achivement, bool isUnlocked) : base(parent)
+        private readonly ButtonControl _startButton;
+        public ChallengeControl(GameWindow parent, ChallengeDefinition challenge, ClickedHandler click, bool isFinished) : base(parent)
         {
-            Achivement = achivement;
+            Challenge = challenge;
             Width = 900;
             Height = 140;
-            _iconTile = new TileControl(Parent)
-            {
-                X = 75,
-                Width = 75,
-                Height = 75,
-                FillColor = Parent.UIResources.GetTexture(Achivement.ID)
-            };
             _titleControl = new LabelControl(Parent)
             {
-                X = 160,
+                X = 75,
                 Width = 400,
                 Height = 35,
-                Text = achivement.Name,
+                Text = challenge.Name,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
             };
             var sb = new StringBuilder();
             sb.AppendLine("Requirements:");
-            foreach (var req in achivement.Criterias)
+            foreach (var req in challenge.Criterias)
                 sb.AppendLine(req.GetDescriptionString());
             _requirementsTextBox = new TextboxControl(Parent)
             {
-                X = 560,
+                X = 525,
                 Width = 400,
                 Height = 75,
                 Font = BasicFonts.GetFont(10),
@@ -54,48 +48,59 @@ namespace BugDefender.OpenGL.Views.AchivementsView
             };
             _descriptionTextbox = new TextboxControl(Parent)
             {
-                X = 160,
+                X = 75,
                 Width = 400,
                 Height = 75,
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = achivement.Description,
+                Text = Challenge.Description,
                 Margin = 15
             };
-
-            if (isUnlocked)
+            _startButton = new ButtonControl(Parent, click)
             {
-                if (Parent.CurrentUser.Achivements.Contains(achivement.ID))
-                    FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
-                else
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                X = 525,
+                Width = 400,
+                Height = 35,
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                Text = $"[Reward: {challenge.Reward} credits] Start!",
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                IsEnabled = !isFinished
+            };
+            if (isFinished)
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                _startButton.Text = "Completed!";
             }
             else
-                FillColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            _iconTile._y = _y + Scale(30);
-            _iconTile.Initialize();
-
             _titleControl._y = _y + Scale(20);
             _titleControl.Initialize();
+
+            _requirementsTextBox._y = _y + Scale(45);
+            _requirementsTextBox.Initialize();
 
             _descriptionTextbox._y = _y + Scale(45);
             _descriptionTextbox.Initialize();
 
-            _requirementsTextBox._y = _y + Scale(10);
-            _requirementsTextBox.Initialize();
+            _startButton._y = _y + Scale(20);
+            _startButton.Tag = Tag;
+            _startButton.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
             _titleControl.Update(gameTime);
-            _descriptionTextbox.Update(gameTime);
             _requirementsTextBox.Update(gameTime);
-            _iconTile.Update(gameTime);
+            _descriptionTextbox.Update(gameTime);
+            _startButton.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -106,9 +111,9 @@ namespace BugDefender.OpenGL.Views.AchivementsView
 
             base.Draw(gameTime, spriteBatch);
             _titleControl.Draw(gameTime, spriteBatch);
-            _iconTile.Draw(gameTime, spriteBatch);
-            _descriptionTextbox.Draw(gameTime, spriteBatch);
             _requirementsTextBox.Draw(gameTime, spriteBatch);
+            _descriptionTextbox.Draw(gameTime, spriteBatch);
+            _startButton.Draw(gameTime, spriteBatch);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
             _displayName = Target;
             if (_displayName.Contains('.'))
                 _displayName = _displayName.Substring(_displayName.LastIndexOf('.') + 1);
-            for(int i = 0; i < _displayName.Length; i++)
+            for (int i = 0; i < _displayName.Length; i++)
             {
                 if (char.IsUpper(_displayName[i]))
                 {

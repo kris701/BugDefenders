@@ -4,10 +4,12 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models;
+using BugDefender.Core.Users.Models.Challenges;
 using System.Text.Json;
 
 namespace BugDefender.Core.Game
 {
+    public enum GameResult { None, NormalLost, ChallengeLost, ChallengeSuccess }
     public class GameContext
     {
         public MapDefinition Map { get; set; }
@@ -15,13 +17,14 @@ namespace BugDefender.Core.Game
         public List<List<Guid>> EnemiesToSpawn { get; set; } = new List<List<Guid>>();
         public bool AutoSpawn { get; set; } = false;
         public float Evolution { get; set; } = 1;
-        public StatsDefinition Outcome { get; set; } = new StatsDefinition();
+        public StatsDefinition Stats { get; set; } = new StatsDefinition();
         public HashSet<EnemyInstance> CurrentEnemies { get; set; } = new HashSet<EnemyInstance>();
         public HashSet<TurretInstance> Turrets { get; set; } = new HashSet<TurretInstance>();
         public HashSet<ProjectileInstance> Projectiles { get; set; } = new HashSet<ProjectileInstance>();
-        public int HP { get; set; } = -1;
-        public int Money { get; set; } = -1;
+        public int HP { get; set; } = 0;
+        public int Money { get; set; } = 0;
         public int Score { get; set; } = 0;
+        public ChallengeDefinition? Challenge { get; set; }
 
         public int Wave { get; set; } = 0;
         public TimeSpan GameTime { get; set; }

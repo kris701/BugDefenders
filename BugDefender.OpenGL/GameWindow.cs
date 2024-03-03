@@ -57,9 +57,12 @@ namespace BugDefender.OpenGL
                     "Default",
                     new List<Guid>(),
                     new List<Guid>(),
+                    new List<Guid>(),
+                    -1,
                     new List<ScoreDefinition>(),
                     true,
                     new StatsDefinition(),
+                    0,
                     new SettingsDefinition());
                 UserManager.AddNewUser(newUser);
                 ChangeUser(newUser);
@@ -95,9 +98,12 @@ namespace BugDefender.OpenGL
                 name,
                 new List<Guid>(),
                 new List<Guid>(),
+                new List<Guid>(),
+                -1,
                 new List<ScoreDefinition>(),
                 false,
                 new StatsDefinition(),
+                0,
                 new SettingsDefinition());
             UserManager.AddNewUser(newUser);
         }

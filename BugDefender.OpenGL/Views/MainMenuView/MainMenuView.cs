@@ -15,7 +15,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
     public partial class MainMenuView : BaseAnimatedView
     {
         public static readonly Guid _id = new Guid("9c52281c-3202-4b22-bfc9-dfc187fdbeb3");
-        private static string _saveDir = "Saves";
+        private static readonly string _saveDir = "Saves";
         private readonly KeysWatcher _cheatsInputWatcher;
         private readonly KeyWatcher _escapeInputWatcher;
         public MainMenuView(GameWindow parent) : base(
@@ -69,7 +69,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         private void ContinueGame(ButtonControl sender)
         {
             var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
-            if (!File.Exists(saveFile)) 
+            if (!File.Exists(saveFile))
                 throw new Exception("Error loading save file!");
             var context = JsonSerializer.Deserialize<GameContext>(File.ReadAllText(saveFile));
             if (context == null)

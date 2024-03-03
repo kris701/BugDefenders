@@ -1,50 +1,44 @@
-﻿using BugDefender.Core.Users.Models;
+﻿using BugDefender.Core.Users.Models.Buffs;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Text;
+using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
-namespace BugDefender.OpenGL.Views.AchivementsView
+namespace BugDefender.OpenGL.Views.PermaBuffsView
 {
-    public class AchivementControl : TileControl
+    public class PermaBuffControl : TileControl
     {
-        public AchivementDefinition Achivement { get; }
+        public BuffDefinition Buff { get; }
 
-        private readonly TileControl _iconTile;
         private readonly LabelControl _titleControl;
         private readonly TextboxControl _requirementsTextBox;
         private readonly TextboxControl _descriptionTextbox;
-        public AchivementControl(GameWindow parent, AchivementDefinition achivement, bool isUnlocked) : base(parent)
+        private readonly ButtonControl _buyButton;
+        public PermaBuffControl(GameWindow parent, BuffDefinition buff, ClickedHandler click, bool isUnlocked) : base(parent)
         {
-            Achivement = achivement;
+            Buff = buff;
             Width = 900;
             Height = 140;
-            _iconTile = new TileControl(Parent)
-            {
-                X = 75,
-                Width = 75,
-                Height = 75,
-                FillColor = Parent.UIResources.GetTexture(Achivement.ID)
-            };
             _titleControl = new LabelControl(Parent)
             {
-                X = 160,
+                X = 75,
                 Width = 400,
                 Height = 35,
-                Text = achivement.Name,
+                Text = buff.Name,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
             };
             var sb = new StringBuilder();
             sb.AppendLine("Requirements:");
-            foreach (var req in achivement.Criterias)
+            foreach (var req in buff.Criterias)
                 sb.AppendLine(req.GetDescriptionString());
             _requirementsTextBox = new TextboxControl(Parent)
             {
-                X = 560,
+                X = 525,
                 Width = 400,
                 Height = 75,
                 Font = BasicFonts.GetFont(10),
@@ -54,19 +48,35 @@ namespace BugDefender.OpenGL.Views.AchivementsView
             };
             _descriptionTextbox = new TextboxControl(Parent)
             {
-                X = 160,
+                X = 75,
                 Width = 400,
                 Height = 75,
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = achivement.Description,
+                Text = Buff.Description,
                 Margin = 15
             };
-
+            _buyButton = new ButtonControl(Parent, click)
+            {
+                X = 525,
+                Width = 400,
+                Height = 35,
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                Text = $"[{buff.Cost} credits] Buy",
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                Tag = buff,
+                IsEnabled = isUnlocked && Parent.CurrentUser.Credits >= buff.Cost
+            };
             if (isUnlocked)
             {
-                if (Parent.CurrentUser.Achivements.Contains(achivement.ID))
+                if (Parent.CurrentUser.Buffs.Contains(buff.ID))
+                {
                     FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    _buyButton.Text = "Owned!";
+                }
                 else
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
@@ -77,25 +87,25 @@ namespace BugDefender.OpenGL.Views.AchivementsView
         public override void Initialize()
         {
             base.Initialize();
-            _iconTile._y = _y + Scale(30);
-            _iconTile.Initialize();
-
             _titleControl._y = _y + Scale(20);
             _titleControl.Initialize();
+
+            _requirementsTextBox._y = _y + Scale(45);
+            _requirementsTextBox.Initialize();
 
             _descriptionTextbox._y = _y + Scale(45);
             _descriptionTextbox.Initialize();
 
-            _requirementsTextBox._y = _y + Scale(10);
-            _requirementsTextBox.Initialize();
+            _buyButton._y = _y + Scale(20);
+            _buyButton.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
             _titleControl.Update(gameTime);
-            _descriptionTextbox.Update(gameTime);
             _requirementsTextBox.Update(gameTime);
-            _iconTile.Update(gameTime);
+            _descriptionTextbox.Update(gameTime);
+            _buyButton.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -106,9 +116,9 @@ namespace BugDefender.OpenGL.Views.AchivementsView
 
             base.Draw(gameTime, spriteBatch);
             _titleControl.Draw(gameTime, spriteBatch);
-            _iconTile.Draw(gameTime, spriteBatch);
-            _descriptionTextbox.Draw(gameTime, spriteBatch);
             _requirementsTextBox.Draw(gameTime, spriteBatch);
+            _descriptionTextbox.Draw(gameTime, spriteBatch);
+            _buyButton.Draw(gameTime, spriteBatch);
         }
     }
 }

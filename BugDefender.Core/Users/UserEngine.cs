@@ -35,8 +35,9 @@ namespace BugDefender.Core.Users
         public void AddBuffUpgrade(UserDefinition<T> user, Guid id)
         {
             var buff = ResourceManager.Buffs.GetResource(id);
-            if (buff.IsValid(user))
+            if (buff.IsValid(user) && user.Credits >= buff.Cost)
             {
+                user.Credits -= buff.Cost;
                 user.Buffs.Add(id);
                 SaveUser(user);
                 ApplyBuffsToResources(user);

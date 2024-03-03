@@ -5,5 +5,9 @@
         public int Quantity { get; set; }
 
         public bool IsValid(StatsDefinition stats) => stats.TotalWavesStarted >= Quantity;
+        public string GetDescriptionString()
+        {
+            return $"Start {Quantity} waves.";
+        }
     }
 }

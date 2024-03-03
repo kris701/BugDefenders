@@ -47,7 +47,7 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
 
         internal bool UpdateEnemy(TimeSpan passed, EnemyInstance enemy, T def)
         {
-            if (MathHelpers.SqrDistance(enemy, Context.Map.Paths[enemy.PathID][enemy.WayPointID]) < 5)
+            if (MathHelpers.SqrDistance(enemy, Context.Map.Paths[enemy.PathID][enemy.WayPointID]) < 5 * Context.GameStyle.EnemySpeedMultiplier)
             {
                 enemy.WayPointID++;
                 if (enemy.WayPointID >= Context.Map.Paths[enemy.PathID].Count)

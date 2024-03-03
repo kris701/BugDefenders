@@ -54,7 +54,7 @@ namespace BugDefender.Core.Game.Modules.Turrets
 
             upgrade.Apply(turret);
             Context.Money -= upgrade.Cost;
-            Context.Outcome.TurretUpgraded(turret.DefinitionID);
+            Context.Stats.TurretUpgraded(turret.DefinitionID);
 
             OnTurretUpgraded?.Invoke(turret);
             return true;
@@ -66,7 +66,7 @@ namespace BugDefender.Core.Game.Modules.Turrets
                 throw new Exception("Turret not in game!");
             Context.Money += turret.GetTurretWorth();
             Context.Turrets.Remove(turret);
-            Context.Outcome.TurretSold(turret.DefinitionID);
+            Context.Stats.TurretSold(turret.DefinitionID);
 
             OnTurretSold?.Invoke(turret);
         }
@@ -106,7 +106,7 @@ namespace BugDefender.Core.Game.Modules.Turrets
             Context.Turrets.Add(newInstance);
             OnTurretPurchased?.Invoke(newInstance);
 
-            Context.Outcome.PlacedTurret(newInstance.DefinitionID);
+            Context.Stats.PlacedTurret(newInstance.DefinitionID);
 
             return true;
         }

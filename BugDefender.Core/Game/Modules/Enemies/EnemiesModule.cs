@@ -109,13 +109,13 @@ namespace BugDefender.Core.Game.Modules.Enemies
             {
                 var amount = (int)(enemy.GetDefinition().Reward * Context.GameStyle.MoneyMultiplier);
                 Context.Money += amount;
-                Context.Outcome.MoneyEarned(amount);
+                Context.Stats.MoneyEarned(amount);
 
                 Context.Score += enemy.GetDefinition().Reward;
                 Context.CurrentEnemies.Remove(enemy);
                 OnEnemyKilled?.Invoke(enemy);
 
-                Context.Outcome.EnemyKilled(enemy.ID, turretDefinitionID);
+                Context.Stats.EnemyKilled(enemy.DefinitionID, turretDefinitionID);
                 return true;
             }
             return false;
@@ -123,7 +123,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
 
         private void UpdateEnemiesToSpawnList()
         {
-            int waveSize = (int)(1 * Context.Evolution);
+            int waveSize = (int)Context.Evolution;
             for (int i = Context.EnemiesToSpawn.Count; i < 3; i++)
             {
                 var wave = new List<Guid>();
@@ -148,7 +148,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
         {
             Context.Money += Context.GameStyle.MoneyPrWave;
             Context.Wave++;
-            Context.Outcome.WaveStarted();
+            Context.Stats.WaveStarted();
             foreach (var item in Context.EnemiesToSpawn[0])
             {
                 if (WaveEnemiesModule.EnemyOptions.Contains(item))
