@@ -41,8 +41,15 @@
     <None Remove="Resources\Core\Achivements\wavesstarted_3.json" />
     <None Remove="Resources\Core\Buffs\gatlingturret_1.json" />
     <None Remove="Resources\Core\Buffs\gatlingturret_2.json" />
+    <None Remove="Resources\Core\Buffs\gatlingturret_3.json" />
+    <None Remove="Resources\Core\Buffs\gatlingturret_4.json" />
     <None Remove="Resources\Core\Buffs\laserturret_1.json" />
     <None Remove="Resources\Core\Buffs\laserturret_2.json" />
+    <None Remove="Resources\Core\Buffs\laserturret_3.json" />
+    <None Remove="Resources\Core\Buffs\missileturret_1.json" />
+    <None Remove="Resources\Core\Buffs\rocketturret_1.json" />
+    <None Remove="Resources\Core\Buffs\rocketturret_2.json" />
+    <None Remove="Resources\Core\Buffs\rocketturret_3.json" />
     <None Remove="Resources\Core\Challenges\easy_1.json" />
     <None Remove="Resources\Core\Challenges\easy_2.json" />
     <None Remove="Resources\Core\Challenges\hardcore_1.json" />
@@ -131,10 +138,31 @@
     <EmbeddedResource Include="Resources\Core\Achivements\totalkills_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_4.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\missileturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\rocketturret_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\rocketturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\rocketturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\laserturret_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_2.json">

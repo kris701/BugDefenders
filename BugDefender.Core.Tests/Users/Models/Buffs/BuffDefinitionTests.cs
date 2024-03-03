@@ -25,5 +25,14 @@ namespace BugDefender.Core.Tests.Users.Models.Buffs
             // ASSERT
 
         }
+
+        [TestMethod]
+        public void AreIDsUnique()
+        {
+            ResourceManager.ReloadResources();
+            var ids = ResourceManager.Buffs.GetResources();
+
+            Assert.AreEqual(ids.Count, ids.Distinct().Count());
+        }
     }
 }

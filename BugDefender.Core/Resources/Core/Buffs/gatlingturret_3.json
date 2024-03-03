@@ -1,21 +1,21 @@
 ﻿{
-  "id": "ede7db0c-6de0-4931-bf1b-0e50e2b4b5e3",
+  "id": "0182304f-2e07-4689-8553-61d127e724f1",
   "Name": "Gatling Turret Upgrade",
-  "description": "Permanently gives the gatling turret 5% more damage",
+  "description": "Permanently gives the gatling turret 5% more range",
   "Cost": 25,
   "Criterias": [
     {
       "CriteriaType": "TurretKills",
       "TurretID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
-      "Quantity": 100
+      "Quantity": 500
     }
   ],
   "Effect": {
-    "TargetType": "Projectile",
-    "Target": "1db411e4-8599-464b-923c-0e23bc031435",
+    "TargetType": "Turret",
+    "Target": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
     "Effects": [
       {
-        "Target": "Damage",
+        "Target": "Range",
         "Modifier": 1.05
       }
     ]

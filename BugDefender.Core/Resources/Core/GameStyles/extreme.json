@@ -3,7 +3,7 @@
   "Name": "Extreme",
   "Description": "",
   "EvolutionRate": 1.50,
-  "EnemySpeedMultiplier": 2,
+  "EnemySpeedMultiplier": 1.25,
   "MoneyMultiplier": 10,
   "StartingHP": 1,
   "StartingMoney": 250,
