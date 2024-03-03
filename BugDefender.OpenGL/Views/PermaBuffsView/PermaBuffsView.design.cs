@@ -1,11 +1,9 @@
 ﻿using BugDefender.Core.Resources;
-using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Buffs;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Views.AchivementsView;
 using BugDefender.OpenGL.Views.PermaBuffsView;
 using Microsoft.Xna.Framework;
 using System;
@@ -69,8 +67,8 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                     offset = 0;
                 }
                 var newButton = new PermaBuffControl(
-                    Parent, 
-                    buff, 
+                    Parent,
+                    buff,
                     (x) =>
                     {
                         if (x.Tag is BuffDefinition buffDef)
@@ -81,7 +79,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                                 SwitchView(new PermaBuffsView(Parent));
                             }
                         }
-                    }, 
+                    },
                     buff.IsValid(Parent.CurrentUser))
                 {
                     X = 50,

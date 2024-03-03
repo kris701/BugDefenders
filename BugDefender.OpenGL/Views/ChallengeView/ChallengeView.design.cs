@@ -45,8 +45,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             foreach (var id in _remainingChallenges)
             {
                 var newControl = new ChallengeControl(
-                    Parent, 
-                    ResourceManager.Challenges.GetResource(id), 
+                    Parent,
+                    ResourceManager.Challenges.GetResource(id),
                     StartButton_Click,
                     Parent.CurrentUser.CompletedChallenges.Contains(id))
                 {

@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
@@ -39,7 +38,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             }
             var challenges = ResourceManager.Challenges.GetResources();
             var rnd = new Random(hashValue);
-            while(_remainingChallenges.Count < _challengeCount)
+            while (_remainingChallenges.Count < _challengeCount)
             {
                 var target = rnd.Next(0, challenges.Count);
                 var id = challenges[target];

@@ -1,6 +1,4 @@
-﻿using BugDefender.Core.Resources;
-
-namespace BugDefender.Core.Users.Models.UserCriterias
+﻿namespace BugDefender.Core.Users.Models.UserCriterias
 {
     public class TurretsPlacedCriteria : IUserCriteria
     {

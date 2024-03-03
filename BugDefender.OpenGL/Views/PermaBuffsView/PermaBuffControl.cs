@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Users.Models.Buffs;
-using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
