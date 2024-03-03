@@ -70,7 +70,8 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 }
                 var newButton = new PermaBuffControl(
                     Parent, 
-                    buff, (x) =>
+                    buff, 
+                    (x) =>
                     {
                         if (x.Tag is BuffDefinition buffDef)
                         {

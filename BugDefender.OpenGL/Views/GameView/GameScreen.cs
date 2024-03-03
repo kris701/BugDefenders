@@ -654,7 +654,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 if (result != GameResult.ChallengeLost)
                 {
                     Parent.CurrentUser.Stats.Combine(_game.Context.Stats);
-                    credits += (_game.Context.Score / 1000);
+                    credits += (_game.Context.Score / 100);
                     Parent.CurrentUser.Credits += credits;
                     Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
                     Parent.UserManager.SaveUser(Parent.CurrentUser);
@@ -664,7 +664,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #endif
                 Parent.UIResources.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, credits, _game.Context.GameTime));
+                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, credits, _game.Context.GameTime, _game.Result));
             }
         }
 

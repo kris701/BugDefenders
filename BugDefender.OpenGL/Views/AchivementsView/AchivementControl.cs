@@ -64,7 +64,12 @@ namespace BugDefender.OpenGL.Views.AchivementsView
             };
 
             if (isUnlocked)
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+            {
+                if (Parent.CurrentUser.Achivements.Contains(achivement.ID))
+                    FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                else
+                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+            }
             else
                 FillColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
         }

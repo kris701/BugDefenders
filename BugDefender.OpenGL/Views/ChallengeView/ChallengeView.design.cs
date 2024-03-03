@@ -44,7 +44,11 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             int count = 0;
             foreach (var id in _remainingChallenges)
             {
-                var newControl = new ChallengeControl(Parent, ResourceManager.Challenges.GetResource(id), StartButton_Click)
+                var newControl = new ChallengeControl(
+                    Parent, 
+                    ResourceManager.Challenges.GetResource(id), 
+                    StartButton_Click,
+                    Parent.CurrentUser.CompletedChallenges.Contains(id))
                 {
                     X = 50,
                     Y = 210 + count++ * 135 + 5,

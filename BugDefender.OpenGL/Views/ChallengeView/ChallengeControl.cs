@@ -17,7 +17,7 @@ namespace BugDefender.OpenGL.Views.ChallengeView
         private readonly TextboxControl _requirementsTextBox;
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _startButton;
-        public ChallengeControl(GameWindow parent, ChallengeDefinition challenge, ClickedHandler click) : base(parent)
+        public ChallengeControl(GameWindow parent, ChallengeDefinition challenge, ClickedHandler click, bool isFinished) : base(parent)
         {
             Challenge = challenge;
             Width = 900;
@@ -65,9 +65,17 @@ namespace BugDefender.OpenGL.Views.ChallengeView
                 FontColor = Color.White,
                 Text = $"[Reward: {challenge.Reward} credits] Start!",
                 FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759"))
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                IsEnabled = !isFinished
             };
-            FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+            if (isFinished)
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                _startButton.Text = "Completed!";
+            }
+            else
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
         }
 
         public override void Initialize()

@@ -69,10 +69,18 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                 FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Tag = buff,
-                IsEnabled = isUnlocked
+                IsEnabled = isUnlocked && Parent.CurrentUser.Credits >= buff.Cost
             };
             if (isUnlocked)
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+            {
+                if (Parent.CurrentUser.Buffs.Contains(buff.ID))
+                {
+                    FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    _buyButton.Text = "Owned!";
+                }
+                else
+                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+            }
             else
                 FillColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
         }
@@ -90,7 +98,6 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
             _descriptionTextbox.Initialize();
 
             _buyButton._y = _y + Scale(20);
-            _buyButton.Tag = Tag;
             _buyButton.Initialize();
         }
 
