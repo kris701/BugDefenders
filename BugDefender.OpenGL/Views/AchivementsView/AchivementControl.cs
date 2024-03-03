@@ -36,7 +36,6 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 Text = achivement.Name,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
             };
             var sb = new StringBuilder();
             sb.AppendLine("Requirements:");
@@ -47,7 +46,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 X = 560,
                 Width = 400,
                 Height = 75,
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
                 Text = sb.ToString(),
                 Margin = 15
@@ -57,7 +56,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 X = 160,
                 Width = 400,
                 Height = 75,
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
                 Text = achivement.Description,
                 Margin = 15

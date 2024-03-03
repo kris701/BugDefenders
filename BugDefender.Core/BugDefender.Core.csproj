@@ -74,6 +74,9 @@
     <None Remove="Resources\Core\Challenges\money_1.json" />
     <None Remove="Resources\Core\Challenges\money_2.json" />
     <None Remove="Resources\Core\Challenges\money_3.json" />
+    <None Remove="Resources\Core\Challenges\turretplacer_1.json" />
+    <None Remove="Resources\Core\Challenges\turretplacer_2.json" />
+    <None Remove="Resources\Core\Challenges\turretplacer_3.json" />
     <None Remove="Resources\Core\Enemies\boss1_2.json" />
     <None Remove="Resources\Core\Enemies\boss2_1.json" />
     <None Remove="Resources\Core\Enemies\boss2_2.json" />
@@ -218,6 +221,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\bosskiller_3.json">

@@ -1,4 +1,5 @@
-﻿using BugDefender.Core.Users.Models.Challenges;
+﻿using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
@@ -30,7 +31,6 @@ namespace BugDefender.OpenGL.Views.ChallengeView
                 Text = challenge.Name,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
             };
             var sb = new StringBuilder();
             sb.AppendLine("Requirements:");
@@ -41,19 +41,22 @@ namespace BugDefender.OpenGL.Views.ChallengeView
                 X = 525,
                 Width = 400,
                 Height = 75,
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
                 Text = sb.ToString(),
                 Margin = 15
             };
+            var sb2 = new StringBuilder();
+            sb2.AppendLine(Challenge.Description);
+            sb2.AppendLine($"Map: '{ResourceManager.Maps.GetResource(challenge.MapID).Name}'. Gamestyle: '{ResourceManager.GameStyles.GetResource(challenge.GameStyleID).Name}'");
             _descriptionTextbox = new TextboxControl(Parent)
             {
                 X = 75,
                 Width = 400,
                 Height = 75,
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
-                Text = Challenge.Description,
+                Text = sb2.ToString(),
                 Margin = 15
             };
             _startButton = new ButtonControl(Parent, click)
