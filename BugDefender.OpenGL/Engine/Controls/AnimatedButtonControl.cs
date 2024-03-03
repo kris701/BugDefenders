@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Helpers;
+﻿using BugDefender.Core.Game.Models.Maps;
+using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -128,8 +129,9 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (IsEnabled && IsVisible && Parent.IsActive && Clicked != null)
             {
                 var mouseState = Mouse.GetState();
-                if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&
-                    mouseState.Y > Y && mouseState.Y < Y + Height))
+                var translatedPos = InputHelper.GetRelativePosition(Parent.CurrentUser.UserData.Scale);
+                if (!_blocked && (translatedPos.X > X && translatedPos.X < X + Width &&
+                    translatedPos.Y > Y && translatedPos.Y < Y + Height))
                 {
                     if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
                         _holding = true;

@@ -324,11 +324,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             UpdateLasers();
 
-            if (mouseState.X >= _gameArea.X && mouseState.X <= _gameArea.X + _gameArea.Width &&
-                mouseState.Y >= _gameArea.Y && mouseState.Y <= _gameArea.Y + _gameArea.Height)
+            var translatedPos = InputHelper.GetRelativePosition(Parent.CurrentUser.UserData.Scale);
+            if (translatedPos.X >= _gameArea.X && translatedPos.X <= _gameArea.X + _gameArea.Width &&
+                translatedPos.Y >= _gameArea.Y && translatedPos.Y <= _gameArea.Y + _gameArea.Height)
             {
-                var relative = new FloatPoint(mouseState.X - _gameArea.X, mouseState.Y - _gameArea.Y);
-                UpdateWithinGameField(mouseState, relative, keyState);
+                UpdateWithinGameField(mouseState, translatedPos, keyState);
             }
             else
             {
@@ -520,20 +520,20 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_buyingTurret != null)
             {
                 _buyingPreviewTile.IsVisible = true;
-                _buyingPreviewTile.X = mouseState.X - _buyingPreviewTile.Width / 2;
-                _buyingPreviewTile.Y = mouseState.Y - _buyingPreviewTile.Height / 2;
+                _buyingPreviewTile.X = relativeMousePosition.X - _buyingPreviewTile.Width / 2;
+                _buyingPreviewTile.Y = relativeMousePosition.Y - _buyingPreviewTile.Height / 2;
                 _buyingPreviewTile.CalculateViewPort();
                 _buyingPreviewRangeTile.IsVisible = true;
-                _buyingPreviewRangeTile.X = mouseState.X - _buyingPreviewRangeTile.Width / 2;
-                _buyingPreviewRangeTile.Y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;
+                _buyingPreviewRangeTile.X = relativeMousePosition.X - _buyingPreviewRangeTile.Width / 2;
+                _buyingPreviewRangeTile.Y = relativeMousePosition.Y - _buyingPreviewRangeTile.Height / 2;
                 _buyingPreviewRangeTile.CalculateViewPort();
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
                     var turretDef = ResourceManager.Turrets.GetResource((Guid)_buyingTurret);
                     var at = new FloatPoint(
-                        relativeMousePosition.X - turretDef.Size / 2,
-                        relativeMousePosition.Y - turretDef.Size / 2);
+                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X * Parent.CurrentUser.UserData.Scale,
+                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y * Parent.CurrentUser.UserData.Scale);
                     if (_game.TurretsModule.AddTurret(turretDef, at))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
