@@ -1,4 +1,6 @@
-﻿namespace BugDefender.Core.Users.Models.UserCriterias
+﻿using BugDefender.Core.Resources;
+
+namespace BugDefender.Core.Users.Models.UserCriterias
 {
     public class TurretKillsOfTypeCriteria : IUserCriteria
     {
@@ -10,5 +12,10 @@
             stats.TotalTurretKillsOfType.ContainsKey(TurretID) &&
             stats.TotalTurretKillsOfType[TurretID].ContainsKey(EnemyID) &&
             stats.TotalTurretKillsOfType[TurretID][EnemyID] >= Quantity;
+
+        public string GetDescriptionString()
+        {
+            return $"Kill {Quantity} '{ResourceManager.Enemies.GetResource(EnemyID).Name}' enemies with a '{ResourceManager.Turrets.GetResource(TurretID).Name}' turret.";
+        }
     }
 }

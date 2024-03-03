@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
@@ -255,6 +256,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             if (_game.Context.Challenge == null)
                 return;
+            var sb = new StringBuilder();
+            foreach (var req in _game.Context.Challenge.Criterias)
+                sb.AppendLine(req.GetDescriptionString());
             AddControl(1, new LabelControl(Parent)
             {
                 Text = _game.Context.Challenge.Name,
@@ -267,7 +271,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             AddControl(1, new TextboxControl(Parent)
             {
-                Text = _game.Context.Challenge.Description,
+                Text = sb.ToString(),
                 Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
                 X = xOffset,

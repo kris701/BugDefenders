@@ -46,8 +46,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             {
                 var newControl = new ChallengeControl(Parent, ResourceManager.Challenges.GetResource(id), StartButton_Click)
                 {
-                    X = 100,
-                    Y = 210 + count++ * 140 + 5,
+                    X = 50,
+                    Y = 210 + count++ * 135 + 5,
                     Tag = id
                 };
                 AddControl(1, newControl);

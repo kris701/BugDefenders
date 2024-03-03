@@ -1,16 +1,24 @@
 ﻿using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models;
+using BugDefender.Core.Users.Models.Buffs;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views.AchivementsView;
+using BugDefender.OpenGL.Views.PermaBuffsView;
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseAnimatedView
     {
-        private readonly int _upgradeViewCount = 5;
+        private readonly int _selectionsPrPage = 5;
+        private readonly List<List<PermaBuffControl>> _upgradePages = new List<List<PermaBuffControl>>();
+        private int _currentUpgradePage = 0;
         public override void Initialize()
         {
             AddControl(0, new TileControl(Parent)
@@ -42,83 +50,89 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 FontColor = Color.White
             });
 
-            var buffs = ResourceManager.Buffs.GetResources();
-            int count = 0;
-            foreach (var id in buffs)
-            {
-                if (count >= buffs.Count || count >= _upgradeViewCount)
-                    break;
-                var buff = ResourceManager.Buffs.GetResource(id);
-                if (!buff.IsValid(Parent.CurrentUser))
-                    continue;
+            var ids = ResourceManager.Buffs.GetResources();
+            var sorted = new List<BuffDefinition>();
+            foreach (var id in ids)
+                sorted.Add(ResourceManager.Buffs.GetResource(id));
+            sorted = sorted.OrderByDescending(x => !Parent.CurrentUser.Buffs.Contains(x.ID)).ThenByDescending(x => x.IsValid(Parent.CurrentUser)).ToList();
 
-                AddControl(0, new LabelControl(Parent)
+            _upgradePages.Add(new List<PermaBuffControl>());
+            int page = 0;
+            int offset = 0;
+            int count = 1;
+            foreach (var buff in sorted)
+            {
+                if (count++ % (_selectionsPrPage + 1) == 0)
                 {
-                    X = 100,
-                    Y = 210 + count * 140 + 5,
-                    Width = 400,
-                    Height = 50,
-                    Text = buff.Name,
-                    Font = BasicFonts.GetFont(16),
-                    FontColor = Color.White,
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                });
-                AddControl(0, new TextboxControl(Parent)
-                {
-                    X = 100,
-                    Y = 260 + count * 140 + 5,
-                    Width = 800,
-                    Height = 75,
-                    Text = buff.Description,
-                    Font = BasicFonts.GetFont(10),
-                    FontColor = Color.White,
-                    FillColor = Parent.UIResources.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
-                    Margin = 15
-                });
-                var newControl = new ButtonControl(Parent, clicked: (x) =>
-                {
-                    if (x.Tag is int cost)
+                    page++;
+                    _upgradePages.Add(new List<PermaBuffControl>());
+                    offset = 0;
+                }
+                var newButton = new PermaBuffControl(
+                    Parent, 
+                    buff, (x) =>
                     {
-                        if (Parent.CurrentUser.Credits >= cost)
+                        if (x.Tag is BuffDefinition buffDef)
                         {
-                            Parent.UserManager.AddBuffUpgrade(Parent.CurrentUser, id);
-                            SwitchView(new PermaBuffsView(Parent));
+                            if (Parent.CurrentUser.Credits >= buffDef.Cost)
+                            {
+                                Parent.UserManager.AddBuffUpgrade(Parent.CurrentUser, buffDef.ID);
+                                SwitchView(new PermaBuffsView(Parent));
+                            }
                         }
-                    }
-                })
+                    }, 
+                    buff.IsValid(Parent.CurrentUser))
                 {
-                    X = 500,
-                    Y = 210 + count * 140 + 5,
-                    Width = 400,
-                    Height = 50,
-                    Text = $"[{buff.Cost}$] Buy",
-                    Font = BasicFonts.GetFont(16),
-                    FontColor = Color.White,
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
-                    IsEnabled = !Parent.CurrentUser.Buffs.Contains(id) && Parent.CurrentUser.Credits >= buff.Cost,
-                    Tag = buff.Cost
+                    X = 50,
+                    Y = 210 + offset++ * 135 + 5,
                 };
-                if (Parent.CurrentUser.Buffs.Contains(id))
-                    newControl.Text = "Owned!";
-                AddControl(0, newControl);
-                count++;
+                _upgradePages[page].Add(newButton);
+                AddControl(2, newButton);
             }
 
-            if (count == 0)
+            UpdateUpgradeSelectionPages();
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
             {
-                AddControl(0, new LabelControl(Parent)
-                {
-                    HorizontalAlignment = Alignment.Middle,
-                    Y = 500,
-                    Height = 80,
-                    Width = 700,
-                    Text = $"No buffs available yet! Keep playing the game to unlock them",
-                    Font = BasicFonts.GetFont(16),
-                    FontColor = Color.White
-                });
-            }
+                _currentUpgradePage--;
+                if (_currentUpgradePage < 0)
+                    _currentUpgradePage = 0;
+                if (_currentUpgradePage >= _upgradePages.Count)
+                    _currentUpgradePage = _upgradePages.Count - 1;
+                UpdateUpgradeSelectionPages();
+            })
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(16),
+                Text = $"<",
+                X = 70,
+                Y = 150,
+                Height = 50,
+                Width = 50,
+                IsVisible = _upgradePages.Count > 1
+            });
+            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            {
+                _currentUpgradePage++;
+                if (_currentUpgradePage < 0)
+                    _currentUpgradePage = 0;
+                if (_currentUpgradePage >= _upgradePages.Count)
+                    _currentUpgradePage = _upgradePages.Count - 1;
+                UpdateUpgradeSelectionPages();
+            })
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FontColor = Color.White,
+                Font = BasicFonts.GetFont(16),
+                Text = $">",
+                X = 875,
+                Y = 150,
+                Height = 50,
+                Width = 50,
+                IsVisible = _upgradePages.Count > 1
+            });
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {

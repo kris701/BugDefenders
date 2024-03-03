@@ -59,41 +59,22 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
 
             foreach (var achivement in sorted)
             {
-                var unlocked = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
-                if (!Parent.CurrentUser.Achivements.Contains(achivement.ID))
-                    unlocked = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
                 if (count++ % (_selectionsPrPage + 1) == 0)
                 {
                     page++;
                     _achivementsPages.Add(new List<AchivementControl>());
                     offset = 0;
                 }
-                var newButton = new AchivementControl(Parent, achivement)
+                var newButton = new AchivementControl(Parent, achivement, Parent.CurrentUser.Achivements.Contains(achivement.ID))
                 {
-                    FillColor = unlocked,
-                    X = 100,
-                    Y = 270 + offset++ * 120,
-                    IsVisible = false
+                    X = 50,
+                    Y = 210 + offset++ * 135 + 5,
                 };
                 _achivementsPages[page].Add(newButton);
                 AddControl(2, newButton);
             }
 
             UpdateAchivementSelectionPages();
-
-            if (count == 1)
-            {
-                AddControl(0, new LabelControl(Parent)
-                {
-                    HorizontalAlignment = Alignment.Middle,
-                    Y = 500,
-                    Height = 80,
-                    Width = 700,
-                    Text = $"You have unlocked no achivements yet",
-                    Font = BasicFonts.GetFont(16),
-                    FontColor = Color.White
-                });
-            }
             AddControl(1, new ButtonControl(Parent, clicked: (s) =>
             {
                 _currentAchivementsPage--;
@@ -110,7 +91,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 Font = BasicFonts.GetFont(16),
                 Text = $"<",
                 X = 70,
-                Y = 210,
+                Y = 150,
                 Height = 50,
                 Width = 50,
                 IsVisible = _achivementsPages.Count > 1
@@ -131,7 +112,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 Font = BasicFonts.GetFont(16),
                 Text = $">",
                 X = 875,
-                Y = 210,
+                Y = 150,
                 Height = 50,
                 Width = 50,
                 IsVisible = _achivementsPages.Count > 1

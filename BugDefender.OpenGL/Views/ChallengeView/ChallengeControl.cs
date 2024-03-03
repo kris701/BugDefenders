@@ -4,6 +4,7 @@ using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Text;
 using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.Views.ChallengeView
@@ -13,56 +14,75 @@ namespace BugDefender.OpenGL.Views.ChallengeView
         public ChallengeDefinition Challenge { get; }
 
         private readonly LabelControl _titleControl;
+        private readonly TextboxControl _requirementsTextBox;
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _startButton;
         public ChallengeControl(GameWindow parent, ChallengeDefinition challenge, ClickedHandler click) : base(parent)
         {
             Challenge = challenge;
-            Width = 800;
-            Height = 120;
+            Width = 900;
+            Height = 140;
             _titleControl = new LabelControl(Parent)
             {
-                X = 100,
+                X = 75,
                 Width = 400,
-                Height = 50,
+                Height = 35,
                 Text = challenge.Name,
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
             };
+            var sb = new StringBuilder();
+            sb.AppendLine("Requirements:");
+            foreach (var req in challenge.Criterias)
+                sb.AppendLine(req.GetDescriptionString());
+            _requirementsTextBox = new TextboxControl(Parent)
+            {
+                X = 525,
+                Width = 400,
+                Height = 75,
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                Text = sb.ToString(),
+                Margin = 15
+            };
             _descriptionTextbox = new TextboxControl(Parent)
             {
-                X = 100,
-                Width = 800,
+                X = 75,
+                Width = 400,
                 Height = 75,
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 Text = Challenge.Description,
-                FillColor = Parent.UIResources.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db"))
+                Margin = 15
             };
             _startButton = new ButtonControl(Parent, click)
             {
-                X = 500,
+                X = 525,
                 Width = 400,
-                Height = 50,
-                Font = BasicFonts.GetFont(10),
+                Height = 35,
+                Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"[Reward: {challenge.Reward} credits] Start!",
                 FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759"))
             };
+            FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            _titleControl._y = _y;
+            _titleControl._y = _y + Scale(20);
             _titleControl.Initialize();
 
-            _descriptionTextbox._y = _y + Scale(50);
+            _requirementsTextBox._y = _y + Scale(45);
+            _requirementsTextBox.Initialize();
+
+            _descriptionTextbox._y = _y + Scale(45);
             _descriptionTextbox.Initialize();
 
-            _startButton._y = _y;
+            _startButton._y = _y + Scale(20);
             _startButton.Tag = Tag;
             _startButton.Initialize();
         }
@@ -70,6 +90,7 @@ namespace BugDefender.OpenGL.Views.ChallengeView
         public override void Update(GameTime gameTime)
         {
             _titleControl.Update(gameTime);
+            _requirementsTextBox.Update(gameTime);
             _descriptionTextbox.Update(gameTime);
             _startButton.Update(gameTime);
             base.Update(gameTime);
@@ -82,6 +103,7 @@ namespace BugDefender.OpenGL.Views.ChallengeView
 
             base.Draw(gameTime, spriteBatch);
             _titleControl.Draw(gameTime, spriteBatch);
+            _requirementsTextBox.Draw(gameTime, spriteBatch);
             _descriptionTextbox.Draw(gameTime, spriteBatch);
             _startButton.Draw(gameTime, spriteBatch);
         }

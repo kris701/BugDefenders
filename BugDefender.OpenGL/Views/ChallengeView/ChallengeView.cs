@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
@@ -38,10 +39,15 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             }
             var challenges = ResourceManager.Challenges.GetResources();
             var rnd = new Random(hashValue);
-            for (int i = 0; i < _challengeCount; i++)
+            var checkedItems = new List<Guid>();
+
+            while(_remainingChallenges.Count < _challengeCount)
             {
                 var target = rnd.Next(0, challenges.Count);
                 var id = challenges[target];
+                checkedItems.Add(id);
+                if (checkedItems.Intersect(challenges).Count() == 0)
+                    break;
                 if (!Parent.CurrentUser.CompletedChallenges.Contains(id) && !_remainingChallenges.Contains(id))
                     _remainingChallenges.Add(id);
             }
