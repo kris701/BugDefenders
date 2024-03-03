@@ -1,8 +1,8 @@
 ﻿{
-  "id": "03418952-36e8-45cb-ab7f-2e667f3a15cb",
+  "id": "5b05095f-00e2-4823-ae4c-bc4cbec2d434",
   "Name": "Easy Game",
-  "description": "Get at least 100 kills in a easy game on the map Snakes Way",
-  "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
+  "description": "Get at least 100 kills in a easy game on the map Criss Cross",
+  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
   "GameStyleID": "42db41e5-613a-4d05-b456-5ba7c751bdc4",
   "Reward": 5,
   "Criterias": [

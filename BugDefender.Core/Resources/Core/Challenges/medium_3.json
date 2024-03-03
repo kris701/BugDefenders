@@ -1,8 +1,8 @@
 ﻿{
-  "id": "59d2ab4a-c256-4d7f-9667-2273dadfed5a",
+  "id": "8f53f3b2-c20c-4d41-8147-a44d623cfa75",
   "Name": "Medium Game",
-  "description": "Get at least 100 kills in a medium game on the map Snakes Way",
-  "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
+  "description": "Get at least 100 kills in a medium game on the map Criss Cross",
+  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
   "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
   "Reward": 10,
   "Criterias": [

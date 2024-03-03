@@ -1,14 +1,14 @@
 ﻿{
   "id": "972495b3-27e2-4ba4-b4f1-5e086b9a990d",
   "Name": "Medium Game",
-  "description": "Get at least 1000 kills in a medium game",
+  "description": "Get at least 100 kills in a easy game on the map Slow Glow",
   "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
   "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
-  "Reward": 30,
+  "Reward": 10,
   "Criterias": [
     {
       "CriteriaType": "Kills",
-      "Quantity": 1000
+      "Quantity": 100
     }
   ]
 }

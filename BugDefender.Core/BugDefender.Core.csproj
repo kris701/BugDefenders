@@ -62,12 +62,15 @@
     <None Remove="Resources\Core\Buffs\slowingturret_2.json" />
     <None Remove="Resources\Core\Challenges\easy_1.json" />
     <None Remove="Resources\Core\Challenges\easy_2.json" />
+    <None Remove="Resources\Core\Challenges\easy_3.json" />
     <None Remove="Resources\Core\Challenges\hardcore_1.json" />
     <None Remove="Resources\Core\Challenges\hardcore_2.json" />
     <None Remove="Resources\Core\Challenges\medium_1.json" />
     <None Remove="Resources\Core\Challenges\medium_2.json" />
+    <None Remove="Resources\Core\Challenges\medium_3.json" />
     <None Remove="Resources\Core\Challenges\money_1.json" />
     <None Remove="Resources\Core\Challenges\money_2.json" />
+    <None Remove="Resources\Core\Challenges\money_3.json" />
     <None Remove="Resources\Core\Enemies\boss1_2.json" />
     <None Remove="Resources\Core\Enemies\boss2_1.json" />
     <None Remove="Resources\Core\Enemies\boss2_2.json" />
@@ -211,6 +214,9 @@
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\easy_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\easy_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -218,6 +224,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\hardcore_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\medium_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\money_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\money_2.json">
