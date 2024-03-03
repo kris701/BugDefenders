@@ -24,7 +24,6 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            ScaleValue = parent.CurrentUser.UserData.Scale;
 
             _remainingChallenges = new List<Guid>();
             DateTime a = DateTime.MinValue;

@@ -71,7 +71,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             _game = game;
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
@@ -107,7 +106,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
             {
-                AddControl(99, new TileControl(Parent)
+                AddControl(99, new TileControl()
                 {
                     X = blockingTile.X + _gameArea.X,
                     Y = blockingTile.Y + _gameArea.Y,
@@ -221,11 +220,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_selectedTurret == null)
                 return;
 
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)Scale(GetRangeOfTurret(_selectedTurret.TurretInfo) * 2));
-            _turretSelectRangeTile._width = _turretSelectRangeTile.FillColor.Width;
-            _turretSelectRangeTile._height = _turretSelectRangeTile.FillColor.Height;
-            _turretSelectRangeTile._x = Scale(_selectedTurret.CenterX) + Scale(_gameArea.X) - _turretSelectRangeTile.FillColor.Width / 2;
-            _turretSelectRangeTile._y = Scale(_selectedTurret.CenterY) + Scale(_gameArea.Y) - _turretSelectRangeTile.FillColor.Height / 2;
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(_selectedTurret.TurretInfo) * 2);
+            _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
+            _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
+            _turretSelectRangeTile.X = _selectedTurret.CenterX + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
+            _turretSelectRangeTile.Y = _selectedTurret.CenterY + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
             _turretSelectRangeTile.CalculateViewPort();
             _turretSelectRangeTile.IsVisible = true;
 
@@ -325,10 +324,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             UpdateLasers();
 
-            if (mouseState.X >= Scale(_gameArea.X) && mouseState.X <= Scale(_gameArea.X) + Scale(_gameArea.Width) &&
-                mouseState.Y >= Scale(_gameArea.Y) && mouseState.Y <= Scale(_gameArea.Y) + Scale(_gameArea.Height))
+            if (mouseState.X >= _gameArea.X && mouseState.X <= _gameArea.X + _gameArea.Width &&
+                mouseState.Y >= _gameArea.Y && mouseState.Y <= _gameArea.Y + _gameArea.Height)
             {
-                var relative = new FloatPoint(InvScale(mouseState.X - Scale(_gameArea.X)), InvScale(mouseState.Y - Scale(_gameArea.Y)));
+                var relative = new FloatPoint(mouseState.X - _gameArea.X, mouseState.Y - _gameArea.Y);
                 UpdateWithinGameField(mouseState, relative, keyState);
             }
             else
@@ -408,7 +407,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
             var animation = Parent.UIResources.GetAnimation<ProjectileEntityDefinition>(entity.DefinitionID).OnCreate;
             var textureSet = Parent.UIResources.GetTextureSet(animation);
-            return new AnimatedTileControl(Parent)
+            return new AnimatedTileControl()
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
                 TileSet = textureSet.LoadedContents,
@@ -429,7 +428,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 if (entityDef.OnCreate != Guid.Empty)
                     Parent.UIResources.PlaySoundEffectOnce(entityDef.OnCreate);
             }
-            var newTile = new AnimatedTileControl(Parent)
+            var newTile = new AnimatedTileControl()
             {
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y,
@@ -446,7 +445,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private LineControl CreateNewLaser(LaserEntity entity)
         {
-            var newTile = new LineControl(Parent)
+            var newTile = new LineControl()
             {
                 Thickness = 3,
                 Stroke = BasicTextures.GetBasicRectange(Color.Red),
@@ -521,12 +520,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_buyingTurret != null)
             {
                 _buyingPreviewTile.IsVisible = true;
-                _buyingPreviewTile._x = mouseState.X - _buyingPreviewTile.Width / 2;
-                _buyingPreviewTile._y = mouseState.Y - _buyingPreviewTile.Height / 2;
+                _buyingPreviewTile.X = mouseState.X - _buyingPreviewTile.Width / 2;
+                _buyingPreviewTile.Y = mouseState.Y - _buyingPreviewTile.Height / 2;
                 _buyingPreviewTile.CalculateViewPort();
                 _buyingPreviewRangeTile.IsVisible = true;
-                _buyingPreviewRangeTile._x = mouseState.X - _buyingPreviewRangeTile.Width / 2;
-                _buyingPreviewRangeTile._y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;
+                _buyingPreviewRangeTile.X = mouseState.X - _buyingPreviewRangeTile.Width / 2;
+                _buyingPreviewRangeTile.Y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;
                 _buyingPreviewRangeTile.CalculateViewPort();
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
@@ -610,9 +609,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.Width = def.Size;
                 _buyingPreviewTile.Height = def.Size;
                 _buyingPreviewTile.Initialize();
-                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)Scale(GetRangeOfTurret(def.ModuleInfo) * 2));
-                _buyingPreviewRangeTile._width = _buyingPreviewRangeTile.FillColor.Width;
-                _buyingPreviewRangeTile._height = _buyingPreviewRangeTile.FillColor.Height;
+                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(def.ModuleInfo) * 2);
+                _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
+                _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
                 _turretStatesTextbox.Text = new TurretInstance(def).GetDescriptionString();
             }
         }

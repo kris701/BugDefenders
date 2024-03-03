@@ -14,16 +14,18 @@ namespace BugDefender.OpenGL.Views.GameView
 {
     public class EnemyQueueControl : TileControl
     {
+        private GameWindow _parent;
         private readonly AnimatedTileControl _iconControl;
         private readonly TextboxControl _descriptionControl;
-        public EnemyQueueControl(GameWindow parent) : base(parent)
+        public EnemyQueueControl(GameWindow parent)
         {
-            _iconControl = new AnimatedTileControl(Parent)
+            _parent = parent;
+            _iconControl = new AnimatedTileControl()
             {
                 Width = 25,
                 Height = 25,
             };
-            _descriptionControl = new TextboxControl(Parent)
+            _descriptionControl = new TextboxControl()
             {
                 Margin = 1,
                 Font = BasicFonts.GetFont(8),
@@ -38,8 +40,8 @@ namespace BugDefender.OpenGL.Views.GameView
         {
             var def = ResourceManager.Enemies.GetResource(wave[0]);
             var instance = new EnemyInstance(def, evolution);
-            var animation = Parent.UIResources.GetAnimation<EnemyEntityDefinition>(def.ID);
-            var textureSet = Parent.UIResources.GetTextureSet(animation.OnCreate);
+            var animation = _parent.UIResources.GetAnimation<EnemyEntityDefinition>(def.ID);
+            var textureSet = _parent.UIResources.GetTextureSet(animation.OnCreate);
             _iconControl.TileSet = textureSet.LoadedContents;
             _iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
 
@@ -66,12 +68,12 @@ namespace BugDefender.OpenGL.Views.GameView
 
         public override void Initialize()
         {
-            _iconControl._x = _x + Scale(10);
-            _iconControl._y = _y + Height / 2 - _iconControl.Height / 2;
+            _iconControl.X = X + 10;
+            _iconControl.Y = Y + Height / 2 - _iconControl.Height / 2;
             _iconControl.Initialize();
 
-            _descriptionControl._x = _x + Scale(10) + _iconControl.Width;
-            _descriptionControl._y = _y + Scale(10);
+            _descriptionControl.X = X + 10 + _iconControl.Width;
+            _descriptionControl.Y = Y + 10;
             _descriptionControl.Initialize();
 
             base.Initialize();

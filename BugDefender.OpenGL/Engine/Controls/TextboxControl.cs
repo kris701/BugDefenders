@@ -40,10 +40,6 @@ namespace BugDefender.OpenGL.Engine.Controls
         internal bool _textChanged = true;
         internal List<LabelControl> lines = new List<LabelControl>();
 
-        public TextboxControl(GameWindow parent) : base(parent)
-        {
-        }
-
         public override void Update(GameTime gameTime)
         {
             if (_textChanged && Text != "")
@@ -67,19 +63,19 @@ namespace BugDefender.OpenGL.Engine.Controls
             {
                 currentString += character;
                 var size = Font.MeasureString(currentString);
-                if (Scale(size.X) > Width - Scale(Margin * 2))
+                if (size.X > Width - Margin * 2)
                 {
-                    var newLabel = new LabelControl(Parent)
+                    var newLabel = new LabelControl()
                     {
                         Font = Font,
                         Text = currentString,
                         FontColor = FontColor
                     };
-                    newLabel._x = _x;
-                    newLabel._y = _y + Scale(size.Y) * lines.Count + Scale(Margin);
-                    newLabel._width = _width;
-                    newLabel._height = Scale(size.Y);
-                    if (newLabel._y + newLabel._height > _y + _height - Margin)
+                    newLabel.X = X;
+                    newLabel.Y = Y + size.Y * lines.Count + Margin;
+                    newLabel.Width = Width;
+                    newLabel.Height = size.Y;
+                    if (newLabel.Y + newLabel.Height > Y + Height - Margin)
                         break;
                     lines.Add(newLabel);
                     currentString = "";
@@ -88,17 +84,17 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (currentString != "")
             {
                 var size = Font.MeasureString(currentString);
-                var newLabel = new LabelControl(Parent)
+                var newLabel = new LabelControl()
                 {
                     Font = Font,
                     Text = currentString,
                     FontColor = FontColor
                 };
-                newLabel._x = _x;
-                newLabel._y = _y + Scale(size.Y) * lines.Count + Scale(Margin);
-                newLabel._width = _width;
-                newLabel._height = Scale(size.Y);
-                if (newLabel._y + newLabel._height > _y + _height - Margin)
+                newLabel.X = X;
+                newLabel.Y = Y + size.Y * lines.Count + Margin;
+                newLabel.Width = Width;
+                newLabel.Height = size.Y;
+                if (newLabel.Y + newLabel.Height > Y + Height - Margin)
                     return;
                 lines.Add(newLabel);
             }

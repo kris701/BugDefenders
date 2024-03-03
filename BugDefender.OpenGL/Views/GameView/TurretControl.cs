@@ -18,13 +18,13 @@ namespace BugDefender.OpenGL.Views.GameView
         public TurretControl(GameWindow parent, TurretInstance instance, ClickedHandler clicked) : base(parent, clicked)
         {
             Instance = instance;
-            baseControl = new TileControl(Parent)
+            baseControl = new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d")),
                 Width = 35,
                 Height = 35,
             };
-            turretLevelControl = new LabelControl(Parent)
+            turretLevelControl = new LabelControl()
             {
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
@@ -35,12 +35,12 @@ namespace BugDefender.OpenGL.Views.GameView
 
         public override void Initialize()
         {
-            baseControl._x = _x + (Width - baseControl.Width) / 2;
-            baseControl._y = _y + (Height - baseControl.Height) / 2;
+            baseControl.X = X + (Width - baseControl.Width) / 2;
+            baseControl.Y = Y + (Height - baseControl.Height) / 2;
             baseControl.Initialize();
 
-            turretLevelControl._x = _x + Width;
-            turretLevelControl._y = _y;
+            turretLevelControl.X = X + Width;
+            turretLevelControl.Y = Y;
             turretLevelControl.Initialize();
             base.Initialize();
         }

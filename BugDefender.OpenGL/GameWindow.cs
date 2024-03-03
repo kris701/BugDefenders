@@ -13,6 +13,7 @@ using BugDefender.OpenGL.Settings;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
@@ -122,6 +123,7 @@ namespace BugDefender.OpenGL
             UserManager.SaveUser(toUser);
             if (_isInitialized)
                 ApplySettings();
+            LoadMods();
         }
 
         protected override void Initialize()
@@ -256,7 +258,8 @@ namespace BugDefender.OpenGL
             if (_spriteBatch == null)
                 throw new Exception("Error! Spritebatch was not initialized!");
 
-            _spriteBatch.Begin();
+            var matrix = Matrix.CreateScale(CurrentUser.UserData.Scale, CurrentUser.UserData.Scale, 1.0f);
+            _spriteBatch.Begin(transformMatrix: matrix);
             CurrentScreen.Draw(gameTime, _spriteBatch);
             foreach (var worker in BackroundWorkers)
                 worker.Draw(gameTime, _spriteBatch);

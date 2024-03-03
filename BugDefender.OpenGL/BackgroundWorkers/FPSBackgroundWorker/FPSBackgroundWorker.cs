@@ -8,17 +8,19 @@ namespace BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker
 {
     public class FPSBackgroundWorker : BaseBackroundWorker
     {
+        private GameWindow _parent;
         public override Guid ID { get; } = new Guid("685946a7-a6b4-4a5d-88c4-7b4ba6dee748");
         private TimeSpan _passed = TimeSpan.Zero;
         private int _currentFrames = 0;
         private int _frames = 0;
-        public FPSBackgroundWorker(GameWindow parent) : base(parent)
+        public FPSBackgroundWorker(GameWindow parent)
         {
+            _parent = parent;
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (Parent.CurrentUser.UserData.FPSCounter)
+            if (_parent.CurrentUser.UserData.FPSCounter)
             {
                 _currentFrames++;
                 _passed += gameTime.ElapsedGameTime;
@@ -33,7 +35,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (Parent.CurrentUser.UserData.FPSCounter)
+            if (_parent.CurrentUser.UserData.FPSCounter)
                 spriteBatch.DrawString(BasicFonts.GetFont(16), $"FPS: {_frames}", new Vector2(0, 0), new Color(255, 0, 0, 255));
         }
     }

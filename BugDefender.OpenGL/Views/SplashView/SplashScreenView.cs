@@ -15,7 +15,6 @@ namespace BugDefender.OpenGL.Screens.SplashScreen
         {
             FadeInTime = 1000;
             FadeOutTime = 1000;
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
             Parent.UIResources.PlaySong(MainMenuView._id);
         }

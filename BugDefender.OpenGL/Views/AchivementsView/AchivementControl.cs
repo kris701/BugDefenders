@@ -16,19 +16,19 @@ namespace BugDefender.OpenGL.Views.AchivementsView
         private readonly LabelControl _titleControl;
         private readonly TextboxControl _requirementsTextBox;
         private readonly TextboxControl _descriptionTextbox;
-        public AchivementControl(GameWindow parent, AchivementDefinition achivement, bool isUnlocked) : base(parent)
+        public AchivementControl(GameWindow parent, AchivementDefinition achivement, bool isUnlocked)
         {
             Achivement = achivement;
             Width = 900;
             Height = 140;
-            _iconTile = new TileControl(Parent)
+            _iconTile = new TileControl()
             {
                 X = 75,
                 Width = 75,
                 Height = 75,
-                FillColor = Parent.UIResources.GetTexture(Achivement.ID)
+                FillColor = parent.UIResources.GetTexture(Achivement.ID)
             };
-            _titleControl = new LabelControl(Parent)
+            _titleControl = new LabelControl()
             {
                 X = 160,
                 Width = 400,
@@ -41,7 +41,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
             sb.AppendLine("Requirements:");
             foreach (var req in achivement.Criterias)
                 sb.AppendLine(req.GetDescriptionString());
-            _requirementsTextBox = new TextboxControl(Parent)
+            _requirementsTextBox = new TextboxControl()
             {
                 X = 560,
                 Width = 400,
@@ -51,7 +51,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 Text = sb.ToString(),
                 Margin = 15
             };
-            _descriptionTextbox = new TextboxControl(Parent)
+            _descriptionTextbox = new TextboxControl()
             {
                 X = 160,
                 Width = 400,
@@ -64,28 +64,28 @@ namespace BugDefender.OpenGL.Views.AchivementsView
 
             if (isUnlocked)
             {
-                if (Parent.CurrentUser.Achivements.Contains(achivement.ID))
-                    FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                if (parent.CurrentUser.Achivements.Contains(achivement.ID))
+                    FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 else
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
             else
-                FillColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
+                FillColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            _iconTile._y = _y + Scale(30);
+            _iconTile.Y = Y + 30;
             _iconTile.Initialize();
 
-            _titleControl._y = _y + Scale(20);
+            _titleControl.Y = Y + 20;
             _titleControl.Initialize();
 
-            _descriptionTextbox._y = _y + Scale(45);
+            _descriptionTextbox.Y = Y + 45;
             _descriptionTextbox.Initialize();
 
-            _requirementsTextBox._y = _y + Scale(10);
+            _requirementsTextBox.Y = Y + 10;
             _requirementsTextBox.Initialize();
         }
 

@@ -28,7 +28,6 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             _credits = credits;
             _gameTime = gameTime;
             _gameResult = result;
-            ScaleValue = parent.CurrentUser.UserData.Scale;
 
             Parent.CurrentUser.HighScores.Add(new ScoreDefinition(
                 _score,

@@ -61,14 +61,14 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });
 
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -78,7 +78,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 175,
@@ -149,7 +149,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         private void SetupScreenSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset,
@@ -182,7 +182,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 _scaleButtons.Add(newControl);
             }
 
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset + 80,
@@ -248,7 +248,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         private void SetupTextureSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset,
@@ -287,7 +287,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         private void SetupMusicSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset,
@@ -325,7 +325,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         private void SetupSoundEffectsSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset,

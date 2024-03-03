@@ -14,13 +14,13 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         private TextInputControl _cheatsInput;
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 200,
@@ -120,7 +120,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
 
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 X = 50,
                 Y = 860,

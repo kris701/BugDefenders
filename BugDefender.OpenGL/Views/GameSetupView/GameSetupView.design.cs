@@ -24,14 +24,14 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = 1000,
                 Height = 1000
             });
 
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -41,7 +41,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 175,
@@ -106,7 +106,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
 
         private void SetupPreviewPanel()
         {
-            AddControl(1, new TileControl(Parent)
+            AddControl(1, new TileControl()
             {
                 X = 50,
                 Y = 210,
@@ -114,7 +114,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = 900,
                 FillColor = Parent.UIResources.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
             });
-            _mapPreviewTile = new TileControl(Parent)
+            _mapPreviewTile = new TileControl()
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
                 X = 75,
@@ -122,13 +122,13 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = 300,
                 Height = 300,
             };
-            AddControl(1, new BorderControl(Parent, _mapPreviewTile)
+            AddControl(1, new BorderControl(_mapPreviewTile)
             {
                 Thickness = 3,
                 BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
 
-            _mapNameLabel = new LabelControl(Parent)
+            _mapNameLabel = new LabelControl()
             {
                 Text = "Select A Map",
                 Font = BasicFonts.GetFont(16),
@@ -139,7 +139,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 FontColor = Color.White,
             };
             AddControl(1, _mapNameLabel);
-            _mapDescriptionTextbox = new TextboxControl(Parent)
+            _mapDescriptionTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(10),
                 X = 380,
@@ -153,7 +153,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
 
         private void SetupMapsView()
         {
-            AddControl(1, new TileControl(Parent)
+            AddControl(1, new TileControl()
             {
                 X = 50,
                 Y = 550,
@@ -161,7 +161,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = 440,
                 FillColor = Parent.UIResources.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 Font = BasicFonts.GetFont(24),
                 Text = "Maps",
@@ -249,7 +249,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
 
         private void SetupGameStyleView()
         {
-            AddControl(1, new TileControl(Parent)
+            AddControl(1, new TileControl()
             {
                 X = 510,
                 Y = 550,
@@ -257,7 +257,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = 440,
                 FillColor = Parent.UIResources.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 Font = BasicFonts.GetFont(24),
                 Text = "Game Styles",
