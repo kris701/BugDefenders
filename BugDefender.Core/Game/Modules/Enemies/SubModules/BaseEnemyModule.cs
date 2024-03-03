@@ -14,6 +14,8 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
         public BaseEnemyModule(GameContext context, GameEngine game) : base(context, game)
         {
             var options = ResourceManager.Enemies.GetResources();
+            if (Context.GameStyle.EnemyWhiteList.Count > 0)
+                options = options.Where(x => Context.GameStyle.EnemyWhiteList.Contains(x)).ToList();
             EnemyOptions = new HashSet<Guid>();
             foreach (var option in options)
             {

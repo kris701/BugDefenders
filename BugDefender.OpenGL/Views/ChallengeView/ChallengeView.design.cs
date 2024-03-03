@@ -11,6 +11,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
 {
     public partial class ChallengeView : BaseAnimatedView
     {
+        private LabelControl _waitLabel;
         public override void Initialize()
         {
             AddControl(0, new TileControl(Parent)
@@ -30,16 +31,17 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
-            AddControl(0, new LabelControl(Parent)
+            _waitLabel = new LabelControl(Parent)
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 175,
                 Height = 35,
                 Width = 700,
-                Text = $"You have {_remainingChallenges.Count} challenges remaining for today!",
+                Text = $"{_remainingChallenges.Count} challenges remaining for today. Until reroll",
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White
-            });
+            };
+            AddControl(0, _waitLabel);
 
             int count = 0;
             foreach (var id in _remainingChallenges)

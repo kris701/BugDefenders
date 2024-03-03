@@ -1,7 +1,7 @@
 ﻿{
   "id": "57c6af7b-5f97-408a-b26b-fb3c54de4749",
   "Name": "City Builder",
-  "description": "You have placed 1000 turrets!",
+  "description": "You have placed a city worth of turrets!",
   "Criterias": [
     {
       "CriteriaType": "PlacedTurrets",

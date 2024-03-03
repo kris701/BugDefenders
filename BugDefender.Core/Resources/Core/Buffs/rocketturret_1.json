@@ -1,0 +1,23 @@
+﻿{
+  "id": "3fcee02b-ffc5-4ed6-ba19-05861965cabf",
+  "Name": "Rocket Turret Upgrade",
+  "description": "Permanently increases the range of the rocket turret by 10%",
+  "Cost": 25,
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+      "Quantity": 500
+    }
+  ],
+  "Effect": {
+    "TargetType": "Turret",
+    "Target": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+    "Effects": [
+      {
+        "Target": "Range",
+        "Modifier": 1.1
+      }
+    ]
+  }
+}

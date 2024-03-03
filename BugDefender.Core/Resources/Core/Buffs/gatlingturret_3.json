@@ -1,0 +1,23 @@
+﻿{
+  "id": "0182304f-2e07-4689-8553-61d127e724f1",
+  "Name": "Gatling Turret Upgrade",
+  "description": "Permanently gives the gatling turret 5% more range",
+  "Cost": 25,
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+      "Quantity": 500
+    }
+  ],
+  "Effect": {
+    "TargetType": "Turret",
+    "Target": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+    "Effects": [
+      {
+        "Target": "Range",
+        "Modifier": 1.05
+      }
+    ]
+  }
+}

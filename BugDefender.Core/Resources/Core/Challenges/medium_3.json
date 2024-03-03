@@ -1,0 +1,14 @@
+﻿{
+  "id": "8f53f3b2-c20c-4d41-8147-a44d623cfa75",
+  "Name": "Medium Game",
+  "description": "Get at least 100 kills in a medium game on the map Criss Cross",
+  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+  "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
+  "Reward": 10,
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 100
+    }
+  ]
+}

@@ -47,10 +47,9 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 FontColor = Color.White
             });
 
-            int count = 1;
-            int page = 0;
+            int count = 0;
+            int page = -1;
             int offset = 0;
-            _achivementsPages.Add(new List<AchivementControl>());
             var ids = ResourceManager.Achivements.GetResources();
             var sorted = new List<AchivementDefinition>();
             foreach (var id in ids)
@@ -59,7 +58,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
 
             foreach (var achivement in sorted)
             {
-                if (count++ % (_selectionsPrPage + 1) == 0)
+                if (count % _selectionsPrPage == 0)
                 {
                     page++;
                     _achivementsPages.Add(new List<AchivementControl>());
@@ -72,6 +71,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 };
                 _achivementsPages[page].Add(newButton);
                 AddControl(2, newButton);
+                count++;
             }
 
             UpdateAchivementSelectionPages();

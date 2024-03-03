@@ -1,0 +1,11 @@
+﻿{
+  "id": "cae05609-66c4-4f8a-9e53-a7cebc7817d6",
+  "Name": "Small Business",
+  "description": "Gotta make some money",
+  "Criterias": [
+    {
+      "CriteriaType": "MoneyEarned",
+      "Quantity": 10000
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+﻿{
+  "id": "22228843-2fc0-45bd-ac7e-7744881c7976",
+  "Name": "City Destroyer",
+  "description": "Serious liquidation of turrets!",
+  "Criterias": [
+    {
+      "CriteriaType": "SoldTurrets",
+      "Quantity": 1000
+    }
+  ]
+}

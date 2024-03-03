@@ -1,0 +1,23 @@
+﻿{
+  "id": "66fb1ed2-cbaa-4632-b9c8-c41ae02d3455",
+  "Name": "Slowing Turret Upgrade",
+  "description": "Permanently increases the slowing turrets range by 10%",
+  "Cost": 150,
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+      "Quantity": 100000
+    }
+  ],
+  "Effect": {
+    "TargetType": "Turret",
+    "Target": "c402592b-1af3-4bb5-a7e6-9e285dfc31a2",
+    "Effects": [
+      {
+        "Target": "Range",
+        "Modifier": 1.1
+      }
+    ]
+  }
+}

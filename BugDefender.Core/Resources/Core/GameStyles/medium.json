@@ -3,7 +3,7 @@
   "Name": "Medium",
   "Description": "",
   "EvolutionRate": 1.02,
-  "EnemySpeedMultiplier": 0.7,
+  "EnemySpeedMultiplier": 0.75,
   "MoneyMultiplier": 3,
   "StartingHP": 50,
   "StartingMoney": 1000,
@@ -11,6 +11,8 @@
   "ProjectileSpeedCap": 20,
   "BossEveryNWave": 5,
   "TurretBlackList": [],
+  "TurretWhiteList": [],
   "EnemyBlackList": [],
+  "EnemyWhiteList": [],
   "MoneyPrWave": 100
 }

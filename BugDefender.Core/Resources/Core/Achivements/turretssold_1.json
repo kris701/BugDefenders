@@ -1,0 +1,11 @@
+﻿{
+  "id": "e68ad92b-3abc-4a26-89f1-d05d5b5e7f27",
+  "Name": "Home Wrecker",
+  "description": "You needed some money...",
+  "Criterias": [
+    {
+      "CriteriaType": "SoldTurrets",
+      "Quantity": 100
+    }
+  ]
+}

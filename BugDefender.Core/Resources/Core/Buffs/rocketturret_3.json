@@ -1,0 +1,23 @@
+﻿{
+  "id": "0e486338-25ee-4ce3-b53d-d395cb08ddea",
+  "Name": "Rocket Turret Upgrade",
+  "description": "Permanently makes rocket guided!",
+  "Cost": 150,
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+      "Quantity": 10000
+    }
+  ],
+  "Effect": {
+    "TargetType": "Projectile",
+    "Target": "6ee45409-1dd2-4190-938b-90848cf0ec52",
+    "Effects": [
+      {
+        "Target": "IsGuided",
+        "Value": true
+      }
+    ]
+  }
+}

@@ -9,18 +9,16 @@ namespace BugDefender.Core.Users.Models.Buffs
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Guid? Requires { get; set; }
         public int Cost { get; set; }
 
         public List<IUserCriteria> Criterias { get; set; }
         public BuffEffect Effect { get; set; }
 
-        public BuffDefinition(Guid iD, string name, string description, Guid? requires, int cost, List<IUserCriteria> criterias, BuffEffect effect)
+        public BuffDefinition(Guid iD, string name, string description, int cost, List<IUserCriteria> criterias, BuffEffect effect)
         {
             ID = iD;
             Name = name;
             Description = description;
-            Requires = requires;
             Cost = cost;
             Criterias = criterias;
             Effect = effect;
@@ -28,8 +26,6 @@ namespace BugDefender.Core.Users.Models.Buffs
 
         public bool IsValid<T>(UserDefinition<T> user)
         {
-            if (Requires != null && !user.Buffs.Contains((Guid)Requires))
-                return false;
             foreach (var criteria in Criterias)
                 if (!criteria.IsValid(user.Stats))
                     return false;

@@ -1,10 +1,10 @@
 ﻿{
   "id": "c678fe2f-63d8-46e9-a414-9a311980ead3",
   "Name": "Big Money",
-  "description": "Earn at least 1000000 money in a medium game!",
-  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+  "description": "Earn at least 1000000$ in a medium game on the map Snakes Way",
+  "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
   "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
-  "Reward": 15,
+  "Reward": 10,
   "Criterias": [
     {
       "CriteriaType": "MoneyEarned",

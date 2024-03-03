@@ -54,13 +54,12 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 sorted.Add(ResourceManager.Buffs.GetResource(id));
             sorted = sorted.OrderByDescending(x => !Parent.CurrentUser.Buffs.Contains(x.ID)).ThenByDescending(x => x.IsValid(Parent.CurrentUser)).ToList();
 
-            _upgradePages.Add(new List<PermaBuffControl>());
-            int page = 0;
+            int page = -1;
             int offset = 0;
-            int count = 1;
+            int count = 0;
             foreach (var buff in sorted)
             {
-                if (count++ % (_selectionsPrPage + 1) == 0)
+                if (count % _selectionsPrPage == 0)
                 {
                     page++;
                     _upgradePages.Add(new List<PermaBuffControl>());
@@ -87,6 +86,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 };
                 _upgradePages[page].Add(newButton);
                 AddControl(2, newButton);
+                count++;
             }
 
             UpdateUpgradeSelectionPages();

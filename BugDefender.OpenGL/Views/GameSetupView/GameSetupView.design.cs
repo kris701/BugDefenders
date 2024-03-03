@@ -214,13 +214,12 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
             });
 
-            int count = 1;
-            int page = 0;
+            int count = 0;
+            int page = -1;
             int offset = 0;
-            _mapPages.Add(new List<ButtonControl>());
             foreach (var mapID in ResourceManager.Maps.GetResources())
             {
-                if (count++ % (_selectionsPrPage + 1) == 0)
+                if (count % _selectionsPrPage == 0)
                 {
                     page++;
                     _mapPages.Add(new List<ButtonControl>());
@@ -242,6 +241,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 };
                 _mapPages[page].Add(newButton);
                 AddControl(2, newButton);
+                count++;
             }
 
             UpdateMapSelectionPages();
@@ -275,7 +275,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     _currentGameStylePage = 0;
                 if (_currentGameStylePage >= _gameStylePages.Count)
                     _currentGameStylePage = _gameStylePages.Count - 1;
-                UpdateMapSelectionPages();
+                UpdateGameStyleSelectionPages();
             })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
@@ -296,7 +296,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     _currentGameStylePage = 0;
                 if (_currentGameStylePage >= _gameStylePages.Count)
                     _currentGameStylePage = _gameStylePages.Count - 1;
-                UpdateMapSelectionPages();
+                UpdateGameStyleSelectionPages();
             })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
@@ -311,13 +311,12 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
             });
 
-            int count = 1;
-            int page = 0;
+            int count = 0;
+            int page = -1;
             int offset = 0;
-            _gameStylePages.Add(new List<ButtonControl>());
             foreach (var gameStyleID in ResourceManager.GameStyles.GetResources())
             {
-                if (count++ % (_selectionsPrPage + 1) == 0)
+                if (count % _selectionsPrPage == 0)
                 {
                     page++;
                     _gameStylePages.Add(new List<ButtonControl>());
@@ -339,6 +338,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 };
                 _gameStylePages[page].Add(newButton);
                 AddControl(2, newButton);
+                count++;
             }
 
             UpdateGameStyleSelectionPages();

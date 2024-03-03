@@ -1,14 +1,14 @@
 ﻿{
   "id": "5b05095f-00e2-4823-ae4c-bc4cbec2d434",
   "Name": "Easy Game",
-  "description": "Get at least 1000 kills in a easy game",
+  "description": "Get at least 100 kills in a easy game on the map Slow Glow",
   "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
   "GameStyleID": "42db41e5-613a-4d05-b456-5ba7c751bdc4",
-  "Reward": 15,
+  "Reward": 5,
   "Criterias": [
     {
       "CriteriaType": "Kills",
-      "Quantity": 1000
+      "Quantity": 100
     }
   ]
 }

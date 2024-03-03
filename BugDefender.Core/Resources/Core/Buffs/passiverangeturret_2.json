@@ -1,0 +1,23 @@
+﻿{
+  "id": "67f0e467-7b72-497e-ba27-c7eb3b63f6ea",
+  "Name": "Passive Range Turret Upgrade",
+  "description": "Permanently increases the range of the passive range turret by 10%",
+  "Cost": 100,
+  "Criterias": [
+    {
+      "CriteriaType": "PlacedTurrets",
+      "TurretID": "265c5fb7-baea-47eb-bd97-dd6855b382ae",
+      "Quantity": 100000
+    }
+  ],
+  "Effect": {
+    "TargetType": "Turret",
+    "Target": "265c5fb7-baea-47eb-bd97-dd6855b382ae",
+    "Effects": [
+      {
+        "Target": "Range",
+        "Modifier": 1.1
+      }
+    ]
+  }
+}

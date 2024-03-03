@@ -1,7 +1,7 @@
 ﻿{
   "id": "5c53b0c5-1709-490e-86cb-b8873c1e0dc3",
   "Name": "World Builder",
-  "description": "You have placed 100000 turrets!",
+  "description": "Mass placing of turrets have occured",
   "Criterias": [
     {
       "CriteriaType": "PlacedTurrets",

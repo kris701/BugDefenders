@@ -1,0 +1,27 @@
+﻿{
+  "id": "2cec9770-4868-4bc8-a07b-6c4302d44918",
+  "Name": "Laser Turret Upgrade",
+  "description": "Permanently makes the laser turret slightly slow enemies",
+  "Cost": 100,
+  "Criterias": [
+    {
+      "CriteriaType": "TurretKills",
+      "TurretID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+      "Quantity": 10000
+    }
+  ],
+  "Effect": {
+    "TargetType": "Turret",
+    "Target": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+    "Effects": [
+      {
+        "Target": "SlowingFactor",
+        "Value": 0.85
+      },
+      {
+        "Target": "SlowingDuration",
+        "Value": 100
+      }
+    ]
+  }
+}

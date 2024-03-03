@@ -254,18 +254,6 @@ namespace BugDefender.Core.Resources.Integrity
                 Errors.Add(new IntegrityError(
                     $"Some buff IDs are not unique!",
                     IntegrityError.SeverityLevel.Critical));
-            foreach (var id in buffs)
-            {
-                var buff = ResourceManager.Buffs.GetResource(id);
-                if (buff.Requires != null && !buffs.Contains((Guid)buff.Requires))
-                    Errors.Add(new IntegrityError(
-                        $"Buff ({id}) requires another buff id that does not exist!",
-                        IntegrityError.SeverityLevel.Critical));
-                if (buff.Requires != null && buff.Requires == id)
-                    Errors.Add(new IntegrityError(
-                        $"Buff ({id}) requires itself to be enabled!",
-                        IntegrityError.SeverityLevel.Critical));
-            }
         }
 
         private void CheckAchivements()

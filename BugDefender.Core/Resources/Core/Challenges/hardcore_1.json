@@ -1,7 +1,7 @@
 ﻿{
   "id": "8617000e-6be1-414f-bf34-77c1c5effe3d",
   "Name": "Spicy Game",
-  "description": "Get at least 100 kills in a extreme game",
+  "description": "Get at least 100 kills in a extreme game on the map Slow Glow",
   "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
   "GameStyleID": "9672b018-ea7c-45fc-87cd-b952437eda74",
   "Reward": 50,

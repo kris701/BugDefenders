@@ -1,0 +1,14 @@
+﻿{
+  "id": "e8846165-6150-4d94-95f9-369bfd39c091",
+  "Name": "Turret Placer",
+  "description": "Place at least 50 turrets in a easy game on the map Snakes Way",
+  "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
+  "GameStyleID": "42db41e5-613a-4d05-b456-5ba7c751bdc4",
+  "Reward": 10,
+  "Criterias": [
+    {
+      "CriteriaType": "PlacedTurrets",
+      "Quantity": 50
+    }
+  ]
+}

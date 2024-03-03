@@ -1,0 +1,14 @@
+﻿{
+  "id": "a9af0185-869b-4db2-b0ce-be1688f4854a",
+  "Name": "Big Money",
+  "description": "Earn at least 1000000$ in a medium game on the map Slow Glow",
+  "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
+  "GameStyleID": "9dc5b1d4-6493-4eac-8fec-4e1d2860ce04",
+  "Reward": 10,
+  "Criterias": [
+    {
+      "CriteriaType": "MoneyEarned",
+      "Quantity": 1000000
+    }
+  ]
+}

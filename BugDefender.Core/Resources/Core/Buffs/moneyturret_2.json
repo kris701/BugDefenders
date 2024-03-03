@@ -1,0 +1,22 @@
+﻿{
+  "id": "b2a1d166-d775-4c66-a46e-b49f8642b351",
+  "Name": "Money Turret Upgrade",
+  "description": "Permanently increase the money pr wave by 10%",
+  "Cost": 150,
+  "Criterias": [
+    {
+      "CriteriaType": "MoneyEarned",
+      "Quantity": 10000000
+    }
+  ],
+  "Effect": {
+    "TargetType": "Turret",
+    "Target": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
+    "Effects": [
+      {
+        "Target": "MoneyPrWave",
+        "Modifier": 1.1
+      }
+    ]
+  }
+}

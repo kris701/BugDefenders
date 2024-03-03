@@ -1,0 +1,11 @@
+﻿{
+  "id": "f4bf6cde-04a0-4407-8944-773087f72328",
+  "Name": "Ocean is getting wild",
+  "description": "Some serious amount of waves have been spotted",
+  "Criterias": [
+    {
+      "CriteriaType": "WavesStarted",
+      "Quantity": 1000
+    }
+  ]
+}

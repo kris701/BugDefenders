@@ -1,8 +1,7 @@
 ﻿{
   "id": "7dd06467-3347-4e5d-8ee9-b5f42d41082e",
   "Name": "Laser Turret Upgrade",
-  "description": "Permanently gives the laser turret 2% more range",
-  "Requires": "01c1b070-605a-4cf2-9e5c-9ae5b7f7159f",
+  "description": "Permanently gives the laser turret 5% more range",
   "Cost": 25,
   "Criterias": [
     {
@@ -17,7 +16,7 @@
     "Effects": [
       {
         "Target": "Range",
-        "Modifier": 1.02
+        "Modifier": 1.05
       }
     ]
   }

@@ -1,0 +1,14 @@
+﻿{
+  "id": "a67f7878-c040-4b87-b856-6da5c1933226",
+  "Name": "Easy Game",
+  "description": "Get at least 100 kills in a easy game on the map Criss Cross",
+  "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
+  "GameStyleID": "42db41e5-613a-4d05-b456-5ba7c751bdc4",
+  "Reward": 5,
+  "Criterias": [
+    {
+      "CriteriaType": "Kills",
+      "Quantity": 100
+    }
+  ]
+}

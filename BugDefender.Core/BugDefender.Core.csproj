@@ -23,6 +23,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Core\Achivements\moneyearned_1.json" />
+    <None Remove="Resources\Core\Achivements\moneyearned_2.json" />
+    <None Remove="Resources\Core\Achivements\moneyearned_3.json" />
     <None Remove="Resources\Core\Achivements\totalkills_1.json" />
     <None Remove="Resources\Core\Achivements\totalkills_2.json" />
     <None Remove="Resources\Core\Achivements\totalkills_3.json" />
@@ -30,18 +33,50 @@
     <None Remove="Resources\Core\Achivements\turretsplaced_1.json" />
     <None Remove="Resources\Core\Achivements\turretsplaced_2.json" />
     <None Remove="Resources\Core\Achivements\turretsplaced_3.json" />
+    <None Remove="Resources\Core\Achivements\turretssold_1.json" />
+    <None Remove="Resources\Core\Achivements\turretssold_2.json" />
+    <None Remove="Resources\Core\Achivements\turretssold_3.json" />
+    <None Remove="Resources\Core\Achivements\wavesstarted_1.json" />
+    <None Remove="Resources\Core\Achivements\wavesstarted_2.json" />
+    <None Remove="Resources\Core\Achivements\wavesstarted_3.json" />
     <None Remove="Resources\Core\Buffs\gatlingturret_1.json" />
     <None Remove="Resources\Core\Buffs\gatlingturret_2.json" />
+    <None Remove="Resources\Core\Buffs\gatlingturret_3.json" />
+    <None Remove="Resources\Core\Buffs\gatlingturret_4.json" />
     <None Remove="Resources\Core\Buffs\laserturret_1.json" />
     <None Remove="Resources\Core\Buffs\laserturret_2.json" />
+    <None Remove="Resources\Core\Buffs\laserturret_3.json" />
+    <None Remove="Resources\Core\Buffs\missileturret_1.json" />
+    <None Remove="Resources\Core\Buffs\missileturret_2.json" />
+    <None Remove="Resources\Core\Buffs\moneyturret_1.json" />
+    <None Remove="Resources\Core\Buffs\moneyturret_2.json" />
+    <None Remove="Resources\Core\Buffs\moneyturret_3.json" />
+    <None Remove="Resources\Core\Buffs\passivedamageturret_1.json" />
+    <None Remove="Resources\Core\Buffs\passivedamageturret_2.json" />
+    <None Remove="Resources\Core\Buffs\passiverangeturret_1.json" />
+    <None Remove="Resources\Core\Buffs\passiverangeturret_2.json" />
+    <None Remove="Resources\Core\Buffs\rocketturret_1.json" />
+    <None Remove="Resources\Core\Buffs\rocketturret_2.json" />
+    <None Remove="Resources\Core\Buffs\rocketturret_3.json" />
+    <None Remove="Resources\Core\Buffs\slowingturret_1.json" />
+    <None Remove="Resources\Core\Buffs\slowingturret_2.json" />
+    <None Remove="Resources\Core\Challenges\bosskiller_1.json" />
+    <None Remove="Resources\Core\Challenges\bosskiller_2.json" />
+    <None Remove="Resources\Core\Challenges\bosskiller_3.json" />
     <None Remove="Resources\Core\Challenges\easy_1.json" />
     <None Remove="Resources\Core\Challenges\easy_2.json" />
+    <None Remove="Resources\Core\Challenges\easy_3.json" />
     <None Remove="Resources\Core\Challenges\hardcore_1.json" />
     <None Remove="Resources\Core\Challenges\hardcore_2.json" />
     <None Remove="Resources\Core\Challenges\medium_1.json" />
     <None Remove="Resources\Core\Challenges\medium_2.json" />
+    <None Remove="Resources\Core\Challenges\medium_3.json" />
     <None Remove="Resources\Core\Challenges\money_1.json" />
     <None Remove="Resources\Core\Challenges\money_2.json" />
+    <None Remove="Resources\Core\Challenges\money_3.json" />
+    <None Remove="Resources\Core\Challenges\turretplacer_1.json" />
+    <None Remove="Resources\Core\Challenges\turretplacer_2.json" />
+    <None Remove="Resources\Core\Challenges\turretplacer_3.json" />
     <None Remove="Resources\Core\Enemies\boss1_2.json" />
     <None Remove="Resources\Core\Enemies\boss2_1.json" />
     <None Remove="Resources\Core\Enemies\boss2_2.json" />
@@ -62,8 +97,11 @@
     <None Remove="Resources\Core\Enemies\enemy6_1.json" />
     <None Remove="Resources\Core\Enemies\enemy6_2.json" />
     <None Remove="Resources\Core\Enemies\enemy6_3.json" />
+    <None Remove="Resources\Core\GameStyles\easy_bossrush.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
+    <None Remove="Resources\Core\GameStyles\hard_bossrush.json" />
+    <None Remove="Resources\Core\GameStyles\medium_bossrush.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
     <None Remove="Resources\Core\Turrets\gatlingturret.json" />
     <None Remove="Resources\Core\Turrets\missileturret.json" />
@@ -74,6 +112,33 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Core\Achivements\moneyearned_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\moneyearned_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\moneyearned_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\wavesstarted_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\wavesstarted_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\wavesstarted_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\turretssold_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\turretssold_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Achivements\turretssold_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Achivements\turretsplaced_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -95,16 +160,88 @@
     <EmbeddedResource Include="Resources\Core\Achivements\totalkills_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_4.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\gatlingturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\moneyturret_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\moneyturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passiverangeturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passiverangeturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passivedamageturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\passivedamageturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\missileturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\missileturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\moneyturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\slowingturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\slowingturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\rocketturret_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\rocketturret_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\rocketturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Buffs\laserturret_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_2.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\bosskiller_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\bosskiller_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\bosskiller_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\easy_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\easy_2.json">
@@ -114,6 +251,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\hardcore_2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\medium_3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Challenges\money_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\money_2.json">
@@ -210,6 +353,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\enemy1_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\hard_bossrush.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\medium_bossrush.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\easy_bossrush.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\extreme.json">
