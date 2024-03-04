@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     public partial class GameScreen : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
-        private Rectangle _gameArea = new Rectangle(180, 10, 950, 950);
+        private Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
         private static readonly string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
@@ -336,8 +336,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.IsVisible = false;
             }
 
-            _mainMenuButton.IsEnabled = _game.Context.CanSave();
-            _saveAndExitButton.IsEnabled = _mainMenuButton.IsEnabled;
+            _saveAndExitButton.IsEnabled = _game.Context.CanSave();
         }
 
         private void UpdateEffectLifetimes(GameTime gameTime)

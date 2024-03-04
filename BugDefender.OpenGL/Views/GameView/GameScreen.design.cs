@@ -176,8 +176,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 X = xOffset + 10,
                 Y = yOffset + 90,
                 Height = 30,
-                Width = 100,
-                IsEnabled = false
+                Width = 100
             };
             AddControl(1, _mainMenuButton);
             _saveAndExitButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
