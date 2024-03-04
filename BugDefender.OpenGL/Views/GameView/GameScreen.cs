@@ -337,6 +337,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
 
             _saveAndExitButton.IsEnabled = _game.Context.CanSave();
+            if (_playtimeLabel != null)
+                _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
         }
 
         private void UpdateEffectLifetimes(GameTime gameTime)

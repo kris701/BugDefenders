@@ -26,6 +26,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private ButtonControl _saveAndExitButton;
         private ButtonControl _autoRunButton;
 
+        private LabelControl _playtimeLabel;
+
         private AnimatedTileControl _buyingPreviewTile;
         private TileControl _buyingPreviewRangeTile;
 
@@ -64,7 +66,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
             else
                 SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
-
 
             SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y + 160, 320, 570);
             SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
@@ -245,7 +246,38 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset + height / 2 - 15,
+                Y = yOffset + 15,
+                Height = 30,
+                Width = width
+            });
+            _playtimeLabel = new LabelControl()
+            {
+                Text = "Game Time: ",
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 45,
+                Height = 30,
+                Width = width
+            };
+            AddControl(1, _playtimeLabel);
+            AddControl(1, new LabelControl()
+            {
+                Text = $"Map: {_game.Context.Map.Name}",
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 75,
+                Height = 30,
+                Width = width
+            });
+            AddControl(1, new LabelControl()
+            {
+                Text = $"Game Style: {_game.Context.GameStyle.Name}",
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 105,
                 Height = 30,
                 Width = width
             });
@@ -264,10 +296,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(1, new LabelControl()
             {
                 Text = "Challenge Info",
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset + 5,
+                Y = yOffset + 15,
                 Height = 30,
                 Width = width
             });
@@ -278,11 +310,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 sb.AppendLine(req.GetDescriptionString());
             AddControl(1, new LabelControl()
             {
-                Text = _game.Context.Challenge.Name,
+                Text = $"Challenge: {_game.Context.Challenge.Name}",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset + 35,
+                Y = yOffset + 45,
                 Height = 30,
                 Width = width
             });
@@ -292,7 +324,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset + 65,
+                Y = yOffset + 75,
                 Height = 80,
                 Width = width
             });
