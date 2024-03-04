@@ -723,10 +723,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 }
                 var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID))
                 {
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillColor = Parent.UIResources.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
                     X = _upgradesLeftButton.X,
-                    Y = _upgradesLeftButton.Y + (offset++ * 170) + 30,
-                    Height = 30,
+                    Y = _upgradesLeftButton.Y + (offset++ * 175) + 30,
+                    Height = 160,
                     Width = 300,
                     Tag = upgrade,
                     IsVisible = false

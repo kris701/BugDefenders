@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
@@ -71,6 +72,20 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
             SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 5, _gameArea.Width, 110);
             SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, 745, 650, 330);
+
+            if (CheatsHelper.Cheats.Count > 0)
+            {
+                AddControl(100, new LabelControl()
+                {
+                    Text = $"Cheats On!",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.HotPink,
+                    X = _gameArea.X + 40,
+                    Y = _gameArea.Y + 10,
+                    Height = 30,
+                    Width = 100
+                });
+            }
 
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext()
@@ -217,7 +232,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     Parent.UIResources.PlaySoundEffectOnce(new Guid("e6908fa1-85b3-4f18-9bf0-cc4fa97a29c1"));
             })
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 Text = $"Send Wave",
                 Font = BasicFonts.GetFont(10),
