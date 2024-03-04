@@ -39,12 +39,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != null && _selectedGameStyle != null)
-            {
-                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
-                if (File.Exists(saveFile))
-                    File.Delete(saveFile);
                 SwitchView(new GameScreen.GameScreen(Parent, (Guid)_selectedMap, (Guid)_selectedGameStyle));
-            }
         }
 
         private void SelectMap_Click(ButtonControl sender)

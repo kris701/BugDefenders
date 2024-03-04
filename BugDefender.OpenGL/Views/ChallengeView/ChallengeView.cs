@@ -64,9 +64,6 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
         {
             if (sender.Tag is Guid challengeId)
             {
-                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
-                if (File.Exists(saveFile))
-                    File.Delete(saveFile);
                 var challenge = ResourceManager.Challenges.GetResource(challengeId);
                 SwitchView(new GameScreen.GameScreen(Parent, challenge));
             }

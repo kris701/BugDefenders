@@ -18,12 +18,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     public partial class GameScreen : BaseAnimatedView
     {
         private LabelControl _moneyLabel;
-        private LabelControl _hpLabel;
         private LabelControl _scoreLabel;
 
         private ButtonControl _startButton;
         private ButtonControl _sendWave;
         private ButtonControl _mainMenuButton;
+        private ButtonControl _saveAndExitButton;
         private ButtonControl _autoRunButton;
 
         private AnimatedTileControl _buyingPreviewTile;
@@ -57,21 +57,19 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = GameWindow.BaseScreenSize.Y
             });
 
-            SetupGameField();
-            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y - 5, 640, 160);
+            SetupGameField(_gameArea.X, _gameArea.Y, _gameArea.Width, _gameArea.Height);
+            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 160);
 
             if (_game.Context.Challenge != null)
-            {
-                _turretSelectionsPrPage = 9;
-                SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 140);
-                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 300, 320, 350);
-            }
+                SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
             else
-                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 320, _gameArea.Y + 160, 320, 570);
+                SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
 
+
+            SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y + 160, 320, 570);
             SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
             SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 5, _gameArea.Width, 110);
-            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, 750, 640, 320);
+            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, 745, 650, 330);
 
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext()
@@ -93,23 +91,23 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             base.Initialize();
         }
 
-        private void SetupGameField()
+        private void SetupGameField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(_game.Context.Map.ID),
-                X = _gameArea.X,
-                Y = _gameArea.Y,
-                Height = _gameArea.Height,
-                Width = _gameArea.Width
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
             });
             AddControl(100, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("86f37f1c-921f-484a-98da-4b0790f51d70")),
-                X = _gameArea.X,
-                Y = _gameArea.Y,
-                Height = _gameArea.Height,
-                Width = _gameArea.Width
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
             });
             _turretSelectRangeTile = new TileControl()
             {
@@ -130,23 +128,13 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl()
-            {
-                Text = "Bug Defenders",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                X = xOffset,
-                Y = yOffset + 5,
-                Height = 30,
-                Width = width
-            });
             _scoreLabel = new LabelControl()
             {
-                Text = $"Wave 0, Score 0",
+                Text = $"Wave 0, Score 0, HP: 50",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 5,
-                Y = yOffset + 25,
+                Y = yOffset + 5,
                 Height = 30,
                 Width = width - 10
             };
@@ -154,25 +142,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _moneyLabel = new LabelControl()
             {
                 Text = $"Money: {_game.Context.Money}$",
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 X = xOffset + 5,
-                Y = yOffset + 45,
+                Y = yOffset + 30,
                 Height = 30,
-                Width = 310
+                Width = width - 10
             };
             AddControl(1, _moneyLabel);
-            _hpLabel = new LabelControl()
-            {
-                Text = $"HP: {_game.Context.HP}",
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset + 5,
-                Y = yOffset + 65,
-                Height = 30,
-                Width = 310
-            };
-            AddControl(1, _hpLabel);
 
             _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
             {
@@ -182,27 +159,42 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 10,
-                Y = yOffset + 90,
+                Y = yOffset + 60,
                 Height = 30,
                 Width = 100
             };
             AddControl(1, _startButton);
 
-            _mainMenuButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
+            _mainMenuButton = new ButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
-                Text = $"Main Menu",
+                Text = $"Exit",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 10,
-                Y = yOffset + 120,
+                Y = yOffset + 90,
                 Height = 30,
                 Width = 100,
                 IsEnabled = false
             };
             AddControl(1, _mainMenuButton);
+            _saveAndExitButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                Text = $"Save and Exit",
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                X = xOffset + 110,
+                Y = yOffset + 90,
+                Height = 30,
+                Width = 200,
+                IsEnabled = false
+            };
+            AddControl(1, _saveAndExitButton);
 
             _autoRunButton = new ButtonControl(Parent, clicked: AutoRunButton_Click)
             {
@@ -212,7 +204,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 110,
-                Y = yOffset + 90,
+                Y = yOffset + 60,
                 Height = 30,
                 Width = 200
             };
@@ -230,19 +222,41 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Text = $"Send Wave",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                X = xOffset + 110,
+                X = xOffset + 10,
                 Y = yOffset + 120,
                 Height = 30,
-                Width = 200
+                Width = width - 20
             };
             AddControl(1, _sendWave);
+        }
+
+        private void SetupBaseGameField(int xOffset, int yOffset, int width, int height)
+        {
+            AddControl(0, new TileControl()
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
+            });
+            AddControl(1, new LabelControl()
+            {
+                Text = "Bug Defenders",
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + height / 2 - 15,
+                Height = 30,
+                Width = width
+            });
         }
 
         private void SetupChallengeInfoField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -491,12 +505,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            int x = xOffset + 15;
+            int x = xOffset + 20;
             int y = yOffset + 30;
             int itemXOffset = 0;
-            int itemWidth = 200;
+            int itemWidth = 220;
             int margin = 10;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 var newItem = new EnemyQueueControl(Parent)
                 {

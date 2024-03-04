@@ -310,8 +310,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _game.Update(gameTime.ElapsedGameTime);
 
             _moneyLabel.Text = $"Money: {_game.Context.Money}$";
-            _hpLabel.Text = $"HP: {_game.Context.HP}";
-            _scoreLabel.Text = $"Wave {_game.Context.Wave},Score {_game.Context.Score}";
+            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Score}, HP: {_game.Context.HP}";
 
             UpdateTurretPurchaseButtons();
             UpdateNextEnemies();
@@ -338,6 +337,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
 
             _mainMenuButton.IsEnabled = _game.Context.CanSave();
+            _saveAndExitButton.IsEnabled = _mainMenuButton.IsEnabled;
         }
 
         private void UpdateEffectLifetimes(GameTime gameTime)
@@ -617,7 +617,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
         }
 
-        private void SaveAndGoToMainMenu()
+        private void SaveGame()
         {
             if (_game.Context.CanSave())
             {
@@ -625,9 +625,22 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     Directory.CreateDirectory(_saveDir);
                 var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
                 _game.Context.Save(new FileInfo(saveFile));
-                Parent.UIResources.StopSounds();
-                SwitchView(new MainMenu.MainMenuView(Parent));
             }
+        }
+
+        private void SaveAndGoToMainMenu()
+        {
+            if (_game.Context.CanSave())
+            {
+                SaveGame();
+                GoToMainMenu();
+            }
+        }
+
+        private void GoToMainMenu()
+        {
+            Parent.UIResources.StopSounds();
+            SwitchView(new MainMenu.MainMenuView(Parent));
         }
 
         private void GameOver()
