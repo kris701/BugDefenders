@@ -14,7 +14,7 @@ namespace BugDefender.OpenGL.Views.GameView
 {
     public class EnemyQueueControl : TileControl
     {
-        private GameWindow _parent;
+        private readonly GameWindow _parent;
         private readonly AnimatedTileControl _iconControl;
         private readonly TextboxControl _descriptionControl;
         public EnemyQueueControl(GameWindow parent)

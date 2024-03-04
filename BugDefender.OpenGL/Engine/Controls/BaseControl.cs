@@ -1,5 +1,4 @@
-﻿using BugDefender.OpenGL.Engine.Helpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BugDefender.OpenGL.Engine.Controls

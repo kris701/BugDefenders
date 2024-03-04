@@ -1,10 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Maps;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.Engine.Helpers
 {

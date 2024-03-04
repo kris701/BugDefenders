@@ -41,7 +41,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private int _turretSelectionsPrPage = 13;
+        private readonly int _turretSelectionsPrPage = 13;
         private readonly List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
         private int _currentTurretPage = 0;
 

@@ -5,7 +5,6 @@ using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.IO;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {

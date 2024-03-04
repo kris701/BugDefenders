@@ -24,7 +24,7 @@ namespace MapPathBlockingTileGen
             if (parsed != null)
             {
                 var newBlocks = new List<BlockedTile>();
-                foreach(var path in parsed.Paths)   
+                foreach (var path in parsed.Paths)
                 {
                     var from = path[0];
                     foreach (var point in path.Skip(1))

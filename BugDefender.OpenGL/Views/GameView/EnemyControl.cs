@@ -10,7 +10,7 @@ namespace BugDefender.OpenGL.Views.GameView
 {
     public class EnemyControl : AnimatedTileControl
     {
-        private GameWindow _parent;
+        private readonly GameWindow _parent;
         public FloatPoint VisualOffset { get; }
         public EnemyInstance Enemy { get; }
         private TileControl _healthBar;
