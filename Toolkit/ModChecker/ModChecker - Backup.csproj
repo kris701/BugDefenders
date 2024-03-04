@@ -23,4 +23,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\BugDefender.Core\BugDefender.Core.csproj" />
   </ItemGroup>
+
+	<Target Name="AfterBuild">
+		<ItemGroup>
+			<FilesToMove Include="$(OutDir)\*.exe" />
+		</ItemGroup>
+		<Move SourceFiles="@(FilesToMove)" DestinationFolder="$(OutDir)\Toolkit" />
+	</Target>
+
 </Project>

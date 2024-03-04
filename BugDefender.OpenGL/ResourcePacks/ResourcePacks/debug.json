@@ -57,6 +57,10 @@
       "ID": "f367b2e1-0b9f-40da-95af-dac50b16a0ad",
       "Content": "Views/GameView/upgradeField"
     },
+    {
+      "ID": "86f37f1c-921f-484a-98da-4b0790f51d70",
+      "Content": "Views/GameView/gameField"
+    },
 
     {
       "ID": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",

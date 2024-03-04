@@ -53,8 +53,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             });
 
             SetupPreviewPanel(50, 225, 900, 750);
-            SetupMapsView(975, 225, 425, 750);
-            SetupGameStyleView(1425, 225, 425, 750);
+            SetupMapsView(965, 225, 445, 750);
+            SetupGameStyleView(1425, 225, 445, 750);
 
             _startButton = new ButtonControl(Parent, StartButton_Click)
             {

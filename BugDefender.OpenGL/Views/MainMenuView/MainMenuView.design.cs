@@ -129,7 +129,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
                 Text = $"User: {Parent.CurrentUser.Name}",
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreenView(Parent)))
             {

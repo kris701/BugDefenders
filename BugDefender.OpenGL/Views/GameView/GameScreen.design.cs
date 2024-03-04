@@ -95,17 +95,21 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupGameField()
         {
-            AddControl(0, new BorderControl(new TileControl()
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(_game.Context.Map.ID),
                 X = _gameArea.X,
                 Y = _gameArea.Y,
                 Height = _gameArea.Height,
                 Width = _gameArea.Width
-            })
+            });
+            AddControl(100, new TileControl()
             {
-                Thickness = 2,
-                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
+                FillColor = Parent.UIResources.GetTexture(new Guid("86f37f1c-921f-484a-98da-4b0790f51d70")),
+                X = _gameArea.X,
+                Y = _gameArea.Y,
+                Height = _gameArea.Height,
+                Width = _gameArea.Width
             });
             _turretSelectRangeTile = new TileControl()
             {
