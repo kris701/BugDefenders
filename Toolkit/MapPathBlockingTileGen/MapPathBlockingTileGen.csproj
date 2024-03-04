@@ -14,6 +14,7 @@
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	  <TieredCompilation>false</TieredCompilation>
 	  <OutputPath>../../Output/</OutputPath>
+	  <PublishDir>$(OutputPath)/$(TargetFramework)/$(RuntimeIdentifier)/publish/Toolkit</PublishDir>
   </PropertyGroup>
 
   <ItemGroup>

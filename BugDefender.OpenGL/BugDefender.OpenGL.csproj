@@ -45,10 +45,6 @@
     <None Remove="Content\Views\UsersView\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="ResourcePacks\ResourcePacks\high.json" />
-    <None Remove="ResourcePacks\ResourcePacks\medium.json" />
-  </ItemGroup>
-  <ItemGroup>
 	  <EmbeddedResource Include="Icon.bmp">
 		  <LogicalName>Icon.bmp</LogicalName>
 	  </EmbeddedResource>
@@ -80,6 +76,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Mods\readme.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Toolkit\readme.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

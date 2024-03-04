@@ -35,6 +35,10 @@ jobs:
 
       - name: Publish Game (Windows)
         run: dotnet publish BugDefender.OpenGL -c Release -r win-x64
+      - name: Publish Toolkit (1/2) (Windows)
+        run: dotnet publish .\Toolkit\MapPathBlockingTileGen -c Release -r win-x64
+      - name: Publish Toolkit (2/2) (Windows)
+        run: dotnet publish .\Toolkit\ModChecker -c Release -r win-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
@@ -66,8 +70,10 @@ jobs:
 
       - name: Publish Game (Linux)
         run: dotnet publish BugDefender.OpenGL -c Release -r linux-x64
-      - name: Publish Toolkit (Linux)
-        run: dotnet publish BugDefender.CLI -c Release -r linux-x64
+      - name: Publish Toolkit (1/2) (Linux)
+        run: dotnet publish .\Toolkit\MapPathBlockingTileGen -c Release -r linux-x64
+      - name: Publish Toolkit (2/2) (Linux)
+        run: dotnet publish .\Toolkit\ModChecker -c Release -r linux-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
