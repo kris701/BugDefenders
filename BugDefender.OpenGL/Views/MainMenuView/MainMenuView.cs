@@ -24,7 +24,6 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
             Parent.UIResources.PlaySong(ID);
             _cheatsInputWatcher = new KeysWatcher(new List<Keys>() { Keys.LeftAlt, Keys.Enter }, OpenCheatsMenu);
@@ -34,7 +33,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             if (_continueButton.IsVisible)
             {
                 _startGame!.HorizontalAlignment = Engine.Alignment.None;
-                _startGame!.X = 200;
+                _startGame!.X = 960;
             }
         }
 

@@ -20,10 +20,10 @@ namespace BugDefender.OpenGL.Engine.Views
         {
             _in = inSet;
             _out = outSet;
-            _tile = new AnimatedTileControl(parent)
+            _tile = new AnimatedTileControl()
             {
-                Width = 1000,
-                Height = 1000,
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y,
                 TileSet = _in.LoadedContents,
                 FrameTime = TimeSpan.FromMilliseconds(_in.FrameTime),
                 AutoPlay = false

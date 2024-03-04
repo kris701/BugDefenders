@@ -11,14 +11,14 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
     {
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
-            var gameOverLabel = new LabelControl(Parent)
+            var gameOverLabel = new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 100,
@@ -32,7 +32,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 case Core.Game.GameResult.ChallengeSuccess: gameOverLabel.Text = "Challenge Completed!"; break;
             }
             AddControl(1, gameOverLabel);
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 225,
@@ -40,7 +40,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(24),
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 275,
@@ -49,12 +49,12 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 Font = BasicFonts.GetFont(24),
             });
 
-            AddControl(1, new BorderControl(Parent, new TileControl(Parent)
+            AddControl(1, new BorderControl(new TileControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 350,
-                Width = 500,
-                Height = 500,
+                Width = 960,
+                Height = 540,
                 FillColor = _screen
             })
             {
@@ -65,7 +65,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             AddControl(1, new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenuView(Parent)); })
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = 875,
+                Y = 910,
                 Width = 400,
                 Height = 80,
                 Font = BasicFonts.GetFont(24),

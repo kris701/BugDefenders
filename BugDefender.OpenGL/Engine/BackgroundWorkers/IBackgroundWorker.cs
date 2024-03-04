@@ -4,7 +4,7 @@ using System;
 
 namespace BugDefender.OpenGL.Engine.BackgroundWorkers
 {
-    public interface IBackgroundWorker : IScalable
+    public interface IBackgroundWorker
     {
         public Guid ID { get; }
 

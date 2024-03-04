@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
@@ -16,14 +17,14 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -33,12 +34,22 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
+            AddControl(0, new LabelControl()
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = 175,
+                Height = 35,
+                Width = 700,
+                Text = $"Users contain their own settings, scores, buffs, etc.",
+                Font = BasicFonts.GetFont(16),
+                FontColor = Color.White
+            });
 
             _nameInputBox = new TextInputControl(Parent, AddUserInputTextBox_Enter)
             {
-                X = 200,
-                Y = 200,
-                Width = 400,
+                X = 450,
+                Y = 230,
+                Width = 800,
                 Height = 50,
                 Limit = 10,
                 Font = BasicFonts.GetFont(24),
@@ -50,8 +61,8 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
             AddControl(0, _nameInputBox);
             _acceptButton = new ButtonControl(Parent, AddUserButton_Click)
             {
-                X = 600,
-                Y = 200,
+                X = 1250,
+                Y = 230,
                 Width = 200,
                 Height = 50,
                 Text = "Add User",
@@ -71,8 +82,8 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Back",
@@ -110,9 +121,9 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
             {
                 var newControl = new ButtonControl(Parent, ChangeUserButton_Click)
                 {
-                    X = 200,
+                    X = 450,
                     Y = 280 + (count * 50 + 5),
-                    Width = 400,
+                    Width = 800,
                     Height = 50,
                     Text = $"{user.Name}",
                     Font = BasicFonts.GetFont(16),
@@ -129,7 +140,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
 
                 var newDeleteControl = new ButtonControl(Parent, RemoveUserButton_Click)
                 {
-                    X = 600,
+                    X = 1250,
                     Y = 280 + (count++ * 50 + 5),
                     Width = 200,
                     Height = 50,

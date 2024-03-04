@@ -25,7 +25,7 @@ namespace BugDefender.OpenGL.Engine.Views
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            spriteBatch.FillScreen(_fillColor, Parent.ScreenWidth(), Parent.ScreenHeight(), fadeValue);
+            spriteBatch.FillScreen(_fillColor, GameWindow.BaseScreenSize.X, GameWindow.BaseScreenSize.Y, fadeValue);
         }
 
         public override void Update(GameTime gameTime)

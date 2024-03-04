@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
@@ -18,13 +19,15 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     public partial class GameScreen : BaseAnimatedView
     {
         private LabelControl _moneyLabel;
-        private LabelControl _hpLabel;
         private LabelControl _scoreLabel;
 
         private ButtonControl _startButton;
         private ButtonControl _sendWave;
         private ButtonControl _mainMenuButton;
+        private ButtonControl _saveAndExitButton;
         private ButtonControl _autoRunButton;
+
+        private LabelControl _playtimeLabel;
 
         private AnimatedTileControl _buyingPreviewTile;
         private TileControl _buyingPreviewRangeTile;
@@ -38,7 +41,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private int _turretSelectionsPrPage = 13;
+        private readonly int _turretSelectionsPrPage = 13;
         private readonly List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
         private int _currentTurretPage = 0;
 
@@ -50,28 +53,39 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("32b08b60-c8b9-450a-90b3-73086261e87f")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
-            SetupGameField();
-            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y - 5, 320, 160);
+            SetupGameField(_gameArea.X, _gameArea.Y, _gameArea.Width, _gameArea.Height);
+            SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 160);
 
             if (_game.Context.Challenge != null)
-            {
-                _turretSelectionsPrPage = 9;
-                SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 140);
-                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 300, 320, 350);
-            }
+                SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
             else
-                SetupPurchasingField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 490);
+                SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
 
-            SetupUpgradeField(_gameArea.X, _gameArea.Y + _gameArea.Height + 10, _gameArea.Width, 200);
-            SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 20 + 200, _gameArea.Width, 110);
-            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + _gameArea.Height + 10, 320, 320);
+            SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y + 160, 320, 570);
+            SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
+            SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 5, _gameArea.Width, 110);
+            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, 745, 650, 330);
+
+            if (CheatsHelper.Cheats.Count > 0)
+            {
+                AddControl(100, new LabelControl()
+                {
+                    Text = $"Cheats On!",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.HotPink,
+                    X = _gameArea.X + 40,
+                    Y = _gameArea.Y + 10,
+                    Height = 30,
+                    Width = 100
+                });
+            }
 
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext()
@@ -93,21 +107,25 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             base.Initialize();
         }
 
-        private void SetupGameField()
+        private void SetupGameField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new BorderControl(Parent, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(_game.Context.Map.ID),
-                X = _gameArea.X,
-                Y = _gameArea.Y,
-                Height = _gameArea.Height,
-                Width = _gameArea.Width
-            })
-            {
-                Thickness = 2,
-                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
             });
-            _turretSelectRangeTile = new TileControl(Parent)
+            AddControl(100, new TileControl()
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("86f37f1c-921f-484a-98da-4b0790f51d70")),
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
+            });
+            _turretSelectRangeTile = new TileControl()
             {
                 IsVisible = false,
                 Alpha = 25,
@@ -118,7 +136,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupGameControlsField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
                 X = xOffset,
@@ -126,49 +144,28 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl(Parent)
+            _scoreLabel = new LabelControl()
             {
-                Text = "Bug Defenders",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                X = xOffset,
-                Y = yOffset + 5,
-                Height = 30,
-                Width = width
-            });
-            _scoreLabel = new LabelControl(Parent)
-            {
-                Text = $"Wave 0, Score 0",
+                Text = $"Wave 0, Score 0, HP: 50",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 5,
-                Y = yOffset + 25,
+                Y = yOffset + 5,
                 Height = 30,
                 Width = width - 10
             };
             AddControl(1, _scoreLabel);
-            _moneyLabel = new LabelControl(Parent)
+            _moneyLabel = new LabelControl()
             {
                 Text = $"Money: {_game.Context.Money}$",
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 X = xOffset + 5,
-                Y = yOffset + 45,
+                Y = yOffset + 30,
                 Height = 30,
-                Width = 310
+                Width = width - 10
             };
             AddControl(1, _moneyLabel);
-            _hpLabel = new LabelControl(Parent)
-            {
-                Text = $"HP: {_game.Context.HP}",
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset + 5,
-                Y = yOffset + 65,
-                Height = 30,
-                Width = 310
-            };
-            AddControl(1, _hpLabel);
 
             _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
             {
@@ -178,27 +175,41 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 10,
-                Y = yOffset + 90,
+                Y = yOffset + 60,
                 Height = 30,
                 Width = 100
             };
             AddControl(1, _startButton);
 
-            _mainMenuButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
+            _mainMenuButton = new ButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
-                Text = $"Main Menu",
+                Text = $"Exit",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 10,
-                Y = yOffset + 120,
+                Y = yOffset + 90,
                 Height = 30,
-                Width = 100,
-                IsEnabled = false
+                Width = 100
             };
             AddControl(1, _mainMenuButton);
+            _saveAndExitButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                Text = $"Save and Exit",
+                Font = BasicFonts.GetFont(10),
+                FontColor = Color.White,
+                X = xOffset + 110,
+                Y = yOffset + 90,
+                Height = 30,
+                Width = 200,
+                IsEnabled = false
+            };
+            AddControl(1, _saveAndExitButton);
 
             _autoRunButton = new ButtonControl(Parent, clicked: AutoRunButton_Click)
             {
@@ -208,7 +219,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset + 110,
-                Y = yOffset + 90,
+                Y = yOffset + 60,
                 Height = 30,
                 Width = 200
             };
@@ -221,36 +232,89 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     Parent.UIResources.PlaySoundEffectOnce(new Guid("e6908fa1-85b3-4f18-9bf0-cc4fa97a29c1"));
             })
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 Text = $"Send Wave",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                X = xOffset + 110,
+                X = xOffset + 10,
                 Y = yOffset + 120,
                 Height = 30,
-                Width = 200
+                Width = width - 20
             };
             AddControl(1, _sendWave);
         }
 
-        private void SetupChallengeInfoField(int xOffset, int yOffset, int width, int height)
+        private void SetupBaseGameField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
-                Text = "Challenge Info",
-                Font = BasicFonts.GetFont(16),
+                Text = "Bug Defenders",
+                Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset + 5,
+                Y = yOffset + 15,
+                Height = 30,
+                Width = width
+            });
+            _playtimeLabel = new LabelControl()
+            {
+                Text = "Game Time: ",
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 45,
+                Height = 30,
+                Width = width
+            };
+            AddControl(1, _playtimeLabel);
+            AddControl(1, new LabelControl()
+            {
+                Text = $"Map: {_game.Context.Map.Name}",
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 75,
+                Height = 30,
+                Width = width
+            });
+            AddControl(1, new LabelControl()
+            {
+                Text = $"Game Style: {_game.Context.GameStyle.Name}",
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 105,
+                Height = 30,
+                Width = width
+            });
+        }
+
+        private void SetupChallengeInfoField(int xOffset, int yOffset, int width, int height)
+        {
+            AddControl(0, new TileControl()
+            {
+                FillColor = Parent.UIResources.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
+                X = xOffset,
+                Y = yOffset,
+                Height = height,
+                Width = width
+            });
+            AddControl(1, new LabelControl()
+            {
+                Text = "Challenge Info",
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White,
+                X = xOffset,
+                Y = yOffset + 15,
                 Height = 30,
                 Width = width
             });
@@ -259,23 +323,23 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             var sb = new StringBuilder();
             foreach (var req in _game.Context.Challenge.Criterias)
                 sb.AppendLine(req.GetDescriptionString());
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
-                Text = _game.Context.Challenge.Name,
+                Text = $"Challenge: {_game.Context.Challenge.Name}",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset + 35,
+                Y = yOffset + 45,
                 Height = 30,
                 Width = width
             });
-            AddControl(1, new TextboxControl(Parent)
+            AddControl(1, new TextboxControl()
             {
                 Text = sb.ToString(),
                 Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
                 X = xOffset,
-                Y = yOffset + 65,
+                Y = yOffset + 75,
                 Height = 80,
                 Width = width
             });
@@ -283,7 +347,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupPurchasingField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
                 X = xOffset,
@@ -291,7 +355,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 Text = "Turrets",
                 Font = BasicFonts.GetFont(16),
@@ -384,14 +448,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             UpdateTurretSelectionPages();
 
-            _buyingPreviewRangeTile = new TileControl(Parent)
+            _buyingPreviewRangeTile = new TileControl()
             {
                 IsVisible = false,
                 Alpha = 25,
                 ViewPort = _gameArea
             };
             AddControl(10, _buyingPreviewRangeTile);
-            _buyingPreviewTile = new AnimatedTileControl(Parent)
+            _buyingPreviewTile = new AnimatedTileControl()
             {
                 IsVisible = false,
                 ViewPort = _gameArea
@@ -401,15 +465,15 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupUpgradeField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f367b2e1-0b9f-40da-95af-dac50b16a0ad")),
+                FillColor = Parent.UIResources.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 Text = "Upgrades",
                 Font = BasicFonts.GetFont(16),
@@ -457,7 +521,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(10),
                 Text = $">",
-                X = xOffset + 615,
+                X = xOffset + width - 35,
                 Y = yOffset + 10,
                 Height = 25,
                 Width = 25,
@@ -468,7 +532,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("2712c649-3e74-44ca-b8a9-c3032aba217e")),
                 X = xOffset,
@@ -476,7 +540,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 Text = "Next Enemies",
                 Font = BasicFonts.GetFont(10),
@@ -487,12 +551,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            int x = xOffset + 15;
+            int x = xOffset + 20;
             int y = yOffset + 30;
             int itemXOffset = 0;
-            int itemWidth = 200;
+            int itemWidth = 220;
             int margin = 10;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 var newItem = new EnemyQueueControl(Parent)
                 {
@@ -509,7 +573,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupTurretStatsPanel(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("90447608-bd7a-478c-9bfd-fddb26c731b7")),
                 X = xOffset,
@@ -517,7 +581,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 Text = "Turret Stats",
                 Font = BasicFonts.GetFont(10),
@@ -543,7 +607,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 IsEnabled = false
             };
             AddControl(1, _sellTurretButton);
-            _turretStatesTextbox = new TextboxControl(Parent)
+            _turretStatesTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,

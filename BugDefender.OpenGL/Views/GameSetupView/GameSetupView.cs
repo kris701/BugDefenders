@@ -5,7 +5,6 @@ using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.IO;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
@@ -26,7 +25,6 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
         }
@@ -40,12 +38,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != null && _selectedGameStyle != null)
-            {
-                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
-                if (File.Exists(saveFile))
-                    File.Delete(saveFile);
                 SwitchView(new GameScreen.GameScreen(Parent, (Guid)_selectedMap, (Guid)_selectedGameStyle));
-            }
         }
 
         private void SelectMap_Click(ButtonControl sender)

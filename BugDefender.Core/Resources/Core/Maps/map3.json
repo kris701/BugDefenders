@@ -2,56 +2,56 @@
   "ID": "df2fded0-2a01-4350-bd87-cda973e1886c",
   "Name": "Slow Glow",
   "Description": "A simple map with a few turns. Shouldnt be too hard!",
-  "Width": 650,
-  "Height": 650,
+  "Width": 950,
+  "Height": 950,
   "Paths": [
     [
       {
         "X": 0,
-        "Y": 135
+        "Y": 195
       },
       {
-        "X": 190,
-        "Y": 135
+        "X": 275,
+        "Y": 195
       },
       {
-        "X": 190,
-        "Y": 465
+        "X": 275,
+        "Y": 675
       },
       {
-        "X": 565,
-        "Y": 465
+        "X": 820,
+        "Y": 675
       },
       {
-        "X": 565,
+        "X": 820,
         "Y": 0
       }
     ]
   ],
   "BlockingTiles": [
     {
-      "X": 0,
-      "Y": 110,
-      "Width": 215,
-      "Height": 50
+      "X": -37.5,
+      "Y": 157.5,
+      "Width": 350,
+      "Height": 75
     },
     {
-      "X": 168,
-      "Y": 110,
-      "Width": 50,
-      "Height": 380
+      "X": 237.5,
+      "Y": 157.5,
+      "Width": 75,
+      "Height": 555
     },
     {
-      "X": 168,
-      "Y": 442,
-      "Width": 425,
-      "Height": 50
+      "X": 237.5,
+      "Y": 637.5,
+      "Width": 620,
+      "Height": 75
     },
     {
-      "X": 545,
-      "Y": 0,
-      "Width": 50,
-      "Height": 490
+      "X": 782.5,
+      "Y": -37.5,
+      "Width": 75,
+      "Height": 750
     }
   ]
 }

@@ -23,7 +23,6 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
         {
             _oldSettings = oldSettings;
             _newSettings = newSettings;
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, Cancel);
         }

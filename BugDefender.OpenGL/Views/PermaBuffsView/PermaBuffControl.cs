@@ -17,16 +17,15 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
         private readonly TextboxControl _requirementsTextBox;
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _buyButton;
-        public PermaBuffControl(GameWindow parent, BuffDefinition buff, ClickedHandler click, bool isUnlocked) : base(parent)
+        public PermaBuffControl(GameWindow parent, BuffDefinition buff, ClickedHandler click, bool isUnlocked)
         {
             Buff = buff;
             Width = 900;
             Height = 140;
-            _titleControl = new LabelControl(Parent)
+            _titleControl = new LabelControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Text = buff.Name,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
@@ -35,67 +34,67 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
             sb.AppendLine("Requirements:");
             foreach (var req in buff.Criterias)
                 sb.AppendLine(req.GetDescriptionString());
-            _requirementsTextBox = new TextboxControl(Parent)
+            _requirementsTextBox = new TextboxControl()
             {
-                X = 525,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = sb.ToString(),
-                Margin = 15
+                Text = sb.ToString()
             };
-            _descriptionTextbox = new TextboxControl(Parent)
+            _descriptionTextbox = new TextboxControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = Buff.Description,
-                Margin = 15
+                Text = Buff.Description
             };
-            _buyButton = new ButtonControl(Parent, click)
+            _buyButton = new ButtonControl(parent, click)
             {
-                X = 525,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"[{buff.Cost} credits] Buy",
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Tag = buff,
-                IsEnabled = isUnlocked && Parent.CurrentUser.Credits >= buff.Cost
+                IsEnabled = isUnlocked && parent.CurrentUser.Credits >= buff.Cost
             };
             if (isUnlocked)
             {
-                if (Parent.CurrentUser.Buffs.Contains(buff.ID))
+                if (parent.CurrentUser.Buffs.Contains(buff.ID))
                 {
-                    FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                     _buyButton.Text = "Owned!";
                 }
                 else
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
             else
-                FillColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
+                FillColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            _titleControl._y = _y + Scale(20);
+            _titleControl.Y = Y + 20;
+            _titleControl.X = X + 45;
             _titleControl.Initialize();
 
-            _requirementsTextBox._y = _y + Scale(45);
-            _requirementsTextBox.Initialize();
-
-            _descriptionTextbox._y = _y + Scale(45);
+            _descriptionTextbox.Y = Y + 50;
+            _descriptionTextbox.X = X + 45;
             _descriptionTextbox.Initialize();
 
-            _buyButton._y = _y + Scale(20);
+            _requirementsTextBox.Y = Y + 50;
+            _requirementsTextBox.X = X + 470;
+            _requirementsTextBox.Initialize();
+
+            _buyButton.Y = Y + 20;
+            _buyButton.X = X + 470;
+            _buyButton.Tag = Tag;
             _buyButton.Initialize();
         }
 

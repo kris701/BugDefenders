@@ -12,18 +12,20 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(4);
         public float Speed { get; set; } = 3;
         public List<INotificationHandle> Handles { get; set; } = new List<INotificationHandle>();
+        public GameWindow Parent { get; set; }
 
         private enum MoveState { Hold, Up, Down }
         private MoveState _currentMoveState = MoveState.Hold;
         private TimeSpan _currentHoldTime = TimeSpan.Zero;
-        private float _currentY = 1000f;
+        private float _currentY = 1080f;
         private readonly List<NotificationItem> _notificationStack = new List<NotificationItem>();
         private NotificationControl? _notification;
         private readonly TimeSpan _waitTarget = TimeSpan.FromSeconds(3);
         private TimeSpan _waitingFor = TimeSpan.FromSeconds(0);
 
-        public NotificationBackroundWorker(GameWindow parent) : base(parent)
+        public NotificationBackroundWorker(GameWindow parent)
         {
+            Parent = parent;
         }
 
         public void AddManualNotification(string name, string description)
@@ -73,12 +75,12 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
                         break;
                     case MoveState.Up:
                         _currentY -= Speed;
-                        if (_currentY <= 1000 - _notification._height)
+                        if (_currentY <= 1080 - _notification.Height)
                             _currentMoveState = MoveState.Hold;
                         break;
                     case MoveState.Down:
                         _currentY += Speed;
-                        if (_currentY >= 1000)
+                        if (_currentY >= 1080)
                         {
                             _currentMoveState = MoveState.Hold;
                             _notification = null;

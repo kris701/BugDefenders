@@ -4,13 +4,9 @@ using System;
 
 namespace BugDefender.OpenGL.Engine.BackgroundWorkers
 {
-    public abstract class BaseBackroundWorker : BaseScalable, IBackgroundWorker
+    public abstract class BaseBackroundWorker : IBackgroundWorker
     {
         public abstract Guid ID { get; }
-
-        public BaseBackroundWorker(GameWindow parent) : base(parent)
-        {
-        }
 
         public virtual void Initialize()
         {

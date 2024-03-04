@@ -18,8 +18,8 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             Item = item;
             Width = 300;
             Height = 120;
-            _iconTile = new TileControl(Parent);
-            _descriptionTextbox = new TextboxControl(Parent);
+            _iconTile = new TileControl();
+            _descriptionTextbox = new TextboxControl();
             Clicked += item.Clicked;
             FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent);
             FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent);
@@ -33,8 +33,8 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
                 _iconTile.Width = 75;
                 _iconTile.Height = 75;
                 _iconTile.FillColor = Parent.UIResources.GetTexture(Item.Definition.ID);
-                _iconTile._x = _x + Scale(20);
-                _iconTile._y = _y + Scale(20);
+                _iconTile.X = X + 20;
+                _iconTile.Y = Y + 20;
                 _iconTile.Initialize();
             }
 
@@ -45,12 +45,12 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             _descriptionTextbox.Text = $"{Item.PreFix}{Environment.NewLine}{Item.Definition.Name}{Environment.NewLine}{Item.Definition.Description}";
             if (!Item.HasImage)
             {
-                _descriptionTextbox._width = 260;
-                _descriptionTextbox._x = _x + Scale(10);
+                _descriptionTextbox.Width = 260;
+                _descriptionTextbox.X = X + 10;
             }
             else
-                _descriptionTextbox._x = _x + Scale(10) + Scale(100);
-            _descriptionTextbox._y = _y + Scale(10);
+                _descriptionTextbox.X = X + 10 + 100;
+            _descriptionTextbox.Y = Y + 10;
             _descriptionTextbox.Initialize();
         }
 
@@ -58,13 +58,13 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         {
             if (Item.HasImage)
             {
-                _iconTile._x = _x + Scale(20);
-                _iconTile._y = _y + Scale(20);
-                _descriptionTextbox._x = _x + Scale(10) + Scale(75);
+                _iconTile.X = X + 20;
+                _iconTile.Y = Y + 20;
+                _descriptionTextbox.X = X + 10 + 75;
             }
             else
-                _descriptionTextbox._x = _x + Scale(20);
-            _descriptionTextbox._y = _y + Scale(20);
+                _descriptionTextbox.X = X + 20;
+            _descriptionTextbox.Y = Y + 20;
             _descriptionTextbox._textChanged = true;
 
             _descriptionTextbox.Update(gameTime);

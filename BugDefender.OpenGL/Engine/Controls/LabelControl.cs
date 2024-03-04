@@ -41,10 +41,6 @@ namespace BugDefender.OpenGL.Engine.Controls
         internal float _textHeight = 0;
         internal bool _textChanged = true;
 
-        public LabelControl(GameWindow parent) : base(parent)
-        {
-        }
-
         internal void UpdateTextPositions()
         {
             var size = Font.MeasureString(Text);
@@ -53,8 +49,8 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (Height == 0)
                 Height = size.Y;
             ReAlign();
-            _textWidth = Scale(size.X);
-            _textHeight = Scale(size.Y);
+            _textWidth = size.X;
+            _textHeight = size.Y;
             _textX = X + Width / 2 - _textWidth / 2;
             _textY = Y + Height / 2 - _textHeight / 2;
         }
@@ -80,11 +76,11 @@ namespace BugDefender.OpenGL.Engine.Controls
                 spriteBatch.DrawString(
                     Font,
                     Text,
-                    new Vector2(_textX + (_textWidth * ScaleValue) / 2, _textY + (_textHeight * ScaleValue) / 2),
+                    new Vector2(_textX + _textWidth / 2, _textY + _textHeight / 2),
                     new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
                     Rotation,
                     new Vector2(_textWidth / 2, _textHeight / 2),
-                    ScaleValue,
+                    1f,
                     SpriteEffects.None,
                     0);
 #if TEXTBORDER

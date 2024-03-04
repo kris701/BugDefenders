@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     public partial class GameScreen : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
-        private Rectangle _gameArea = new Rectangle(10, 10, 650, 650);
+        private Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
         private static readonly string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
@@ -71,7 +71,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             _game = game;
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
@@ -107,7 +106,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
             {
-                AddControl(99, new TileControl(Parent)
+                AddControl(99, new TileControl()
                 {
                     X = blockingTile.X + _gameArea.X,
                     Y = blockingTile.Y + _gameArea.Y,
@@ -124,13 +123,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 var from = path[0];
                 foreach (var waypoint in path.Skip(1))
                 {
-                    AddControl(99, new LineControl(Parent)
+                    AddControl(99, new LineControl()
                     {
                         X = from.X + _gameArea.X,
                         Y = from.Y + _gameArea.Y,
                         X2 = waypoint.X + _gameArea.X,
                         Y2 = waypoint.Y + _gameArea.Y,
-                        Alpha = 50
+                        Alpha = 50,
+                        Thickness = 5
                     });
                     from = waypoint;
                 }
@@ -221,11 +221,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_selectedTurret == null)
                 return;
 
-            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)Scale(GetRangeOfTurret(_selectedTurret.TurretInfo) * 2));
-            _turretSelectRangeTile._width = _turretSelectRangeTile.FillColor.Width;
-            _turretSelectRangeTile._height = _turretSelectRangeTile.FillColor.Height;
-            _turretSelectRangeTile._x = Scale(_selectedTurret.CenterX) + Scale(_gameArea.X) - _turretSelectRangeTile.FillColor.Width / 2;
-            _turretSelectRangeTile._y = Scale(_selectedTurret.CenterY) + Scale(_gameArea.Y) - _turretSelectRangeTile.FillColor.Height / 2;
+            _turretSelectRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(_selectedTurret.TurretInfo) * 2);
+            _turretSelectRangeTile.Width = _turretSelectRangeTile.FillColor.Width;
+            _turretSelectRangeTile.Height = _turretSelectRangeTile.FillColor.Height;
+            _turretSelectRangeTile.X = _selectedTurret.CenterX + _gameArea.X - _turretSelectRangeTile.FillColor.Width / 2;
+            _turretSelectRangeTile.Y = _selectedTurret.CenterY + _gameArea.Y - _turretSelectRangeTile.FillColor.Height / 2;
             _turretSelectRangeTile.CalculateViewPort();
             _turretSelectRangeTile.IsVisible = true;
 
@@ -310,8 +310,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _game.Update(gameTime.ElapsedGameTime);
 
             _moneyLabel.Text = $"Money: {_game.Context.Money}$";
-            _hpLabel.Text = $"HP: {_game.Context.HP}";
-            _scoreLabel.Text = $"Wave {_game.Context.Wave},Score {_game.Context.Score}";
+            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Score}, HP: {_game.Context.HP}";
 
             UpdateTurretPurchaseButtons();
             UpdateNextEnemies();
@@ -325,11 +324,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             UpdateLasers();
 
-            if (mouseState.X >= Scale(_gameArea.X) && mouseState.X <= Scale(_gameArea.X) + Scale(_gameArea.Width) &&
-                mouseState.Y >= Scale(_gameArea.Y) && mouseState.Y <= Scale(_gameArea.Y) + Scale(_gameArea.Height))
+            var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
+            if (translatedPos.X >= _gameArea.X && translatedPos.X <= _gameArea.X + _gameArea.Width &&
+                translatedPos.Y >= _gameArea.Y && translatedPos.Y <= _gameArea.Y + _gameArea.Height)
             {
-                var relative = new FloatPoint(InvScale(mouseState.X - Scale(_gameArea.X)), InvScale(mouseState.Y - Scale(_gameArea.Y)));
-                UpdateWithinGameField(mouseState, relative, keyState);
+                UpdateWithinGameField(mouseState, translatedPos, keyState);
             }
             else
             {
@@ -337,7 +336,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.IsVisible = false;
             }
 
-            _mainMenuButton.IsEnabled = _game.Context.CanSave();
+            _saveAndExitButton.IsEnabled = _game.Context.CanSave();
+            if (_playtimeLabel != null)
+                _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
         }
 
         private void UpdateEffectLifetimes(GameTime gameTime)
@@ -408,7 +409,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
             var animation = Parent.UIResources.GetAnimation<ProjectileEntityDefinition>(entity.DefinitionID).OnCreate;
             var textureSet = Parent.UIResources.GetTextureSet(animation);
-            return new AnimatedTileControl(Parent)
+            return new AnimatedTileControl()
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
                 TileSet = textureSet.LoadedContents,
@@ -429,7 +430,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 if (entityDef.OnCreate != Guid.Empty)
                     Parent.UIResources.PlaySoundEffectOnce(entityDef.OnCreate);
             }
-            var newTile = new AnimatedTileControl(Parent)
+            var newTile = new AnimatedTileControl()
             {
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y,
@@ -446,7 +447,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private LineControl CreateNewLaser(LaserEntity entity)
         {
-            var newTile = new LineControl(Parent)
+            var newTile = new LineControl()
             {
                 Thickness = 3,
                 Stroke = BasicTextures.GetBasicRectange(Color.Red),
@@ -521,20 +522,20 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_buyingTurret != null)
             {
                 _buyingPreviewTile.IsVisible = true;
-                _buyingPreviewTile._x = mouseState.X - _buyingPreviewTile.Width / 2;
-                _buyingPreviewTile._y = mouseState.Y - _buyingPreviewTile.Height / 2;
+                _buyingPreviewTile.X = relativeMousePosition.X - _buyingPreviewTile.Width / 2;
+                _buyingPreviewTile.Y = relativeMousePosition.Y - _buyingPreviewTile.Height / 2;
                 _buyingPreviewTile.CalculateViewPort();
                 _buyingPreviewRangeTile.IsVisible = true;
-                _buyingPreviewRangeTile._x = mouseState.X - _buyingPreviewRangeTile.Width / 2;
-                _buyingPreviewRangeTile._y = mouseState.Y - _buyingPreviewRangeTile.Height / 2;
+                _buyingPreviewRangeTile.X = relativeMousePosition.X - _buyingPreviewRangeTile.Width / 2;
+                _buyingPreviewRangeTile.Y = relativeMousePosition.Y - _buyingPreviewRangeTile.Height / 2;
                 _buyingPreviewRangeTile.CalculateViewPort();
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
                     var turretDef = ResourceManager.Turrets.GetResource((Guid)_buyingTurret);
                     var at = new FloatPoint(
-                        relativeMousePosition.X - turretDef.Size / 2,
-                        relativeMousePosition.Y - turretDef.Size / 2);
+                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X,
+                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y);
                     if (_game.TurretsModule.AddTurret(turretDef, at))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
@@ -610,14 +611,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.Width = def.Size;
                 _buyingPreviewTile.Height = def.Size;
                 _buyingPreviewTile.Initialize();
-                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)Scale(GetRangeOfTurret(def.ModuleInfo) * 2));
-                _buyingPreviewRangeTile._width = _buyingPreviewRangeTile.FillColor.Width;
-                _buyingPreviewRangeTile._height = _buyingPreviewRangeTile.FillColor.Height;
+                _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(def.ModuleInfo) * 2);
+                _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
+                _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
                 _turretStatesTextbox.Text = new TurretInstance(def).GetDescriptionString();
             }
         }
 
-        private void SaveAndGoToMainMenu()
+        private void SaveGame()
         {
             if (_game.Context.CanSave())
             {
@@ -625,9 +626,22 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     Directory.CreateDirectory(_saveDir);
                 var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
                 _game.Context.Save(new FileInfo(saveFile));
-                Parent.UIResources.StopSounds();
-                SwitchView(new MainMenu.MainMenuView(Parent));
             }
+        }
+
+        private void SaveAndGoToMainMenu()
+        {
+            if (_game.Context.CanSave())
+            {
+                SaveGame();
+                GoToMainMenu();
+            }
+        }
+
+        private void GoToMainMenu()
+        {
+            Parent.UIResources.StopSounds();
+            SwitchView(new MainMenu.MainMenuView(Parent));
         }
 
         private void GameOver()
@@ -709,11 +723,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 }
                 var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID))
                 {
-                    FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    X = _gameArea.X + 10 + (offset++ * 210),
-                    Y = _gameArea.Y + _gameArea.Height + 45,
-                    Height = 30,
-                    Width = 210,
+                    FillColor = Parent.UIResources.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
+                    X = _upgradesLeftButton.X,
+                    Y = _upgradesLeftButton.Y + (offset++ * 175) + 30,
+                    Height = 160,
+                    Width = 300,
                     Tag = upgrade,
                     IsVisible = false
                 };

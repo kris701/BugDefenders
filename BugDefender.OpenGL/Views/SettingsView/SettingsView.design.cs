@@ -10,15 +10,15 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 {
     public partial class SettingsView : BaseAnimatedView
     {
-        private readonly List<float> _scaleOptions = new List<float>()
+        private readonly List<Point> _resolutionOptions = new List<Point>()
         {
-            0.25f,
-            0.50f,
-            0.75f,
-            1f,
-            1.25f,
-            1.5f,
-            1.75f
+            new Point(480, 270),
+            new Point(960, 540),
+            new Point(1280, 720),
+            new Point(1600, 900),
+            new Point(1920, 1080),
+            new Point(2400, 1350),
+            new Point(3840, 2160),
         };
         private readonly List<ButtonControl> _scaleButtons = new List<ButtonControl>();
 
@@ -61,14 +61,14 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -78,7 +78,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 175,
@@ -104,7 +104,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             })
             {
                 X = 50,
-                Y = 900,
+                Y = 980,
                 Width = 200,
                 Height = 50,
                 Text = "Apply",
@@ -119,8 +119,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Cancel",
@@ -149,40 +149,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         private void SetupScreenSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
-            {
-                HorizontalAlignment = Alignment.Middle,
-                Y = yOffset,
-                Text = "UI Scale",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White
-            });
-
-            for (int i = 0; i < _scaleOptions.Count; i++)
-            {
-                var newControl = new ButtonControl(Parent, clicked: (s) =>
-                {
-                    if (s.Tag is float value)
-                        _settings.Scale = value;
-                    UpdateScreenSettingsButtons();
-                })
-                {
-                    Y = yOffset + 35,
-                    X = 110 + (i * (710 / _scaleOptions.Count + 10)),
-                    Width = 710 / _scaleOptions.Count,
-                    Height = 40,
-                    Text = $"{Math.Round(_scaleOptions[i] * 100, 0)}%",
-                    Font = BasicFonts.GetFont(16),
-                    FontColor = Color.White,
-                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    Tag = _scaleOptions[i]
-                };
-                AddControl(1, newControl);
-                _scaleButtons.Add(newControl);
-            }
-
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset + 80,
@@ -243,12 +210,49 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             };
             AddControl(1, _isFPSCounter);
 
+            AddControl(1, new LabelControl()
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = yOffset,
+                Text = "UI Scale",
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White
+            });
+
+            for (int i = 0; i < _resolutionOptions.Count; i++)
+            {
+                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                {
+                    if (s.Tag is Point value)
+                    {
+                        _settings.ScreenWidth = value.X;
+                        _settings.ScreenHeight = value.Y;
+                    }
+                    UpdateScreenSettingsButtons();
+                })
+                {
+                    Y = yOffset + 35,
+                    X = 110 + (i * (1585 / _resolutionOptions.Count + 10)),
+                    Width = 1585 / _resolutionOptions.Count,
+                    Height = 40,
+                    Text = $"{_resolutionOptions[i].X}x{_resolutionOptions[i].Y}",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.White,
+                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                    Tag = _resolutionOptions[i]
+                };
+                AddControl(1, newControl);
+                _scaleButtons.Add(newControl);
+            }
+
             UpdateScreenSettingsButtons();
         }
 
         private void SetupTextureSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset,
@@ -268,8 +272,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 40,
-                    X = 110 + (i * (770 / packs.Count + 10)),
-                    Width = 770 / packs.Count,
+                    X = 110 + (i * (1585 / packs.Count + 10)),
+                    Width = 1585 / packs.Count,
                     Height = 50,
                     Text = Parent.UIResources.GetTexturePack(packs[i]).Name,
                     Font = BasicFonts.GetFont(16),
@@ -287,7 +291,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         private void SetupMusicSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset,
@@ -306,8 +310,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _musicOptions.Count + 10)),
-                    Width = 710 / _musicOptions.Count,
+                    X = 110 + (i * (1585 / _musicOptions.Count + 10)),
+                    Width = 1585 / _musicOptions.Count,
                     Height = 40,
                     Text = $"{Math.Round(_musicOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),
@@ -325,7 +329,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         private void SetupSoundEffectsSettingsView(int yOffset)
         {
-            AddControl(1, new LabelControl(Parent)
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = yOffset,
@@ -344,8 +348,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 })
                 {
                     Y = yOffset + 35,
-                    X = 110 + (i * (710 / _soundEffectOptions.Count + 10)),
-                    Width = 710 / _soundEffectOptions.Count,
+                    X = 110 + (i * (1585 / _soundEffectOptions.Count + 10)),
+                    Width = 1585 / _soundEffectOptions.Count,
                     Height = 40,
                     Text = $"{Math.Round(_soundEffectOptions[i] * 100, 0)}%",
                     Font = BasicFonts.GetFont(16),

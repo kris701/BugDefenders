@@ -7,21 +7,10 @@ namespace BugDefender.OpenGL.Engine.Controls
     public class BorderControl : TileControl
     {
         public Texture2D BorderBrush { get; set; } = BasicTextures.GetBasicRectange(Color.Black);
-        private float _thickness = 2;
-        public float Thickness
-        {
-            get
-            {
-                return _thickness;
-            }
-            set
-            {
-                _thickness = Scale(value);
-            }
-        }
+        public float Thickness { get; set; } = 2;
         public IControl Child { get; set; }
 
-        public BorderControl(GameWindow parent, IControl child) : base(parent)
+        public BorderControl(IControl child)
         {
             Child = child;
         }

@@ -16,7 +16,6 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
         }

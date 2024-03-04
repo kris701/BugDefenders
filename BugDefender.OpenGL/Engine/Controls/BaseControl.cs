@@ -3,60 +3,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BugDefender.OpenGL.Engine.Controls
 {
-    public abstract class BaseControl : BaseScalable, IControl
+    public abstract class BaseControl : IControl
     {
         public Alignment HorizontalAlignment { get; set; } = Alignment.None;
 
         public float Rotation { get; set; } = 0;
         public bool IsVisible { get; set; } = true;
-        internal float _x = 0;
-        public float X
-        {
-            get
-            {
-                return _x;
-            }
-            set
-            {
-                _x = Scale(value);
-            }
-        }
-        internal float _y = 0;
-        public float Y
-        {
-            get
-            {
-                return _y;
-            }
-            set
-            {
-                _y = Scale(value);
-            }
-        }
-        internal float _width = 0;
-        public float Width
-        {
-            get
-            {
-                return _width;
-            }
-            set
-            {
-                _width = Scale(value);
-            }
-        }
-        internal float _height = 0;
-        public float Height
-        {
-            get
-            {
-                return _height;
-            }
-            set
-            {
-                _height = Scale(value);
-            }
-        }
+        public float X { get; set; }
+        public float Y { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
         public int Alpha { get; set; } = 255;
         public object? Tag { get; set; }
         private bool _usesViewPort = false;
@@ -70,7 +26,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             }
             set
             {
-                var copy = new Rectangle(Scale(value.X), Scale(value.Y), Scale(value.Width), Scale(value.Height));
+                var copy = new Rectangle(value.X, value.Y, value.Width, value.Height);
                 _viewPort = copy;
                 _usesViewPort = true;
             }
@@ -106,17 +62,13 @@ namespace BugDefender.OpenGL.Engine.Controls
             _actualViewPort = new Rectangle((int)viewPortX, (int)viewPortY, (int)viewPortWidth, (int)viewPortHeight);
         }
 
-        protected BaseControl(GameWindow parent) : base(parent)
-        {
-        }
-
         internal void ReAlign()
         {
             switch (HorizontalAlignment)
             {
-                case Alignment.Left: _x = 0; break;
-                case Alignment.Right: _x = Parent.ScreenWidth() - Width; break;
-                case Alignment.Middle: _x = Parent.ScreenWidth() / 2 - Width / 2; break;
+                case Alignment.Left: X = 0; break;
+                case Alignment.Right: X = GameWindow.BaseScreenSize.X - Width; break;
+                case Alignment.Middle: X = GameWindow.BaseScreenSize.X / 2 - Width / 2; break;
             }
         }
 

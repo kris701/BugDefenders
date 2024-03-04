@@ -12,14 +12,14 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
         private LabelControl _timeLeftLabel;
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -29,7 +29,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 175,
@@ -39,7 +39,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White
             });
-            _timeLeftLabel = new LabelControl(Parent)
+            _timeLeftLabel = new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 500,
@@ -52,7 +52,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
             AddControl(0, new ButtonControl(Parent, clicked: (x) => { Accept(); })
             {
                 X = 50,
-                Y = 900,
+                Y = 980,
                 Width = 200,
                 Height = 50,
                 Text = "Apply",
@@ -64,8 +64,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) => { Cancel(); })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Cancel",

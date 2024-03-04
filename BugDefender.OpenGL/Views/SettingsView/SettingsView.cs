@@ -19,7 +19,6 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             _settings = parent.CurrentUser.UserData.Copy();
-            ScaleValue = parent.CurrentUser.UserData.Scale;
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
         }
@@ -40,7 +39,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             foreach (var button in _texturePacksButtons)
                 button.FillColor = normal;
             foreach (var button in _scaleButtons)
+            {
                 button.FillColor = normal;
+                button.IsEnabled = true;
+            }
             foreach (var button in _musicButtons)
                 button.FillColor = normal;
             foreach (var button in _soundEffectsButtons)
@@ -61,12 +63,20 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                     break;
                 }
             }
-            foreach (var button in _scaleButtons)
+            if (_isFullScreen.FillColor == selected)
             {
-                if (button.Tag is float value && value == _settings.Scale)
+                foreach (var button in _scaleButtons)
+                    button.IsEnabled = false;
+            }
+            else
+            {
+                foreach (var button in _scaleButtons)
                 {
-                    button.FillColor = selected;
-                    break;
+                    if (button.Tag is Point value && value.X == _settings.ScreenWidth && value.Y == _settings.ScreenHeight)
+                    {
+                        button.FillColor = selected;
+                        break;
+                    }
                 }
             }
             foreach (var button in _musicButtons)

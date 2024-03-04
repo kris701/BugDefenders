@@ -18,82 +18,80 @@ namespace BugDefender.OpenGL.Views.ChallengeView
         private readonly TextboxControl _requirementsTextBox;
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _startButton;
-        public ChallengeControl(GameWindow parent, ChallengeDefinition challenge, ClickedHandler click, bool isFinished) : base(parent)
+        public ChallengeControl(GameWindow parent, ChallengeDefinition challenge, ClickedHandler click, bool isFinished)
         {
             Challenge = challenge;
             Width = 900;
             Height = 140;
-            _titleControl = new LabelControl(Parent)
+            _titleControl = new LabelControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Text = challenge.Name,
-                Font = BasicFonts.GetFont(12),
+                Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
             };
             var sb = new StringBuilder();
             sb.AppendLine("Requirements:");
             foreach (var req in challenge.Criterias)
                 sb.AppendLine(req.GetDescriptionString());
-            _requirementsTextBox = new TextboxControl(Parent)
+            _requirementsTextBox = new TextboxControl()
             {
-                X = 525,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = sb.ToString(),
-                Margin = 15
+                Text = sb.ToString()
             };
             var sb2 = new StringBuilder();
             sb2.AppendLine(Challenge.Description);
             sb2.AppendLine($"Map: '{ResourceManager.Maps.GetResource(challenge.MapID).Name}'. Gamestyle: '{ResourceManager.GameStyles.GetResource(challenge.GameStyleID).Name}'");
-            _descriptionTextbox = new TextboxControl(Parent)
+            _descriptionTextbox = new TextboxControl()
             {
-                X = 75,
                 Width = 400,
-                Height = 75,
-                Font = BasicFonts.GetFont(8),
+                Height = 70,
+                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = sb2.ToString(),
-                Margin = 15
+                Text = sb2.ToString()
             };
-            _startButton = new ButtonControl(Parent, click)
+            _startButton = new ButtonControl(parent, click)
             {
-                X = 525,
                 Width = 400,
-                Height = 35,
+                Height = 25,
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"[Reward: {challenge.Reward} credits] Start!",
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 IsEnabled = !isFinished
             };
             if (isFinished)
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 _startButton.Text = "Completed!";
             }
             else
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            _titleControl._y = _y + Scale(20);
+            _titleControl.Y = Y + 20;
+            _titleControl.X = X + 45;
             _titleControl.Initialize();
 
-            _requirementsTextBox._y = _y + Scale(45);
-            _requirementsTextBox.Initialize();
-
-            _descriptionTextbox._y = _y + Scale(45);
+            _descriptionTextbox.Y = Y + 50;
+            _descriptionTextbox.X = X + 45;
             _descriptionTextbox.Initialize();
 
-            _startButton._y = _y + Scale(20);
+            _requirementsTextBox.Y = Y + 50;
+            _requirementsTextBox.X = X + 470;
+            _requirementsTextBox.Initialize();
+
+            _startButton.Y = Y + 20;
+            _startButton.X = X + 470;
             _startButton.Tag = Tag;
             _startButton.Initialize();
         }

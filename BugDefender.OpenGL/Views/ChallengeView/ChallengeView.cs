@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
@@ -24,7 +23,6 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            ScaleValue = parent.CurrentUser.UserData.Scale;
 
             _remainingChallenges = new List<Guid>();
             DateTime a = DateTime.MinValue;
@@ -65,9 +63,6 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
         {
             if (sender.Tag is Guid challengeId)
             {
-                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
-                if (File.Exists(saveFile))
-                    File.Delete(saveFile);
                 var challenge = ResourceManager.Challenges.GetResource(challengeId);
                 SwitchView(new GameScreen.GameScreen(Parent, challenge));
             }

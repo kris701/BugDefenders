@@ -18,10 +18,6 @@ namespace BugDefender.OpenGL.Engine.Controls
         private bool _finished = false;
         private TimeSpan _currentFrameTime = TimeSpan.Zero;
 
-        public AnimatedTileControl(GameWindow parent) : base(parent)
-        {
-        }
-
         public override void Initialize()
         {
             if (TileSet.Count > 0)

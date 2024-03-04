@@ -4,9 +4,10 @@ using System;
 
 namespace BugDefender.OpenGL.Engine.Views
 {
-    public interface IView : IScalable
+    public interface IView
     {
         public Guid ID { get; set; }
+        public GameWindow Parent { get; set; }
 
         public void ClearLayer(int layer);
         public void AddControl(int layer, IControl control);

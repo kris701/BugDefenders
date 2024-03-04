@@ -1,7 +1,7 @@
 ﻿{
   "ID": "f58b60d7-4aed-4865-a5bb-e240014649a7",
-  "Name": "Debug",
-  "Description": "abasf",
+  "Name": "Low Quality",
+  "Description": "",
   "BasedOn": null,
   "Textures": [
     {
@@ -56,6 +56,14 @@
     {
       "ID": "f367b2e1-0b9f-40da-95af-dac50b16a0ad",
       "Content": "Views/GameView/upgradeField"
+    },
+    {
+      "ID": "86f37f1c-921f-484a-98da-4b0790f51d70",
+      "Content": "Views/GameView/gameField"
+    },
+    {
+      "ID": "8799e365-3b1c-47fa-b11b-83173f6d4bca",
+      "Content": "Views/GameView/upgradePanel"
     },
 
     {

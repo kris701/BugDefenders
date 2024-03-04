@@ -11,6 +11,7 @@ namespace BugDefender.OpenGL.Engine.Controls
     {
         public delegate void EnterHandler(TextInputControl parent);
         public event EnterHandler? OnEnter;
+        public GameWindow Parent { get; set; }
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public bool IsEnabled { get; set; } = true;
@@ -37,8 +38,9 @@ namespace BugDefender.OpenGL.Engine.Controls
             Keys.D9
         };
 
-        public TextInputControl(GameWindow parent, EnterHandler? onEnter = null) : base(parent)
+        public TextInputControl(GameWindow parent, EnterHandler? onEnter = null)
         {
+            Parent = parent;
             OnEnter += onEnter;
         }
 
@@ -109,8 +111,9 @@ namespace BugDefender.OpenGL.Engine.Controls
                 }
 
                 var mouseState = Mouse.GetState();
-                if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&
-                    mouseState.Y > Y && mouseState.Y < Y + Height))
+                var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
+                if (!_blocked && (translatedPos.X > X && translatedPos.X < X + Width &&
+                    translatedPos.Y > Y && translatedPos.Y < Y + Height))
                 {
                     if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
                         _holding = true;

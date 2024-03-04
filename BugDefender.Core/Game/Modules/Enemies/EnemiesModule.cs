@@ -124,7 +124,9 @@ namespace BugDefender.Core.Game.Modules.Enemies
         private void UpdateEnemiesToSpawnList()
         {
             int waveSize = (int)Context.Evolution;
-            for (int i = Context.EnemiesToSpawn.Count; i < 3; i++)
+            if (waveSize > 50)
+                waveSize = 50;
+            for (int i = Context.EnemiesToSpawn.Count; i < 4; i++)
             {
                 var wave = new List<Guid>();
                 for (int j = 0; j < waveSize; j++)

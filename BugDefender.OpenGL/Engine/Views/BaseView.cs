@@ -5,13 +5,15 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Engine.Views
 {
-    public abstract class BaseView : BaseScalable, IView
+    public abstract class BaseView : IView
     {
         public Guid ID { get; set; }
+        public GameWindow Parent { get; set; }
         private readonly SortedDictionary<int, List<IControl>> _viewLayers;
 
-        public BaseView(GameWindow parent, Guid id) : base(parent)
+        public BaseView(GameWindow parent, Guid id)
         {
+            Parent = parent;
             _viewLayers = new SortedDictionary<int, List<IControl>>() {
                 { 0, new List<IControl>() }
             };

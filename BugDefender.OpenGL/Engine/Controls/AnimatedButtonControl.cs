@@ -16,6 +16,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         public delegate void ClickedHandler(AnimatedButtonControl parent);
         public event ClickedHandler? Clicked;
 
+        public GameWindow Parent { get; set; }
         public Guid ClickSound { get; set; } = new Guid("2e3a4bbb-c0e5-4617-aee1-070e02e4b8ea");
         public List<Texture2D> TileSet { get; set; } = new List<Texture2D>();
         public int Frame { get; set; } = 0;
@@ -64,8 +65,9 @@ namespace BugDefender.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public AnimatedButtonControl(GameWindow parent, ClickedHandler? clicked = null) : base(parent)
+        public AnimatedButtonControl(GameWindow parent, ClickedHandler? clicked = null)
         {
+            Parent = parent;
             Clicked += clicked;
         }
 
@@ -77,8 +79,8 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (Height == 0)
                 Height = size.Y;
             ReAlign();
-            _textWidth = Scale(size.X);
-            _textHeight = Scale(size.Y);
+            _textWidth = size.X;
+            _textHeight = size.Y;
             _textX = X + Width / 2 - _textWidth / 2;
             _textY = Y + Height / 2 - _textHeight / 2;
         }
@@ -126,8 +128,9 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (IsEnabled && IsVisible && Parent.IsActive && Clicked != null)
             {
                 var mouseState = Mouse.GetState();
-                if (!_blocked && (mouseState.X > X && mouseState.X < X + Width &&
-                    mouseState.Y > Y && mouseState.Y < Y + Height))
+                var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
+                if (!_blocked && (translatedPos.X > X && translatedPos.X < X + Width &&
+                    translatedPos.Y > Y && translatedPos.Y < Y + Height))
                 {
                     if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
                         _holding = true;
@@ -175,11 +178,11 @@ namespace BugDefender.OpenGL.Engine.Controls
                 spriteBatch.DrawString(
                     Font,
                     Text,
-                    new Vector2(_textX + (_textWidth * ScaleValue) / 2, _textY + (_textHeight * ScaleValue) / 2),
+                    new Vector2(_textX + _textWidth / 2, _textY + _textHeight / 2),
                     new Color(FontColor.R, FontColor.G, FontColor.B, Alpha),
                     Rotation,
                     new Vector2(_textWidth / 2, _textHeight / 2),
-                    ScaleValue,
+                    1f,
                     SpriteEffects.None,
                     0);
 #if DEBUG && TEXTBORDER

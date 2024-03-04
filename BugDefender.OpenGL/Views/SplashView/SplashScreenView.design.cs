@@ -8,11 +8,11 @@ namespace BugDefender.OpenGL.Screens.SplashScreen
     {
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
             base.Initialize();
         }

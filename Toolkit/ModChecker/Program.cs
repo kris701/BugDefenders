@@ -3,7 +3,7 @@ using BugDefender.Core.Resources.Integrity;
 using CommandLine;
 using CommandLine.Text;
 
-namespace BugDefender.CLI
+namespace ModChecker
 {
     internal class Program
     {

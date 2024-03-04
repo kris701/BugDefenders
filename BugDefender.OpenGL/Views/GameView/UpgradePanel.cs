@@ -18,29 +18,30 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _buyUpgradeButton;
 
-        public UpgradePanel(GameWindow parent, ClickedHandler buy, UpgradeDefinition upgrade, bool canUpgrade) : base(parent)
+        public UpgradePanel(GameWindow parent, ClickedHandler buy, UpgradeDefinition upgrade, bool canUpgrade)
         {
             Buy = buy;
-            _nameLabel = new LabelControl(Parent)
+            _nameLabel = new LabelControl()
             {
-                Font = BasicFonts.GetFont(10),
+                Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"{upgrade.Name}",
-                Height = 35
+                Height = 25
             };
-            _descriptionTextbox = new TextboxControl(Parent)
+            _descriptionTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 Text = upgrade.GetDescriptionString(),
-                Height = 85
+                Height = 85,
+                Margin = 20
             };
-            _buyUpgradeButton = new ButtonControl(Parent, clicked: buy)
+            _buyUpgradeButton = new ButtonControl(parent, clicked: buy)
             {
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = BasicTextures.GetBasicRectange(Color.Transparent),
+                FillClickedColor = parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 Text = $"[{upgrade.Cost}$] Buy",
                 Height = 35,
@@ -77,15 +78,15 @@ namespace BugDefender.OpenGL.Views.GameView
 
         public override void Initialize()
         {
-            _nameLabel._x = _x;
-            _nameLabel._y = _y;
-            _nameLabel._width = _width;
-            _descriptionTextbox._x = _x;
-            _descriptionTextbox._y = _y + Scale(35);
-            _descriptionTextbox._width = _width;
-            _buyUpgradeButton._x = _x;
-            _buyUpgradeButton._y = _y + Scale(35 + 85);
-            _buyUpgradeButton._width = _width;
+            _nameLabel.X = X;
+            _nameLabel.Y = Y + 10;
+            _nameLabel.Width = Width;
+            _descriptionTextbox.X = X;
+            _descriptionTextbox.Y = Y + 25;
+            _descriptionTextbox.Width = Width;
+            _buyUpgradeButton.X = X + 10;
+            _buyUpgradeButton.Y = Y + 30 + 85;
+            _buyUpgradeButton.Width = Width - 20;
 
             foreach (var child in Children)
                 child.Initialize();

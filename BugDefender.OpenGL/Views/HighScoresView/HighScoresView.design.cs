@@ -16,14 +16,14 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl(Parent)
+            AddControl(0, new TileControl()
             {
                 FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = 1000,
-                Height = 1000
+                Width = GameWindow.BaseScreenSize.X,
+                Height = GameWindow.BaseScreenSize.Y
             });
 
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Engine.Alignment.Middle,
                 Y = 100,
@@ -33,7 +33,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48)
             });
-            AddControl(0, new LabelControl(Parent)
+            AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
                 Y = 175,
@@ -54,15 +54,15 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
             int count = 0;
             foreach (var score in allScores)
             {
-                AddControl(0, new LabelControl(Parent)
+                AddControl(0, new LabelControl()
                 {
-                    HorizontalAlignment = Engine.Alignment.Middle,
-                    Y = 215 + (count++ * 50 + 5),
-                    Height = 50,
-                    Width = 800,
+                    HorizontalAlignment = Alignment.Middle,
+                    Y = 215 + (count++ * 60 + 5),
+                    Height = 60,
+                    Width = 1200,
                     Text = $"User: {allUsers.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
                     FontColor = Color.White,
-                    Font = BasicFonts.GetFont(10),
+                    Font = BasicFonts.GetFont(12),
                     FillColor = Parent.UIResources.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                 });
             }
@@ -72,8 +72,8 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
             {
-                Y = 900,
-                X = 750,
+                Y = 980,
+                X = 1670,
                 Width = 200,
                 Height = 50,
                 Text = "Back",

@@ -1,6 +1,6 @@
 ﻿using CommandLine;
 
-namespace BugDefender.CLI
+namespace ModChecker
 {
     public class Options
     {

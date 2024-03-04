@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace BugDefender.OpenGL.Engine
 {
     public enum Alignment { None, Left, Middle, Right }
-    public interface IControl : IScalable
+    public interface IControl
     {
         public Alignment HorizontalAlignment { get; set; }
 
