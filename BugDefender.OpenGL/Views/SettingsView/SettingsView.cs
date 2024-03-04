@@ -39,7 +39,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             foreach (var button in _texturePacksButtons)
                 button.FillColor = normal;
             foreach (var button in _scaleButtons)
+            {
                 button.FillColor = normal;
+                button.IsEnabled = true;
+            }
             foreach (var button in _musicButtons)
                 button.FillColor = normal;
             foreach (var button in _soundEffectsButtons)
@@ -60,12 +63,20 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                     break;
                 }
             }
-            foreach (var button in _scaleButtons)
+            if (_isFullScreen.FillColor == selected)
             {
-                if (button.Tag is Point value && value.X == _settings.ScreenWidth && value.Y == _settings.ScreenHeight)
+                foreach (var button in _scaleButtons)
+                    button.IsEnabled = false;
+            }
+            else
+            {
+                foreach (var button in _scaleButtons)
                 {
-                    button.FillColor = selected;
-                    break;
+                    if (button.Tag is Point value && value.X == _settings.ScreenWidth && value.Y == _settings.ScreenHeight)
+                    {
+                        button.FillColor = selected;
+                        break;
+                    }
                 }
             }
             foreach (var button in _musicButtons)

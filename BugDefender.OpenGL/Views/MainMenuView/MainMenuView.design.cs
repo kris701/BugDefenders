@@ -23,6 +23,14 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
+                Y = 1050,
+                Font = BasicFonts.GetFont(12),
+                Text = "Copyright Kristian Skov Johansen",
+                FontColor = Color.White,
+            });
+            AddControl(0, new LabelControl()
+            {
+                HorizontalAlignment = Alignment.Middle,
                 Y = 200,
                 Font = BasicFonts.GetFont(72),
                 Text = "Bug Defenders",

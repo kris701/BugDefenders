@@ -152,42 +152,6 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = Alignment.Middle,
-                Y = yOffset,
-                Text = "UI Scale",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White
-            });
-
-            for (int i = 0; i < _resolutionOptions.Count; i++)
-            {
-                var newControl = new ButtonControl(Parent, clicked: (s) =>
-                {
-                    if (s.Tag is Point value)
-                    {
-                        _settings.ScreenWidth = value.X;
-                        _settings.ScreenHeight = value.Y;
-                    }
-                    UpdateScreenSettingsButtons();
-                })
-                {
-                    Y = yOffset + 35,
-                    X = 110 + (i * (1585 / _resolutionOptions.Count + 10)),
-                    Width = 1585 / _resolutionOptions.Count,
-                    Height = 40,
-                    Text = $"{_resolutionOptions[i].X}x{_resolutionOptions[i].Y}",
-                    Font = BasicFonts.GetFont(16),
-                    FontColor = Color.White,
-                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    Tag = _resolutionOptions[i]
-                };
-                AddControl(1, newControl);
-                _scaleButtons.Add(newControl);
-            }
-
-            AddControl(1, new LabelControl()
-            {
-                HorizontalAlignment = Alignment.Middle,
                 Y = yOffset + 80,
                 Text = "Other",
                 Font = BasicFonts.GetFont(24),
@@ -245,6 +209,43 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isFPSCounter);
+
+            AddControl(1, new LabelControl()
+            {
+                HorizontalAlignment = Alignment.Middle,
+                Y = yOffset,
+                Text = "UI Scale",
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White
+            });
+
+            for (int i = 0; i < _resolutionOptions.Count; i++)
+            {
+                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                {
+                    if (s.Tag is Point value)
+                    {
+                        _settings.ScreenWidth = value.X;
+                        _settings.ScreenHeight = value.Y;
+                    }
+                    UpdateScreenSettingsButtons();
+                })
+                {
+                    Y = yOffset + 35,
+                    X = 110 + (i * (1585 / _resolutionOptions.Count + 10)),
+                    Width = 1585 / _resolutionOptions.Count,
+                    Height = 40,
+                    Text = $"{_resolutionOptions[i].X}x{_resolutionOptions[i].Y}",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.White,
+                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillDisabledColor = Parent.UIResources.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                    Tag = _resolutionOptions[i]
+                };
+                AddControl(1, newControl);
+                _scaleButtons.Add(newControl);
+            }
 
             UpdateScreenSettingsButtons();
         }

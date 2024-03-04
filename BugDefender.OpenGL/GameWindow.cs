@@ -276,14 +276,20 @@ namespace BugDefender.OpenGL
 
             Device.PreferredBackBufferHeight = CurrentUser.UserData.ScreenHeight;
             Device.PreferredBackBufferWidth = CurrentUser.UserData.ScreenWidth;
-            XScale = (float)Device.PreferredBackBufferWidth / (float)BaseScreenSize.X;
-            YScale = (float)Device.PreferredBackBufferHeight / (float)BaseScreenSize.Y;
             Device.SynchronizeWithVerticalRetrace = CurrentUser.UserData.IsVsync;
+            Device.HardwareModeSwitch = false;
             Device.IsFullScreen = CurrentUser.UserData.IsFullscreen;
+            if (CurrentUser.UserData.IsFullscreen)
+            {
+                Device.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                Device.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            }
             UIResources.LoadTexturePack(CurrentUser.UserData.TexturePack);
             MediaPlayer.Volume = CurrentUser.UserData.MusicVolume;
             SoundEffect.MasterVolume = CurrentUser.UserData.EffectsVolume;
             Device.ApplyChanges();
+            XScale = (float)Device.PreferredBackBufferWidth / (float)BaseScreenSize.X;
+            YScale = (float)Device.PreferredBackBufferHeight / (float)BaseScreenSize.Y;
         }
     }
 }
