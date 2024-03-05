@@ -29,7 +29,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             _cheatsInputWatcher = new KeysWatcher(new List<Keys>() { Keys.LeftAlt, Keys.Enter }, OpenCheatsMenu);
             _escapeInputWatcher = new KeyWatcher(Keys.Escape, CloseCheatsMenu);
 
-            _continueButton!.IsVisible = File.Exists(Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json"));
+            _continueButton!.IsVisible = File.Exists(Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json"));
             if (_continueButton.IsVisible)
             {
                 _startGame!.HorizontalAlignment = Engine.Alignment.None;
@@ -67,7 +67,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
 
         private void ContinueGame(ButtonControl sender)
         {
-            var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
+            var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
             if (!File.Exists(saveFile))
                 throw new Exception("Error loading save file!");
             var context = JsonSerializer.Deserialize<GameContext>(File.ReadAllText(saveFile));

@@ -24,7 +24,7 @@ namespace BugDefender.Core.Users.Models.Buffs
             Effect = effect;
         }
 
-        public bool IsValid<T>(UserDefinition<T> user)
+        public bool IsValid<T>(UserDefinition<T> user) where T : new()
         {
             foreach (var criteria in Criterias)
                 if (!criteria.IsValid(user.Stats))

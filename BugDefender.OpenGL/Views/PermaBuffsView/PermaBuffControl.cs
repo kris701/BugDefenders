@@ -61,11 +61,11 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
                 FillClickedColor = parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                 FillDisabledColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Tag = buff,
-                IsEnabled = isUnlocked && parent.CurrentUser.Credits >= buff.Cost
+                IsEnabled = isUnlocked && parent.UserManager.CurrentUser.Credits >= buff.Cost
             };
             if (isUnlocked)
             {
-                if (parent.CurrentUser.Buffs.Contains(buff.ID))
+                if (parent.UserManager.CurrentUser.Buffs.Contains(buff.ID))
                 {
                     FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                     _buyButton.Text = "Owned!";

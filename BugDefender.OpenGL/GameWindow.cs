@@ -35,14 +35,12 @@ namespace BugDefender.OpenGL
         public GraphicsDeviceManager Device { get; }
         public IView CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; set; }
-        public UserDefinition<SettingsDefinition> CurrentUser { get; set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; }
         public UIResourceManager UIResources { get; set; }
 
         private readonly Func<GameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
-        private bool _isInitialized = false;
-        private readonly NotificationBackroundWorker _notificationWorker;
+        private NotificationBackroundWorker _notificationWorker;
 
         public GameWindow(Func<GameWindow, IView> screen)
         {
@@ -50,81 +48,6 @@ namespace BugDefender.OpenGL
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
-            UserManager = new UserEngine<SettingsDefinition>();
-            var allUsers = UserManager.GetAllUsers();
-            if (allUsers.Count == 0)
-            {
-                var newUser = new UserDefinition<SettingsDefinition>(
-                    Guid.NewGuid(),
-                    "Default",
-                    new List<Guid>(),
-                    new List<Guid>(),
-                    new List<Guid>(),
-                    -1,
-                    new List<ScoreDefinition>(),
-                    true,
-                    new StatsDefinition(),
-                    0,
-                    new SettingsDefinition());
-                UserManager.AddNewUser(newUser);
-                ChangeUser(newUser);
-            }
-            else
-            {
-                foreach (var user in allUsers)
-                {
-                    if (user.IsPrimary)
-                    {
-                        ChangeUser(user);
-                        break;
-                    }
-                }
-                if (CurrentUser == null)
-                    ChangeUser(allUsers[0]);
-            }
-
-            _notificationWorker = new NotificationBackroundWorker(this);
-            _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
-            _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
-            _notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));
-            BackroundWorkers = new List<IBackgroundWorker>() {
-                _notificationWorker,
-                new FPSBackgroundWorker(this)
-            };
-        }
-
-        public void CreateNewUser(string name)
-        {
-            var newUser = new UserDefinition<SettingsDefinition>(
-                Guid.NewGuid(),
-                name,
-                new List<Guid>(),
-                new List<Guid>(),
-                new List<Guid>(),
-                -1,
-                new List<ScoreDefinition>(),
-                false,
-                new StatsDefinition(),
-                0,
-                new SettingsDefinition());
-            UserManager.AddNewUser(newUser);
-        }
-
-        public void ChangeUser(UserDefinition<SettingsDefinition> toUser)
-        {
-            if (CurrentUser != null)
-            {
-                CurrentUser.IsPrimary = false;
-                UserManager.SaveUser(CurrentUser);
-            }
-
-            CurrentUser = toUser;
-            UserManager.ApplyBuffsToResources(toUser);
-            toUser.IsPrimary = true;
-            UserManager.SaveUser(toUser);
-            if (_isInitialized)
-                ApplySettings();
-            LoadMods();
         }
 
         protected override void Initialize()
@@ -136,19 +59,27 @@ namespace BugDefender.OpenGL
             Window.Title = $"Bug Defender {thisVersionStr}";
 
             UIResources = new UIResourceManager(Content);
+            UserManager = new UserEngine<SettingsDefinition>();
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
-            ApplySettings();
             MediaPlayer.IsRepeating = true;
             SoundEffect.Initialize();
+            _notificationWorker = new NotificationBackroundWorker(this);
+            _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
+            _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
+            _notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));
+            BackroundWorkers = new List<IBackgroundWorker>() {
+                _notificationWorker,
+                new FPSBackgroundWorker(this)
+            };
+            LoadMods();
+            ApplySettings();
 
             foreach (var worker in BackroundWorkers)
                 worker.Initialize();
 
             CurrentScreen = _screenToLoad(this);
             CurrentScreen.Initialize();
-
-            _isInitialized = true;
         }
 
         private void LoadMods()
@@ -271,21 +202,21 @@ namespace BugDefender.OpenGL
 
         public void ApplySettings()
         {
-            UserManager.SaveUser(CurrentUser);
+            UserManager.SaveUser();
 
-            Device.PreferredBackBufferHeight = CurrentUser.UserData.ScreenHeight;
-            Device.PreferredBackBufferWidth = CurrentUser.UserData.ScreenWidth;
-            Device.SynchronizeWithVerticalRetrace = CurrentUser.UserData.IsVsync;
+            Device.PreferredBackBufferHeight = UserManager.CurrentUser.UserData.ScreenHeight;
+            Device.PreferredBackBufferWidth = UserManager.CurrentUser.UserData.ScreenWidth;
+            Device.SynchronizeWithVerticalRetrace = UserManager.CurrentUser.UserData.IsVsync;
             Device.HardwareModeSwitch = false;
-            Device.IsFullScreen = CurrentUser.UserData.IsFullscreen;
-            if (CurrentUser.UserData.IsFullscreen)
+            Device.IsFullScreen = UserManager.CurrentUser.UserData.IsFullscreen;
+            if (UserManager.CurrentUser.UserData.IsFullscreen)
             {
                 Device.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
                 Device.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             }
-            UIResources.LoadTexturePack(CurrentUser.UserData.TexturePack);
-            MediaPlayer.Volume = CurrentUser.UserData.MusicVolume;
-            SoundEffect.MasterVolume = CurrentUser.UserData.EffectsVolume;
+            UIResources.LoadTexturePack(UserManager.CurrentUser.UserData.TexturePack);
+            MediaPlayer.Volume = UserManager.CurrentUser.UserData.MusicVolume;
+            SoundEffect.MasterVolume = UserManager.CurrentUser.UserData.EffectsVolume;
             Device.ApplyChanges();
             XScale = (float)Device.PreferredBackBufferWidth / (float)BaseScreenSize.X;
             YScale = (float)Device.PreferredBackBufferHeight / (float)BaseScreenSize.Y;

@@ -15,21 +15,21 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
         public AchivementsHandle(NotificationBackroundWorker parent)
         {
             Parent = parent;
-            _currentUserGuid = parent.Parent.CurrentUser.ID;
-            foreach (var achivement in Parent.Parent.CurrentUser.Achivements)
+            _currentUserGuid = parent.Parent.UserManager.CurrentUser.ID;
+            foreach (var achivement in Parent.Parent.UserManager.CurrentUser.Achivements)
                 _previousAchivements.Add(achivement);
         }
 
         public NotificationItem? GetNewNotification()
         {
-            if (_currentUserGuid != Parent.Parent.CurrentUser.ID)
+            if (_currentUserGuid != Parent.Parent.UserManager.CurrentUser.ID)
             {
-                _currentUserGuid = Parent.Parent.CurrentUser.ID;
+                _currentUserGuid = Parent.Parent.UserManager.CurrentUser.ID;
                 _previousAchivements.Clear();
-                foreach (var achivement in Parent.Parent.CurrentUser.Achivements)
+                foreach (var achivement in Parent.Parent.UserManager.CurrentUser.Achivements)
                     _previousAchivements.Add(achivement);
             }
-            var newItem = Parent.Parent.CurrentUser.Achivements.FirstOrDefault(x => !_previousAchivements.Contains(x));
+            var newItem = Parent.Parent.UserManager.CurrentUser.Achivements.FirstOrDefault(x => !_previousAchivements.Contains(x));
             if (newItem != Guid.Empty)
             {
                 _previousAchivements.Add(newItem);

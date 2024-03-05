@@ -58,7 +58,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
 
             if (isUnlocked)
             {
-                if (parent.CurrentUser.Achivements.Contains(achivement.ID))
+                if (parent.UserManager.CurrentUser.Achivements.Contains(achivement.ID))
                     FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 else
                     FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));

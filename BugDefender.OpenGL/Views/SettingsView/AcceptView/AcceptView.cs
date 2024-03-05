@@ -44,17 +44,17 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 
         private void Accept()
         {
-            Parent.CurrentUser.UserData = _newSettings;
+            Parent.UserManager.CurrentUser.UserData = _newSettings;
             Parent.ApplySettings();
-            Parent.UserManager.SaveUser(Parent.CurrentUser);
+            Parent.UserManager.SaveUser();
             SwitchView(new MainMenu.MainMenuView(Parent));
         }
 
         private void Cancel()
         {
-            Parent.CurrentUser.UserData = _oldSettings;
+            Parent.UserManager.CurrentUser.UserData = _oldSettings;
             Parent.ApplySettings();
-            Parent.UserManager.SaveUser(Parent.CurrentUser);
+            Parent.UserManager.SaveUser();
             SwitchView(new SettingsView(Parent));
         }
     }

@@ -75,9 +75,9 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
-                var oldSettings = Parent.CurrentUser.UserData.Copy();
+                var oldSettings = Parent.UserManager.CurrentUser.UserData.Copy();
                 var newSettings = _settings.Copy();
-                Parent.CurrentUser.UserData = newSettings;
+                Parent.UserManager.CurrentUser.UserData = newSettings;
                 Parent.ApplySettings();
                 SwitchView(new AcceptView.AcceptView(Parent, oldSettings, newSettings));
             })

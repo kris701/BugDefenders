@@ -29,16 +29,16 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             _gameTime = gameTime;
             _gameResult = result;
 
-            Parent.CurrentUser.HighScores.Add(new ScoreDefinition(
+            Parent.UserManager.CurrentUser.HighScores.Add(new ScoreDefinition(
                 _score,
                 gameTime.ToString("hh\\:mm\\:ss"),
                 DateTime.Now.Date.ToShortDateString()
             ));
-            if (Parent.CurrentUser.HighScores.Count > 10)
+            if (Parent.UserManager.CurrentUser.HighScores.Count > 10)
             {
                 var smallest = int.MaxValue;
                 ScoreDefinition? smallestDef = null;
-                foreach (var scoreDef in Parent.CurrentUser.HighScores)
+                foreach (var scoreDef in Parent.UserManager.CurrentUser.HighScores)
                 {
                     if (scoreDef.Score < smallest)
                     {
@@ -47,15 +47,15 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                     }
                 }
                 if (smallestDef != null)
-                    Parent.CurrentUser.HighScores.Remove(smallestDef);
+                    Parent.UserManager.CurrentUser.HighScores.Remove(smallestDef);
             }
-            Parent.UserManager.SaveUser(Parent.CurrentUser);
+            Parent.UserManager.SaveUser();
 
             Initialize();
 
             Parent.UIResources.PlaySong(ID);
 
-            var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
+            var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
             if (File.Exists(saveFile))
                 File.Delete(saveFile);
         }

@@ -23,9 +23,8 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                 "High Scores",
                 "Play the game and get your highscore onto the list!");
 
-            var allUsers = Parent.UserManager.GetAllUsers();
             var allScores = new List<ScoreDefinition>();
-            foreach (var user in allUsers)
+            foreach (var user in Parent.UserManager.Users)
                 allScores.AddRange(user.HighScores);
             allScores = allScores.OrderByDescending(x => x.Score).ToList();
             allScores = allScores.Take(_showCount).ToList();
@@ -39,7 +38,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                     Y = 215 + (count++ * 60 + 5),
                     Height = 60,
                     Width = 1200,
-                    Text = $"User: {allUsers.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
+                    Text = $"User: {Parent.UserManager.Users.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
                     FontColor = Color.White,
                     Font = BasicFonts.GetFont(12),
                     FillColor = Parent.UIResources.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),

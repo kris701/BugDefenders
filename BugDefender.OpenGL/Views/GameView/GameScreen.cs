@@ -624,7 +624,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 if (!Directory.Exists(_saveDir))
                     Directory.CreateDirectory(_saveDir);
-                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
+                var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
                 _game.Context.Save(new FileInfo(saveFile));
             }
         }
@@ -657,7 +657,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     if (result == GameResult.ChallengeSuccess)
                     {
                         credits += _game.Context.Challenge.Reward;
-                        Parent.CurrentUser.CompletedChallenges.Add(_game.Context.Challenge.ID);
+                        Parent.UserManager.CurrentUser.CompletedChallenges.Add(_game.Context.Challenge.ID);
                     }
                 }
 
@@ -667,11 +667,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #endif
                 if (result != GameResult.ChallengeLost)
                 {
-                    Parent.CurrentUser.Stats.Combine(_game.Context.Stats);
+                    Parent.UserManager.CurrentUser.Stats.Combine(_game.Context.Stats);
                     credits += (_game.Context.Score / 100);
-                    Parent.CurrentUser.Credits += credits;
-                    Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
-                    Parent.UserManager.SaveUser(Parent.CurrentUser);
+                    Parent.UserManager.CurrentUser.Credits += credits;
+                    Parent.UserManager.CheckAndApplyAchivements();
+                    Parent.UserManager.SaveUser();
                 }
 #if RELEASE
                 }
