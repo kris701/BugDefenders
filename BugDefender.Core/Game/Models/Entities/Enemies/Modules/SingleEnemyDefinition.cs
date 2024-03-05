@@ -11,20 +11,12 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
         [JsonIgnore]
         public int SlowingDuration { get; set; } = 0;
 
-        public IEnemyModule Copy()
+        public SingleEnemyDefinition(float speed)
         {
-            return new SingleEnemyDefinition()
-            {
-                Speed = Speed
-            };
+            Speed = speed;
         }
 
-        public string GetDescriptionString()
-        {
-            var sb = new StringBuilder();
-
-            return sb.ToString();
-        }
+        public IEnemyModule Copy() => new SingleEnemyDefinition(Speed);
 
         public float GetSpeed()
         {

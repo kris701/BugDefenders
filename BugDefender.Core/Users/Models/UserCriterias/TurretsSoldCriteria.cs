@@ -5,7 +5,7 @@
         public int Quantity { get; set; }
 
         public bool IsValid(StatsDefinition stats) => stats.TotalTurretsSold >= Quantity;
-        public string GetDescriptionString()
+        public override string ToString()
         {
             return $"Sell {Quantity} turrets.";
         }

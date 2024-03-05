@@ -24,13 +24,6 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
 
         public IEnemyModule Copy() => new WaveEnemyDefinition(Speed, WaveSize, SpawnDelay);
 
-        public string GetDescriptionString()
-        {
-            var sb = new StringBuilder();
-
-            return sb.ToString();
-        }
-
         public float GetSpeed()
         {
             if (SlowingFactor == 1)

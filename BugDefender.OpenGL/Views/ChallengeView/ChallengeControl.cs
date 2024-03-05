@@ -34,7 +34,7 @@ namespace BugDefender.OpenGL.Views.ChallengeView
             var sb = new StringBuilder();
             sb.AppendLine("Requirements:");
             foreach (var req in challenge.Criterias)
-                sb.AppendLine(req.GetDescriptionString());
+                sb.AppendLine(req.ToString());
             _requirementsTextBox = new TextboxControl()
             {
                 Width = 400,

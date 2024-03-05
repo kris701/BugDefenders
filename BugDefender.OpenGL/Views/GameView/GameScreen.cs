@@ -231,7 +231,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             SetTurretUpgradeField(_selectedTurret);
 
-            _turretStatesTextbox.Text = _selectedTurret.GetDescriptionString();
+            _turretStatesTextbox.Text = _selectedTurret.ToString();
             _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
 
@@ -614,7 +614,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(def.ModuleInfo) * 2);
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
-                _turretStatesTextbox.Text = new TurretInstance(def).GetDescriptionString();
+                _turretStatesTextbox.Text = new TurretInstance(def).ToString();
             }
         }
 

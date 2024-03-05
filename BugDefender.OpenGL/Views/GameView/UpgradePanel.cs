@@ -32,7 +32,7 @@ namespace BugDefender.OpenGL.Views.GameView
             {
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                Text = upgrade.GetDescriptionString(),
+                Text = upgrade.ToString(),
                 Height = 85,
                 Margin = 20
             };

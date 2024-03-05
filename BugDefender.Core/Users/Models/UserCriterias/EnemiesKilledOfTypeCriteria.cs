@@ -8,7 +8,7 @@ namespace BugDefender.Core.Users.Models.UserCriterias
         public int Quantity { get; set; }
 
         public bool IsValid(StatsDefinition stats) => stats.KillsOfType.ContainsKey(EnemyID) && stats.KillsOfType[EnemyID] >= Quantity;
-        public string GetDescriptionString()
+        public override string ToString()
         {
             return $"Kill {Quantity} '{ResourceManager.Enemies.GetResource(EnemyID).Name}' enemies.";
         }

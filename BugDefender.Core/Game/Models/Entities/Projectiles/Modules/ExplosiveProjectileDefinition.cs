@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {
-    public class ExplosiveProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute, IDamageAttribute
+    public class ExplosiveProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute
     {
         public float Speed { get; set; }
         public float Damage { get; set; }
@@ -31,7 +31,7 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 
         public IProjectileModule Copy() => new ExplosiveProjectileDefinition(Speed, Damage, SplashRange, TriggerRange, Acceleration, IsGuided, SlowingFactor, SlowingDuration, DamageModifiers);
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 

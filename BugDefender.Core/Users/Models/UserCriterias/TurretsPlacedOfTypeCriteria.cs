@@ -8,7 +8,7 @@ namespace BugDefender.Core.Users.Models.UserCriterias
         public int Quantity { get; set; }
 
         public bool IsValid(StatsDefinition stats) => stats.TotalTurretsPlacedOfType.ContainsKey(TurretID) && stats.TotalTurretsPlacedOfType[TurretID] >= Quantity;
-        public string GetDescriptionString()
+        public override string ToString()
         {
             return $"Place {Quantity} '{ResourceManager.Turrets.GetResource(TurretID).Name}' turrets.";
         }

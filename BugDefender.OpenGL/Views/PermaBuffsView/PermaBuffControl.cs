@@ -33,7 +33,7 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
             var sb = new StringBuilder();
             sb.AppendLine("Requirements:");
             foreach (var req in buff.Criterias)
-                sb.AppendLine(req.GetDescriptionString());
+                sb.AppendLine(req.ToString());
             _requirementsTextBox = new TextboxControl()
             {
                 Width = 400,

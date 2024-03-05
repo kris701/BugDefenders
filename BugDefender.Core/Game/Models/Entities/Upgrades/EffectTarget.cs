@@ -22,7 +22,7 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
         }
 
         private string? _displayName;
-        public string GetDisplayName()
+        public override string ToString()
         {
             if (_displayName != null)
                 return _displayName;

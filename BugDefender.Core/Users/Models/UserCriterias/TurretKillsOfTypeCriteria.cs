@@ -13,7 +13,7 @@ namespace BugDefender.Core.Users.Models.UserCriterias
             stats.TotalTurretKillsOfType[TurretID].ContainsKey(EnemyID) &&
             stats.TotalTurretKillsOfType[TurretID][EnemyID] >= Quantity;
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             return $"Kill {Quantity} '{ResourceManager.Enemies.GetResource(EnemyID).Name}' enemies with a '{ResourceManager.Turrets.GetResource(TurretID).Name}' turret.";
         }

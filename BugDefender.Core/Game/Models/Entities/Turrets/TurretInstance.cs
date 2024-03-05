@@ -60,12 +60,12 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets
             return worth;
         }
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine(GetDefinition().GetDescriptionString());
-            sb.AppendLine(TurretInfo.GetDescriptionString());
+            sb.AppendLine(GetDefinition().ToString());
+            sb.AppendLine(TurretInfo.ToString());
             if (Kills != 0)
             {
                 sb.AppendLine(" ");

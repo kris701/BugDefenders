@@ -3,6 +3,5 @@
     public interface IModuleInfo<T>
     {
         public T Copy();
-        public string GetDescriptionString();
     }
 }

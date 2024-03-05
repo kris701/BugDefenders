@@ -22,21 +22,5 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles
             ModuleInfo = moduleInfo;
             CanDamage = canDamage;
         }
-
-        public string GetDescriptionString()
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine($"Name: {Name}");
-            if (CanDamage.Count != 0)
-            {
-                sb.AppendLine("Can Damage:");
-                foreach (var item in CanDamage)
-                    sb.Append($"{Enum.GetName(typeof(EnemyTerrrainTypes), item)}, ");
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
-        }
     }
 }

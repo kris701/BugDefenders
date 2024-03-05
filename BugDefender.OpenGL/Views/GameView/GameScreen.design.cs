@@ -322,7 +322,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 return;
             var sb = new StringBuilder();
             foreach (var req in _game.Context.Challenge.Criterias)
-                sb.AppendLine(req.GetDescriptionString());
+                sb.AppendLine(req.ToString());
             AddControl(1, new LabelControl()
             {
                 Text = $"Challenge: {_game.Context.Challenge.Name}",
