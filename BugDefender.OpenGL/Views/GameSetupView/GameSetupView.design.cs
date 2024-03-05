@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Resources;
-using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;

@@ -1,6 +1,5 @@
 ﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.Buffs;
-using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
@@ -15,7 +14,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseAnimatedView
     {
-        private PageHandler<PermaBuffControl> _buffPageHandler = new PageHandler<PermaBuffControl>()
+        private readonly PageHandler<PermaBuffControl> _buffPageHandler = new PageHandler<PermaBuffControl>()
         {
             LeftButtonX = 500,
             LeftButtonY = 110,

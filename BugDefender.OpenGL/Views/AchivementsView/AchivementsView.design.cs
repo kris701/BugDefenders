@@ -1,13 +1,10 @@
 ﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
-using BugDefender.Core.Users.Models.Buffs;
-using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views.AchivementsView;
 using BugDefender.OpenGL.Views.Helpers;
-using BugDefender.OpenGL.Views.PermaBuffsView;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,7 +14,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
 {
     public partial class AchivementsView : BaseAnimatedView
     {
-        private PageHandler<AchivementControl> _achivementPageHandler = new PageHandler<AchivementControl>()
+        private readonly PageHandler<AchivementControl> _achivementPageHandler = new PageHandler<AchivementControl>()
         {
             LeftButtonX = 500,
             LeftButtonY = 110,
