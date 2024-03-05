@@ -149,6 +149,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
         public void QueueEnemies()
         {
             Context.Money += Context.GameStyle.MoneyPrWave;
+            Context.Stats.MoneyEarned(Context.GameStyle.MoneyPrWave);
             Context.Wave++;
             Context.Stats.WaveStarted();
             foreach (var item in Context.EnemiesToSpawn[0])
