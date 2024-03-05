@@ -14,9 +14,16 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseAnimatedView
     {
-        private readonly int _selectionsPrPage = 5;
-        private readonly List<List<PermaBuffControl>> _upgradePages = new List<List<PermaBuffControl>>();
-        private int _currentUpgradePage = 0;
+        private PageHandler<PermaBuffControl> _buffPageHandler = new PageHandler<PermaBuffControl>()
+        {
+            LeftButtonX = 500,
+            LeftButtonY = 110,
+            RightButtonX = 1350,
+            RightButtonY = 110,
+            ItemsPrPage = 5,
+            X = 500,
+            Y = 250,
+        };
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -54,17 +61,9 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 sorted.Add(ResourceManager.Buffs.GetResource(id));
             sorted = sorted.OrderByDescending(x => !Parent.CurrentUser.Buffs.Contains(x.ID)).ThenByDescending(x => x.IsValid(Parent.CurrentUser)).ToList();
 
-            int page = -1;
-            int offset = 0;
-            int count = 0;
+            var controlList = new List<PermaBuffControl>();
             foreach (var buff in sorted)
             {
-                if (count % _selectionsPrPage == 0)
-                {
-                    page++;
-                    _upgradePages.Add(new List<PermaBuffControl>());
-                    offset = 0;
-                }
                 var newButton = new PermaBuffControl(
                     Parent,
                     buff,
@@ -81,58 +80,11 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                     },
                     buff.IsValid(Parent.CurrentUser))
                 {
-                    X = 500,
-                    Y = 250 + offset++ * 135 + 5,
                     Tag = buff
                 };
-                _upgradePages[page].Add(newButton);
-                AddControl(2, newButton);
-                count++;
+                controlList.Add(newButton);
             }
-
-            UpdateUpgradeSelectionPages();
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
-            {
-                _currentUpgradePage--;
-                if (_currentUpgradePage < 0)
-                    _currentUpgradePage = 0;
-                if (_currentUpgradePage >= _upgradePages.Count)
-                    _currentUpgradePage = _upgradePages.Count - 1;
-                UpdateUpgradeSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                Text = $"<",
-                X = 500,
-                Y = 110,
-                Height = 50,
-                Width = 50,
-                IsVisible = _upgradePages.Count > 1
-            });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
-            {
-                _currentUpgradePage++;
-                if (_currentUpgradePage < 0)
-                    _currentUpgradePage = 0;
-                if (_currentUpgradePage >= _upgradePages.Count)
-                    _currentUpgradePage = _upgradePages.Count - 1;
-                UpdateUpgradeSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                Text = $">",
-                X = 1350,
-                Y = 110,
-                Height = 50,
-                Width = 50,
-                IsVisible = _upgradePages.Count > 1
-            });
+            _buffPageHandler.Initialize(controlList, this);
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {

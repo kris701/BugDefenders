@@ -25,15 +25,5 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
             var keyState = Keyboard.GetState();
             _escapeKeyWatcher.Update(keyState);
         }
-
-        private void UpdateUpgradeSelectionPages()
-        {
-            foreach (var buttons in _upgradePages)
-                foreach (var control in buttons)
-                    control.IsVisible = false;
-
-            foreach (var control in _upgradePages[_currentUpgradePage])
-                control.IsVisible = true;
-        }
     }
 }
