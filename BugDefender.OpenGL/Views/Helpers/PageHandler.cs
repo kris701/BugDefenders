@@ -1,4 +1,6 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views.PermaBuffsView;
 using Microsoft.Xna.Framework;
@@ -9,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BugDefender.OpenGL.Engine.Helpers
+namespace BugDefender.OpenGL.Views.Helpers
 {
     public class PageHandler<T> where T : IControl
     {
