@@ -83,6 +83,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 {
                     X = 500,
                     Y = 250 + offset++ * 135 + 5,
+                    Tag = buff
                 };
                 _upgradePages[page].Add(newButton);
                 AddControl(2, newButton);
