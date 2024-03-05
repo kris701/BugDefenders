@@ -1,8 +1,8 @@
 ﻿using BugDefender.Core.Resources;
-using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -16,41 +16,16 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private TextboxControl _mapDescriptionTextbox;
         private ButtonControl _startButton;
 
-        private readonly int _selectionsPrPage = 13;
-        private readonly List<List<ButtonControl>> _mapPages = new List<List<ButtonControl>>();
-        private int _currentMapPage = 0;
-        private readonly List<List<ButtonControl>> _gameStylePages = new List<List<ButtonControl>>();
-        private int _currentGameStylePage = 0;
+        private PageHandler<ButtonControl> _mapPageHandler;
+        private PageHandler<ButtonControl> _gamestylePageHandler;
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl()
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
-            });
-
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Engine.Alignment.Middle,
-                Y = 100,
-                Height = 75,
-                Width = 800,
-                Text = "Game Setup",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(48)
-            });
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Alignment.Middle,
-                Y = 175,
-                Height = 35,
-                Width = 700,
-                Text = $"Select a map and a gamestyle to start.",
-                Font = BasicFonts.GetFont(16),
-                FontColor = Color.White
-            });
+            BasicMenuPage.GenerateBaseMenu(
+                this,
+                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                "Game Setup",
+                "Select a map and a gamestyle to start.");
 
             SetupPreviewPanel(50, 225, 900, 750);
             SetupMapsView(965, 225, 445, 750);
@@ -171,80 +146,36 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 FontColor = Color.White
             });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            _mapPageHandler = new PageHandler<ButtonControl>()
             {
-                _currentMapPage--;
-                if (_currentMapPage < 0)
-                    _currentMapPage = 0;
-                if (_currentMapPage >= _mapPages.Count)
-                    _currentMapPage = _mapPages.Count - 1;
-                UpdateMapSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                Text = $"<",
-                X = x + 30,
-                Y = y + 10,
-                Height = 50,
-                Width = 50,
-                IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
-            });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
-            {
-                _currentMapPage++;
-                if (_currentMapPage < 0)
-                    _currentMapPage = 0;
-                if (_currentMapPage >= _mapPages.Count)
-                    _currentMapPage = _mapPages.Count - 1;
-                UpdateMapSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                Text = $">",
-                X = x + width - 80,
-                Y = y + 10,
-                Height = 50,
-                Width = 50,
-                IsVisible = ResourceManager.Maps.GetResources().Count > _selectionsPrPage
-            });
+                LeftButtonX = x + 30,
+                LeftButtonY = y + 10,
+                RightButtonX = x + width - 80,
+                RightButtonY = y + 10,
+                ItemsPrPage = 13,
+                X = x + 10,
+                Y = y + 70,
+            };
 
-            int count = 0;
-            int page = -1;
-            int offset = 0;
-            foreach (var mapID in ResourceManager.Maps.GetResources())
+            var controlList = new List<ButtonControl>();
+            var ids = ResourceManager.Maps.GetResources();
+            foreach (var id in ids)
             {
-                if (count % _selectionsPrPage == 0)
-                {
-                    page++;
-                    _mapPages.Add(new List<ButtonControl>());
-                    offset = 0;
-                }
-                var newButton = new ButtonControl(Parent, clicked: SelectMap_Click)
+                var map = ResourceManager.Maps.GetResource(id);
+                controlList.Add(new ButtonControl(Parent, clicked: SelectMap_Click)
                 {
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                     Font = BasicFonts.GetFont(12),
-                    Text = $"{ResourceManager.Maps.GetResource(mapID).Name}",
+                    Text = $"{map.Name}",
                     FontColor = Color.White,
-                    X = x + 10,
-                    Y = y + 70 + offset++ * 50,
                     Height = 50,
                     Width = width - 20,
-                    Tag = mapID,
-                    IsVisible = false
-                };
-                _mapPages[page].Add(newButton);
-                AddControl(2, newButton);
-                count++;
+                    Tag = map
+                });
             }
 
-            UpdateMapSelectionPages();
+            _mapPageHandler.Initialize(controlList, this);
         }
 
         private void SetupGameStyleView(float x, float y, float width, float height)
@@ -267,81 +198,36 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 FontColor = Color.White
             });
+            _gamestylePageHandler = new PageHandler<ButtonControl>()
+            {
+                LeftButtonX = x + 30,
+                LeftButtonY = y + 10,
+                RightButtonX = x + width - 80,
+                RightButtonY = y + 10,
+                ItemsPrPage = 13,
+                X = x + 10,
+                Y = y + 70,
+            };
 
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
+            var controlList = new List<ButtonControl>();
+            var ids = ResourceManager.GameStyles.GetResources();
+            foreach (var id in ids)
             {
-                _currentGameStylePage--;
-                if (_currentGameStylePage < 0)
-                    _currentGameStylePage = 0;
-                if (_currentGameStylePage >= _gameStylePages.Count)
-                    _currentGameStylePage = _gameStylePages.Count - 1;
-                UpdateGameStyleSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                Text = $"<",
-                X = x + 30,
-                Y = y + 10,
-                Height = 50,
-                Width = 50,
-                IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
-            });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
-            {
-                _currentGameStylePage++;
-                if (_currentGameStylePage < 0)
-                    _currentGameStylePage = 0;
-                if (_currentGameStylePage >= _gameStylePages.Count)
-                    _currentGameStylePage = _gameStylePages.Count - 1;
-                UpdateGameStyleSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
-                Text = $">",
-                X = x + width - 80,
-                Y = y + 10,
-                Height = 50,
-                Width = 50,
-                IsVisible = ResourceManager.GameStyles.GetResources().Count > _selectionsPrPage
-            });
-
-            int count = 0;
-            int page = -1;
-            int offset = 0;
-            foreach (var gameStyleID in ResourceManager.GameStyles.GetResources())
-            {
-                if (count % _selectionsPrPage == 0)
-                {
-                    page++;
-                    _gameStylePages.Add(new List<ButtonControl>());
-                    offset = 0;
-                }
-                var newButton = new ButtonControl(Parent, clicked: SelectGameStyle_Click)
+                var gameStyle = ResourceManager.GameStyles.GetResource(id);
+                controlList.Add(new ButtonControl(Parent, clicked: SelectGameStyle_Click)
                 {
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                     Font = BasicFonts.GetFont(12),
-                    Text = $"{ResourceManager.GameStyles.GetResource(gameStyleID).Name}",
+                    Text = $"{gameStyle.Name}",
                     FontColor = Color.White,
-                    X = x + 10,
-                    Y = y + 70 + offset++ * 50,
                     Height = 50,
                     Width = width - 20,
-                    Tag = gameStyleID,
-                    IsVisible = false
-                };
-                _gameStylePages[page].Add(newButton);
-                AddControl(2, newButton);
-                count++;
+                    Tag = gameStyle
+                });
             }
 
-            UpdateGameStyleSelectionPages();
+            _gamestylePageHandler.Initialize(controlList, this);
         }
     }
 }

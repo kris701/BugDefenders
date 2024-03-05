@@ -29,6 +29,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
                     _previousBuffs.Add(achivement);
             }
             var buffs = ResourceManager.Buffs.GetResources();
+            bool any = false;
             foreach (var id in buffs)
             {
                 if (_previousBuffs.Contains(id) || Parent.Parent.CurrentUser.Buffs.Contains(id))
@@ -37,9 +38,11 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
                 if (buff.IsValid(Parent.Parent.CurrentUser))
                 {
                     _previousBuffs.Add(buff.ID);
-                    return new NotificationItem("Buff Available!", buff, false, (s) => { Parent.Skip(); });
+                    any = true;
                 }
             }
+            if (any)
+                return new NotificationItem("Buff Available!", new ManualDefinition($"Update Available", $"A new buff is a available. Go to the buff menu to see what it is.."), false, (s) => { Parent.Skip(); });
             return null;
         }
     }

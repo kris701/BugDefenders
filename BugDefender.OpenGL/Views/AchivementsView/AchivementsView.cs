@@ -25,15 +25,5 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
             var keyState = Keyboard.GetState();
             _escapeKeyWatcher.Update(keyState);
         }
-
-        private void UpdateAchivementSelectionPages()
-        {
-            foreach (var buttons in _achivementsPages)
-                foreach (var control in buttons)
-                    control.IsVisible = false;
-
-            foreach (var control in _achivementsPages[_currentAchivementsPage])
-                control.IsVisible = true;
-        }
     }
 }
