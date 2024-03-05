@@ -1,7 +1,6 @@
 ﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Resources.Integrity;
 using BugDefender.Core.Users;
-using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;

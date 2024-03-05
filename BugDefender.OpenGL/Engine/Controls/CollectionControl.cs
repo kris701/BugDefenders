@@ -11,7 +11,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         public override void Initialize()
         {
             base.Initialize();
-            foreach(var child in Children)
+            foreach (var child in Children)
             {
                 child.OffsetFrom(this);
                 child.Initialize();
@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (!IsVisible)
                 return;
 
-            foreach(var child in Children)
+            foreach (var child in Children)
                 child.Draw(gameTime, spriteBatch);
         }
     }
