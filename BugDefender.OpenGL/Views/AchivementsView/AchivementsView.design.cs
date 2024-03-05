@@ -29,33 +29,11 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
         };
         public override void Initialize()
         {
-            AddControl(0, new TileControl()
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
-            });
-
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Alignment.Middle,
-                Y = 100,
-                Height = 75,
-                Width = 800,
-                Text = "Achivements",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(48)
-            });
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Alignment.Middle,
-                Y = 175,
-                Height = 35,
-                Width = 700,
-                Text = $"You have {Parent.CurrentUser.Achivements.Count} unlocked! There are still {ResourceManager.Achivements.GetResources().Count - Parent.CurrentUser.Achivements.Count} to go!",
-                Font = BasicFonts.GetFont(16),
-                FontColor = Color.White
-            });
+            BasicMenuPage.GenerateBaseMenu(
+                this,
+                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                "Achivements",
+                $"You have {Parent.CurrentUser.Achivements.Count} unlocked! There are still {ResourceManager.Achivements.GetResources().Count - Parent.CurrentUser.Achivements.Count} to go!");
 
             var ids = ResourceManager.Achivements.GetResources();
             var sorted = new List<AchivementDefinition>();

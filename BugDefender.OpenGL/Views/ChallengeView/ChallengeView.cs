@@ -56,7 +56,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             DateTime a = DateTime.Today.AddDays(1);
             DateTime now = DateTime.Now;
             TimeSpan ts = a - now;
-            _waitLabel.Text = $"{_remainingChallenges.Count} challenges remaining for today. {ts.ToString("hh\\:mm\\:ss")} until reroll";
+            _waitLabel.Text = $"{ts.ToString("hh\\:mm\\:ss")}";
         }
 
         private void StartButton_Click(ButtonControl sender)

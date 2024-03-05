@@ -20,39 +20,13 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private PageHandler<ButtonControl> _mapPageHandler;
         private PageHandler<ButtonControl> _gamestylePageHandler;
 
-        private readonly int _selectionsPrPage = 13;
-        private readonly List<List<ButtonControl>> _gameStylePages = new List<List<ButtonControl>>();
-        private int _currentGameStylePage = 0;
-
         public override void Initialize()
         {
-            AddControl(0, new TileControl()
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
-            });
-
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Engine.Alignment.Middle,
-                Y = 100,
-                Height = 75,
-                Width = 800,
-                Text = "Game Setup",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(48)
-            });
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Alignment.Middle,
-                Y = 175,
-                Height = 35,
-                Width = 700,
-                Text = $"Select a map and a gamestyle to start.",
-                Font = BasicFonts.GetFont(16),
-                FontColor = Color.White
-            });
+            BasicMenuPage.GenerateBaseMenu(
+                this,
+                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                "Game Setup",
+                "Select a map and a gamestyle to start.");
 
             SetupPreviewPanel(50, 225, 900, 750);
             SetupMapsView(965, 225, 445, 750);

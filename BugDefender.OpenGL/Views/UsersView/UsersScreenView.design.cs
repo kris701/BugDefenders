@@ -2,6 +2,7 @@
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -17,33 +18,11 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
 
         public override void Initialize()
         {
-            AddControl(0, new TileControl()
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
-            });
-
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Engine.Alignment.Middle,
-                Y = 100,
-                Height = 75,
-                Width = 800,
-                Text = "Users",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(48)
-            });
-            AddControl(0, new LabelControl()
-            {
-                HorizontalAlignment = Alignment.Middle,
-                Y = 175,
-                Height = 35,
-                Width = 700,
-                Text = $"Users contain their own settings, scores, buffs, etc.",
-                Font = BasicFonts.GetFont(16),
-                FontColor = Color.White
-            });
+            BasicMenuPage.GenerateBaseMenu(
+                this,
+                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                "Users",
+                "Users contain their own settings, scores, buffs, etc.");
 
             _nameInputBox = new TextInputControl(Parent, AddUserInputTextBox_Enter)
             {
