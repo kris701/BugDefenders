@@ -3,10 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BugDefender.OpenGL.Engine
 {
-    public enum Alignment { None, Left, Middle, Right }
+    public enum HorizontalAlignment { None, Left, Middle, Right }
+    public enum VerticalAlignment { None, Top, Middle, Bottom }
     public interface IControl
     {
-        public Alignment HorizontalAlignment { get; set; }
+        public HorizontalAlignment HorizontalAlignment { get; set; }
+        public VerticalAlignment VerticalAlignment { get; set; }
 
         public bool IsVisible { get; set; }
         public float X { get; set; }
@@ -21,5 +23,6 @@ namespace BugDefender.OpenGL.Engine
         public void Initialize(); // Constructor level initialization
         public void Update(GameTime gameTime); // Update each frame
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch); // Draw each frame
+        public void OffsetFrom(IControl parent);
     }
 }

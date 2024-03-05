@@ -5,7 +5,8 @@ namespace BugDefender.OpenGL.Engine.Controls
 {
     public abstract class BaseControl : IControl
     {
-        public Alignment HorizontalAlignment { get; set; } = Alignment.None;
+        public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.None;
+        public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.None;
 
         public float Rotation { get; set; } = 0;
         public bool IsVisible { get; set; } = true;
@@ -66,9 +67,15 @@ namespace BugDefender.OpenGL.Engine.Controls
         {
             switch (HorizontalAlignment)
             {
-                case Alignment.Left: X = 0; break;
-                case Alignment.Right: X = GameWindow.BaseScreenSize.X - Width; break;
-                case Alignment.Middle: X = GameWindow.BaseScreenSize.X / 2 - Width / 2; break;
+                case HorizontalAlignment.Left: X = 0; break;
+                case HorizontalAlignment.Right: X = GameWindow.BaseScreenSize.X - Width; break;
+                case HorizontalAlignment.Middle: X = GameWindow.BaseScreenSize.X / 2 - Width / 2; break;
+            }
+            switch (VerticalAlignment)
+            {
+                case VerticalAlignment.Top: Y = 0; break;
+                case VerticalAlignment.Bottom: Y = GameWindow.BaseScreenSize.Y - Height; break;
+                case VerticalAlignment.Middle: Y = GameWindow.BaseScreenSize.Y / 2 - Height / 2; break;
             }
         }
 
@@ -82,6 +89,12 @@ namespace BugDefender.OpenGL.Engine.Controls
         {
         }
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+
+        public void OffsetFrom(IControl parent)
+        {
+            X += parent.X;
+            Y += parent.Y;
+        }
 
         internal Color GetAlphaColor() => new Color(255, 255, 255, Alpha);
 

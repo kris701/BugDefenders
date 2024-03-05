@@ -22,7 +22,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 1050,
                 Font = BasicFonts.GetFont(12),
                 Text = "Copyright Kristian Skov Johansen",
@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 200,
                 Font = BasicFonts.GetFont(72),
                 Text = "Bug Defenders",
@@ -51,7 +51,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, _continueButton);
             _startGame = new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 300,
                 Width = 300,
                 Height = 50,
@@ -63,7 +63,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, _startGame);
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 350,
                 Width = 300,
                 Height = 50,
@@ -74,7 +74,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 400,
                 Width = 300,
                 Height = 50,
@@ -85,7 +85,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 450,
                 Width = 300,
                 Height = 50,
@@ -96,7 +96,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView.AchivementsView(Parent)))
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 500,
                 Width = 300,
                 Height = 50,
@@ -107,7 +107,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new ChallengeView.ChallengeView(Parent)))
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 550,
                 Width = 300,
                 Height = 50,
@@ -118,7 +118,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 600,
                 Width = 300,
                 Height = 50,
@@ -163,7 +163,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Limit = 50,
                 IsVisible = false,
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 700
             };
             AddControl(1, _cheatsInput);

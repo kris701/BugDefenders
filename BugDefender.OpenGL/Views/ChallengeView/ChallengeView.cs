@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
@@ -60,11 +61,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
 
         private void StartButton_Click(ButtonControl sender)
         {
-            if (sender.Tag is Guid challengeId)
-            {
-                var challenge = ResourceManager.Challenges.GetResource(challengeId);
+            if (sender.Tag is ChallengeDefinition challenge)
                 SwitchView(new GameScreen.GameScreen(Parent, challenge));
-            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
             {
                 AddControl(0, new LabelControl()
                 {
-                    HorizontalAlignment = Alignment.Middle,
+                    HorizontalAlignment = HorizontalAlignment.Middle,
                     Y = 215 + (count++ * 60 + 5),
                     Height = 60,
                     Width = 1200,

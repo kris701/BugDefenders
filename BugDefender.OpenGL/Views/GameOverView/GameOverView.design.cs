@@ -20,7 +20,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
 
             var gameOverLabel = new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 100,
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48),
@@ -34,7 +34,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             AddControl(1, gameOverLabel);
             AddControl(1, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 225,
                 Text = $"Score: {_score}, giving you {_credits} credits",
                 FontColor = Color.White,
@@ -42,7 +42,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             });
             AddControl(1, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 275,
                 Text = $"Played for {_gameTime.ToString("hh\\:mm\\:ss")}",
                 FontColor = Color.White,
@@ -51,7 +51,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
 
             AddControl(1, new BorderControl(new TileControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 350,
                 Width = 960,
                 Height = 540,
@@ -64,7 +64,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
 
             AddControl(1, new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenuView(Parent)); })
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 910,
                 Width = 400,
                 Height = 80,

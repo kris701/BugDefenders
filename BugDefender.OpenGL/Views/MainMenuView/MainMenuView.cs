@@ -32,7 +32,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             _continueButton!.IsVisible = File.Exists(Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json"));
             if (_continueButton.IsVisible)
             {
-                _startGame!.HorizontalAlignment = Engine.Alignment.None;
+                _startGame!.HorizontalAlignment = Engine.HorizontalAlignment.None;
                 _startGame!.X = 960;
             }
         }
