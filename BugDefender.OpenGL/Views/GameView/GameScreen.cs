@@ -364,19 +364,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private EnemyControl CreateNewEnemyControl(EnemyInstance entity)
         {
-            var animation = Parent.UIResources.GetAnimation<EnemyEntityDefinition>(entity.DefinitionID).OnCreate;
-            var textureSet = Parent.UIResources.GetTextureSet(animation);
             return new EnemyControl(Parent, entity)
             {
-                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
-                TileSet = textureSet.LoadedContents,
-                AutoPlay = true,
                 X = entity.X + _gameArea.X,
-                Y = entity.Y + _gameArea.Y,
-                Width = entity.Size,
-                Height = entity.Size,
-                Rotation = entity.Angle + (float)Math.PI / 2,
-                Tag = entity
+                Y = entity.Y + _gameArea.Y
             };
         }
 
