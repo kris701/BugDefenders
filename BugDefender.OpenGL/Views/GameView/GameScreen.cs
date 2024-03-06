@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
     public partial class GameScreen : BaseAnimatedView
     {
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
-        private Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
+        public static Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
         private static readonly string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
@@ -196,11 +196,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 button.IsEnabled = false;
                 button.FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
-            foreach (var buttons in _turretUpgradePages)
-                foreach (var control in buttons)
-                    RemoveControl(10, control);
-            _upgradesLeftButton.IsVisible = false;
-            _upgradesRightButton.IsVisible = false;
+            _upgradePageHandler.IsVisible = false;
+            _upgradePageHandler.UpdatePages();
         }
 
         private void Turret_Click(AnimatedButtonControl parent)
@@ -231,7 +228,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             SetTurretUpgradeField(_selectedTurret);
 
-            _turretStatesTextbox.Text = _selectedTurret.GetDescriptionString();
+            _turretStatesTextbox.Text = _selectedTurret.ToString();
             _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
 
@@ -360,35 +357,17 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             var textureSet = Parent.UIResources.GetTextureSet(animation);
             return new TurretControl(Parent, entity, clicked: Turret_Click)
             {
-                IsEnabled = true,
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
-                FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
-                TileSet = textureSet.LoadedContents,
-                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
                 X = _gameArea.X + entity.X,
-                Y = _gameArea.Y + entity.Y,
-                Width = entity.Size,
-                Height = entity.Size,
-                Rotation = entity.Angle + (float)Math.PI / 2,
-                Tag = entity
+                Y = _gameArea.Y + entity.Y
             };
         }
 
         private EnemyControl CreateNewEnemyControl(EnemyInstance entity)
         {
-            var animation = Parent.UIResources.GetAnimation<EnemyEntityDefinition>(entity.DefinitionID).OnCreate;
-            var textureSet = Parent.UIResources.GetTextureSet(animation);
             return new EnemyControl(Parent, entity)
             {
-                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
-                TileSet = textureSet.LoadedContents,
-                AutoPlay = true,
                 X = entity.X + _gameArea.X,
-                Y = entity.Y + _gameArea.Y,
-                Width = entity.Size,
-                Height = entity.Size,
-                Rotation = entity.Angle + (float)Math.PI / 2,
-                Tag = entity
+                Y = entity.Y + _gameArea.Y
             };
         }
 
@@ -470,14 +449,17 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void UpdateTurretPurchaseButtons()
         {
-            foreach (var turret in _turretPages[_currentTurretPage])
+            foreach (var page in _turretPageHandler.Pages)
             {
-                if (turret.Tag is TurretDefinition def)
+                foreach (var turret in page)
                 {
-                    if (_game.Context.Money < def.Cost || _game.Context.Wave < def.AvailableAtWave)
-                        turret.IsEnabled = false;
-                    else
-                        turret.IsEnabled = true;
+                    if (turret.Tag is TurretDefinition def)
+                    {
+                        if (_game.Context.Money < def.Cost || _game.Context.Wave < def.AvailableAtWave)
+                            turret.IsEnabled = false;
+                        else
+                            turret.IsEnabled = true;
+                    }
                 }
             }
         }
@@ -488,7 +470,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (control == null)
                 return;
             control.SetTurretAnimation(Parent.UIResources.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
-            control.Initialize();
             Parent.UIResources.StopSoundEffect(control.CurrentSoundEffect);
             control.CurrentSoundEffect = Parent.UIResources.PlaySoundEffect(Parent.UIResources.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             if (turret.TurretInfo is AOETurretDefinition def)
@@ -513,7 +494,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (control == null)
                 return;
             control.SetTurretAnimation(Parent.UIResources.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnIdle);
-            control.Initialize();
             Parent.UIResources.StopSoundEffect(control.CurrentSoundEffect);
         }
 
@@ -614,7 +594,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(def.ModuleInfo) * 2);
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
-                _turretStatesTextbox.Text = new TurretInstance(def).GetDescriptionString();
+                _turretStatesTextbox.Text = new TurretInstance(def).ToString();
             }
         }
 
@@ -624,7 +604,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 if (!Directory.Exists(_saveDir))
                     Directory.CreateDirectory(_saveDir);
-                var saveFile = Path.Combine(_saveDir, $"{Parent.CurrentUser.ID}_save.json");
+                var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
                 _game.Context.Save(new FileInfo(saveFile));
             }
         }
@@ -657,7 +637,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     if (result == GameResult.ChallengeSuccess)
                     {
                         credits += _game.Context.Challenge.Reward;
-                        Parent.CurrentUser.CompletedChallenges.Add(_game.Context.Challenge.ID);
+                        Parent.UserManager.CurrentUser.CompletedChallenges.Add(_game.Context.Challenge.ID);
                     }
                 }
 
@@ -667,11 +647,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #endif
                 if (result != GameResult.ChallengeLost)
                 {
-                    Parent.CurrentUser.Stats.Combine(_game.Context.Stats);
+                    Parent.UserManager.CurrentUser.Stats.Combine(_game.Context.Stats);
                     credits += (_game.Context.Score / 100);
-                    Parent.CurrentUser.Credits += credits;
-                    Parent.UserManager.CheckAndApplyAchivements(Parent.CurrentUser);
-                    Parent.UserManager.SaveUser(Parent.CurrentUser);
+                    Parent.UserManager.CurrentUser.Credits += credits;
+                    Parent.UserManager.CheckAndApplyAchivements();
+                    Parent.UserManager.SaveUser();
                 }
 #if RELEASE
                 }
@@ -689,64 +669,31 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             return 1;
         }
 
-        private void UpdateTurretSelectionPages()
-        {
-            foreach (var buttons in _turretPages)
-                foreach (var control in buttons)
-                    control.IsVisible = false;
-
-            foreach (var control in _turretPages[_currentTurretPage])
-                control.IsVisible = true;
-        }
-
         private void SetTurretUpgradeField(TurretInstance turret)
         {
-            _upgradesLeftButton.IsVisible = false;
-            _upgradesRightButton.IsVisible = false;
-            int count = 1;
-            int page = 0;
+            int pageIndex = 0;
             int offset = 0;
-            _turretUpgradePages.Clear();
-            _currentTurretUpgradePage = 0;
-            _turretUpgradePages.Add(new List<UpgradePanel>());
+            int count = 0;
             foreach (var upgrade in turret.GetDefinition().Upgrades)
             {
                 if (turret.HasUpgrades.Contains(upgrade.ID))
                     continue;
-                if (count++ % (_upgradeSelectionsPrPage + 1) == 0)
+                count++;
+                _upgradePageHandler.Pages[pageIndex][offset].IsVisible = true;
+                _upgradePageHandler.Pages[pageIndex][offset].SetUpgrade(upgrade, _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID));
+                offset++;
+                if (offset % _upgradePageHandler.ItemsPrPage == 0)
                 {
-                    page++;
-                    _turretUpgradePages.Add(new List<UpgradePanel>());
+                    pageIndex++;
                     offset = 0;
-                    _upgradesLeftButton.IsVisible = true;
-                    _upgradesRightButton.IsVisible = true;
                 }
-                var upgradePanel = new UpgradePanel(Parent, BuyUpgrade_Click, upgrade, _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID))
-                {
-                    FillColor = Parent.UIResources.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
-                    X = _upgradesLeftButton.X,
-                    Y = _upgradesLeftButton.Y + (offset++ * 175) + 30,
-                    Height = 160,
-                    Width = 300,
-                    Tag = upgrade,
-                    IsVisible = false
-                };
-                _turretUpgradePages[page].Add(upgradePanel);
-                upgradePanel.Initialize();
-                AddControl(10, upgradePanel);
             }
-
-            UpdateTurretUpgradeSelectionPages();
-        }
-
-        private void UpdateTurretUpgradeSelectionPages()
-        {
-            foreach (var buttons in _turretUpgradePages)
-                foreach (var control in buttons)
-                    control.IsVisible = false;
-
-            foreach (var control in _turretUpgradePages[_currentTurretUpgradePage])
-                control.IsVisible = true;
+            _upgradePageHandler.IsVisible = true;
+            _upgradePageHandler.PageIndex = 0;
+            _upgradePageHandler.MinPage = 0;
+            _upgradePageHandler.MaxPage = (int)Math.Ceiling((double)count / _upgradePageHandler.ItemsPrPage);
+            _upgradePageHandler.MaxItem = count;
+            _upgradePageHandler.UpdatePages();
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace BugDefender.Core.Users.Models
+﻿using System.Text.Json.Serialization;
+
+namespace BugDefender.Core.Users.Models
 {
-    public class UserDefinition<T>
+    public class UserDefinition<T> where T : new()
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
@@ -14,6 +16,22 @@
         public int Credits { get; set; }
         public T UserData { get; set; }
 
+        public UserDefinition(string name)
+        {
+            ID = Guid.NewGuid();
+            Name = name;
+            Buffs = new List<Guid>();
+            Achivements = new List<Guid>();
+            CompletedChallenges = new List<Guid>();
+            ChallengeDaySeed = 0;
+            HighScores = new List<ScoreDefinition>();
+            IsPrimary = false;
+            Stats = new StatsDefinition();
+            Credits = 0;
+            UserData = new T();
+        }
+
+        [JsonConstructor]
         public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<Guid> completedChallenges, int challengeDaySeed, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, int credits, T userData)
         {
             ID = iD;

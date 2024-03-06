@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	  <Nullable>enable</Nullable>
 	  <Authors>Kristian Skov Johansen</Authors>
+	  <Copyright>Kristian Skov Johansen</Copyright>
 	  <Product>Bug Defenders Core</Product>
 	  <Version>1.0.0</Version>
 	  <SelfContained>true</SelfContained>
@@ -12,6 +13,8 @@
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	  <TieredCompilation>false</TieredCompilation>
 	  <OutputPath>../Output/</OutputPath>
+	  <SignAssembly>True</SignAssembly>
+	  <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

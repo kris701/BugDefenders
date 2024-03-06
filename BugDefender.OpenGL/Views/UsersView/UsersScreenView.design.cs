@@ -93,9 +93,8 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 RemoveControl(1, item);
             foreach (var item in _usersDeleteButtons)
                 RemoveControl(2, item);
-            var allUsers = Parent.UserManager.GetAllUsers();
             var count = 0;
-            foreach (var user in allUsers)
+            foreach (var user in Parent.UserManager.Users)
             {
                 var newControl = new ButtonControl(Parent, ChangeUserButton_Click)
                 {

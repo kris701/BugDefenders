@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
-            _settings = parent.CurrentUser.UserData.Copy();
+            _settings = parent.UserManager.CurrentUser.UserData.Copy();
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
         }

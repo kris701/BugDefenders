@@ -19,7 +19,7 @@ namespace BugDefender.OpenGL.Views.Helpers
             });
             view.AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 100,
                 Height = 75,
                 Width = 800,
@@ -29,7 +29,7 @@ namespace BugDefender.OpenGL.Views.Helpers
             });
             view.AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 175,
                 Height = 35,
                 Width = 700,

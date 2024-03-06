@@ -26,7 +26,7 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
             instance.HasUpgrades.Add(ID);
         }
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 
@@ -34,9 +34,9 @@ namespace BugDefender.Core.Game.Models.Entities.Upgrades
             foreach (var effect in Effects)
             {
                 if (effect.Value != null)
-                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Value}");
+                    sb.AppendLine($"{effect} {effect.Value}");
                 else
-                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Modifier}x");
+                    sb.AppendLine($"{effect} {effect.Modifier}x");
             }
 
             return sb.ToString();

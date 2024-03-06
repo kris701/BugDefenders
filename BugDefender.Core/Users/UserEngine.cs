@@ -7,50 +7,80 @@ using BugDefender.Core.Users.Models;
 
 namespace BugDefender.Core.Users
 {
-    public class UserEngine<T>
+    public class UserEngine<T> where T : new()
     {
         public string UsersPath { get; } = "Users";
+        public List<UserDefinition<T>> Users { get; set; }
+        public UserDefinition<T> CurrentUser { get; set; }
 
         public UserEngine()
         {
             if (!Directory.Exists(UsersPath))
                 Directory.CreateDirectory(UsersPath);
-        }
 
-        public List<UserDefinition<T>> GetAllUsers()
-        {
-            var retList = new List<UserDefinition<T>>();
+            Users = new List<UserDefinition<T>>();
             if (Directory.Exists(UsersPath))
             {
                 foreach (var file in new DirectoryInfo(UsersPath).GetFiles())
                 {
                     var parsed = Deserialize(File.ReadAllText(file.FullName));
                     if (parsed != null && parsed.ID != Guid.Empty)
-                        retList.Add(parsed);
+                        Users.Add(parsed);
                 }
             }
-            return retList;
-        }
 
-        public void AddBuffUpgrade(UserDefinition<T> user, Guid id)
-        {
-            var buff = ResourceManager.Buffs.GetResource(id);
-            if (buff.IsValid(user) && user.Credits >= buff.Cost)
+            foreach (var user in Users)
             {
-                user.Credits -= buff.Cost;
-                user.Buffs.Add(id);
-                SaveUser(user);
-                ApplyBuffsToResources(user);
+                if (user.IsPrimary)
+                {
+                    SwitchUser(user);
+                    break;
+                }
+            }
+            if (CurrentUser != null && Users.Count > 0)
+                SwitchUser(Users[0]);
+            else
+            {
+                var newUser = AddNewUser("Default");
+                newUser.IsPrimary = true;
+                CurrentUser = newUser;
+                SaveUser();
             }
         }
 
-        public void ApplyBuffsToResources(UserDefinition<T> user)
+        public void SwitchUser(UserDefinition<T> toUser)
+        {
+            if (!Users.Contains(toUser))
+                throw new Exception("User not found!");
+            if (CurrentUser != null)
+            {
+                CurrentUser.IsPrimary = false;
+                SaveUser();
+            }
+            CurrentUser = toUser;
+            CurrentUser.IsPrimary = true;
+            ApplyBuffsToResources();
+        }
+
+        public void AddBuffUpgrade(Guid id)
+        {
+            var buff = ResourceManager.Buffs.GetResource(id);
+            if (buff.IsValid(CurrentUser) && CurrentUser.Credits >= buff.Cost)
+            {
+                CurrentUser.Credits -= buff.Cost;
+                CurrentUser.Buffs.Add(id);
+                SaveUser();
+                ApplyBuffsToResources();
+            }
+        }
+
+        private void ApplyBuffsToResources()
         {
             ResourceManager.ReloadResources();
 
             // Need to load projectile buffs first, since the projectile turret modules contain a projectile module
             bool any = false;
-            foreach (var id in user.Buffs)
+            foreach (var id in CurrentUser.Buffs)
             {
                 var buff = ResourceManager.Buffs.GetResource(id);
                 if (buff.Effect.TargetType == Models.Buffs.BuffEffectTypes.Projectile)
@@ -62,7 +92,7 @@ namespace BugDefender.Core.Users
             if (any)
                 ResourceManager.Turrets.Reload();
 
-            foreach (var id in user.Buffs)
+            foreach (var id in CurrentUser.Buffs)
             {
                 var buff = ResourceManager.Buffs.GetResource(id);
                 if (buff.Effect.TargetType != Models.Buffs.BuffEffectTypes.Projectile)
@@ -70,42 +100,54 @@ namespace BugDefender.Core.Users
             }
         }
 
-        public void CheckAndApplyAchivements(UserDefinition<T> user)
+        public void CheckAndApplyAchivements()
         {
             var achivements = ResourceManager.Achivements.GetResources();
+            bool changed = false;
             foreach (var id in achivements)
             {
-                if (!user.Achivements.Contains(id))
+                if (!CurrentUser.Achivements.Contains(id))
                 {
                     var achivement = ResourceManager.Achivements.GetResource(id);
-                    if (achivement.IsValid(user))
-                        user.Achivements.Add(id);
+                    if (achivement.IsValid(CurrentUser))
+                    {
+                        CurrentUser.Achivements.Add(id);
+                        changed = true;
+                    }
                 }
             }
+            if (changed)
+                SaveUser();
         }
 
-        public void AddNewUser(UserDefinition<T> user)
+        public UserDefinition<T> AddNewUser(string name)
         {
-            var target = Path.Combine(UsersPath, $"{user.ID}.json");
+            var user = new UserDefinition<T>(name);
+            var target = GetUserPath(user.ID);
             if (File.Exists(target))
                 throw new Exception("User already exists!");
             File.WriteAllText(target, Serialize(user));
+            Users.Add(user);
+            return user;
         }
 
         public void RemoveUser(UserDefinition<T> user)
         {
-            var target = Path.Combine(UsersPath, $"{user.ID}.json");
+            var target = GetUserPath(user.ID);
             if (File.Exists(target))
                 File.Delete(target);
+            Users.Remove(user);
         }
 
-        public void SaveUser(UserDefinition<T> user)
+        public void SaveUser()
         {
-            var target = Path.Combine(UsersPath, $"{user.ID}.json");
+            var target = GetUserPath(CurrentUser.ID);
             if (File.Exists(target))
                 File.Delete(target);
-            File.WriteAllText(target, Serialize(user));
+            File.WriteAllText(target, Serialize(CurrentUser));
         }
+
+        private string GetUserPath(Guid id) => Path.Combine(UsersPath, $"{id}.json");
 
         private string Serialize(UserDefinition<T> user)
         {

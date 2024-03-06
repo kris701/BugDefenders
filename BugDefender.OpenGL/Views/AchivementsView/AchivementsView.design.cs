@@ -30,20 +30,20 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 this,
                 Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Achivements",
-                $"You have {Parent.CurrentUser.Achivements.Count} unlocked! There are still {ResourceManager.Achivements.GetResources().Count - Parent.CurrentUser.Achivements.Count} to go!");
+                $"You have {Parent.UserManager.CurrentUser.Achivements.Count} unlocked! There are still {ResourceManager.Achivements.GetResources().Count - Parent.UserManager.CurrentUser.Achivements.Count} to go!");
 
             var ids = ResourceManager.Achivements.GetResources();
             var sorted = new List<AchivementDefinition>();
             foreach (var id in ids)
                 sorted.Add(ResourceManager.Achivements.GetResource(id));
-            sorted = sorted.OrderByDescending(x => Parent.CurrentUser.Achivements.Contains(x.ID)).ToList();
+            sorted = sorted.OrderByDescending(x => Parent.UserManager.CurrentUser.Achivements.Contains(x.ID)).ToList();
 
             var controlList = new List<AchivementControl>();
             foreach (var achivement in sorted)
                 controlList.Add(new AchivementControl(
                     Parent,
                     achivement,
-                    Parent.CurrentUser.Achivements.Contains(achivement.ID)));
+                    Parent.UserManager.CurrentUser.Achivements.Contains(achivement.ID)));
             _achivementPageHandler.Initialize(controlList, this);
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>

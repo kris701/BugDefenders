@@ -19,7 +19,7 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 
         public new ITurretModule Copy() => new PassiveTurretDefinition(Range, base.Copy().Effects);
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 
@@ -29,9 +29,9 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
             foreach (var effect in Effects)
             {
                 if (effect.Value != null)
-                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Value}");
+                    sb.AppendLine($"{effect.ToString()} {effect.Value}");
                 else
-                    sb.AppendLine($"{effect.GetDisplayName()} {effect.Modifier}x");
+                    sb.AppendLine($"{effect.ToString()} {effect.Modifier}x");
             }
 
             return sb.ToString();

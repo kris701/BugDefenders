@@ -29,7 +29,7 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets
             AvailableAtWave = availableAtWave;
         }
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 

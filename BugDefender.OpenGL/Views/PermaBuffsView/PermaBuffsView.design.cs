@@ -30,13 +30,13 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 this,
                 Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Permanent Buffs",
-                $"Currently {Parent.CurrentUser.Buffs.Count} buffs are applied. You have {Parent.CurrentUser.Credits} credits.");
+                $"Currently {Parent.UserManager.CurrentUser.Buffs.Count} buffs are applied. You have {Parent.UserManager.CurrentUser.Credits} credits.");
 
             var ids = ResourceManager.Buffs.GetResources();
             var sorted = new List<BuffDefinition>();
             foreach (var id in ids)
                 sorted.Add(ResourceManager.Buffs.GetResource(id));
-            sorted = sorted.OrderByDescending(x => !Parent.CurrentUser.Buffs.Contains(x.ID)).ThenByDescending(x => x.IsValid(Parent.CurrentUser)).ToList();
+            sorted = sorted.OrderByDescending(x => !Parent.UserManager.CurrentUser.Buffs.Contains(x.ID)).ThenByDescending(x => x.IsValid(Parent.UserManager.CurrentUser)).ToList();
 
             var controlList = new List<PermaBuffControl>();
             foreach (var buff in sorted)
@@ -48,14 +48,14 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                     {
                         if (x.Tag is BuffDefinition buffDef)
                         {
-                            if (Parent.CurrentUser.Credits >= buffDef.Cost)
+                            if (Parent.UserManager.CurrentUser.Credits >= buffDef.Cost)
                             {
-                                Parent.UserManager.AddBuffUpgrade(Parent.CurrentUser, buffDef.ID);
+                                Parent.UserManager.AddBuffUpgrade(buffDef.ID);
                                 SwitchView(new PermaBuffsView(Parent));
                             }
                         }
                     },
-                    buff.IsValid(Parent.CurrentUser))
+                    buff.IsValid(Parent.UserManager.CurrentUser))
                 {
                     Tag = buff
                 };

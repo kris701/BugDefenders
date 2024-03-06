@@ -75,9 +75,9 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
-                var oldSettings = Parent.CurrentUser.UserData.Copy();
+                var oldSettings = Parent.UserManager.CurrentUser.UserData.Copy();
                 var newSettings = _settings.Copy();
-                Parent.CurrentUser.UserData = newSettings;
+                Parent.UserManager.CurrentUser.UserData = newSettings;
                 Parent.ApplySettings();
                 SwitchView(new AcceptView.AcceptView(Parent, oldSettings, newSettings));
             })
@@ -130,7 +130,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         {
             AddControl(1, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset + 80,
                 Text = "Other",
                 Font = BasicFonts.GetFont(24),
@@ -191,7 +191,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
             AddControl(1, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset,
                 Text = "UI Scale",
                 Font = BasicFonts.GetFont(24),
@@ -233,7 +233,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         {
             AddControl(1, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset,
                 Text = "Texture packs",
                 Font = BasicFonts.GetFont(24),
@@ -272,7 +272,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         {
             AddControl(1, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset,
                 Text = "Music Volume",
                 Font = BasicFonts.GetFont(24),
@@ -310,7 +310,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         {
             AddControl(1, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset,
                 Text = "Sound Effects Volume",
                 Font = BasicFonts.GetFont(24),

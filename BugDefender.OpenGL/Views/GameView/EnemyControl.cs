@@ -2,23 +2,26 @@
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
-    public class EnemyControl : AnimatedTileControl
+    public class EnemyControl : CollectionControl
     {
-        private readonly GameWindow _parent;
         public FloatPoint VisualOffset { get; }
         public EnemyInstance Enemy { get; }
-        private TileControl _healthBar;
+
+        private readonly TileControl _healthBar;
+        private readonly AnimatedTileControl _enemyTile;
         private readonly float _initialHP;
         private readonly int _legalOffset = 5;
         public EnemyControl(GameWindow parent, EnemyInstance enemy)
         {
-            _parent = parent;
+            Width = enemy.Size;
+            Height = enemy.Size;
+
             _initialHP = enemy.Health;
             Enemy = enemy;
             var rnd = new Random();
@@ -26,46 +29,40 @@ namespace BugDefender.OpenGL.Views.GameView
                 rnd.Next(-_legalOffset, _legalOffset),
                 rnd.Next(-_legalOffset, _legalOffset)
                 );
-        }
 
-        public override void Initialize()
-        {
-            base.Initialize();
+            var animation = parent.UIResources.GetAnimation<EnemyEntityDefinition>(enemy.DefinitionID).OnCreate;
+            var textureSet = parent.UIResources.GetTextureSet(animation);
+            _enemyTile = new AnimatedTileControl()
+            {
+                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
+                TileSet = textureSet.LoadedContents,
+                AutoPlay = true,
+                Width = enemy.Size,
+                Height = enemy.Size,
+                Rotation = enemy.Angle + (float)Math.PI / 2,
+                Tag = enemy
+            };
+            Children.Add(_enemyTile);
             _healthBar = new TileControl()
             {
                 Width = Width,
                 Height = 5,
+                Y = -5,
                 FillColor = BasicTextures.GetBasicRectange(Color.Green)
             };
-            _healthBar.X = X;
-            _healthBar.Y = Y - 5;
-        }
-
-        public void SetEnemyAnimation(Guid id)
-        {
-            var textureSet = _parent.UIResources.GetTextureSet(id);
-            TileSet = textureSet.LoadedContents;
-            FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
-            Initialize();
+            Children.Add(_healthBar);
         }
 
         public override void Update(GameTime gameTime)
         {
-            _healthBar.Width = Width * (Enemy.Health / _initialHP);
+            _enemyTile.X = X;
+            _enemyTile.Y = Y;
+            _enemyTile.Rotation = Rotation;
             _healthBar.X = X;
             _healthBar.Y = Y - 5;
+            _healthBar.Width = Width * (Enemy.Health / _initialHP);
 
-            _healthBar.Update(gameTime);
             base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
-
-            base.Draw(gameTime, spriteBatch);
-            _healthBar.Draw(gameTime, spriteBatch);
         }
     }
 }

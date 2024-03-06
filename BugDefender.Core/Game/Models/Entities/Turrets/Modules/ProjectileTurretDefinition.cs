@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
-    public class ProjectileTurretDefinition : ITurretModule, IRangeAttribute, ICooldownAttribute
+    public class ProjectileTurretDefinition : ITurretModule, IRangeAttribute
     {
         public float Range { get; set; }
         public int Cooldown { get; set; }
@@ -34,7 +34,7 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
             };
         }
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 
@@ -44,7 +44,7 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
             sb.AppendLine($"Cooldown: {Cooldown}");
             sb.AppendLine();
             sb.AppendLine("Projectile:");
-            sb.AppendLine(ProjectileInfo.GetDescriptionString());
+            sb.AppendLine(ProjectileInfo.ToString());
 
             return sb.ToString();
         }

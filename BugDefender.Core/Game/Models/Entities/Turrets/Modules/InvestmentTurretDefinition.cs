@@ -14,7 +14,7 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
             };
         }
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 

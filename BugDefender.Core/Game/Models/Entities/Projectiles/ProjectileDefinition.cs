@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
-using System.Text;
 using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles
@@ -21,22 +20,6 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles
             Size = size;
             ModuleInfo = moduleInfo;
             CanDamage = canDamage;
-        }
-
-        public string GetDescriptionString()
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine($"Name: {Name}");
-            if (CanDamage.Count != 0)
-            {
-                sb.AppendLine("Can Damage:");
-                foreach (var item in CanDamage)
-                    sb.Append($"{Enum.GetName(typeof(EnemyTerrrainTypes), item)}, ");
-                sb.AppendLine();
-            }
-
-            return sb.ToString();
         }
     }
 }

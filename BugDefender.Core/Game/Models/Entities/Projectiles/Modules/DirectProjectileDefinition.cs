@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {
-    public class DirectProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute, IDamageAttribute
+    public class DirectProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute
     {
         public float Speed { get; set; }
         public float Damage { get; set; }
@@ -27,7 +27,7 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 
         public IProjectileModule Copy() => new DirectProjectileDefinition(Speed, Damage, Acceleration, IsGuided, SlowingFactor, SlowingDuration, DamageModifiers);
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 

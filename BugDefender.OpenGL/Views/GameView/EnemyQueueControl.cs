@@ -4,7 +4,6 @@ using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,7 @@ using System.Text;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
-    public class EnemyQueueControl : TileControl
+    public class EnemyQueueControl : CollectionControl
     {
         private readonly GameWindow _parent;
         private readonly AnimatedTileControl _iconControl;
@@ -20,20 +19,38 @@ namespace BugDefender.OpenGL.Views.GameView
         public EnemyQueueControl(GameWindow parent)
         {
             _parent = parent;
+            Width = 220;
+            Height = 70;
+
+            var background = new TileControl()
+            {
+                X = 0,
+                Y = 0,
+                Width = Width,
+                Height = Height,
+                FillColor = parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
+            };
+            Children.Add(background);
             _iconControl = new AnimatedTileControl()
             {
+                X = 10,
+                Y = Height / 2 - 25 / 2,
                 Width = 25,
                 Height = 25,
             };
+            Children.Add(_iconControl);
             _descriptionControl = new TextboxControl()
             {
-                Margin = 1,
+                X = 10 + _iconControl.Width,
+                Y = 10,
+                Margin = 3,
                 Font = BasicFonts.GetFont(8),
                 FontColor = Color.White,
                 Height = 50,
                 Width = 150,
                 Text = ""
             };
+            Children.Add(_descriptionControl);
         }
 
         public void UpdateToEnemy(List<Guid> wave, float evolution)
@@ -64,36 +81,6 @@ namespace BugDefender.OpenGL.Views.GameView
             }
 
             _descriptionControl.Text = sb.ToString();
-        }
-
-        public override void Initialize()
-        {
-            _iconControl.X = X + 10;
-            _iconControl.Y = Y + Height / 2 - _iconControl.Height / 2;
-            _iconControl.Initialize();
-
-            _descriptionControl.X = X + 10 + _iconControl.Width;
-            _descriptionControl.Y = Y + 10;
-            _descriptionControl.Initialize();
-
-            base.Initialize();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            _iconControl.Update(gameTime);
-            _descriptionControl.Update(gameTime);
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
-
-            base.Draw(gameTime, spriteBatch);
-            _iconControl.Draw(gameTime, spriteBatch);
-            _descriptionControl.Draw(gameTime, spriteBatch);
         }
     }
 }

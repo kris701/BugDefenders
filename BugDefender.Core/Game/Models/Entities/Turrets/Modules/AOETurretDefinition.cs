@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
-    public class AOETurretDefinition : ITurretModule, IRangeAttribute, ISlowingAttribute, ICooldownAttribute, IDamageAttribute
+    public class AOETurretDefinition : ITurretModule, IRangeAttribute, ISlowingAttribute
     {
         public float Range { get; set; }
         public float Damage { get; set; }
@@ -28,7 +28,7 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 
         public ITurretModule Copy() => new AOETurretDefinition(Range, Damage, Cooldown, SlowingFactor, SlowingDuration, DamageModifiers);
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 

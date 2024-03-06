@@ -58,7 +58,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
 
         private void AddUser(string text)
         {
-            Parent.CreateNewUser(text);
+            Parent.UserManager.AddNewUser(text);
             _update = true;
         }
 
@@ -66,13 +66,12 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
         {
             if (sender.Tag is UserDefinition<SettingsDefinition> user)
             {
-                if (Parent.CurrentUser.ID == user.ID)
+                if (Parent.UserManager.CurrentUser.ID == user.ID)
                 {
-                    var allUsers = Parent.UserManager.GetAllUsers();
-                    if (allUsers.Count == 1)
+                    if (Parent.UserManager.Users.Count == 1)
                         return;
-                    Parent.ChangeUser(allUsers.First(x => x.ID != user.ID));
-                    Parent.UserManager.RemoveUser(user);
+                    Parent.UserManager.SwitchUser(Parent.UserManager.Users.First(x => x.ID != user.ID));
+                    Parent.ApplySettings();
                     SwitchView(new UsersScreenView(Parent));
                 }
                 else
@@ -88,9 +87,10 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
         {
             if (sender.Tag is UserDefinition<SettingsDefinition> user)
             {
-                if (Parent.CurrentUser.ID != user.ID)
+                if (Parent.UserManager.CurrentUser.ID != user.ID)
                 {
-                    Parent.ChangeUser(user);
+                    Parent.UserManager.SwitchUser(user);
+                    Parent.ApplySettings();
                     SwitchView(new UsersScreenView(Parent));
                 }
             }
@@ -98,7 +98,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
 
         private void CheckValidUserInput()
         {
-            if (Parent.UserManager.GetAllUsers().Count > 10)
+            if (Parent.UserManager.Users.Count > 10)
             {
                 _nameInputBox.IsEnabled = false;
                 _acceptButton.IsEnabled = false;

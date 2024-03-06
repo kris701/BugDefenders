@@ -38,11 +38,10 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                     Parent,
                     ResourceManager.Challenges.GetResource(id),
                     StartButton_Click,
-                    Parent.CurrentUser.CompletedChallenges.Contains(id))
+                    Parent.UserManager.CurrentUser.CompletedChallenges.Contains(id))
                 {
                     X = 500,
-                    Y = 250 + count++ * 135 + 5,
-                    Tag = id
+                    Y = 250 + count++ * 135 + 5
                 };
                 AddControl(1, newControl);
             }

@@ -20,7 +20,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker
 
         public override void Update(GameTime gameTime)
         {
-            if (_parent.CurrentUser.UserData.FPSCounter)
+            if (_parent.UserManager.CurrentUser.UserData.FPSCounter)
             {
                 _currentFrames++;
                 _passed += gameTime.ElapsedGameTime;
@@ -35,7 +35,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            if (_parent.CurrentUser.UserData.FPSCounter)
+            if (_parent.UserManager.CurrentUser.UserData.FPSCounter)
                 spriteBatch.DrawString(BasicFonts.GetFont(16), $"FPS: {_frames}", new Vector2(0, 0), new Color(255, 0, 0, 255));
         }
     }

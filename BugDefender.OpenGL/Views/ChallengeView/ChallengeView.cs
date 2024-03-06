@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
@@ -13,7 +14,6 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
     {
         private static readonly Guid _id = new Guid("7fe5d5b5-3be0-4bc9-a27c-08448042b881");
         private readonly KeyWatcher _escapeKeyWatcher;
-        private static readonly string _saveDir = "Saves";
         private static readonly int _challengeCount = 5;
 
         private readonly List<Guid> _remainingChallenges;
@@ -29,10 +29,10 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             DateTime now = DateTime.Now;
             TimeSpan ts = now - a;
             int hashValue = Math.Abs(ts.Days);
-            if (Parent.CurrentUser.ChallengeDaySeed != hashValue)
+            if (Parent.UserManager.CurrentUser.ChallengeDaySeed != hashValue)
             {
-                Parent.CurrentUser.ChallengeDaySeed = hashValue;
-                Parent.CurrentUser.CompletedChallenges.Clear();
+                Parent.UserManager.CurrentUser.ChallengeDaySeed = hashValue;
+                Parent.UserManager.CurrentUser.CompletedChallenges.Clear();
             }
             var challenges = ResourceManager.Challenges.GetResources();
             var rnd = new Random(hashValue);
@@ -61,11 +61,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
 
         private void StartButton_Click(ButtonControl sender)
         {
-            if (sender.Tag is Guid challengeId)
-            {
-                var challenge = ResourceManager.Challenges.GetResource(challengeId);
+            if (sender.Tag is ChallengeDefinition challenge)
                 SwitchView(new GameScreen.GameScreen(Parent, challenge));
-            }
         }
     }
 }

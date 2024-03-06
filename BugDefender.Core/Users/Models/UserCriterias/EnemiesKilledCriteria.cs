@@ -6,7 +6,7 @@
 
         public bool IsValid(StatsDefinition stats) => stats.TotalKills >= Quantity;
 
-        public string GetDescriptionString()
+        public override string ToString()
         {
             return $"Kill {Quantity} enemies.";
         }

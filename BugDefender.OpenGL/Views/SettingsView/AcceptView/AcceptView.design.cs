@@ -21,7 +21,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 
             AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Engine.Alignment.Middle,
+                HorizontalAlignment = Engine.HorizontalAlignment.Middle,
                 Y = 100,
                 Height = 75,
                 Width = 800,
@@ -31,7 +31,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
             });
             AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 175,
                 Height = 35,
                 Width = 700,
@@ -41,7 +41,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
             });
             _timeLeftLabel = new LabelControl()
             {
-                HorizontalAlignment = Alignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 500,
                 Text = "10 seconds left",
                 Font = BasicFonts.GetFont(48),
