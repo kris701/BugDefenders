@@ -7,6 +7,7 @@
     <TieredCompilation>false</TieredCompilation>
 	  <Nullable>enable</Nullable>
 	  <Authors>Kristian Skov Johansen</Authors>
+	  <Copyright>Kristian Skov Johansen</Copyright>
 	  <Product>Bug Defenders</Product>
 	  <Version>0.1.1</Version>
 	  <PublishSingleFile>true</PublishSingleFile>
@@ -22,6 +23,8 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>C:\Users\kris7\OneDrive\Programming\_GitHub_\BugDefender\Git\BugDefender\sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 	  <!--<DefineConstants>$(DefineConstants);CENTERPOINT</DefineConstants>-->
