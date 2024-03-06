@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Resources;
-using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models.UserCriterias
 {

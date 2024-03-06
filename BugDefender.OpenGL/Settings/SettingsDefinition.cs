@@ -1,6 +1,4 @@
-﻿using BugDefender.Core.Users.Models;
-using System;
-using System.Text.Json.Serialization;
+﻿using System;
 
 namespace BugDefender.OpenGL.Settings
 {

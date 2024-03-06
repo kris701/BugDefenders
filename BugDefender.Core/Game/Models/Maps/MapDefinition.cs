@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BugDefender.Core.Game.Models.Maps
+﻿namespace BugDefender.Core.Game.Models.Maps
 {
     public class MapDefinition : IDefinition
     {

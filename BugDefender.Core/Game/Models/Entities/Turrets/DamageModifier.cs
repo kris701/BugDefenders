@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BugDefender.Core.Game.Models.Entities.Turrets
+﻿namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
     public class DamageModifier
     {

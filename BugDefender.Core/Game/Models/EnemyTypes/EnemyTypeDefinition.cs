@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BugDefender.Core.Game.Models.EnemyTypes
+﻿namespace BugDefender.Core.Game.Models.EnemyTypes
 {
     public class EnemyTypeDefinition : IDefinition
     {

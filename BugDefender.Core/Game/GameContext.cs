@@ -6,7 +6,6 @@ using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Challenges;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game
 {

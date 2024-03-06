@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BugDefender.Core.Users.Models
+﻿namespace BugDefender.Core.Users.Models
 {
     public class ScoreDefinition
     {

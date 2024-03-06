@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
-using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Enemies
 {
