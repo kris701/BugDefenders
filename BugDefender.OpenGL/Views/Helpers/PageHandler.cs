@@ -10,63 +10,74 @@ namespace BugDefender.OpenGL.Views.Helpers
 {
     public class PageHandler<T> where T : IControl
     {
-        private readonly List<List<T>> _pages = new List<List<T>>();
-        private int _pageIndex = 0;
-        private ButtonControl _leftButton;
-        private ButtonControl _rightButton;
+        public List<List<T>> Pages = new List<List<T>>();
+        public int PageIndex { get; set; } = 0;
 
         public float X { get; set; } = 0;
         public float Y { get; set; } = 0;
         public int ItemsPrPage { get; set; } = 5;
         public float Margin { get; set; } = 5;
+        public bool IsVisible { get; set; } = true;
 
+        public float ButtonSize { get; set; } = 50;
+        public int ButtonFontSize { get; set; } = 16;
         public float LeftButtonX { get; set; } = 0;
         public float LeftButtonY { get; set; } = 0;
         public float RightButtonX { get; set; } = 0;
         public float RightButtonY { get; set; } = 0;
+        public int MinPage { get; set; } = 0;
+        public int MaxPage { get; set; } = int.MaxValue;
+        public int MinItem { get; set; } = 0;
+        public int MaxItem { get; set; } = int.MaxValue;
+
+        private ButtonControl _leftButton;
+        private ButtonControl _rightButton;
 
         public void Initialize(List<T> items, BaseView parent)
         {
-            _pages.Clear();
+            foreach (var page in Pages)
+                foreach (var item in page)
+                    parent.RemoveControl(2, item);
+
+            Pages.Clear();
             int offset = 0;
             if (items.Count <= ItemsPrPage)
             {
-                _pages.Add(new List<T>());
+                Pages.Add(new List<T>());
                 foreach (var item in items)
                 {
                     item.X = X;
                     item.Y = Y + offset++ * item.Height + Margin;
                     item.IsVisible = true;
+                    Pages[0].Add(item);
                     parent.AddControl(2, item);
                 }
                 return;
             }
 
-            int page = -1;
+            int pageIndex = -1;
             int count = 0;
             foreach (var item in items)
             {
                 if (count % ItemsPrPage == 0)
                 {
-                    page++;
-                    _pages.Add(new List<T>());
+                    pageIndex++;
+                    Pages.Add(new List<T>());
                     offset = 0;
                 }
                 item.X = X;
                 item.Y = Y + offset++ * item.Height + Margin;
-                item.IsVisible = page == 0;
-                _pages[page].Add(item);
+                item.IsVisible = pageIndex == 0;
+                Pages[pageIndex].Add(item);
                 parent.AddControl(2, item);
                 count++;
             }
 
             _leftButton = new ButtonControl(parent.Parent, clicked: (s) =>
             {
-                _pageIndex--;
-                if (_pageIndex < 0)
-                    _pageIndex = 0;
-                if (_pageIndex >= _pages.Count)
-                    _pageIndex = _pages.Count - 1;
+                PageIndex--;
+                if (PageIndex < MinPage)
+                    PageIndex = MinPage;
                 UpdatePages();
             })
             {
@@ -74,23 +85,21 @@ namespace BugDefender.OpenGL.Views.Helpers
                 FillClickedColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FillDisabledColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(ButtonFontSize),
                 Text = $"<",
                 X = LeftButtonX,
                 Y = LeftButtonY,
-                Height = 50,
-                Width = 50,
-                IsVisible = _pages.Count > 1,
-                IsEnabled = false
+                Height = ButtonSize,
+                Width = ButtonSize,
+                IsEnabled = false,
+                IsVisible = false,
             };
             parent.AddControl(1, _leftButton);
             _rightButton = new ButtonControl(parent.Parent, clicked: (s) =>
             {
-                _pageIndex++;
-                if (_pageIndex < 0)
-                    _pageIndex = 0;
-                if (_pageIndex >= _pages.Count)
-                    _pageIndex = _pages.Count - 1;
+                PageIndex++;
+                if (PageIndex >= MaxPage)
+                    PageIndex = MaxPage;
                 UpdatePages();
             })
             {
@@ -98,34 +107,57 @@ namespace BugDefender.OpenGL.Views.Helpers
                 FillClickedColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FillDisabledColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(16),
+                Font = BasicFonts.GetFont(ButtonFontSize),
                 Text = $">",
                 X = RightButtonX,
                 Y = RightButtonY,
-                Height = 50,
-                Width = 50,
-                IsVisible = _pages.Count > 1
+                Height = ButtonSize,
+                Width = ButtonSize,
+                IsVisible = false
             };
             parent.AddControl(1, _rightButton);
+
+            if (MaxPage == int.MaxValue)
+                MaxPage = Pages.Count;
+            if (MaxPage - MinPage < 0)
+                throw new Exception("Impossible page limits!");
+            if (PageIndex < MinPage)
+                PageIndex = MaxPage;
+
+            UpdatePages();
         }
 
         public void UpdatePages()
         {
-            foreach (var buttons in _pages)
-                foreach (var control in buttons)
-                    control.IsVisible = false;
+            foreach (var items in Pages)
+                foreach (var item in items)
+                    item.IsVisible = false;
+            _leftButton.IsVisible = false;
+            _rightButton.IsVisible = false;
 
-            foreach (var control in _pages[_pageIndex])
-                control.IsVisible = true;
+            if (!IsVisible)
+                return;
 
-            if (_pageIndex == 0)
-                _leftButton.IsEnabled = false;
-            else
-                _leftButton.IsEnabled = true;
-            if (_pageIndex == _pages.Count - 1)
-                _rightButton.IsEnabled = false;
-            else
-                _rightButton.IsEnabled = true;
+            int count = PageIndex * ItemsPrPage;
+            foreach (var item in Pages[PageIndex])
+            {
+                item.IsVisible = count >= MinItem && count < MaxItem;
+                count++;
+            }
+
+            if (MaxPage - MinPage != 1)
+            { 
+                _leftButton.IsVisible = true;
+                _rightButton.IsVisible = true;
+                if (PageIndex == MinPage)
+                    _leftButton.IsEnabled = false;
+                else
+                    _leftButton.IsEnabled = true;
+                if (PageIndex == MaxPage - 1)
+                    _rightButton.IsEnabled = false;
+                else
+                    _rightButton.IsEnabled = true;
+            }
         }
     }
 }

@@ -26,6 +26,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         {
             Initialize();
             Parent.UIResources.PlaySong(ID);
+            Parent.UserManager.SaveUser();
             _cheatsInputWatcher = new KeysWatcher(new List<Keys>() { Keys.LeftAlt, Keys.Enter }, OpenCheatsMenu);
             _escapeInputWatcher = new KeyWatcher(Keys.Escape, CloseCheatsMenu);
 

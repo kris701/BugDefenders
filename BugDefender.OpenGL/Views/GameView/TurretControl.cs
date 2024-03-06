@@ -1,48 +1,60 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.ResourcePacks.EntityResources;
+using BugDefender.OpenGL.Screens.GameScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using static BugDefender.OpenGL.Engine.Controls.AnimatedButtonControl;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
-    public class TurretControl : AnimatedButtonControl
+    public class TurretControl : CollectionControl
     {
         public TurretInstance Instance { get; }
         public Guid CurrentSoundEffect { get; set; }
 
-        private readonly TileControl baseControl;
-        private readonly LabelControl turretLevelControl;
+        private readonly GameWindow _parent;
+        private readonly AnimatedButtonControl _turretControl;
+        private readonly LabelControl _turretLevelControl;
         private Guid _currentAnimation;
-        public TurretControl(GameWindow parent, TurretInstance instance, ClickedHandler clicked) : base(parent, clicked)
+        public TurretControl(GameWindow parent, TurretInstance instance, ClickedHandler clicked)
         {
+            _parent = parent;
             Instance = instance;
-            baseControl = new TileControl()
+            Width = instance.Size;
+            Height = instance.Size;
+
+            Children.Add(new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d")),
+                X = (Width - 35) / 2,
+                Y = (Height - 35) / 2,
+                FillColor = parent.UIResources.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d")),
                 Width = 35,
                 Height = 35,
-            };
-            turretLevelControl = new LabelControl()
+            });
+            _currentAnimation = parent.UIResources.GetAnimation<TurretEntityDefinition>(instance.DefinitionID).OnIdle;
+            var textureSet = parent.UIResources.GetTextureSet(_currentAnimation);
+            _turretControl = new AnimatedButtonControl(parent, clicked)
             {
+                TileSet = textureSet.LoadedContents,
+                FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
+                FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
+                FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
+                Rotation = instance.Angle + (float)Math.PI / 2,
+                Tag = instance
+            };
+            Children.Add(_turretControl);
+            _turretLevelControl = new LabelControl()
+            {
+                X = Width,
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 IsVisible = Instance.HasUpgrades.Count > 0,
                 Text = $"{Instance.HasUpgrades.Count}"
             };
-        }
-
-        public override void Initialize()
-        {
-            baseControl.X = X + (Width - baseControl.Width) / 2;
-            baseControl.Y = Y + (Height - baseControl.Height) / 2;
-            baseControl.Initialize();
-
-            turretLevelControl.X = X + Width;
-            turretLevelControl.Y = Y;
-            turretLevelControl.Initialize();
-            base.Initialize();
+            Children.Add(_turretLevelControl);
         }
 
         public void SetTurretAnimation(Guid id)
@@ -50,35 +62,24 @@ namespace BugDefender.OpenGL.Views.GameView
             if (id == _currentAnimation)
                 return;
             _currentAnimation = id;
-            var textureSet = Parent.UIResources.GetTextureSet(id);
-            TileSet = textureSet.LoadedContents;
-            FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
+            var textureSet = _parent.UIResources.GetTextureSet(id);
+            _turretControl.TileSet = textureSet.LoadedContents;
+            _turretControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
         }
 
         public void UpgradeTurretLevels(TurretInstance turret)
         {
             if (turret.HasUpgrades.Count > 0)
             {
-                turretLevelControl.Text = $"{turret.HasUpgrades.Count}";
-                turretLevelControl.IsVisible = true;
+                _turretLevelControl.Text = $"{turret.HasUpgrades.Count}";
+                _turretLevelControl.IsVisible = true;
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            baseControl.Update(gameTime);
-            turretLevelControl.Update(gameTime);
+            _turretControl.Rotation = Rotation;
             base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
-
-            baseControl.Draw(gameTime, spriteBatch);
-            base.Draw(gameTime, spriteBatch);
-            turretLevelControl.Draw(gameTime, spriteBatch);
         }
     }
 }

@@ -6,7 +6,9 @@ using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views.AchivementsView;
 using BugDefender.OpenGL.Views.GameView;
+using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -41,15 +43,21 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private readonly int _turretSelectionsPrPage = 13;
-        private readonly List<List<ButtonControl>> _turretPages = new List<List<ButtonControl>>();
-        private int _currentTurretPage = 0;
+        private PageHandler<ButtonControl> _turretPageHandler = new PageHandler<ButtonControl>()
+        {
+            ItemsPrPage = 13,
+            ButtonSize = 25,
+            ButtonFontSize = 10
+        };
 
-        private ButtonControl _upgradesLeftButton;
-        private ButtonControl _upgradesRightButton;
-        private readonly int _upgradeSelectionsPrPage = 3;
-        private readonly List<List<UpgradePanel>> _turretUpgradePages = new List<List<UpgradePanel>>();
-        private int _currentTurretUpgradePage = 0;
+        private PageHandler<UpgradePanel> _upgradePageHandler = new PageHandler<UpgradePanel>()
+        {
+            ItemsPrPage = 3,
+            ButtonSize = 25,
+            ButtonFontSize = 10,
+            Margin = 30,
+            IsVisible = false
+        };
 
         public override void Initialize()
         {
@@ -366,87 +374,34 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
-            {
-                _currentTurretPage--;
-                if (_currentTurretPage < 0)
-                    _currentTurretPage = 0;
-                if (_currentTurretPage >= _turretPages.Count)
-                    _currentTurretPage = _turretPages.Count - 1;
-                UpdateTurretSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(10),
-                Text = $"<",
-                X = xOffset + 10,
-                Y = yOffset + 10,
-                Height = 25,
-                Width = 25,
-                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
-            });
-            AddControl(1, new ButtonControl(Parent, clicked: (s) =>
-            {
-                _currentTurretPage++;
-                if (_currentTurretPage < 0)
-                    _currentTurretPage = 0;
-                if (_currentTurretPage >= _turretPages.Count)
-                    _currentTurretPage = _turretPages.Count - 1;
-                UpdateTurretSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(10),
-                Text = $">",
-                X = xOffset + 285,
-                Y = yOffset + 10,
-                Height = 25,
-                Width = 25,
-                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
-            });
-
-            int count = 1;
-            int page = 0;
-            int offset = 0;
-            _turretPages.Add(new List<ButtonControl>());
+            _turretPageHandler.LeftButtonX = xOffset + 10;
+            _turretPageHandler.LeftButtonY = yOffset + 10;
+            _turretPageHandler.RightButtonX = xOffset + width - 35;
+            _turretPageHandler.RightButtonY = yOffset + 10;
+            _turretPageHandler.X = xOffset + 10;
+            _turretPageHandler.Y = yOffset + 35;
             var optionIDs = ResourceManager.Turrets.GetResources();
-            var turretDefs = new List<TurretDefinition>();
+            var sorted = new List<TurretDefinition>();
             foreach (var id in optionIDs)
-                turretDefs.Add(ResourceManager.Turrets.GetResource(id));
-            turretDefs = turretDefs.OrderBy(x => x.AvailableAtWave).ThenByDescending(x => x.Cost).ToList();
+                sorted.Add(ResourceManager.Turrets.GetResource(id));
+            sorted = sorted.OrderBy(x => x.AvailableAtWave).ThenByDescending(x => x.Cost).ToList();
 
-            foreach (var turret in turretDefs)
-            {
-                if (count++ % (_turretSelectionsPrPage + 1) == 0)
+            var controlList = new List<ButtonControl>();
+            foreach (var turret in sorted) {
+                controlList.Add(new ButtonControl(Parent, BuyTurret_Click)
                 {
-                    page++;
-                    _turretPages.Add(new List<ButtonControl>());
-                    offset = 0;
-                }
-                var newButton = new ButtonControl(Parent, clicked: BuyTurret_Click)
-                {
+                    Height = 30,
+                    Width = width - 20,
                     FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                     FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                     Font = BasicFonts.GetFont(10),
                     Text = $"[{turret.Cost}$] {turret.Name}",
                     FontColor = Color.White,
-                    X = xOffset + 10,
-                    Y = yOffset + 35 + (offset++ * 35),
-                    Height = 30,
-                    Width = width - 20,
-                    Tag = turret,
-                    IsVisible = false
-                };
-                _turretPages[page].Add(newButton);
-                AddControl(2, newButton);
+                    Tag = turret
+                });
             }
-
-            UpdateTurretSelectionPages();
+            _turretPageHandler.Initialize(controlList, this);
 
             _buyingPreviewRangeTile = new TileControl()
             {
@@ -484,50 +439,23 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _upgradesLeftButton = new ButtonControl(Parent, clicked: (s) =>
+            _upgradePageHandler.LeftButtonX = xOffset + 10;
+            _upgradePageHandler.LeftButtonY = yOffset + 10;
+            _upgradePageHandler.RightButtonX = xOffset + width - 35;
+            _upgradePageHandler.RightButtonY = yOffset + 10;
+            _upgradePageHandler.X = xOffset + 10;
+            _upgradePageHandler.Y = yOffset + 35;
+            var controlList = new List<UpgradePanel>();
+            for (int i = 0; i < 9; i++)
             {
-                _currentTurretUpgradePage--;
-                if (_currentTurretUpgradePage < 0)
-                    _currentTurretUpgradePage = 0;
-                if (_currentTurretUpgradePage >= _turretUpgradePages.Count)
-                    _currentTurretUpgradePage = _turretUpgradePages.Count - 1;
-                UpdateTurretUpgradeSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(10),
-                Text = $"<",
-                X = xOffset + 10,
-                Y = yOffset + 10,
-                Height = 25,
-                Width = 25,
-                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
-            };
-            AddControl(1, _upgradesLeftButton);
-            _upgradesRightButton = new ButtonControl(Parent, clicked: (s) =>
-            {
-                _currentTurretUpgradePage++;
-                if (_currentTurretUpgradePage < 0)
-                    _currentTurretUpgradePage = 0;
-                if (_currentTurretUpgradePage >= _turretUpgradePages.Count)
-                    _currentTurretUpgradePage = _turretUpgradePages.Count - 1;
-                UpdateTurretUpgradeSelectionPages();
-            })
-            {
-                FillColor = Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(10),
-                Text = $">",
-                X = xOffset + width - 35,
-                Y = yOffset + 10,
-                Height = 25,
-                Width = 25,
-                IsVisible = ResourceManager.Turrets.GetResources().Count > _turretSelectionsPrPage
-            };
-            AddControl(1, _upgradesRightButton);
+                controlList.Add(new UpgradePanel(Parent, BuyUpgrade_Click)
+                {
+                    
+                });
+            }
+            _upgradePageHandler.MinPage = 0;
+            _upgradePageHandler.MaxPage = 0;
+            _upgradePageHandler.Initialize(controlList, this);
         }
 
         private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)
@@ -561,10 +489,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 var newItem = new EnemyQueueControl(Parent)
                 {
                     X = x + (itemXOffset++ * (itemWidth + margin)),
-                    Y = y,
-                    Height = 70,
-                    Width = itemWidth,
-                    FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    Y = y
                 };
                 _nextEnemyPanels.Add(newItem);
                 AddControl(1, newItem);

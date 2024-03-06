@@ -37,12 +37,14 @@ namespace BugDefender.Core.Users
                     break;
                 }
             }
-            if (CurrentUser == null && Users.Count > 0)
+            if (CurrentUser != null && Users.Count > 0)
                 SwitchUser(Users[0]);
             else
             {
                 var newUser = AddNewUser("Default");
+                newUser.IsPrimary = true;
                 CurrentUser = newUser;
+                SaveUser();
             }
         }
 
