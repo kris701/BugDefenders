@@ -2,7 +2,6 @@
 
 namespace BugDefender.Core.Users.Models.UserCriterias
 {
-    [JsonSerializable(typeof(TurretsSoldCriteria))]
     public class TurretsSoldCriteria : IUserCriteria
     {
         public int Quantity { get; set; }

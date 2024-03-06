@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models
 {
-    [JsonSerializable(typeof(AchivementDefinition))]
     public class AchivementDefinition : IDefinition
     {
         public Guid ID { get; set; }

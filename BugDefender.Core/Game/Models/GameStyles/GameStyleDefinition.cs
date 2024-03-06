@@ -2,7 +2,6 @@
 
 namespace BugDefender.Core.Game.Models.GameStyles
 {
-    [JsonSerializable(typeof(GameStyleDefinition))]
     public class GameStyleDefinition : IDefinition
     {
         public Guid ID { get; set; }

@@ -2,7 +2,6 @@
 
 namespace BugDefender.Core.Users.Models
 {
-    [JsonSerializable(typeof(UserDefinition<>))]
     public class UserDefinition<T> where T : new()
     {
         public Guid ID { get; set; }

@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.ResourcePacks
 {
-    [JsonSerializable(typeof(TextureDefinition))]
     public class TextureDefinition
     {
         public Guid ID { get; set; }

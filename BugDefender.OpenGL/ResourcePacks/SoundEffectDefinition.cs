@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.ResourcePacks
 {
-    [JsonSerializable(typeof(SoundEffectDefinition))]
     public class SoundEffectDefinition
     {
         public Guid ID { get; set; }

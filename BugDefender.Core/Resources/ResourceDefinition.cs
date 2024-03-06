@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Resources
 {
-    [JsonSerializable(typeof(ResourceDefinition))]
     public class ResourceDefinition : IDefinition
     {
         public Guid ID { get; set; }

@@ -2,7 +2,6 @@
 
 namespace BugDefender.Core.Game.Models.EnemyTypes
 {
-    [JsonSerializable(typeof(EnemyTypeDefinition))]
     public class EnemyTypeDefinition : IDefinition
     {
         public Guid ID { get; set; }

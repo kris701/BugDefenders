@@ -2,7 +2,6 @@
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
-    [JsonSerializable(typeof(DamageModifier))]
     public class DamageModifier
     {
         public Guid EnemyType { get; set; }

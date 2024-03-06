@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Enemies
 {
-    [JsonSerializable(typeof(EnemyDefinition))]
     public class EnemyDefinition : IDefinition
     {
         public enum EnemyTerrrainTypes { None, Ground, Flying }

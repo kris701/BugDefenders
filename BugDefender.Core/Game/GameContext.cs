@@ -11,7 +11,6 @@ using System.Text.Json.Serialization;
 namespace BugDefender.Core.Game
 {
     public enum GameResult { None, NormalLost, ChallengeLost, ChallengeSuccess }
-    [JsonSerializable(typeof(GameContext))]
     public class GameContext
     {
         public MapDefinition Map { get; set; }

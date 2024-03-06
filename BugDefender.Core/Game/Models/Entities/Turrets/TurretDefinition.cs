@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
-    [JsonSerializable(typeof(TurretDefinition))]
     public class TurretDefinition : IDefinition
     {
         public Guid ID { get; set; }

@@ -2,7 +2,6 @@
 
 namespace BugDefender.Core.Users.Models
 {
-    [JsonSerializable(typeof(StatsDefinition))]
     public class StatsDefinition
     {
         public int TotalWavesStarted { get; set; } = 0;

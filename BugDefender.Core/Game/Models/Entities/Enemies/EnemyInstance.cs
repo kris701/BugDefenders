@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Enemies
 {
-    [JsonSerializable(typeof(EnemyInstance))]
     public class EnemyInstance : BasePositionModel, IInstance<EnemyDefinition>
     {
         public Guid ID { get; set; }

@@ -2,7 +2,6 @@
 
 namespace BugDefender.Core.Game.Models.Maps
 {
-    [JsonSerializable(typeof(MapDefinition))]
     public class MapDefinition : IDefinition
     {
         public Guid ID { get; set; }

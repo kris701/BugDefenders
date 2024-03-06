@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {
-    [JsonSerializable(typeof(ExplosiveProjectileDefinition))]
     public class ExplosiveProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute
     {
         public float Speed { get; set; }
