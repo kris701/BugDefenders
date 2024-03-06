@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
+    [JsonSerializable(typeof(AOETurretDefinition))]
     public class AOETurretDefinition : ITurretModule, IRangeAttribute, ISlowingAttribute
     {
         public float Range { get; set; }

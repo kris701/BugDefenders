@@ -1,5 +1,8 @@
-﻿namespace BugDefender.Core.Users.Models
+﻿using System.Text.Json.Serialization;
+
+namespace BugDefender.Core.Users.Models
 {
+    [JsonSerializable(typeof(ScoreDefinition))]
     public class ScoreDefinition
     {
         public int Score { get; set; }

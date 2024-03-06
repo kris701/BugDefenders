@@ -1,9 +1,11 @@
 ﻿using BugDefender.Core.Game.Models;
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.UserCriterias;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models.Buffs
 {
+    [JsonSerializable(typeof(BuffDefinition))]
     public class BuffDefinition : IDefinition
     {
         public Guid ID { get; set; }

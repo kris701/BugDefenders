@@ -1,5 +1,8 @@
-﻿namespace BugDefender.Core.Users.Models.UserCriterias
+﻿using System.Text.Json.Serialization;
+
+namespace BugDefender.Core.Users.Models.UserCriterias
 {
+    [JsonSerializable(typeof(TurretsPlacedCriteria))]
     public class TurretsPlacedCriteria : IUserCriteria
     {
         public int Quantity { get; set; }

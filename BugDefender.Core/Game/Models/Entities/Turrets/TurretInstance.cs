@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets
 {
+    [JsonSerializable(typeof(TurretInstance))]
     public class TurretInstance : BasePositionModel, IInstance<TurretDefinition>
     {
         public enum TargetingTypes { None, Closest, Weakest, Strongest }

@@ -1,7 +1,9 @@
 ﻿using BugDefender.Core.Resources;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models.UserCriterias
 {
+    [JsonSerializable(typeof(EnemiesKilledOfTypeCriteria))]
     public class EnemiesKilledOfTypeCriteria : IUserCriteria
     {
         public Guid EnemyID { get; set; }

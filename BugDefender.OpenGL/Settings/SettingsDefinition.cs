@@ -1,7 +1,11 @@
-﻿using System;
+﻿using BugDefender.Core.Users.Models;
+using System;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.Settings
 {
+    [JsonSerializable(typeof(SettingsDefinition))]
+    [JsonSerializable(typeof(UserDefinition<SettingsDefinition>))]
     public class SettingsDefinition
     {
         public int ScreenWidth { get; set; } = 1280;

@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles
 {
+    [JsonSerializable(typeof(ProjectileInstance))]
     public class ProjectileInstance : BasePositionModel, IInstance<ProjectileDefinition>
     {
         public Guid ID { get; set; }

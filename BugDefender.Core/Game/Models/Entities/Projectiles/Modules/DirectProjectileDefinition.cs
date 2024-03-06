@@ -1,9 +1,11 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Resources;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {
+    [JsonSerializable(typeof(DirectProjectileDefinition))]
     public class DirectProjectileDefinition : IProjectileModule, ISpeedAttribute, ISlowingAttribute
     {
         public float Speed { get; set; }

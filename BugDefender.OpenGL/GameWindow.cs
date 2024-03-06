@@ -34,7 +34,7 @@ namespace BugDefender.OpenGL
         public GraphicsDeviceManager Device { get; }
         public IView CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; set; }
-        public List<IBackgroundWorker> BackroundWorkers { get; set; }
+        public List<IBackgroundWorker> BackroundWorkers { get; set; } = new List<IBackgroundWorker>();
         public UIResourceManager UIResources { get; set; }
 
         private readonly Func<GameWindow, IView> _screenToLoad;
@@ -178,7 +178,6 @@ namespace BugDefender.OpenGL
             CurrentScreen.Update(gameTime);
             foreach (var worker in BackroundWorkers)
                 worker.Update(gameTime);
-
             base.Update(gameTime);
         }
 
@@ -186,11 +185,8 @@ namespace BugDefender.OpenGL
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            if (_spriteBatch == null)
-                throw new Exception("Error! Spritebatch was not initialized!");
-
             var matrix = Matrix.CreateScale(XScale, YScale, 1.0f);
-            _spriteBatch.Begin(transformMatrix: matrix);
+            _spriteBatch!.Begin(transformMatrix: matrix);
             CurrentScreen.Draw(gameTime, _spriteBatch);
             foreach (var worker in BackroundWorkers)
                 worker.Draw(gameTime, _spriteBatch);

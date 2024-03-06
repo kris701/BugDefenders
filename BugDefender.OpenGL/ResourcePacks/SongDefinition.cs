@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.ResourcePacks
 {
+    [JsonSerializable(typeof(SongDefinition))]
     public class SongDefinition
     {
         public Guid ID { get; set; }

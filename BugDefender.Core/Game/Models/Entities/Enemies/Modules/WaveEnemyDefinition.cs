@@ -2,6 +2,7 @@
 
 namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
 {
+    [JsonSerializable(typeof(WaveEnemyDefinition))]
     public class WaveEnemyDefinition : IEnemyModule, ISpeedAttribute, ISlowable
     {
         public float Speed { get; set; }

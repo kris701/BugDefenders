@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.ResourcePacks
 {
+    [JsonSerializable(typeof(TextureDefinition))]
     public class TextureDefinition
     {
         public Guid ID { get; set; }

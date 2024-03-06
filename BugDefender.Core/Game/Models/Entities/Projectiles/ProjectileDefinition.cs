@@ -1,8 +1,10 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using System.Text.Json.Serialization;
 using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles
 {
+    [JsonSerializable(typeof(ProjectileDefinition))]
     public class ProjectileDefinition : IDefinition
     {
         public Guid ID { get; set; }

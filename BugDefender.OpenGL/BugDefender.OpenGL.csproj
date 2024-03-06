@@ -15,6 +15,9 @@
 	  <PublishReadyToRun>false</PublishReadyToRun>
 	  <TieredCompilation>false</TieredCompilation>
 	  <OutputPath>../Output/</OutputPath>
+	  <PublishTrimmed>true</PublishTrimmed>
+	  <TrimMode>partial</TrimMode>
+	  <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -27,6 +30,11 @@
 	  <!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
 	  <!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
   </PropertyGroup>
+	<ItemGroup>
+		<TrimmerRootAssembly Include="MonoGame.Framework" />
+		<TrimmerRootAssembly Include="System.Text.Json" />
+		<TrimmerRootAssembly Include="mscorlib" />
+	</ItemGroup>
   <ItemGroup>
     <Compile Remove="Content\Views\AchivementsView\**" />
     <Compile Remove="Content\Views\HighScoresView\**" />

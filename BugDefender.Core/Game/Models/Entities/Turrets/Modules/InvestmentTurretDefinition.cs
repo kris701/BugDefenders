@@ -1,7 +1,9 @@
 ﻿using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
+    [JsonSerializable(typeof(InvestmentTurretDefinition))]
     public class InvestmentTurretDefinition : ITurretModule
     {
         public int MoneyPrWave { get; set; }

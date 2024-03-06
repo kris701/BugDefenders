@@ -1,8 +1,10 @@
 ﻿using BugDefender.Core.Game.Models;
 using BugDefender.Core.Users.Models.UserCriterias;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models.Challenges
 {
+    [JsonSerializable(typeof(ChallengeDefinition))]
     public class ChallengeDefinition : IDefinition
     {
         public Guid ID { get; set; }

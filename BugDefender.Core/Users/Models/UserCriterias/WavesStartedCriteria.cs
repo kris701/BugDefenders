@@ -1,5 +1,8 @@
-﻿namespace BugDefender.Core.Users.Models.UserCriterias
+﻿using System.Text.Json.Serialization;
+
+namespace BugDefender.Core.Users.Models.UserCriterias
 {
+    [JsonSerializable(typeof(WavesStartedCriteria))]
     public class WavesStartedCriteria : IUserCriteria
     {
         public int Quantity { get; set; }

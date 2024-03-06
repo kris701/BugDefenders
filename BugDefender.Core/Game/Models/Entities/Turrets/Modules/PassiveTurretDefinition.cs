@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
+    [JsonSerializable(typeof(PassiveTurretDefinition))]
     public class PassiveTurretDefinition : UpgradeEffectModel, ITurretModule, IRangeAttribute
     {
         public float Range { get; set; }

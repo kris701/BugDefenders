@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Turrets.Modules
 {
+    [JsonSerializable(typeof(ProjectileTurretDefinition))]
     public class ProjectileTurretDefinition : ITurretModule, IRangeAttribute
     {
         public float Range { get; set; }

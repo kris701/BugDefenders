@@ -1,7 +1,9 @@
 ﻿using BugDefender.Core.Resources;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models.UserCriterias
 {
+    [JsonSerializable(typeof(TurretKillsCriteria))]
     public class TurretKillsCriteria : IUserCriteria
     {
         public Guid TurretID { get; set; }
