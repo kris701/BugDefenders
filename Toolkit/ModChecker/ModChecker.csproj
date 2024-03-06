@@ -17,7 +17,7 @@
 	  <OutputPath>../../Output/</OutputPath>
 	  <PublishDir>$(OutputPath)/$(TargetFramework)/$(RuntimeIdentifier)/publish/Toolkit</PublishDir>
 	  <SignAssembly>True</SignAssembly>
-	  <AssemblyOriginatorKeyFile>C:\Users\kris7\OneDrive\Programming\_GitHub_\BugDefender\Git\BugDefender\sgKey.snk</AssemblyOriginatorKeyFile>
+	  <AssemblyOriginatorKeyFile>../../sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

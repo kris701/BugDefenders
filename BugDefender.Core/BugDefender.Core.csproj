@@ -14,7 +14,7 @@
 	  <TieredCompilation>false</TieredCompilation>
 	  <OutputPath>../Output/</OutputPath>
 	  <SignAssembly>True</SignAssembly>
-	  <AssemblyOriginatorKeyFile>C:\Users\kris7\OneDrive\Programming\_GitHub_\BugDefender\Git\BugDefender\sgKey.snk</AssemblyOriginatorKeyFile>
+	  <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
