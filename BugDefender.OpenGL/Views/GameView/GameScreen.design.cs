@@ -6,7 +6,6 @@ using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Views.AchivementsView;
 using BugDefender.OpenGL.Views.GameView;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
@@ -43,14 +42,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private PageHandler<ButtonControl> _turretPageHandler = new PageHandler<ButtonControl>()
+        private readonly PageHandler<ButtonControl> _turretPageHandler = new PageHandler<ButtonControl>()
         {
             ItemsPrPage = 13,
             ButtonSize = 25,
             ButtonFontSize = 10
         };
 
-        private PageHandler<UpgradePanel> _upgradePageHandler = new PageHandler<UpgradePanel>()
+        private readonly PageHandler<UpgradePanel> _upgradePageHandler = new PageHandler<UpgradePanel>()
         {
             ItemsPrPage = 3,
             ButtonSize = 25,
@@ -387,7 +386,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             sorted = sorted.OrderBy(x => x.AvailableAtWave).ThenByDescending(x => x.Cost).ToList();
 
             var controlList = new List<ButtonControl>();
-            foreach (var turret in sorted) {
+            foreach (var turret in sorted)
+            {
                 controlList.Add(new ButtonControl(Parent, BuyTurret_Click)
                 {
                     Height = 30,
@@ -450,7 +450,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 controlList.Add(new UpgradePanel(Parent, BuyUpgrade_Click)
                 {
-                    
+
                 });
             }
             _upgradePageHandler.MinPage = 0;

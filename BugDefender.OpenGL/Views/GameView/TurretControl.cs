@@ -2,9 +2,7 @@
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
-using BugDefender.OpenGL.Screens.GameScreen;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using static BugDefender.OpenGL.Engine.Controls.AnimatedButtonControl;
 

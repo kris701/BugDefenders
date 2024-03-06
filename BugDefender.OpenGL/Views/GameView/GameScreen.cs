@@ -449,7 +449,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void UpdateTurretPurchaseButtons()
         {
-            foreach (var page in _turretPageHandler.Pages) 
+            foreach (var page in _turretPageHandler.Pages)
             {
                 foreach (var turret in page)
                 {

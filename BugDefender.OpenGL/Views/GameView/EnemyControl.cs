@@ -4,7 +4,6 @@ using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 
 namespace BugDefender.OpenGL.Views.GameView
@@ -14,8 +13,8 @@ namespace BugDefender.OpenGL.Views.GameView
         public FloatPoint VisualOffset { get; }
         public EnemyInstance Enemy { get; }
 
-        private TileControl _healthBar;
-        private AnimatedTileControl _enemyTile;
+        private readonly TileControl _healthBar;
+        private readonly AnimatedTileControl _enemyTile;
         private readonly float _initialHP;
         private readonly int _legalOffset = 5;
         public EnemyControl(GameWindow parent, EnemyInstance enemy)

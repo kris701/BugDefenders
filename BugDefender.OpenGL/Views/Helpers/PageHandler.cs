@@ -146,7 +146,7 @@ namespace BugDefender.OpenGL.Views.Helpers
             }
 
             if (MaxPage - MinPage != 1)
-            { 
+            {
                 _leftButton.IsVisible = true;
                 _rightButton.IsVisible = true;
                 if (PageIndex == MinPage)
