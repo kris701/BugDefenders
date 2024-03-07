@@ -47,8 +47,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (!IsVisible)
                 return;
 
-            DrawTile(gameTime, spriteBatch, FillColor);
-            DrawString(gameTime, spriteBatch);
+            base.Draw(gameTime, spriteBatch);
             if (_holding)
                 DrawTile(gameTime, spriteBatch, FillClickedColor);
             if (!IsEnabled)

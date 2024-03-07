@@ -200,7 +200,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _upgradePageHandler.UpdatePages();
         }
 
-        private void Turret_Click(AnimatedButtonControl parent)
+        private void Turret_Click(ButtonControl parent)
         {
             if (_buyingPreviewTile.IsVisible)
                 return;

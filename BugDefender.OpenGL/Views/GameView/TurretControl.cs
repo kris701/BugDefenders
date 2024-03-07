@@ -4,7 +4,7 @@ using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using Microsoft.Xna.Framework;
 using System;
-using static BugDefender.OpenGL.Engine.Controls.AnimatedButtonControl;
+using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -62,6 +62,7 @@ namespace BugDefender.OpenGL.Views.GameView
             _currentAnimation = id;
             var textureSet = _parent.TextureController.GetTextureSet(id);
             _turretControl.TileSet = textureSet.LoadedContents;
+            _turretControl.Frame = 0;
             _turretControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
         }
 

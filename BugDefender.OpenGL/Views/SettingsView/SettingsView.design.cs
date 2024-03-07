@@ -130,7 +130,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = yOffset + 80,
+                Y = yOffset + 100,
                 Text = "Other",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White
@@ -191,7 +191,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = yOffset,
+                Y = yOffset + 10,
                 Text = "UI Scale",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White

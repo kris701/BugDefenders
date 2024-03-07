@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Helpers;
+﻿using BugDefender.OpenGL.Engine.Controls.Elements;
+using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,7 +12,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         public event ClickedHandler? Clicked;
 
         public IWindow Parent { get; set; }
-        public Guid ClickSound { get; set; } = new Guid("2e3a4bbb-c0e5-4617-aee1-070e02e4b8ea");
+        public Guid ClickSound { get; set; }
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
         public bool IsEnabled { get; set; } = true;
@@ -19,29 +20,17 @@ namespace BugDefender.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public ButtonControl(IWindow parent, ClickedHandler? clicked = null)
+        public ButtonControl(IWindow parent, ClickedHandler? clicked = null) : base()
         {
             Parent = parent;
             Clicked += clicked;
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
-
-            DrawTile(gameTime, spriteBatch, FillColor);
-            DrawString(gameTime, spriteBatch);
-            if (_holding)
-                DrawTile(gameTime, spriteBatch, FillClickedColor);
-            if (!IsEnabled)
-                DrawTile(gameTime, spriteBatch, FillDisabledColor);
-        }
-
         public void DoClick()
         {
             _holding = true;
-            Parent.AudioController.PlaySoundEffectOnce(ClickSound);
+            if (ClickSound != Guid.Empty)
+                Parent.AudioController.PlaySoundEffectOnce(ClickSound);
             Clicked?.Invoke(this);
         }
 
@@ -58,7 +47,8 @@ namespace BugDefender.OpenGL.Engine.Controls
                         _holding = true;
                     else if (_holding && mouseState.LeftButton == ButtonState.Released)
                     {
-                        Parent.AudioController.PlaySoundEffectOnce(ClickSound);
+                        if (ClickSound != Guid.Empty)
+                            Parent.AudioController.PlaySoundEffectOnce(ClickSound);
                         Clicked?.Invoke(this);
                         _holding = false;
                     }
@@ -75,6 +65,18 @@ namespace BugDefender.OpenGL.Engine.Controls
             }
 
             base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            if (!IsVisible)
+                return;
+
+            base.Draw(gameTime, spriteBatch);
+            if (_holding)
+                DrawTile(gameTime, spriteBatch, FillClickedColor);
+            if (!IsEnabled)
+                DrawTile(gameTime, spriteBatch, FillDisabledColor);
         }
     }
 }

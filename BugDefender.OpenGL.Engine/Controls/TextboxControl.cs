@@ -62,12 +62,10 @@ namespace BugDefender.OpenGL.Engine.Controls
                 var size = Font.MeasureString(currentString);
                 if (size.X > Width - Margin * 2)
                 {
-                    var newLabel = new LabelControl()
-                    {
-                        Font = Font,
-                        Text = currentString,
-                        FontColor = FontColor
-                    };
+                    var newLabel = new LabelControl();
+                    newLabel.Font = Font;
+                    newLabel.Text = currentString;
+                    newLabel.FontColor = FontColor;
                     newLabel.X = X;
                     newLabel.Y = Y + size.Y * lines.Count + Margin;
                     newLabel.Width = Width;
@@ -81,12 +79,10 @@ namespace BugDefender.OpenGL.Engine.Controls
             if (currentString != "")
             {
                 var size = Font.MeasureString(currentString);
-                var newLabel = new LabelControl()
-                {
-                    Font = Font,
-                    Text = currentString,
-                    FontColor = FontColor
-                };
+                var newLabel = new LabelControl();
+                newLabel.Font = Font;
+                newLabel.Text = currentString;
+                newLabel.FontColor = FontColor;
                 newLabel.X = X;
                 newLabel.Y = Y + size.Y * lines.Count + Margin;
                 newLabel.Width = Width;

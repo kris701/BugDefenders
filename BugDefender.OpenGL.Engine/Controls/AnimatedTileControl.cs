@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BugDefender.OpenGL.Engine.Controls
 {
-    public class AnimatedTileControl : BaseControl
+    public class AnimatedTileControl : TileControl
     {
         public delegate void OnAnimationDoneHandler(AnimatedTileControl parent);
 
@@ -29,21 +29,11 @@ namespace BugDefender.OpenGL.Engine.Controls
                     Width = TileSet[0].Width;
                 if (Height == 0)
                     Height = TileSet[0].Height;
+                Frame = 0;
+                FillColor = TileSet[0];
             }
             _finished = false;
             base.Initialize();
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
-
-            if (Frame >= TileSet.Count)
-                Frame = 0;
-
-            if (TileSet.Count > 0)
-                DrawTile(gameTime, spriteBatch, TileSet[Frame]);
         }
 
         public override void Update(GameTime gameTime)
@@ -63,13 +53,26 @@ namespace BugDefender.OpenGL.Engine.Controls
                     if (AutoPlay)
                         Frame = 0;
                     else
+                    {
                         _finished = true;
-                    if (OnAnimationDone != null)
-                        OnAnimationDone.Invoke(this);
+                        Frame = TileSet.Count - 1;
+                    }
+                    OnAnimationDone?.Invoke(this);
                 }
+                FillColor = TileSet[Frame];
                 _currentFrameTime = TimeSpan.Zero;
             }
+        }
 
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            if (!IsVisible)
+                return;
+
+            if (Frame >= TileSet.Count)
+                Frame = 0;
+
+            base.Draw(gameTime, spriteBatch);
         }
     }
 }
