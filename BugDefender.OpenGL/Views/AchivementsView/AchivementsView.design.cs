@@ -2,7 +2,7 @@
 using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.AchivementsView;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.AchivementsView
 {
-    public partial class AchivementsView : BaseAnimatedView
+    public partial class AchivementsView : BaseBugDefenderView
     {
         private readonly PageHandler<AchivementControl> _achivementPageHandler = new PageHandler<AchivementControl>()
         {
@@ -28,7 +28,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
         {
             BasicMenuPage.GenerateBaseMenu(
                 this,
-                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Achivements",
                 $"You have {Parent.UserManager.CurrentUser.Achivements.Count} unlocked! There are still {ResourceManager.Achivements.GetResources().Count - Parent.UserManager.CurrentUser.Achivements.Count} to go!");
 
@@ -58,8 +58,8 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView(Parent)))

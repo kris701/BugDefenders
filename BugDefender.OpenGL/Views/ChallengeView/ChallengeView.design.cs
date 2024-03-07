@@ -1,7 +1,7 @@
 ﻿using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.ChallengeView;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
@@ -9,14 +9,14 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
-    public partial class ChallengeView : BaseAnimatedView
+    public partial class ChallengeView : BaseBugDefenderView
     {
         private LabelControl _waitLabel;
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
                 this,
-                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Todays Challenges",
                 $"{_remainingChallenges.Count} challenges for today. Time until reroll:");
 
@@ -58,8 +58,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG

@@ -10,7 +10,7 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
 {
     public class PermaBuffControl : CollectionControl
     {
-        public PermaBuffControl(GameWindow parent, BuffDefinition buff, ClickedHandler click, bool isUnlocked)
+        public PermaBuffControl(BugDefenderGameWindow parent, BuffDefinition buff, ClickedHandler click, bool isUnlocked)
         {
             Width = 900;
             Height = 140;
@@ -66,9 +66,9 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"[{buff.Cost} credits] Buy",
-                FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Tag = buff,
                 IsEnabled = isUnlocked && parent.UserManager.CurrentUser.Credits >= buff.Cost
             };
@@ -77,14 +77,14 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
             {
                 if (parent.UserManager.CurrentUser.Buffs.Contains(buff.ID))
                 {
-                    backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                     buyButton.Text = "Owned!";
                 }
                 else
-                    backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
             else
-                backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
+                backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
         }
     }
 }

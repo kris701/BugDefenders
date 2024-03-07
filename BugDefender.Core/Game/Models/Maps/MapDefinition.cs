@@ -1,4 +1,6 @@
-﻿namespace BugDefender.Core.Game.Models.Maps
+﻿using BugDefender.Tools;
+
+namespace BugDefender.Core.Game.Models.Maps
 {
     public class MapDefinition : IDefinition
     {

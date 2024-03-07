@@ -1,8 +1,7 @@
 ﻿using BugDefender.Core.Users.Models;
-using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
@@ -11,7 +10,7 @@ using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.HighScoresView
 {
-    public partial class HighScoresView : BaseAnimatedView
+    public partial class HighScoresView : BaseBugDefenderView
     {
         private static readonly int _showCount = 13;
 
@@ -19,7 +18,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
         {
             BasicMenuPage.GenerateBaseMenu(
                 this,
-                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "High Scores",
                 "Play the game and get your highscore onto the list!");
 
@@ -41,7 +40,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                     Text = $"User: {Parent.UserManager.Users.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
                     FontColor = Color.White,
                     Font = BasicFonts.GetFont(12),
-                    FillColor = Parent.UIResources.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
+                    FillColor = Parent.TextureController.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                 });
             }
 
@@ -57,8 +56,8 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG

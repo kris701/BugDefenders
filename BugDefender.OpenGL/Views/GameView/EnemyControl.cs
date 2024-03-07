@@ -1,8 +1,8 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies;
-using BugDefender.Core.Game.Models.Maps;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
+using BugDefender.Tools;
 using Microsoft.Xna.Framework;
 using System;
 
@@ -17,7 +17,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly AnimatedTileControl _enemyTile;
         private readonly float _initialHP;
         private readonly int _legalOffset = 5;
-        public EnemyControl(GameWindow parent, EnemyInstance enemy)
+        public EnemyControl(BugDefenderGameWindow parent, EnemyInstance enemy)
         {
             Width = enemy.Size;
             Height = enemy.Size;
@@ -30,8 +30,8 @@ namespace BugDefender.OpenGL.Views.GameView
                 rnd.Next(-_legalOffset, _legalOffset)
                 );
 
-            var animation = parent.UIResources.GetAnimation<EnemyEntityDefinition>(enemy.DefinitionID).OnCreate;
-            var textureSet = parent.UIResources.GetTextureSet(animation);
+            var animation = parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(enemy.DefinitionID).OnCreate;
+            var textureSet = parent.TextureController.GetTextureSet(animation);
             _enemyTile = new AnimatedTileControl()
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),

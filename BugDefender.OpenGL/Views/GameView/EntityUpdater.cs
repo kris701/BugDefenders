@@ -1,5 +1,5 @@
 ﻿using BugDefender.Core.Game.Models;
-using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
 using System;

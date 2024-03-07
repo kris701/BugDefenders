@@ -1,22 +1,21 @@
 ﻿using BugDefender.OpenGL.Engine.Input;
-using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Settings;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
-    public partial class SettingsView : BaseAnimatedView
+    public partial class SettingsView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
         private readonly SettingsDefinition _settings;
         private readonly KeyWatcher _escapeKeyWatcher;
-        public SettingsView(GameWindow parent) : base(
+        public SettingsView(BugDefenderGameWindow parent) : base(
             parent,
             _id,
-            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             _settings = parent.UserManager.CurrentUser.UserData.Copy();
             Initialize();
@@ -31,8 +30,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         public void UpdateScreenSettingsButtons()
         {
-            var normal = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"));
-            var selected = Parent.UIResources.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
+            var normal = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"));
+            var selected = Parent.TextureController.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
             _isFullScreen.FillColor = normal;
             _isVSync.FillColor = normal;
             _isFPSCounter.FillColor = normal;

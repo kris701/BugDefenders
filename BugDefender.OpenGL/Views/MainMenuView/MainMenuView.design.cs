@@ -1,13 +1,13 @@
 ﻿using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using System;
 
 namespace BugDefender.OpenGL.Screens.MainMenu
 {
-    public partial class MainMenuView : BaseAnimatedView
+    public partial class MainMenuView : BaseBugDefenderView
     {
         private ButtonControl _startGame;
         private ButtonControl _continueButton;
@@ -16,9 +16,9 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
+                FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Width = IWindow.BaseScreenSize.X,
+                Height = IWindow.BaseScreenSize.Y
             });
             AddControl(0, new LabelControl()
             {
@@ -116,7 +116,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => (Parent as Game).Exit())
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 600,
@@ -137,7 +137,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
                 Text = $"User: {Parent.UserManager.CurrentUser.Name}",
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
             });
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreenView(Parent)))
             {
@@ -148,8 +148,8 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 Text = "Users",
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
             _cheatsInput = new TextInputControl(Parent, OnEnterCheat)
@@ -158,9 +158,9 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Height = 100,
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Limit = 50,
                 IsVisible = false,
                 HorizontalAlignment = HorizontalAlignment.Middle,

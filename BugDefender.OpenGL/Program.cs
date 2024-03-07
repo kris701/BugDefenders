@@ -9,12 +9,12 @@ namespace BugDefender.OpenGL
         static void Main()
         {
 #if DEBUG
-            using (var mainWindow = new GameWindow((g) => new SplashScreenView(g)))
+            using (var mainWindow = new BugDefenderGameWindow((g) => new SplashScreenView(g)))
                 mainWindow.Run();
 #else
             try
             {
-                using (var mainWindow = new GameWindow((g) => new SplashScreenView(g)))
+                using (var mainWindow = new BugDefenderGameWindow((g) => new SplashScreenView(g)))
                     mainWindow.Run();
             }
             catch (Exception e)

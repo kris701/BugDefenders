@@ -13,7 +13,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _buyUpgradeButton;
 
-        public UpgradePanel(GameWindow parent, ClickedHandler buy)
+        public UpgradePanel(BugDefenderGameWindow parent, ClickedHandler buy)
         {
             Width = 300;
             Height = 160;
@@ -22,7 +22,7 @@ namespace BugDefender.OpenGL.Views.GameView
             {
                 Width = Width,
                 Height = Height,
-                FillColor = parent.UIResources.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
+                FillColor = parent.TextureController.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
             });
             _nameLabel = new LabelControl()
             {
@@ -51,7 +51,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 FillColor = BasicTextures.GetBasicRectange(Color.Transparent),
-                FillClickedColor = parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillClickedColor = parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 Height = 35
             };

@@ -1,18 +1,19 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Views;
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Views;
 using System;
 
 namespace BugDefender.OpenGL.Screens.SplashScreen
 {
-    public partial class SplashScreenView : BaseFadeView
+    public partial class SplashScreenView : BaseBugDefenderView
     {
         public override void Initialize()
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
+                FillColor = Parent.TextureController.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
+                Width = IWindow.BaseScreenSize.X,
+                Height = IWindow.BaseScreenSize.Y
             });
             base.Initialize();
         }

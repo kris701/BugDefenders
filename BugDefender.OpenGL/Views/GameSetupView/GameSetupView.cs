@@ -2,14 +2,14 @@
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
-using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
-    public partial class GameSetupView : BaseAnimatedView
+    public partial class GameSetupView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
 
@@ -19,11 +19,11 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private ButtonControl? _selectedMapButton;
         private readonly KeyWatcher _escapeKeyWatcher;
 
-        public GameSetupView(GameWindow parent) : base(
+        public GameSetupView(BugDefenderGameWindow parent) : base(
             parent,
             _id,
-            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
@@ -46,13 +46,13 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             if (sender.Tag is MapDefinition map)
             {
                 if (_selectedMapButton != null)
-                    _selectedMapButton.FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                 _selectedMapButton = sender;
-                _selectedMapButton.FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                 _selectedMap = map.ID;
-                _mapPreviewTile.FillColor = Parent.UIResources.GetTexture(map.ID);
+                _mapPreviewTile.FillColor = Parent.TextureController.GetTexture(map.ID);
                 _mapNameLabel.Text = map.Name;
                 _mapDescriptionTextbox.Text = map.Description;
 
@@ -66,10 +66,10 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             if (sender.Tag is GameStyleDefinition gameStyle)
             {
                 if (_selectedGameStyleButton != null)
-                    _selectedGameStyleButton.FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                 _selectedGameStyleButton = sender;
-                _selectedGameStyleButton.FillColor = Parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                 _selectedGameStyle = gameStyle.ID;
 

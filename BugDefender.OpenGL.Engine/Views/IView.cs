@@ -1,0 +1,22 @@
+﻿using BugDefender.OpenGL.Engine.Controls;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace BugDefender.OpenGL.Engine.Views
+{
+    public interface IView
+    {
+        public Guid ID { get; set; }
+        public IWindow Parent { get; set; }
+
+        public void ClearLayer(int layer);
+        public void AddControl(int layer, IControl control);
+        public void RemoveControl(int layer, IControl control);
+
+        public void Initialize();
+        public void Update(GameTime gameTime);
+        public void OnUpdate(GameTime gameTime);
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        public void SwitchView(IView screen);
+    }
+}

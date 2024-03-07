@@ -1,7 +1,7 @@
 ﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities.Turrets;
-using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Game.Modules.Turrets.SubModules;
+using BugDefender.Tools;
 
 namespace BugDefender.Core.Game.Modules.Turrets
 {

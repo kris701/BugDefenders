@@ -9,7 +9,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
 {
     public class AchivementControl : CollectionControl
     {
-        public AchivementControl(GameWindow parent, AchivementDefinition achivement, bool isUnlocked)
+        public AchivementControl(BugDefenderGameWindow parent, AchivementDefinition achivement, bool isUnlocked)
         {
             Height = 140;
             Width = 900;
@@ -23,12 +23,12 @@ namespace BugDefender.OpenGL.Views.AchivementsView
             if (isUnlocked)
             {
                 if (parent.UserManager.CurrentUser.Achivements.Contains(achivement.ID))
-                    backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 else
-                    backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
             else
-                backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
+                backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
             Children.Add(backgroundTile);
             Children.Add(new TileControl()
             {
@@ -36,7 +36,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 X = 40,
                 Width = 75,
                 Height = 75,
-                FillColor = parent.UIResources.GetTexture(achivement.ID)
+                FillColor = parent.TextureController.GetTexture(achivement.ID)
             });
             Children.Add(new LabelControl()
             {

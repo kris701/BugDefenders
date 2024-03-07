@@ -13,7 +13,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         private readonly TileControl _iconTile;
         private readonly TextboxControl _descriptionTextbox;
 
-        public NotificationControl(GameWindow parent, NotificationItem item) : base(parent)
+        public NotificationControl(BugDefenderGameWindow parent, NotificationItem item) : base(parent)
         {
             Item = item;
             Width = 300;
@@ -32,7 +32,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             {
                 _iconTile.Width = 75;
                 _iconTile.Height = 75;
-                _iconTile.FillColor = Parent.UIResources.GetTexture(Item.Definition.ID);
+                _iconTile.FillColor = Parent.TextureController.GetTexture(Item.Definition.ID);
                 _iconTile.X = X + 20;
                 _iconTile.Y = Y + 20;
                 _iconTile.Initialize();
@@ -65,7 +65,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             else
                 _descriptionTextbox.X = X + 20;
             _descriptionTextbox.Y = Y + 20;
-            _descriptionTextbox._textChanged = true;
+            _descriptionTextbox.Text = _descriptionTextbox.Text;
 
             _descriptionTextbox.Update(gameTime);
             if (Item.HasImage)

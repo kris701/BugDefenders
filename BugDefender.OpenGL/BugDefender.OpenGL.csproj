@@ -9,7 +9,7 @@
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Copyright>Kristian Skov Johansen</Copyright>
 	  <Product>Bug Defenders</Product>
-	  <Version>0.1.2</Version>
+	  <Version>0.1.3</Version>
 	  <PublishSingleFile>true</PublishSingleFile>
 	  <SelfContained>true</SelfContained>
 	  <DebugType>embedded</DebugType>
@@ -56,21 +56,20 @@
     <None Remove="Content\Views\UsersView\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="ResourcePacks\ResourcePacks\high.json" />
+    <None Remove="ResourcePacks\ResourcePacks\low.json" />
+    <None Remove="ResourcePacks\ResourcePacks\medium.json" />
+  </ItemGroup>
+  <ItemGroup>
 	  <EmbeddedResource Include="Icon.bmp">
 		  <LogicalName>Icon.bmp</LogicalName>
 	  </EmbeddedResource>
 	  <EmbeddedResource Include="Icon.ico">
 		  <LogicalName>Icon.ico</LogicalName>
 	  </EmbeddedResource>
-	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\high.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\medium.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </EmbeddedResource>
-    <EmbeddedResource Include="ResourcePacks\ResourcePacks\low.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\high.json" />
+	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\low.json" />
+	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\medium.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
@@ -78,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BugDefender.Core\BugDefender.Core.csproj" />
+    <ProjectReference Include="..\BugDefender.OpenGL.Engine\BugDefender.OpenGL.Engine.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Licences\INNO-SETUP-LICENSE.txt">
