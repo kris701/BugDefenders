@@ -455,10 +455,19 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 {
                     if (turret.Tag is TurretDefinition def)
                     {
-                        if (_game.Context.Money < def.Cost || _game.Context.Wave < def.AvailableAtWave)
+                        if (_game.Context.Wave < def.AvailableAtWave)
+                        {
                             turret.IsEnabled = false;
+                            turret.Alpha = 10;
+                        }
                         else
-                            turret.IsEnabled = true;
+                        {
+                            turret.Alpha = 255;
+                            if (_game.Context.Money < def.Cost)
+                                turret.IsEnabled = false;
+                            else
+                                turret.IsEnabled = true;
+                        }
                     }
                 }
             }
