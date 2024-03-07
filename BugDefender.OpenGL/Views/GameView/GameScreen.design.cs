@@ -47,7 +47,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             ItemsPrPage = 13,
             ButtonSize = 25,
-            ButtonFontSize = 10
+            ButtonFontSize = 10,
+            Layer = 102
         };
 
         private readonly PageHandler<UpgradePanel> _upgradePageHandler = new PageHandler<UpgradePanel>()
@@ -56,7 +57,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             ButtonSize = 25,
             ButtonFontSize = 10,
             Margin = 30,
-            IsVisible = false
+            IsVisible = false,
+            Layer = 102
         };
 
         public override void Initialize()
@@ -83,7 +85,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             if (CheatsHelper.Cheats.Count > 0)
             {
-                AddControl(100, new LabelControl()
+                AddControl(200, new LabelControl()
                 {
                     Text = $"Cheats On!",
                     Font = BasicFonts.GetFont(16),
@@ -117,7 +119,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupGameField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl()
+            AddControl(50, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(_game.Context.Map.ID),
                 X = xOffset,
@@ -128,10 +130,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(100, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("86f37f1c-921f-484a-98da-4b0790f51d70")),
-                X = xOffset,
-                Y = yOffset,
-                Height = height,
-                Width = width
+                X = xOffset - 50,
+                Y = yOffset - 50,
+                Height = height + 100,
+                Width = width + 100
             });
             _turretSelectRangeTile = new TileControl()
             {
@@ -139,12 +141,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Alpha = 25,
                 ViewPort = _gameArea
             };
-            AddControl(0, _turretSelectRangeTile);
+            AddControl(101, _turretSelectRangeTile);
         }
 
         private void SetupGameControlsField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl()
+            AddControl(101, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
                 X = xOffset,
@@ -162,7 +164,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width - 10
             };
-            AddControl(1, _scoreLabel);
+            AddControl(101, _scoreLabel);
             _moneyLabel = new LabelControl()
             {
                 Text = $"Money: {_game.Context.Money}$",
@@ -173,7 +175,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width - 10
             };
-            AddControl(1, _moneyLabel);
+            AddControl(101, _moneyLabel);
 
             _startButton = new ButtonControl(Parent, clicked: StartButton_Click)
             {
@@ -187,7 +189,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 100
             };
-            AddControl(1, _startButton);
+            AddControl(101, _startButton);
 
             _mainMenuButton = new ButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
             {
@@ -202,7 +204,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 100
             };
-            AddControl(1, _mainMenuButton);
+            AddControl(101, _mainMenuButton);
             _saveAndExitButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
@@ -217,7 +219,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 200,
                 IsEnabled = false
             };
-            AddControl(1, _saveAndExitButton);
+            AddControl(101, _saveAndExitButton);
 
             _autoRunButton = new ButtonControl(Parent, clicked: AutoRunButton_Click)
             {
@@ -231,7 +233,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 200
             };
-            AddControl(1, _autoRunButton);
+            AddControl(101, _autoRunButton);
 
             _sendWave = new ButtonControl(Parent, clicked: (s) =>
             {
@@ -250,12 +252,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width - 20
             };
-            AddControl(1, _sendWave);
+            AddControl(101, _sendWave);
         }
 
         private void SetupBaseGameField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl()
+            AddControl(101, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
                 X = xOffset,
@@ -263,7 +265,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = "Bug Defenders",
                 Font = BasicFonts.GetFont(24),
@@ -283,8 +285,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width
             };
-            AddControl(1, _playtimeLabel);
-            AddControl(1, new LabelControl()
+            AddControl(101, _playtimeLabel);
+            AddControl(101, new LabelControl()
             {
                 Text = $"Map: {_game.Context.Map.Name}",
                 Font = BasicFonts.GetFont(12),
@@ -294,7 +296,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width
             });
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = $"Game Style: {_game.Context.GameStyle.Name}",
                 Font = BasicFonts.GetFont(12),
@@ -316,7 +318,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = "Challenge Info",
                 Font = BasicFonts.GetFont(24),
@@ -331,7 +333,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             var sb = new StringBuilder();
             foreach (var req in _game.Context.Challenge.Criterias)
                 sb.AppendLine(req.ToString());
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = $"Challenge: {_game.Context.Challenge.Name}",
                 Font = BasicFonts.GetFont(10),
@@ -341,7 +343,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width
             });
-            AddControl(1, new TextboxControl()
+            AddControl(101, new TextboxControl()
             {
                 Text = sb.ToString(),
                 Font = BasicFonts.GetFont(8),
@@ -355,7 +357,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupPurchasingField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl()
+            AddControl(101, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
                 X = xOffset,
@@ -363,7 +365,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = "Turrets",
                 Font = BasicFonts.GetFont(16),
@@ -410,18 +412,18 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Alpha = 25,
                 ViewPort = _gameArea
             };
-            AddControl(10, _buyingPreviewRangeTile);
+            AddControl(101, _buyingPreviewRangeTile);
             _buyingPreviewTile = new AnimatedTileControl()
             {
                 IsVisible = false,
                 ViewPort = _gameArea
             };
-            AddControl(10, _buyingPreviewTile);
+            AddControl(101, _buyingPreviewTile);
         }
 
         private void SetupUpgradeField(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl()
+            AddControl(101, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
                 X = xOffset,
@@ -429,7 +431,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = "Upgrades",
                 Font = BasicFonts.GetFont(16),
@@ -461,7 +463,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl()
+            AddControl(101, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("2712c649-3e74-44ca-b8a9-c3032aba217e")),
                 X = xOffset,
@@ -469,7 +471,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = "Next Enemies",
                 Font = BasicFonts.GetFont(10),
@@ -493,13 +495,13 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     Y = y
                 };
                 _nextEnemyPanels.Add(newItem);
-                AddControl(1, newItem);
+                AddControl(101, newItem);
             }
         }
 
         private void SetupTurretStatsPanel(int xOffset, int yOffset, int width, int height)
         {
-            AddControl(0, new TileControl()
+            AddControl(101, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("90447608-bd7a-478c-9bfd-fddb26c731b7")),
                 X = xOffset,
@@ -507,7 +509,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
-            AddControl(1, new LabelControl()
+            AddControl(101, new LabelControl()
             {
                 Text = "Turret Stats",
                 Font = BasicFonts.GetFont(10),
@@ -532,7 +534,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 IsEnabled = false
             };
-            AddControl(1, _sellTurretButton);
+            AddControl(101, _sellTurretButton);
             _turretStatesTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(8),
@@ -543,7 +545,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width - 20,
                 Height = height - 115
             };
-            AddControl(1, _turretStatesTextbox);
+            AddControl(101, _turretStatesTextbox);
 
             var values = Enum.GetValues(typeof(TargetingTypes)).Cast<TargetingTypes>().ToList();
             var buttonWidth = (width - 20) / (values.Count - 1) - 5;
@@ -572,7 +574,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     IsEnabled = false,
                 };
                 _turretTargetingModes.Add(newControl);
-                AddControl(1, newControl);
+                AddControl(101, newControl);
             }
         }
     }
