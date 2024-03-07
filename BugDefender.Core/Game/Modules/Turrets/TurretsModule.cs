@@ -64,7 +64,7 @@ namespace BugDefender.Core.Game.Modules.Turrets
         {
             if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
-            Context.Money += turret.GetTurretWorth();
+            Context.Money += turret.GetTurretWorth(Context.GameStyle);
             Context.Turrets.Remove(turret);
             Context.Stats.TurretSold(turret.DefinitionID);
 

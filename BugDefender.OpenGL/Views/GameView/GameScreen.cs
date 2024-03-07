@@ -229,7 +229,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetTurretUpgradeField(_selectedTurret);
 
             _turretStatesTextbox.Text = _selectedTurret.ToString();
-            _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
+            _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth(_game.Context.GameStyle)}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
 
             foreach (var button in _turretTargetingModes)

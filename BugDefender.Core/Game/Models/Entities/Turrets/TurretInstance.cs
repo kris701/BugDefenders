@@ -1,5 +1,6 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Resources;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -50,14 +51,14 @@ namespace BugDefender.Core.Game.Models.Entities.Turrets
             return _definition;
         }
 
-        public int GetTurretWorth()
+        public int GetTurretWorth(GameStyleDefinition style)
         {
             var def = GetDefinition();
             var worth = def.Cost;
             foreach (var upgrade in def.Upgrades)
                 if (HasUpgrades.Contains(upgrade.ID))
                     worth += upgrade.Cost;
-            return worth;
+            return (int)(worth * style.TurretRefundPenalty);
         }
 
         public override string ToString()
