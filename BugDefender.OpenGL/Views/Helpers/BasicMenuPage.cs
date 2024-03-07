@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
@@ -13,8 +14,8 @@ namespace BugDefender.OpenGL.Views.Helpers
             view.AddControl(0, new TileControl()
             {
                 FillColor = background,
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
+                Width = IWindow.BaseScreenSize.X,
+                Height = IWindow.BaseScreenSize.Y
             });
             view.AddControl(0, new LabelControl()
             {

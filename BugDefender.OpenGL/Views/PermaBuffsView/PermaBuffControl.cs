@@ -10,7 +10,7 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
 {
     public class PermaBuffControl : CollectionControl
     {
-        public PermaBuffControl(GameWindow parent, BuffDefinition buff, ClickedHandler click, bool isUnlocked)
+        public PermaBuffControl(BugDefenderGameWindow parent, BuffDefinition buff, ClickedHandler click, bool isUnlocked)
         {
             Width = 900;
             Height = 140;

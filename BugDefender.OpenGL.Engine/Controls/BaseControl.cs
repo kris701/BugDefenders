@@ -68,14 +68,14 @@ namespace BugDefender.OpenGL.Engine.Controls
             switch (HorizontalAlignment)
             {
                 case HorizontalAlignment.Left: X = 0; break;
-                case HorizontalAlignment.Right: X = IGameWindow.BaseScreenSize.X - Width; break;
-                case HorizontalAlignment.Middle: X = IGameWindow.BaseScreenSize.X / 2 - Width / 2; break;
+                case HorizontalAlignment.Right: X = IWindow.BaseScreenSize.X - Width; break;
+                case HorizontalAlignment.Middle: X = IWindow.BaseScreenSize.X / 2 - Width / 2; break;
             }
             switch (VerticalAlignment)
             {
                 case VerticalAlignment.Top: Y = 0; break;
-                case VerticalAlignment.Bottom: Y = IGameWindow.BaseScreenSize.Y - Height; break;
-                case VerticalAlignment.Middle: Y = IGameWindow.BaseScreenSize.Y / 2 - Height / 2; break;
+                case VerticalAlignment.Bottom: Y = IWindow.BaseScreenSize.Y - Height; break;
+                case VerticalAlignment.Middle: Y = IWindow.BaseScreenSize.Y / 2 - Height / 2; break;
             }
         }
 

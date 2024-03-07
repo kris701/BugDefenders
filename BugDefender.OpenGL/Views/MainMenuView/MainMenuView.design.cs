@@ -1,12 +1,14 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using System;
 
 namespace BugDefender.OpenGL.Screens.MainMenu
 {
-    public partial class MainMenuView : BaseAnimatedView
+    public partial class MainMenuView : BaseBugDefenderView
     {
         private ButtonControl _startGame;
         private ButtonControl _continueButton;
@@ -16,8 +18,8 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
+                Width = IWindow.BaseScreenSize.X,
+                Height = IWindow.BaseScreenSize.Y
             });
             AddControl(0, new LabelControl()
             {
@@ -115,7 +117,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => Parent.Exit())
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => (Parent as Game).Exit())
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 600,

@@ -16,7 +16,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         public delegate void ClickedHandler(AnimatedButtonControl parent);
         public event ClickedHandler? Clicked;
 
-        public IGameWindow Parent { get; set; }
+        public IWindow Parent { get; set; }
         public Guid ClickSound { get; set; } = new Guid("2e3a4bbb-c0e5-4617-aee1-070e02e4b8ea");
         public List<Texture2D> TileSet { get; set; } = new List<Texture2D>();
         public int Frame { get; set; } = 0;
@@ -65,7 +65,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public AnimatedButtonControl(IGameWindow parent, ClickedHandler? clicked = null)
+        public AnimatedButtonControl(IWindow parent, ClickedHandler? clicked = null)
         {
             Parent = parent;
             Clicked += clicked;

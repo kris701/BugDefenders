@@ -14,27 +14,28 @@ namespace BugDefender.OpenGL.ResourcePacks
 {
     public class ResourcePackController
     {
-        public IGameWindow Parent { get; }
-        public BaseBuilder<ResourcePackDefinition> TexturePacks = new BaseBuilder<ResourcePackDefinition>("ResourcePacks.ResourcePacks", Assembly.GetExecutingAssembly());
+        public BugDefenderGameWindow Parent { get; }
+        public BaseBuilder<ResourcePackDefinition> ResourcePacks = new BaseBuilder<ResourcePackDefinition>("ResourcePacks.ResourcePacks", Assembly.GetExecutingAssembly());
         private readonly Dictionary<Guid, List<IEntityResource>> _animationEntities = new Dictionary<Guid, List<IEntityResource>>();
         private readonly Dictionary<Guid, List<IEntityResource>> _soundEffectEntities = new Dictionary<Guid, List<IEntityResource>>();
 
-        public ResourcePackController(IGameWindow parent)
+        public ResourcePackController(BugDefenderGameWindow parent)
         {
             Parent = parent;
         }
 
-        public List<Guid> GetTexturePacks() => TexturePacks.GetResources();
+        public List<Guid> GetResourcePacks() => ResourcePacks.GetResources();
+        public ResourcePackDefinition GetResourcePack(Guid id) => ResourcePacks.GetResource(id);
 
-        public void LoadTexturePack(Guid texturePack)
+        public void LoadResourcePack(Guid texturePack)
         {
-            LoadTexturePack(TexturePacks.GetResource(texturePack));
+            LoadResourcePack(ResourcePacks.GetResource(texturePack));
         }
 
-        private void LoadTexturePack(ResourcePackDefinition pack)
+        private void LoadResourcePack(ResourcePackDefinition pack)
         {
             if (pack.BasedOn != null)
-                LoadTexturePack(TexturePacks.GetResource((Guid)pack.BasedOn));
+                LoadResourcePack(ResourcePacks.GetResource((Guid)pack.BasedOn));
             foreach (var item in pack.Textures)
                 Parent.TextureController.LoadTexture(item);
             foreach (var item in pack.TextureSets)

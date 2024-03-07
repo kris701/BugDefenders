@@ -1,6 +1,7 @@
 ﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.UsersScreen
 {
-    public partial class UsersScreenView : BaseAnimatedView
+    public partial class UsersScreenView : BaseBugDefenderView
     {
         private readonly List<ButtonControl> _usersButtons = new List<ButtonControl>();
         private readonly List<ButtonControl> _usersDeleteButtons = new List<ButtonControl>();

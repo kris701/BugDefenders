@@ -56,12 +56,20 @@
     <None Remove="Content\Views\UsersView\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="ResourcePacks\ResourcePacks\high.json" />
+    <None Remove="ResourcePacks\ResourcePacks\low.json" />
+    <None Remove="ResourcePacks\ResourcePacks\medium.json" />
+  </ItemGroup>
+  <ItemGroup>
 	  <EmbeddedResource Include="Icon.bmp">
 		  <LogicalName>Icon.bmp</LogicalName>
 	  </EmbeddedResource>
 	  <EmbeddedResource Include="Icon.ico">
 		  <LogicalName>Icon.ico</LogicalName>
 	  </EmbeddedResource>
+	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\high.json" />
+	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\low.json" />
+	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\medium.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />

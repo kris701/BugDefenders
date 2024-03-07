@@ -12,7 +12,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(4);
         public float Speed { get; set; } = 3;
         public List<INotificationHandle> Handles { get; set; } = new List<INotificationHandle>();
-        public GameWindow Parent { get; set; }
+        public BugDefenderGameWindow Parent { get; set; }
 
         private enum MoveState { Hold, Up, Down }
         private MoveState _currentMoveState = MoveState.Hold;
@@ -23,7 +23,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         private readonly TimeSpan _waitTarget = TimeSpan.FromSeconds(3);
         private TimeSpan _waitingFor = TimeSpan.FromSeconds(0);
 
-        public NotificationBackroundWorker(GameWindow parent)
+        public NotificationBackroundWorker(BugDefenderGameWindow parent)
         {
             Parent = parent;
         }

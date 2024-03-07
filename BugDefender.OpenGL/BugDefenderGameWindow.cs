@@ -26,7 +26,7 @@ using System.Text.Json;
 
 namespace BugDefender.OpenGL
 {
-    public class GameWindow : Game, IGameWindow
+    public class BugDefenderGameWindow : Game, IWindow
     {
         private static readonly string _contentDir = "Content";
         private static readonly string _modsDir = "Mods";
@@ -36,18 +36,18 @@ namespace BugDefender.OpenGL
 
         public GraphicsDeviceManager Device { get; }
         public IView CurrentScreen { get; set; }
-        public UserEngine<SettingsDefinition> UserManager { get; set; }
+        public UserEngine<SettingsDefinition> UserManager { get; private set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; } = new List<IBackgroundWorker>();
 
         public AudioController AudioController { get; private set; }
         public TextureController TextureController { get; private set; }
         public ResourcePackController ResourcePackController { get; private set; }
 
-        private readonly Func<GameWindow, IView> _screenToLoad;
+        private readonly Func<BugDefenderGameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
         private NotificationBackroundWorker _notificationWorker;
 
-        public GameWindow(Func<GameWindow, IView> screen)
+        public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen)
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;
@@ -217,12 +217,12 @@ namespace BugDefender.OpenGL
                 Device.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
                 Device.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             }
-            ResourcePackController.LoadTexturePack(UserManager.CurrentUser.UserData.TexturePack);
+            ResourcePackController.LoadResourcePack(UserManager.CurrentUser.UserData.TexturePack);
             MediaPlayer.Volume = UserManager.CurrentUser.UserData.MusicVolume;
             SoundEffect.MasterVolume = UserManager.CurrentUser.UserData.EffectsVolume;
             Device.ApplyChanges();
-            XScale = (float)Device.PreferredBackBufferWidth / (float)IGameWindow.BaseScreenSize.X;
-            YScale = (float)Device.PreferredBackBufferHeight / (float)IGameWindow.BaseScreenSize.Y;
+            XScale = (float)Device.PreferredBackBufferWidth / (float)IWindow.BaseScreenSize.X;
+            YScale = (float)Device.PreferredBackBufferHeight / (float)IWindow.BaseScreenSize.Y;
         }
     }
 }

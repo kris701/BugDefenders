@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly AnimatedTileControl _enemyTile;
         private readonly float _initialHP;
         private readonly int _legalOffset = 5;
-        public EnemyControl(GameWindow parent, EnemyInstance enemy)
+        public EnemyControl(BugDefenderGameWindow parent, EnemyInstance enemy)
         {
             Width = enemy.Size;
             Height = enemy.Size;

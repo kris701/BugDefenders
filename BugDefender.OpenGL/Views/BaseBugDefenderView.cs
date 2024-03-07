@@ -1,0 +1,20 @@
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.ResourcePacks;
+using BugDefender.OpenGL.Engine.Views;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BugDefender.OpenGL.Views
+{
+    public class BaseBugDefenderView : BaseAnimatedView
+    {
+        public new BugDefenderGameWindow Parent { get; set; }
+        public BaseBugDefenderView(BugDefenderGameWindow parent, Guid id, TextureSetDefinition inSet, TextureSetDefinition outSet) : base(parent, id, inSet, outSet)
+        {
+            Parent = parent;
+        }
+    }
+}

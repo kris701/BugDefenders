@@ -13,10 +13,10 @@ namespace BugDefender.OpenGL.Views.GameView
 {
     public class EnemyQueueControl : CollectionControl
     {
-        private readonly GameWindow _parent;
+        private readonly BugDefenderGameWindow _parent;
         private readonly AnimatedTileControl _iconControl;
         private readonly TextboxControl _descriptionControl;
-        public EnemyQueueControl(GameWindow parent)
+        public EnemyQueueControl(BugDefenderGameWindow parent)
         {
             _parent = parent;
             Width = 220;
@@ -57,7 +57,7 @@ namespace BugDefender.OpenGL.Views.GameView
         {
             var def = ResourceManager.Enemies.GetResource(wave[0]);
             var instance = new EnemyInstance(def, evolution);
-            var animation = _parent.TextureController.GetAnimation<EnemyEntityDefinition>(def.ID);
+            var animation = _parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(def.ID);
             var textureSet = _parent.TextureController.GetTextureSet(animation.OnCreate);
             _iconControl.TileSet = textureSet.LoadedContents;
             _iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);

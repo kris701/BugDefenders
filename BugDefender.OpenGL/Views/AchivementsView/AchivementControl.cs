@@ -9,7 +9,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
 {
     public class AchivementControl : CollectionControl
     {
-        public AchivementControl(GameWindow parent, AchivementDefinition achivement, bool isUnlocked)
+        public AchivementControl(BugDefenderGameWindow parent, AchivementDefinition achivement, bool isUnlocked)
         {
             Height = 140;
             Width = 900;

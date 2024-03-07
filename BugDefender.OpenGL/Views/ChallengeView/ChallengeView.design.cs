@@ -2,6 +2,7 @@
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.ChallengeView;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
@@ -9,7 +10,7 @@ using System;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
-    public partial class ChallengeView : BaseAnimatedView
+    public partial class ChallengeView : BaseBugDefenderView
     {
         private LabelControl _waitLabel;
         public override void Initialize()

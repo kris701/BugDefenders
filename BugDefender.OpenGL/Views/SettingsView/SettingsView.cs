@@ -1,18 +1,19 @@
 ﻿using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Settings;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
-    public partial class SettingsView : BaseAnimatedView
+    public partial class SettingsView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
         private readonly SettingsDefinition _settings;
         private readonly KeyWatcher _escapeKeyWatcher;
-        public SettingsView(GameWindow parent) : base(
+        public SettingsView(BugDefenderGameWindow parent) : base(
             parent,
             _id,
             parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

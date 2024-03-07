@@ -11,7 +11,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         public delegate void ClickedHandler(ButtonControl parent);
         public event ClickedHandler? Clicked;
 
-        public IGameWindow Parent { get; set; }
+        public IWindow Parent { get; set; }
         public Guid ClickSound { get; set; } = new Guid("2e3a4bbb-c0e5-4617-aee1-070e02e4b8ea");
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
@@ -20,7 +20,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public ButtonControl(IGameWindow parent, ClickedHandler? clicked = null)
+        public ButtonControl(IWindow parent, ClickedHandler? clicked = null)
         {
             Parent = parent;
             Clicked += clicked;

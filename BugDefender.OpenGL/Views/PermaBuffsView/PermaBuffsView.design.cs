@@ -3,6 +3,7 @@ using BugDefender.Core.Users.Models.Buffs;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using BugDefender.OpenGL.Views.PermaBuffsView;
 using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@ using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
-    public partial class PermaBuffsView : BaseAnimatedView
+    public partial class PermaBuffsView : BaseBugDefenderView
     {
         private readonly PageHandler<PermaBuffControl> _buffPageHandler = new PageHandler<PermaBuffControl>()
         {

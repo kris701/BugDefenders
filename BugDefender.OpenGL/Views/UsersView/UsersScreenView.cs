@@ -3,6 +3,7 @@ using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Settings;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -10,12 +11,12 @@ using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.UsersScreen
 {
-    public partial class UsersScreenView : BaseAnimatedView
+    public partial class UsersScreenView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("0dd63d81-e49c-44d2-868e-7db6fb4634d7");
         private readonly KeyWatcher _escapeKeyWatcher;
         private bool _update = false;
-        public UsersScreenView(GameWindow parent) : base(
+        public UsersScreenView(BugDefenderGameWindow parent) : base(
             parent,
             _id,
             parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

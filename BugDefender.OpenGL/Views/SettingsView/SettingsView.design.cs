@@ -1,6 +1,7 @@
 ﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
-    public partial class SettingsView : BaseAnimatedView
+    public partial class SettingsView : BaseBugDefenderView
     {
         private readonly List<Point> _resolutionOptions = new List<Point>()
         {
@@ -239,7 +240,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FontColor = Color.White
             });
 
-            var packs = Parent.TextureController.GetTexturePacks();
+            var packs = Parent.ResourcePackController.GetResourcePacks();
             for (int i = 0; i < packs.Count; i++)
             {
                 var newControl = new ButtonControl(Parent, clicked: (s) =>
@@ -253,7 +254,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                     X = 110 + (i * (1585 / packs.Count + 10)),
                     Width = 1585 / packs.Count,
                     Height = 50,
-                    Text = Parent.TextureController.GetTexturePack(packs[i]).Name,
+                    Text = Parent.ResourcePackController.GetResourcePack(packs[i]).Name,
                     Font = BasicFonts.GetFont(16),
                     FontColor = Color.White,
                     FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),

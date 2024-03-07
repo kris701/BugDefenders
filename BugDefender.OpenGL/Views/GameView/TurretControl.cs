@@ -13,11 +13,11 @@ namespace BugDefender.OpenGL.Views.GameView
         public TurretInstance Instance { get; }
         public Guid CurrentSoundEffect { get; set; }
 
-        private readonly GameWindow _parent;
+        private readonly BugDefenderGameWindow _parent;
         private readonly AnimatedButtonControl _turretControl;
         private readonly LabelControl _turretLevelControl;
         private Guid _currentAnimation;
-        public TurretControl(GameWindow parent, TurretInstance instance, ClickedHandler clicked)
+        public TurretControl(BugDefenderGameWindow parent, TurretInstance instance, ClickedHandler clicked)
         {
             _parent = parent;
             Instance = instance;

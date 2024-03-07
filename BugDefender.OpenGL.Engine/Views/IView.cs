@@ -8,7 +8,7 @@ namespace BugDefender.OpenGL.Engine.Views
     public interface IView
     {
         public Guid ID { get; set; }
-        public IGameWindow Parent { get; set; }
+        public IWindow Parent { get; set; }
 
         public void ClearLayer(int layer);
         public void AddControl(int layer, IControl control);

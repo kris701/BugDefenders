@@ -3,6 +3,7 @@ using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.AchivementsView;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@ using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.AchivementsView
 {
-    public partial class AchivementsView : BaseAnimatedView
+    public partial class AchivementsView : BaseBugDefenderView
     {
         private readonly PageHandler<AchivementControl> _achivementPageHandler = new PageHandler<AchivementControl>()
         {

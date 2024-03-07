@@ -1,20 +1,22 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using System;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
-    public partial class GameOverView : BaseAnimatedView
+    public partial class GameOverView : BaseBugDefenderView
     {
         public override void Initialize()
         {
             AddControl(0, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
+                Width = IWindow.BaseScreenSize.X,
+                Height = IWindow.BaseScreenSize.Y
             });
 
             var gameOverLabel = new LabelControl()

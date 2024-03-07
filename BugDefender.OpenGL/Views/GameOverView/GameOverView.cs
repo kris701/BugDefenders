@@ -1,13 +1,14 @@
 ﻿using BugDefender.Core.Game;
 using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
-    public partial class GameOverView : BaseAnimatedView
+    public partial class GameOverView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
         private static readonly string _saveDir = "Saves";
@@ -17,7 +18,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private readonly int _credits;
         private readonly TimeSpan _gameTime;
         private readonly GameResult _gameResult;
-        public GameOverView(GameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result) : base(
+        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result) : base(
             parent,
             _id,
             parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
@@ -53,7 +54,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
 
             Initialize();
 
-            Parent.TextureController.PlaySong(ID);
+            Parent.AudioController.PlaySong(ID);
 
             var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
             if (File.Exists(saveFile))

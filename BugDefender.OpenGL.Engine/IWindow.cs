@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.Engine
 {
-    public interface IGameWindow
+    public interface IWindow
     {
         public static readonly Point BaseScreenSize = new Point(1920, 1080);
         public float XScale { get; }

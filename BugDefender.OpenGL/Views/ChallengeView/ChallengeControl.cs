@@ -11,7 +11,7 @@ namespace BugDefender.OpenGL.Views.ChallengeView
 {
     public class ChallengeControl : CollectionControl
     {
-        public ChallengeControl(GameWindow parent, ChallengeDefinition challenge, ClickedHandler click, bool isFinished)
+        public ChallengeControl(BugDefenderGameWindow parent, ChallengeDefinition challenge, ClickedHandler click, bool isFinished)
         {
             Width = 900;
             Height = 140;

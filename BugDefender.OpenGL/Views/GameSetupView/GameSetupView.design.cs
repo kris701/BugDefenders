@@ -2,6 +2,7 @@
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
@@ -9,7 +10,7 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
-    public partial class GameSetupView : BaseAnimatedView
+    public partial class GameSetupView : BaseBugDefenderView
     {
         private TileControl _mapPreviewTile;
         private LabelControl _mapNameLabel;

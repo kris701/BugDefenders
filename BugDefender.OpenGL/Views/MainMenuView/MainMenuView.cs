@@ -3,6 +3,7 @@ using BugDefender.Core.Game.Helpers;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -12,20 +13,20 @@ using System.Text.Json;
 
 namespace BugDefender.OpenGL.Screens.MainMenu
 {
-    public partial class MainMenuView : BaseAnimatedView
+    public partial class MainMenuView : BaseBugDefenderView
     {
         public static readonly Guid _id = new Guid("9c52281c-3202-4b22-bfc9-dfc187fdbeb3");
         private static readonly string _saveDir = "Saves";
         private readonly KeysWatcher _cheatsInputWatcher;
         private readonly KeyWatcher _escapeInputWatcher;
-        public MainMenuView(GameWindow parent) : base(
+        public MainMenuView(BugDefenderGameWindow parent) : base(
             parent,
             _id,
             parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
             parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             Initialize();
-            Parent.TextureController.PlaySong(ID);
+            Parent.AudioController.PlaySong(ID);
             Parent.UserManager.SaveUser();
             _cheatsInputWatcher = new KeysWatcher(new List<Keys>() { Keys.LeftAlt, Keys.Enter }, OpenCheatsMenu);
             _escapeInputWatcher = new KeyWatcher(Keys.Escape, CloseCheatsMenu);
@@ -60,9 +61,9 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             var preCount = CheatsHelper.Cheats.Count;
             CheatsHelper.AddCheat(control.Text);
             if (CheatsHelper.Cheats.Count == preCount)
-                Parent.TextureController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
+                Parent.AudioController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
             else
-                Parent.TextureController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
+                Parent.AudioController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
             control.Text = "";
         }
 

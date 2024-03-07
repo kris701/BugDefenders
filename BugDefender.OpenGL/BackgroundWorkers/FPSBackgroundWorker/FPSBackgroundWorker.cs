@@ -8,12 +8,12 @@ namespace BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker
 {
     public class FPSBackgroundWorker : BaseBackroundWorker
     {
-        private readonly GameWindow _parent;
+        private readonly BugDefenderGameWindow _parent;
         public override Guid ID { get; } = new Guid("685946a7-a6b4-4a5d-88c4-7b4ba6dee748");
         private TimeSpan _passed = TimeSpan.Zero;
         private int _currentFrames = 0;
         private int _frames = 0;
-        public FPSBackgroundWorker(GameWindow parent)
+        public FPSBackgroundWorker(BugDefenderGameWindow parent)
         {
             _parent = parent;
         }

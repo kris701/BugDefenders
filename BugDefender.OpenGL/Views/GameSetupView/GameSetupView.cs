@@ -3,13 +3,14 @@ using BugDefender.Core.Game.Models.Maps;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
-    public partial class GameSetupView : BaseAnimatedView
+    public partial class GameSetupView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
 
@@ -19,7 +20,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private ButtonControl? _selectedMapButton;
         private readonly KeyWatcher _escapeKeyWatcher;
 
-        public GameSetupView(GameWindow parent) : base(
+        public GameSetupView(BugDefenderGameWindow parent) : base(
             parent,
             _id,
             parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),

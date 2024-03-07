@@ -16,17 +16,12 @@ namespace BugDefender.OpenGL.Engine.Textures
         private readonly ContentManager _contentManager;
         private readonly Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
         private readonly Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
-        private readonly Texture2D _noTexture;
-        private readonly TextureSetDefinition _noTextureSet;
+        private Texture2D? _noTexture;
+        private TextureSetDefinition? _noTextureSet;
 
         public TextureController(ContentManager contentManager)
         {
             _contentManager = contentManager;
-            _noTexture = BasicTextures.GetBasicRectange(Color.HotPink);
-            _noTextureSet = new TextureSetDefinition(Guid.Empty, 9999, new List<string>())
-            {
-                LoadedContents = new List<Texture2D>() { _noTexture }
-            };
         }
 
         public void LoadTexture(TextureDefinition item)
@@ -54,6 +49,8 @@ namespace BugDefender.OpenGL.Engine.Textures
         {
             if (_textures.ContainsKey(id))
                 return _textures[id].LoadedContent;
+            if (_noTexture == null)
+                _noTexture = BasicTextures.GetBasicRectange(Color.HotPink);
             return _noTexture;
         }
 
@@ -72,6 +69,16 @@ namespace BugDefender.OpenGL.Engine.Textures
                 };
                 _textureSets.Add(id, newSet);
                 return newSet;
+            }
+
+            if (_noTextureSet == null)
+            {
+                if (_noTexture == null)
+                    _noTexture = BasicTextures.GetBasicRectange(Color.HotPink);
+                _noTextureSet = new TextureSetDefinition(Guid.Empty, 9999, new List<string>())
+                {
+                    LoadedContents = new List<Texture2D>() { _noTexture }
+                };
             }
             return _noTextureSet;
         }

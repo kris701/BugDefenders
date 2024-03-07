@@ -13,7 +13,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _buyUpgradeButton;
 
-        public UpgradePanel(GameWindow parent, ClickedHandler buy)
+        public UpgradePanel(BugDefenderGameWindow parent, ClickedHandler buy)
         {
             Width = 300;
             Height = 160;

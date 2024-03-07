@@ -13,7 +13,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
         private readonly TileControl _iconTile;
         private readonly TextboxControl _descriptionTextbox;
 
-        public NotificationControl(GameWindow parent, NotificationItem item) : base(parent)
+        public NotificationControl(BugDefenderGameWindow parent, NotificationItem item) : base(parent)
         {
             Item = item;
             Width = 300;
@@ -65,7 +65,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             else
                 _descriptionTextbox.X = X + 20;
             _descriptionTextbox.Y = Y + 20;
-            _descriptionTextbox._textChanged = true;
+            _descriptionTextbox.Text = _descriptionTextbox.Text;
 
             _descriptionTextbox.Update(gameTime);
             if (Item.HasImage)

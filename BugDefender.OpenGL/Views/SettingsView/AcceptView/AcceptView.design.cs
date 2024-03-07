@@ -1,12 +1,14 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using System;
 
 namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 {
-    public partial class AcceptView : BaseAnimatedView
+    public partial class AcceptView : BaseBugDefenderView
     {
         private LabelControl _timeLeftLabel;
         public override void Initialize()
@@ -14,8 +16,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
             AddControl(0, new TileControl()
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y
+                Width = IWindow.BaseScreenSize.X,
+                Height = IWindow.BaseScreenSize.Y
             });
 
             AddControl(0, new LabelControl()

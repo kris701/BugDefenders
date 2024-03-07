@@ -3,6 +3,7 @@ using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -10,14 +11,14 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
-    public partial class ChallengeView : BaseAnimatedView
+    public partial class ChallengeView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("7fe5d5b5-3be0-4bc9-a27c-08448042b881");
         private readonly KeyWatcher _escapeKeyWatcher;
         private static readonly int _challengeCount = 5;
 
         private readonly List<Guid> _remainingChallenges;
-        public ChallengeView(GameWindow parent) : base(
+        public ChallengeView(BugDefenderGameWindow parent) : base(
             parent,
             _id,
             parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
