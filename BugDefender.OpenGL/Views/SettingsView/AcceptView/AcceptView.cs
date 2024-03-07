@@ -1,5 +1,4 @@
 ﻿using BugDefender.OpenGL.Engine.Input;
-using BugDefender.OpenGL.Settings;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;

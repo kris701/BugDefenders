@@ -1,5 +1,4 @@
-﻿using BugDefender.OpenGL.Engine.Controls.Elements;
-using BugDefender.OpenGL.Engine.Helpers;
+﻿using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

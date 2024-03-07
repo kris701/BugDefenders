@@ -22,7 +22,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             get => _element.FontColor;
             set => _element.FontColor = value;
         }
-        private TextElement _element;
+        private readonly TextElement _element;
 
         public LabelControl()
         {

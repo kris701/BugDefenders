@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BugDefender.OpenGL.Settings
+namespace BugDefender.OpenGL
 {
     public class SettingsDefinition
     {
