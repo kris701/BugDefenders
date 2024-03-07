@@ -1,7 +1,6 @@
 ﻿using BugDefender.OpenGL.Engine.Controls.Elements;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static BugDefender.OpenGL.Engine.Controls.Elements.AnimatedTileElement;
 
 namespace BugDefender.OpenGL.Engine.Controls
 {
@@ -10,8 +9,8 @@ namespace BugDefender.OpenGL.Engine.Controls
         public List<Texture2D> TileSet
         {
             get => AnimatedElement.TileSet;
-            set 
-            { 
+            set
+            {
                 AnimatedElement.TileSet = value;
                 AnimatedElement.Finished = false;
             }

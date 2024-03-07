@@ -14,7 +14,20 @@ namespace BugDefender.OpenGL.Engine.Controls
         public float Y { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
-        public int Alpha { get; set; } = 255;
+        private Color _alphaColor = new Color(255, 255, 255, 255);
+        private int _alpha = 255;
+        public int Alpha
+        {
+            get
+            {
+                return _alpha;
+            }
+            set
+            {
+                _alpha = value;
+                _alphaColor = new Color(255, 255, 255, value);
+            }
+        }
         public object? Tag { get; set; }
         private bool _usesViewPort = false;
         private Rectangle _actualViewPort;
@@ -96,8 +109,6 @@ namespace BugDefender.OpenGL.Engine.Controls
             Y += parent.Y;
         }
 
-        internal Color GetAlphaColor() => new Color(255, 255, 255, Alpha);
-
         internal void DrawTile(GameTime gameTime, SpriteBatch spriteBatch, Texture2D texture)
         {
             if (texture.Width == 1 && texture.Height == 1)
@@ -107,7 +118,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                         texture,
                         new Vector2(X + Width / 2, Y + Height / 2),
                         _actualViewPort,
-                        GetAlphaColor(),
+                        _alphaColor,
                         0,
                         new Vector2(Width / 2, Height / 2),
                         1,
@@ -118,7 +129,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                         texture,
                         new Vector2(X + Width / 2, Y + Height / 2),
                         new Rectangle(0, 0, (int)Width, (int)Height),
-                        GetAlphaColor(),
+                        _alphaColor,
                         Rotation,
                         new Vector2(Width / 2, Height / 2),
                         1,
@@ -141,7 +152,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                         texture,
                         new Vector2(X + Width / 2, Y + Height / 2),
                         scaledViewPort,
-                        GetAlphaColor(),
+                        _alphaColor,
                         0,
                         new Vector2(texture.Width / 2 - scaledViewPort.X, texture.Height / 2 - scaledViewPort.Y),
                         new Vector2(xFit, yFit),
@@ -153,7 +164,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                         texture,
                         new Vector2(X + Width / 2, Y + Height / 2),
                         null,
-                        GetAlphaColor(),
+                        _alphaColor,
                         Rotation,
                         new Vector2(texture.Width / 2, texture.Height / 2),
                         new Vector2(xFit, yFit),
