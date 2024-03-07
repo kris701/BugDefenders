@@ -14,5 +14,6 @@
   "TurretWhiteList": [],
   "EnemyBlackList": [],
   "EnemyWhiteList": [],
-  "MoneyPrWave": 50
+  "MoneyPrWave": 50,
+  "TurretRefundPenalty": 0.75
 }

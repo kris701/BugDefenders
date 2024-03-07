@@ -64,11 +64,30 @@ namespace BugDefender.Core.Game.Modules.Turrets
         {
             if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
-            Context.Money += turret.GetTurretWorth();
+            Context.Money += turret.GetTurretWorth(Context.GameStyle);
             Context.Turrets.Remove(turret);
             Context.Stats.TurretSold(turret.DefinitionID);
 
             OnTurretSold?.Invoke(turret);
+        }
+
+        public bool IsTurretPlacementOk(TurretDefinition turretDef, FloatPoint at)
+        {
+            if (at.X < 0)
+                return false;
+            if (at.X > Context.Map.Width - turretDef.Size)
+                return false;
+            if (at.Y < 0)
+                return false;
+            if (at.Y > Context.Map.Height - turretDef.Size)
+                return false;
+            foreach (var block in Context.Map.BlockingTiles)
+                if (MathHelpers.Intersects(turretDef, at, block))
+                    return false;
+            foreach (var otherTurret in Context.Turrets)
+                if (MathHelpers.Intersects(turretDef, at, otherTurret))
+                    return false;
+            return true;
         }
 
         public bool AddTurret(TurretDefinition turretDef, FloatPoint at)
@@ -81,22 +100,8 @@ namespace BugDefender.Core.Game.Modules.Turrets
                 return false;
             if (Context.GameStyle.TurretWhiteList.Count > 0 && !Context.GameStyle.TurretWhiteList.Contains(turretDef.ID))
                 return false;
-            if (at.X < 0)
+            if (!IsTurretPlacementOk(turretDef, at))
                 return false;
-            if (at.X > Context.Map.Width - turretDef.Size)
-                return false;
-            if (at.Y < 0)
-                return false;
-            if (at.Y > Context.Map.Height - turretDef.Size)
-                return false;
-
-            foreach (var block in Context.Map.BlockingTiles)
-                if (MathHelpers.Intersects(turretDef, at, block))
-                    return false;
-
-            foreach (var otherTurret in Context.Turrets)
-                if (MathHelpers.Intersects(turretDef, at, otherTurret))
-                    return false;
 
             var newInstance = new TurretInstance(turretDef)
             {

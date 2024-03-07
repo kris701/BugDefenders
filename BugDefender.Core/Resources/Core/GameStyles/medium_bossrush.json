@@ -21,5 +21,6 @@
     "dfea435c-c8ab-4981-b47a-210b31c5be48",
     "188bd963-5dac-4d7c-8c98-5d443b81eb7f"
   ],
-  "MoneyPrWave": 100
+  "MoneyPrWave": 100,
+  "TurretRefundPenalty": 0.75
 }

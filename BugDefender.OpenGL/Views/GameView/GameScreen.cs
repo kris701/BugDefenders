@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
@@ -40,7 +41,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private readonly EntityUpdater<LaserEntity, LineControl> _laserUpdater;
 
         private readonly GameEngine _game;
-        private Guid? _buyingTurret;
+        private TurretDefinition? _buyingTurret;
         private TurretInstance? _selectedTurret;
         private readonly HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
         private readonly Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
@@ -79,13 +80,13 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Parent.AudioController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
             };
 
-            _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(7, this, _gameArea.X, _gameArea.Y);
-            _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(3, this, _gameArea.X, _gameArea.Y);
+            _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(90, this, _gameArea.X, _gameArea.Y);
+            _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(91, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater.OnDelete += OnEnemyDeath;
-            _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(5, this, _gameArea.X, _gameArea.Y);
+            _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(92, this, _gameArea.X, _gameArea.Y);
             _projectileUpdater.OnDelete += OnProjectileDeleted;
-            _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(6, this, _gameArea.X, _gameArea.Y);
-            _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(4, this, _gameArea.X, _gameArea.Y);
+            _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(93, this, _gameArea.X, _gameArea.Y);
+            _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(92, this, _gameArea.X, _gameArea.Y);
 
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave?.DoClick(); });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
@@ -106,7 +107,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
             {
-                AddControl(99, new TileControl()
+                AddControl(200, new TileControl()
                 {
                     X = blockingTile.X + _gameArea.X,
                     Y = blockingTile.Y + _gameArea.Y,
@@ -123,7 +124,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 var from = path[0];
                 foreach (var waypoint in path.Skip(1))
                 {
-                    AddControl(99, new LineControl()
+                    AddControl(200, new LineControl()
                     {
                         X = from.X + _gameArea.X,
                         Y = from.Y + _gameArea.Y,
@@ -229,7 +230,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetTurretUpgradeField(_selectedTurret);
 
             _turretStatesTextbox.Text = _selectedTurret.ToString();
-            _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth()}$] Sell Turret";
+            _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth(_game.Context.GameStyle)}$] Sell Turret";
             _sellTurretButton.IsEnabled = true;
 
             foreach (var button in _turretTargetingModes)
@@ -455,10 +456,19 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 {
                     if (turret.Tag is TurretDefinition def)
                     {
-                        if (_game.Context.Money < def.Cost || _game.Context.Wave < def.AvailableAtWave)
+                        if (_game.Context.Wave < def.AvailableAtWave)
+                        {
                             turret.IsEnabled = false;
+                            turret.Alpha = 10;
+                        }
                         else
-                            turret.IsEnabled = true;
+                        {
+                            turret.Alpha = 255;
+                            if (_game.Context.Money < def.Cost)
+                                turret.IsEnabled = false;
+                            else
+                                turret.IsEnabled = true;
+                        }
                     }
                 }
             }
@@ -509,14 +519,23 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.X = relativeMousePosition.X - _buyingPreviewRangeTile.Width / 2;
                 _buyingPreviewRangeTile.Y = relativeMousePosition.Y - _buyingPreviewRangeTile.Height / 2;
                 _buyingPreviewRangeTile.CalculateViewPort();
+                var at = new FloatPoint(
+                    relativeMousePosition.X - _buyingTurret.Size / 2 - _gameArea.X,
+                    relativeMousePosition.Y - _buyingTurret.Size / 2 - _gameArea.Y);
+                if (!_game.TurretsModule.IsTurretPlacementOk(_buyingTurret, at))
+                {
+                    _buyingPreviewRangeTile.IsVisible = false;
+                    _buyingPreviewTile.Alpha = 10;
+                }
+                else
+                {
+                    _buyingPreviewRangeTile.IsVisible = true;
+                    _buyingPreviewTile.Alpha = 255;
+                }
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    var turretDef = ResourceManager.Turrets.GetResource((Guid)_buyingTurret);
-                    var at = new FloatPoint(
-                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X,
-                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y);
-                    if (_game.TurretsModule.AddTurret(turretDef, at))
+                    if (_game.TurretsModule.AddTurret(_buyingTurret, at))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
@@ -583,7 +602,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             if (parent.Tag is TurretDefinition def)
             {
-                _buyingTurret = def.ID;
+                _buyingTurret = def;
                 var animation = Parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(def.ID).OnIdle;
                 var textureSet = Parent.TextureController.GetTextureSet(animation);
                 _buyingPreviewTile.TileSet = textureSet.LoadedContents;

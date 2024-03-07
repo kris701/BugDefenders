@@ -28,6 +28,7 @@ namespace BugDefender.OpenGL.Views.Helpers
         public int MaxPage { get; set; } = int.MaxValue;
         public int MinItem { get; set; } = 0;
         public int MaxItem { get; set; } = int.MaxValue;
+        public int Layer { get; set; } = 0;
 
         private ButtonControl _leftButton;
         private ButtonControl _rightButton;
@@ -49,7 +50,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                     item.Y = Y + offset++ * item.Height + Margin;
                     item.IsVisible = true;
                     Pages[0].Add(item);
-                    parent.AddControl(2, item);
+                    parent.AddControl(Layer + 1, item);
                 }
                 return;
             }
@@ -68,7 +69,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 item.Y = Y + offset++ * item.Height + Margin;
                 item.IsVisible = pageIndex == 0;
                 Pages[pageIndex].Add(item);
-                parent.AddControl(2, item);
+                parent.AddControl(Layer + 1, item);
                 count++;
             }
 
@@ -93,7 +94,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 IsEnabled = false,
                 IsVisible = false,
             };
-            parent.AddControl(1, _leftButton);
+            parent.AddControl(Layer, _leftButton);
             _rightButton = new ButtonControl(parent.Parent, clicked: (s) =>
             {
                 PageIndex++;
@@ -114,7 +115,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 Width = ButtonSize,
                 IsVisible = false
             };
-            parent.AddControl(1, _rightButton);
+            parent.AddControl(Layer, _rightButton);
 
             if (MaxPage == int.MaxValue)
                 MaxPage = Pages.Count;

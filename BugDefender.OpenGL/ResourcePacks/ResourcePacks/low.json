@@ -5,6 +5,76 @@
   "BasedOn": null,
   "Textures": [
     {
+      "ID": "cae05609-66c4-4f8a-9e53-a7cebc7817d6",
+      "Content": "Achivements/moneyearned_1"
+    },
+    {
+      "ID": "c034193b-2172-4bc4-8a1e-4c25ad3bc955",
+      "Content": "Achivements/moneyearned_2"
+    },
+    {
+      "ID": "b4e2e147-1d69-4588-ad1d-756c7bbac911",
+      "Content": "Achivements/moneyearned_3"
+    },
+
+    {
+      "ID": "62a25083-8ce2-4783-b303-cf8d745cfd49",
+      "Content": "Achivements/totalkills_1"
+    },
+    {
+      "ID": "0242dd8b-6079-444d-a077-6ffe5e556ec9",
+      "Content": "Achivements/totalkills_2"
+    },
+    {
+      "ID": "279c4d26-f1a1-4107-8bb8-fc458b7ed1d3",
+      "Content": "Achivements/totalkills_3"
+    },
+    {
+      "ID": "7a4ab642-e363-4917-82a4-2888362a9636",
+      "Content": "Achivements/totalkills_4"
+    },
+
+    {
+      "ID": "fcd8f51c-66e7-4609-b37e-153f528faf1e",
+      "Content": "Achivements/turretsplaced_1"
+    },
+    {
+      "ID": "57c6af7b-5f97-408a-b26b-fb3c54de4749",
+      "Content": "Achivements/turretsplaced_2"
+    },
+    {
+      "ID": "5c53b0c5-1709-490e-86cb-b8873c1e0dc3",
+      "Content": "Achivements/turretsplaced_3"
+    },
+
+    {
+      "ID": "e68ad92b-3abc-4a26-89f1-d05d5b5e7f27",
+      "Content": "Achivements/turretssold_1"
+    },
+    {
+      "ID": "22228843-2fc0-45bd-ac7e-7744881c7976",
+      "Content": "Achivements/turretssold_2"
+    },
+    {
+      "ID": "4b0240d5-8f7c-4f66-8a10-dc069c395cc9",
+      "Content": "Achivements/turretssold_3"
+    },
+
+    {
+      "ID": "b4ee2d68-a981-4c74-afa0-c361a4fd36e9",
+      "Content": "Achivements/wavesstarted_1"
+    },
+    {
+      "ID": "f4bf6cde-04a0-4407-8944-773087f72328",
+      "Content": "Achivements/wavesstarted_2"
+    },
+    {
+      "ID": "a8518315-2963-451b-a908-223ef55118e8",
+      "Content": "Achivements/wavesstarted_3"
+    },
+
+
+    {
       "ID": "2811A657-6811-423A-8342-142BF5BD261A",
       "Content": "Entities/Maps/map1"
     },
