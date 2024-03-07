@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Text.Json.Serialization;
 
-namespace BugDefender.OpenGL.Engine.ResourcePacks
+namespace BugDefender.OpenGL.Engine.Textures
 {
     public class TextureDefinition
     {

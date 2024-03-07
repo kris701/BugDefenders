@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies;
-using BugDefender.Core.Game.Models.Maps;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;

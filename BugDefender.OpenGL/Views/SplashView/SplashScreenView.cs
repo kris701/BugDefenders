@@ -1,5 +1,4 @@
-﻿using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Screens.MainMenu;
+﻿using BugDefender.OpenGL.Screens.MainMenu;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;

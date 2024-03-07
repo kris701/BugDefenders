@@ -1,11 +1,6 @@
-﻿using BugDefender.OpenGL.Engine;
-using BugDefender.OpenGL.Engine.ResourcePacks;
+﻿using BugDefender.OpenGL.Engine.Textures;
 using BugDefender.OpenGL.Engine.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.Views
 {

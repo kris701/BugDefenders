@@ -1,6 +1,5 @@
 ﻿using BugDefender.Core.Game.Models;
-using BugDefender.OpenGL.Engine.ResourcePacks;
-using BugDefender.OpenGL.ResourcePacks;
+using BugDefender.OpenGL.Engine.Textures;
 using System;
 
 namespace BugDefender.OpenGL.Views.GameView

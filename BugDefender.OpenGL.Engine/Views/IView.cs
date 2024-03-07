@@ -1,7 +1,6 @@
 ﻿using BugDefender.OpenGL.Engine.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace BugDefender.OpenGL.Engine.Views
 {

@@ -8,7 +8,6 @@ using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Audio;
 using BugDefender.OpenGL.Engine.BackgroundWorkers;
 using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.ResourcePacks;
 using BugDefender.OpenGL.Engine.Textures;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks;

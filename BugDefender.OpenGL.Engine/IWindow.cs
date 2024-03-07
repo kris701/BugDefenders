@@ -3,11 +3,6 @@ using BugDefender.OpenGL.Engine.BackgroundWorkers;
 using BugDefender.OpenGL.Engine.Textures;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.Engine
 {

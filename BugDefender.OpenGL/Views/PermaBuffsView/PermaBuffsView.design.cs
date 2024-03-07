@@ -2,7 +2,6 @@
 using BugDefender.Core.Users.Models.Buffs;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using BugDefender.OpenGL.Views.PermaBuffsView;

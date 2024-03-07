@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Media;
-using System;
 using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.Engine.Audio

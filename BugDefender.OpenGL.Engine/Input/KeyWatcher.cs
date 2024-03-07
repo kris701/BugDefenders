@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace BugDefender.OpenGL.Engine.Input
 {

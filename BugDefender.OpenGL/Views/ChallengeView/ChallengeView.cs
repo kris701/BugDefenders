@@ -2,7 +2,6 @@
 using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
-using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
