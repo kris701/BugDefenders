@@ -40,7 +40,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private readonly EntityUpdater<LaserEntity, LineControl> _laserUpdater;
 
         private readonly GameEngine _game;
-        private Guid? _buyingTurret;
+        private TurretDefinition? _buyingTurret;
         private TurretInstance? _selectedTurret;
         private readonly HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
         private readonly Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
@@ -509,14 +509,23 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.X = relativeMousePosition.X - _buyingPreviewRangeTile.Width / 2;
                 _buyingPreviewRangeTile.Y = relativeMousePosition.Y - _buyingPreviewRangeTile.Height / 2;
                 _buyingPreviewRangeTile.CalculateViewPort();
+                var at = new FloatPoint(
+                    relativeMousePosition.X - _buyingTurret.Size / 2 - _gameArea.X,
+                    relativeMousePosition.Y - _buyingTurret.Size / 2 - _gameArea.Y);
+                if (!_game.TurretsModule.IsTurretPlacementOk(_buyingTurret, at))
+                {
+                    _buyingPreviewRangeTile.IsVisible = false;
+                    _buyingPreviewTile.Alpha = 10;
+                }
+                else
+                {
+                    _buyingPreviewRangeTile.IsVisible = true;
+                    _buyingPreviewTile.Alpha = 255;
+                }
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    var turretDef = ResourceManager.Turrets.GetResource((Guid)_buyingTurret);
-                    var at = new FloatPoint(
-                        relativeMousePosition.X - turretDef.Size / 2 - _gameArea.X,
-                        relativeMousePosition.Y - turretDef.Size / 2 - _gameArea.Y);
-                    if (_game.TurretsModule.AddTurret(turretDef, at))
+                    if (_game.TurretsModule.AddTurret(_buyingTurret, at))
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
@@ -583,7 +592,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             if (parent.Tag is TurretDefinition def)
             {
-                _buyingTurret = def.ID;
+                _buyingTurret = def;
                 var animation = Parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(def.ID).OnIdle;
                 var textureSet = Parent.TextureController.GetTextureSet(animation);
                 _buyingPreviewTile.TileSet = textureSet.LoadedContents;
