@@ -27,7 +27,7 @@ namespace BugDefender.OpenGL.Engine.Views
                 FrameTime = TimeSpan.FromMilliseconds(_in.FrameTime),
                 AutoPlay = false
             };
-            _tile.OnAnimationDone += (s) =>
+            _tile.AnimatedElement.OnAnimationDone += (s) =>
             {
                 switch (State)
                 {

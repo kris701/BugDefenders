@@ -1,78 +1,53 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BugDefender.OpenGL.Engine.Controls.Elements;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static BugDefender.OpenGL.Engine.Controls.Elements.AnimatedTileElement;
 
 namespace BugDefender.OpenGL.Engine.Controls
 {
     public class AnimatedTileControl : TileControl
     {
-        public delegate void OnAnimationDoneHandler(AnimatedTileControl parent);
+        public List<Texture2D> TileSet
+        {
+            get => AnimatedElement.TileSet;
+            set 
+            { 
+                AnimatedElement.TileSet = value;
+                AnimatedElement.Finished = false;
+            }
+        }
+        public int Frame
+        {
+            get => AnimatedElement.Frame;
+            set => AnimatedElement.Frame = value;
+        }
+        public bool AutoPlay
+        {
+            get => AnimatedElement.AutoPlay;
+            set => AnimatedElement.AutoPlay = value;
+        }
+        public TimeSpan FrameTime
+        {
+            get => AnimatedElement.FrameTime;
+            set => AnimatedElement.FrameTime = value;
+        }
+        public AnimatedTileElement AnimatedElement;
 
-        public OnAnimationDoneHandler? OnAnimationDone;
-        public List<Texture2D> TileSet { get; set; } = new List<Texture2D>();
-        public int Frame { get; set; } = 0;
-        public bool AutoPlay { get; set; } = true;
-        public TimeSpan FrameTime { get; set; } = TimeSpan.FromMilliseconds(500);
-        private bool _finished = false;
-        private TimeSpan _currentFrameTime = TimeSpan.Zero;
+        public AnimatedTileControl()
+        {
+            AnimatedElement = new AnimatedTileElement(this);
+        }
 
         public override void Initialize()
         {
-            if (TileSet.Count > 0)
-            {
-                int targetW = TileSet[0].Width;
-                int targetH = TileSet[0].Height;
-                foreach (var tile in TileSet.Skip(1))
-                    if (tile.Width != targetW || tile.Height != targetH)
-                        throw new Exception("Animated tileset must have the same size!");
-
-                if (Width == 0)
-                    Width = TileSet[0].Width;
-                if (Height == 0)
-                    Height = TileSet[0].Height;
-                Frame = 0;
-                FillColor = TileSet[0];
-            }
-            _finished = false;
+            AnimatedElement.Initialize();
             base.Initialize();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (TileSet.Count <= 1)
-                return;
-
-            if (_finished && !AutoPlay)
-                return;
-
-            _currentFrameTime += gameTime.ElapsedGameTime;
-            if (_currentFrameTime >= FrameTime)
-            {
-                Frame++;
-                if (Frame >= TileSet.Count)
-                {
-                    if (AutoPlay)
-                        Frame = 0;
-                    else
-                    {
-                        _finished = true;
-                        Frame = TileSet.Count - 1;
-                    }
-                    OnAnimationDone?.Invoke(this);
-                }
-                FillColor = TileSet[Frame];
-                _currentFrameTime = TimeSpan.Zero;
-            }
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
-
-            if (Frame >= TileSet.Count)
-                Frame = 0;
-
-            base.Draw(gameTime, spriteBatch);
+            AnimatedElement.Update(gameTime);
+            base.Update(gameTime);
         }
     }
 }
