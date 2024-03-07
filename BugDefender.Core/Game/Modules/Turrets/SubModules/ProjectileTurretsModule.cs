@@ -6,6 +6,7 @@ using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Tools;
 
 namespace BugDefender.Core.Game.Modules.Turrets.SubModules
 {

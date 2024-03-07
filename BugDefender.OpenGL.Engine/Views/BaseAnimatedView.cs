@@ -1,5 +1,5 @@
 ﻿using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.ResourcePacks;
+using BugDefender.OpenGL.Engine.ResourcePacks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -16,14 +16,14 @@ namespace BugDefender.OpenGL.Engine.Views
         private readonly TextureSetDefinition _out;
 
         private IView? _switchTo;
-        public BaseAnimatedView(GameWindow parent, Guid id, TextureSetDefinition inSet, TextureSetDefinition outSet) : base(parent, id)
+        public BaseAnimatedView(IGameWindow parent, Guid id, TextureSetDefinition inSet, TextureSetDefinition outSet) : base(parent, id)
         {
             _in = inSet;
             _out = outSet;
             _tile = new AnimatedTileControl()
             {
-                Width = GameWindow.BaseScreenSize.X,
-                Height = GameWindow.BaseScreenSize.Y,
+                Width = IGameWindow.BaseScreenSize.X,
+                Height = IGameWindow.BaseScreenSize.Y,
                 TileSet = _in.LoadedContents,
                 FrameTime = TimeSpan.FromMilliseconds(_in.FrameTime),
                 AutoPlay = false

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace BugDefender.OpenGL.ResourcePacks
+namespace BugDefender.OpenGL.Engine.ResourcePacks
 {
     public class TextureSetDefinition
     {

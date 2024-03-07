@@ -1,5 +1,4 @@
-﻿using BugDefender.OpenGL.Engine;
-using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
@@ -13,7 +12,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = GameWindow.BaseScreenSize.X,
                 Height = GameWindow.BaseScreenSize.Y
             });
@@ -71,8 +70,8 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 Text = "Main Menu",
-                FillColor = Parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
             });
 
 #if DEBUG

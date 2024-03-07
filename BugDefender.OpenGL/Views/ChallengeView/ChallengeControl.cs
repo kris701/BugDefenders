@@ -69,9 +69,9 @@ namespace BugDefender.OpenGL.Views.ChallengeView
                 Font = BasicFonts.GetFont(12),
                 FontColor = Color.White,
                 Text = $"[Reward: {challenge.Reward} credits] Start!",
-                FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = parent.UIResources.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = parent.UIResources.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 IsEnabled = !isFinished,
                 Tag = challenge
             };
@@ -79,11 +79,11 @@ namespace BugDefender.OpenGL.Views.ChallengeView
 
             if (isFinished)
             {
-                backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 startButton.Text = "Completed!";
             }
             else
-                backgroundTile.FillColor = parent.UIResources.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
         }
     }
 }

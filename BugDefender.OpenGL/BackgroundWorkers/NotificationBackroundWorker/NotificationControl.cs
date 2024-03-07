@@ -32,7 +32,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             {
                 _iconTile.Width = 75;
                 _iconTile.Height = 75;
-                _iconTile.FillColor = Parent.UIResources.GetTexture(Item.Definition.ID);
+                _iconTile.FillColor = Parent.TextureController.GetTexture(Item.Definition.ID);
                 _iconTile.X = X + 20;
                 _iconTile.Y = Y + 20;
                 _iconTile.Initialize();

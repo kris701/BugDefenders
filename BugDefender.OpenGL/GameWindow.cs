@@ -4,8 +4,12 @@ using BugDefender.Core.Users;
 using BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
+using BugDefender.OpenGL.Engine;
+using BugDefender.OpenGL.Engine.Audio;
 using BugDefender.OpenGL.Engine.BackgroundWorkers;
 using BugDefender.OpenGL.Engine.Helpers;
+using BugDefender.OpenGL.Engine.ResourcePacks;
+using BugDefender.OpenGL.Engine.Textures;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks;
 using BugDefender.OpenGL.Settings;
@@ -22,12 +26,11 @@ using System.Text.Json;
 
 namespace BugDefender.OpenGL
 {
-    public class GameWindow : Game
+    public class GameWindow : Game, IGameWindow
     {
         private static readonly string _contentDir = "Content";
         private static readonly string _modsDir = "Mods";
 
-        public static readonly Point BaseScreenSize = new Point(1920, 1080);
         public float XScale { get; private set; }
         public float YScale { get; private set; }
 
@@ -35,7 +38,10 @@ namespace BugDefender.OpenGL
         public IView CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; } = new List<IBackgroundWorker>();
-        public UIResourceManager UIResources { get; set; }
+
+        public AudioController AudioController { get; private set; }
+        public TextureController TextureController { get; private set; }
+        public ResourcePackController ResourcePackController { get; private set; }
 
         private readonly Func<GameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
@@ -57,7 +63,9 @@ namespace BugDefender.OpenGL
             var thisVersionStr = $"v{thisVersion.Major}.{thisVersion.Minor}.{thisVersion.Build}";
             Window.Title = $"Bug Defender {thisVersionStr}";
 
-            UIResources = new UIResourceManager(Content);
+            AudioController = new AudioController(Content);
+            TextureController = new TextureController(Content);
+            ResourcePackController = new ResourcePackController(this);
             UserManager = new UserEngine<SettingsDefinition>();
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content);
@@ -105,7 +113,7 @@ namespace BugDefender.OpenGL
                                 foreach (var texture in textureDef)
                                 {
                                     texture.Content = Path.Combine(subFolder.Parent.FullName, "Content", texture.Content);
-                                    UIResources.LoadTexture(texture);
+                                    TextureController.LoadTexture(texture);
                                 }
                             }
                         }
@@ -122,7 +130,7 @@ namespace BugDefender.OpenGL
                                     for (int i = 0; i < textureSet.Contents.Count; i++)
                                         textureSet.Contents[i] = Path.Combine(subFolder.Parent.FullName, "Content", textureSet.Contents[i]);
                                     foreach (var content in textureSet.Contents)
-                                        UIResources.LoadTextureSet(textureSet);
+                                        TextureController.LoadTextureSet(textureSet);
                                 }
                             }
                         }
@@ -137,7 +145,7 @@ namespace BugDefender.OpenGL
                                 foreach (var song in songsDef)
                                 {
                                     song.Content = Path.Combine(subFolder.Parent.FullName, "Content", song.Content);
-                                    UIResources.LoadSong(song);
+                                    AudioController.LoadSong(song);
                                 }
                             }
                         }
@@ -152,7 +160,7 @@ namespace BugDefender.OpenGL
                                 foreach (var soundEffect in soundEffectsDef)
                                 {
                                     soundEffect.Content = Path.Combine(subFolder.Parent.FullName, "Content", soundEffect.Content);
-                                    UIResources.LoadSoundEffect(soundEffect);
+                                    AudioController.LoadSoundEffect(soundEffect);
                                 }
                             }
                         }
@@ -209,12 +217,12 @@ namespace BugDefender.OpenGL
                 Device.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
                 Device.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             }
-            UIResources.LoadTexturePack(UserManager.CurrentUser.UserData.TexturePack);
+            ResourcePackController.LoadTexturePack(UserManager.CurrentUser.UserData.TexturePack);
             MediaPlayer.Volume = UserManager.CurrentUser.UserData.MusicVolume;
             SoundEffect.MasterVolume = UserManager.CurrentUser.UserData.EffectsVolume;
             Device.ApplyChanges();
-            XScale = (float)Device.PreferredBackBufferWidth / (float)BaseScreenSize.X;
-            YScale = (float)Device.PreferredBackBufferHeight / (float)BaseScreenSize.Y;
+            XScale = (float)Device.PreferredBackBufferWidth / (float)IGameWindow.BaseScreenSize.X;
+            YScale = (float)Device.PreferredBackBufferHeight / (float)IGameWindow.BaseScreenSize.Y;
         }
     }
 }

@@ -20,8 +20,8 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         public GameOverView(GameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result) : base(
             parent,
             _id,
-            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             _screen = screen;
             _score = score;
@@ -53,7 +53,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
 
             Initialize();
 
-            Parent.UIResources.PlaySong(ID);
+            Parent.TextureController.PlaySong(ID);
 
             var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
             if (File.Exists(saveFile))

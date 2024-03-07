@@ -2,7 +2,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace BugDefender.OpenGL.ResourcePacks
+namespace BugDefender.OpenGL.Engine.Audio
 {
     public class SongDefinition
     {

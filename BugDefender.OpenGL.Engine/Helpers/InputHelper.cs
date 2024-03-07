@@ -1,4 +1,4 @@
-﻿using BugDefender.Core.Game.Models.Maps;
+﻿using BugDefender.Tools;
 using Microsoft.Xna.Framework.Input;
 
 namespace BugDefender.OpenGL.Engine.Helpers

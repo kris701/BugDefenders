@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BugDefender.OpenGL.Engine.Controls;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
@@ -7,7 +8,7 @@ namespace BugDefender.OpenGL.Engine.Views
     public interface IView
     {
         public Guid ID { get; set; }
-        public GameWindow Parent { get; set; }
+        public IGameWindow Parent { get; set; }
 
         public void ClearLayer(int layer);
         public void AddControl(int layer, IControl control);

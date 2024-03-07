@@ -16,7 +16,7 @@ namespace BugDefender.OpenGL.Screens.SplashScreen
             FadeInTime = 1000;
             FadeOutTime = 1000;
             Initialize();
-            Parent.UIResources.PlaySong(MainMenuView._id);
+            Parent.TextureController.PlaySong(MainMenuView._id);
         }
 
         public override void OnUpdate(GameTime gameTime)

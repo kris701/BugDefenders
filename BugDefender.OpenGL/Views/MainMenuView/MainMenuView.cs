@@ -21,11 +21,11 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         public MainMenuView(GameWindow parent) : base(
             parent,
             _id,
-            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
             Initialize();
-            Parent.UIResources.PlaySong(ID);
+            Parent.TextureController.PlaySong(ID);
             Parent.UserManager.SaveUser();
             _cheatsInputWatcher = new KeysWatcher(new List<Keys>() { Keys.LeftAlt, Keys.Enter }, OpenCheatsMenu);
             _escapeInputWatcher = new KeyWatcher(Keys.Escape, CloseCheatsMenu);
@@ -33,7 +33,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             _continueButton!.IsVisible = File.Exists(Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json"));
             if (_continueButton.IsVisible)
             {
-                _startGame!.HorizontalAlignment = Engine.HorizontalAlignment.None;
+                _startGame!.HorizontalAlignment = HorizontalAlignment.None;
                 _startGame!.X = 960;
             }
         }
@@ -60,9 +60,9 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             var preCount = CheatsHelper.Cheats.Count;
             CheatsHelper.AddCheat(control.Text);
             if (CheatsHelper.Cheats.Count == preCount)
-                Parent.UIResources.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
+                Parent.TextureController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
             else
-                Parent.UIResources.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
+                Parent.TextureController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
             control.Text = "";
         }
 

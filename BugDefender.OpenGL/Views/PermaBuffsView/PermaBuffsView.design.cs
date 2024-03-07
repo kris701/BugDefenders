@@ -28,7 +28,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
         {
             BasicMenuPage.GenerateBaseMenu(
                 this,
-                Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Permanent Buffs",
                 $"Currently {Parent.UserManager.CurrentUser.Buffs.Count} buffs are applied. You have {Parent.UserManager.CurrentUser.Credits} credits.");
 
@@ -75,8 +75,8 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 Text = "Back",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 #if DEBUG
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView(Parent)))

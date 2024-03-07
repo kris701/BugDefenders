@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace BugDefender.OpenGL.Engine
+namespace BugDefender.OpenGL.Engine.Controls
 {
     public enum HorizontalAlignment { None, Left, Middle, Right }
     public enum VerticalAlignment { None, Top, Middle, Bottom }

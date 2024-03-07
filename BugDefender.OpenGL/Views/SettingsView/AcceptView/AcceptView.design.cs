@@ -1,5 +1,4 @@
-﻿using BugDefender.OpenGL.Engine;
-using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
@@ -14,14 +13,14 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.UIResources.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = GameWindow.BaseScreenSize.X,
                 Height = GameWindow.BaseScreenSize.Y
             });
 
             AddControl(0, new LabelControl()
             {
-                HorizontalAlignment = Engine.HorizontalAlignment.Middle,
+                HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 100,
                 Height = 75,
                 Width = 800,
@@ -58,8 +57,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 Text = "Apply",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) => { Cancel(); })
@@ -71,8 +70,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 Text = "Cancel",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                FillColor = Parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.UIResources.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
 #if DEBUG

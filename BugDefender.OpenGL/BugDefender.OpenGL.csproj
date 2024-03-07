@@ -62,15 +62,6 @@
 	  <EmbeddedResource Include="Icon.ico">
 		  <LogicalName>Icon.ico</LogicalName>
 	  </EmbeddedResource>
-	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\high.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="ResourcePacks\ResourcePacks\medium.json">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </EmbeddedResource>
-    <EmbeddedResource Include="ResourcePacks\ResourcePacks\low.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
@@ -78,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BugDefender.Core\BugDefender.Core.csproj" />
+    <ProjectReference Include="..\BugDefender.OpenGL.Engine\BugDefender.OpenGL.Engine.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Licences\INNO-SETUP-LICENSE.txt">

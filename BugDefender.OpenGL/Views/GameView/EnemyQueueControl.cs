@@ -28,7 +28,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 Y = 0,
                 Width = Width,
                 Height = Height,
-                FillColor = parent.UIResources.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
+                FillColor = parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
             };
             Children.Add(background);
             _iconControl = new AnimatedTileControl()
@@ -57,8 +57,8 @@ namespace BugDefender.OpenGL.Views.GameView
         {
             var def = ResourceManager.Enemies.GetResource(wave[0]);
             var instance = new EnemyInstance(def, evolution);
-            var animation = _parent.UIResources.GetAnimation<EnemyEntityDefinition>(def.ID);
-            var textureSet = _parent.UIResources.GetTextureSet(animation.OnCreate);
+            var animation = _parent.TextureController.GetAnimation<EnemyEntityDefinition>(def.ID);
+            var textureSet = _parent.TextureController.GetTextureSet(animation.OnCreate);
             _iconControl.TileSet = textureSet.LoadedContents;
             _iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
 

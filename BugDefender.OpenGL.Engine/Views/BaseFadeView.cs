@@ -18,14 +18,14 @@ namespace BugDefender.OpenGL.Engine.Views
         private IView? _switchTo;
         private readonly Texture2D _fillColor = BasicTextures.GetBasicRectange(Color.Black);
 
-        public BaseFadeView(GameWindow parent, Guid id) : base(parent, id)
+        public BaseFadeView(IGameWindow parent, Guid id) : base(parent, id)
         {
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            spriteBatch.FillScreen(_fillColor, GameWindow.BaseScreenSize.X, GameWindow.BaseScreenSize.Y, fadeValue);
+            spriteBatch.FillScreen(_fillColor, IGameWindow.BaseScreenSize.X, IGameWindow.BaseScreenSize.Y, fadeValue);
         }
 
         public override void Update(GameTime gameTime)

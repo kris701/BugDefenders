@@ -1,5 +1,4 @@
-﻿using BugDefender.OpenGL.Engine;
-using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
@@ -81,9 +80,9 @@ namespace BugDefender.OpenGL.Views.Helpers
                 UpdatePages();
             })
             {
-                FillColor = parent.Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FillDisabledColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillDisabledColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(ButtonFontSize),
                 Text = $"<",
@@ -103,9 +102,9 @@ namespace BugDefender.OpenGL.Views.Helpers
                 UpdatePages();
             })
             {
-                FillColor = parent.Parent.UIResources.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FillDisabledColor = parent.Parent.UIResources.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillDisabledColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(ButtonFontSize),
                 Text = $">",

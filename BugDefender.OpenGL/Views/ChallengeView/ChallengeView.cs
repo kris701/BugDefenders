@@ -20,8 +20,8 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
         public ChallengeView(GameWindow parent) : base(
             parent,
             _id,
-            parent.UIResources.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.UIResources.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
+            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
         {
 
             _remainingChallenges = new List<Guid>();

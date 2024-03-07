@@ -1,18 +1,18 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Text.Json.Serialization;
 
-namespace BugDefender.OpenGL.ResourcePacks
+namespace BugDefender.OpenGL.Engine.Audio
 {
-    public class TextureDefinition
+    public class SoundEffectDefinition
     {
         public Guid ID { get; set; }
         public string Content { get; set; }
 
         [JsonIgnore]
-        public Texture2D LoadedContent { get; set; }
+        public SoundEffect LoadedContent { get; set; }
 
-        public TextureDefinition(Guid iD, string content)
+        public SoundEffectDefinition(Guid iD, string content)
         {
             ID = iD;
             Content = content;

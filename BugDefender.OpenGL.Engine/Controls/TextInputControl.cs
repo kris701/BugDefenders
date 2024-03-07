@@ -11,7 +11,7 @@ namespace BugDefender.OpenGL.Engine.Controls
     {
         public delegate void EnterHandler(TextInputControl parent);
         public event EnterHandler? OnEnter;
-        public GameWindow Parent { get; set; }
+        public IGameWindow Parent { get; set; }
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public bool IsEnabled { get; set; } = true;
@@ -38,7 +38,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             Keys.D9
         };
 
-        public TextInputControl(GameWindow parent, EnterHandler? onEnter = null)
+        public TextInputControl(IGameWindow parent, EnterHandler? onEnter = null)
         {
             Parent = parent;
             OnEnter += onEnter;
