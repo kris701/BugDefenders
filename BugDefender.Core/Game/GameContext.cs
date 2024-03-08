@@ -6,6 +6,7 @@ using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Challenges;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game
 {
@@ -28,6 +29,30 @@ namespace BugDefender.Core.Game
 
         public int Wave { get; set; } = 0;
         public TimeSpan GameTime { get; set; }
+
+        [JsonConstructor]
+        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, HashSet<EnemyInstance> currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, ChallengeDefinition? challenge, int wave, TimeSpan gameTime) : this(map, gameStyle)
+        {
+            EnemiesToSpawn = enemiesToSpawn;
+            AutoSpawn = autoSpawn;
+            Evolution = evolution;
+            Stats = stats;
+            CurrentEnemies = currentEnemies;
+            Turrets = turrets;
+            Projectiles = projectiles;
+            HP = hP;
+            Money = money;
+            Score = score;
+            Challenge = challenge;
+            Wave = wave;
+            GameTime = gameTime;
+        }
+
+        public GameContext(MapDefinition map, GameStyleDefinition gameStyle)
+        {
+            Map = map;
+            GameStyle = gameStyle;
+        }
 
         public bool CanSave()
         {

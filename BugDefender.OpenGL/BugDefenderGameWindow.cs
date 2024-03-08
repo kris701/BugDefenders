@@ -45,7 +45,9 @@ namespace BugDefender.OpenGL
         private SpriteBatch? _spriteBatch;
         private NotificationBackroundWorker _notificationWorker;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen) : base()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;

@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugDefender.Core", "BugDefe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{233BAAAB-DFB6-46A6-87AC-64DADCB2A0B0}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		.github\workflows\build.yml = .github\workflows\build.yml
 		inno.iss = inno.iss
@@ -25,9 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapPathBlockingTileGen", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModChecker", "Toolkit\ModChecker\ModChecker.csproj", "{B61229D5-DABA-497B-8036-174BD869C3BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugDefender.OpenGL.Engine", "BugDefender.OpenGL.Engine\BugDefender.OpenGL.Engine.csproj", "{4ED05166-0491-4877-82D4-2171A78F22CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugDefender.OpenGL.Engine", "BugDefender.OpenGL.Engine\BugDefender.OpenGL.Engine.csproj", "{4ED05166-0491-4877-82D4-2171A78F22CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugDefender.Tools", "BugDefender.Tools\BugDefender.Tools.csproj", "{C679CE63-4C30-4725-8EF1-05D239CAC589}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugDefender.Tools", "BugDefender.Tools\BugDefender.Tools.csproj", "{C679CE63-4C30-4725-8EF1-05D239CAC589}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

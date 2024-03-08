@@ -84,11 +84,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext()
-            {
-                Map = _game.Context.Map,
-                GameStyle = _game.Context.GameStyle
-            })))
+            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext(_game.Context.Map, _game.Context.GameStyle))))
             {
                 X = 0,
                 Y = 0,

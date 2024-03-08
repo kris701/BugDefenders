@@ -45,11 +45,7 @@ namespace BugDefender.Core.Game
         }
 
         public GameEngine(Guid mapID, Guid gameStyleID) : this(
-            new GameContext()
-            {
-                Map = ResourceManager.Maps.GetResource(mapID),
-                GameStyle = ResourceManager.GameStyles.GetResource(gameStyleID)
-            }
+            new GameContext(ResourceManager.Maps.GetResource(mapID), ResourceManager.GameStyles.GetResource(gameStyleID))
         )
         {
             Context.HP = Context.GameStyle.StartingHP;
