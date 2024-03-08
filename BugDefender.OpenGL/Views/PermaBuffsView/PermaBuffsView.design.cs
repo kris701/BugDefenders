@@ -8,22 +8,16 @@ using BugDefender.OpenGL.Views.PermaBuffsView;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
     public partial class PermaBuffsView : BaseBugDefenderView
     {
-        private readonly PageHandler<PermaBuffControl> _buffPageHandler = new PageHandler<PermaBuffControl>()
-        {
-            LeftButtonX = 500,
-            LeftButtonY = 110,
-            RightButtonX = 1350,
-            RightButtonY = 110,
-            ItemsPrPage = 5,
-            X = 500,
-            Y = 250,
-        };
+        private PageHandler<PermaBuffControl> _buffPageHandler;
+
+        [MemberNotNull(nameof(_buffPageHandler))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
@@ -61,6 +55,16 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 };
                 controlList.Add(newButton);
             }
+            _buffPageHandler = new PageHandler<PermaBuffControl>()
+            {
+                LeftButtonX = 500,
+                LeftButtonY = 110,
+                RightButtonX = 1350,
+                RightButtonY = 110,
+                ItemsPrPage = 5,
+                X = 500,
+                Y = 250,
+            };
             _buffPageHandler.Initialize(controlList, this);
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>

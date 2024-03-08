@@ -43,14 +43,17 @@ namespace BugDefender.OpenGL
 
         private readonly Func<BugDefenderGameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
-        private NotificationBackroundWorker _notificationWorker;
+        private readonly NotificationBackroundWorker _notificationWorker;
 
-        public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen)
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen) : base()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
+            _notificationWorker = new NotificationBackroundWorker(this);
         }
 
         protected override void Initialize()
@@ -69,7 +72,6 @@ namespace BugDefender.OpenGL
             BasicFonts.Initialize(Content);
             MediaPlayer.IsRepeating = true;
             SoundEffect.Initialize();
-            _notificationWorker = new NotificationBackroundWorker(this);
             _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
             _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
             _notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));

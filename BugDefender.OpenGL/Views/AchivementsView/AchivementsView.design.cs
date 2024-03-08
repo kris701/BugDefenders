@@ -8,22 +8,16 @@ using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.AchivementsView
 {
     public partial class AchivementsView : BaseBugDefenderView
     {
-        private readonly PageHandler<AchivementControl> _achivementPageHandler = new PageHandler<AchivementControl>()
-        {
-            LeftButtonX = 500,
-            LeftButtonY = 110,
-            RightButtonX = 1350,
-            RightButtonY = 110,
-            ItemsPrPage = 5,
-            X = 500,
-            Y = 250,
-        };
+        private PageHandler<AchivementControl> _achivementPageHandler;
+
+        [MemberNotNull(nameof(_achivementPageHandler))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
@@ -44,6 +38,16 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                     Parent,
                     achivement,
                     Parent.UserManager.CurrentUser.Achivements.Contains(achivement.ID)));
+            _achivementPageHandler = new PageHandler<AchivementControl>()
+            {
+                LeftButtonX = 500,
+                LeftButtonY = 110,
+                RightButtonX = 1350,
+                RightButtonY = 110,
+                ItemsPrPage = 5,
+                X = 500,
+                Y = 250,
+            };
             _achivementPageHandler.Initialize(controlList, this);
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>

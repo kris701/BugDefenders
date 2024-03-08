@@ -9,7 +9,7 @@
     "Damage": 500,
     "Range": 600,
     "SplashRange": 100,
-    "TriggerRange": 50,
+    "TriggerRange": 25,
     "Acceleration": 1.2,
     "SlowingFactor": 1,
     "SlowingDuration": 0,

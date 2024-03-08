@@ -23,7 +23,7 @@ namespace BugDefender.OpenGL.Engine.Views
             {
                 Width = IWindow.BaseScreenSize.X,
                 Height = IWindow.BaseScreenSize.Y,
-                TileSet = _in.LoadedContents,
+                TileSet = _in.GetLoadedContent(),
                 FrameTime = TimeSpan.FromMilliseconds(_in.FrameTime),
                 AutoPlay = false
             };
@@ -65,7 +65,7 @@ namespace BugDefender.OpenGL.Engine.Views
         {
             if (_switchTo == null)
             {
-                _tile.TileSet = _out.LoadedContents;
+                _tile.TileSet = _out.GetLoadedContent();
                 _tile.FrameTime = TimeSpan.FromMilliseconds(_out.FrameTime);
                 _tile.Frame = 0;
                 _tile.IsVisible = true;

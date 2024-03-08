@@ -13,6 +13,9 @@ namespace BugDefender.OpenGL.Views.GameView
 {
     public class EnemyQueueControl : CollectionControl
     {
+        private List<Guid> _currentWave = new List<Guid>();
+        private float _currentEvolution = -1;
+
         private readonly BugDefenderGameWindow _parent;
         private readonly AnimatedTileControl _iconControl;
         private readonly TextboxControl _descriptionControl;
@@ -55,12 +58,20 @@ namespace BugDefender.OpenGL.Views.GameView
 
         public void UpdateToEnemy(List<Guid> wave, float evolution)
         {
+            if (!IsNew(wave, evolution))
+                return;
+
+            _currentWave = wave;
+            _currentEvolution = evolution;
+
             var def = ResourceManager.Enemies.GetResource(wave[0]);
             var instance = new EnemyInstance(def, evolution);
             var animation = _parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(def.ID);
             var textureSet = _parent.TextureController.GetTextureSet(animation.OnCreate);
-            _iconControl.TileSet = textureSet.LoadedContents;
+            _iconControl.TileSet = textureSet.GetLoadedContent();
             _iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
+            _iconControl.Frame = 0;
+            _iconControl.FillColor = _iconControl.TileSet[0];
 
             var sb = new StringBuilder();
             if (wave.Count > 1)
@@ -81,6 +92,19 @@ namespace BugDefender.OpenGL.Views.GameView
             }
 
             _descriptionControl.Text = sb.ToString();
+        }
+
+        private bool IsNew(List<Guid> wave, float evolution)
+        {
+            if (evolution != _currentEvolution)
+                return true;
+            if (wave.Count != _currentWave.Count)
+                return true;
+            for (int i = 0; i < _currentWave.Count; i++)
+                if (wave[i] != _currentWave[i])
+                    return true;
+
+            return false;
         }
     }
 }

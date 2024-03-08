@@ -359,49 +359,49 @@
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:DefaultFonts/DefaultFont10.spritefont
 
 #begin DefaultFonts/DefaultFont12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:DefaultFonts/DefaultFont12.spritefont
 
 #begin DefaultFonts/DefaultFont16.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:DefaultFonts/DefaultFont16.spritefont
 
 #begin DefaultFonts/DefaultFont24.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:DefaultFonts/DefaultFont24.spritefont
 
 #begin DefaultFonts/DefaultFont48.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:DefaultFonts/DefaultFont48.spritefont
 
 #begin DefaultFonts/DefaultFont72.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:DefaultFonts/DefaultFont72.spritefont
 
 #begin DefaultFonts/DefaultFont8.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:DefaultFonts/DefaultFont8.spritefont
 
 #begin Entities/Effects/BossSplat/splat_1.png
@@ -452,6 +452,18 @@
 /processorParam:TextureFormat=Color
 /build:Entities/Effects/EnemySplat/splat_2.png
 
+#begin Entities/Effects/Explosion/explosion1_large.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Effects/Explosion/explosion1_large.png
+
 #begin Entities/Effects/Explosion/explosion1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -463,6 +475,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Effects/Explosion/explosion1.png
+
+#begin Entities/Effects/Explosion/explosion2_large.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Entities/Effects/Explosion/explosion2_large.png
 
 #begin Entities/Effects/Explosion/explosion2.png
 /importer:TextureImporter
@@ -1189,18 +1213,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Entities/Turrets/turretBase.png
-
-#begin notexture.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:notexture.png
 
 #begin Views/GameOverView/gameover.mp3
 /importer:Mp3Importer

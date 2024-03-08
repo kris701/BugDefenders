@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
@@ -68,7 +69,15 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
         {
             if (projectile.Source == null)
                 return false;
-            var best = Game.EnemiesModule.GetBestEnemy(projectile, projectile.Size / 2, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
+            EnemyInstance? best = null;
+            if (def.IsGuided && projectile.Target != null)
+            {
+                var dist = MathHelpers.Distance(projectile, projectile.Target);
+                if (dist < projectile.Size / 2)
+                    best = projectile.Target;
+            }
+            else
+                best = Game.EnemiesModule.GetBestEnemy(projectile, projectile.Size / 2, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
             if (best != null)
             {
                 if (best.ModuleInfo is ISlowable slow)

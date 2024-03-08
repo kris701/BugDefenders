@@ -34,6 +34,8 @@ namespace BugDefender.Core.Game.Modules.Turrets
             var upgrade = turret.GetDefinition().Upgrades.FirstOrDefault(x => x.ID == id);
             if (upgrade == null)
                 return false;
+            if (turret.HasUpgrades.Contains(id))
+                return false;
             if (Context.Money < upgrade.Cost)
                 return false;
             if (upgrade.Requires != null && !turret.HasUpgrades.Contains((Guid)upgrade.Requires))

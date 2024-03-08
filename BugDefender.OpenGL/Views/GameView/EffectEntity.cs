@@ -15,7 +15,7 @@ namespace BugDefender.OpenGL.Views.GameView
             ID = iD;
             LifeTime = lifeTime;
             TextureSetDefinition = textureSetDefinition;
-            Size = textureSetDefinition.LoadedContents[0].Width;
+            Size = textureSetDefinition.GetLoadedContent()[0].Width;
         }
     }
 }

@@ -11,11 +11,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         private static readonly Guid _id = new Guid("dd52b3a2-8d62-4733-8894-dde445408a02");
         private readonly SettingsDefinition _settings;
         private readonly KeyWatcher _escapeKeyWatcher;
-        public SettingsView(BugDefenderGameWindow parent) : base(
-            parent,
-            _id,
-            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+        public SettingsView(BugDefenderGameWindow parent) : base(parent, _id)
         {
             _settings = parent.UserManager.CurrentUser.UserData.Copy();
             Initialize();

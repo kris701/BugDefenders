@@ -8,7 +8,6 @@ using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
-using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
@@ -23,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
@@ -66,11 +64,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
         }
 
-        private GameScreen(BugDefenderGameWindow parent, GameEngine game) : base(
-            parent,
-            _id,
-            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+        private GameScreen(BugDefenderGameWindow parent, GameEngine game) : base(parent, _id)
         {
             _game = game;
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
@@ -165,8 +159,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     var effect = Parent.TextureController.GetTextureSet(entityDef.OnDestroyed);
                     _effects.Add(new EffectEntity(entityDef.OnDestroyed, TimeSpan.FromMilliseconds(250), effect)
                     {
-                        X = projectile.CenterX - effect.LoadedContents[0].Width / 2,
-                        Y = projectile.CenterY - effect.LoadedContents[0].Height / 2
+                        X = projectile.CenterX - effect.GetLoadedContent()[0].Width / 2,
+                        Y = projectile.CenterY - effect.GetLoadedContent()[0].Height / 2
                     });
                 }
             }
@@ -180,8 +174,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 var effect = Parent.TextureController.GetTextureSet(entityDef.OnDeath);
                 _effects.Add(new EffectEntity(entityDef.OnDeath, TimeSpan.FromMilliseconds(250), effect)
                 {
-                    X = parent.Enemy.CenterX - effect.LoadedContents[0].Width / 2,
-                    Y = parent.Enemy.CenterY - effect.LoadedContents[0].Height / 2
+                    X = parent.Enemy.CenterX - effect.GetLoadedContent()[0].Width / 2,
+                    Y = parent.Enemy.CenterY - effect.GetLoadedContent()[0].Height / 2
                 });
             }
         }
@@ -264,12 +258,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_game.Running)
             {
                 Parent.AudioController.ResumeSounds();
-                _startButton.Text = "Pause";
+                parent.Text = "Pause";
             }
             else
             {
                 Parent.AudioController.PauseSounds();
-                _startButton.Text = "Start";
+                parent.Text = "Start";
             }
         }
 
@@ -277,9 +271,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             _game.Context.AutoSpawn = !_game.Context.AutoSpawn;
             if (_game.Context.AutoSpawn)
-                _autoRunButton.Text = "[X] Auto-Wave";
+                parent.Text = "[X] Auto-Wave";
             else
-                _autoRunButton.Text = "[ ] Auto-Wave";
+                parent.Text = "[ ] Auto-Wave";
         }
 
         public override void OnUpdate(GameTime gameTime)
@@ -392,7 +386,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             return new AnimatedTileControl()
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
-                TileSet = textureSet.LoadedContents,
+                TileSet = textureSet.GetLoadedContent(),
                 X = entity.X + _gameArea.X,
                 Y = entity.Y + _gameArea.Y,
                 Width = entity.Size,
@@ -415,7 +409,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y,
                 FrameTime = TimeSpan.FromMilliseconds(entity.TextureSetDefinition.FrameTime),
-                TileSet = entity.TextureSetDefinition.LoadedContents,
+                TileSet = entity.TextureSetDefinition.GetLoadedContent(),
                 AutoPlay = true,
                 Width = entity.Size,
                 Height = entity.Size,
@@ -605,7 +599,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingTurret = def;
                 var animation = Parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(def.ID).OnIdle;
                 var textureSet = Parent.TextureController.GetTextureSet(animation);
-                _buyingPreviewTile.TileSet = textureSet.LoadedContents;
+                _buyingPreviewTile.TileSet = textureSet.GetLoadedContent();
                 _buyingPreviewTile.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
                 _buyingPreviewTile.Width = def.Size;
                 _buyingPreviewTile.Height = def.Size;

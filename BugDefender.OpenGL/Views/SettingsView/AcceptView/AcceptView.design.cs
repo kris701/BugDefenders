@@ -4,12 +4,15 @@ using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 {
     public partial class AcceptView : BaseBugDefenderView
     {
         private LabelControl _timeLeftLabel;
+
+        [MemberNotNull(nameof(_timeLeftLabel))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()

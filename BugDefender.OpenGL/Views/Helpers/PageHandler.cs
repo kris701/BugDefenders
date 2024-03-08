@@ -30,8 +30,8 @@ namespace BugDefender.OpenGL.Views.Helpers
         public int MaxItem { get; set; } = int.MaxValue;
         public int Layer { get; set; } = 0;
 
-        private ButtonControl _leftButton;
-        private ButtonControl _rightButton;
+        private ButtonControl? _leftButton;
+        private ButtonControl? _rightButton;
 
         public void Initialize(List<T> items, BaseView parent)
         {
@@ -129,6 +129,9 @@ namespace BugDefender.OpenGL.Views.Helpers
 
         public void UpdatePages()
         {
+            if (_leftButton == null || _rightButton == null)
+                throw new NullReferenceException("Page handler was not initialized!");
+
             foreach (var items in Pages)
                 foreach (var item in items)
                     item.IsVisible = false;
@@ -145,7 +148,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 count++;
             }
 
-            if (MaxPage - MinPage != 1)
+            if (MinItem - MaxItem != 0 && MaxPage - MinPage != 1)
             {
                 _leftButton.IsVisible = true;
                 _rightButton.IsVisible = true;

@@ -6,12 +6,14 @@ using BugDefender.OpenGL.Views.ChallengeView;
 using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
     public partial class ChallengeView : BaseBugDefenderView
     {
         private LabelControl _waitLabel;
+        [MemberNotNull(nameof(_waitLabel))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
