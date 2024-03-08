@@ -1,7 +1,9 @@
 ﻿using BugDefender.Core.Game.Helpers;
+using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using System;
 
 namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
 {
@@ -35,12 +37,13 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                 }
             }
 
+            var triggerRange = (float)Math.Pow(def.TriggerRange, 2);
             if (projectile.Size >= 10)
             {
                 projectile.X += xMod * def.Speed;
                 projectile.Y += yMod * def.Speed;
 
-                if (IsWithinTriggerRange(projectile, def, def.TriggerRange) ||
+                if (IsWithinTriggerRange(projectile, def, triggerRange) ||
                     projectile.X < 0 || projectile.X > Context.Map.Width ||
                     projectile.Y < 0 || projectile.Y > Context.Map.Height)
                     return true;
@@ -57,7 +60,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                     projectile.X += xMod * stepBy;
                     projectile.Y += yMod * stepBy;
 
-                    if (IsWithinTriggerRange(projectile, def, def.TriggerRange) ||
+                    if (IsWithinTriggerRange(projectile, def, triggerRange) ||
                         projectile.X < 0 || projectile.X > Context.Map.Width ||
                         projectile.Y < 0 || projectile.Y > Context.Map.Height)
                         return true;
@@ -70,17 +73,17 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
         {
             if (projectile.Source == null)
                 return false;
-            triggerRange = (float)Math.Pow(triggerRange, 2);
-            bool isWithin = false;
-            foreach (var enemy in Context.CurrentEnemies)
+
+            EnemyInstance? best = null;
+            if (def.IsGuided && projectile.Target != null)
             {
-                if (MathHelpers.SqrDistance(projectile, enemy) < triggerRange)
-                {
-                    isWithin = true;
-                    break;
-                }
+                var dist = MathHelpers.SqrDistance(projectile, projectile.Target);
+                if (dist < triggerRange)
+                    best = projectile.Target;
             }
-            if (isWithin)
+            else
+                best = Game.EnemiesModule.GetBestEnemy(projectile, def.TriggerRange, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
+            if (best != null)
             {
                 for (int i = 0; i < Context.CurrentEnemies.Count; i++)
                 {

@@ -240,6 +240,14 @@
       ]
     },
     {
+      "ID": "927fb53e-329e-4184-9b38-35b5b5868254",
+      "FrameTime": 50,
+      "Contents": [
+        "Entities/Effects/Explosion/explosion1_large",
+        "Entities/Effects/Explosion/explosion2_large"
+      ]
+    },
+    {
       "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
       "FrameTime": 500,
       "Contents": [
@@ -738,7 +746,7 @@
       "TargetType": "Projectile",
       "Target": "24be3e70-c410-443b-9e91-75d9f3a4270f",
       "OnCreate": "24be3e70-c410-443b-9e91-75d9f3a4270f",
-      "OnDestroyed": "ebca3566-e0bf-4aa1-9a29-74be54f3e96b"
+      "OnDestroyed": "927fb53e-329e-4184-9b38-35b5b5868254"
     },
     {
       "TargetType": "Projectile",
