@@ -17,11 +17,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private readonly int _credits;
         private readonly TimeSpan _gameTime;
         private readonly GameResult _gameResult;
-        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result) : base(
-            parent,
-            _id,
-            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result) : base(parent, _id)
         {
             _screen = screen;
             _score = score;

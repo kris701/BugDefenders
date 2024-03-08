@@ -14,11 +14,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
         private static readonly Guid _id = new Guid("0dd63d81-e49c-44d2-868e-7db6fb4634d7");
         private readonly KeyWatcher _escapeKeyWatcher;
         private bool _update = false;
-        public UsersScreenView(BugDefenderGameWindow parent) : base(
-            parent,
-            _id,
-            parent.TextureController.GetTextureSet(new Guid("1c960708-4fd0-4313-8763-8191b6818bb4")),
-            parent.TextureController.GetTextureSet(new Guid("9eb83a7f-5244-4ccc-8ef3-e88225ff1c18")))
+        public UsersScreenView(BugDefenderGameWindow parent) : base(parent, _id)
         {
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
