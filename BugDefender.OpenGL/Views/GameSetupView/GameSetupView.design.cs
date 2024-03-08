@@ -6,6 +6,7 @@ using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
@@ -16,9 +17,14 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private TextboxControl _mapDescriptionTextbox;
         private ButtonControl _startButton;
 
+        private ButtonControl? _selectedGameStyleButton;
+        private ButtonControl? _selectedMapButton;
+
         private PageHandler<ButtonControl> _mapPageHandler;
         private PageHandler<ButtonControl> _gamestylePageHandler;
 
+        [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
+            nameof(_startButton), nameof(_mapPageHandler), nameof(_gamestylePageHandler))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
@@ -79,6 +85,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             base.Initialize();
         }
 
+        [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox))]
         private void SetupPreviewPanel(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
@@ -126,6 +133,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             AddControl(1, _mapDescriptionTextbox);
         }
 
+
+        [MemberNotNull(nameof(_mapPageHandler))]
         private void SetupMapsView(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
@@ -178,6 +187,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             _mapPageHandler.Initialize(controlList, this);
         }
 
+
+        [MemberNotNull(nameof(_gamestylePageHandler))]
         private void SetupGameStyleView(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()

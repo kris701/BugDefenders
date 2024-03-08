@@ -264,12 +264,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_game.Running)
             {
                 Parent.AudioController.ResumeSounds();
-                _startButton.Text = "Pause";
+                parent.Text = "Pause";
             }
             else
             {
                 Parent.AudioController.PauseSounds();
-                _startButton.Text = "Start";
+                parent.Text = "Start";
             }
         }
 
@@ -277,9 +277,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             _game.Context.AutoSpawn = !_game.Context.AutoSpawn;
             if (_game.Context.AutoSpawn)
-                _autoRunButton.Text = "[X] Auto-Wave";
+                parent.Text = "[X] Auto-Wave";
             else
-                _autoRunButton.Text = "[ ] Auto-Wave";
+                parent.Text = "[ ] Auto-Wave";
         }
 
         public override void OnUpdate(GameTime gameTime)

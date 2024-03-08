@@ -14,9 +14,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
 
         private Guid? _selectedGameStyle;
-        private ButtonControl? _selectedGameStyleButton;
         private Guid? _selectedMap;
-        private ButtonControl? _selectedMapButton;
         private readonly KeyWatcher _escapeKeyWatcher;
 
         public GameSetupView(BugDefenderGameWindow parent) : base(

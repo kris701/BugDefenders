@@ -4,6 +4,7 @@ using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Views.Helpers
 {
@@ -30,8 +31,8 @@ namespace BugDefender.OpenGL.Views.Helpers
         public int MaxItem { get; set; } = int.MaxValue;
         public int Layer { get; set; } = 0;
 
-        private ButtonControl _leftButton;
-        private ButtonControl _rightButton;
+        private ButtonControl? _leftButton;
+        private ButtonControl? _rightButton;
 
         public void Initialize(List<T> items, BaseView parent)
         {
@@ -129,6 +130,9 @@ namespace BugDefender.OpenGL.Views.Helpers
 
         public void UpdatePages()
         {
+            if (_leftButton == null || _rightButton == null)
+                throw new NullReferenceException("Page handler was not initialized!");
+
             foreach (var items in Pages)
                 foreach (var item in items)
                     item.IsVisible = false;

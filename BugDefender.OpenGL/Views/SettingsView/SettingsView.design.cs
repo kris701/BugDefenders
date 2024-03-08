@@ -5,6 +5,7 @@ using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
@@ -59,6 +60,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         private ButtonControl _isFPSCounter;
         private readonly List<ButtonControl> _texturePacksButtons = new List<ButtonControl>();
 
+        [MemberNotNull(nameof(_isFullScreen), nameof(_isVSync), nameof(_isFPSCounter))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
@@ -125,6 +127,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             base.Initialize();
         }
 
+        [MemberNotNull(nameof(_isFullScreen), nameof(_isVSync), nameof(_isFPSCounter))]
         private void SetupScreenSettingsView(int yOffset)
         {
             AddControl(1, new LabelControl()

@@ -45,12 +45,13 @@ namespace BugDefender.OpenGL
         private SpriteBatch? _spriteBatch;
         private NotificationBackroundWorker _notificationWorker;
 
-        public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen)
+        public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen) : base()
         {
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
             IsMouseVisible = true;
+            _notificationWorker = new NotificationBackroundWorker(this);
         }
 
         protected override void Initialize()
@@ -69,7 +70,6 @@ namespace BugDefender.OpenGL
             BasicFonts.Initialize(Content);
             MediaPlayer.IsRepeating = true;
             SoundEffect.Initialize();
-            _notificationWorker = new NotificationBackroundWorker(this);
             _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
             _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
             _notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));

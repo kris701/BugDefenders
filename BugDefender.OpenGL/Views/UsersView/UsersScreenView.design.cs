@@ -5,6 +5,9 @@ using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 
 namespace BugDefender.OpenGL.Screens.UsersScreen
 {
@@ -15,6 +18,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
         private TextInputControl _nameInputBox;
         private ButtonControl _acceptButton;
 
+        [MemberNotNull(nameof(_nameInputBox), nameof(_acceptButton))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(

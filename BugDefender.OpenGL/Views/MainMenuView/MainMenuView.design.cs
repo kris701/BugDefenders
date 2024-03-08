@@ -4,14 +4,17 @@ using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Screens.MainMenu
 {
     public partial class MainMenuView : BaseBugDefenderView
     {
-        private ButtonControl _startGame;
+        private ButtonControl _startGameButton;
         private ButtonControl _continueButton;
         private TextInputControl _cheatsInput;
+
+        [MemberNotNull(nameof(_startGameButton), nameof(_continueButton), nameof(_cheatsInput))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -49,7 +52,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 IsVisible = false
             };
             AddControl(0, _continueButton);
-            _startGame = new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
+            _startGameButton = new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 300,
@@ -60,7 +63,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             };
-            AddControl(0, _startGame);
+            AddControl(0, _startGameButton);
             AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
