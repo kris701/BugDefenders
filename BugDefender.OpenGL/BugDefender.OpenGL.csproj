@@ -9,7 +9,7 @@
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Copyright>Kristian Skov Johansen</Copyright>
 	  <Product>Bug Defenders</Product>
-	  <Version>0.1.4</Version>
+	  <Version>0.1.5</Version>
 	  <PublishSingleFile>true</PublishSingleFile>
 	  <SelfContained>true</SelfContained>
 	  <DebugType>embedded</DebugType>
