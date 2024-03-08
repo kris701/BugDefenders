@@ -4,7 +4,6 @@ using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Views.Helpers
 {

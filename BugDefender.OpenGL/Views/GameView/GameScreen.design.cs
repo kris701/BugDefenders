@@ -43,7 +43,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private PageHandler<ButtonControl> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
 
-        [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave), 
+        [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
             nameof(_buyingPreviewRangeTile), nameof(_turretStatesTextbox), nameof(_sellTurretButton),
             nameof(_turretPageHandler), nameof(_turretSelectRangeTile))]
