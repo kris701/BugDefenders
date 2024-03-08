@@ -21,7 +21,7 @@ namespace BugDefender.OpenGL.Engine.Audio
         {
             if (_songs.ContainsKey(item.ID))
                 _songs.Remove(item.ID);
-            item.LoadedContent = _contentManager.Load<Song>(item.Content);
+            item.SetContent(_contentManager.Load<Song>(item.Content));
             _songs.Add(item.ID, item);
         }
 
@@ -29,7 +29,7 @@ namespace BugDefender.OpenGL.Engine.Audio
         {
             if (_soundEffects.ContainsKey(item.ID))
                 _soundEffects.Remove(item.ID);
-            item.LoadedContent = _contentManager.Load<SoundEffect>(item.Content);
+            item.SetContent(_contentManager.Load<SoundEffect>(item.Content));
             _soundEffects.Add(item.ID, item);
         }
 
@@ -42,7 +42,7 @@ namespace BugDefender.OpenGL.Engine.Audio
                 return;
             _playing = song.Content;
             MediaPlayer.Stop();
-            MediaPlayer.Play(song.LoadedContent);
+            MediaPlayer.Play(song.GetLoadedContent());
         }
 
         public void StopSong()
@@ -56,7 +56,7 @@ namespace BugDefender.OpenGL.Engine.Audio
             if (!_soundEffects.ContainsKey(id))
                 return Guid.Empty;
             var newEffect = Guid.NewGuid();
-            _instances.Add(newEffect, _soundEffects[id].LoadedContent.CreateInstance());
+            _instances.Add(newEffect, _soundEffects[id].GetLoadedContent().CreateInstance());
             _instances[newEffect].Volume = SoundEffect.MasterVolume;
             _instances[newEffect].IsLooped = true;
             _instances[newEffect].Play();
@@ -67,7 +67,7 @@ namespace BugDefender.OpenGL.Engine.Audio
         {
             if (!_soundEffects.ContainsKey(id))
                 return;
-            _soundEffects[id].LoadedContent.Play();
+            _soundEffects[id].GetLoadedContent().Play();
         }
 
         public void StopSoundEffect(Guid id)

@@ -35,7 +35,7 @@ namespace BugDefender.OpenGL.Views.GameView
             _enemyTile = new AnimatedTileControl()
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
-                TileSet = textureSet.LoadedContents,
+                TileSet = textureSet.GetLoadedContent(),
                 AutoPlay = true,
                 Width = enemy.Size,
                 Height = enemy.Size,

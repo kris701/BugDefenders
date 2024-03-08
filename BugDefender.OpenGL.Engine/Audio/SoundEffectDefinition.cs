@@ -3,13 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.Engine.Audio
 {
-    public class SoundEffectDefinition
+    public class SoundEffectDefinition : LoadableContent<SoundEffect>
     {
         public Guid ID { get; set; }
         public string Content { get; set; }
-
-        [JsonIgnore]
-        public SoundEffect LoadedContent { get; set; }
 
         public SoundEffectDefinition(Guid iD, string content)
         {

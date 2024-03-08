@@ -36,7 +36,7 @@ namespace BugDefender.OpenGL.Views.GameView
             var textureSet = parent.TextureController.GetTextureSet(_currentAnimation);
             _turretControl = new AnimatedButtonControl(parent, clicked)
             {
-                TileSet = textureSet.LoadedContents,
+                TileSet = textureSet.GetLoadedContent(),
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
@@ -61,7 +61,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 return;
             _currentAnimation = id;
             var textureSet = _parent.TextureController.GetTextureSet(id);
-            _turretControl.TileSet = textureSet.LoadedContents;
+            _turretControl.TileSet = textureSet.GetLoadedContent();
             _turretControl.Frame = 0;
             _turretControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
         }

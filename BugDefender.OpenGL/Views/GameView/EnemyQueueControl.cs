@@ -68,7 +68,7 @@ namespace BugDefender.OpenGL.Views.GameView
             var instance = new EnemyInstance(def, evolution);
             var animation = _parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(def.ID);
             var textureSet = _parent.TextureController.GetTextureSet(animation.OnCreate);
-            _iconControl.TileSet = textureSet.LoadedContents;
+            _iconControl.TileSet = textureSet.GetLoadedContent();
             _iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
             _iconControl.Frame = 0;
             _iconControl.FillColor = _iconControl.TileSet[0];
