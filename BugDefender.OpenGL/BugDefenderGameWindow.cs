@@ -43,7 +43,7 @@ namespace BugDefender.OpenGL
 
         private readonly Func<BugDefenderGameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
-        private NotificationBackroundWorker _notificationWorker;
+        private readonly NotificationBackroundWorker _notificationWorker;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen) : base()
