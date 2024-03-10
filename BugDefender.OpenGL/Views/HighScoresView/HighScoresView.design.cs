@@ -37,7 +37,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                     Y = 215 + (count++ * 60 + 5),
                     Height = 60,
                     Width = 1200,
-                    Text = $"User: {Parent.UserManager.Users.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}",
+                    Text = $"User: {Parent.UserManager.Users.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}, Difficulty: {Math.Round(score.DifficultyRating, 2)}",
                     FontColor = Color.White,
                     Font = BasicFonts.GetFont(12),
                     FillColor = Parent.TextureController.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),

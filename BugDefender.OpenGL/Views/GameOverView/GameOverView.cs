@@ -17,18 +17,21 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private readonly int _credits;
         private readonly TimeSpan _gameTime;
         private readonly GameResult _gameResult;
-        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result) : base(parent, _id)
+        private readonly float _difficulty;
+        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result, float difficulty) : base(parent, _id)
         {
             _screen = screen;
             _score = score;
             _credits = credits;
             _gameTime = gameTime;
             _gameResult = result;
+            _difficulty = difficulty;
 
             Parent.UserManager.CurrentUser.HighScores.Add(new ScoreDefinition(
                 _score,
                 gameTime.ToString("hh\\:mm\\:ss"),
-                DateTime.Now.Date.ToShortDateString()
+                DateTime.Now.Date.ToShortDateString(),
+                difficulty
             ));
             if (Parent.UserManager.CurrentUser.HighScores.Count > 10)
             {

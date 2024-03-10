@@ -685,7 +685,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #endif
                 Parent.AudioController.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent as Game);
-                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, credits, _game.Context.GameTime, _game.Result));
+                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, credits, _game.Context.GameTime, _game.Result, _game.Context.Map.GetDifficultyRating() * _game.Context.GameStyle.GetDifficultyRating()));
             }
         }
 
