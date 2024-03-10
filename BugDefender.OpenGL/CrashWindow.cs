@@ -44,7 +44,7 @@ namespace BugDefender.OpenGL
         {
             base.Initialize();
             Window.Title = $"Game Crashed!";
-            BasicFonts.Initialize(Content);
+            BasicFonts.Initialize(Content, "DefaultFonts/DefaultFont");
         }
 
         protected override void LoadContent()

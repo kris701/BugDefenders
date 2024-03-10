@@ -69,7 +69,7 @@ namespace BugDefender.OpenGL
             ResourcePackController = new ResourcePackController(this);
             UserManager = new UserEngine<SettingsDefinition>();
             BasicTextures.Initialize(GraphicsDevice);
-            BasicFonts.Initialize(Content);
+            BasicFonts.Initialize(Content, "DefaultFonts/DefaultFont");
             MediaPlayer.IsRepeating = true;
             SoundEffect.Initialize();
             _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
