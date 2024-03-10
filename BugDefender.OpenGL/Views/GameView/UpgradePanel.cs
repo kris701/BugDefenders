@@ -9,7 +9,10 @@ namespace BugDefender.OpenGL.Views.GameView
 {
     public class UpgradePanel : CollectionControl
     {
+        public UpgradeDefinition? Upgrade { get; set; }
+
         private readonly LabelControl _nameLabel;
+        private readonly LabelControl _questionLabel;
         private readonly TextboxControl _descriptionTextbox;
         private readonly ButtonControl _buyUpgradeButton;
 
@@ -24,6 +27,15 @@ namespace BugDefender.OpenGL.Views.GameView
                 Height = Height,
                 FillColor = parent.TextureController.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
             });
+            _questionLabel = new LabelControl()
+            {
+                Width = Width,
+                Height = Height,
+                Font = BasicFonts.GetFont(24),
+                Text = "???",
+                IsVisible = false
+            };
+            Children.Add(_questionLabel);
             _nameLabel = new LabelControl()
             {
                 Y = 10,
@@ -58,30 +70,27 @@ namespace BugDefender.OpenGL.Views.GameView
             Children.Add(_buyUpgradeButton);
         }
 
-        private void SetPurchasability(bool canUpgrade)
+        public void SetPurchasability(bool canUpgrade, bool isLocked)
         {
+            _questionLabel.IsVisible = isLocked;
+            _nameLabel.IsVisible = !isLocked;
+            _descriptionTextbox.IsVisible = !isLocked;
+            _buyUpgradeButton.IsVisible = !isLocked;
             _buyUpgradeButton.IsEnabled = canUpgrade;
-            if (!canUpgrade)
-            {
-                _nameLabel.FontColor = Color.Gray;
-                _descriptionTextbox.FontColor = Color.Gray;
-                _buyUpgradeButton.FontColor = Color.Gray;
-            }
-            else
-            {
-                _nameLabel.FontColor = Color.White;
-                _descriptionTextbox.FontColor = Color.White;
+            if (canUpgrade)
                 _buyUpgradeButton.FontColor = Color.White;
-            }
+            else
+                _buyUpgradeButton.FontColor = Color.Gray;
         }
-
-        public void SetUpgrade(UpgradeDefinition upgrade, bool canUpgrade)
+        
+        public void SetUpgrade(UpgradeDefinition upgrade, bool canUpgrade, bool isLocked)
         {
             _nameLabel.Text = $"{upgrade.Name}";
             _descriptionTextbox.Text = upgrade.ToString();
             _buyUpgradeButton.Text = $"[{upgrade.Cost}$] Buy";
             _buyUpgradeButton.Tag = upgrade;
-            SetPurchasability(canUpgrade);
+            Upgrade = upgrade;
+            SetPurchasability(canUpgrade, isLocked);
         }
     }
 }

@@ -74,7 +74,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Parent.AudioController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
             };
 
-            _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(90, this, _gameArea.X, _gameArea.Y);
+            _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(95, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater = new EntityUpdater<EnemyInstance, EnemyControl>(91, this, _gameArea.X, _gameArea.Y);
             _enemyUpdater.OnDelete += OnEnemyDeath;
             _projectileUpdater = new EntityUpdater<ProjectileInstance, AnimatedTileControl>(92, this, _gameArea.X, _gameArea.Y);
@@ -331,6 +331,20 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _saveAndExitButton.IsEnabled = _game.Context.CanSave();
             if (_playtimeLabel != null)
                 _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
+
+            if (_selectedTurret != null)
+            {
+                foreach (var item in _upgradePageHandler.Pages[_upgradePageHandler.PageIndex])
+                {
+                    if (item.Upgrade != null)
+                    {
+                        bool isLocked = false;
+                        if (item.Upgrade.Requires != null)
+                            isLocked = !_selectedTurret.HasUpgrades.Contains((Guid)item.Upgrade.Requires);
+                        item.SetPurchasability(_game.TurretsModule.CanUpgradeTurret(_selectedTurret, item.Upgrade.ID), isLocked);
+                    }
+                }
+            }
         }
 
         private void UpdateEffectLifetimes(GameTime gameTime)
@@ -348,8 +362,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private TurretControl CreateNewTurretControl(TurretInstance entity)
         {
-            var animation = Parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(entity.DefinitionID).OnIdle;
-            var textureSet = Parent.TextureController.GetTextureSet(animation);
             return new TurretControl(Parent, entity, clicked: Turret_Click)
             {
                 X = _gameArea.X + entity.X,
@@ -694,8 +706,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 if (turret.HasUpgrades.Contains(upgrade.ID))
                     continue;
                 count++;
+                bool isLocked = false;
+                if (upgrade.Requires != null)
+                    isLocked = !turret.HasUpgrades.Contains((Guid)upgrade.Requires);
                 _upgradePageHandler.Pages[pageIndex][offset].IsVisible = true;
-                _upgradePageHandler.Pages[pageIndex][offset].SetUpgrade(upgrade, _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID));
+                _upgradePageHandler.Pages[pageIndex][offset].SetUpgrade(
+                    upgrade, 
+                    _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID),
+                    isLocked);
                 offset++;
                 if (offset % _upgradePageHandler.ItemsPrPage == 0)
                 {
