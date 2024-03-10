@@ -444,11 +444,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 X = xOffset + 10,
                 Y = yOffset + 35,
                 Width = width,
-                Height = height,
-                IsVisible = false
+                Height = height
             };
             _upgradePageHandler.MinPage = 0;
             _upgradePageHandler.MaxPage = 0;
+            _upgradePageHandler.MaxItem = 0;
             AddControl(101, _upgradePageHandler);
         }
 
