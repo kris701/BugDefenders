@@ -95,6 +95,9 @@ namespace BugDefender.OpenGL.Engine.Controls
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if (!IsVisible)
+                return;
+
             base.Draw(gameTime, spriteBatch);
             foreach (var line in lines)
                 line.Draw(gameTime, spriteBatch);

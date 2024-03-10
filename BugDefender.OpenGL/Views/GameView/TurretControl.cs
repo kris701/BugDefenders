@@ -41,6 +41,8 @@ namespace BugDefender.OpenGL.Views.GameView
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 Rotation = instance.Angle + (float)Math.PI / 2,
+                Width = Width,
+                Height = Height,
                 Tag = instance
             };
             Children.Add(_turretControl);

@@ -3,7 +3,7 @@
   "Name": "Passive Range Turret",
   "Description": "A passive turret that increases the range of turrets within its own range.",
   "Size": 50,
-  "Cost": 3500,
+  "Cost": 5000,
   "ModuleInfo": {
     "TurretModule": "PassiveTurret",
     "Range": 100,
@@ -14,8 +14,8 @@
       }
     ]
   },
-  "CanDamage": [],
-  "AvailableAtWave": 20,
+  "CanTarget": [],
+  "AvailableAtWave": 85,
   "Upgrades": [
     {
       "id": "eb52a632-0e95-4d9b-81f3-10edff81075f",
@@ -39,7 +39,7 @@
       "Effects": [
         {
           "Target": "Effects[Target=Range].Modifier",
-          "Modifier": 1.5
+          "Modifier": 1.25
         }
       ]
     }

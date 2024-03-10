@@ -7,7 +7,7 @@
   "Reward": 20,
   "ModuleInfo": {
     "EnemyModule": "Wave",
-    "Speed": 1,
+    "Speed": 2,
     "WaveSize": 2,
     "SpawnDelay": 1000
   },

@@ -11,8 +11,8 @@
     "ProjectileID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
     "IsTrailing": false
   },
-  "CanDamage": [ 2 ],
-  "AvailableAtWave": 20,
+  "CanTarget": [ 2 ],
+  "AvailableAtWave": 40,
   "Upgrades": [
     {
       "id": "c56cf52c-aaa9-4fed-8163-bb32b6457607",
@@ -23,7 +23,7 @@
       "Effects": [
         {
           "Target": "Cooldown",
-          "Modifier": 0.5
+          "Modifier": 0.75
         }
       ]
     },
@@ -36,7 +36,7 @@
       "Effects": [
         {
           "Target": "ProjectileInfo.Damage",
-          "Modifier": 2
+          "Modifier": 1.5
         }
       ]
     }

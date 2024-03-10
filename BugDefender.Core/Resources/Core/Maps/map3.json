@@ -4,6 +4,10 @@
   "Description": "A simple map with a few turns. Shouldnt be too hard!",
   "Width": 950,
   "Height": 950,
+  "Tags": [
+    "Medium",
+    "Map"
+  ],
   "Paths": [
     [
       {

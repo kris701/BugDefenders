@@ -3,15 +3,15 @@
   "Name": "Gatling Turret",
   "Description": "Shoots unguided bullets at a fast rate. This turret also slightly slows enemies.",
   "Size": 50,
-  "Cost": 150,
+  "Cost": 250,
   "ModuleInfo": {
     "TurretModule": "ProjectileTurret",
-    "Range": 200,
+    "Range": 150,
     "Cooldown": 100,
     "ProjectileID": "1db411e4-8599-464b-923c-0e23bc031435",
     "IsTrailing": true
   },
-  "CanDamage": [ 1 ],
+  "CanTarget": [ 1 ],
   "AvailableAtWave": 0,
   "Upgrades": [
     {

@@ -29,5 +29,5 @@
       }
     ]
   },
-  "CanDamage": [ 2 ]
+  "CanTarget": [ 2 ]
 } 

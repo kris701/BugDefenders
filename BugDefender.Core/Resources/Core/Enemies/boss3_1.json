@@ -2,7 +2,7 @@
   "id": "dfea435c-c8ab-4981-b47a-210b31c5be48",
   "Name": "Baby Fire Boss",
   "description": "",
-  "Health": 50000,
+  "Health": 25000,
   "Size": 50,
   "Reward": 1000,
   "ModuleInfo": {

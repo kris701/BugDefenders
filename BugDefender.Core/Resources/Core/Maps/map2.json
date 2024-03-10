@@ -4,6 +4,10 @@
   "Description": "A map with two paths that the enemies can take!",
   "Width": 950,
   "Height": 950,
+  "Tags": [
+    "Hard",
+    "Map"
+  ],
   "Paths": [
     [
       {

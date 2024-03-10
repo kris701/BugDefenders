@@ -81,7 +81,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                     best = projectile.Target;
             }
             else
-                best = Game.EnemiesModule.GetBestEnemy(projectile, def.TriggerRange, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
+                best = Game.EnemiesModule.GetBestEnemy(projectile, def.TriggerRange, projectile.Source.TargetingType, projectile.GetDefinition().CanTarget);
             if (best != null)
             {
                 for (int i = 0; i < Context.CurrentEnemies.Count; i++)

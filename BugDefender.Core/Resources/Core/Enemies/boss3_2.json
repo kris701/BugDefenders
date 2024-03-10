@@ -2,7 +2,7 @@
   "id": "188bd963-5dac-4d7c-8c98-5d443b81eb7f",
   "Name": "Young Fire Boss",
   "description": "",
-  "Health": 100000,
+  "Health": 40000,
   "Size": 50,
   "Reward": 1000,
   "ModuleInfo": {

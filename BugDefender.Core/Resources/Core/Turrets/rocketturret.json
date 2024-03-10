@@ -3,16 +3,16 @@
   "Name": "Rocket Turret",
   "Description": "Shoots unguided rockets that do explosive splash damage",
   "Size": 50,
-  "Cost": 1000,
+  "Cost": 1500,
   "ModuleInfo": {
     "TurretModule": "ProjectileTurret",
-    "Range": 200,
-    "Cooldown": 750,
+    "Range": 150,
+    "Cooldown": 1000,
     "ProjectileID": "6ee45409-1dd2-4190-938b-90848cf0ec52",
     "IsTrailing": false
   },
-  "CanDamage": [ 1, 2 ],
-  "AvailableAtWave": 5,
+  "CanTarget": [ 1, 2 ],
+  "AvailableAtWave": 20,
   "Upgrades": [
     {
       "id": "1d5bfdd5-470b-4037-a434-cdc6bb8a4367",
@@ -23,7 +23,7 @@
       "Effects": [
         {
           "Target": "Cooldown",
-          "Modifier": 0.5
+          "Modifier": 0.75
         }
       ]
     },
@@ -36,7 +36,7 @@
       "Effects": [
         {
           "Target": "ProjectileInfo.Damage",
-          "Modifier": 2
+          "Modifier": 1.25
         }
       ]
     }

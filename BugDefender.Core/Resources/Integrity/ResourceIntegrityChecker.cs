@@ -152,7 +152,7 @@ namespace BugDefender.Core.Resources.Integrity
                         break;
                 }
 
-                if (turret.CanDamage.Count == 0 && turret.ModuleInfo is not PassiveTurretDefinition && turret.ModuleInfo is not InvestmentTurretDefinition)
+                if (turret.CanTarget.Count == 0 && turret.ModuleInfo is not PassiveTurretDefinition && turret.ModuleInfo is not InvestmentTurretDefinition)
                     Errors.Add(new IntegrityError(
                         $"Turret ({id}) is set to be unable to target anything!",
                         IntegrityError.SeverityLevel.Message));
@@ -191,7 +191,7 @@ namespace BugDefender.Core.Resources.Integrity
             foreach (var id in projectiles)
             {
                 var projectile = ResourceManager.Projectiles.GetResource(id);
-                if (projectile.CanDamage.Count == 0)
+                if (projectile.CanTarget.Count == 0)
                     Errors.Add(new IntegrityError(
                         $"Projectile ({id}) is set to be unable to target anything!",
                         IntegrityError.SeverityLevel.Message));

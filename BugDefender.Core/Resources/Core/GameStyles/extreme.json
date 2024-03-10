@@ -1,7 +1,7 @@
 ﻿{
   "ID": "9672b018-ea7c-45fc-87cd-b952437eda74",
   "Name": "Extreme",
-  "Description": "",
+  "Description": "An Extreme Game. You most likely will fail",
   "EvolutionRate": 1.50,
   "EnemySpeedMultiplier": 1.25,
   "MoneyMultiplier": 10,

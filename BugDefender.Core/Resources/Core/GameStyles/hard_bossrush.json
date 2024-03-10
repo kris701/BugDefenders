@@ -1,7 +1,7 @@
 ﻿{
   "ID": "e6efd8cc-40dd-4a11-baa0-24437a0f2595",
   "Name": "Boss Rush Hard",
-  "Description": "",
+  "Description": "An Hard Game with only bosses",
   "EvolutionRate": 1.05,
   "EnemySpeedMultiplier": 0.45,
   "MoneyMultiplier": 4,
