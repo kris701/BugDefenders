@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
@@ -333,6 +334,13 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _saveAndExitButton.IsEnabled = _game.Context.CanSave();
             if (_playtimeLabel != null)
                 _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
+            if (_game.Context.Challenge != null)
+            {
+                var sb = new StringBuilder();
+                foreach (var req in _game.Context.Challenge.Criterias)
+                    sb.AppendLine(req.Progress(_game.Context.Stats));
+                _challengeProgressTextbox.Text = sb.ToString();
+            }
 
             if (_selectedTurret != null)
             {

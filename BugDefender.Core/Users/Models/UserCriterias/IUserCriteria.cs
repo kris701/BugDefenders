@@ -16,5 +16,6 @@ namespace BugDefender.Core.Users.Models.UserCriterias
     public interface IUserCriteria
     {
         public bool IsValid(StatsDefinition stats);
+        public string Progress(StatsDefinition stats);
     }
 }

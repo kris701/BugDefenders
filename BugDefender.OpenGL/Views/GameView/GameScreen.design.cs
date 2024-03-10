@@ -40,6 +40,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
+        private TextboxControl? _challengeProgressTextbox;
+
         private PageHandler<TurretPurchasePanel> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
 
@@ -313,9 +315,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             if (_game.Context.Challenge == null)
                 return;
-            var sb = new StringBuilder();
-            foreach (var req in _game.Context.Challenge.Criterias)
-                sb.AppendLine(req.ToString());
             AddControl(101, new LabelControl()
             {
                 Text = $"Challenge: {_game.Context.Challenge.Name}",
@@ -326,7 +325,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width
             });
-            AddControl(101, new TextboxControl()
+            var sb = new StringBuilder();
+            foreach (var req in _game.Context.Challenge.Criterias)
+                sb.AppendLine(req.Progress(_game.Context.Stats));
+            _challengeProgressTextbox = new TextboxControl()
             {
                 Text = sb.ToString(),
                 Font = BasicFonts.GetFont(8),
@@ -335,7 +337,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Y = yOffset + 75,
                 Height = 80,
                 Width = width
-            });
+            };
+            AddControl(101, _challengeProgressTextbox);
         }
 
         [MemberNotNull(nameof(_turretPageHandler), nameof(_buyingPreviewRangeTile), nameof(_buyingPreviewTile))]

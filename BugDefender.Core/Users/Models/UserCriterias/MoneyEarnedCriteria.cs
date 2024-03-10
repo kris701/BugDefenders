@@ -9,5 +9,10 @@
         {
             return $"Earn {Quantity} money.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            return $"{Quantity - stats.TotalMoneyEarned} more money to earn";
+        }
     }
 }

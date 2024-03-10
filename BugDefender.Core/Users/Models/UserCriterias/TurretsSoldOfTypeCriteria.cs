@@ -12,5 +12,12 @@ namespace BugDefender.Core.Users.Models.UserCriterias
         {
             return $"Sell {Quantity} '{ResourceManager.Turrets.GetResource(TurretID).Name}' turrets.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            if (!stats.TotalTurretsPlacedOfType.ContainsKey(TurretID))
+                return $"{Quantity} more '{ResourceManager.Turrets.GetResource(TurretID).Name}' turrets sold to go"; ;
+            return $"{Quantity - stats.TotalTurretsSoldOfType[TurretID]} more '{ResourceManager.Turrets.GetResource(TurretID).Name}' turrets sold to go"; ;
+        }
     }
 }
