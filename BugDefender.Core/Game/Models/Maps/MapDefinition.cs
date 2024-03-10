@@ -30,7 +30,7 @@ namespace BugDefender.Core.Game.Models.Maps
         {
             float difficulty = 1;
 
-            foreach(var path in Paths)
+            foreach (var path in Paths)
             {
                 float totalLength = 0;
                 var from = path[0];
@@ -40,7 +40,7 @@ namespace BugDefender.Core.Game.Models.Maps
                 difficulty *= 1.25f;
             }
             float totalSize = 0;
-            foreach(var block in BlockingTiles)
+            foreach (var block in BlockingTiles)
                 totalSize += block.Width * block.Height;
             difficulty *= 1 + (totalSize / (Width * Height));
 

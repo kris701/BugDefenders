@@ -27,7 +27,7 @@ namespace BugDefender.OpenGL.Views.Helpers
         public int MinItem { get; set; } = 0;
         public int MaxItem { get; set; } = int.MaxValue;
 
-        private List<T> _items;
+        private readonly List<T> _items;
         private ButtonControl? _leftButton;
         private ButtonControl? _rightButton;
         private ScrollWatcher? _scrollWatcher;

@@ -22,7 +22,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -48,8 +47,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private readonly HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
         private readonly Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
 
-        private GameTimer _backgroundTasksTimer;
-        private GameTimer _gameTasksTimer;
+        private readonly GameTimer _backgroundTasksTimer;
+        private readonly GameTimer _gameTasksTimer;
 
         private readonly KeyWatcher _waveKeyWatcher;
         private int tabIndex = 0;

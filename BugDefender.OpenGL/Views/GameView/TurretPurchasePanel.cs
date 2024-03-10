@@ -3,10 +3,6 @@ using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.Views.GameView
@@ -15,7 +11,7 @@ namespace BugDefender.OpenGL.Views.GameView
     {
         public TurretDefinition Turret { get; set; }
 
-        private ButtonControl _turretButton;
+        private readonly ButtonControl _turretButton;
         public TurretPurchasePanel(BugDefenderGameWindow parent, TurretDefinition turret, ClickedHandler buy)
         {
             Width = 300;

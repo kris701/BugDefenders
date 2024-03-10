@@ -59,7 +59,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     sb.AppendLine();
                 }
                 sb.AppendLine();
-                sb.AppendLine($"Difficulty Rating: {Math.Round(map.GetDifficultyRating(),2)}");
+                sb.AppendLine($"Difficulty Rating: {Math.Round(map.GetDifficultyRating(), 2)}");
                 _mapDescriptionTextbox.Text = sb.ToString();
 
                 if (_selectedGameStyle != null && _selectedMap != null)
