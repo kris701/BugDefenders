@@ -180,16 +180,6 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 FontColor = Color.White
             });
-            _mapPageHandler = new PageHandler<ButtonControl>()
-            {
-                LeftButtonX = x + 30,
-                LeftButtonY = y + 10,
-                RightButtonX = x + width - 80,
-                RightButtonY = y + 10,
-                ItemsPrPage = 13,
-                X = x + 10,
-                Y = y + 70,
-            };
 
             var controlList = new List<ButtonControl>();
             var ids = ResourceManager.Maps.GetResources();
@@ -208,8 +198,19 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     Tag = map
                 });
             }
-
-            _mapPageHandler.Initialize(controlList, this);
+            _mapPageHandler = new PageHandler<ButtonControl>(this, controlList)
+            {
+                LeftButtonX = 10,
+                LeftButtonY = -50,
+                RightButtonX = width - 80,
+                RightButtonY = -50,
+                ItemsPrPage = 12,
+                X = x + 10,
+                Y = y + 70,
+                Width = width,
+                Height = height
+            };
+            AddControl(1, _mapPageHandler);
         }
 
 
@@ -234,16 +235,6 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 FontColor = Color.White
             });
-            _gamestylePageHandler = new PageHandler<ButtonControl>()
-            {
-                LeftButtonX = x + 30,
-                LeftButtonY = y + 10,
-                RightButtonX = x + width - 80,
-                RightButtonY = y + 10,
-                ItemsPrPage = 13,
-                X = x + 10,
-                Y = y + 70,
-            };
 
             var controlList = new List<ButtonControl>();
             var ids = ResourceManager.GameStyles.GetResources();
@@ -262,8 +253,19 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     Tag = gameStyle
                 });
             }
-
-            _gamestylePageHandler.Initialize(controlList, this);
+            _gamestylePageHandler = new PageHandler<ButtonControl>(this, controlList)
+            {
+                LeftButtonX = 10,
+                LeftButtonY = -50,
+                RightButtonX = width - 80,
+                RightButtonY = -50,
+                ItemsPrPage = 12,
+                X = x + 10,
+                Y = y + 70,
+                Width = width,
+                Height = height
+            };
+            AddControl(1, _gamestylePageHandler);
         }
     }
 }

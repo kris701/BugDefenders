@@ -360,20 +360,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _turretPageHandler = new PageHandler<TurretPurchasePanel>()
-            {
-                ItemsPrPage = 7,
-                ButtonSize = 25,
-                ButtonFontSize = 10,
-                Layer = 102,
-                LeftButtonX = xOffset + 10,
-                LeftButtonY = yOffset + 10,
-                RightButtonX = xOffset + width - 35,
-                RightButtonY = yOffset + 10,
-                X = xOffset + 10,
-                Y = yOffset + 35,
-                Margin = 5
-            };
             var optionIDs = ResourceManager.Turrets.GetResources();
             var sorted = new List<TurretDefinition>();
             foreach (var id in optionIDs)
@@ -383,7 +369,22 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             var controlList = new List<TurretPurchasePanel>();
             foreach (var turret in sorted)
                 controlList.Add(new TurretPurchasePanel(Parent, turret, BuyTurret_Click));
-            _turretPageHandler.Initialize(controlList, this);
+            _turretPageHandler = new PageHandler<TurretPurchasePanel>(this, controlList)
+            {
+                ItemsPrPage = 7,
+                ButtonSize = 25,
+                ButtonFontSize = 10,
+                LeftButtonX = 5,
+                LeftButtonY = -25,
+                RightButtonX = width - 50,
+                RightButtonY = -25,
+                X = xOffset + 10,
+                Y = yOffset + 35,
+                Margin = 5,
+                Width = width,
+                Height = height
+            };
+            AddControl(101, _turretPageHandler);
 
             _buyingPreviewRangeTile = new TileControl()
             {
@@ -422,32 +423,33 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _upgradePageHandler = new PageHandler<UpgradePanel>()
-            {
-                ItemsPrPage = 3,
-                ButtonSize = 25,
-                ButtonFontSize = 10,
-                Margin = 20,
-                IsVisible = false,
-                Layer = 102,
-                LeftButtonX = xOffset + 10,
-                LeftButtonY = yOffset + 10,
-                RightButtonX = xOffset + width - 35,
-                RightButtonY = yOffset + 10,
-                X = xOffset + 10,
-                Y = yOffset + 35
-            };
             var controlList = new List<UpgradePanel>();
             for (int i = 0; i < 9; i++)
             {
                 controlList.Add(new UpgradePanel(Parent, BuyUpgrade_Click)
                 {
-
+                    IsVisible = false
                 });
             }
+            _upgradePageHandler = new PageHandler<UpgradePanel>(this, controlList)
+            {
+                ItemsPrPage = 3,
+                ButtonSize = 25,
+                ButtonFontSize = 10,
+                Margin = 20,
+                LeftButtonX = 5,
+                LeftButtonY = -25,
+                RightButtonX = width - 50,
+                RightButtonY = -25,
+                X = xOffset + 10,
+                Y = yOffset + 35,
+                Width = width,
+                Height = height,
+                IsVisible = false
+            };
             _upgradePageHandler.MinPage = 0;
             _upgradePageHandler.MaxPage = 0;
-            _upgradePageHandler.Initialize(controlList, this);
+            AddControl(101, _upgradePageHandler);
         }
 
         private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)

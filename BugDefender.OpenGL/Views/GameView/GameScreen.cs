@@ -191,7 +191,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 button.IsEnabled = false;
                 button.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
-            _upgradePageHandler.IsVisible = false;
+            _upgradePageHandler.MaxPage = 0;
+            _upgradePageHandler.MinPage = 0;
+            _upgradePageHandler.MaxItem = 0;
             _upgradePageHandler.UpdatePages();
         }
 
@@ -456,13 +458,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void UpdateTurretPurchaseButtons()
         {
-            foreach (var page in _turretPageHandler.Pages)
-            {
-                foreach (var turret in page)
-                {
-                    turret.SetPurchasability(_game.Context.Money > turret.Turret.Cost, _game.Context.Wave < turret.Turret.AvailableAtWave);
-                }
-            }
+            foreach (var turret in _turretPageHandler.Pages[_turretPageHandler.PageIndex])
+                turret.SetPurchasability(_game.Context.Money > turret.Turret.Cost, _game.Context.Wave < turret.Turret.AvailableAtWave);
         }
 
         public void OnTurretFiring(TurretInstance turret)
@@ -704,7 +701,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     offset = 0;
                 }
             }
-            _upgradePageHandler.IsVisible = true;
             _upgradePageHandler.PageIndex = 0;
             _upgradePageHandler.MinPage = 0;
             _upgradePageHandler.MaxPage = (int)Math.Ceiling((double)count / _upgradePageHandler.ItemsPrPage);

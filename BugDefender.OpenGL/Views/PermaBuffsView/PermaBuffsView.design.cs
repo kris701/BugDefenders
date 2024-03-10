@@ -55,17 +55,19 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 };
                 controlList.Add(newButton);
             }
-            _buffPageHandler = new PageHandler<PermaBuffControl>()
+            _buffPageHandler = new PageHandler<PermaBuffControl>(this, controlList)
             {
-                LeftButtonX = 500,
-                LeftButtonY = 110,
-                RightButtonX = 1350,
-                RightButtonY = 110,
+                LeftButtonX = 10,
+                LeftButtonY = -50,
+                RightButtonX = 850,
+                RightButtonY = -50,
                 ItemsPrPage = 5,
                 X = 500,
                 Y = 250,
+                Width = 800,
+                Height = 725
             };
-            _buffPageHandler.Initialize(controlList, this);
+            AddControl(0, _buffPageHandler);
 
             AddControl(0, new ButtonControl(Parent, clicked: (x) =>
             {
