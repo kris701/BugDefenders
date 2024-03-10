@@ -34,7 +34,7 @@ namespace BugDefender.OpenGL.Views.GameView
             YOffset = yOffset;
         }
 
-        public void UpdateEntities(HashSet<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime>? updateOverride = null)
+        public void UpdateEntities(HashSet<T> entities, TimeSpan passed, Func<T, U> toControl, Action<T, U, TimeSpan>? updateOverride = null)
         {
             if (!entities.SetEquals(_entities.Keys))
             {

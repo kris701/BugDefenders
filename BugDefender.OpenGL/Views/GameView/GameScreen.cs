@@ -1,4 +1,6 @@
 ﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Helpers;
+
 #if RELEASE
 using BugDefender.Core.Game.Helpers;
 #endif
@@ -20,6 +22,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -44,6 +47,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TurretInstance? _selectedTurret;
         private readonly HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
         private readonly Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
+
+        private GameTimer _backgroundTasksTimer;
+        private GameTimer _gameTasksTimer;
 
         private readonly KeyWatcher _waveKeyWatcher;
         private int tabIndex = 0;
@@ -96,6 +102,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _selectedTurret = _game.Context.Turrets.ToList()[tabIndex];
             });
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, UnselectTurret);
+            _backgroundTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(100), OnUpdateBackground);
+            _gameTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(33), OnUpdateGame);
             Initialize();
             Parent.AudioController.PlaySong(ID);
 
@@ -279,6 +287,45 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 parent.Text = "[ ] Auto-Wave";
         }
 
+        public void OnUpdateBackground(TimeSpan passed)
+        {
+            _moneyLabel.Text = $"Money: {_game.Context.Money}$";
+            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Score}, HP: {_game.Context.HP}";
+            UpdateTurretPurchaseButtons();
+            UpdateNextEnemies();
+            _saveAndExitButton.IsEnabled = _game.Context.CanSave();
+            UpdateGameInfoPanel();
+            UpdateTurretUpgradePanel();
+        }
+
+        private void UpdateGameInfoPanel()
+        {
+            if (_game.Context.Challenge != null && _challengeProgressTextbox != null)
+            {
+                var sb = new StringBuilder();
+                foreach (var req in _game.Context.Challenge.Criterias)
+                    sb.AppendLine(req.Progress(_game.Context.Stats));
+                _challengeProgressTextbox.Text = sb.ToString();
+            }
+            else
+            {
+                if (_playtimeLabel != null)
+                    _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
+            }
+        }
+
+        public void OnUpdateGame(TimeSpan passed)
+        {
+            _game.Update(passed);
+            _turretUpdater.UpdateEntities(_game.Context.Turrets, passed, CreateNewTurretControl);
+            _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies, passed, CreateNewEnemyControl, UpdateEnemyControl);
+            _projectileUpdater.UpdateEntities(_game.Context.Projectiles, passed, CreateNewProjectileControl);
+            _effectsUpdater.UpdateEntities(_effects, passed, CreateNewEffect);
+            _laserUpdater.UpdateEntities(_lasers.Values.ToHashSet(), passed, CreateNewLaser, UpdateLaserControl);
+            UpdateEffectLifetimes(passed);
+            UpdateLasers();
+        }
+
         public override void OnUpdate(GameTime gameTime)
         {
             if (_game.GameOver)
@@ -302,22 +349,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _switchTurretWatcher.Update(keyState);
             _escapeKeyWatcher.Update(keyState);
 
-            _game.Update(gameTime.ElapsedGameTime);
-
-            _moneyLabel.Text = $"Money: {_game.Context.Money}$";
-            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Score}, HP: {_game.Context.HP}";
-
-            UpdateTurretPurchaseButtons();
-            UpdateNextEnemies();
-
-            _turretUpdater.UpdateEntities(_game.Context.Turrets, gameTime, CreateNewTurretControl);
-            _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies, gameTime, CreateNewEnemyControl, UpdateEnemyControl);
-            _projectileUpdater.UpdateEntities(_game.Context.Projectiles, gameTime, CreateNewProjectileControl);
-            _effectsUpdater.UpdateEntities(_effects, gameTime, CreateNewEffect);
-            _laserUpdater.UpdateEntities(_lasers.Values.ToHashSet(), gameTime, CreateNewLaser, UpdateLaserControl);
-            UpdateEffectLifetimes(gameTime);
-
-            UpdateLasers();
+            _backgroundTasksTimer.Update(gameTime.ElapsedGameTime);
+            _gameTasksTimer.Update(gameTime.ElapsedGameTime);
 
             var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
             if (translatedPos.X >= _gameArea.X && translatedPos.X <= _gameArea.X + _gameArea.Width &&
@@ -330,18 +363,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewTile.IsVisible = false;
                 _buyingPreviewRangeTile.IsVisible = false;
             }
+        }
 
-            _saveAndExitButton.IsEnabled = _game.Context.CanSave();
-            if (_playtimeLabel != null)
-                _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
-            if (_game.Context.Challenge != null)
-            {
-                var sb = new StringBuilder();
-                foreach (var req in _game.Context.Challenge.Criterias)
-                    sb.AppendLine(req.Progress(_game.Context.Stats));
-                _challengeProgressTextbox.Text = sb.ToString();
-            }
-
+        private void UpdateTurretUpgradePanel()
+        {
             if (_selectedTurret != null)
             {
                 foreach (var item in _upgradePageHandler.Pages[_upgradePageHandler.PageIndex])
@@ -357,12 +382,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
         }
 
-        private void UpdateEffectLifetimes(GameTime gameTime)
+        private void UpdateEffectLifetimes(TimeSpan passed)
         {
             var toRemove = new List<EffectEntity>();
             foreach (var effect in _effects)
             {
-                effect.LifeTime -= gameTime.ElapsedGameTime;
+                effect.LifeTime -= passed;
                 if (effect.LifeTime <= TimeSpan.Zero)
                     toRemove.Add(effect);
             }
@@ -388,7 +413,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             };
         }
 
-        private void UpdateEnemyControl(EnemyInstance entity, EnemyControl control, GameTime passed)
+        private void UpdateEnemyControl(EnemyInstance entity, EnemyControl control, TimeSpan passed)
         {
             control.X = entity.X + _gameArea.X + control.VisualOffset.X;
             control.Y = entity.Y + _gameArea.Y + control.VisualOffset.Y;
@@ -456,7 +481,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             return newTile;
         }
 
-        private void UpdateLaserControl(LaserEntity entity, LineControl control, GameTime passed)
+        private void UpdateLaserControl(LaserEntity entity, LineControl control, TimeSpan passed)
         {
             control.X = _gameArea.X + entity.From.CenterX;
             control.Y = _gameArea.Y + entity.From.CenterY;
@@ -697,11 +722,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 bool isLocked = false;
                 if (upgrade.Requires != null)
                     isLocked = !turret.HasUpgrades.Contains((Guid)upgrade.Requires);
-                _upgradePageHandler.Pages[pageIndex][offset].IsVisible = true;
+                bool canUpgrade = _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID);
                 _upgradePageHandler.Pages[pageIndex][offset].SetUpgrade(
                     upgrade,
-                    _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID),
+                    canUpgrade,
                     isLocked);
+
                 offset++;
                 if (offset % _upgradePageHandler.ItemsPrPage == 0)
                 {

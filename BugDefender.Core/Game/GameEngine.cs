@@ -99,7 +99,7 @@ namespace BugDefender.Core.Game
             }
         }
 
-        private void MainLoop()
+        private void MainLoop(TimeSpan passed)
         {
             foreach (var module in GameModules)
                 module.Update(_mainLoopTimer.Target);
@@ -110,7 +110,7 @@ namespace BugDefender.Core.Game
                 Context.Wave = 99999999;
         }
 
-        private void CheckChallenge()
+        private void CheckChallenge(TimeSpan passed)
         {
             if (Context.Challenge != null && Context.Challenge.IsValid(Context.Stats))
             {

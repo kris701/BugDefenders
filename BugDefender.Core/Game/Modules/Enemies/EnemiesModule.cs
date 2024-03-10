@@ -24,7 +24,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
 
         public EnemiesModule(GameContext context, GameEngine game) : base(context, game)
         {
-            _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), () => { if (Context.CurrentEnemies.Count == 0) QueueEnemies(); });
+            _enemySpawnTimer = new GameTimer(TimeSpan.FromSeconds(1), (t) => { if (Context.CurrentEnemies.Count == 0) QueueEnemies(); });
             WaveEnemiesModule = new WaveEnemyModule(Context, Game);
             SingleEnemiesModule = new SingleEnemyModule(Context, Game);
             Modules = new List<IGameModule>()
@@ -124,6 +124,8 @@ namespace BugDefender.Core.Game.Modules.Enemies
         private void UpdateEnemiesToSpawnList()
         {
             int waveSize = (int)Context.Evolution;
+            if (CheatsHelper.Cheats.Contains(CheatTypes.EnemiesX100))
+                waveSize *= 100;
             if (waveSize > 50)
                 waveSize = 50;
             for (int i = Context.EnemiesToSpawn.Count; i < 4; i++)
