@@ -711,7 +711,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     isLocked = !turret.HasUpgrades.Contains((Guid)upgrade.Requires);
                 _upgradePageHandler.Pages[pageIndex][offset].IsVisible = true;
                 _upgradePageHandler.Pages[pageIndex][offset].SetUpgrade(
-                    upgrade, 
+                    upgrade,
                     _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID),
                     isLocked);
                 offset++;

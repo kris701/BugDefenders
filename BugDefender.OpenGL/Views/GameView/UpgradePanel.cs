@@ -82,7 +82,7 @@ namespace BugDefender.OpenGL.Views.GameView
             else
                 _buyUpgradeButton.FontColor = Color.Gray;
         }
-        
+
         public void SetUpgrade(UpgradeDefinition upgrade, bool canUpgrade, bool isLocked)
         {
             _nameLabel.Text = $"{upgrade.Name}";

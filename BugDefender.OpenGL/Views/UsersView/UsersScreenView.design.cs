@@ -133,8 +133,6 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 };
                 _usersDeleteButtons.Add(newDeleteControl);
                 AddControl(2, newDeleteControl);
-
-
             }
         }
     }
