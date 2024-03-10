@@ -40,7 +40,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private ButtonControl _sellTurretButton;
 
-        private PageHandler<ButtonControl> _turretPageHandler;
+        private PageHandler<TurretPurchasePanel> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
 
         [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
@@ -360,9 +360,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _turretPageHandler = new PageHandler<ButtonControl>()
+            _turretPageHandler = new PageHandler<TurretPurchasePanel>()
             {
-                ItemsPrPage = 13,
+                ItemsPrPage = 7,
                 ButtonSize = 25,
                 ButtonFontSize = 10,
                 Layer = 102,
@@ -371,30 +371,18 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 RightButtonX = xOffset + width - 35,
                 RightButtonY = yOffset + 10,
                 X = xOffset + 10,
-                Y = yOffset + 35
+                Y = yOffset + 35,
+                Margin = 5
             };
             var optionIDs = ResourceManager.Turrets.GetResources();
             var sorted = new List<TurretDefinition>();
             foreach (var id in optionIDs)
                 sorted.Add(ResourceManager.Turrets.GetResource(id));
-            sorted = sorted.OrderBy(x => x.AvailableAtWave).ThenByDescending(x => x.Cost).ToList();
+            sorted = sorted.OrderBy(x => x.AvailableAtWave).ThenBy(x => x.Cost).ToList();
 
-            var controlList = new List<ButtonControl>();
+            var controlList = new List<TurretPurchasePanel>();
             foreach (var turret in sorted)
-            {
-                controlList.Add(new ButtonControl(Parent, BuyTurret_Click)
-                {
-                    Height = 30,
-                    Width = width - 20,
-                    FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
-                    Font = BasicFonts.GetFont(10),
-                    Text = $"[{turret.Cost}$] {turret.Name}",
-                    FontColor = Color.White,
-                    Tag = turret
-                });
-            }
+                controlList.Add(new TurretPurchasePanel(Parent, turret, BuyTurret_Click));
             _turretPageHandler.Initialize(controlList, this);
 
             _buyingPreviewRangeTile = new TileControl()
@@ -439,7 +427,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 ItemsPrPage = 3,
                 ButtonSize = 25,
                 ButtonFontSize = 10,
-                Margin = 30,
+                Margin = 20,
                 IsVisible = false,
                 Layer = 102,
                 LeftButtonX = xOffset + 10,

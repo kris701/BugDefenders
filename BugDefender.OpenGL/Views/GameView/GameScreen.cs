@@ -460,24 +460,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 foreach (var turret in page)
                 {
-                    if (turret.Tag is TurretDefinition def)
-                    {
-                        if (_game.Context.Wave < def.AvailableAtWave)
-                        {
-                            turret.IsEnabled = false;
-                            turret.Text = $"Unlocks at wave {def.AvailableAtWave}";
-                        }
-                        else
-                        {
-                            turret.Text = $"[{def.Cost}$] {def.Name}";
-                            if (_game.Context.Money < def.Cost)
-                            {
-                                turret.IsEnabled = false;
-                            }
-                            else
-                                turret.IsEnabled = true;
-                        }
-                    }
+                    turret.SetPurchasability(_game.Context.Money > turret.Turret.Cost, _game.Context.Wave < turret.Turret.AvailableAtWave);
                 }
             }
         }

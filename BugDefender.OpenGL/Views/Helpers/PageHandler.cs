@@ -47,7 +47,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 foreach (var item in items)
                 {
                     item.X = X;
-                    item.Y = Y + offset++ * item.Height + Margin;
+                    item.Y = Y + offset++ * (item.Height + Margin);
                     item.IsVisible = true;
                     Pages[0].Add(item);
                     parent.AddControl(Layer + 1, item);
@@ -66,7 +66,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                     offset = 0;
                 }
                 item.X = X;
-                item.Y = Y + offset++ * item.Height + Margin;
+                item.Y = Y + offset++ * (item.Height + Margin);
                 item.IsVisible = pageIndex == 0;
                 Pages[pageIndex].Add(item);
                 parent.AddControl(Layer + 1, item);
