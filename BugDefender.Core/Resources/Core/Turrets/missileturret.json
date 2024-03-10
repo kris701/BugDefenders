@@ -11,7 +11,7 @@
     "ProjectileID": "24be3e70-c410-443b-9e91-75d9f3a4270f",
     "IsTrailing": false
   },
-  "CanDamage": [ 2 ],
+  "CanTarget": [ 2 ],
   "AvailableAtWave": 20,
   "Upgrades": [
     {

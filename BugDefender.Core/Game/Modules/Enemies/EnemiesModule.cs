@@ -44,8 +44,8 @@ namespace BugDefender.Core.Game.Modules.Enemies
                 module.Update(passed);
         }
 
-        internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanDamage);
-        internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanDamage);
+        internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanTarget);
+        internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanTarget);
         internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canDamage)
         {
             range = (float)Math.Pow(range, 2);

@@ -8,7 +8,7 @@
     "TurretModule": "InvestmentTurret",
     "MoneyPrWave": 250
   },
-  "CanDamage": [],
+  "CanTarget": [],
   "AvailableAtWave": 30,
   "Upgrades": [
     {

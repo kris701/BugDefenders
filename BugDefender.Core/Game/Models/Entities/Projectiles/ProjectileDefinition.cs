@@ -10,16 +10,16 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles
         public string Description { get; set; }
         public float Size { get; set; }
         public IProjectileModule ModuleInfo { get; set; }
-        public HashSet<EnemyTerrrainTypes> CanDamage { get; set; }
+        public HashSet<EnemyTerrrainTypes> CanTarget { get; set; }
 
-        public ProjectileDefinition(Guid iD, string name, string description, float size, IProjectileModule moduleInfo, HashSet<EnemyTerrrainTypes> canDamage)
+        public ProjectileDefinition(Guid iD, string name, string description, float size, IProjectileModule moduleInfo, HashSet<EnemyTerrrainTypes> canTarget)
         {
             ID = iD;
             Name = name;
             Description = description;
             Size = size;
             ModuleInfo = moduleInfo;
-            CanDamage = canDamage;
+            CanTarget = canTarget;
         }
     }
 }

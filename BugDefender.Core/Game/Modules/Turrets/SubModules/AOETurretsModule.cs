@@ -24,7 +24,7 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
             var range = (float)Math.Pow(def.Range, 2);
             foreach (var enemy in Context.CurrentEnemies)
             {
-                if (!turret.GetDefinition().CanDamage.Contains(enemy.GetDefinition().TerrainType))
+                if (!turret.GetDefinition().CanTarget.Contains(enemy.GetDefinition().TerrainType))
                     continue;
                 var dist = MathHelpers.SqrDistance(enemy, turret);
                 if (dist <= range)

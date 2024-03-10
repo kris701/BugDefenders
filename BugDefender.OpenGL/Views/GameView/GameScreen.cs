@@ -453,14 +453,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                         if (_game.Context.Wave < def.AvailableAtWave)
                         {
                             turret.IsEnabled = false;
-                            turret.FillDisabledColor = Parent.TextureController.GetTexture(new Guid("3236f9b1-351a-4eda-a1ac-cddfa2a34ead"));
+                            turret.Text = $"Unlocks at wave {def.AvailableAtWave}";
                         }
                         else
                         {
+                            turret.Text = $"[{def.Cost}$] {def.Name}";
                             if (_game.Context.Money < def.Cost)
                             {
                                 turret.IsEnabled = false;
-                                turret.FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
                             }
                             else
                                 turret.IsEnabled = true;

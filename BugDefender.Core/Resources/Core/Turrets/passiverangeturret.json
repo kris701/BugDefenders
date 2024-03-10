@@ -14,7 +14,7 @@
       }
     ]
   },
-  "CanDamage": [],
+  "CanTarget": [],
   "AvailableAtWave": 20,
   "Upgrades": [
     {

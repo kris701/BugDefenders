@@ -77,7 +77,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                     best = projectile.Target;
             }
             else
-                best = Game.EnemiesModule.GetBestEnemy(projectile, projectile.Size / 2, projectile.Source.TargetingType, projectile.GetDefinition().CanDamage);
+                best = Game.EnemiesModule.GetBestEnemy(projectile, projectile.Size / 2, projectile.Source.TargetingType, projectile.GetDefinition().CanTarget);
             if (best != null)
             {
                 if (best.ModuleInfo is ISlowable slow)
