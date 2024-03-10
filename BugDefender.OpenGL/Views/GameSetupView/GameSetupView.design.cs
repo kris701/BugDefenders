@@ -15,7 +15,9 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private TileControl _mapPreviewTile;
         private LabelControl _mapNameLabel;
         private TextboxControl _mapDescriptionTextbox;
+        private TextboxControl _gameStyleDescriptionTextbox;
         private ButtonControl _startButton;
+        private LabelControl _totalDifficultyLabel;
 
         private ButtonControl? _selectedGameStyleButton;
         private ButtonControl? _selectedMapButton;
@@ -24,7 +26,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private PageHandler<ButtonControl> _gamestylePageHandler;
 
         [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
-            nameof(_startButton), nameof(_mapPageHandler), nameof(_gamestylePageHandler))]
+            nameof(_startButton), nameof(_mapPageHandler), nameof(_gamestylePageHandler),
+            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
@@ -85,7 +88,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             base.Initialize();
         }
 
-        [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox))]
+        [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
+            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel))]
         private void SetupPreviewPanel(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
@@ -121,18 +125,39 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 FontColor = Color.White,
             };
             AddControl(1, _mapNameLabel);
+            var boxHeight = height / 2;
             _mapDescriptionTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(10),
                 X = x + (height - 300) + 75,
                 Y = y + 50,
-                Height = height - 100,
+                Height = boxHeight - 100,
                 Width = width - 550,
                 FontColor = Color.White
             };
             AddControl(1, _mapDescriptionTextbox);
+            _gameStyleDescriptionTextbox = new TextboxControl()
+            {
+                Font = BasicFonts.GetFont(10),
+                X = x + (height - 300) + 75,
+                Y = y + 50 + boxHeight / 2 + 100,
+                Height = boxHeight - 100,
+                Width = width - 550,
+                FontColor = Color.White
+            };
+            AddControl(1, _gameStyleDescriptionTextbox);
+            _totalDifficultyLabel = new LabelControl()
+            {
+                Text = "Total Difficulty: ...",
+                Font = BasicFonts.GetFont(12),
+                X = x + 50,
+                Y = y + height - 150,
+                Height = 50,
+                Width = height - 300,
+                FontColor = Color.White,
+            };
+            AddControl(1, _totalDifficultyLabel);
         }
-
 
         [MemberNotNull(nameof(_mapPageHandler))]
         private void SetupMapsView(float x, float y, float width, float height)

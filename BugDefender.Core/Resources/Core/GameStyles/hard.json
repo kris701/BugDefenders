@@ -1,7 +1,7 @@
 ﻿{
   "ID": "d0e4e64c-0d62-473e-9da5-58dfe38e1fca",
   "Name": "Hard",
-  "Description": "",
+  "Description": "An Hard Game",
   "EvolutionRate": 1.05,
   "EnemySpeedMultiplier": 1,
   "MoneyMultiplier": 4,

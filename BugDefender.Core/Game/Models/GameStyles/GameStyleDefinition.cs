@@ -1,4 +1,6 @@
-﻿namespace BugDefender.Core.Game.Models.GameStyles
+﻿using BugDefender.Core.Game.Helpers;
+
+namespace BugDefender.Core.Game.Models.GameStyles
 {
     public class GameStyleDefinition : IDefinition
     {
@@ -39,6 +41,20 @@
             EnemyWhiteList = enemyWhiteList;
             MoneyPrWave = moneyPrWave;
             TurretRefundPenalty = turretRefundPenalty;
+        }
+
+        public float GetDifficultyRating()
+        {
+            float difficulty = 1;
+            difficulty += 1 / (float)StartingHP;
+            difficulty += (1 / (float)StartingMoney) * 100;
+            difficulty += 1 / (float)BossEveryNWave;
+            difficulty += 1 / (1 + (float)MoneyPrWave);
+            difficulty += 1 / TurretRefundPenalty;
+            difficulty *= (1 + TurretBlackList.Count);
+            difficulty *= EnemyWaveMultiplier;
+
+            return difficulty;
         }
     }
 }

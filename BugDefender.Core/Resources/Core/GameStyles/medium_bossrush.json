@@ -1,7 +1,7 @@
 ﻿{
   "ID": "c9020ca7-065c-4647-9950-3246a2f86db0",
   "Name": "Boss Rush Medium",
-  "Description": "",
+  "Description": "An Medium Game with only bosses",
   "EvolutionRate": 1.02,
   "EnemySpeedMultiplier": 0.35,
   "MoneyMultiplier": 3,

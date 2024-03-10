@@ -14,7 +14,7 @@
     "DamageModifiers": []
   },
   "CanTarget": [ 1 ],
-  "AvailableAtWave": 20,
+  "AvailableAtWave": 30,
   "Upgrades": [
     {
       "id": "5ce6344e-a814-4acf-953e-ed5304de3bed",

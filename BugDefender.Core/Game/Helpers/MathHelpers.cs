@@ -21,6 +21,7 @@ namespace BugDefender.Core.Game.Helpers
 
         public static float Distance(IPosition p1, IPosition p2) => Distance(p1.CenterX, p1.CenterY, p2.CenterX, p2.CenterY);
         public static float Distance(IPosition p1, FloatPoint p2) => Distance(p1.CenterX, p1.CenterY, p2.X, p2.Y);
+        public static float Distance(FloatPoint p1, FloatPoint p2) => Distance(p1.X, p1.Y, p2.X, p2.Y);
         public static float Distance(float x1, float y1, float x2, float y2) => (float)Math.Sqrt(SqrDistance(x1, y1, x2, y2));
 
         public static float SqrDistance(IPosition p1, IPosition p2) => SqrDistance(p1.CenterX, p1.CenterY, p2.CenterX, p2.CenterY);

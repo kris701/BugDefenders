@@ -12,7 +12,7 @@
     "IsTrailing": false
   },
   "CanTarget": [ 2 ],
-  "AvailableAtWave": 20,
+  "AvailableAtWave": 40,
   "Upgrades": [
     {
       "id": "c56cf52c-aaa9-4fed-8163-bb32b6457607",

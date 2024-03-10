@@ -52,7 +52,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 Height = 85,
-                Margin = 20
+                Margin = 15
             };
             Children.Add(_descriptionTextbox);
             _buyUpgradeButton = new ButtonControl(parent, clicked: buy)

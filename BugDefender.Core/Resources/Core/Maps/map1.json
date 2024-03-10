@@ -4,6 +4,9 @@
   "Description": "An easy map with one long snaky path.",
   "Width": 950,
   "Height": 950,
+  "Tags": [
+    "Easy", "Map"
+  ],
   "Paths": [
     [
       {

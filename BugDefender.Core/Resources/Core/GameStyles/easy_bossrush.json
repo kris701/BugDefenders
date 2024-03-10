@@ -1,7 +1,7 @@
 ﻿{
   "ID": "fb417695-acc6-4719-8c1f-4c63e9ad5864",
   "Name": "Boss Rush Easy",
-  "Description": "",
+  "Description": "An Easy Game with only bosses",
   "EvolutionRate": 1.01,
   "EnemySpeedMultiplier": 0.25,
   "MoneyMultiplier": 2,
