@@ -3,18 +3,18 @@
   "Name": "Passive Damage Turret",
   "Description": "A passive turret that increases the damage of turrets within its own range.",
   "Size": 50,
-  "Cost": 5000,
+  "Cost": 10000,
   "ModuleInfo": {
     "TurretModule": "PassiveTurret",
     "Range": 100,
     "Effects": [
       {
         "Target": "Damage",
-        "Modifier": 2
+        "Modifier": 1.25
       },
       {
         "Target": "ProjectileInfo.Damage",
-        "Modifier": 2
+        "Modifier": 1.25
       }
     ]
   },
@@ -43,11 +43,11 @@
       "Effects": [
         {
           "Target": "Effects[Target=Damage].Modifier",
-          "Modifier": 1.5
+          "Modifier": 1.25
         },
         {
           "Target": "Effects[Target=ProjectileInfo.Damage].Modifier",
-          "Modifier": 1.5
+          "Modifier": 1.25
         }
       ]
     }

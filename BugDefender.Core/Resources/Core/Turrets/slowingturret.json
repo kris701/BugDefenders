@@ -3,14 +3,15 @@
   "Name": "Slowing Turret",
   "Description": "Area of Effect turret that slows all enemies within its range.",
   "Size": 50,
-  "Cost": 1000,
+  "Cost": 1500,
   "ModuleInfo": {
     "TurretModule": "AOETurret",
     "Range": 100,
     "Damage": 0,
     "Cooldown": 2000,
-    "SlowingFactor": 0.3,
-    "SlowingDuration": 1500
+    "SlowingFactor": 0.5,
+    "SlowingDuration": 500,
+    "DamageModifiers": []
   },
   "CanTarget": [ 1 ],
   "AvailableAtWave": 20,
@@ -37,7 +38,7 @@
       "Effects": [
         {
           "Target": "SlowingDuration",
-          "Modifier": 2
+          "Modifier": 1.25
         }
       ]
     },
@@ -50,7 +51,7 @@
       "Effects": [
         {
           "Target": "SlowingFactor",
-          "Modifier": 0.5
+          "Modifier": 0.80
         }
       ]
     }

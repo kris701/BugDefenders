@@ -23,7 +23,7 @@
       "Effects": [
         {
           "Target": "Cooldown",
-          "Modifier": 0.5
+          "Modifier": 0.75
         }
       ]
     },
@@ -36,7 +36,7 @@
       "Effects": [
         {
           "Target": "ProjectileInfo.Damage",
-          "Modifier": 2
+          "Modifier": 1.5
         }
       ]
     }

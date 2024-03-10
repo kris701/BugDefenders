@@ -3,7 +3,7 @@
   "Name": "Laser Turret",
   "Description": "Fires lasers to instantly damage enemies",
   "Size": 50,
-  "Cost": 750,
+  "Cost": 1000,
   "ModuleInfo": {
     "TurretModule": "LaserTurret",
     "Range": 200,
@@ -42,7 +42,7 @@
         },
         {
           "Target": "Damage",
-          "Modifier": 2
+          "Modifier": 1.5
         }
       ]
     },
@@ -55,7 +55,7 @@
       "Effects": [
         {
           "Target": "Cooldown",
-          "Modifier": 0.5
+          "Modifier": 0.75
         }
       ]
     },
@@ -68,7 +68,7 @@
       "Effects": [
         {
           "Target": "Cooldown",
-          "Modifier": 0.5
+          "Modifier": 0.75
         }
       ]
     },
@@ -81,7 +81,7 @@
       "Effects": [
         {
           "Target": "Cooldown",
-          "Modifier": 0.5
+          "Modifier": 0.75
         }
       ]
     },
@@ -94,7 +94,7 @@
       "Effects": [
         {
           "Target": "Cooldown",
-          "Modifier": 0.5
+          "Modifier": 0.75
         }
       ]
     }

@@ -6,7 +6,7 @@
   "Cost": 2500,
   "ModuleInfo": {
     "TurretModule": "InvestmentTurret",
-    "MoneyPrWave": 250
+    "MoneyPrWave": 100
   },
   "CanTarget": [],
   "AvailableAtWave": 30,
@@ -20,7 +20,7 @@
       "Effects": [
         {
           "Target": "MoneyPrWave",
-          "Modifier": 1.2
+          "Modifier": 1.1
         }
       ]
     },
@@ -33,7 +33,7 @@
       "Effects": [
         {
           "Target": "MoneyPrWave",
-          "Modifier": 1.2
+          "Modifier": 1.1
         }
       ]
     }
