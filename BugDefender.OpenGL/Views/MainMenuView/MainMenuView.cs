@@ -1,6 +1,5 @@
 ﻿using BugDefender.Core.Game;
 using BugDefender.Core.Game.Helpers;
-using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
