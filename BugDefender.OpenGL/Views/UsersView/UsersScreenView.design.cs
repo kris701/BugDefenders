@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
@@ -11,10 +12,10 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
 {
     public partial class UsersScreenView : BaseBugDefenderView
     {
-        private readonly List<ButtonControl> _usersButtons = new List<ButtonControl>();
-        private readonly List<ButtonControl> _usersDeleteButtons = new List<ButtonControl>();
+        private readonly List<BugDefenderButtonControl> _usersButtons = new List<BugDefenderButtonControl>();
+        private readonly List<BugDefenderButtonControl> _usersDeleteButtons = new List<BugDefenderButtonControl>();
         private TextInputControl _nameInputBox;
-        private ButtonControl _acceptButton;
+        private BugDefenderButtonControl _acceptButton;
 
         [MemberNotNull(nameof(_nameInputBox), nameof(_acceptButton))]
         public override void Initialize()
@@ -39,7 +40,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
             };
             AddControl(0, _nameInputBox);
-            _acceptButton = new ButtonControl(Parent, AddUserButton_Click)
+            _acceptButton = new BugDefenderButtonControl(Parent, AddUserButton_Click)
             {
                 X = 1250,
                 Y = 230,
@@ -57,7 +58,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
 
             UpdateUsersList();
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
@@ -74,7 +75,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreenView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreenView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -98,7 +99,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
             var count = 0;
             foreach (var user in Parent.UserManager.Users)
             {
-                var newControl = new ButtonControl(Parent, ChangeUserButton_Click)
+                var newControl = new BugDefenderButtonControl(Parent, ChangeUserButton_Click)
                 {
                     X = 450,
                     Y = 280 + (count * 50 + 5),
@@ -117,7 +118,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 _usersButtons.Add(newControl);
                 AddControl(1, newControl);
 
-                var newDeleteControl = new ButtonControl(Parent, RemoveUserButton_Click)
+                var newDeleteControl = new BugDefenderButtonControl(Parent, RemoveUserButton_Click)
                 {
                     X = 1250,
                     Y = 280 + (count++ * 50 + 5),

@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
@@ -21,7 +22,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             new Point(2400, 1350),
             new Point(3840, 2160),
         };
-        private readonly List<ButtonControl> _scaleButtons = new List<ButtonControl>();
+        private readonly List<BugDefenderButtonControl> _scaleButtons = new List<BugDefenderButtonControl>();
 
         private readonly List<float> _musicOptions = new List<float>()
         {
@@ -37,7 +38,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             0.9f,
             1f
         };
-        private readonly List<ButtonControl> _musicButtons = new List<ButtonControl>();
+        private readonly List<BugDefenderButtonControl> _musicButtons = new List<BugDefenderButtonControl>();
 
         private readonly List<float> _soundEffectOptions = new List<float>()
         {
@@ -53,12 +54,12 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             0.9f,
             1f
         };
-        private readonly List<ButtonControl> _soundEffectsButtons = new List<ButtonControl>();
+        private readonly List<BugDefenderButtonControl> _soundEffectsButtons = new List<BugDefenderButtonControl>();
 
-        private ButtonControl _isFullScreen;
-        private ButtonControl _isVSync;
-        private ButtonControl _isFPSCounter;
-        private readonly List<ButtonControl> _texturePacksButtons = new List<ButtonControl>();
+        private BugDefenderButtonControl _isFullScreen;
+        private BugDefenderButtonControl _isVSync;
+        private BugDefenderButtonControl _isFPSCounter;
+        private readonly List<BugDefenderButtonControl> _texturePacksButtons = new List<BugDefenderButtonControl>();
 
         [MemberNotNull(nameof(_isFullScreen), nameof(_isVSync), nameof(_isFPSCounter))]
         public override void Initialize()
@@ -74,7 +75,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             SetupMusicSettingsView(500);
             SetupSoundEffectsSettingsView(600);
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 var oldSettings = Parent.UserManager.CurrentUser.UserData.Copy();
                 var newSettings = _settings.Copy();
@@ -94,7 +95,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
@@ -111,7 +112,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -139,7 +140,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FontColor = Color.White
             });
 
-            _isFullScreen = new ButtonControl(Parent, clicked: (x) =>
+            _isFullScreen = new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 _settings.IsFullscreen = !_settings.IsFullscreen;
                 UpdateScreenSettingsButtons();
@@ -156,7 +157,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isFullScreen);
-            _isVSync = new ButtonControl(Parent, clicked: (x) =>
+            _isVSync = new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 _settings.IsVsync = !_settings.IsVsync;
                 UpdateScreenSettingsButtons();
@@ -173,7 +174,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isVSync);
-            _isFPSCounter = new ButtonControl(Parent, clicked: (x) =>
+            _isFPSCounter = new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 _settings.FPSCounter = !_settings.FPSCounter;
                 UpdateScreenSettingsButtons();
@@ -202,7 +203,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
             for (int i = 0; i < _resolutionOptions.Count; i++)
             {
-                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                var newControl = new BugDefenderButtonControl(Parent, clicked: (s) =>
                 {
                     if (s.Tag is Point value)
                     {
@@ -245,7 +246,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
             var packs = Parent.ResourcePackController.GetResourcePacks();
             for (int i = 0; i < packs.Count; i++)
             {
-                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                var newControl = new BugDefenderButtonControl(Parent, clicked: (s) =>
                 {
                     if (s.Tag is Guid str)
                         _settings.TexturePack = str;
@@ -283,7 +284,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
             for (int i = 0; i < _musicOptions.Count; i++)
             {
-                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                var newControl = new BugDefenderButtonControl(Parent, clicked: (s) =>
                 {
                     if (s.Tag is float value)
                         _settings.MusicVolume = value;
@@ -321,7 +322,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
             for (int i = 0; i < _soundEffectOptions.Count; i++)
             {
-                var newControl = new ButtonControl(Parent, clicked: (s) =>
+                var newControl = new BugDefenderButtonControl(Parent, clicked: (s) =>
                 {
                     if (s.Tag is float value)
                         _settings.EffectsVolume = value;

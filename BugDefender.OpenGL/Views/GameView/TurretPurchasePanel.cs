@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
@@ -11,7 +12,7 @@ namespace BugDefender.OpenGL.Views.GameView
     {
         public TurretDefinition Turret { get; set; }
 
-        private readonly ButtonControl _turretButton;
+        private readonly BugDefenderButtonControl _turretButton;
         public TurretPurchasePanel(BugDefenderGameWindow parent, TurretDefinition turret, ClickedHandler buy)
         {
             Width = 300;
@@ -44,7 +45,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 Font = BasicFonts.GetFont(10),
                 Text = turret.Name
             });
-            _turretButton = new ButtonControl(parent, buy)
+            _turretButton = new BugDefenderButtonControl(parent, buy)
             {
                 X = 70,
                 Y = 30,

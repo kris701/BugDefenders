@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
@@ -44,7 +45,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                 });
             }
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
@@ -61,7 +62,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView(Parent)))
             {
                 X = 0,
                 Y = 0,

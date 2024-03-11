@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Upgrades;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
@@ -13,7 +14,7 @@ namespace BugDefender.OpenGL.Views.GameView
 
         private readonly LabelControl _nameLabel;
         private readonly TextboxControl _descriptionTextbox;
-        private readonly ButtonControl _buyUpgradeButton;
+        private readonly BugDefenderButtonControl _buyUpgradeButton;
 
         public UpgradePanel(BugDefenderGameWindow parent, ClickedHandler buy)
         {
@@ -45,7 +46,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 Margin = 15
             };
             Children.Add(_descriptionTextbox);
-            _buyUpgradeButton = new ButtonControl(parent, clicked: buy)
+            _buyUpgradeButton = new BugDefenderButtonControl(parent, clicked: buy)
             {
                 X = 10,
                 Y = 115,

@@ -1,5 +1,6 @@
 ﻿using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
@@ -38,60 +39,66 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
 
         private void SelectMap_Click(ButtonControl sender)
         {
-            if (sender.Tag is MapDefinition map)
+            if (sender is BugDefenderButtonControl button)
             {
-                if (_selectedMapButton != null)
-                    _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
-
-                _selectedMapButton = sender;
-                _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
-
-                _selectedMap = map;
-                _mapPreviewTile.FillColor = Parent.TextureController.GetTexture(map.ID);
-                _mapNameLabel.Text = map.Name;
-                var sb = new StringBuilder();
-                sb.AppendLine(map.Description);
-                if (map.Tags.Count > 0)
+                if (sender.Tag is MapDefinition map)
                 {
-                    sb.AppendLine("Tags:");
-                    foreach (var tag in map.Tags)
-                        sb.Append($"{tag}, ");
+                    if (_selectedMapButton != null)
+                        _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+
+                    _selectedMapButton = button;
+                    _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+
+                    _selectedMap = map;
+                    _mapPreviewTile.FillColor = Parent.TextureController.GetTexture(map.ID);
+                    _mapNameLabel.Text = map.Name;
+                    var sb = new StringBuilder();
+                    sb.AppendLine(map.Description);
+                    if (map.Tags.Count > 0)
+                    {
+                        sb.AppendLine("Tags:");
+                        foreach (var tag in map.Tags)
+                            sb.Append($"{tag}, ");
+                        sb.AppendLine();
+                    }
                     sb.AppendLine();
-                }
-                sb.AppendLine();
-                sb.AppendLine($"Difficulty Rating: {Math.Round(map.GetDifficultyRating(), 2)}");
-                _mapDescriptionTextbox.Text = sb.ToString();
+                    sb.AppendLine($"Difficulty Rating: {Math.Round(map.GetDifficultyRating(), 2)}");
+                    _mapDescriptionTextbox.Text = sb.ToString();
 
-                if (_selectedGameStyle != null && _selectedMap != null)
-                {
-                    _totalDifficultyLabel.Text = $"Total Difficulty: {Math.Round(_selectedGameStyle.GetDifficultyRating() * _selectedMap.GetDifficultyRating(), 2)}";
-                    _startButton.IsEnabled = true;
+                    if (_selectedGameStyle != null && _selectedMap != null)
+                    {
+                        _totalDifficultyLabel.Text = $"Total Difficulty: {Math.Round(_selectedGameStyle.GetDifficultyRating() * _selectedMap.GetDifficultyRating(), 2)}";
+                        _startButton.IsEnabled = true;
+                    }
                 }
             }
         }
 
         private void SelectGameStyle_Click(ButtonControl sender)
         {
-            if (sender.Tag is GameStyleDefinition gameStyle)
+            if (sender is BugDefenderButtonControl button)
             {
-                if (_selectedGameStyleButton != null)
-                    _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
-
-                _selectedGameStyleButton = sender;
-                _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
-
-                var sb = new StringBuilder();
-                sb.AppendLine(gameStyle.Description);
-                sb.AppendLine();
-                sb.AppendLine($"Difficulty Rating: {Math.Round(gameStyle.GetDifficultyRating(), 2)}");
-                _gameStyleDescriptionTextbox.Text = sb.ToString();
-
-                _selectedGameStyle = gameStyle;
-
-                if (_selectedGameStyle != null && _selectedMap != null)
+                if (sender.Tag is GameStyleDefinition gameStyle)
                 {
-                    _totalDifficultyLabel.Text = $"Total Difficulty: {Math.Round(_selectedGameStyle.GetDifficultyRating() * _selectedMap.GetDifficultyRating(), 2)}";
-                    _startButton.IsEnabled = true;
+                    if (_selectedGameStyleButton != null)
+                        _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+
+                    _selectedGameStyleButton = button;
+                    _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+
+                    var sb = new StringBuilder();
+                    sb.AppendLine(gameStyle.Description);
+                    sb.AppendLine();
+                    sb.AppendLine($"Difficulty Rating: {Math.Round(gameStyle.GetDifficultyRating(), 2)}");
+                    _gameStyleDescriptionTextbox.Text = sb.ToString();
+
+                    _selectedGameStyle = gameStyle;
+
+                    if (_selectedGameStyle != null && _selectedMap != null)
+                    {
+                        _totalDifficultyLabel.Text = $"Total Difficulty: {Math.Round(_selectedGameStyle.GetDifficultyRating() * _selectedMap.GetDifficultyRating(), 2)}";
+                        _startButton.IsEnabled = true;
+                    }
                 }
             }
         }

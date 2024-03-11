@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Controls.Elements;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
@@ -28,8 +29,8 @@ namespace BugDefender.OpenGL.Views.Helpers
         public int MaxItem { get; set; } = int.MaxValue;
 
         private readonly List<T> _items;
-        private ButtonControl? _leftButton;
-        private ButtonControl? _rightButton;
+        private BugDefenderButtonControl? _leftButton;
+        private BugDefenderButtonControl? _rightButton;
         private ScrollWatcher? _scrollWatcher;
 
         public PageHandler(BaseView parent, List<T> items)
@@ -44,7 +45,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 foreach (var item in page)
                     Parent.RemoveControl(2, item);
 
-            _leftButton = new ButtonControl(Parent.Parent, clicked: (s) =>
+            _leftButton = new BugDefenderButtonControl(Parent.Parent, clicked: (s) =>
             {
                 PageIndex--;
                 if (PageIndex >= MaxPage)
@@ -68,7 +69,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 IsVisible = false,
             };
             Children.Add(_leftButton);
-            _rightButton = new ButtonControl(Parent.Parent, clicked: (s) =>
+            _rightButton = new BugDefenderButtonControl(Parent.Parent, clicked: (s) =>
             {
                 PageIndex++;
                 if (PageIndex >= MaxPage)

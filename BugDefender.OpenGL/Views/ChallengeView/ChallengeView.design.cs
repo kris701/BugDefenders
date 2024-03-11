@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
@@ -48,7 +49,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 AddControl(1, newControl);
             }
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
@@ -65,7 +66,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new ChallengeView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new ChallengeView(Parent)))
             {
                 X = 0,
                 Y = 0,

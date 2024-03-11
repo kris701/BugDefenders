@@ -1232,6 +1232,12 @@
 /processorParam:Quality=Best
 /build:Views/GameOverView/gameover.mp3
 
+#begin Views/GameOverView/statsUpdate.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Views/GameOverView/statsUpdate.wav
+
 #begin Views/GameSetupView/descriptionBox.png
 /importer:TextureImporter
 /processor:TextureProcessor

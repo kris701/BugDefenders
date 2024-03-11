@@ -1,5 +1,6 @@
 ﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.Buffs;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
@@ -69,7 +70,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
             };
             AddControl(0, _buffPageHandler);
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
@@ -85,7 +86,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView(Parent)))
             {
                 X = 0,
                 Y = 0,

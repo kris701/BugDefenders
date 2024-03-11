@@ -1,14 +1,19 @@
-﻿using BugDefender.OpenGL.Engine;
+﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
     public partial class GameOverView : BaseBugDefenderView
     {
+        private TextboxControl _statsTextBox;
+
+        [MemberNotNull(nameof(_statsTextBox))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -21,7 +26,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             var gameOverLabel = new LabelControl()
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 100,
+                Y = 150,
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48),
             };
@@ -32,27 +37,11 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 case Core.Game.GameResult.ChallengeSuccess: gameOverLabel.Text = "Challenge Completed!"; break;
             }
             AddControl(1, gameOverLabel);
-            AddControl(1, new LabelControl()
-            {
-                HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 225,
-                Text = $"Score: {_score}, giving you {_credits} credits",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(24),
-            });
-            AddControl(1, new LabelControl()
-            {
-                HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 275,
-                Text = $"Played for {_gameTime.ToString("hh\\:mm\\:ss")}",
-                FontColor = Color.White,
-                Font = BasicFonts.GetFont(24),
-            });
 
             AddControl(1, new BorderControl(new TileControl()
             {
-                HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 350,
+                X = 100,
+                Y = 250,
                 Width = 960,
                 Height = 540,
                 FillColor = _screen
@@ -62,10 +51,37 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
 
-            AddControl(1, new ButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenuView(Parent)); })
+            AddControl(1, new TileControl()
+            {
+                X = 1100,
+                Y = 250,
+                Height = 540,
+                Width = 700,
+                FillColor = Parent.TextureController.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
+            });
+            AddControl(1, new LabelControl()
+            {
+                X = 1450,
+                Y = 280,
+                Font = BasicFonts.GetFont(24),
+                FontColor = Color.White,
+                Text = "Results"
+            });
+            _statsTextBox = new TextboxControl()
+            {
+                X = 1100,
+                Y = 300,
+                Height = 540,
+                Width = 700,
+                Font = BasicFonts.GetFont(12),
+                FontColor = Color.White
+            };
+            AddControl(1, _statsTextBox);
+
+            AddControl(1, new BugDefenderButtonControl(Parent, clicked: (s) => { SwitchView(new MainMenu.MainMenuView(Parent)); })
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 910,
+                Y = 860,
                 Width = 400,
                 Height = 80,
                 Font = BasicFonts.GetFont(24),
@@ -76,7 +92,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _score, _credits, _gameTime, _gameResult, _difficulty)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _context, _credits, _gameResult, _difficulty)))
             {
                 X = 0,
                 Y = 0,

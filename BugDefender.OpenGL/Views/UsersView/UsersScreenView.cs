@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;

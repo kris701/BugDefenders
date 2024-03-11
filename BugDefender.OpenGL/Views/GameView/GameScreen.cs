@@ -11,6 +11,7 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Users.Models.Challenges;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
@@ -396,7 +397,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private TurretControl CreateNewTurretControl(TurretInstance entity)
         {
-            return new TurretControl(Parent, entity, clicked: Turret_Click)
+            return new TurretControl(Parent, entity, Turret_Click)
             {
                 X = _gameArea.X + entity.X,
                 Y = _gameArea.Y + entity.Y
@@ -697,7 +698,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 #endif
                 Parent.AudioController.StopSounds();
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent as Game);
-                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context.Score, credits, _game.Context.GameTime, _game.Result, _game.Context.Map.GetDifficultyRating() * _game.Context.GameStyle.GetDifficultyRating()));
+                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context, credits, _game.Result, _game.Context.Map.GetDifficultyRating() * _game.Context.GameStyle.GetDifficultyRating()));
             }
         }
 

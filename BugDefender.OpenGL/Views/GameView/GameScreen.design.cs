@@ -3,6 +3,7 @@ using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
@@ -24,8 +25,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private LabelControl _moneyLabel;
         private LabelControl _scoreLabel;
 
-        private ButtonControl _sendWave;
-        private ButtonControl _saveAndExitButton;
+        private BugDefenderButtonControl _sendWave;
+        private BugDefenderButtonControl _saveAndExitButton;
 
         private LabelControl? _playtimeLabel;
 
@@ -35,10 +36,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TileControl _turretSelectRangeTile;
 
         private readonly List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
-        private readonly List<ButtonControl> _turretTargetingModes = new List<ButtonControl>();
+        private readonly List<BugDefenderButtonControl> _turretTargetingModes = new List<BugDefenderButtonControl>();
 
         private TextboxControl _turretStatesTextbox;
-        private ButtonControl _sellTurretButton;
+        private BugDefenderButtonControl _sellTurretButton;
 
         private TextboxControl? _challengeProgressTextbox;
 
@@ -86,7 +87,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext(_game.Context.Map, _game.Context.GameStyle))))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext(_game.Context.Map, _game.Context.GameStyle))))
             {
                 X = 0,
                 Y = 0,
@@ -164,7 +165,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             };
             AddControl(101, _moneyLabel);
 
-            AddControl(101, new ButtonControl(Parent, clicked: StartButton_Click)
+            AddControl(101, new BugDefenderButtonControl(Parent, clicked: StartButton_Click)
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -177,7 +178,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 100
             });
 
-            AddControl(101, new ButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
+            AddControl(101, new BugDefenderButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -190,7 +191,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 100
             });
-            _saveAndExitButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
+            _saveAndExitButton = new BugDefenderButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -206,7 +207,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             };
             AddControl(101, _saveAndExitButton);
 
-            AddControl(101, new ButtonControl(Parent, clicked: AutoRunButton_Click)
+            AddControl(101, new BugDefenderButtonControl(Parent, clicked: AutoRunButton_Click)
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -219,7 +220,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 200
             });
 
-            _sendWave = new ButtonControl(Parent, clicked: (s) =>
+            _sendWave = new BugDefenderButtonControl(Parent, clicked: (s) =>
             {
                 _game.EnemiesModule.QueueEnemies();
                 if (_game.Context.GameStyle.MoneyPrWave > 0 || _game.Context.Turrets.Any(x => x.TurretInfo is InvestmentTurretDefinition))
@@ -516,7 +517,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _sellTurretButton = new ButtonControl(Parent, clicked: SellTurret_Click)
+            _sellTurretButton = new BugDefenderButtonControl(Parent, clicked: SellTurret_Click)
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
@@ -549,7 +550,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _turretTargetingModes.Clear();
             foreach (TargetingTypes option in values.Skip(1))
             {
-                var newControl = new ButtonControl(Parent, (e) =>
+                var newControl = new BugDefenderButtonControl(Parent, (e) =>
                 {
                     if (_selectedTurret != null)
                         _selectedTurret.TargetingType = option;

@@ -524,6 +524,10 @@
     {
       "ID": "88edf648-6434-4413-893b-ed21470231e7",
       "Content": "Entities/Turrets/rocketturret/explode5"
+    },
+    {
+      "ID": "3cca7fa9-014a-4ffa-8b95-00e775aa37c4",
+      "Content": "Views/GameOverView/statsUpdate"
     }
   ],
   "AnimationsEntities": [
