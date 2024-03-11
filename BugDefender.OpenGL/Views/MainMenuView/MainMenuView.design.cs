@@ -156,7 +156,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
-            _cheatsInput = new TextInputControl(Parent, OnEnterCheat)
+            _cheatsInput = new BugDefendersTextInputControl(Parent, OnEnterCheat)
             {
                 Width = 800,
                 Height = 100,

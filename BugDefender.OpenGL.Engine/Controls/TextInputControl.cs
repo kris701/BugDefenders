@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Helpers;
+﻿using BugDefender.OpenGL.Engine.Controls.Elements;
+using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,7 +15,19 @@ namespace BugDefender.OpenGL.Engine.Controls
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public bool IsEnabled { get; set; } = true;
         public int Limit { get; set; } = 0;
+        public Guid KeyDownSound
+        {
+            get => _keyDownSoundElement.SoundEffect;
+            set => _keyDownSoundElement.SoundEffect = value;
+        }
+        public Guid EnterSound
+        {
+            get => _enterSoundElement.SoundEffect;
+            set => _enterSoundElement.SoundEffect = value;
+        }
 
+        private SoundEffectElement _keyDownSoundElement;
+        private SoundEffectElement _enterSoundElement;
         private bool _captured = false;
         private List<Keys> _lastKeys = new List<Keys>();
         private bool _holding = false;
@@ -40,6 +53,8 @@ namespace BugDefender.OpenGL.Engine.Controls
         {
             Parent = parent;
             OnEnter += onEnter;
+            _keyDownSoundElement = new SoundEffectElement(parent);
+            _enterSoundElement = new SoundEffectElement(parent);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -68,6 +83,8 @@ namespace BugDefender.OpenGL.Engine.Controls
                     {
                         if (!_lastKeys.Contains(key) && _legalCharacters.Contains(key))
                         {
+                            if (!keys.Any(x => x == Keys.Enter))
+                                _keyDownSoundElement.Trigger();
                             if (newText.Length > 0 && key == Keys.Back)
                                 newText = newText.Remove(newText.Length - 1);
                             else if (Limit != 0 && newText.Length < Limit)
@@ -96,6 +113,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                         }
                         if (key == Keys.Enter)
                         {
+                            _enterSoundElement.Trigger();
                             OnEnter?.Invoke(this);
                             _captured = false;
                             _holding = false;

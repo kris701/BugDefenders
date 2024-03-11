@@ -31,7 +31,7 @@ namespace BugDefender.OpenGL.Views.Helpers
         private readonly List<T> _items;
         private BugDefenderButtonControl? _leftButton;
         private BugDefenderButtonControl? _rightButton;
-        private ScrollWatcher? _scrollWatcher;
+        private ScrollWatcherElement? _scrollWatcher;
 
         public PageHandler(BaseView parent, List<T> items)
         {
@@ -124,7 +124,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                     count++;
                 }
 
-                _scrollWatcher = new ScrollWatcher(Parent.Parent)
+                _scrollWatcher = new ScrollWatcherElement(Parent.Parent)
                 {
                     X = X,
                     Y = Y,

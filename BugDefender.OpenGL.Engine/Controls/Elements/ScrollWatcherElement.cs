@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BugDefender.OpenGL.Engine.Controls.Elements
 {
-    public class ScrollWatcher
+    public class ScrollWatcherElement
     {
         public delegate void ScrollEventHandler(int oldValue, int newValue);
         public event ScrollEventHandler? ScrollChanged;
@@ -18,7 +18,7 @@ namespace BugDefender.OpenGL.Engine.Controls.Elements
 
         private int _lastValue = 0;
 
-        public ScrollWatcher(IWindow parent)
+        public ScrollWatcherElement(IWindow parent)
         {
             Parent = parent;
         }

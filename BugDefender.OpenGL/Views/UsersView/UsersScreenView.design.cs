@@ -26,7 +26,7 @@ namespace BugDefender.OpenGL.Screens.UsersScreen
                 "Users",
                 "Users contain their own settings, scores, buffs, etc.");
 
-            _nameInputBox = new TextInputControl(Parent, AddUserInputTextBox_Enter)
+            _nameInputBox = new BugDefendersTextInputControl(Parent, AddUserInputTextBox_Enter)
             {
                 X = 450,
                 Y = 230,
