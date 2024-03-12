@@ -74,7 +74,7 @@ namespace BugDefender.OpenGL
             SoundEffect.Initialize();
             _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
             _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
-            _notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));
+            //_notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));
             BackroundWorkers = new List<IBackgroundWorker>() {
                 _notificationWorker,
                 new FPSBackgroundWorker(this)
