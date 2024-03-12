@@ -537,7 +537,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private void UpdateTurretPurchaseButtons()
         {
             foreach (var turret in _turretPageHandler.Pages[_turretPageHandler.PageIndex])
-                turret.SetPurchasability(_game.Context.Money > turret.Turret.Cost, _game.Context.Wave < turret.Turret.AvailableAtWave);
+                turret.SetPurchasability(_game.Context.Money >= turret.Turret.Cost, _game.Context.Wave < turret.Turret.AvailableAtWave);
         }
 
         public void OnTurretFiring(TurretInstance turret)
@@ -591,7 +591,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 if (!_game.TurretsModule.IsTurretPlacementOk(_buyingTurret, at))
                 {
                     _buyingPreviewRangeTile.IsVisible = false;
-                    _buyingPreviewTile.Alpha = 10;
+                    _buyingPreviewTile.Alpha = 100;
                 }
                 else
                 {

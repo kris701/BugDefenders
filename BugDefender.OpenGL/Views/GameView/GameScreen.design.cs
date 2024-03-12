@@ -135,7 +135,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _turretSelectRangeTile = new TileControl()
             {
                 IsVisible = false,
-                Alpha = 25,
+                Alpha = 100,
                 ViewPort = _gameArea
             };
             AddControl(101, _turretSelectRangeTile);
@@ -404,7 +404,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _buyingPreviewRangeTile = new TileControl()
             {
                 IsVisible = false,
-                Alpha = 25,
+                Alpha = 150,
                 ViewPort = _gameArea
             };
             AddControl(101, _buyingPreviewRangeTile);
