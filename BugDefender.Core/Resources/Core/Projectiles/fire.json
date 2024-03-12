@@ -1,0 +1,32 @@
+﻿{
+  "id": "70cd19ed-ec4d-47eb-b91a-a1f0fb45566f",
+  "Name": "Fire",
+  "Description": "",
+  "Size": 30,
+  "ModuleInfo": {
+    "ProjectileModule": "Fire",
+    "Speed": 15,
+    "Damage": 1,
+    "DamageRange": 15,
+    "Acceleration": 0.95,
+    "SlowingFactor": 0.6,
+    "SlowingDuration": 1000,
+    "IsGuided": false,
+    "LifeTimeMs": 1000,
+    "DamageModifiers": [
+      {
+        "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
+        "Modifier": 0.25
+      },
+      {
+        "EnemyType": "10b9d1a6-605a-489d-944a-1aaeac27ef87",
+        "Modifier": 1.5
+      },
+      {
+        "EnemyType": "5102185e-16e4-4c2b-8311-3c1548d344d0",
+        "Modifier": 1.25
+      }
+    ]
+  },
+  "CanTarget": [ 1 ]
+}

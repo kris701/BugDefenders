@@ -1,7 +1,6 @@
 ﻿using BugDefender.Core.Game.Models;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Views;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
@@ -34,7 +33,7 @@ namespace BugDefender.OpenGL.Views.GameView
             YOffset = yOffset;
         }
 
-        public void UpdateEntities(HashSet<T> entities, GameTime passed, Func<T, U> toControl, Action<T, U, GameTime>? updateOverride = null)
+        public void UpdateEntities(HashSet<T> entities, TimeSpan passed, Func<T, U> toControl, Action<T, U, TimeSpan>? updateOverride = null)
         {
             if (!entities.SetEquals(_entities.Keys))
             {

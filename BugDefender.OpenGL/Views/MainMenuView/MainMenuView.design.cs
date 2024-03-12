@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine;
+﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
@@ -10,8 +11,8 @@ namespace BugDefender.OpenGL.Screens.MainMenu
 {
     public partial class MainMenuView : BaseBugDefenderView
     {
-        private ButtonControl _startGameButton;
-        private ButtonControl _continueButton;
+        private BugDefenderButtonControl _startGameButton;
+        private BugDefenderButtonControl _continueButton;
         private TextInputControl _cheatsInput;
 
         [MemberNotNull(nameof(_startGameButton), nameof(_continueButton), nameof(_cheatsInput))]
@@ -39,7 +40,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Text = "Bug Defenders",
                 FontColor = Color.White,
             });
-            _continueButton = new ButtonControl(Parent, ContinueGame)
+            _continueButton = new BugDefenderButtonControl(Parent, ContinueGame)
             {
                 X = 960 - 300,
                 Y = 300,
@@ -52,7 +53,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 IsVisible = false
             };
             AddControl(0, _continueButton);
-            _startGameButton = new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
+            _startGameButton = new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 300,
@@ -64,7 +65,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FillClickedColor = BasicTextures.GetClickedTexture()
             };
             AddControl(0, _startGameButton);
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 350,
@@ -75,7 +76,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 400,
@@ -86,7 +87,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 450,
@@ -97,7 +98,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView.AchivementsView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView.AchivementsView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 500,
@@ -108,7 +109,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new ChallengeView.ChallengeView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new ChallengeView.ChallengeView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 550,
@@ -119,7 +120,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => (Parent as Game).Exit())
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => (Parent as Game).Exit())
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 600,
@@ -142,7 +143,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Text = $"User: {Parent.UserManager.CurrentUser.Name}",
                 FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
             });
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreenView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreenView(Parent)))
             {
                 X = 50,
                 Y = 980,
@@ -155,7 +156,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 
-            _cheatsInput = new TextInputControl(Parent, OnEnterCheat)
+            _cheatsInput = new BugDefendersTextInputControl(Parent, OnEnterCheat)
             {
                 Width = 800,
                 Height = 100,
@@ -172,7 +173,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(1, _cheatsInput);
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new MainMenuView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new MainMenuView(Parent)))
             {
                 X = 0,
                 Y = 0,

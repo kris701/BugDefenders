@@ -1,4 +1,5 @@
-﻿using BugDefender.OpenGL.Engine.Helpers;
+﻿using BugDefender.OpenGL.Engine.Controls.Elements;
+using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,11 +12,16 @@ namespace BugDefender.OpenGL.Engine.Controls
         public event ClickedHandler? Clicked;
 
         public IWindow Parent { get; set; }
-        public Guid ClickSound { get; set; }
+        public Guid ClickSound
+        {
+            get => _clickSoundElement.SoundEffect;
+            set => _clickSoundElement.SoundEffect = value;
+        }
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
         public bool IsEnabled { get; set; } = true;
 
+        private readonly SoundEffectElement _clickSoundElement;
         private bool _holding = false;
         private bool _blocked = false;
 
@@ -23,13 +29,15 @@ namespace BugDefender.OpenGL.Engine.Controls
         {
             Parent = parent;
             Clicked += clicked;
+            _clickSoundElement = new SoundEffectElement(parent);
         }
 
         public void DoClick()
         {
+            if (!IsEnabled || !IsVisible)
+                return;
             _holding = true;
-            if (ClickSound != Guid.Empty)
-                Parent.AudioController.PlaySoundEffectOnce(ClickSound);
+            _clickSoundElement.Trigger();
             Clicked?.Invoke(this);
         }
 
@@ -46,8 +54,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                         _holding = true;
                     else if (_holding && mouseState.LeftButton == ButtonState.Released)
                     {
-                        if (ClickSound != Guid.Empty)
-                            Parent.AudioController.PlaySoundEffectOnce(ClickSound);
+                        _clickSoundElement.Trigger();
                         Clicked?.Invoke(this);
                         _holding = false;
                     }

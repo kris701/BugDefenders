@@ -1,5 +1,6 @@
 ﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.Challenges;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
@@ -60,7 +61,7 @@ namespace BugDefender.OpenGL.Views.ChallengeView
                 FontColor = Color.White,
                 Text = sb.ToString()
             });
-            var startButton = new ButtonControl(parent, click)
+            var startButton = new BugDefenderButtonControl(parent, click)
             {
                 X = 470,
                 Y = 20,

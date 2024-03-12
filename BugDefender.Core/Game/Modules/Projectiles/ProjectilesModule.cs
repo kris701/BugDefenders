@@ -9,7 +9,8 @@ namespace BugDefender.Core.Game.Modules.Projectiles
             Modules = new List<IGameModule>()
             {
                 new ExplosiveProjectileModule(Context, Game),
-                new DirectProjectileModule(Context, Game)
+                new DirectProjectileModule(Context, Game),
+                new FireProjectileModule(Context, Game)
             };
         }
     }

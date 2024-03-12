@@ -19,7 +19,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             UpdateVisibility();
         }
 
-        private void UpdateVisibility()
+        public void UpdateVisibility()
         {
             if (IsVisible != _visibilityChanged)
             {

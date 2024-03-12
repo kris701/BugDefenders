@@ -1,4 +1,6 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Controls.Elements;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using Microsoft.Xna.Framework;
@@ -7,16 +9,13 @@ using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Views.Helpers
 {
-    public class PageHandler<T> where T : IControl
+    public class PageHandler<T> : CollectionControl where T : IControl
     {
         public List<List<T>> Pages = new List<List<T>>();
         public int PageIndex { get; set; } = 0;
-
-        public float X { get; set; } = 0;
-        public float Y { get; set; } = 0;
         public int ItemsPrPage { get; set; } = 5;
         public float Margin { get; set; } = 5;
-        public bool IsVisible { get; set; } = true;
+        public IView Parent { get; set; }
 
         public float ButtonSize { get; set; } = 50;
         public int ButtonFontSize { get; set; } = 16;
@@ -28,62 +27,37 @@ namespace BugDefender.OpenGL.Views.Helpers
         public int MaxPage { get; set; } = int.MaxValue;
         public int MinItem { get; set; } = 0;
         public int MaxItem { get; set; } = int.MaxValue;
-        public int Layer { get; set; } = 0;
 
-        private ButtonControl? _leftButton;
-        private ButtonControl? _rightButton;
+        private readonly List<T> _items;
+        private BugDefenderButtonControl? _leftButton;
+        private BugDefenderButtonControl? _rightButton;
+        private ScrollWatcherElement? _scrollWatcher;
 
-        public void Initialize(List<T> items, BaseView parent)
+        public PageHandler(BaseView parent, List<T> items)
+        {
+            Parent = parent;
+            _items = items;
+        }
+
+        public override void Initialize()
         {
             foreach (var page in Pages)
                 foreach (var item in page)
-                    parent.RemoveControl(2, item);
+                    Parent.RemoveControl(2, item);
 
-            Pages.Clear();
-            int offset = 0;
-            if (items.Count <= ItemsPrPage)
-            {
-                Pages.Add(new List<T>());
-                foreach (var item in items)
-                {
-                    item.X = X;
-                    item.Y = Y + offset++ * item.Height + Margin;
-                    item.IsVisible = true;
-                    Pages[0].Add(item);
-                    parent.AddControl(Layer + 1, item);
-                }
-                return;
-            }
-
-            int pageIndex = -1;
-            int count = 0;
-            foreach (var item in items)
-            {
-                if (count % ItemsPrPage == 0)
-                {
-                    pageIndex++;
-                    Pages.Add(new List<T>());
-                    offset = 0;
-                }
-                item.X = X;
-                item.Y = Y + offset++ * item.Height + Margin;
-                item.IsVisible = pageIndex == 0;
-                Pages[pageIndex].Add(item);
-                parent.AddControl(Layer + 1, item);
-                count++;
-            }
-
-            _leftButton = new ButtonControl(parent.Parent, clicked: (s) =>
+            _leftButton = new BugDefenderButtonControl(Parent.Parent, clicked: (s) =>
             {
                 PageIndex--;
+                if (PageIndex >= MaxPage)
+                    PageIndex = MaxPage - 1;
                 if (PageIndex < MinPage)
                     PageIndex = MinPage;
                 UpdatePages();
             })
             {
-                FillColor = parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FillDisabledColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = Parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillDisabledColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(ButtonFontSize),
                 Text = $"<",
@@ -94,18 +68,20 @@ namespace BugDefender.OpenGL.Views.Helpers
                 IsEnabled = false,
                 IsVisible = false,
             };
-            parent.AddControl(Layer, _leftButton);
-            _rightButton = new ButtonControl(parent.Parent, clicked: (s) =>
+            Children.Add(_leftButton);
+            _rightButton = new BugDefenderButtonControl(Parent.Parent, clicked: (s) =>
             {
                 PageIndex++;
                 if (PageIndex >= MaxPage)
-                    PageIndex = MaxPage;
+                    PageIndex = MaxPage - 1;
+                if (PageIndex < MinPage)
+                    PageIndex = MinPage;
                 UpdatePages();
             })
             {
-                FillColor = parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FillDisabledColor = parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = Parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillDisabledColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(ButtonFontSize),
                 Text = $">",
@@ -115,7 +91,54 @@ namespace BugDefender.OpenGL.Views.Helpers
                 Width = ButtonSize,
                 IsVisible = false
             };
-            parent.AddControl(Layer, _rightButton);
+            Children.Add(_rightButton);
+
+            Pages.Clear();
+            int offset = 0;
+            if (_items.Count <= ItemsPrPage)
+            {
+                Pages.Add(new List<T>());
+                foreach (var item in _items)
+                {
+                    item.Y = offset++ * (item.Height + Margin);
+                    Pages[0].Add(item);
+                    Children.Add(item);
+                }
+            }
+            else
+            {
+                int pageIndex = -1;
+                int count = 0;
+                foreach (var item in _items)
+                {
+                    if (count % ItemsPrPage == 0)
+                    {
+                        pageIndex++;
+                        Pages.Add(new List<T>());
+                        offset = 0;
+                    }
+                    item.Y = offset++ * (item.Height + Margin);
+                    item.IsVisible = pageIndex == 0;
+                    Pages[pageIndex].Add(item);
+                    Children.Add(item);
+                    count++;
+                }
+
+                _scrollWatcher = new ScrollWatcherElement(Parent.Parent)
+                {
+                    X = X,
+                    Y = Y,
+                    Width = Width,
+                    Height = Height
+                };
+                _scrollWatcher.ScrollChanged += (o, n) =>
+                {
+                    if (n > o)
+                        _leftButton.DoClick();
+                    else if (n < o)
+                        _rightButton.DoClick();
+                };
+            }
 
             if (MaxPage == int.MaxValue)
                 MaxPage = Pages.Count;
@@ -124,7 +147,18 @@ namespace BugDefender.OpenGL.Views.Helpers
             if (PageIndex < MinPage)
                 PageIndex = MaxPage;
 
+            base.Initialize();
             UpdatePages();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (_scrollWatcher != null)
+            {
+                _scrollWatcher.IsEnabled = IsVisible;
+                _scrollWatcher.Update(gameTime);
+            }
+            base.Update(gameTime);
         }
 
         public void UpdatePages()

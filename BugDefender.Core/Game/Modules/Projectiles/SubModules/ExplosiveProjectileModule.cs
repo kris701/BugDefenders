@@ -86,6 +86,8 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             {
                 for (int i = 0; i < Context.CurrentEnemies.Count; i++)
                 {
+                    if (!projectile.GetDefinition().CanTarget.Contains(Context.CurrentEnemies.ElementAt(i).GetDefinition().TerrainType))
+                        continue;
                     var dist = MathHelpers.SqrDistance(projectile, Context.CurrentEnemies.ElementAt(i));
                     if (dist < triggerRange)
                     {

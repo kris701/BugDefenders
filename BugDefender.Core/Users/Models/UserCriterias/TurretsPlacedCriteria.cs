@@ -9,5 +9,10 @@
         {
             return $"Place {Quantity} turrets.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            return $"{Quantity - stats.TotalTurretsPlaced} more turrets placed to go";
+        }
     }
 }

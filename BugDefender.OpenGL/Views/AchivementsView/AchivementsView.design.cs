@@ -1,6 +1,6 @@
 ﻿using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
-using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.AchivementsView;
@@ -38,19 +38,21 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                     Parent,
                     achivement,
                     Parent.UserManager.CurrentUser.Achivements.Contains(achivement.ID)));
-            _achivementPageHandler = new PageHandler<AchivementControl>()
+            _achivementPageHandler = new PageHandler<AchivementControl>(this, controlList)
             {
-                LeftButtonX = 500,
-                LeftButtonY = 110,
-                RightButtonX = 1350,
-                RightButtonY = 110,
+                LeftButtonX = 10,
+                LeftButtonY = -50,
+                RightButtonX = 850,
+                RightButtonY = -50,
                 ItemsPrPage = 5,
                 X = 500,
                 Y = 250,
+                Width = 800,
+                Height = 725
             };
-            _achivementPageHandler.Initialize(controlList, this);
+            AddControl(0, _achivementPageHandler);
 
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
@@ -66,7 +68,7 @@ namespace BugDefender.OpenGL.Screens.AchivementsView
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             });
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView(Parent)))
             {
                 X = 0,
                 Y = 0,

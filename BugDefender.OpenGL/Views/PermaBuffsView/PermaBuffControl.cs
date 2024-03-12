@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Users.Models.Buffs;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
@@ -57,7 +58,7 @@ namespace BugDefender.OpenGL.Views.PermaBuffsView
                 FontColor = Color.White,
                 Text = sb.ToString()
             });
-            var buyButton = new ButtonControl(parent, click)
+            var buyButton = new BugDefenderButtonControl(parent, click)
             {
                 X = 470,
                 Y = 20,

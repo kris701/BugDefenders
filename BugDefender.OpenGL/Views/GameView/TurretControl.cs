@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
@@ -14,7 +15,7 @@ namespace BugDefender.OpenGL.Views.GameView
         public Guid CurrentSoundEffect { get; set; }
 
         private readonly BugDefenderGameWindow _parent;
-        private readonly AnimatedButtonControl _turretControl;
+        private readonly BugDefenderAnmiatedButtonControl _turretControl;
         private readonly LabelControl _turretLevelControl;
         private Guid _currentAnimation;
         public TurretControl(BugDefenderGameWindow parent, TurretInstance instance, ClickedHandler clicked)
@@ -34,7 +35,7 @@ namespace BugDefender.OpenGL.Views.GameView
             });
             _currentAnimation = parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(instance.DefinitionID).OnIdle;
             var textureSet = parent.TextureController.GetTextureSet(_currentAnimation);
-            _turretControl = new AnimatedButtonControl(parent, clicked)
+            _turretControl = new BugDefenderAnmiatedButtonControl(parent, clicked)
             {
                 TileSet = textureSet.GetLoadedContent(),
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),

@@ -1,9 +1,14 @@
 ﻿using BugDefender.Core.Game;
 using BugDefender.Core.Users.Models;
+using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {
@@ -18,18 +23,23 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private readonly TimeSpan _gameTime;
         private readonly GameResult _gameResult;
         private readonly float _difficulty;
-        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, int score, int credits, TimeSpan gameTime, GameResult result, float difficulty) : base(parent, _id)
+        private readonly GameContext _context;
+        private readonly KeyWatcher _escapeKeyWatcher;
+        private readonly List<string> _linesToShow;
+        private int _lineIndex = 0;
+        private TimeSpan _passed = TimeSpan.FromSeconds(1);
+        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, GameContext context, int credits, GameResult result, float difficulty) : base(parent, _id)
         {
             _screen = screen;
-            _score = score;
+            _context = context;
             _credits = credits;
-            _gameTime = gameTime;
             _gameResult = result;
             _difficulty = difficulty;
+            _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
 
             Parent.UserManager.CurrentUser.HighScores.Add(new ScoreDefinition(
                 _score,
-                gameTime.ToString("hh\\:mm\\:ss"),
+                context.GameTime.ToString("hh\\:mm\\:ss"),
                 DateTime.Now.Date.ToShortDateString(),
                 difficulty
             ));
@@ -57,6 +67,42 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
             if (File.Exists(saveFile))
                 File.Delete(saveFile);
+
+            _linesToShow = new List<string>();
+            _linesToShow.Add($"Final Score: {_score}");
+            _linesToShow.Add($"Game Difficulty: {_difficulty}");
+            _linesToShow.Add($"Total Gametime: {context.GameTime.ToString("hh\\:mm\\:ss")}");
+            _linesToShow.Add($"Game gives you {_credits} credits");
+            _linesToShow.Add($" ");
+            _linesToShow.Add($"Game Stats:");
+            _linesToShow.Add($"Total Kills: {context.Stats.TotalKills}");
+            _linesToShow.Add($"Total Turrets Placed: {context.Stats.TotalTurretsPlaced}");
+            _linesToShow.Add($"Total Turrets Sold: {context.Stats.TotalTurretsSold}");
+            _linesToShow.Add($"Total Money Earned: {context.Stats.TotalMoneyEarned}");
+            _linesToShow.Add($"Total Waves Started: {context.Stats.TotalWavesStarted}");
+        }
+
+        public override void OnUpdate(GameTime gameTime)
+        {
+            var keyState = Keyboard.GetState();
+            _escapeKeyWatcher.Update(keyState);
+
+            if (_lineIndex < _linesToShow.Count)
+            {
+                _passed -= gameTime.ElapsedGameTime;
+                if (_passed <= TimeSpan.Zero)
+                {
+                    _passed = TimeSpan.FromMilliseconds(500);
+                    _lineIndex++;
+                    var sb = new StringBuilder();
+                    for (int i = 0; i < _lineIndex; i++)
+                        sb.AppendLine(_linesToShow[i]);
+
+                    _statsTextBox.Text = sb.ToString();
+                    _statsTextBox.Initialize();
+                    Parent.AudioController.PlaySoundEffectOnce(new Guid("3cca7fa9-014a-4ffa-8b95-00e775aa37c4"));
+                }
+            }
         }
     }
 }

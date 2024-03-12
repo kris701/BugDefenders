@@ -3,6 +3,7 @@ using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
@@ -24,8 +25,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private LabelControl _moneyLabel;
         private LabelControl _scoreLabel;
 
-        private ButtonControl _sendWave;
-        private ButtonControl _saveAndExitButton;
+        private BugDefenderButtonControl _sendWave;
+        private BugDefenderButtonControl _saveAndExitButton;
 
         private LabelControl? _playtimeLabel;
 
@@ -33,20 +34,23 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TileControl _buyingPreviewRangeTile;
 
         private TileControl _turretSelectRangeTile;
+        private TileControl _hurtGameAreaTile;
 
         private readonly List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
-        private readonly List<ButtonControl> _turretTargetingModes = new List<ButtonControl>();
+        private readonly List<BugDefenderButtonControl> _turretTargetingModes = new List<BugDefenderButtonControl>();
 
         private TextboxControl _turretStatesTextbox;
-        private ButtonControl _sellTurretButton;
+        private BugDefenderButtonControl _sellTurretButton;
 
-        private PageHandler<ButtonControl> _turretPageHandler;
+        private TextboxControl? _challengeProgressTextbox;
+
+        private PageHandler<TurretPurchasePanel> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
 
         [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
             nameof(_buyingPreviewRangeTile), nameof(_turretStatesTextbox), nameof(_sellTurretButton),
-            nameof(_turretPageHandler), nameof(_turretSelectRangeTile))]
+            nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -84,7 +88,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext(_game.Context.Map, _game.Context.GameStyle))))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext(_game.Context.Map, _game.Context.GameStyle))))
             {
                 X = 0,
                 Y = 0,
@@ -99,7 +103,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             base.Initialize();
         }
 
-        [MemberNotNull(nameof(_turretSelectRangeTile))]
+        [MemberNotNull(nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile))]
         private void SetupGameField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(50, new TileControl()
@@ -118,6 +122,16 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height + 100,
                 Width = width + 100
             });
+            _hurtGameAreaTile = new TileControl()
+            {
+                FillColor = Parent.TextureController.GetTexture(new Guid("3715b90d-7cc7-4528-99fc-84c8497d06c1")),
+                X = xOffset - 50,
+                Y = yOffset - 50,
+                Height = height + 100,
+                Width = width + 100,
+                IsVisible = false
+            };
+            AddControl(100, _hurtGameAreaTile);
             _turretSelectRangeTile = new TileControl()
             {
                 IsVisible = false,
@@ -162,7 +176,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             };
             AddControl(101, _moneyLabel);
 
-            AddControl(101, new ButtonControl(Parent, clicked: StartButton_Click)
+            AddControl(101, new BugDefenderButtonControl(Parent, clicked: StartButton_Click)
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -175,7 +189,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 100
             });
 
-            AddControl(101, new ButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
+            AddControl(101, new BugDefenderButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -188,7 +202,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = 100
             });
-            _saveAndExitButton = new ButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
+            _saveAndExitButton = new BugDefenderButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -204,7 +218,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             };
             AddControl(101, _saveAndExitButton);
 
-            AddControl(101, new ButtonControl(Parent, clicked: AutoRunButton_Click)
+            AddControl(101, new BugDefenderButtonControl(Parent, clicked: AutoRunButton_Click)
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
@@ -217,7 +231,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 200
             });
 
-            _sendWave = new ButtonControl(Parent, clicked: (s) =>
+            _sendWave = new BugDefenderButtonControl(Parent, clicked: (s) =>
             {
                 _game.EnemiesModule.QueueEnemies();
                 if (_game.Context.GameStyle.MoneyPrWave > 0 || _game.Context.Turrets.Any(x => x.TurretInfo is InvestmentTurretDefinition))
@@ -313,9 +327,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             if (_game.Context.Challenge == null)
                 return;
-            var sb = new StringBuilder();
-            foreach (var req in _game.Context.Challenge.Criterias)
-                sb.AppendLine(req.ToString());
             AddControl(101, new LabelControl()
             {
                 Text = $"Challenge: {_game.Context.Challenge.Name}",
@@ -326,7 +337,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width
             });
-            AddControl(101, new TextboxControl()
+            var sb = new StringBuilder();
+            foreach (var req in _game.Context.Challenge.Criterias)
+                sb.AppendLine(req.Progress(_game.Context.Stats));
+            _challengeProgressTextbox = new TextboxControl()
             {
                 Text = sb.ToString(),
                 Font = BasicFonts.GetFont(8),
@@ -335,7 +349,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Y = yOffset + 75,
                 Height = 80,
                 Width = width
-            });
+            };
+            AddControl(101, _challengeProgressTextbox);
         }
 
         [MemberNotNull(nameof(_turretPageHandler), nameof(_buyingPreviewRangeTile), nameof(_buyingPreviewTile))]
@@ -360,42 +375,31 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _turretPageHandler = new PageHandler<ButtonControl>()
-            {
-                ItemsPrPage = 13,
-                ButtonSize = 25,
-                ButtonFontSize = 10,
-                Layer = 102,
-                LeftButtonX = xOffset + 10,
-                LeftButtonY = yOffset + 10,
-                RightButtonX = xOffset + width - 35,
-                RightButtonY = yOffset + 10,
-                X = xOffset + 10,
-                Y = yOffset + 35
-            };
             var optionIDs = ResourceManager.Turrets.GetResources();
             var sorted = new List<TurretDefinition>();
             foreach (var id in optionIDs)
                 sorted.Add(ResourceManager.Turrets.GetResource(id));
-            sorted = sorted.OrderBy(x => x.AvailableAtWave).ThenByDescending(x => x.Cost).ToList();
+            sorted = sorted.OrderBy(x => x.AvailableAtWave).ThenBy(x => x.Cost).ToList();
 
-            var controlList = new List<ButtonControl>();
+            var controlList = new List<TurretPurchasePanel>();
             foreach (var turret in sorted)
+                controlList.Add(new TurretPurchasePanel(Parent, turret, BuyTurret_Click));
+            _turretPageHandler = new PageHandler<TurretPurchasePanel>(this, controlList)
             {
-                controlList.Add(new ButtonControl(Parent, BuyTurret_Click)
-                {
-                    Height = 30,
-                    Width = width - 20,
-                    FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
-                    Font = BasicFonts.GetFont(10),
-                    Text = $"[{turret.Cost}$] {turret.Name}",
-                    FontColor = Color.White,
-                    Tag = turret
-                });
-            }
-            _turretPageHandler.Initialize(controlList, this);
+                ItemsPrPage = 7,
+                ButtonSize = 25,
+                ButtonFontSize = 10,
+                LeftButtonX = 5,
+                LeftButtonY = -25,
+                RightButtonX = width - 50,
+                RightButtonY = -25,
+                X = xOffset + 10,
+                Y = yOffset + 35,
+                Margin = 5,
+                Width = width,
+                Height = height
+            };
+            AddControl(101, _turretPageHandler);
 
             _buyingPreviewRangeTile = new TileControl()
             {
@@ -434,32 +438,33 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _upgradePageHandler = new PageHandler<UpgradePanel>()
-            {
-                ItemsPrPage = 3,
-                ButtonSize = 25,
-                ButtonFontSize = 10,
-                Margin = 30,
-                IsVisible = false,
-                Layer = 102,
-                LeftButtonX = xOffset + 10,
-                LeftButtonY = yOffset + 10,
-                RightButtonX = xOffset + width - 35,
-                RightButtonY = yOffset + 10,
-                X = xOffset + 10,
-                Y = yOffset + 35
-            };
             var controlList = new List<UpgradePanel>();
             for (int i = 0; i < 9; i++)
             {
                 controlList.Add(new UpgradePanel(Parent, BuyUpgrade_Click)
                 {
-
+                    IsVisible = false
                 });
             }
+            _upgradePageHandler = new PageHandler<UpgradePanel>(this, controlList)
+            {
+                ItemsPrPage = 3,
+                ButtonSize = 25,
+                ButtonFontSize = 10,
+                Margin = 20,
+                LeftButtonX = 5,
+                LeftButtonY = -25,
+                RightButtonX = width - 50,
+                RightButtonY = -25,
+                X = xOffset + 10,
+                Y = yOffset + 35,
+                Width = width,
+                Height = height
+            };
             _upgradePageHandler.MinPage = 0;
             _upgradePageHandler.MaxPage = 0;
-            _upgradePageHandler.Initialize(controlList, this);
+            _upgradePageHandler.MaxItem = 0;
+            AddControl(101, _upgradePageHandler);
         }
 
         private void SetupNextEnemyPanel(int xOffset, int yOffset, int width, int height)
@@ -523,7 +528,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
 
-            _sellTurretButton = new ButtonControl(Parent, clicked: SellTurret_Click)
+            _sellTurretButton = new BugDefenderButtonControl(Parent, clicked: SellTurret_Click)
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
@@ -556,7 +561,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _turretTargetingModes.Clear();
             foreach (TargetingTypes option in values.Skip(1))
             {
-                var newControl = new ButtonControl(Parent, (e) =>
+                var newControl = new BugDefenderButtonControl(Parent, (e) =>
                 {
                     if (_selectedTurret != null)
                         _selectedTurret.TargetingType = option;

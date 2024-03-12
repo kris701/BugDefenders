@@ -74,6 +74,8 @@ namespace BugDefender.Core.Game
                 Context.GameStyle.TurretBlackList.Count != 0 && Context.GameStyle.TurretWhiteList.Count != 0)
                 throw new Exception("Cant have a black list and a white list at the same time!");
 
+            Context.Stats.MoneyEarned(Context.GameStyle.StartingMoney);
+
             Initialize();
 
             //#if DEBUG
@@ -99,7 +101,7 @@ namespace BugDefender.Core.Game
             }
         }
 
-        private void MainLoop()
+        private void MainLoop(TimeSpan passed)
         {
             foreach (var module in GameModules)
                 module.Update(_mainLoopTimer.Target);
@@ -110,7 +112,7 @@ namespace BugDefender.Core.Game
                 Context.Wave = 99999999;
         }
 
-        private void CheckChallenge()
+        private void CheckChallenge(TimeSpan passed)
         {
             if (Context.Challenge != null && Context.Challenge.IsValid(Context.Stats))
             {

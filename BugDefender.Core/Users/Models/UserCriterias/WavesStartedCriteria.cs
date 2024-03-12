@@ -9,5 +9,10 @@
         {
             return $"Start {Quantity} waves.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            return $"{Quantity - stats.TotalWavesStarted} more waves started to go";
+        }
     }
 }

@@ -9,5 +9,10 @@
         {
             return $"Sell {Quantity} turrets.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            return $"{Quantity - stats.TotalTurretsSold} more turrets sold to go";
+        }
     }
 }

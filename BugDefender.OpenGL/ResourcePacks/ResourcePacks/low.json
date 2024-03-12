@@ -132,8 +132,16 @@
       "Content": "Views/GameView/gameField"
     },
     {
+      "ID": "3715b90d-7cc7-4528-99fc-84c8497d06c1",
+      "Content": "Views/GameView/gameField_hurt"
+    },
+    {
       "ID": "8799e365-3b1c-47fa-b11b-83173f6d4bca",
       "Content": "Views/GameView/upgradePanel"
+    },
+    {
+      "ID": "5c993d08-bc73-433c-a09b-0b944ac2f425",
+      "Content": "Views/GameView/turretPuchaseButton"
     },
 
     {
@@ -304,6 +312,22 @@
       ]
     },
     {
+      "ID": "a5d3b0a0-3aaa-435e-9f82-fdf874c65460",
+      "FrameTime": 500,
+      "Contents": [
+        "Entities/Turrets/fireturret/idle_1",
+        "Entities/Turrets/fireturret/idle_2"
+      ]
+    },
+    {
+      "ID": "d49b8dc4-0e5b-4c28-85d0-be1c36a4d41a",
+      "FrameTime": 100,
+      "Contents": [
+        "Entities/Turrets/fireturret/shoot_1",
+        "Entities/Turrets/fireturret/shoot_2"
+      ]
+    },
+    {
       "ID": "9dca5c04-36c5-4eb5-bd36-a7f8ba25562e",
       "FrameTime": 100,
       "Contents": [
@@ -434,6 +458,14 @@
       ]
     },
     {
+      "ID": "70cd19ed-ec4d-47eb-b91a-a1f0fb45566f",
+      "FrameTime": 150,
+      "Contents": [
+        "Entities/Projectiles/fire/fire_move_1",
+        "Entities/Projectiles/fire/fire_move_2"
+      ]
+    },
+    {
       "ID": "bb696b04-60e5-464e-b46b-2f5a8377b68e",
       "FrameTime": 250,
       "Contents": [
@@ -498,6 +530,10 @@
       "Content": "Entities/Turrets/gatlingturret/shoot"
     },
     {
+      "ID": "a5d3b0a0-3aaa-435e-9f82-fdf874c65460",
+      "Content": "Entities/Turrets/fireturret/shoot"
+    },
+    {
       "ID": "468b3259-bd65-4aa1-9e40-5fb5e455b847",
       "Content": "Entities/Turrets/laserturret/shoot"
     },
@@ -520,6 +556,10 @@
     {
       "ID": "88edf648-6434-4413-893b-ed21470231e7",
       "Content": "Entities/Turrets/rocketturret/explode5"
+    },
+    {
+      "ID": "3cca7fa9-014a-4ffa-8b95-00e775aa37c4",
+      "Content": "Views/GameOverView/statsUpdate"
     }
   ],
   "AnimationsEntities": [
@@ -557,6 +597,12 @@
       "Target": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
       "OnShoot": "9dca5c04-36c5-4eb5-bd36-a7f8ba25562e",
       "OnIdle": "1a252e16-8c8c-4179-8b1c-75b2b8f47704"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "a5d3b0a0-3aaa-435e-9f82-fdf874c65460",
+      "OnShoot": "d49b8dc4-0e5b-4c28-85d0-be1c36a4d41a",
+      "OnIdle": "a5d3b0a0-3aaa-435e-9f82-fdf874c65460"
     },
     {
       "TargetType": "Turret",
@@ -752,6 +798,11 @@
       "TargetType": "Projectile",
       "Target": "1db411e4-8599-464b-923c-0e23bc031435",
       "OnCreate": "1db411e4-8599-464b-923c-0e23bc031435"
+    },
+    {
+      "TargetType": "Projectile",
+      "Target": "70cd19ed-ec4d-47eb-b91a-a1f0fb45566f",
+      "OnCreate": "70cd19ed-ec4d-47eb-b91a-a1f0fb45566f"
     }
   ],
   "SoundEffectEntities": [
@@ -772,6 +823,11 @@
       "TargetType": "Turret",
       "Target": "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
       "OnShoot": "1a252e16-8c8c-4179-8b1c-75b2b8f47704"
+    },
+    {
+      "TargetType": "Turret",
+      "Target": "a5d3b0a0-3aaa-435e-9f82-fdf874c65460",
+      "OnShoot": "a5d3b0a0-3aaa-435e-9f82-fdf874c65460"
     },
     {
       "TargetType": "Turret",

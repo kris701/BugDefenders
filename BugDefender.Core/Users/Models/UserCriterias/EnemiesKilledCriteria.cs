@@ -10,5 +10,10 @@
         {
             return $"Kill {Quantity} enemies.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            return $"{Quantity - stats.TotalKills} more enemies to kill";
+        }
     }
 }

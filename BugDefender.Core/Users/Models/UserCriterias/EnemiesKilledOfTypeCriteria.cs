@@ -12,5 +12,12 @@ namespace BugDefender.Core.Users.Models.UserCriterias
         {
             return $"Kill {Quantity} '{ResourceManager.Enemies.GetResource(EnemyID).Name}' enemies.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            if (!stats.KillsOfType.ContainsKey(EnemyID))
+                return $"{Quantity} more '{ResourceManager.Enemies.GetResource(EnemyID).Name}' enemies to kill";
+            return $"{Quantity - stats.KillsOfType[EnemyID]} more '{ResourceManager.Enemies.GetResource(EnemyID).Name}' enemies to kill";
+        }
     }
 }

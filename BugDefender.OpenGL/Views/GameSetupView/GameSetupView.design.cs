@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
@@ -16,14 +17,14 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private LabelControl _mapNameLabel;
         private TextboxControl _mapDescriptionTextbox;
         private TextboxControl _gameStyleDescriptionTextbox;
-        private ButtonControl _startButton;
+        private BugDefenderButtonControl _startButton;
         private LabelControl _totalDifficultyLabel;
 
-        private ButtonControl? _selectedGameStyleButton;
-        private ButtonControl? _selectedMapButton;
+        private BugDefenderButtonControl? _selectedGameStyleButton;
+        private BugDefenderButtonControl? _selectedMapButton;
 
-        private PageHandler<ButtonControl> _mapPageHandler;
-        private PageHandler<ButtonControl> _gamestylePageHandler;
+        private PageHandler<BugDefenderButtonControl> _mapPageHandler;
+        private PageHandler<BugDefenderButtonControl> _gamestylePageHandler;
 
         [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
             nameof(_startButton), nameof(_mapPageHandler), nameof(_gamestylePageHandler),
@@ -40,7 +41,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             SetupMapsView(965, 225, 445, 750);
             SetupGameStyleView(1425, 225, 445, 750);
 
-            _startButton = new ButtonControl(Parent, StartButton_Click)
+            _startButton = new BugDefenderButtonControl(Parent, StartButton_Click)
             {
                 X = 50,
                 Y = 980,
@@ -55,7 +56,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 IsEnabled = false
             };
             AddControl(0, _startButton);
-            AddControl(0, new ButtonControl(Parent, clicked: (x) =>
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
             })
@@ -72,7 +73,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             });
 
 #if DEBUG
-            AddControl(0, new ButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -180,23 +181,13 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 FontColor = Color.White
             });
-            _mapPageHandler = new PageHandler<ButtonControl>()
-            {
-                LeftButtonX = x + 30,
-                LeftButtonY = y + 10,
-                RightButtonX = x + width - 80,
-                RightButtonY = y + 10,
-                ItemsPrPage = 13,
-                X = x + 10,
-                Y = y + 70,
-            };
 
-            var controlList = new List<ButtonControl>();
+            var controlList = new List<BugDefenderButtonControl>();
             var ids = ResourceManager.Maps.GetResources();
             foreach (var id in ids)
             {
                 var map = ResourceManager.Maps.GetResource(id);
-                controlList.Add(new ButtonControl(Parent, clicked: SelectMap_Click)
+                controlList.Add(new BugDefenderButtonControl(Parent, SelectMap_Click)
                 {
                     FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
@@ -208,8 +199,19 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     Tag = map
                 });
             }
-
-            _mapPageHandler.Initialize(controlList, this);
+            _mapPageHandler = new PageHandler<BugDefenderButtonControl>(this, controlList)
+            {
+                LeftButtonX = 10,
+                LeftButtonY = -50,
+                RightButtonX = width - 80,
+                RightButtonY = -50,
+                ItemsPrPage = 12,
+                X = x + 10,
+                Y = y + 70,
+                Width = width,
+                Height = height
+            };
+            AddControl(1, _mapPageHandler);
         }
 
 
@@ -234,23 +236,13 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 FontColor = Color.White
             });
-            _gamestylePageHandler = new PageHandler<ButtonControl>()
-            {
-                LeftButtonX = x + 30,
-                LeftButtonY = y + 10,
-                RightButtonX = x + width - 80,
-                RightButtonY = y + 10,
-                ItemsPrPage = 13,
-                X = x + 10,
-                Y = y + 70,
-            };
 
-            var controlList = new List<ButtonControl>();
+            var controlList = new List<BugDefenderButtonControl>();
             var ids = ResourceManager.GameStyles.GetResources();
             foreach (var id in ids)
             {
                 var gameStyle = ResourceManager.GameStyles.GetResource(id);
-                controlList.Add(new ButtonControl(Parent, clicked: SelectGameStyle_Click)
+                controlList.Add(new BugDefenderButtonControl(Parent, SelectGameStyle_Click)
                 {
                     FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
@@ -262,8 +254,19 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     Tag = gameStyle
                 });
             }
-
-            _gamestylePageHandler.Initialize(controlList, this);
+            _gamestylePageHandler = new PageHandler<BugDefenderButtonControl>(this, controlList)
+            {
+                LeftButtonX = 10,
+                LeftButtonY = -50,
+                RightButtonX = width - 80,
+                RightButtonY = -50,
+                ItemsPrPage = 12,
+                X = x + 10,
+                Y = y + 70,
+                Width = width,
+                Height = height
+            };
+            AddControl(1, _gamestylePageHandler);
         }
     }
 }

@@ -12,5 +12,12 @@ namespace BugDefender.Core.Users.Models.UserCriterias
         {
             return $"Kill {Quantity} enemies with a '{ResourceManager.Turrets.GetResource(TurretID).Name}' turret.";
         }
+
+        public string Progress(StatsDefinition stats)
+        {
+            if (!stats.TotalTurretKills.ContainsKey(TurretID))
+                return $"{Quantity} more kills with a '{ResourceManager.Turrets.GetResource(TurretID).Name}' turret to go";
+            return $"{Quantity - stats.TotalTurretKills[TurretID]} more kills with a '{ResourceManager.Turrets.GetResource(TurretID).Name}' turret to go";
+        }
     }
 }

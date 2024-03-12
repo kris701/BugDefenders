@@ -7,7 +7,6 @@
     "ProjectileModule": "Explosive",
     "Speed": 1,
     "Damage": 100,
-    "Range": 600,
     "SplashRange": 50,
     "TriggerRange": 25,
     "Acceleration": 1.2,

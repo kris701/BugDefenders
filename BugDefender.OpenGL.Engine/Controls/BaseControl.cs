@@ -28,7 +28,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             set
             {
                 _alpha = value;
-                _alphaColor = new Color(255, 255, 255, value);
+                _alphaColor = new Color(value, value, value, value);
             }
         }
         public object? Tag { get; set; }
