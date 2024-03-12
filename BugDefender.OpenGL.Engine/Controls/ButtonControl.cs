@@ -34,6 +34,8 @@ namespace BugDefender.OpenGL.Engine.Controls
 
         public void DoClick()
         {
+            if (!IsEnabled)
+                return;
             _holding = true;
             _clickSoundElement.Trigger();
             Clicked?.Invoke(this);

@@ -1,6 +1,5 @@
 ﻿using BugDefender.Core.Game;
 using BugDefender.Core.Game.Helpers;
-
 #if RELEASE
 using BugDefender.Core.Game.Helpers;
 #endif
@@ -11,6 +10,7 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Users.Models.Challenges;
+using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
@@ -40,12 +40,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private readonly EntityUpdater<ProjectileInstance, AnimatedTileControl> _projectileUpdater;
         private readonly EntityUpdater<EffectEntity, AnimatedTileControl> _effectsUpdater;
         private readonly EntityUpdater<LaserEntity, LineControl> _laserUpdater;
+        private readonly EntityUpdater<EnemyInstance, TileControl> _deadEnemyUpdater;
 
         private readonly GameEngine _game;
         private TurretDefinition? _buyingTurret;
         private TurretInstance? _selectedTurret;
         private readonly HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
         private readonly Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
+        private HashSet<EnemyInstance> _deadEnemyInstances = new HashSet<EnemyInstance>();
 
         private readonly GameTimer _backgroundTasksTimer;
         private readonly GameTimer _gameTasksTimer;
@@ -87,6 +89,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _projectileUpdater.OnDelete += OnProjectileDeleted;
             _effectsUpdater = new EntityUpdater<EffectEntity, AnimatedTileControl>(93, this, _gameArea.X, _gameArea.Y);
             _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(92, this, _gameArea.X, _gameArea.Y);
+            _deadEnemyUpdater = new EntityUpdater<EnemyInstance, TileControl>(120, this, _gameArea.X, _gameArea.Y);
 
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave?.DoClick(); });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
@@ -186,6 +189,15 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     Y = parent.Enemy.CenterY - effect.GetLoadedContent()[0].Height / 2
                 });
             }
+
+            var deadEnemy = new EnemyInstance(parent.Enemy.GetDefinition(), 1);
+            var rnd = new Random();
+            if (rnd.Next(0, 2) == 1)
+                deadEnemy.X = -75 + rnd.Next(-10, 11);
+            else
+                deadEnemy.X = 1675 + rnd.Next(-10, 11);
+            deadEnemy.Y = -100;
+            _deadEnemyInstances.Add(deadEnemy);
         }
 
         private void UnselectTurret()
@@ -316,13 +328,15 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         public void OnUpdateGame(TimeSpan passed)
         {
             _game.Update(passed);
+            UpdateEffectLifetimes(passed);
+            UpdateLasers();
+            UpdateDeadEnemyList();
             _turretUpdater.UpdateEntities(_game.Context.Turrets, passed, CreateNewTurretControl);
             _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies, passed, CreateNewEnemyControl, UpdateEnemyControl);
             _projectileUpdater.UpdateEntities(_game.Context.Projectiles, passed, CreateNewProjectileControl);
             _effectsUpdater.UpdateEntities(_effects, passed, CreateNewEffect);
+            _deadEnemyUpdater.UpdateEntities(_deadEnemyInstances, passed, CreateNewDeadEnemyControl);
             _laserUpdater.UpdateEntities(_lasers.Values.ToHashSet(), passed, CreateNewLaser, UpdateLaserControl);
-            UpdateEffectLifetimes(passed);
-            UpdateLasers();
         }
 
         public override void OnUpdate(GameTime gameTime)
@@ -417,6 +431,22 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             control.X = entity.X + _gameArea.X + control.VisualOffset.X;
             control.Y = entity.Y + _gameArea.Y + control.VisualOffset.Y;
             control.Rotation = entity.Angle + (float)Math.PI / 2;
+        }
+
+        private TileControl CreateNewDeadEnemyControl(EnemyInstance entity)
+        {
+            var animation = Parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(entity.DefinitionID).OnCreate;
+            var textureSet = Parent.TextureController.GetTextureSet(animation);
+            return new TileControl()
+            {
+                FillColor = textureSet.GetLoadedContent()[0],
+                X = entity.X + _gameArea.X,
+                Y = entity.Y + _gameArea.Y,
+                Width = entity.Size,
+                Height = entity.Size,
+                Rotation = entity.Angle + (float)Math.PI / 2,
+                Tag = entity
+            };
         }
 
         private AnimatedTileControl CreateNewProjectileControl(ProjectileInstance entity)
@@ -606,6 +636,20 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     toRemove.Add(key);
             foreach (var remove in toRemove)
                 _lasers.Remove(remove);
+        }
+
+        private void UpdateDeadEnemyList()
+        {
+            var toRemove = new List<EnemyInstance>();
+            foreach(var item in _deadEnemyInstances)
+            {
+                item.Y += 2;
+                item.Angle += 0.15f;
+                if (item.Y > IWindow.BaseScreenSize.Y)
+                    toRemove.Add(item);
+            }
+            foreach(var remove in toRemove)
+                _deadEnemyInstances.Remove(remove);
         }
 
         private void UpdateNextEnemies()

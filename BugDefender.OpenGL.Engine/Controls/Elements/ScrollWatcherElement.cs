@@ -21,6 +21,8 @@ namespace BugDefender.OpenGL.Engine.Controls.Elements
         public ScrollWatcherElement(IWindow parent)
         {
             Parent = parent;
+            var mouseState = Mouse.GetState();
+            _lastValue = mouseState.ScrollWheelValue;
         }
 
         public void Update(GameTime gameTime)
