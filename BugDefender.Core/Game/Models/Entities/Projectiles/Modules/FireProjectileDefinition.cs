@@ -1,6 +1,7 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Resources;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
 {
@@ -13,10 +14,14 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
         public bool IsGuided { get; set; }
         public float SlowingFactor { get; set; }
         public int SlowingDuration { get; set; }
+        public int CooldownMs { get; set; }
         public int LifeTimeMs { get; set; }
         public List<DamageModifier> DamageModifiers { get; set; }
 
-        public FireProjectileDefinition(float speed, float damage, float damageRange, double acceleration, bool isGuided, float slowingFactor, int slowingDuration, int lifetimeMs, List<DamageModifier> damageModifiers)
+        [JsonIgnore]
+        public TimeSpan CoolingFor { get; set; } = TimeSpan.Zero;
+
+        public FireProjectileDefinition(float speed, float damage, float damageRange, double acceleration, bool isGuided, float slowingFactor, int slowingDuration, int cooldownMs, int lifetimeMs, List<DamageModifier> damageModifiers)
         {
             Speed = speed;
             Damage = damage;
@@ -25,11 +30,12 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
             IsGuided = isGuided;
             SlowingFactor = slowingFactor;
             SlowingDuration = slowingDuration;
+            CooldownMs = cooldownMs;
             LifeTimeMs = lifetimeMs;
             DamageModifiers = damageModifiers;
         }
 
-        public IProjectileModule Copy() => new FireProjectileDefinition(Speed, Damage, DamageRange, Acceleration, IsGuided, SlowingFactor, SlowingDuration, LifeTimeMs, DamageModifiers);
+        public IProjectileModule Copy() => new FireProjectileDefinition(Speed, Damage, DamageRange, Acceleration, IsGuided, SlowingFactor, SlowingDuration, CooldownMs, LifeTimeMs, DamageModifiers);
 
         public override string ToString()
         {
@@ -38,15 +44,15 @@ namespace BugDefender.Core.Game.Models.Entities.Projectiles.Modules
             if (Speed != 0)
                 sb.AppendLine($"Speed: {Speed}");
             if (LifeTimeMs != 0)
-                sb.AppendLine($"Lifetime: {LifeTimeMs}");
+                sb.AppendLine($"Lifetime: {LifeTimeMs}ms");
             if (Damage != 0)
-                sb.AppendLine($"Damage: {Damage}");
+                sb.AppendLine($"Damage: {Damage} every {CooldownMs}ms");
             if (DamageRange != 0)
                 sb.AppendLine($"Damage Range: {DamageRange}");
             if (SlowingFactor != 1)
                 sb.AppendLine($"Slowing Factor: {SlowingFactor}");
             if (SlowingDuration != 0)
-                sb.AppendLine($"Slowing Duration: {SlowingDuration}");
+                sb.AppendLine($"Slowing Duration: {SlowingDuration}ms");
             sb.AppendLine();
             if (DamageModifiers.Count > 0)
             {

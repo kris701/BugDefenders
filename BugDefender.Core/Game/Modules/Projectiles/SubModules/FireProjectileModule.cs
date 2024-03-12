@@ -45,37 +45,19 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             }
 
             var damageRange = (float)Math.Pow(def.DamageRange, 2);
-            if (def.Speed == 0)
-            {
-                DamageWithinRange(projectile, def, damageRange);
-                return false;
-            }
-            if (projectile.Size >= 10)
+            if (def.Speed > 0)
             {
                 projectile.X += xMod * def.Speed;
                 projectile.Y += yMod * def.Speed;
 
-                DamageWithinRange(projectile, def, damageRange);
                 if (projectile.X < 0 || projectile.X > Context.Map.Width ||
                     projectile.Y < 0 || projectile.Y > Context.Map.Height)
                     return true;
             }
-            else
+            def.CoolingFor -= passed;
+            if (def.CoolingFor <= TimeSpan.Zero)
             {
-                var moved = 0f;
-                var stepBy = projectile.Size;
-                if (stepBy > def.Speed)
-                    stepBy = def.Speed;
-                while (moved < def.Speed)
-                {
-                    moved += stepBy;
-                    projectile.X += xMod * stepBy;
-                    projectile.Y += yMod * stepBy;
-
-                    if (projectile.X < 0 || projectile.X > Context.Map.Width ||
-                        projectile.Y < 0 || projectile.Y > Context.Map.Height)
-                        return true;
-                }
+                def.CoolingFor = TimeSpan.FromMilliseconds(def.CooldownMs);
                 DamageWithinRange(projectile, def, damageRange);
             }
             return false;

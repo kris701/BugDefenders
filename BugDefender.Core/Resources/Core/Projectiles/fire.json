@@ -6,13 +6,14 @@
   "ModuleInfo": {
     "ProjectileModule": "Fire",
     "Speed": 15,
-    "Damage": 1,
-    "DamageRange": 15,
+    "Damage": 3,
+    "DamageRange": 30,
     "Acceleration": 0.95,
     "SlowingFactor": 0.6,
     "SlowingDuration": 1000,
     "IsGuided": false,
     "LifeTimeMs": 1000,
+    "CooldownMs": 100,
     "DamageModifiers": [
       {
         "EnemyType": "ab55f996-a60c-4226-9b32-b91ea96d6ca0",
