@@ -106,6 +106,8 @@
     <None Remove="Resources\Core\GameStyles\hard_bossrush.json" />
     <None Remove="Resources\Core\GameStyles\medium_bossrush.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
+    <None Remove="Resources\Core\Projectiles\fire.json" />
+    <None Remove="Resources\Core\Turrets\flameturret.json" />
     <None Remove="Resources\Core\Turrets\gatlingturret.json" />
     <None Remove="Resources\Core\Turrets\missileturret.json" />
     <None Remove="Resources\Core\Turrets\moneyturret.json" />
@@ -388,6 +390,9 @@
     <EmbeddedResource Include="Resources\Core\Maps\map1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Projectiles\fire.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Projectiles\missile.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -397,6 +402,7 @@
     <EmbeddedResource Include="Resources\Core\Projectiles\rocket.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Turrets\flameturret.json" />
     <EmbeddedResource Include="Resources\Core\Turrets\rocketturret.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

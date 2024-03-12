@@ -1,0 +1,57 @@
+﻿{
+  "id": "a5d3b0a0-3aaa-435e-9f82-fdf874c65460",
+  "Name": "Flame Turret",
+  "Description": "Shoots fire that lingers for a little while, constantly dealing damage",
+  "Size": 50,
+  "Cost": 1000,
+  "ModuleInfo": {
+    "TurretModule": "ProjectileTurret",
+    "Range": 100,
+    "Cooldown": 500,
+    "ProjectileID": "70cd19ed-ec4d-47eb-b91a-a1f0fb45566f",
+    "IsTrailing": true
+  },
+  "CanTarget": [ 1 ],
+  "AvailableAtWave": 0,
+  "Upgrades": [
+    {
+      "id": "b658c479-6fb4-4abd-8dc2-2092532f9d2f",
+      "requires": null,
+      "Name": "Firing Rate",
+      "Description": "Increases the firing rate of the turret.",
+      "Cost": 500,
+      "Effects": [
+        {
+          "Target": "Cooldown",
+          "Modifier": 0.5
+        }
+      ]
+    },
+    {
+      "id": "624f305c-899c-43ba-8a38-b48cc1cf1d09",
+      "requires": "b658c479-6fb4-4abd-8dc2-2092532f9d2f",
+      "Name": "Fire Damage",
+      "Description": "Makes the turrets fire do more damage.",
+      "Cost": 1000,
+      "Effects": [
+        {
+          "Target": "ProjectileInfo.Damage",
+          "Modifier": 2
+        }
+      ]
+    },
+    {
+      "id": "22e991a4-10c9-4893-b29e-8c35126dce9c",
+      "requires": "624f305c-899c-43ba-8a38-b48cc1cf1d09",
+      "Name": "Fire Damage",
+      "Description": "Makes the turrets fire do more damage.",
+      "Cost": 1500,
+      "Effects": [
+        {
+          "Target": "ProjectileInfo.Damage",
+          "Modifier": 2
+        }
+      ]
+    }
+  ]
+}

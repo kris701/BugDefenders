@@ -3,6 +3,8 @@ using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
+using System;
+using System.Linq;
 
 namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
 {
@@ -86,6 +88,8 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
             {
                 for (int i = 0; i < Context.CurrentEnemies.Count; i++)
                 {
+                    if (!projectile.GetDefinition().CanTarget.Contains(Context.CurrentEnemies.ElementAt(i).GetDefinition().TerrainType))
+                        continue;
                     var dist = MathHelpers.SqrDistance(projectile, Context.CurrentEnemies.ElementAt(i));
                     if (dist < triggerRange)
                     {
