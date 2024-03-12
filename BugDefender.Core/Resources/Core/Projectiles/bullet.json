@@ -4,7 +4,7 @@
   "Description": "asfdasfasf",
   "Size": 5,
   "ModuleInfo": {
-    "ProjectileModule": "Fire",
+    "ProjectileModule": "Direct",
     "Speed": 15,
     "Damage": 10,
     "Acceleration": 1,

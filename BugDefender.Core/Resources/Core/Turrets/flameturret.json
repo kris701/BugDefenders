@@ -3,7 +3,7 @@
   "Name": "Flame Turret",
   "Description": "Shoots fire that lingers for a little while, constantly dealing damage",
   "Size": 50,
-  "Cost": 1000,
+  "Cost": 1500,
   "ModuleInfo": {
     "TurretModule": "ProjectileTurret",
     "Range": 100,
@@ -12,7 +12,7 @@
     "IsTrailing": true
   },
   "CanTarget": [ 1 ],
-  "AvailableAtWave": 0,
+  "AvailableAtWave": 30,
   "Upgrades": [
     {
       "id": "b658c479-6fb4-4abd-8dc2-2092532f9d2f",
