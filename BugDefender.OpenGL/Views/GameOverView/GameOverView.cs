@@ -18,9 +18,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private static readonly string _saveDir = "Saves";
 
         private readonly Texture2D _screen;
-        private readonly int _score;
         private readonly int _credits;
-        private readonly TimeSpan _gameTime;
         private readonly GameResult _gameResult;
         private readonly float _difficulty;
         private readonly GameContext _context;
@@ -38,7 +36,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
 
             Parent.UserManager.CurrentUser.HighScores.Add(new ScoreDefinition(
-                _score,
+                context.Score,
                 context.GameTime.ToString("hh\\:mm\\:ss"),
                 DateTime.Now.Date.ToShortDateString(),
                 difficulty
@@ -69,8 +67,8 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 File.Delete(saveFile);
 
             _linesToShow = new List<string>();
-            _linesToShow.Add($"Final Score: {_score}");
-            _linesToShow.Add($"Game Difficulty: {_difficulty}");
+            _linesToShow.Add($"Final Score: {context.Score}");
+            _linesToShow.Add($"Game Difficulty: {Math.Round(_difficulty, 2)}");
             _linesToShow.Add($"Total Gametime: {context.GameTime.ToString("hh\\:mm\\:ss")}");
             _linesToShow.Add($"Game gives you {_credits} credits");
             _linesToShow.Add($" ");
