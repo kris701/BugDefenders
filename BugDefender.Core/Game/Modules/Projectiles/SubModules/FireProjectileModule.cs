@@ -1,5 +1,4 @@
 ﻿using BugDefender.Core.Game.Helpers;
-using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Projectiles.Modules;
@@ -37,7 +36,8 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                 {
                     def.Speed = Context.GameStyle.ProjectileSpeedCap;
                     def.Acceleration = 1;
-                } else if (def.Speed <= 0)
+                }
+                else if (def.Speed <= 0)
                 {
                     def.Speed = 0;
                     def.Acceleration = 1;

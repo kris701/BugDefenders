@@ -21,7 +21,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
         public bool IsEnabled { get; set; } = true;
 
-        private SoundEffectElement _clickSoundElement;
+        private readonly SoundEffectElement _clickSoundElement;
         private bool _holding = false;
         private bool _blocked = false;
 

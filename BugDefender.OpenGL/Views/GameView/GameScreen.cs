@@ -47,7 +47,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TurretInstance? _selectedTurret;
         private readonly HashSet<EffectEntity> _effects = new HashSet<EffectEntity>();
         private readonly Dictionary<Guid, LaserEntity> _lasers = new Dictionary<Guid, LaserEntity>();
-        private HashSet<EnemyInstance> _deadEnemyInstances = new HashSet<EnemyInstance>();
+        private readonly HashSet<EnemyInstance> _deadEnemyInstances = new HashSet<EnemyInstance>();
 
         private readonly GameTimer _backgroundTasksTimer;
         private readonly GameTimer _gameTasksTimer;
@@ -657,14 +657,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private void UpdateDeadEnemyList()
         {
             var toRemove = new List<EnemyInstance>();
-            foreach(var item in _deadEnemyInstances)
+            foreach (var item in _deadEnemyInstances)
             {
                 item.Y += 2;
                 item.Angle += 0.15f;
                 if (item.Y > IWindow.BaseScreenSize.Y)
                     toRemove.Add(item);
             }
-            foreach(var remove in toRemove)
+            foreach (var remove in toRemove)
                 _deadEnemyInstances.Remove(remove);
         }
 

@@ -26,8 +26,8 @@ namespace BugDefender.OpenGL.Engine.Controls
             set => _enterSoundElement.SoundEffect = value;
         }
 
-        private SoundEffectElement _keyDownSoundElement;
-        private SoundEffectElement _enterSoundElement;
+        private readonly SoundEffectElement _keyDownSoundElement;
+        private readonly SoundEffectElement _enterSoundElement;
         private bool _captured = false;
         private List<Keys> _lastKeys = new List<Keys>();
         private bool _holding = false;
