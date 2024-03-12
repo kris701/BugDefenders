@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using BugDefender.OpenGL.Helpers;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
@@ -58,38 +59,9 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
             {
                 _checked = true;
                 if (_hasUpdate)
-                    return new NotificationItem("", new ManualDefinition($"Update Available", $"Version {_availableUpdateVersion} is available! Click here to go to the download page."), false, (s) => { OpenUrl("https://github.com/kris701/BugDefenders.Public/releases"); });
+                    return new NotificationItem("", new ManualDefinition($"Update Available", $"Version {_availableUpdateVersion} is available! Click here to go to the download page."), false, (s) => { LinkHelper.OpenUrl("https://kris701.itch.io/bug-defenders"); });
             }
             return null;
-        }
-
-        private void OpenUrl(string url)
-        {
-            try
-            {
-                Process.Start(url);
-            }
-            catch
-            {
-                // hack because of this: https://github.com/dotnet/corefx/issues/10361
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    url = url.Replace("&", "^&");
-                    Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    Process.Start("xdg-open", url);
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    Process.Start("open", url);
-                }
-                else
-                {
-                    throw;
-                }
-            }
         }
     }
 }
