@@ -132,6 +132,10 @@
       "Content": "Views/GameView/gameField"
     },
     {
+      "ID": "3715b90d-7cc7-4528-99fc-84c8497d06c1",
+      "Content": "Views/GameView/gameField_hurt"
+    },
+    {
       "ID": "8799e365-3b1c-47fa-b11b-83173f6d4bca",
       "Content": "Views/GameView/upgradePanel"
     },

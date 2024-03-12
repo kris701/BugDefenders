@@ -34,6 +34,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TileControl _buyingPreviewRangeTile;
 
         private TileControl _turretSelectRangeTile;
+        private TileControl _hurtGameAreaTile;
 
         private readonly List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
         private readonly List<BugDefenderButtonControl> _turretTargetingModes = new List<BugDefenderButtonControl>();
@@ -49,7 +50,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
             nameof(_buyingPreviewRangeTile), nameof(_turretStatesTextbox), nameof(_sellTurretButton),
-            nameof(_turretPageHandler), nameof(_turretSelectRangeTile))]
+            nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -102,7 +103,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             base.Initialize();
         }
 
-        [MemberNotNull(nameof(_turretSelectRangeTile))]
+        [MemberNotNull(nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile))]
         private void SetupGameField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(50, new TileControl()
@@ -121,6 +122,16 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height + 100,
                 Width = width + 100
             });
+            _hurtGameAreaTile = new TileControl()
+            {
+                FillColor = Parent.TextureController.GetTexture(new Guid("3715b90d-7cc7-4528-99fc-84c8497d06c1")),
+                X = xOffset - 50,
+                Y = yOffset - 50,
+                Height = height + 100,
+                Width = width + 100,
+                IsVisible = false
+            };
+            AddControl(100, _hurtGameAreaTile);
             _turretSelectRangeTile = new TileControl()
             {
                 IsVisible = false,

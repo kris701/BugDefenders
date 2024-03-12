@@ -59,6 +59,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _gameOverCheck = false;
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
+        private TimeSpan _hurtGameAreaTileShowTime = TimeSpan.Zero;
 
         public GameScreen(BugDefenderGameWindow parent, ChallengeDefinition challenge) : this(parent, new GameEngine(challenge))
         {
@@ -80,6 +81,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _game.OnPlayerDamaged += () =>
             {
                 Parent.AudioController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
+                if (_hurtGameAreaTile != null)
+                {
+                    _hurtGameAreaTile.IsVisible = true;
+                    _hurtGameAreaTile.Alpha = 256;
+                    _hurtGameAreaTileShowTime = TimeSpan.FromSeconds(1);
+                }
             };
 
             _turretUpdater = new EntityUpdater<TurretInstance, TurretControl>(95, this, _gameArea.X, _gameArea.Y);
@@ -375,6 +382,15 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _buyingPreviewTile.IsVisible = false;
                 _buyingPreviewRangeTile.IsVisible = false;
+            }
+
+            if (_hurtGameAreaTileShowTime > TimeSpan.Zero)
+            {
+                _hurtGameAreaTileShowTime -= gameTime.ElapsedGameTime;
+                var diff = (_hurtGameAreaTileShowTime / TimeSpan.FromSeconds(1)) * 256;
+                _hurtGameAreaTile.Alpha = (int)diff;
+                if (_hurtGameAreaTileShowTime <= TimeSpan.Zero)
+                    _hurtGameAreaTile.IsVisible = false;
             }
         }
 
