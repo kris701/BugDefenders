@@ -40,8 +40,7 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
 
             if (best != null)
             {
-                if (Game.TurretsModule.OnTurretShooting != null)
-                    Game.TurretsModule.OnTurretShooting.Invoke(turret);
+                Game.TurretsModule.OnTurretShooting?.Invoke(turret);
                 turret.Targeting = best;
 
                 foreach (var enemy in targeting)

@@ -9,6 +9,7 @@ using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
+using BugDefender.Core.Game.Modules.Turrets;
 using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
@@ -268,7 +269,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             if (_selectedTurret != null && !_unselectTurret && parent.Tag is UpgradeDefinition upg)
             {
-                if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID))
+                if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID) == TurretsModule.CanUpgradeResult.Success)
                 {
                     Parent.AudioController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
                     _game.TurretsModule.UpgradeTurret(_selectedTurret, upg.ID);
@@ -405,7 +406,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                         bool isLocked = false;
                         if (item.Upgrade.Requires != null)
                             isLocked = !_selectedTurret.HasUpgrades.Contains((Guid)item.Upgrade.Requires);
-                        item.SetPurchasability(_game.TurretsModule.CanUpgradeTurret(_selectedTurret, item.Upgrade.ID), isLocked);
+                        item.SetPurchasability(
+                            _game.TurretsModule.CanUpgradeTurret(_selectedTurret, item.Upgrade.ID) == TurretsModule.CanUpgradeResult.Success, 
+                            isLocked);
                     }
                 }
             }
@@ -601,7 +604,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (_game.TurretsModule.AddTurret(_buyingTurret, at))
+                    if (_game.TurretsModule.AddTurret(_buyingTurret, at) != null)
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
@@ -781,7 +784,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 bool isLocked = false;
                 if (upgrade.Requires != null)
                     isLocked = !turret.HasUpgrades.Contains((Guid)upgrade.Requires);
-                bool canUpgrade = _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID);
+                bool canUpgrade = _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID) == TurretsModule.CanUpgradeResult.Success;
                 _upgradePageHandler.Pages[pageIndex][offset].SetUpgrade(
                     upgrade,
                     canUpgrade,
