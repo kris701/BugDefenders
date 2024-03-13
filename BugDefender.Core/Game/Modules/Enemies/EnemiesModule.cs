@@ -44,9 +44,9 @@ namespace BugDefender.Core.Game.Modules.Enemies
                 module.Update(passed);
         }
 
-        internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanTarget);
-        internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanTarget);
-        internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canDamage)
+        public EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanTarget);
+        public EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanTarget);
+        public EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canDamage)
         {
             range = (float)Math.Pow(range, 2);
             float dist = 0;
@@ -103,7 +103,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
             return best;
         }
 
-        internal bool DamageEnemy(EnemyInstance enemy, float damage, Guid turretDefinitionID)
+        public bool DamageEnemy(EnemyInstance enemy, float damage, Guid turretDefinitionID)
         {
             if (CheatsHelper.Cheats.Contains(CheatTypes.DamageX10))
                 damage *= 10;
@@ -111,12 +111,12 @@ namespace BugDefender.Core.Game.Modules.Enemies
             if (enemy.Health <= 0)
             {
                 var enemyDef = enemy.GetDefinition();
-                var amount = (int)(enemyDef.Reward * Context.GameStyle.MoneyMultiplier);
+                var amount = (int)(enemyDef.Reward * Context.GameStyle.RewardMultiplier);
                 Context.Money += amount;
                 Context.Stats.MoneyEarned(amount);
 
                 Context.Score += enemyDef.Reward;
-                Context.CurrentEnemies.RemoveEnemy(enemy);
+                Context.CurrentEnemies.Remove(enemy);
                 OnEnemyKilled?.Invoke(enemy);
 
                 Context.Stats.EnemyKilled(enemy.DefinitionID, turretDefinitionID);
@@ -125,7 +125,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
             return false;
         }
 
-        private void UpdateEnemiesToSpawnList()
+        public void UpdateEnemiesToSpawnList()
         {
             int waveSize = (int)Context.Evolution;
             if (CheatsHelper.Cheats.Contains(CheatTypes.EnemiesX100))
@@ -175,7 +175,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
             newToAdd.AddRange(SingleEnemiesModule.UpdateSpawnQueue(passed, _spawnQueue));
             foreach (var enemy in newToAdd)
             {
-                Context.CurrentEnemies.AddEnemy(enemy);
+                Context.CurrentEnemies.Add(enemy);
                 OnEnemySpawned?.Invoke(enemy);
             }
             foreach (var remove in newToAdd)

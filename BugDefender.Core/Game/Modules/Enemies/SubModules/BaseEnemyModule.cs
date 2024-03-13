@@ -42,7 +42,7 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
                     if (UpdateEnemy(passed, enemy, def))
                         toRemove.Add(enemy);
             foreach (var enemy in toRemove)
-                Context.CurrentEnemies.RemoveEnemy(enemy);
+                Context.CurrentEnemies.Remove(enemy);
         }
         public abstract HashSet<EnemyInstance> QueueEnemies(Guid id);
         public abstract List<EnemyInstance> UpdateSpawnQueue(TimeSpan passed, HashSet<EnemyInstance> queue);

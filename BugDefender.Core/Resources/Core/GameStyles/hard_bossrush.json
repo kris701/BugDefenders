@@ -4,7 +4,7 @@
   "Description": "An Hard Game with only bosses",
   "EvolutionRate": 1.05,
   "EnemySpeedMultiplier": 0.45,
-  "MoneyMultiplier": 4,
+  "RewardMultiplier": 4,
   "StartingHP": 1,
   "StartingMoney": 1000,
   "EnemyWaveMultiplier": 1,

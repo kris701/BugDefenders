@@ -7,52 +7,15 @@ using static BugDefender.Core.Game.Modules.Turrets.TurretsModule;
 namespace BugDefender.Core.Tests.Game.Modules.Turrets
 {
     [TestClass]
-    public class TurretsModuleTests
+    public class TurretsModuleTests : BaseModuleTests
     {
-        private static GameEngine GetBaseGame()
-        {
-            return new GameEngine(
-                new GameContext(
-                    new MapDefinition(
-                        Guid.NewGuid(),
-                        "Empty",
-                        "",
-                        new List<List<Tools.FloatPoint>>(),
-                        new List<BlockedTile>(),
-                        950,
-                        950,
-                        new List<string>()
-                    ),
-                    new GameStyleDefinition(
-                        Guid.NewGuid(),
-                        "Empty",
-                        "",
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        new List<Guid>(),
-                        new List<Guid>(),
-                        new List<Guid>(),
-                        new List<Guid>(),
-                        1,
-                        1
-                    )
-                )
-            );
-        }
-
         public static IEnumerable<object[]> AllTurrets()
         {
             foreach (var id in ResourceManager.Turrets.GetResources())
                 yield return new object[] { id };
         }
 
-        public static IEnumerable<object[]> AllUpgrades()
+        public static IEnumerable<object[]> AllTurretsAndUpgrades()
         {
             foreach (var turretID in ResourceManager.Turrets.GetResources())
                 foreach (var upgrade in ResourceManager.Turrets.GetResource(turretID).Upgrades)
@@ -100,7 +63,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
         }
 
         [TestMethod]
-        [DynamicData(nameof(AllUpgrades), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(AllTurretsAndUpgrades), DynamicDataSourceType.Method)]
         public void Cant_CanUpgradeTurret_IfNotEnoughMoney(Guid turretID, Guid upgradeID)
         {
             // ARRANGE
@@ -142,7 +105,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
         }
 
         [TestMethod]
-        [DynamicData(nameof(AllUpgrades), DynamicDataSourceType.Method)]
+        [DynamicData(nameof(AllTurretsAndUpgrades), DynamicDataSourceType.Method)]
         public void Cant_CanUpgradeTurret_IfTurretAlreadyHasUpgrade(Guid turretID, Guid upgradeID)
         {
             // ARRANGE

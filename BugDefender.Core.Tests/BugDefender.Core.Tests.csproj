@@ -24,4 +24,8 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Game\Modules\Enemies\" />
+  </ItemGroup>
+
 </Project>

@@ -13,12 +13,11 @@ namespace BugDefender.Core.Game.Modules.Enemies
     {
         public Dictionary<EnemyTerrrainTypes, HashSet<EnemyInstance>> EnemiesByTerrain { get; } = new Dictionary<EnemyTerrrainTypes, HashSet<EnemyInstance>>();
         public HashSet<EnemyInstance> Enemies { get; } = new HashSet<EnemyInstance>();
+        public int Count => Enemies.Count;
 
         public CurrentEnemyContext()
         {
-            foreach (var option in Enum.GetValues(typeof(EnemyTerrrainTypes)))
-                if (option is EnemyTerrrainTypes op && !EnemiesByTerrain.ContainsKey(op))
-                    EnemiesByTerrain.Add(op, new HashSet<EnemyInstance>());
+            Initialize();
         }
 
         [JsonConstructor]
@@ -26,25 +25,28 @@ namespace BugDefender.Core.Game.Modules.Enemies
         {
             EnemiesByTerrain = enemiesByTerrain;
             Enemies = enemies;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             foreach (var option in Enum.GetValues(typeof(EnemyTerrrainTypes)))
                 if (option is EnemyTerrrainTypes op && !EnemiesByTerrain.ContainsKey(op))
                     EnemiesByTerrain.Add(op, new HashSet<EnemyInstance>());
         }
 
-        public void AddEnemy(EnemyInstance enemy)
+        public void Add(EnemyInstance enemy)
         {
             var enemyDef = enemy.GetDefinition();
             EnemiesByTerrain[enemyDef.TerrainType].Add(enemy);
             Enemies.Add(enemy);
         }
 
-        public void RemoveEnemy(EnemyInstance enemy)
+        public void Remove(EnemyInstance enemy)
         {
             var enemyDef = enemy.GetDefinition();
             EnemiesByTerrain[enemyDef.TerrainType].Remove(enemy);
             Enemies.Remove(enemy);
         }
-
-        public int Count => Enemies.Count;
     }
 }
