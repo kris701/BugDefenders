@@ -25,9 +25,9 @@ namespace BugDefender.Core.Campain
             CurrentChapter = CurrentCampain.Chapters[0];
             CurrentGame = new GameEngine(new GameContext(
                 ResourceManager.Maps.GetResource(CurrentChapter.MapID),
-                CurrentCampain.GameStyle,
+                CurrentCampain.GameStyle),
                 CurrentChapter.Criterias
-                ));
+                );
         }
 
         public CampainEngine(CampainSavedGame game)

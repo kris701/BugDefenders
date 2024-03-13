@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BugDefender.Core.Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,6 @@ namespace BugDefender.Core.Users.Models.SavedGames
     {
         public string Name { get; set; }
         public DateTime Date { get; set; }
+        public GameContext Context { get; set; }
     }
 }

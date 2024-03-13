@@ -63,8 +63,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetupGameField(_gameArea.X, _gameArea.Y, _gameArea.Width, _gameArea.Height);
             SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 160);
 
-            if (_game.Context.Challenge != null)
-                SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
+            if (_game.Criterias.Count > 0)
+                SetupCriteriaInfoField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
             else
                 SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
 
@@ -87,19 +87,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 });
             }
 
-#if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext(_game.Context.Map, _game.Context.GameStyle))))
-            {
-                X = 0,
-                Y = 0,
-                Width = 50,
-                Height = 25,
-                Text = "Reload",
-                Font = BasicFonts.GetFont(10),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
-            });
-#endif
             base.Initialize();
         }
 
@@ -305,7 +292,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
         }
 
-        private void SetupChallengeInfoField(int xOffset, int yOffset, int width, int height)
+        private void SetupCriteriaInfoField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(0, new TileControl()
             {
@@ -325,11 +312,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 30,
                 Width = width
             });
-            if (_game.Context.Challenge == null)
-                return;
             AddControl(101, new LabelControl()
             {
-                Text = $"Challenge: {_game.Context.Challenge.Name}",
+                Text = $"Win Criterias",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
                 X = xOffset,
@@ -338,7 +323,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             });
             var sb = new StringBuilder();
-            foreach (var req in _game.Context.Challenge.Criterias)
+            foreach (var req in _game.Criterias)
                 sb.AppendLine(req.Progress(_game.Context.Stats));
             _challengeProgressTextbox = new TextboxControl()
             {

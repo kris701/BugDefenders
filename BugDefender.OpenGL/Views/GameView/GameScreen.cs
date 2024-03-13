@@ -10,7 +10,9 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Game.Modules.Turrets;
+using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.Challenges;
+using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
@@ -61,22 +63,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
         private TimeSpan _hurtGameAreaTileShowTime = TimeSpan.Zero;
+        private ISavedGame _gameSave;
 
-        public GameScreen(BugDefenderGameWindow parent, ChallengeDefinition challenge) : this(parent, new GameEngine(challenge))
+        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave) : base(parent, _id)
         {
-        }
-
-        public GameScreen(BugDefenderGameWindow parent, Guid mapID, Guid gameStyleID) : this(parent, new GameEngine(mapID, gameStyleID))
-        {
-        }
-
-        public GameScreen(BugDefenderGameWindow parent, GameContext context) : this(parent, new GameEngine(context))
-        {
-        }
-
-        private GameScreen(BugDefenderGameWindow parent, GameEngine game) : base(parent, _id)
-        {
-            _game = game;
+            _gameSave = newGameSave;
+            _game = new GameEngine(newGameSave);
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
             _game.OnPlayerDamaged += () =>
@@ -319,10 +311,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void UpdateGameInfoPanel()
         {
-            if (_game.Context.Challenge != null && _challengeProgressTextbox != null)
+            if (_game.Criterias.Count > 0 && _challengeProgressTextbox != null)
             {
                 var sb = new StringBuilder();
-                foreach (var req in _game.Context.Challenge.Criterias)
+                foreach (var req in _game.Criterias)
                     sb.AppendLine(req.Progress(_game.Context.Stats));
                 _challengeProgressTextbox.Text = sb.ToString();
             }
@@ -604,7 +596,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (_game.TurretsModule.AddTurret(_buyingTurret, at) != null)
+                    if (_game.TurretsModule.AddTurret(_buyingTurret, at) == TurretsModule.AddTurretResult.Success)
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
@@ -703,12 +695,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private void SaveGame()
         {
             if (_game.Context.CanSave())
-            {
-                if (!Directory.Exists(_saveDir))
-                    Directory.CreateDirectory(_saveDir);
-                var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
-                _game.Context.Save(new FileInfo(saveFile));
-            }
+                Parent.UserManager.SaveGame(_gameSave);
         }
 
         private void SaveAndGoToMainMenu()
@@ -733,22 +720,19 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _gameOverCheck = true;
                 var credits = 0;
                 var result = _game.Result;
-
-                if (_game.Context.Challenge != null)
-                {
-                    if (result == GameResult.ChallengeSuccess)
-                    {
-                        credits += _game.Context.Challenge.Reward;
-                        Parent.UserManager.CurrentUser.CompletedChallenges.Add(_game.Context.Challenge.ID);
-                    }
-                }
-
 #if RELEASE
                 if (CheatsHelper.Cheats.Count == 0)
                 {
 #endif
-                if (result != GameResult.ChallengeLost)
+                if (result == GameResult.Success)
                 {
+                    if (_gameSave is ChallengeSavedGame c)
+                    {
+                        var challenge = ResourceManager.Challenges.GetResource(c.ChallengeID);
+                        credits += challenge.Reward;
+                        Parent.UserManager.CurrentUser.CompletedChallenges.Add(c.ChallengeID);
+                    }
+
                     Parent.UserManager.CurrentUser.Stats.Combine(_game.Context.Stats);
                     credits += (_game.Context.Score / 100);
                     Parent.UserManager.CurrentUser.Credits += credits;
@@ -759,7 +743,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 }
 #endif
                 Parent.AudioController.StopSounds();
-                var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent as Game);
+                var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
                 SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context, credits, _game.Result, _game.Context.Map.GetDifficultyRating() * _game.Context.GameStyle.GetDifficultyRating()));
             }
         }

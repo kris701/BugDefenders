@@ -29,13 +29,12 @@ namespace BugDefender.Core.Game
         public int HP { get; set; } = 0;
         public int Money { get; set; } = 0;
         public int Score { get; set; } = 0;
-        public List<IUserCriteria> Criterias { get; set; } = new List<IUserCriteria>();
 
         public int Wave { get; set; } = 0;
         public TimeSpan GameTime { get; set; }
 
         [JsonConstructor]
-        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, CurrentEnemyContext currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, List<IUserCriteria> criterias, int wave, TimeSpan gameTime) : this(map, gameStyle)
+        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, CurrentEnemyContext currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, int wave, TimeSpan gameTime) : this(map, gameStyle)
         {
             EnemiesToSpawn = enemiesToSpawn;
             AutoSpawn = autoSpawn;
@@ -47,7 +46,6 @@ namespace BugDefender.Core.Game
             HP = hP;
             Money = money;
             Score = score;
-            Criterias = criterias;
             Wave = wave;
             GameTime = gameTime;
         }
@@ -64,11 +62,6 @@ namespace BugDefender.Core.Game
             GameStyle = gameStyle;
             HP = GameStyle.StartingHP;
             Money = GameStyle.StartingMoney;
-        }
-
-        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<IUserCriteria> criterias) : this(map, gameStyle)
-        {
-            Criterias = criterias;
         }
 
         public bool CanSave()

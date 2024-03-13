@@ -42,22 +42,12 @@ namespace BugDefender.Core.Game
         public ProjectilesModule ProjectilesModule { get; }
         public List<IUserCriteria> Criterias { get; set; } = new List<IUserCriteria>();
 
-        public GameEngine(SurvivalSavedGame save) : this(save.Context)
+        public GameEngine(ISavedGame save)
         {
-        }
+            Context = save.Context;
+            if (save is ChallengeSavedGame c)
+                Criterias = ResourceManager.Challenges.GetResource(c.ChallengeID).Criterias;
 
-        public GameEngine(ChallengeSavedGame save) : this(save.Context, ResourceManager.Challenges.GetResource(save.ChallengeID).Criterias)
-        {
-        }
-
-        public GameEngine(GameContext fromContext, List<IUserCriteria> criteria) : this(fromContext)
-        {
-            Criterias = criteria;
-        }
-
-        public GameEngine(GameContext fromContext)
-        {
-            Context = fromContext;
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
             _criteriaTimer = new GameTimer(TimeSpan.FromSeconds(1), CheckCriterias);
 
@@ -93,7 +83,7 @@ namespace BugDefender.Core.Game
             if (Running)
             {
                 _mainLoopTimer.Update(passed);
-                if (Context.Criterias.Count > 0)
+                if (Criterias.Count > 0)
                     _criteriaTimer.Update(passed);
                 Context.GameTime += passed;
             }
@@ -112,7 +102,7 @@ namespace BugDefender.Core.Game
 
         private void CheckCriterias(TimeSpan passed)
         {
-            foreach (var criteria in Context.Criterias)
+            foreach (var criteria in Criterias)
                 if (!criteria.IsValid(Context.Stats))
                     return;
             Running = false;

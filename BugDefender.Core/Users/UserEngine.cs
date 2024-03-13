@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Xml.Linq;
 using BugDefender.Core.Game;
 using BugDefender.Core.Resources;
 #if RELEASE
@@ -149,66 +150,16 @@ namespace BugDefender.Core.Users
             File.WriteAllText(target, Serialize(CurrentUser));
         }
 
-        public void SaveCampain(GameEngine game, Guid currentCampain, Guid currentChapter, string name)
+        public void SaveGame(ISavedGame save)
         {
-            if (!game.Context.CanSave())
+            if (!save.Context.CanSave())
                 throw new Exception("Game still running! Cant save");
-            var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == name);
-            if (target != null && target is CampainSavedGame save)
-            {
-                save.CampainID = currentCampain;
-                save.ChapterID = currentChapter;
-                save.Context = game.Context;
-            }
-            else
-            {
-                CurrentUser.SavedGames.Add(new CampainSavedGame(
-                    name,
-                    DateTime.Now,
-                    game.Context,
-                    currentCampain,
-                    currentChapter));
-            }
-            SaveUser();
-        }
 
-        public void SaveSurvivalGame(GameEngine game, string name)
-        {
-            if (!game.Context.CanSave())
-                throw new Exception("Game still running! Cant save");
-            var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == name);
-            if (target != null && target is SurvivalSavedGame save)
-            {
-                save.Context = game.Context;
-            }
+            var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == save.Name);
+            if (target != null)
+                target = save;
             else
-            {
-                CurrentUser.SavedGames.Add(new SurvivalSavedGame(
-                    name,
-                    DateTime.Now,
-                    game.Context));
-            }
-            SaveUser();
-        }
-
-        public void SaveChallengeGame(GameEngine game, string name, Guid challengeID)
-        {
-            if (!game.Context.CanSave())
-                throw new Exception("Game still running! Cant save");
-            var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == name);
-            if (target != null && target is ChallengeSavedGame save)
-            {
-                save.Context = game.Context;
-                save.ChallengeID = challengeID;
-            }
-            else
-            {
-                CurrentUser.SavedGames.Add(new ChallengeSavedGame(
-                    name,
-                    challengeID,
-                    DateTime.Now,
-                    game.Context));
-            }
+                CurrentUser.SavedGames.Add(save);
             SaveUser();
         }
 
