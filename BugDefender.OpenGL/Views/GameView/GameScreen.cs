@@ -407,7 +407,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                         if (item.Upgrade.Requires != null)
                             isLocked = !_selectedTurret.HasUpgrades.Contains((Guid)item.Upgrade.Requires);
                         item.SetPurchasability(
-                            _game.TurretsModule.CanUpgradeTurret(_selectedTurret, item.Upgrade.ID) == TurretsModule.CanUpgradeResult.Success, 
+                            _game.TurretsModule.CanUpgradeTurret(_selectedTurret, item.Upgrade.ID) == TurretsModule.CanUpgradeResult.Success,
                             isLocked);
                     }
                 }

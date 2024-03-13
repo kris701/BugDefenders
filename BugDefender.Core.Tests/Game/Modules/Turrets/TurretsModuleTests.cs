@@ -1,13 +1,7 @@
 ﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BugDefender.Core.Game.Modules.Turrets.TurretsModule;
 
 namespace BugDefender.Core.Tests.Game.Modules.Turrets
@@ -28,7 +22,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
                         950,
                         950,
                         new List<string>()
-                    ), 
+                    ),
                     new GameStyleDefinition(
                         Guid.NewGuid(),
                         "Empty",
