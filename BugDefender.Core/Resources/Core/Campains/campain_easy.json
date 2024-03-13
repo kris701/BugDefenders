@@ -1,0 +1,48 @@
+﻿{
+  "id": "204db9ee-0768-449a-a2a8-b1e324d3312f",
+  "Name": "Normal Campain",
+  "description": "The main campain for the game!",
+  "Chapters": [
+    {
+      "ID": "ff91a518-876e-4421-9890-51609109cf07",
+      "NextChapterID": null,
+      "Name": "Chapter 1",
+      "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
+      "Intro": {
+        "Conversation": [
+          {
+            "From": "Unknown",
+            "Text": "Hello there stranger"
+          },
+          {
+            "From": "You",
+            "Text": "Who are you?"
+          }
+        ]
+      },
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 100
+        }
+      ],
+      "Effect": {
+        "Effects": [
+          {
+            "Target": "Damage",
+            "Modifier": 1.05
+          }
+        ]
+      }
+    }
+  ],
+  "BaseGameStyle": "42db41e5-613a-4d05-b456-5ba7c751bdc4",
+  "CampainOver": {
+    "Conversation": [
+      {
+        "From": "Unknown",
+        "Text": "You did it :)"
+      }
+    ]
+  }
+}

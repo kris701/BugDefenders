@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace BugDefender.Core.Game.Models.Entities.Upgrades
+namespace BugDefender.Core.Models
 {
     public class EffectTarget
     {

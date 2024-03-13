@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
+using BugDefender.Core.Models;
 using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Upgrades

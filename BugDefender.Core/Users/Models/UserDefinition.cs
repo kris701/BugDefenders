@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Users.Models.SavedGames;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models
 {
@@ -15,6 +17,7 @@ namespace BugDefender.Core.Users.Models
         public StatsDefinition Stats { get; set; } = new StatsDefinition();
         public int Credits { get; set; }
         public T UserData { get; set; }
+        public List<ISavedGame> SavedGames { get; set; } = new List<ISavedGame>();
 
         public UserDefinition(string name)
         {
@@ -29,10 +32,11 @@ namespace BugDefender.Core.Users.Models
             Stats = new StatsDefinition();
             Credits = 0;
             UserData = new T();
+            SavedGames = new List<ISavedGame>();
         }
 
         [JsonConstructor]
-        public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<Guid> completedChallenges, int challengeDaySeed, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, int credits, T userData)
+        public UserDefinition(Guid iD, string name, List<Guid> buffs, List<Guid> achivements, List<Guid> completedChallenges, int challengeDaySeed, List<ScoreDefinition> highScores, bool isPrimary, StatsDefinition stats, int credits, T userData, List<ISavedGame> savedGames)
         {
             ID = iD;
             Name = name;
@@ -45,6 +49,7 @@ namespace BugDefender.Core.Users.Models
             Stats = stats;
             Credits = credits;
             UserData = userData;
+            SavedGames = savedGames;
         }
     }
 }

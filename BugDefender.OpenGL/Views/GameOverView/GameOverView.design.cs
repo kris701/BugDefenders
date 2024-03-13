@@ -32,7 +32,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             };
             switch (_gameResult)
             {
-                case Core.Game.GameResult.NormalLost: gameOverLabel.Text = "Game Over!"; break;
+                case Core.Game.GameResult.Lost: gameOverLabel.Text = "Game Over!"; break;
                 case Core.Game.GameResult.ChallengeLost: gameOverLabel.Text = "Challenge Failed!"; break;
                 case Core.Game.GameResult.ChallengeSuccess: gameOverLabel.Text = "Challenge Completed!"; break;
             }

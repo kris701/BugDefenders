@@ -63,6 +63,7 @@
     <None Remove="Resources\Core\Buffs\rocketturret_3.json" />
     <None Remove="Resources\Core\Buffs\slowingturret_1.json" />
     <None Remove="Resources\Core\Buffs\slowingturret_2.json" />
+    <None Remove="Resources\Core\Campains\campain_easy.json" />
     <None Remove="Resources\Core\Challenges\bosskiller_1.json" />
     <None Remove="Resources\Core\Challenges\bosskiller_2.json" />
     <None Remove="Resources\Core\Challenges\bosskiller_3.json" />
@@ -226,6 +227,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Campains\campain_easy.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_3.json">

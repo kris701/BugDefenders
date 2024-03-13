@@ -4,15 +4,17 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Game.Modules.Enemies;
+using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Challenges;
+using BugDefender.Core.Users.Models.UserCriterias;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace BugDefender.Core.Game
 {
-    public enum GameResult { None, NormalLost, ChallengeLost, ChallengeSuccess }
+    public enum GameResult { None, Lost, Success }
     public class GameContext
     {
         public MapDefinition Map { get; set; }
@@ -27,13 +29,13 @@ namespace BugDefender.Core.Game
         public int HP { get; set; } = 0;
         public int Money { get; set; } = 0;
         public int Score { get; set; } = 0;
-        public ChallengeDefinition? Challenge { get; set; }
+        public List<IUserCriteria> Criterias { get; set; } = new List<IUserCriteria>();
 
         public int Wave { get; set; } = 0;
         public TimeSpan GameTime { get; set; }
 
         [JsonConstructor]
-        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, CurrentEnemyContext currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, ChallengeDefinition? challenge, int wave, TimeSpan gameTime) : this(map, gameStyle)
+        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, CurrentEnemyContext currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, List<IUserCriteria> criterias, int wave, TimeSpan gameTime) : this(map, gameStyle)
         {
             EnemiesToSpawn = enemiesToSpawn;
             AutoSpawn = autoSpawn;
@@ -45,15 +47,28 @@ namespace BugDefender.Core.Game
             HP = hP;
             Money = money;
             Score = score;
-            Challenge = challenge;
+            Criterias = criterias;
             Wave = wave;
             GameTime = gameTime;
+        }
+
+        public GameContext(Guid mapID, Guid gameStyleID) : this(
+            ResourceManager.Maps.GetResource(mapID),
+            ResourceManager.GameStyles.GetResource(gameStyleID))
+        {
         }
 
         public GameContext(MapDefinition map, GameStyleDefinition gameStyle)
         {
             Map = map;
             GameStyle = gameStyle;
+            HP = GameStyle.StartingHP;
+            Money = GameStyle.StartingMoney;
+        }
+
+        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<IUserCriteria> criterias) : this(map, gameStyle)
+        {
+            Criterias = criterias;
         }
 
         public bool CanSave()
@@ -64,14 +79,6 @@ namespace BugDefender.Core.Game
                 return false;
 
             return true;
-        }
-
-        public void Save(FileInfo file)
-        {
-            if (file.Exists)
-                file.Delete();
-            var content = JsonSerializer.Serialize(this);
-            File.WriteAllText(file.FullName, content);
         }
     }
 }
