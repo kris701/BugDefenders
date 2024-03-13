@@ -46,7 +46,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
 
         public EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanTarget);
         public EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanTarget);
-        public EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canDamage)
+        public EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canTarget)
         {
             range = (float)Math.Pow(range, 2);
             float dist = 0;
@@ -55,9 +55,9 @@ namespace BugDefender.Core.Game.Modules.Enemies
             {
                 case TargetingTypes.Closest:
                     var minDist = float.MaxValue;
-                    foreach (var canTarget in canDamage)
+                    foreach (var target in canTarget)
                     {
-                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[canTarget])
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[target])
                         {
                             dist = MathHelpers.SqrDistance(item, enemy);
                             if (dist <= range && dist < minDist)
@@ -70,9 +70,9 @@ namespace BugDefender.Core.Game.Modules.Enemies
                     break;
                 case TargetingTypes.Weakest:
                     var lowestHP = float.MaxValue;
-                    foreach (var canTarget in canDamage)
+                    foreach (var target in canTarget)
                     {
-                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[canTarget])
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[target])
                         {
                             dist = MathHelpers.SqrDistance(item, enemy);
                             if (dist <= range && enemy.Health < lowestHP)
@@ -80,14 +80,14 @@ namespace BugDefender.Core.Game.Modules.Enemies
                                 lowestHP = enemy.Health;
                                 best = enemy;
                             }
-                            }
+                        }
                     }
                     break;
                 case TargetingTypes.Strongest:
                     var highestHP = 0f;
-                    foreach (var canTarget in canDamage)
+                    foreach (var target in canTarget)
                     {
-                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[canTarget])
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[target])
                         {
                             dist = MathHelpers.SqrDistance(item, enemy);
                             if (dist <= range && enemy.Health > highestHP)
