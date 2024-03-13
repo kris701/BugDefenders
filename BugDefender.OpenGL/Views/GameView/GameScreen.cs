@@ -340,7 +340,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             UpdateLasers();
             UpdateDeadEnemyList();
             _turretUpdater.UpdateEntities(_game.Context.Turrets, passed, CreateNewTurretControl);
-            _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies, passed, CreateNewEnemyControl, UpdateEnemyControl);
+            _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies.Enemies, passed, CreateNewEnemyControl, UpdateEnemyControl);
             _projectileUpdater.UpdateEntities(_game.Context.Projectiles, passed, CreateNewProjectileControl);
             _effectsUpdater.UpdateEntities(_effects, passed, CreateNewEffect);
             _deadEnemyUpdater.UpdateEntities(_deadEnemyInstances, passed, CreateNewDeadEnemyControl);

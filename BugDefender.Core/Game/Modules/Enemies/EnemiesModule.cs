@@ -55,43 +55,46 @@ namespace BugDefender.Core.Game.Modules.Enemies
             {
                 case TargetingTypes.Closest:
                     var minDist = float.MaxValue;
-                    foreach (var enemy in Context.CurrentEnemies)
+                    foreach (var canTarget in canDamage)
                     {
-                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
-                            continue;
-                        dist = MathHelpers.SqrDistance(item, enemy);
-                        if (dist <= range && dist < minDist)
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[canTarget])
                         {
-                            minDist = dist;
-                            best = enemy;
+                            dist = MathHelpers.SqrDistance(item, enemy);
+                            if (dist <= range && dist < minDist)
+                            {
+                                minDist = dist;
+                                best = enemy;
+                            }
                         }
                     }
                     break;
                 case TargetingTypes.Weakest:
                     var lowestHP = float.MaxValue;
-                    foreach (var enemy in Context.CurrentEnemies)
+                    foreach (var canTarget in canDamage)
                     {
-                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
-                            continue;
-                        dist = MathHelpers.SqrDistance(item, enemy);
-                        if (dist <= range && enemy.Health < lowestHP)
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[canTarget])
                         {
-                            lowestHP = enemy.Health;
-                            best = enemy;
-                        }
+                            dist = MathHelpers.SqrDistance(item, enemy);
+                            if (dist <= range && enemy.Health < lowestHP)
+                            {
+                                lowestHP = enemy.Health;
+                                best = enemy;
+                            }
+                            }
                     }
                     break;
                 case TargetingTypes.Strongest:
                     var highestHP = 0f;
-                    foreach (var enemy in Context.CurrentEnemies)
+                    foreach (var canTarget in canDamage)
                     {
-                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
-                            continue;
-                        dist = MathHelpers.SqrDistance(item, enemy);
-                        if (dist <= range && enemy.Health > highestHP)
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[canTarget])
                         {
-                            highestHP = enemy.Health;
-                            best = enemy;
+                            dist = MathHelpers.SqrDistance(item, enemy);
+                            if (dist <= range && enemy.Health > highestHP)
+                            {
+                                highestHP = enemy.Health;
+                                best = enemy;
+                            }
                         }
                     }
                     break;
@@ -107,12 +110,13 @@ namespace BugDefender.Core.Game.Modules.Enemies
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {
-                var amount = (int)(enemy.GetDefinition().Reward * Context.GameStyle.MoneyMultiplier);
+                var enemyDef = enemy.GetDefinition();
+                var amount = (int)(enemyDef.Reward * Context.GameStyle.MoneyMultiplier);
                 Context.Money += amount;
                 Context.Stats.MoneyEarned(amount);
 
-                Context.Score += enemy.GetDefinition().Reward;
-                Context.CurrentEnemies.Remove(enemy);
+                Context.Score += enemyDef.Reward;
+                Context.CurrentEnemies.RemoveEnemy(enemy);
                 OnEnemyKilled?.Invoke(enemy);
 
                 Context.Stats.EnemyKilled(enemy.DefinitionID, turretDefinitionID);
@@ -171,7 +175,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
             newToAdd.AddRange(SingleEnemiesModule.UpdateSpawnQueue(passed, _spawnQueue));
             foreach (var enemy in newToAdd)
             {
-                Context.CurrentEnemies.Add(enemy);
+                Context.CurrentEnemies.AddEnemy(enemy);
                 OnEnemySpawned?.Invoke(enemy);
             }
             foreach (var remove in newToAdd)

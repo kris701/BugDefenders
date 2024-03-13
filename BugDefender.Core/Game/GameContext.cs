@@ -3,10 +3,12 @@ using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Game.Modules.Enemies;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.Challenges;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace BugDefender.Core.Game
 {
@@ -19,7 +21,7 @@ namespace BugDefender.Core.Game
         public bool AutoSpawn { get; set; } = false;
         public float Evolution { get; set; } = 1;
         public StatsDefinition Stats { get; set; } = new StatsDefinition();
-        public HashSet<EnemyInstance> CurrentEnemies { get; set; } = new HashSet<EnemyInstance>();
+        public CurrentEnemyContext CurrentEnemies { get; set; } = new CurrentEnemyContext();
         public HashSet<TurretInstance> Turrets { get; set; } = new HashSet<TurretInstance>();
         public HashSet<ProjectileInstance> Projectiles { get; set; } = new HashSet<ProjectileInstance>();
         public int HP { get; set; } = 0;
@@ -31,7 +33,7 @@ namespace BugDefender.Core.Game
         public TimeSpan GameTime { get; set; }
 
         [JsonConstructor]
-        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, HashSet<EnemyInstance> currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, ChallengeDefinition? challenge, int wave, TimeSpan gameTime) : this(map, gameStyle)
+        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, CurrentEnemyContext currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, ChallengeDefinition? challenge, int wave, TimeSpan gameTime) : this(map, gameStyle)
         {
             EnemiesToSpawn = enemiesToSpawn;
             AutoSpawn = autoSpawn;
@@ -56,7 +58,7 @@ namespace BugDefender.Core.Game
 
         public bool CanSave()
         {
-            if (CurrentEnemies.Count > 0)
+            if (CurrentEnemies.Enemies.Count > 0)
                 return false;
             if (Projectiles.Count > 0)
                 return false;
