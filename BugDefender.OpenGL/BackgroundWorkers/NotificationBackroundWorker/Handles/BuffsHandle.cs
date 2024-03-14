@@ -42,7 +42,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handl
                 }
             }
             if (any)
-                return new NotificationItem("Buff Available!", new ManualDefinition($"Update Available", $"A new buff is a available. Go to the buff menu to see what it is.."), false, (s) => { Parent.Skip(); });
+                return new NotificationItem("Buff Available!", new ManualDefinition($"", $"A new buff is a available. Go to the buff menu to see what it is.."), false, (s) => { Parent.Skip(); });
             return null;
         }
     }

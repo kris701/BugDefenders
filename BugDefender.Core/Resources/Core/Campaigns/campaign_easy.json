@@ -6,7 +6,7 @@
   "Chapters": [
     {
       "ID": "ff91a518-876e-4421-9890-51609109cf07",
-      "NextChapterID": "88ea3655-0251-4266-b44b-84b699f57a53",
+      "NextChapterID": "6e6a69da-7143-4d22-9b2d-0cdb7f3e9661",
       "Name": "Chapter 1",
       "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
       "Intro": {
@@ -53,14 +53,52 @@
           }
         ]
       },
+      "AddsTurrets": [  ],
+      "AddsEnemies": [ "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3" ]
+    },
+    {
+      "ID": "6e6a69da-7143-4d22-9b2d-0cdb7f3e9661",
+      "NextChapterID": "88ea3655-0251-4266-b44b-84b699f57a53",
+      "Name": "Chapter 2",
+      "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "From": "Unknown",
+            "Text": "That was only the initial swarm! Bosses are comming!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "From": "You",
+            "Text": "Bosses???"
+          }
+        ]
+      },
+      "Criterias": [
+        {
+          "CriteriaType": "KillsOfType",
+          "EnemyID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+          "Quantity": 2
+        }
+      ],
+      "GameStyleEffect": {
+        "Effects": [
+          {
+            "Target": "StartingMoney",
+            "Value": 3000
+          }
+        ]
+      },
       "AddsTurrets": [ "468b3259-bd65-4aa1-9e40-5fb5e455b847" ],
-      "AddsEnemies": [ "86d3f9ae-cd87-4ce7-ba70-87139f378da2" ]
+      "AddsEnemies": [ "86d3f9ae-cd87-4ce7-ba70-87139f378da2", "292f065c-8f4b-4140-ad13-c38179b8b9fa", "366dd4c1-dd3c-419d-85dd-452f2d45597c" ]
     },
     {
       "ID": "88ea3655-0251-4266-b44b-84b699f57a53",
       "NextChapterID": null,
-      "Name": "Chapter 2",
-      "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
+      "Name": "Chapter 3",
+      "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
       "Intro": {
         "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
         "Conversation": [
@@ -104,16 +142,19 @@
       "Criterias": [
         {
           "CriteriaType": "Kills",
-          "Quantity": 1
+          "Quantity": 250
         }
       ],
       "GameStyleEffect": {
         "Effects": [
-
+          {
+            "Target": "StartingMoney",
+            "Value": 4000
+          }
         ]
       },
-      "AddsTurrets": [],
-      "AddsEnemies": []
+      "AddsTurrets": [ "e1e5d65f-b09e-4f71-a743-67ead199cdfc" ],
+      "AddsEnemies": [ "0511ffe4-1be3-489b-a0c3-066935cd7a07", "ae76b377-f010-4fcc-8f85-3d13aacd238a", "b82e41ce-c032-4ecc-ac65-83f1372663b6" ]
     }
   ],
   "BaseGameStyle": "41088408-1955-4dcc-91ea-06fb301cb817",
