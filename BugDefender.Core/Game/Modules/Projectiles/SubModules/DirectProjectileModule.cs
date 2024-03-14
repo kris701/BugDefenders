@@ -21,7 +21,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                 projectile.Target = Game.EnemiesModule.GetBestEnemy(projectile);
             if (def.IsGuided && projectile.Target != null)
             {
-                if (!Context.CurrentEnemies.Contains(projectile.Target))
+                if (!Context.CurrentEnemies.Enemies.Contains(projectile.Target))
                     projectile.Target = null;
                 else
                     projectile.Angle = MathHelpers.GetAngle(projectile.Target, projectile);

@@ -73,6 +73,31 @@
       "Content": "Achivements/wavesstarted_3"
     },
 
+    {
+      "ID": "6344ec42-5f76-4c44-9e03-11dd4d69c1d8",
+      "Content": "Campaigns/StandardCampaign/conversationBox"
+    },
+    {
+      "ID": "2f5c4389-68ae-4464-82d0-980906a5ab3c",
+      "Content": "Campaigns/StandardCampaign/winBackground"
+    },
+    {
+      "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+      "Content": "Campaigns/StandardCampaign/normalConvoBackground"
+    },
+    {
+      "ID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+      "Content": "Campaigns/StandardCampaign/you"
+    },
+    {
+      "ID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+      "Content": "Campaigns/StandardCampaign/unknown"
+    },
+    {
+      "ID": "204db9ee-0768-449a-a2a8-b1e324d3312f",
+      "Content": "Campaigns/StandardCampaign/titlescreen"
+    },
+
 
     {
       "ID": "2811A657-6811-423A-8342-142BF5BD261A",
@@ -122,10 +147,6 @@
     {
       "ID": "90447608-bd7a-478c-9bfd-fddb26c731b7",
       "Content": "Views/GameView/turretStatsField"
-    },
-    {
-      "ID": "f367b2e1-0b9f-40da-95af-dac50b16a0ad",
-      "Content": "Views/GameView/upgradeField"
     },
     {
       "ID": "86f37f1c-921f-484a-98da-4b0790f51d70",

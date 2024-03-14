@@ -1,0 +1,19 @@
+﻿{
+  "ID": "41088408-1955-4dcc-91ea-06fb301cb817",
+  "Name": "Easy Campaign",
+  "Description": "An Easy Campaign Game",
+  "EvolutionRate": 1.01,
+  "EnemySpeedMultiplier": 0.4,
+  "RewardMultiplier": 1,
+  "StartingHP": 50,
+  "StartingMoney": 1000,
+  "EnemyWaveMultiplier": 1,
+  "ProjectileSpeedCap": 20,
+  "BossEveryNWave": 5,
+  "TurretBlackList": [],
+  "TurretWhiteList": [ "1a252e16-8c8c-4179-8b1c-75b2b8f47704" ],
+  "EnemyBlackList": [],
+  "EnemyWhiteList": [ "709a9b8d-7a8b-488c-827f-bc7ed266226f", "c0f67fc5-b5a4-4e0c-9607-8623861baf56", "37d7c4a9-1479-4146-88a2-ebc4a1ba53ea" ],
+  "MoneyPrWave": 100,
+  "TurretRefundPenalty": 0.75
+}

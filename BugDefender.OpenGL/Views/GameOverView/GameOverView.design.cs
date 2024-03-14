@@ -23,20 +23,14 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 Height = IWindow.BaseScreenSize.Y
             });
 
-            var gameOverLabel = new LabelControl()
+            AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 150,
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48),
-            };
-            switch (_gameResult)
-            {
-                case Core.Game.GameResult.NormalLost: gameOverLabel.Text = "Game Over!"; break;
-                case Core.Game.GameResult.ChallengeLost: gameOverLabel.Text = "Challenge Failed!"; break;
-                case Core.Game.GameResult.ChallengeSuccess: gameOverLabel.Text = "Challenge Completed!"; break;
-            }
-            AddControl(1, gameOverLabel);
+                Text = _title
+            });
 
             AddControl(1, new BorderControl(new TileControl()
             {
@@ -92,7 +86,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             });
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _context, _credits, _gameResult, _difficulty)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _stats, _title)))
             {
                 X = 0,
                 Y = 0,

@@ -4,7 +4,7 @@
   "Description": "An Easy Game with only bosses",
   "EvolutionRate": 1.01,
   "EnemySpeedMultiplier": 0.25,
-  "MoneyMultiplier": 2,
+  "RewardMultiplier": 2,
   "StartingHP": 5,
   "StartingMoney": 3000,
   "EnemyWaveMultiplier": 1,

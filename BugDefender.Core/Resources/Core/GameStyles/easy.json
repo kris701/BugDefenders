@@ -4,7 +4,7 @@
   "Description": "An Easy Game",
   "EvolutionRate": 1.01,
   "EnemySpeedMultiplier": 0.4,
-  "MoneyMultiplier": 2,
+  "RewardMultiplier": 2,
   "StartingHP": 50,
   "StartingMoney": 2500,
   "EnemyWaveMultiplier": 1,

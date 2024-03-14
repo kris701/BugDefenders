@@ -1,5 +1,4 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Helpers;
+﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;
@@ -28,7 +27,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private BugDefenderButtonControl _sendWave;
         private BugDefenderButtonControl _saveAndExitButton;
 
-        private LabelControl? _playtimeLabel;
+        private LabelControl _playtimeLabel;
 
         private AnimatedTileControl _buyingPreviewTile;
         private TileControl _buyingPreviewRangeTile;
@@ -42,7 +41,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private BugDefenderButtonControl _sellTurretButton;
 
-        private TextboxControl? _challengeProgressTextbox;
+        private TextboxControl _gameInfoTextbox;
 
         private PageHandler<TurretPurchasePanel> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
@@ -50,7 +49,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
             nameof(_buyingPreviewRangeTile), nameof(_turretStatesTextbox), nameof(_sellTurretButton),
-            nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile))]
+            nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile),
+            nameof(_playtimeLabel), nameof(_gameInfoTextbox))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -63,10 +63,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetupGameField(_gameArea.X, _gameArea.Y, _gameArea.Width, _gameArea.Height);
             SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 160);
 
-            if (_game.Context.Challenge != null)
-                SetupChallengeInfoField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
-            else
-                SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
+            SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
 
             SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y + 160, 320, 570);
             SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
@@ -87,19 +84,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 });
             }
 
-#if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameScreen(Parent, new GameContext(_game.Context.Map, _game.Context.GameStyle))))
-            {
-                X = 0,
-                Y = 0,
-                Width = 50,
-                Height = 25,
-                Text = "Reload",
-                Font = BasicFonts.GetFont(10),
-                FillColor = BasicTextures.GetBasicRectange(Color.White),
-                FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
-            });
-#endif
             base.Initialize();
         }
 
@@ -189,31 +173,18 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 100
             });
 
-            AddControl(101, new BugDefenderButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
-            {
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
-                Text = $"Exit",
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset + 10,
-                Y = yOffset + 90,
-                Height = 30,
-                Width = 100
-            });
             _saveAndExitButton = new BugDefenderButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
                 Text = $"Save and Exit",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                X = xOffset + 110,
+                X = xOffset + 10,
                 Y = yOffset + 90,
                 Height = 30,
-                Width = 200,
+                Width = width - 20,
                 IsEnabled = false
             };
             AddControl(101, _saveAndExitButton);
@@ -251,7 +222,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(101, _sendWave);
         }
 
-        [MemberNotNull(nameof(_playtimeLabel))]
+        [MemberNotNull(nameof(_playtimeLabel), nameof(_gameInfoTextbox))]
         private void SetupBaseGameField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(101, new TileControl()
@@ -262,9 +233,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
+            var title = "Bug Defenders";
+            if (_game.Criterias.Count > 0)
+                title = "Win Criterias";
             AddControl(101, new LabelControl()
             {
-                Text = "Bug Defenders",
+                Text = title,
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 X = xOffset,
@@ -283,64 +257,19 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             };
             AddControl(101, _playtimeLabel);
-            AddControl(101, new LabelControl()
-            {
-                Text = $"Map: {_game.Context.Map.Name}",
-                Font = BasicFonts.GetFont(12),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 75,
-                Height = 30,
-                Width = width
-            });
-            AddControl(101, new LabelControl()
-            {
-                Text = $"Game Style: {_game.Context.GameStyle.Name}",
-                Font = BasicFonts.GetFont(12),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 105,
-                Height = 30,
-                Width = width
-            });
-        }
 
-        private void SetupChallengeInfoField(int xOffset, int yOffset, int width, int height)
-        {
-            AddControl(0, new TileControl()
-            {
-                FillColor = Parent.TextureController.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
-                X = xOffset,
-                Y = yOffset,
-                Height = height,
-                Width = width
-            });
-            AddControl(101, new LabelControl()
-            {
-                Text = "Challenge Info",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 15,
-                Height = 30,
-                Width = width
-            });
-            if (_game.Context.Challenge == null)
-                return;
-            AddControl(101, new LabelControl()
-            {
-                Text = $"Challenge: {_game.Context.Challenge.Name}",
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 45,
-                Height = 30,
-                Width = width
-            });
             var sb = new StringBuilder();
-            foreach (var req in _game.Context.Challenge.Criterias)
-                sb.AppendLine(req.Progress(_game.Context.Stats));
-            _challengeProgressTextbox = new TextboxControl()
+            if (_game.Criterias.Count > 0)
+            {
+                foreach (var req in _game.Criterias)
+                    sb.AppendLine(req.Progress(_game.Context.Stats));
+            }
+            else
+            {
+                sb.AppendLine($"Map: {_game.Context.Map.Name}");
+                sb.AppendLine($"Game Style: {_game.Context.GameStyle.Name}");
+            }
+            _gameInfoTextbox = new TextboxControl()
             {
                 Text = sb.ToString(),
                 Font = BasicFonts.GetFont(8),
@@ -350,7 +279,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 80,
                 Width = width
             };
-            AddControl(101, _challengeProgressTextbox);
+            AddControl(101, _gameInfoTextbox);
         }
 
         [MemberNotNull(nameof(_turretPageHandler), nameof(_buyingPreviewRangeTile), nameof(_buyingPreviewTile))]
@@ -376,6 +305,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
 
             var optionIDs = ResourceManager.Turrets.GetResources();
+            if (_game.Context.GameStyle.TurretWhiteList.Count > 0)
+                optionIDs.RemoveAll(x => !_game.Context.GameStyle.TurretWhiteList.Contains(x));
+            else if (_game.Context.GameStyle.TurretBlackList.Count > 0)
+                optionIDs.RemoveAll(_game.Context.GameStyle.TurretBlackList.Contains);
+
             var sorted = new List<TurretDefinition>();
             foreach (var id in optionIDs)
                 sorted.Add(ResourceManager.Turrets.GetResource(id));

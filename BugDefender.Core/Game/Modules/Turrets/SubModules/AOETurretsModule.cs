@@ -22,33 +22,33 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
             EnemyInstance? best = null;
             var targeting = new List<EnemyInstance>();
             var range = (float)Math.Pow(def.Range, 2);
-            foreach (var enemy in Context.CurrentEnemies)
+            foreach (var targetingType in turret.GetDefinition().CanTarget)
             {
-                if (!turret.GetDefinition().CanTarget.Contains(enemy.GetDefinition().TerrainType))
-                    continue;
-                var dist = MathHelpers.SqrDistance(enemy, turret);
-                if (dist <= range)
+                foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[targetingType])
                 {
-                    targeting.Add(enemy);
-                    if (dist < closest)
+                    var dist = MathHelpers.SqrDistance(enemy, turret);
+                    if (dist <= range)
                     {
-                        closest = dist;
-                        best = enemy;
+                        targeting.Add(enemy);
+                        if (dist < closest)
+                        {
+                            closest = dist;
+                            best = enemy;
+                        }
                     }
                 }
             }
 
             if (best != null)
             {
-                if (Game.TurretsModule.OnTurretShooting != null)
-                    Game.TurretsModule.OnTurretShooting.Invoke(turret);
+                Game.TurretsModule.OnTurretShooting?.Invoke(turret);
                 turret.Targeting = best;
 
                 foreach (var enemy in targeting)
                 {
                     if (enemy.ModuleInfo is ISlowable slow)
                         SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                    if (Game.EnemiesModule.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def), turret.DefinitionID))
+                    if (Game.EnemiesModule.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def.Damage, def.DamageModifiers), turret.DefinitionID))
                         turret.Kills++;
                 }
                 turret.Angle = MathHelpers.GetAngle(best, turret);
@@ -60,15 +60,6 @@ namespace BugDefender.Core.Game.Modules.Turrets.SubModules
                     Game.TurretsModule.OnTurretIdle.Invoke(turret);
                 turret.Targeting = null;
             }
-        }
-
-        private float GetModifiedDamage(EnemyDefinition enemyDef, AOETurretDefinition def)
-        {
-            var damage = def.Damage;
-            foreach (var modifier in def.DamageModifiers)
-                if (modifier.EnemyType == enemyDef.EnemyType)
-                    damage = damage * modifier.Modifier;
-            return damage;
         }
     }
 }

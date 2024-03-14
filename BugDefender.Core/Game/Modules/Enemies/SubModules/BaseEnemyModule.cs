@@ -37,7 +37,7 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
         public override void Update(TimeSpan passed)
         {
             var toRemove = new List<EnemyInstance>();
-            foreach (var enemy in Context.CurrentEnemies)
+            foreach (var enemy in Context.CurrentEnemies.Enemies)
                 if (enemy.ModuleInfo is T def)
                     if (UpdateEnemy(passed, enemy, def))
                         toRemove.Add(enemy);

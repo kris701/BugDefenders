@@ -14,6 +14,7 @@
             {
                 _currentWave = Context.Wave;
                 Context.Evolution *= Context.GameStyle.EvolutionRate;
+                Context.Stats.HighestEvolution = Context.Evolution;
             }
         }
     }

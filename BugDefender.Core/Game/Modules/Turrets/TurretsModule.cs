@@ -27,27 +27,28 @@ namespace BugDefender.Core.Game.Modules.Turrets
             };
         }
 
-        public bool CanUpgradeTurret(TurretInstance turret, Guid id)
+        public enum CanUpgradeResult { Success, UpgradeNotInTurret, TurretAlreadyHasUpgrade, NotEnoughMoney, MissingRequiredUpgrades }
+        public CanUpgradeResult CanUpgradeTurret(TurretInstance turret, Guid id)
         {
             if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
             var upgrade = turret.GetDefinition().Upgrades.FirstOrDefault(x => x.ID == id);
             if (upgrade == null)
-                return false;
+                return CanUpgradeResult.UpgradeNotInTurret;
             if (turret.HasUpgrades.Contains(id))
-                return false;
+                return CanUpgradeResult.TurretAlreadyHasUpgrade;
             if (Context.Money < upgrade.Cost)
-                return false;
+                return CanUpgradeResult.NotEnoughMoney;
             if (upgrade.Requires != null && !turret.HasUpgrades.Contains((Guid)upgrade.Requires))
-                return false;
-            return true;
+                return CanUpgradeResult.MissingRequiredUpgrades;
+            return CanUpgradeResult.Success;
         }
 
         public bool UpgradeTurret(TurretInstance turret, Guid id)
         {
             if (!Context.Turrets.Contains(turret))
                 throw new Exception("Turret not in game!");
-            if (!CanUpgradeTurret(turret, id))
+            if (CanUpgradeTurret(turret, id) != CanUpgradeResult.Success)
                 return false;
             var upgrade = turret.GetDefinition().Upgrades.First(x => x.ID == id);
             if (upgrade == null)
@@ -92,18 +93,19 @@ namespace BugDefender.Core.Game.Modules.Turrets
             return true;
         }
 
-        public bool AddTurret(TurretDefinition turretDef, FloatPoint at)
+        public enum AddTurretResult { Success, NotEnoughMoney, NotAvailableForWave, Blacklisted, NotWhiteListed, PlacementInvalid }
+        public AddTurretResult AddTurret(TurretDefinition turretDef, FloatPoint at)
         {
             if (Context.Money < turretDef.Cost)
-                return false;
+                return AddTurretResult.NotEnoughMoney;
             if (Context.Wave < turretDef.AvailableAtWave)
-                return false;
+                return AddTurretResult.NotAvailableForWave;
             if (Context.GameStyle.TurretBlackList.Contains(turretDef.ID))
-                return false;
+                return AddTurretResult.Blacklisted;
             if (Context.GameStyle.TurretWhiteList.Count > 0 && !Context.GameStyle.TurretWhiteList.Contains(turretDef.ID))
-                return false;
+                return AddTurretResult.NotWhiteListed;
             if (!IsTurretPlacementOk(turretDef, at))
-                return false;
+                return AddTurretResult.PlacementInvalid;
 
             var newInstance = new TurretInstance(turretDef)
             {
@@ -117,7 +119,7 @@ namespace BugDefender.Core.Game.Modules.Turrets
 
             Context.Stats.PlacedTurret(newInstance.DefinitionID);
 
-            return true;
+            return AddTurretResult.Success;
         }
     }
 }

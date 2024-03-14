@@ -4,7 +4,7 @@
   "Description": "An Medium Game",
   "EvolutionRate": 1.02,
   "EnemySpeedMultiplier": 0.75,
-  "MoneyMultiplier": 3,
+  "RewardMultiplier": 3,
   "StartingHP": 50,
   "StartingMoney": 1000,
   "EnemyWaveMultiplier": 1.5,

@@ -1,5 +1,4 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Helpers;
+﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
@@ -7,15 +6,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 
 namespace BugDefender.OpenGL.Screens.MainMenu
 {
     public partial class MainMenuView : BaseBugDefenderView
     {
         public static readonly Guid _id = new Guid("9c52281c-3202-4b22-bfc9-dfc187fdbeb3");
-        private static readonly string _saveDir = "Saves";
         private readonly KeysWatcher _cheatsInputWatcher;
         private readonly KeyWatcher _escapeInputWatcher;
         public MainMenuView(BugDefenderGameWindow parent) : base(parent, _id)
@@ -25,13 +21,6 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             Parent.UserManager.SaveUser();
             _cheatsInputWatcher = new KeysWatcher(new List<Keys>() { Keys.LeftAlt, Keys.Enter }, OpenCheatsMenu);
             _escapeInputWatcher = new KeyWatcher(Keys.Escape, CloseCheatsMenu);
-
-            _continueButton!.IsVisible = File.Exists(Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json"));
-            if (_continueButton.IsVisible)
-            {
-                _startGameButton!.HorizontalAlignment = HorizontalAlignment.None;
-                _startGameButton!.X = 960;
-            }
         }
 
         public override void OnUpdate(GameTime gameTime)
@@ -60,17 +49,6 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             else
                 Parent.AudioController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
             control.Text = "";
-        }
-
-        private void ContinueGame(ButtonControl sender)
-        {
-            var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
-            if (!File.Exists(saveFile))
-                throw new Exception("Error loading save file!");
-            var context = JsonSerializer.Deserialize<GameContext>(File.ReadAllText(saveFile));
-            if (context == null)
-                throw new Exception("Error loading save file!");
-            SwitchView(new GameScreen.GameScreen(Parent, context));
         }
     }
 }

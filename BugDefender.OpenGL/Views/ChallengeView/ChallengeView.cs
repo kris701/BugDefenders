@@ -1,5 +1,7 @@
-﻿using BugDefender.Core.Resources;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.Challenges;
+using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
@@ -58,7 +60,13 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
         private void StartButton_Click(ButtonControl sender)
         {
             if (sender.Tag is ChallengeDefinition challenge)
-                SwitchView(new GameScreen.GameScreen(Parent, challenge));
+            {
+                var gameHandler = new GameHandler(Parent);
+                gameHandler.LoadGame(
+                    this,
+                    new ChallengeSavedGame("Latest Challenge", challenge.ID, DateTime.Now, new GameContext(challenge.MapID, challenge.GameStyleID))
+                    );
+            }
         }
     }
 }

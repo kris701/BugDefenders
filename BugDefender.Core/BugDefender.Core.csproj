@@ -63,6 +63,7 @@
     <None Remove="Resources\Core\Buffs\rocketturret_3.json" />
     <None Remove="Resources\Core\Buffs\slowingturret_1.json" />
     <None Remove="Resources\Core\Buffs\slowingturret_2.json" />
+    <None Remove="Resources\Core\Campaigns\campaign_easy.json" />
     <None Remove="Resources\Core\Challenges\bosskiller_1.json" />
     <None Remove="Resources\Core\Challenges\bosskiller_2.json" />
     <None Remove="Resources\Core\Challenges\bosskiller_3.json" />
@@ -101,6 +102,7 @@
     <None Remove="Resources\Core\Enemies\enemy6_2.json" />
     <None Remove="Resources\Core\Enemies\enemy6_3.json" />
     <None Remove="Resources\Core\GameStyles\easy_bossrush.json" />
+    <None Remove="Resources\Core\GameStyles\easy_campaign.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
     <None Remove="Resources\Core\GameStyles\hard_bossrush.json" />
@@ -228,6 +230,7 @@
     <EmbeddedResource Include="Resources\Core\Buffs\laserturret_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Campaigns\campaign_easy.json" />
     <EmbeddedResource Include="Resources\Core\Challenges\turretplacer_3.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -360,6 +363,7 @@
     <EmbeddedResource Include="Resources\Core\Enemies\enemy1_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\easy_campaign.json" />
     <EmbeddedResource Include="Resources\Core\GameStyles\hard_bossrush.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

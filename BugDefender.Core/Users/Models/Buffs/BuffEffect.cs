@@ -1,4 +1,4 @@
-﻿using BugDefender.Core.Game.Models.Entities.Upgrades;
+﻿using BugDefender.Core.Models;
 using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models.Buffs

@@ -4,6 +4,7 @@ using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Helpers;
 #endif
 using BugDefender.Core.Users.Models;
+using BugDefender.Core.Users.Models.SavedGames;
 
 namespace BugDefender.Core.Users
 {
@@ -145,6 +146,32 @@ namespace BugDefender.Core.Users
             if (File.Exists(target))
                 File.Delete(target);
             File.WriteAllText(target, Serialize(CurrentUser));
+        }
+
+        public bool SaveExists(string name) => CurrentUser.SavedGames.Any(x => x.Name == name);
+
+        public void RemoveGame(ISavedGame save)
+        {
+            var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == save.Name);
+            if (target != null)
+            {
+                CurrentUser.SavedGames.Remove(save);
+                SaveUser();
+            }
+        }
+
+        public void SaveGame(ISavedGame save)
+        {
+            if (save.Context != null && !save.Context.CanSave())
+                throw new Exception("Game still running! Cant save");
+
+            save.Date = DateTime.Now;
+
+            var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == save.Name);
+            if (target != null)
+                CurrentUser.SavedGames.Remove(target);
+            CurrentUser.SavedGames.Add(save);
+            SaveUser();
         }
 
         private string GetUserPath(Guid id) => Path.Combine(UsersPath, $"{id}.json");

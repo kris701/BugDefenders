@@ -1,11 +1,12 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
+using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Users.Models.Buffs;
 using System.Collections;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace BugDefender.Core.Game.Models.Entities.Upgrades
+namespace BugDefender.Core.Models
 {
     [JsonDerivedType(typeof(UpgradeDefinition))]
     [JsonDerivedType(typeof(BuffEffect))]

@@ -1,5 +1,7 @@
-﻿using BugDefender.Core.Game.Models.GameStyles;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
@@ -9,9 +11,9 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text;
 
-namespace BugDefender.OpenGL.Screens.GameSetupView
+namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
 {
-    public partial class GameSetupView : BaseBugDefenderView
+    public partial class SurvivalGameSetupView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
 
@@ -19,7 +21,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private MapDefinition? _selectedMap;
         private readonly KeyWatcher _escapeKeyWatcher;
 
-        public GameSetupView(BugDefenderGameWindow parent) : base(parent, _id)
+        public SurvivalGameSetupView(BugDefenderGameWindow parent) : base(parent, _id)
         {
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
@@ -34,7 +36,20 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != null && _selectedGameStyle != null)
-                SwitchView(new GameScreen.GameScreen(Parent, _selectedMap.ID, _selectedGameStyle.ID));
+            {
+                var gameHandler = new GameHandler(Parent);
+                gameHandler.LoadGame(
+                    this,
+                    new SurvivalSavedGame(_gameSaveName.Text, DateTime.Now, new GameContext(_selectedMap.ID, _selectedGameStyle.ID)));
+            }
+        }
+
+        private void NameKeyDown(TextInputControl sender)
+        {
+            if (Parent.UserManager.SaveExists(sender.Text))
+                _saveOverwriteWarningLabel.IsVisible = true;
+            else
+                _saveOverwriteWarningLabel.IsVisible = false;
         }
 
         private void SelectMap_Click(ButtonControl sender)

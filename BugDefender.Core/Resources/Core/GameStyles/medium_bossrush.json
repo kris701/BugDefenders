@@ -4,7 +4,7 @@
   "Description": "An Medium Game with only bosses",
   "EvolutionRate": 1.02,
   "EnemySpeedMultiplier": 0.35,
-  "MoneyMultiplier": 3,
+  "RewardMultiplier": 3,
   "StartingHP": 3,
   "StartingMoney": 2000,
   "EnemyWaveMultiplier": 1,

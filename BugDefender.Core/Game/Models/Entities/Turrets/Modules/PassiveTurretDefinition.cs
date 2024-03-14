@@ -1,4 +1,4 @@
-﻿using BugDefender.Core.Game.Models.Entities.Upgrades;
+﻿using BugDefender.Core.Models;
 using System.Text;
 using System.Text.Json.Serialization;
 

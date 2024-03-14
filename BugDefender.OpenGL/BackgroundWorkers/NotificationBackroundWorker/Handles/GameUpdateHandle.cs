@@ -1,9 +1,7 @@
 ﻿using BugDefender.OpenGL.Helpers;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles

@@ -4,7 +4,7 @@
   "Description": "An Hard Game",
   "EvolutionRate": 1.05,
   "EnemySpeedMultiplier": 1,
-  "MoneyMultiplier": 4,
+  "RewardMultiplier": 4,
   "StartingHP": 50,
   "StartingMoney": 500,
   "EnemyWaveMultiplier": 2.5,

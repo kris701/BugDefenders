@@ -4,7 +4,7 @@
   "Description": "An Extreme Game. You most likely will fail",
   "EvolutionRate": 1.50,
   "EnemySpeedMultiplier": 1.25,
-  "MoneyMultiplier": 10,
+  "RewardMultiplier": 10,
   "StartingHP": 1,
   "StartingMoney": 250,
   "EnemyWaveMultiplier": 5,

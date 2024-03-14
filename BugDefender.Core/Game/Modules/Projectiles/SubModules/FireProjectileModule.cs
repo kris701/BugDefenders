@@ -21,7 +21,7 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
                 projectile.Target = Game.EnemiesModule.GetBestEnemy(projectile);
             if (def.IsGuided && projectile.Target != null)
             {
-                if (!Context.CurrentEnemies.Contains(projectile.Target))
+                if (!Context.CurrentEnemies.Enemies.Contains(projectile.Target))
                     projectile.Target = null;
                 else
                     projectile.Angle = MathHelpers.GetAngle(projectile.Target, projectile);
@@ -65,21 +65,23 @@ namespace BugDefender.Core.Game.Modules.Projectiles.SubModules
 
         private void DamageWithinRange(ProjectileInstance projectile, FireProjectileDefinition def, float damageRange)
         {
-            for (int i = 0; i < Context.CurrentEnemies.Count; i++)
+            foreach (var canTarget in projectile.GetDefinition().CanTarget)
             {
-                if (!projectile.GetDefinition().CanTarget.Contains(Context.CurrentEnemies.ElementAt(i).GetDefinition().TerrainType))
-                    continue;
-                var dist = MathHelpers.SqrDistance(projectile, Context.CurrentEnemies.ElementAt(i));
-                if (dist < damageRange)
+                for (int i = 0; i < Context.CurrentEnemies.EnemiesByTerrain[canTarget].Count; i++)
                 {
-                    if (Context.CurrentEnemies.ElementAt(i).ModuleInfo is ISlowable slow)
-                        SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
-                    if (Game.EnemiesModule.DamageEnemy(Context.CurrentEnemies.ElementAt(i), GetModifiedDamage(Context.CurrentEnemies.ElementAt(i).GetDefinition(), def.Damage, def.DamageModifiers), projectile.Source!.DefinitionID))
+                    var enemy = Context.CurrentEnemies.EnemiesByTerrain[canTarget].ElementAt(i);
+                    var dist = MathHelpers.SqrDistance(projectile, enemy);
+                    if (dist < damageRange)
                     {
-                        def.Speed /= 2;
-                        if (projectile.Source != null)
-                            projectile.Source.Kills++;
-                        i--;
+                        if (enemy.ModuleInfo is ISlowable slow)
+                            SetSlowingFactor(slow, def.SlowingFactor, def.SlowingDuration);
+                        if (Game.EnemiesModule.DamageEnemy(enemy, GetModifiedDamage(enemy.GetDefinition(), def.Damage, def.DamageModifiers), projectile.Source!.DefinitionID))
+                        {
+                            def.Speed /= 2;
+                            if (projectile.Source != null)
+                                projectile.Source.Kills++;
+                            i--;
+                        }
                     }
                 }
             }

@@ -44,9 +44,9 @@ namespace BugDefender.Core.Game.Modules.Enemies
                 module.Update(passed);
         }
 
-        internal EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanTarget);
-        internal EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanTarget);
-        internal EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canDamage)
+        public EnemyInstance? GetBestEnemy(ProjectileInstance projectile) => GetBestEnemy(projectile, float.MaxValue, TargetingTypes.Closest, projectile.GetDefinition().CanTarget);
+        public EnemyInstance? GetBestEnemy(TurretInstance turret, float range) => GetBestEnemy(turret, range, turret.TargetingType, turret.GetDefinition().CanTarget);
+        public EnemyInstance? GetBestEnemy(IPosition item, float range, TargetingTypes targetingType, HashSet<EnemyTerrrainTypes> canTarget)
         {
             range = (float)Math.Pow(range, 2);
             float dist = 0;
@@ -55,43 +55,46 @@ namespace BugDefender.Core.Game.Modules.Enemies
             {
                 case TargetingTypes.Closest:
                     var minDist = float.MaxValue;
-                    foreach (var enemy in Context.CurrentEnemies)
+                    foreach (var target in canTarget)
                     {
-                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
-                            continue;
-                        dist = MathHelpers.SqrDistance(item, enemy);
-                        if (dist <= range && dist < minDist)
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[target])
                         {
-                            minDist = dist;
-                            best = enemy;
+                            dist = MathHelpers.SqrDistance(item, enemy);
+                            if (dist <= range && dist < minDist)
+                            {
+                                minDist = dist;
+                                best = enemy;
+                            }
                         }
                     }
                     break;
                 case TargetingTypes.Weakest:
                     var lowestHP = float.MaxValue;
-                    foreach (var enemy in Context.CurrentEnemies)
+                    foreach (var target in canTarget)
                     {
-                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
-                            continue;
-                        dist = MathHelpers.SqrDistance(item, enemy);
-                        if (dist <= range && enemy.Health < lowestHP)
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[target])
                         {
-                            lowestHP = enemy.Health;
-                            best = enemy;
+                            dist = MathHelpers.SqrDistance(item, enemy);
+                            if (dist <= range && enemy.Health < lowestHP)
+                            {
+                                lowestHP = enemy.Health;
+                                best = enemy;
+                            }
                         }
                     }
                     break;
                 case TargetingTypes.Strongest:
                     var highestHP = 0f;
-                    foreach (var enemy in Context.CurrentEnemies)
+                    foreach (var target in canTarget)
                     {
-                        if (!canDamage.Contains(enemy.GetDefinition().TerrainType))
-                            continue;
-                        dist = MathHelpers.SqrDistance(item, enemy);
-                        if (dist <= range && enemy.Health > highestHP)
+                        foreach (var enemy in Context.CurrentEnemies.EnemiesByTerrain[target])
                         {
-                            highestHP = enemy.Health;
-                            best = enemy;
+                            dist = MathHelpers.SqrDistance(item, enemy);
+                            if (dist <= range && enemy.Health > highestHP)
+                            {
+                                highestHP = enemy.Health;
+                                best = enemy;
+                            }
                         }
                     }
                     break;
@@ -100,18 +103,19 @@ namespace BugDefender.Core.Game.Modules.Enemies
             return best;
         }
 
-        internal bool DamageEnemy(EnemyInstance enemy, float damage, Guid turretDefinitionID)
+        public bool DamageEnemy(EnemyInstance enemy, float damage, Guid turretDefinitionID)
         {
             if (CheatsHelper.Cheats.Contains(CheatTypes.DamageX10))
                 damage *= 10;
             enemy.Health -= damage;
             if (enemy.Health <= 0)
             {
-                var amount = (int)(enemy.GetDefinition().Reward * Context.GameStyle.MoneyMultiplier);
+                var enemyDef = enemy.GetDefinition();
+                var amount = (int)(enemyDef.Reward * Context.GameStyle.RewardMultiplier);
                 Context.Money += amount;
                 Context.Stats.MoneyEarned(amount);
 
-                Context.Score += enemy.GetDefinition().Reward;
+                Context.Stats.Score += enemyDef.Reward;
                 Context.CurrentEnemies.Remove(enemy);
                 OnEnemyKilled?.Invoke(enemy);
 
@@ -121,7 +125,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
             return false;
         }
 
-        private void UpdateEnemiesToSpawnList()
+        public void UpdateEnemiesToSpawnList()
         {
             int waveSize = (int)Context.Evolution;
             if (CheatsHelper.Cheats.Contains(CheatTypes.EnemiesX100))

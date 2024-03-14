@@ -9,11 +9,13 @@ using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
-using BugDefender.Core.Users.Models.Challenges;
+using BugDefender.Core.Game.Modules.Turrets;
+using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.GameView;
@@ -22,7 +24,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
@@ -31,9 +32,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseBugDefenderView
     {
+        public Action<IView, GameEngine, ISavedGame> OnGameEnd { get; }
+        public ISavedGame GameSave { get; }
+
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         public static Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
-        private static readonly string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
         private readonly EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
@@ -61,21 +64,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _selectTurret = false;
         private TimeSpan _hurtGameAreaTileShowTime = TimeSpan.Zero;
 
-        public GameScreen(BugDefenderGameWindow parent, ChallengeDefinition challenge) : this(parent, new GameEngine(challenge))
+        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave, Action<IView, GameEngine, ISavedGame> onGameEnd) : base(parent, _id)
         {
-        }
-
-        public GameScreen(BugDefenderGameWindow parent, Guid mapID, Guid gameStyleID) : this(parent, new GameEngine(mapID, gameStyleID))
-        {
-        }
-
-        public GameScreen(BugDefenderGameWindow parent, GameContext context) : this(parent, new GameEngine(context))
-        {
-        }
-
-        private GameScreen(BugDefenderGameWindow parent, GameEngine game) : base(parent, _id)
-        {
-            _game = game;
+            GameSave = newGameSave;
+            Parent.UserManager.SaveGame(newGameSave);
+            _game = new GameEngine(newGameSave);
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
             _game.OnPlayerDamaged += () =>
@@ -98,7 +91,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(92, this, _gameArea.X, _gameArea.Y);
             _deadEnemyUpdater = new EntityUpdater<EnemyInstance, TileControl>(120, this, _gameArea.X, _gameArea.Y);
 
-            _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { _sendWave?.DoClick(); });
+            _waveKeyWatcher = new KeyWatcher(Keys.Space, () =>
+            {
+                if (_game.Context.CanSave())
+                    Parent.UserManager.SaveGame(newGameSave);
+                _sendWave?.DoClick();
+            });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
             {
                 if (_game.Context.Turrets.Count == 0)
@@ -115,6 +113,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _gameTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(33), OnUpdateGame);
             Initialize();
             Parent.AudioController.PlaySong(ID);
+            OnGameEnd = onGameEnd;
 
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
@@ -268,7 +267,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             if (_selectedTurret != null && !_unselectTurret && parent.Tag is UpgradeDefinition upg)
             {
-                if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID))
+                if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID) == TurretsModule.CanUpgradeResult.Success)
                 {
                     Parent.AudioController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
                     _game.TurretsModule.UpgradeTurret(_selectedTurret, upg.ID);
@@ -308,7 +307,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         public void OnUpdateBackground(TimeSpan passed)
         {
             _moneyLabel.Text = $"Money: {_game.Context.Money}$";
-            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Score}, HP: {_game.Context.HP}";
+            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Stats.Score}, HP: {_game.Context.HP}";
             UpdateTurretPurchaseButtons();
             UpdateNextEnemies();
             _saveAndExitButton.IsEnabled = _game.Context.CanSave();
@@ -318,18 +317,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void UpdateGameInfoPanel()
         {
-            if (_game.Context.Challenge != null && _challengeProgressTextbox != null)
+            if (_game.Criterias.Count > 0)
             {
                 var sb = new StringBuilder();
-                foreach (var req in _game.Context.Challenge.Criterias)
+                foreach (var req in _game.Criterias)
                     sb.AppendLine(req.Progress(_game.Context.Stats));
-                _challengeProgressTextbox.Text = sb.ToString();
+                _gameInfoTextbox.Text = sb.ToString();
             }
-            else
-            {
-                if (_playtimeLabel != null)
-                    _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
-            }
+            _playtimeLabel.Text = $"Game time: {_game.Context.Stats.GameTime.ToString("hh\\:mm\\:ss")}";
         }
 
         public void OnUpdateGame(TimeSpan passed)
@@ -339,7 +334,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             UpdateLasers();
             UpdateDeadEnemyList();
             _turretUpdater.UpdateEntities(_game.Context.Turrets, passed, CreateNewTurretControl);
-            _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies, passed, CreateNewEnemyControl, UpdateEnemyControl);
+            _enemyUpdater.UpdateEntities(_game.Context.CurrentEnemies.Enemies, passed, CreateNewEnemyControl, UpdateEnemyControl);
             _projectileUpdater.UpdateEntities(_game.Context.Projectiles, passed, CreateNewProjectileControl);
             _effectsUpdater.UpdateEntities(_effects, passed, CreateNewEffect);
             _deadEnemyUpdater.UpdateEntities(_deadEnemyInstances, passed, CreateNewDeadEnemyControl);
@@ -405,7 +400,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                         bool isLocked = false;
                         if (item.Upgrade.Requires != null)
                             isLocked = !_selectedTurret.HasUpgrades.Contains((Guid)item.Upgrade.Requires);
-                        item.SetPurchasability(_game.TurretsModule.CanUpgradeTurret(_selectedTurret, item.Upgrade.ID), isLocked);
+                        item.SetPurchasability(
+                            _game.TurretsModule.CanUpgradeTurret(_selectedTurret, item.Upgrade.ID) == TurretsModule.CanUpgradeResult.Success,
+                            isLocked);
                     }
                 }
             }
@@ -601,7 +598,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (_game.TurretsModule.AddTurret(_buyingTurret, at))
+                    if (_game.TurretsModule.AddTurret(_buyingTurret, at) == TurretsModule.AddTurretResult.Success)
                     {
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
@@ -697,30 +694,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
         }
 
-        private void SaveGame()
-        {
-            if (_game.Context.CanSave())
-            {
-                if (!Directory.Exists(_saveDir))
-                    Directory.CreateDirectory(_saveDir);
-                var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
-                _game.Context.Save(new FileInfo(saveFile));
-            }
-        }
-
         private void SaveAndGoToMainMenu()
         {
             if (_game.Context.CanSave())
             {
-                SaveGame();
-                GoToMainMenu();
+                Parent.UserManager.SaveGame(GameSave);
+                Parent.AudioController.StopSounds();
+                SwitchView(new MainMenu.MainMenuView(Parent));
             }
-        }
-
-        private void GoToMainMenu()
-        {
-            Parent.AudioController.StopSounds();
-            SwitchView(new MainMenu.MainMenuView(Parent));
         }
 
         private void GameOver()
@@ -728,36 +709,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (!_gameOverCheck)
             {
                 _gameOverCheck = true;
-                var credits = 0;
-                var result = _game.Result;
-
-                if (_game.Context.Challenge != null)
-                {
-                    if (result == GameResult.ChallengeSuccess)
-                    {
-                        credits += _game.Context.Challenge.Reward;
-                        Parent.UserManager.CurrentUser.CompletedChallenges.Add(_game.Context.Challenge.ID);
-                    }
-                }
-
-#if RELEASE
-                if (CheatsHelper.Cheats.Count == 0)
-                {
-#endif
-                if (result != GameResult.ChallengeLost)
-                {
-                    Parent.UserManager.CurrentUser.Stats.Combine(_game.Context.Stats);
-                    credits += (_game.Context.Score / 100);
-                    Parent.UserManager.CurrentUser.Credits += credits;
-                    Parent.UserManager.CheckAndApplyAchivements();
-                    Parent.UserManager.SaveUser();
-                }
-#if RELEASE
-                }
-#endif
                 Parent.AudioController.StopSounds();
-                var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent as Game);
-                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context, credits, _game.Result, _game.Context.Map.GetDifficultyRating() * _game.Context.GameStyle.GetDifficultyRating()));
+                OnGameEnd.Invoke(this, _game, GameSave);
             }
         }
 
@@ -781,7 +734,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 bool isLocked = false;
                 if (upgrade.Requires != null)
                     isLocked = !turret.HasUpgrades.Contains((Guid)upgrade.Requires);
-                bool canUpgrade = _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID);
+                bool canUpgrade = _game.TurretsModule.CanUpgradeTurret(turret, upgrade.ID) == TurretsModule.CanUpgradeResult.Success;
                 _upgradePageHandler.Pages[pageIndex][offset].SetUpgrade(
                     upgrade,
                     canUpgrade,

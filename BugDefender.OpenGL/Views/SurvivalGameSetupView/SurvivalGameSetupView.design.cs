@@ -9,9 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BugDefender.OpenGL.Screens.GameSetupView
+namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
 {
-    public partial class GameSetupView : BaseBugDefenderView
+    public partial class SurvivalGameSetupView : BaseBugDefenderView
     {
         private TileControl _mapPreviewTile;
         private LabelControl _mapNameLabel;
@@ -19,6 +19,8 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private TextboxControl _gameStyleDescriptionTextbox;
         private BugDefenderButtonControl _startButton;
         private LabelControl _totalDifficultyLabel;
+        private TextInputControl _gameSaveName;
+        private LabelControl _saveOverwriteWarningLabel;
 
         private BugDefenderButtonControl? _selectedGameStyleButton;
         private BugDefenderButtonControl? _selectedMapButton;
@@ -28,13 +30,14 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
 
         [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
             nameof(_startButton), nameof(_mapPageHandler), nameof(_gamestylePageHandler),
-            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel))]
+            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel), nameof(_gameSaveName),
+            nameof(_saveOverwriteWarningLabel))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
                 this,
                 Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                "Game Setup",
+                "Survival Game Setup",
                 "Select a map and a gamestyle to start.");
 
             SetupPreviewPanel(50, 225, 900, 750);
@@ -56,6 +59,33 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 IsEnabled = false
             };
             AddControl(0, _startButton);
+            _gameSaveName = new TextInputControl(Parent)
+            {
+                X = 300,
+                Y = 980,
+                Height = 50,
+                Width = 300,
+                Font = BasicFonts.GetFont(24),
+                Text = "New Game",
+                Limit = 25,
+                FontColor = Color.White,
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+            };
+            _gameSaveName.OnKeyDown += NameKeyDown;
+            AddControl(0, _gameSaveName);
+            _saveOverwriteWarningLabel = new LabelControl()
+            {
+                X = 800,
+                Y = 980,
+                Height = 50,
+                Font = BasicFonts.GetFont(16),
+                Text = "Overwrites existing save!",
+                FontColor = Color.Red,
+                IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
+            };
+            AddControl(0, _saveOverwriteWarningLabel);
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
@@ -73,7 +103,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             });
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new SurvivalGameSetupView(Parent)))
             {
                 X = 0,
                 Y = 0,
