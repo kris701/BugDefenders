@@ -73,6 +73,19 @@
       "Content": "Achivements/wavesstarted_3"
     },
 
+    {
+      "ID": "6344ec42-5f76-4c44-9e03-11dd4d69c1d8",
+      "Content": "Campains/NormalCampain/conversationBox"
+    },
+    {
+      "ID": "2f5c4389-68ae-4464-82d0-980906a5ab3c",
+      "Content": "Campains/NormalCampain/winBackground"
+    },
+    {
+      "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+      "Content": "Campains/NormalCampain/normalConvoBackground"
+    },
+
 
     {
       "ID": "2811A657-6811-423A-8342-142BF5BD261A",

@@ -193,7 +193,7 @@ namespace BugDefender.OpenGL
             {
                 if (chapter.ID == currentChapter.ID)
                     break;
-                chapter.Effect.ApplyUpgradeEffectOnObject(baseGameStyle);
+                chapter.Apply(baseGameStyle);
             }
             return new GameContext(
                 ResourceManager.Maps.GetResource(currentChapter.MapID),

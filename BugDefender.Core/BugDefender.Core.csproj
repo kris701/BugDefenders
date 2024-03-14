@@ -102,6 +102,7 @@
     <None Remove="Resources\Core\Enemies\enemy6_2.json" />
     <None Remove="Resources\Core\Enemies\enemy6_3.json" />
     <None Remove="Resources\Core\GameStyles\easy_bossrush.json" />
+    <None Remove="Resources\Core\GameStyles\easy_campain.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
     <None Remove="Resources\Core\GameStyles\hard_bossrush.json" />
@@ -362,6 +363,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Enemies\enemy1_1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\GameStyles\easy_campain.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\hard_bossrush.json">

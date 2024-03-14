@@ -306,6 +306,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
 
             var optionIDs = ResourceManager.Turrets.GetResources();
+            if (_game.Context.GameStyle.TurretWhiteList.Count > 0)
+                optionIDs.RemoveAll(x => !_game.Context.GameStyle.TurretWhiteList.Contains(x));
+            else if (_game.Context.GameStyle.TurretBlackList.Count > 0)
+                optionIDs.RemoveAll(_game.Context.GameStyle.TurretBlackList.Contains);
+
             var sorted = new List<TurretDefinition>();
             foreach (var id in optionIDs)
                 sorted.Add(ResourceManager.Turrets.GetResource(id));
