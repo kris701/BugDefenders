@@ -115,7 +115,7 @@ namespace BugDefender.Core.Game.Modules.Enemies
                 Context.Money += amount;
                 Context.Stats.MoneyEarned(amount);
 
-                Context.Score += enemyDef.Reward;
+                Context.Stats.Score += enemyDef.Reward;
                 Context.CurrentEnemies.Remove(enemy);
                 OnEnemyKilled?.Invoke(enemy);
 

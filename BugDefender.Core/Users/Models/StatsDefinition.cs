@@ -2,6 +2,21 @@
 {
     public class StatsDefinition
     {
+        public TimeSpan GameTime { get; set; } = TimeSpan.Zero;
+        public float Difficulty { get; set; } = 0;
+
+        public float HighestEvolution { get; set; } = 0;
+        public int Score { get; set; } = 0;
+        private int _credits = 0;
+        public int Credits { 
+            get {
+                if (_credits == 0 && Score != 0)
+                    _credits = Score / 100;
+                return _credits; 
+            } 
+            set { _credits = value; } 
+        }
+
         public int TotalWavesStarted { get; set; } = 0;
 
         public int TotalMoneyEarned { get; set; } = 0;
@@ -23,6 +38,11 @@
 
         public void Combine(StatsDefinition outcome)
         {
+            GameTime += outcome.GameTime;
+            HighestEvolution = Math.Max(HighestEvolution, outcome.HighestEvolution);
+            Score += outcome.Score;
+            TotalWavesStarted += outcome.TotalWavesStarted;
+            TotalMoneyEarned += outcome.TotalMoneyEarned;
             TotalKills += outcome.TotalKills;
             foreach (var key in outcome.KillsOfType.Keys)
             {

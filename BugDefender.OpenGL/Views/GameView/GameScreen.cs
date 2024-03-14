@@ -309,7 +309,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         public void OnUpdateBackground(TimeSpan passed)
         {
             _moneyLabel.Text = $"Money: {_game.Context.Money}$";
-            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Score}, HP: {_game.Context.HP}";
+            _scoreLabel.Text = $"Wave {_game.Context.Wave}, Score {_game.Context.Stats.Score}, HP: {_game.Context.HP}";
             UpdateTurretPurchaseButtons();
             UpdateNextEnemies();
             _saveAndExitButton.IsEnabled = _game.Context.CanSave();
@@ -326,7 +326,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     sb.AppendLine(req.Progress(_game.Context.Stats));
                 _gameInfoTextbox.Text = sb.ToString();
             }
-            _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
+            _playtimeLabel.Text = $"Game time: {_game.Context.Stats.GameTime.ToString("hh\\:mm\\:ss")}";
         }
 
         public void OnUpdateGame(TimeSpan passed)

@@ -74,6 +74,7 @@ namespace BugDefender.Core.Game
                 throw new Exception("Cant have a black list and a white list at the same time!");
 
             Context.Stats.MoneyEarned(Context.GameStyle.StartingMoney);
+            Context.Stats.Difficulty = Context.Map.GetDifficultyRating() * Context.GameStyle.GetDifficultyRating();
 
             Initialize();
         }
@@ -91,7 +92,7 @@ namespace BugDefender.Core.Game
                 _mainLoopTimer.Update(passed);
                 if (Criterias.Count > 0)
                     _criteriaTimer.Update(passed);
-                Context.GameTime += passed;
+                Context.Stats.GameTime += passed;
             }
         }
 

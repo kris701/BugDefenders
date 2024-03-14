@@ -1,10 +1,10 @@
 ﻿using BugDefender.Core.Campain.Models;
 using BugDefender.Core.Game;
 using BugDefender.Core.Resources;
+using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
-using BugDefender.OpenGL.Screens.CampainOverView;
 using BugDefender.OpenGL.Screens.CutsceneView;
 using BugDefender.OpenGL.Screens.GameScreen;
 using BugDefender.OpenGL.Screens.MainMenu;
@@ -65,25 +65,21 @@ namespace BugDefender.OpenGL
 
         private void OnChallengeOver(IView view, GameEngine game, ISavedGame gameSave)
         {
-            var credits = 0;
             var result = game.Result;
 #if RELEASE
             if (CheatsHelper.Cheats.Count == 0)
             {
 #endif
-            if (gameSave is ChallengeSavedGame c)
-            {
-                var challenge = ResourceManager.Challenges.GetResource(c.ChallengeID);
-                credits += challenge.Reward;
-                Parent.UserManager.CurrentUser.CompletedChallenges.Add(c.ChallengeID);
-            }
-
             if (result == GameResult.Success)
             {
-                Parent.UserManager.CurrentUser.Stats.Combine(game.Context.Stats);
-                credits += game.Context.Score / 100;
-                Parent.UserManager.CurrentUser.Credits += credits;
-                Parent.UserManager.CheckAndApplyAchivements();
+                if (gameSave is ChallengeSavedGame c)
+                {
+                    var challenge = ResourceManager.Challenges.GetResource(c.ChallengeID);
+                    Parent.UserManager.CurrentUser.Credits += challenge.Reward;
+                    Parent.UserManager.CurrentUser.CompletedChallenges.Add(c.ChallengeID);
+                }
+
+                AddStatsToUser(game.Context.Stats);
                 Parent.UserManager.SaveUser();
             }
 #if RELEASE
@@ -91,12 +87,11 @@ namespace BugDefender.OpenGL
 #endif
             Parent.UserManager.RemoveGame(gameSave);
             var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Challenge Over!"));
+            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context.Stats, "Challenge Over!"));
         }
 
         private void OnSurvivalGameOver(IView view, GameEngine game, ISavedGame gameSave)
         {
-            var credits = 0;
             var result = game.Result;
 #if RELEASE
             if (CheatsHelper.Cheats.Count == 0)
@@ -104,10 +99,8 @@ namespace BugDefender.OpenGL
 #endif
             if (result == GameResult.Success)
             {
-                Parent.UserManager.CurrentUser.Stats.Combine(game.Context.Stats);
-                credits += game.Context.Score / 100;
-                Parent.UserManager.CurrentUser.Credits += credits;
-                Parent.UserManager.CheckAndApplyAchivements();
+                AddStatsToUser(game.Context.Stats);
+                AddToHighScore(game.Context.Stats);
                 Parent.UserManager.SaveUser();
             }
 #if RELEASE
@@ -115,7 +108,7 @@ namespace BugDefender.OpenGL
 #endif
             Parent.UserManager.RemoveGame(gameSave);
             var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Challenge Over!"));
+            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context.Stats, "Game Over!"));
         }
 
         private void OnCampainGameOver(IView view, GameEngine game, ISavedGame gameSave)
@@ -131,8 +124,8 @@ namespace BugDefender.OpenGL
                 var currentChapter = campain.Chapters.First(x => x.ID == campainSave.ChapterID);
                 if (result == GameResult.Success)
                 {
-                    Parent.UserManager.CurrentUser.Stats.Combine(game.Context.Stats);
-                    Parent.UserManager.CheckAndApplyAchivements();
+                    campainSave.Stats.Combine(game.Context.Stats);
+                    AddStatsToUser(game.Context.Stats);
                     Parent.UserManager.SaveUser();
                     if (currentChapter.NextChapterID == null)
                     {
@@ -140,27 +133,29 @@ namespace BugDefender.OpenGL
                         campainSave.IsCompleted = true;
                         campainSave.Context = null;
                         Parent.UserManager.SaveGame(gameSave);
+                        Parent.UserManager.CurrentUser.Credits += campain.Reward;
+                        Parent.UserManager.SaveUser();
                         view.SwitchView(new CutsceneView(Parent, campainSave, campain.CampainOver, OnCampainConversationOver));
                     }
                     else
                     {
                         currentChapter = campain.Chapters.First(x => x.ID == currentChapter.NextChapterID);
                         campainSave.ChapterID = currentChapter.ID;
-                        gameSave.Context = GetContextForChapter(campain, currentChapter);
+                        gameSave.Context = campain.GetContextForChapter(currentChapter);
                         Parent.UserManager.SaveGame(gameSave);
                         view.SwitchView(new CutsceneView(Parent, campainSave, currentChapter.Intro, OnCampainConversationOver));
                     }
                 }
                 else
                 {
-                    gameSave.Context = GetContextForChapter(campain, currentChapter);
+                    gameSave.Context = campain.GetContextForChapter(currentChapter);
                     Parent.UserManager.SaveGame(gameSave);
                 }
 #if RELEASE
             }
 #endif
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-                view.SwitchView(new CampainOverView(Parent, campainSave, false));
+                view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, campainSave.Stats, "Campaign Lost!"));
             }
         }
 
@@ -170,13 +165,14 @@ namespace BugDefender.OpenGL
             {
                 if (campainSave.ChapterID == Guid.Empty)
                 {
-                    view.SwitchView(new CampainOverView(Parent, campainSave, true));
+                    var screen = Parent.TextureController.GetTexture(campainSave.CampainID);
+                    view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, campainSave.Stats, "Campaign Won!"));
                 }
                 else
                 {
                     var campain = ResourceManager.Campains.GetResource(campainSave.CampainID);
                     var currentChapter = campain.Chapters.First(x => x.ID == campainSave.ChapterID);
-                    gameSave.Context = GetContextForChapter(campain, currentChapter);
+                    gameSave.Context = campain.GetContextForChapter(currentChapter);
                     Parent.UserManager.SaveGame(gameSave);
                     view.SwitchView(new GameScreen(
                         Parent,
@@ -186,18 +182,36 @@ namespace BugDefender.OpenGL
             }
         }
 
-        private GameContext GetContextForChapter(CampainDefinition campain, ChapterDefinition currentChapter)
+        private void AddStatsToUser(StatsDefinition stats)
         {
-            var baseGameStyle = ResourceManager.GameStyles.GetResource(campain.BaseGameStyle);
-            foreach (var chapter in campain.Chapters)
+            Parent.UserManager.CurrentUser.Stats.Combine(stats);
+            Parent.UserManager.CurrentUser.Credits += stats.Credits;
+            Parent.UserManager.CheckAndApplyAchivements();
+        }
+
+        private void AddToHighScore(StatsDefinition stats)
+        {
+            Parent.UserManager.CurrentUser.HighScores.Add(new ScoreDefinition(
+                    stats.Score,
+                    stats.GameTime.ToString("hh\\:mm\\:ss"),
+                    DateTime.Now.Date.ToShortDateString(),
+                    stats.Difficulty
+                ));
+            if (Parent.UserManager.CurrentUser.HighScores.Count > 10)
             {
-                if (chapter.ID == currentChapter.ID)
-                    break;
-                chapter.Apply(baseGameStyle);
+                var smallest = int.MaxValue;
+                ScoreDefinition? smallestDef = null;
+                foreach (var scoreDef in Parent.UserManager.CurrentUser.HighScores)
+                {
+                    if (scoreDef.Score < smallest)
+                    {
+                        smallestDef = scoreDef;
+                        smallest = scoreDef.Score;
+                    }
+                }
+                if (smallestDef != null)
+                    Parent.UserManager.CurrentUser.HighScores.Remove(smallestDef);
             }
-            return new GameContext(
-                ResourceManager.Maps.GetResource(currentChapter.MapID),
-                baseGameStyle);
         }
     }
 }

@@ -11,18 +11,20 @@ namespace BugDefender.Core.Users.Models.SavedGames
     {
         public string Name { get; set; }
         public DateTime Date { get; set; }
-        public GameContext? Context { get; set; }
+        public GameContext Context { get; set; }
         public Guid CampainID { get; set; }
         public Guid ChapterID { get; set; }
+        public StatsDefinition Stats { get; set; }
         public bool IsCompleted { get; set; }
 
-        public CampainSavedGame(string name, DateTime date, GameContext? context, Guid campainID, Guid chapterID, bool isCompleted)
+        public CampainSavedGame(string name, DateTime date, GameContext context, Guid campainID, Guid chapterID, StatsDefinition stats, bool isCompleted)
         {
             Name = name;
             Date = date;
             Context = context;
             CampainID = campainID;
             ChapterID = chapterID;
+            Stats = stats;
             IsCompleted = isCompleted;
         }
     }

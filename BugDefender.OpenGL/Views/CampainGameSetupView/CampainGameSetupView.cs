@@ -43,7 +43,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 var gameHandler = new GameHandler(Parent);
                 gameHandler.LoadGame(
                     this,
-                    new CampainSavedGame(_gameSaveName.Text, DateTime.Now, null, _selectedCampain.ID, Guid.Empty, false));
+                    new CampainSavedGame(_gameSaveName.Text, DateTime.Now, null, _selectedCampain.ID, Guid.Empty, new Core.Users.Models.StatsDefinition(), false));
             }
         }
 
@@ -70,7 +70,10 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                     _selectedCampain = campain;
                     _campainPreviewTile.FillColor = Parent.TextureController.GetTexture(campain.ID);
                     _campainNameLabel.Text = campain.Name;
-                    _campainDescriptionTextbox.Text = campain.Description;
+                    var sb = new StringBuilder();
+                    sb.AppendLine(campain.Description);
+                    sb.AppendLine($"Completion reward: {_selectedCampain.Reward} credits!");
+                    _campainDescriptionTextbox.Text = sb.ToString();
                     _startButton.IsEnabled = true;
                 }
             }

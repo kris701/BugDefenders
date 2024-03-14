@@ -17,62 +17,35 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private static readonly Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
 
         private readonly Texture2D _screen;
-        private readonly int _credits;
-        private readonly float _difficulty;
-        private readonly GameContext _context;
+        private readonly StatsDefinition _stats;
         private readonly KeyWatcher _escapeKeyWatcher;
         private readonly List<string> _linesToShow;
         private int _lineIndex = 0;
         private TimeSpan _passed = TimeSpan.FromSeconds(1);
         private string _title;
-        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, GameContext context, int credits, float difficulty, string title) : base(parent, _id)
+        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, StatsDefinition stats, string title) : base(parent, _id)
         {
             _screen = screen;
-            _context = context;
-            _credits = credits;
-            _difficulty = difficulty;
+            _stats = stats;
             _title = title;
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
-
-            Parent.UserManager.CurrentUser.HighScores.Add(new ScoreDefinition(
-                context.Score,
-                context.GameTime.ToString("hh\\:mm\\:ss"),
-                DateTime.Now.Date.ToShortDateString(),
-                difficulty
-            ));
-            if (Parent.UserManager.CurrentUser.HighScores.Count > 10)
-            {
-                var smallest = int.MaxValue;
-                ScoreDefinition? smallestDef = null;
-                foreach (var scoreDef in Parent.UserManager.CurrentUser.HighScores)
-                {
-                    if (scoreDef.Score < smallest)
-                    {
-                        smallestDef = scoreDef;
-                        smallest = scoreDef.Score;
-                    }
-                }
-                if (smallestDef != null)
-                    Parent.UserManager.CurrentUser.HighScores.Remove(smallestDef);
-            }
-            Parent.UserManager.SaveUser();
 
             Initialize();
 
             Parent.AudioController.PlaySong(ID);
 
             _linesToShow = new List<string>();
-            _linesToShow.Add($"Final Score: {context.Score}");
-            _linesToShow.Add($"Game Difficulty: {Math.Round(_difficulty, 2)}");
-            _linesToShow.Add($"Total Gametime: {context.GameTime.ToString("hh\\:mm\\:ss")}");
-            _linesToShow.Add($"Game gives you {_credits} credits");
+            _linesToShow.Add($"Final Score: {stats.Score}");
+            _linesToShow.Add($"Game Difficulty: {Math.Round(stats.Difficulty, 2)}");
+            _linesToShow.Add($"Total Gametime: {stats.GameTime.ToString("hh\\:mm\\:ss")}");
+            _linesToShow.Add($"Game gives you {stats.Credits} credits");
             _linesToShow.Add($" ");
             _linesToShow.Add($"Game Stats:");
-            _linesToShow.Add($"Total Kills: {context.Stats.TotalKills}");
-            _linesToShow.Add($"Total Turrets Placed: {context.Stats.TotalTurretsPlaced}");
-            _linesToShow.Add($"Total Turrets Sold: {context.Stats.TotalTurretsSold}");
-            _linesToShow.Add($"Total Money Earned: {context.Stats.TotalMoneyEarned}");
-            _linesToShow.Add($"Total Waves Started: {context.Stats.TotalWavesStarted}");
+            _linesToShow.Add($"Total Kills: {stats.TotalKills}");
+            _linesToShow.Add($"Total Turrets Placed: {stats.TotalTurretsPlaced}");
+            _linesToShow.Add($"Total Turrets Sold: {stats.TotalTurretsSold}");
+            _linesToShow.Add($"Total Money Earned: {stats.TotalMoneyEarned}");
+            _linesToShow.Add($"Total Waves Started: {stats.TotalWavesStarted}");
         }
 
         public override void OnUpdate(GameTime gameTime)

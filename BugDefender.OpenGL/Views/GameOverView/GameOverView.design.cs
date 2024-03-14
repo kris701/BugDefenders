@@ -86,7 +86,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             });
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _context, _credits, _difficulty, _title)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _stats, _title)))
             {
                 X = 0,
                 Y = 0,

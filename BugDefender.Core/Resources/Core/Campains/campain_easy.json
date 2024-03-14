@@ -2,6 +2,7 @@
   "id": "204db9ee-0768-449a-a2a8-b1e324d3312f",
   "Name": "Normal Campain",
   "description": "The main campain for the game!",
+  "Reward": 250,
   "Chapters": [
     {
       "ID": "ff91a518-876e-4421-9890-51609109cf07",

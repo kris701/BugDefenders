@@ -28,13 +28,10 @@ namespace BugDefender.Core.Game
         public HashSet<ProjectileInstance> Projectiles { get; set; } = new HashSet<ProjectileInstance>();
         public int HP { get; set; } = 0;
         public int Money { get; set; } = 0;
-        public int Score { get; set; } = 0;
-
         public int Wave { get; set; } = 0;
-        public TimeSpan GameTime { get; set; }
 
         [JsonConstructor]
-        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, CurrentEnemyContext currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int score, int wave, TimeSpan gameTime) : this(map, gameStyle)
+        public GameContext(MapDefinition map, GameStyleDefinition gameStyle, List<List<Guid>> enemiesToSpawn, bool autoSpawn, float evolution, StatsDefinition stats, CurrentEnemyContext currentEnemies, HashSet<TurretInstance> turrets, HashSet<ProjectileInstance> projectiles, int hP, int money, int wave) : this(map, gameStyle)
         {
             EnemiesToSpawn = enemiesToSpawn;
             AutoSpawn = autoSpawn;
@@ -45,9 +42,7 @@ namespace BugDefender.Core.Game
             Projectiles = projectiles;
             HP = hP;
             Money = money;
-            Score = score;
             Wave = wave;
-            GameTime = gameTime;
         }
 
         public GameContext(Guid mapID, Guid gameStyleID) : this(
