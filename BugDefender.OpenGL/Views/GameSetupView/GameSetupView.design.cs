@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
@@ -37,7 +38,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             BasicMenuPage.GenerateBaseMenu(
                 this,
                 Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                "Game Setup",
+                "Survival Game Setup",
                 "Select a map and a gamestyle to start.");
 
             SetupPreviewPanel(50, 225, 900, 750);
@@ -83,7 +84,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Font = BasicFonts.GetFont(16),
                 Text = "Overwrites existing save!",
                 FontColor = Color.Red,
-                IsVisible = false
+                IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
             };
             AddControl(0, _saveOverwriteWarningLabel);
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>

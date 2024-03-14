@@ -6,6 +6,7 @@ using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
+using BugDefender.OpenGL.Views.GameView;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -61,38 +62,13 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
         private void StartButton_Click(ButtonControl sender)
         {
             if (sender.Tag is ChallengeDefinition challenge)
-                SwitchView(new GameScreen.GameScreen(Parent, new ChallengeSavedGame("Latest Challenge", challenge.ID, DateTime.Now, new GameContext(challenge.MapID, challenge.GameStyleID)), OnGameOver));
-        }
-
-        private void OnGameOver(GameEngine game, ISavedGame gameSave)
-        {
-            var credits = 0;
-            var result = game.Result;
-#if RELEASE
-            if (CheatsHelper.Cheats.Count == 0)
             {
-#endif
-            if (gameSave is ChallengeSavedGame c)
-            {
-                var challenge = ResourceManager.Challenges.GetResource(c.ChallengeID);
-                credits += challenge.Reward;
-                Parent.UserManager.CurrentUser.CompletedChallenges.Add(c.ChallengeID);
+                var gameHandler = new GameHandler(Parent);
+                gameHandler.LoadGame(
+                    this,
+                    new ChallengeSavedGame("Latest Challenge", challenge.ID, DateTime.Now, new GameContext(challenge.MapID, challenge.GameStyleID))
+                    );
             }
-
-            if (result == GameResult.Success)
-            {
-                Parent.UserManager.CurrentUser.Stats.Combine(game.Context.Stats);
-                credits += (game.Context.Score / 100);
-                Parent.UserManager.CurrentUser.Credits += credits;
-                Parent.UserManager.CheckAndApplyAchivements();
-                Parent.UserManager.SaveUser();
-            }
-#if RELEASE
-            }
-#endif
-            Parent.UserManager.RemoveGame(gameSave);
-            var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-            SwitchView(new GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Result, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Game Over!"));
         }
     }
 }

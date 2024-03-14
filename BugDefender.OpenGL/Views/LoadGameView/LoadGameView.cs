@@ -1,6 +1,8 @@
-﻿using BugDefender.OpenGL.Engine.Controls;
+﻿using BugDefender.Core.Users.Models.SavedGames;
+using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
+using BugDefender.OpenGL.Views.GameView;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -25,12 +27,22 @@ namespace BugDefender.OpenGL.Screens.LoadGameView
 
         private void ContinueGameClick(ButtonControl sender)
         {
-
+            if (sender.Tag is ISavedGame savedGame)
+            {
+                var gameHandler = new GameHandler(Parent);
+                gameHandler.LoadGame(
+                    this,
+                    savedGame);
+            }
         }
 
         private void DeleteGameClick(ButtonControl sender)
         {
-
+            if (sender.Tag is ISavedGame savedGame)
+            {
+                Parent.UserManager.RemoveGame(savedGame);
+                SwitchView(new LoadGameView(Parent));
+            }
         }
     }
 }

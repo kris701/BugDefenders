@@ -26,6 +26,13 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Height = 140,
                 FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
             });
+            var typeStr = "";
+            switch (saveGame)
+            {
+                case SurvivalSavedGame: typeStr = "(Survival) "; break;
+                case ChallengeSavedGame: typeStr = "(Challenge) "; break;
+                case CampainSavedGame: typeStr = "(Campain) "; break;
+            }
             Children.Add(new LabelControl()
             {
                 X = 20,
@@ -33,7 +40,7 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Width = 400,
                 Height = 40,
                 Font = BasicFonts.GetFont(12),
-                Text = saveGame.Name,
+                Text = $"{typeStr}{saveGame.Name}",
                 FontColor = Color.White
             });
             Children.Add(new LabelControl()
@@ -57,6 +64,7 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 FontColor = Color.White,
                 FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                Tag = saveGame
             });
             Children.Add(new ButtonControl(parent, removeClick)
             {
@@ -69,6 +77,7 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 FontColor = Color.Red,
                 FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                Tag = saveGame
             });
         }
     }

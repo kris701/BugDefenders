@@ -25,7 +25,7 @@ namespace BugDefender.OpenGL.Screens.LoadGameView
                 this,
                 Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Load a Saved Game",
-                $"");
+                $"This user has a total of {Parent.UserManager.CurrentUser.SavedGames.Count} saved games");
 
             var controlList = new List<LoadGameControl>();
             foreach (var savedGame in Parent.UserManager.CurrentUser.SavedGames)

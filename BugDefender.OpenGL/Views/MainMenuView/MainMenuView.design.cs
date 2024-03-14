@@ -45,7 +45,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 300,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "Load Game",
@@ -57,7 +57,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 350,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "New Survival Game",
@@ -69,7 +69,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 400,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "Settings",
@@ -80,7 +80,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 450,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "High Scores",
@@ -91,7 +91,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 500,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "Buffs",
@@ -102,7 +102,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 550,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "Achivements",
@@ -113,7 +113,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 600,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "Challenges",
@@ -124,7 +124,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 650,
-                Width = 300,
+                Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 Text = "Exit",

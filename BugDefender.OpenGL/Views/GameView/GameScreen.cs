@@ -17,6 +17,7 @@ using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
+using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.GameView;
@@ -34,7 +35,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseBugDefenderView
     {
-        public Action<GameEngine, ISavedGame> OnGameEnd { get; }
+        public Action<IView, GameEngine, ISavedGame> OnGameEnd { get; }
         public ISavedGame GameSave { get; }
 
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
@@ -66,7 +67,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _selectTurret = false;
         private TimeSpan _hurtGameAreaTileShowTime = TimeSpan.Zero;
 
-        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave, Action<GameEngine, ISavedGame> onGameEnd) : base(parent, _id)
+        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave, Action<IView, GameEngine, ISavedGame> onGameEnd) : base(parent, _id)
         {
             GameSave = newGameSave;
             Parent.UserManager.SaveGame(newGameSave);
@@ -711,7 +712,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _gameOverCheck = true;
                 Parent.AudioController.StopSounds();
-                OnGameEnd.Invoke(_game, GameSave);
+                OnGameEnd.Invoke(this, _game, GameSave);
             }
         }
 
