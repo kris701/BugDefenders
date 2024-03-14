@@ -33,6 +33,16 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 FontColor = Color.White
             };
             AddControl(0, _waitLabel);
+            AddControl(0, new LabelControl()
+            {
+                HorizontalAlignment = HorizontalAlignment.Middle,
+                Y = 200,
+                Height = 50,
+                Font = BasicFonts.GetFont(16),
+                Text = "Overwrites existing challenge save!",
+                FontColor = Color.Red,
+                IsVisible = Parent.UserManager.SaveExists("Latest Challenge")
+            });
 
             int count = 0;
             foreach (var id in _remainingChallenges)

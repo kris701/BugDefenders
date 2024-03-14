@@ -28,7 +28,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private BugDefenderButtonControl _sendWave;
         private BugDefenderButtonControl _saveAndExitButton;
 
-        private LabelControl? _playtimeLabel;
+        private LabelControl _playtimeLabel;
 
         private AnimatedTileControl _buyingPreviewTile;
         private TileControl _buyingPreviewRangeTile;
@@ -42,7 +42,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TextboxControl _turretStatesTextbox;
         private BugDefenderButtonControl _sellTurretButton;
 
-        private TextboxControl? _challengeProgressTextbox;
+        private TextboxControl _gameInfoTextbox;
 
         private PageHandler<TurretPurchasePanel> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
@@ -50,7 +50,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
             nameof(_buyingPreviewRangeTile), nameof(_turretStatesTextbox), nameof(_sellTurretButton),
-            nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile))]
+            nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile),
+            nameof(_playtimeLabel), nameof(_gameInfoTextbox))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -63,10 +64,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetupGameField(_gameArea.X, _gameArea.Y, _gameArea.Width, _gameArea.Height);
             SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 160);
 
-            if (_game.Criterias.Count > 0)
-                SetupCriteriaInfoField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
-            else
-                SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
+            SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
 
             SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y + 160, 320, 570);
             SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
@@ -225,7 +223,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(101, _sendWave);
         }
 
-        [MemberNotNull(nameof(_playtimeLabel))]
+        [MemberNotNull(nameof(_playtimeLabel), nameof(_gameInfoTextbox))]
         private void SetupBaseGameField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(101, new TileControl()
@@ -236,9 +234,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = height,
                 Width = width
             });
+            var title = "Bug Defenders";
+            if (_game.Criterias.Count > 0)
+                title = "Win Criterias";
             AddControl(101, new LabelControl()
             {
-                Text = "Bug Defenders",
+                Text = title,
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
                 X = xOffset,
@@ -257,62 +258,19 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = width
             };
             AddControl(101, _playtimeLabel);
-            AddControl(101, new LabelControl()
-            {
-                Text = $"Map: {_game.Context.Map.Name}",
-                Font = BasicFonts.GetFont(12),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 75,
-                Height = 30,
-                Width = width
-            });
-            AddControl(101, new LabelControl()
-            {
-                Text = $"Game Style: {_game.Context.GameStyle.Name}",
-                Font = BasicFonts.GetFont(12),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 105,
-                Height = 30,
-                Width = width
-            });
-        }
 
-        private void SetupCriteriaInfoField(int xOffset, int yOffset, int width, int height)
-        {
-            AddControl(0, new TileControl()
-            {
-                FillColor = Parent.TextureController.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
-                X = xOffset,
-                Y = yOffset,
-                Height = height,
-                Width = width
-            });
-            AddControl(101, new LabelControl()
-            {
-                Text = "Challenge Info",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 15,
-                Height = 30,
-                Width = width
-            });
-            AddControl(101, new LabelControl()
-            {
-                Text = $"Win Criterias",
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 45,
-                Height = 30,
-                Width = width
-            });
             var sb = new StringBuilder();
-            foreach (var req in _game.Criterias)
-                sb.AppendLine(req.Progress(_game.Context.Stats));
-            _challengeProgressTextbox = new TextboxControl()
+            if (_game.Criterias.Count > 0)
+            {
+                foreach (var req in _game.Criterias)
+                    sb.AppendLine(req.Progress(_game.Context.Stats));
+            }
+            else
+            {
+                sb.AppendLine($"Map: {_game.Context.Map.Name}");
+                sb.AppendLine($"Game Style: {_game.Context.GameStyle.Name}");
+            }
+            _gameInfoTextbox = new TextboxControl()
             {
                 Text = sb.ToString(),
                 Font = BasicFonts.GetFont(8),
@@ -322,7 +280,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Height = 80,
                 Width = width
             };
-            AddControl(101, _challengeProgressTextbox);
+            AddControl(101, _gameInfoTextbox);
         }
 
         [MemberNotNull(nameof(_turretPageHandler), nameof(_buyingPreviewRangeTile), nameof(_buyingPreviewTile))]

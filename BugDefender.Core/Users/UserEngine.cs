@@ -174,9 +174,8 @@ namespace BugDefender.Core.Users
 
             var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == save.Name);
             if (target != null)
-                target = save;
-            else
-                CurrentUser.SavedGames.Add(save);
+                CurrentUser.SavedGames.Remove(target);
+            CurrentUser.SavedGames.Add(save);
             SaveUser();
         }
 

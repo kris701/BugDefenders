@@ -315,18 +315,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void UpdateGameInfoPanel()
         {
-            if (_game.Criterias.Count > 0 && _challengeProgressTextbox != null)
+            if (_game.Criterias.Count > 0)
             {
                 var sb = new StringBuilder();
                 foreach (var req in _game.Criterias)
                     sb.AppendLine(req.Progress(_game.Context.Stats));
-                _challengeProgressTextbox.Text = sb.ToString();
+                _gameInfoTextbox.Text = sb.ToString();
             }
-            else
-            {
-                if (_playtimeLabel != null)
-                    _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
-            }
+            _playtimeLabel.Text = $"Game time: {_game.Context.GameTime.ToString("hh\\:mm\\:ss")}";
         }
 
         public void OnUpdateGame(TimeSpan passed)
