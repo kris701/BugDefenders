@@ -38,7 +38,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 "Select a campain to start playing!");
 
             SetupPreviewPanel(50, 225, 900, 750);
-            SetupCampainsView(965, 225, 445, 750);
+            SetupCampainsView(965, 225, 900, 750);
 
             _startButton = new BugDefenderButtonControl(Parent, StartButton_Click)
             {

@@ -15,11 +15,9 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
     public partial class GameOverView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("f2320690-8061-4f95-8373-972825f97d83");
-        private static readonly string _saveDir = "Saves";
 
         private readonly Texture2D _screen;
         private readonly int _credits;
-        private readonly GameResult _gameResult;
         private readonly float _difficulty;
         private readonly GameContext _context;
         private readonly KeyWatcher _escapeKeyWatcher;
@@ -27,12 +25,11 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private int _lineIndex = 0;
         private TimeSpan _passed = TimeSpan.FromSeconds(1);
         private string _title;
-        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, GameContext context, int credits, GameResult result, float difficulty, string title) : base(parent, _id)
+        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, GameContext context, int credits, float difficulty, string title) : base(parent, _id)
         {
             _screen = screen;
             _context = context;
             _credits = credits;
-            _gameResult = result;
             _difficulty = difficulty;
             _title = title;
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
@@ -63,10 +60,6 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             Initialize();
 
             Parent.AudioController.PlaySong(ID);
-
-            var saveFile = Path.Combine(_saveDir, $"{Parent.UserManager.CurrentUser.ID}_save.json");
-            if (File.Exists(saveFile))
-                File.Delete(saveFile);
 
             _linesToShow = new List<string>();
             _linesToShow.Add($"Final Score: {context.Score}");

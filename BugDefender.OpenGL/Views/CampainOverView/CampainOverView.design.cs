@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BugDefender.OpenGL.Screens.GameOverScreen
+namespace BugDefender.OpenGL.Screens.CampainOverView
 {
-    public partial class GameOverView : BaseBugDefenderView
+    public partial class CampainOverView : BaseBugDefenderView
     {
         private TextboxControl _statsTextBox;
 
@@ -23,26 +23,17 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
                 Height = IWindow.BaseScreenSize.Y
             });
 
+            string title = "Campain Over...";
+            if (_won)
+                title = "Campain Won!";
+
             AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 150,
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48),
-                Text = _title
-            });
-
-            AddControl(1, new BorderControl(new TileControl()
-            {
-                X = 100,
-                Y = 250,
-                Width = 960,
-                Height = 540,
-                FillColor = _screen
-            })
-            {
-                Thickness = 5,
-                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
+                Text = title
             });
 
             AddControl(1, new TileControl()
@@ -86,7 +77,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
             });
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameOverView(Parent, _screen, _context, _credits, _difficulty, _title)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CampainOverView(Parent, _saveGame, _won)))
             {
                 X = 0,
                 Y = 0,

@@ -53,9 +53,13 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Text = saveGame.Date.ToString(),
                 FontColor = Color.White
             });
+            string continueText = "Continue";
             bool isEnabled = true;
-            if (saveGame is CampainSavedGame campain)
+            if (saveGame is CampainSavedGame campain) {
                 isEnabled = !campain.IsCompleted;
+                if (campain.IsCompleted)
+                    continueText = "Completed!";
+            }
             Children.Add(new ButtonControl(parent, clickedContinue)
             {
                 X = 20,
@@ -63,7 +67,7 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Width = 400,
                 Height = 40,
                 Font = BasicFonts.GetFont(12),
-                Text = "Continue",
+                Text = continueText,
                 FontColor = Color.White,
                 FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),

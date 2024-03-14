@@ -4,6 +4,7 @@ using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
+using BugDefender.OpenGL.Screens.CampainOverView;
 using BugDefender.OpenGL.Screens.CutsceneView;
 using BugDefender.OpenGL.Screens.GameScreen;
 using BugDefender.OpenGL.Screens.MainMenu;
@@ -90,7 +91,7 @@ namespace BugDefender.OpenGL
 #endif
             Parent.UserManager.RemoveGame(gameSave);
             var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Result, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Challenge Over!"));
+            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Challenge Over!"));
         }
 
         private void OnSurvivalGameOver(IView view, GameEngine game, ISavedGame gameSave)
@@ -114,7 +115,7 @@ namespace BugDefender.OpenGL
 #endif
             Parent.UserManager.RemoveGame(gameSave);
             var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Result, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Challenge Over!"));
+            view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Challenge Over!"));
         }
 
         private void OnCampainGameOver(IView view, GameEngine game, ISavedGame gameSave)
@@ -154,12 +155,12 @@ namespace BugDefender.OpenGL
                 {
                     gameSave.Context = GetContextForChapter(campain, currentChapter);
                     Parent.UserManager.SaveGame(gameSave);
-                    var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-                    view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context, 0, game.Result, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Campain Over!"));
                 }
 #if RELEASE
             }
 #endif
+                var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
+                view.SwitchView(new CampainOverView(Parent, campainSave, false));
             }
         }
 
@@ -169,7 +170,7 @@ namespace BugDefender.OpenGL
             {
                 if (campainSave.ChapterID == Guid.Empty)
                 {
-                    view.SwitchView(new MainMenuView(Parent));
+                    view.SwitchView(new CampainOverView(Parent, campainSave, true));
                 }
                 else
                 {
