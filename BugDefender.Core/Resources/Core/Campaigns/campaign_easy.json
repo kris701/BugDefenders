@@ -1,8 +1,8 @@
 ﻿{
   "id": "204db9ee-0768-449a-a2a8-b1e324d3312f",
-  "Name": "Normal Campain",
-  "description": "The main campain for the game!",
-  "Reward": 250,
+  "Name": "Standard Campaign",
+  "description": "The main campaign for the game!",
+  "Reward": 50,
   "Chapters": [
     {
       "ID": "ff91a518-876e-4421-9890-51609109cf07",
@@ -42,12 +42,15 @@
       "Criterias": [
         {
           "CriteriaType": "Kills",
-          "Quantity": 1
+          "Quantity": 50
         }
       ],
       "GameStyleEffect": {
         "Effects": [
-
+          {
+            "Target": "StartingMoney",
+            "Value": 2000
+          }
         ]
       },
       "AddsTurrets": [ "468b3259-bd65-4aa1-9e40-5fb5e455b847" ],
@@ -114,7 +117,7 @@
     }
   ],
   "BaseGameStyle": "41088408-1955-4dcc-91ea-06fb301cb817",
-  "CampainOver": {
+  "CampaignOver": {
     "ID": "2f5c4389-68ae-4464-82d0-980906a5ab3c",
     "Conversation": [
       {

@@ -10,23 +10,23 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace BugDefender.OpenGL.Screens.CampainGameSetupView
+namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
 {
-    public partial class CampainGameSetupView : BaseBugDefenderView
+    public partial class CampaignGameSetupView : BaseBugDefenderView
     {
-        private TileControl _campainPreviewTile;
-        private LabelControl _campainNameLabel;
-        private TextboxControl _campainDescriptionTextbox;
+        private TileControl _campaignPreviewTile;
+        private LabelControl _campaignNameLabel;
+        private TextboxControl _campaignDescriptionTextbox;
         private BugDefenderButtonControl _startButton;
         private TextInputControl _gameSaveName;
         private LabelControl _saveOverwriteWarningLabel;
 
-        private BugDefenderButtonControl? _selectedCampainButton;
+        private BugDefenderButtonControl? _selectedCampaignButton;
 
-        private PageHandler<BugDefenderButtonControl> _campainPageHandler;
+        private PageHandler<BugDefenderButtonControl> _campaignPageHandler;
 
-        [MemberNotNull(nameof(_campainPreviewTile), nameof(_campainNameLabel), nameof(_campainDescriptionTextbox),
-            nameof(_startButton), nameof(_campainPageHandler),
+        [MemberNotNull(nameof(_campaignPreviewTile), nameof(_campaignNameLabel), nameof(_campaignDescriptionTextbox),
+            nameof(_startButton), nameof(_campaignPageHandler),
             nameof(_gameSaveName),
             nameof(_saveOverwriteWarningLabel))]
         public override void Initialize()
@@ -34,11 +34,11 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             BasicMenuPage.GenerateBaseMenu(
                 this,
                 Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                "Campain Game Setup",
-                "Select a campain to start playing!");
+                "Campaign Game Setup",
+                "Select a campaign to start playing!");
 
             SetupPreviewPanel(200, 225, 1060, 750);
-            SetupCampainsView(1060 + 200 + 10, 225, 445, 750);
+            SetupCampaignsView(1060 + 200 + 10, 225, 445, 750);
 
             _startButton = new BugDefenderButtonControl(Parent, StartButton_Click)
             {
@@ -72,7 +72,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             });
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CampainGameSetupView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CampaignGameSetupView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -88,7 +88,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             base.Initialize();
         }
 
-        [MemberNotNull(nameof(_campainPreviewTile), nameof(_campainNameLabel), nameof(_campainDescriptionTextbox), nameof(_gameSaveName), nameof(_saveOverwriteWarningLabel))]
+        [MemberNotNull(nameof(_campaignPreviewTile), nameof(_campaignNameLabel), nameof(_campaignDescriptionTextbox), nameof(_gameSaveName), nameof(_saveOverwriteWarningLabel))]
         private void SetupPreviewPanel(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
@@ -99,7 +99,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 Width = width,
                 FillColor = Parent.TextureController.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
             });
-            _campainPreviewTile = new TileControl()
+            _campaignPreviewTile = new TileControl()
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
                 X = x + 50,
@@ -107,15 +107,15 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 Width = 960,
                 Height = 540,
             };
-            AddControl(1, new BorderControl(_campainPreviewTile)
+            AddControl(1, new BorderControl(_campaignPreviewTile)
             {
                 Thickness = 3,
                 BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
 
-            _campainNameLabel = new LabelControl()
+            _campaignNameLabel = new LabelControl()
             {
-                Text = "Select A Campain",
+                Text = "Select A Campaign",
                 Font = BasicFonts.GetFont(16),
                 X = x + 50,
                 Y = y + 10,
@@ -123,8 +123,8 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 Width = (width - 100) / 2,
                 FontColor = Color.White,
             };
-            AddControl(1, _campainNameLabel);
-            _campainDescriptionTextbox = new TextboxControl()
+            AddControl(1, _campaignNameLabel);
+            _campaignDescriptionTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(10),
                 X = x + 50,
@@ -133,7 +133,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 Width = (width - 100) / 2,
                 FontColor = Color.White
             };
-            AddControl(1, _campainDescriptionTextbox);
+            AddControl(1, _campaignDescriptionTextbox);
 
             AddControl(1, new LabelControl()
             {
@@ -175,8 +175,8 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             AddControl(1, _saveOverwriteWarningLabel);
         }
 
-        [MemberNotNull(nameof(_campainPageHandler))]
-        private void SetupCampainsView(float x, float y, float width, float height)
+        [MemberNotNull(nameof(_campaignPageHandler))]
+        private void SetupCampaignsView(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
             {
@@ -189,7 +189,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             AddControl(1, new LabelControl()
             {
                 Font = BasicFonts.GetFont(24),
-                Text = "Campains",
+                Text = "Campaigns",
                 X = x,
                 Y = y + 10,
                 Height = 50,
@@ -198,11 +198,11 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             });
 
             var controlList = new List<BugDefenderButtonControl>();
-            var ids = ResourceManager.Campains.GetResources();
+            var ids = ResourceManager.Campaigns.GetResources();
             foreach (var id in ids)
             {
-                var map = ResourceManager.Campains.GetResource(id);
-                controlList.Add(new BugDefenderButtonControl(Parent, SelectCampain_Click)
+                var map = ResourceManager.Campaigns.GetResource(id);
+                controlList.Add(new BugDefenderButtonControl(Parent, SelectCampaign_Click)
                 {
                     FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
@@ -214,7 +214,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                     Tag = map
                 });
             }
-            _campainPageHandler = new PageHandler<BugDefenderButtonControl>(this, controlList)
+            _campaignPageHandler = new PageHandler<BugDefenderButtonControl>(this, controlList)
             {
                 LeftButtonX = 10,
                 LeftButtonY = -50,
@@ -226,7 +226,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 Width = width,
                 Height = height
             };
-            AddControl(1, _campainPageHandler);
+            AddControl(1, _campaignPageHandler);
         }
     }
 }

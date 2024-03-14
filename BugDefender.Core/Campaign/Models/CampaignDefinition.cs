@@ -10,9 +10,9 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace BugDefender.Core.Campain.Models
+namespace BugDefender.Core.Campaign.Models
 {
-    public class CampainDefinition : IDefinition
+    public class CampaignDefinition : IDefinition
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
@@ -22,10 +22,10 @@ namespace BugDefender.Core.Campain.Models
         public GameStyleDefinition? GameStyle { get; set; }
         public int Reward { get; set; }
 
-        public CutsceneDefinition CampainOver { get; set; }
+        public CutsceneDefinition CampaignOver { get; set; }
 
         [JsonConstructor]
-        public CampainDefinition(Guid iD, string name, string description, List<ChapterDefinition> chapters, Guid baseGameStyle, GameStyleDefinition? gameStyle, CutsceneDefinition campainOver, int reward)
+        public CampaignDefinition(Guid iD, string name, string description, List<ChapterDefinition> chapters, Guid baseGameStyle, GameStyleDefinition? gameStyle, CutsceneDefinition campaignOver, int reward)
         {
             ID = iD;
             Name = name;
@@ -35,7 +35,7 @@ namespace BugDefender.Core.Campain.Models
             GameStyle = gameStyle;
             if (GameStyle == null)
                 GameStyle = ResourceManager.GameStyles.GetResource(BaseGameStyle);
-            CampainOver = campainOver;
+            CampaignOver = campaignOver;
             Reward = reward;
         }
 

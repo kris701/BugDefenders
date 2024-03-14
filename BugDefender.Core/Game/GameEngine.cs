@@ -47,10 +47,10 @@ namespace BugDefender.Core.Game
             Context = save.Context;
             if (save is ChallengeSavedGame challengeSave)
                 Criterias = ResourceManager.Challenges.GetResource(challengeSave.ChallengeID).Criterias;
-            if (save is CampainSavedGame campainSave)
+            if (save is CampaignSavedGame campaignSave)
             {
-                var campain = ResourceManager.Campains.GetResource(campainSave.CampainID);
-                var chapter = campain.Chapters.First(x => x.ID == campainSave.ChapterID);
+                var campaign = ResourceManager.Campaigns.GetResource(campaignSave.CampaignID);
+                var chapter = campaign.Chapters.First(x => x.ID == campaignSave.ChapterID);
                 Criterias = chapter.Criterias;
             }
 

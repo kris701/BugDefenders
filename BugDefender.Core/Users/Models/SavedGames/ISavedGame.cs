@@ -10,7 +10,7 @@ namespace BugDefender.Core.Users.Models.SavedGames
 {
     [JsonPolymorphic(TypeDiscriminatorPropertyName = "SaveType")]
     [JsonDerivedType(typeof(SurvivalSavedGame), typeDiscriminator: "Survival")]
-    [JsonDerivedType(typeof(CampainSavedGame), typeDiscriminator: "Campain")]
+    [JsonDerivedType(typeof(CampaignSavedGame), typeDiscriminator: "Campaign")]
     [JsonDerivedType(typeof(ChallengeSavedGame), typeDiscriminator: "Challenge")]
     public interface ISavedGame
     {

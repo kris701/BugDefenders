@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BugDefender.Core.Campain.Models
+namespace BugDefender.Core.Campaign.Models
 {
     public class ChapterDefinition
     {

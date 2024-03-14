@@ -50,14 +50,14 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
-            AddControl(0, new BugDefenderButtonControl(Parent, (x) => SwitchView(new CampainGameSetupView.CampainGameSetupView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, (x) => SwitchView(new CampaignGameSetupView.CampaignGameSetupView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 350,
                 Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
-                Text = "New Campain Game",
+                Text = "New Campaign Game",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });

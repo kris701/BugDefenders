@@ -31,7 +31,7 @@ namespace BugDefender.OpenGL.Views.LoadGameView
             {
                 case SurvivalSavedGame: typeStr = "(Survival) "; break;
                 case ChallengeSavedGame: typeStr = "(Challenge) "; break;
-                case CampainSavedGame: typeStr = "(Campain) "; break;
+                case CampaignSavedGame: typeStr = "(Campaign) "; break;
             }
             Children.Add(new LabelControl()
             {
@@ -55,9 +55,9 @@ namespace BugDefender.OpenGL.Views.LoadGameView
             });
             string continueText = "Continue";
             bool isEnabled = true;
-            if (saveGame is CampainSavedGame campain) {
-                isEnabled = !campain.IsCompleted;
-                if (campain.IsCompleted)
+            if (saveGame is CampaignSavedGame campaign) {
+                isEnabled = !campaign.IsCompleted;
+                if (campaign.IsCompleted)
                     continueText = "Completed!";
             }
             Children.Add(new ButtonControl(parent, clickedContinue)

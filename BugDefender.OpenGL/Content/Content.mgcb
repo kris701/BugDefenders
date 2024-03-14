@@ -205,7 +205,7 @@
 /processorParam:TextureFormat=Color
 /build:Achivements/wavesstarted_3.png
 
-#begin Campains/NormalCampain/conversationBox.png
+#begin Campaigns/StandardCampaign/conversationBox.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -215,9 +215,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Campains/NormalCampain/conversationBox.png
+/build:Campaigns/StandardCampaign/conversationBox.png
 
-#begin Campains/NormalCampain/normalConvoBackground.png
+#begin Campaigns/StandardCampaign/normalConvoBackground.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -227,9 +227,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Campains/NormalCampain/normalConvoBackground.png
+/build:Campaigns/StandardCampaign/normalConvoBackground.png
 
-#begin Campains/NormalCampain/titlescreen.png
+#begin Campaigns/StandardCampaign/titlescreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -239,9 +239,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Campains/NormalCampain/titlescreen.png
+/build:Campaigns/StandardCampaign/titlescreen.png
 
-#begin Campains/NormalCampain/unknown.png
+#begin Campaigns/StandardCampaign/unknown.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -251,9 +251,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Campains/NormalCampain/unknown.png
+/build:Campaigns/StandardCampaign/unknown.png
 
-#begin Campains/NormalCampain/winBackground.png
+#begin Campaigns/StandardCampaign/winBackground.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -263,9 +263,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Campains/NormalCampain/winBackground.png
+/build:Campaigns/StandardCampaign/winBackground.png
 
-#begin Campains/NormalCampain/you.png
+#begin Campaigns/StandardCampaign/you.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -275,7 +275,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Campains/NormalCampain/you.png
+/build:Campaigns/StandardCampaign/you.png
 
 #begin Common/background.png
 /importer:TextureImporter
@@ -1519,6 +1519,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Views/GameView/turretPuchaseButton.png
+
+#begin Views/GameView/turretStatsField.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Views/GameView/turretStatsField.png
 
 #begin Views/GameView/turretStatsField.png
 /importer:TextureImporter

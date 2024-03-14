@@ -1,4 +1,4 @@
-﻿using BugDefender.Core.Campain.Models;
+﻿using BugDefender.Core.Campaign.Models;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Engine.Views;

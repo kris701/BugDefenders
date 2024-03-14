@@ -1,4 +1,4 @@
-﻿using BugDefender.Core.Campain.Models;
+﻿using BugDefender.Core.Campaign.Models;
 using BugDefender.Core.Game;
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
@@ -42,23 +42,23 @@ namespace BugDefender.OpenGL
                     gameSave,
                     OnChallengeOver));
             }
-            else if (gameSave is CampainSavedGame campainGame)
+            else if (gameSave is CampaignSavedGame campaignGame)
             {
-                if (campainGame.IsCompleted)
+                if (campaignGame.IsCompleted)
                     return;
-                var campain = ResourceManager.Campains.GetResource(campainGame.CampainID);
-                if (campainGame.ChapterID == Guid.Empty)
+                var campaign = ResourceManager.Campaigns.GetResource(campaignGame.CampaignID);
+                if (campaignGame.ChapterID == Guid.Empty)
                 {
-                    var currentChapter = campain.Chapters[0];
-                    campainGame.ChapterID = currentChapter.ID;
-                    from.SwitchView(new CutsceneView(Parent, campainGame, currentChapter.Intro, OnCampainConversationOver));
+                    var currentChapter = campaign.Chapters[0];
+                    campaignGame.ChapterID = currentChapter.ID;
+                    from.SwitchView(new CutsceneView(Parent, campaignGame, currentChapter.Intro, OnCampaignConversationOver));
                 }
                 else
                 {
                     from.SwitchView(new GameScreen(
                         Parent,
                         gameSave,
-                        OnCampainGameOver));
+                        OnCampaignGameOver));
                 }
             }
         }
@@ -111,73 +111,74 @@ namespace BugDefender.OpenGL
             view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, game.Context.Stats, "Game Over!"));
         }
 
-        private void OnCampainGameOver(IView view, GameEngine game, ISavedGame gameSave)
+        private void OnCampaignGameOver(IView view, GameEngine game, ISavedGame gameSave)
         {
-            if (gameSave is CampainSavedGame campainSave)
+            if (gameSave is CampaignSavedGame campaignSave)
             {
                 var result = game.Result;
 #if RELEASE
             if (CheatsHelper.Cheats.Count == 0)
             {
 #endif
-                var campain = ResourceManager.Campains.GetResource(campainSave.CampainID);
-                var currentChapter = campain.Chapters.First(x => x.ID == campainSave.ChapterID);
+                var campaign = ResourceManager.Campaigns.GetResource(campaignSave.CampaignID);
+                var currentChapter = campaign.Chapters.First(x => x.ID == campaignSave.ChapterID);
                 if (result == GameResult.Success)
                 {
-                    campainSave.Stats.Combine(game.Context.Stats);
+                    campaignSave.Stats.Combine(game.Context.Stats);
                     AddStatsToUser(game.Context.Stats);
                     Parent.UserManager.SaveUser();
                     if (currentChapter.NextChapterID == null)
                     {
-                        campainSave.ChapterID = Guid.Empty;
-                        campainSave.IsCompleted = true;
-                        campainSave.Context = null;
+                        campaignSave.ChapterID = Guid.Empty;
+                        campaignSave.IsCompleted = true;
+                        campaignSave.Context = null;
+                        campaignSave.Stats.Credits += campaign.Reward;
                         Parent.UserManager.SaveGame(gameSave);
-                        Parent.UserManager.CurrentUser.Credits += campain.Reward;
+                        Parent.UserManager.CurrentUser.Credits += campaign.Reward;
                         Parent.UserManager.SaveUser();
-                        view.SwitchView(new CutsceneView(Parent, campainSave, campain.CampainOver, OnCampainConversationOver));
+                        view.SwitchView(new CutsceneView(Parent, campaignSave, campaign.CampaignOver, OnCampaignConversationOver));
                     }
                     else
                     {
-                        currentChapter = campain.Chapters.First(x => x.ID == currentChapter.NextChapterID);
-                        campainSave.ChapterID = currentChapter.ID;
-                        gameSave.Context = campain.GetContextForChapter(currentChapter);
+                        currentChapter = campaign.Chapters.First(x => x.ID == currentChapter.NextChapterID);
+                        campaignSave.ChapterID = currentChapter.ID;
+                        gameSave.Context = campaign.GetContextForChapter(currentChapter);
                         Parent.UserManager.SaveGame(gameSave);
-                        view.SwitchView(new CutsceneView(Parent, campainSave, currentChapter.Intro, OnCampainConversationOver));
+                        view.SwitchView(new CutsceneView(Parent, campaignSave, currentChapter.Intro, OnCampaignConversationOver));
                     }
                 }
                 else
                 {
-                    gameSave.Context = campain.GetContextForChapter(currentChapter);
+                    gameSave.Context = campaign.GetContextForChapter(currentChapter);
                     Parent.UserManager.SaveGame(gameSave);
                 }
 #if RELEASE
             }
 #endif
                 var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-                view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, campainSave.Stats, "Campaign Lost!"));
+                view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, campaignSave.Stats, "Campaign Lost!"));
             }
         }
 
-        private void OnCampainConversationOver(IView view, ISavedGame gameSave)
+        private void OnCampaignConversationOver(IView view, ISavedGame gameSave)
         {
-            if (gameSave is CampainSavedGame campainSave)
+            if (gameSave is CampaignSavedGame campaignSave)
             {
-                if (campainSave.ChapterID == Guid.Empty)
+                if (campaignSave.IsCompleted)
                 {
-                    var screen = Parent.TextureController.GetTexture(campainSave.CampainID);
-                    view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, campainSave.Stats, "Campaign Won!"));
+                    var screen = Parent.TextureController.GetTexture(campaignSave.CampaignID);
+                    view.SwitchView(new Screens.GameOverScreen.GameOverView(Parent, screen, campaignSave.Stats, "Campaign Won!"));
                 }
                 else
                 {
-                    var campain = ResourceManager.Campains.GetResource(campainSave.CampainID);
-                    var currentChapter = campain.Chapters.First(x => x.ID == campainSave.ChapterID);
-                    gameSave.Context = campain.GetContextForChapter(currentChapter);
+                    var campaign = ResourceManager.Campaigns.GetResource(campaignSave.CampaignID);
+                    var currentChapter = campaign.Chapters.First(x => x.ID == campaignSave.ChapterID);
+                    gameSave.Context = campaign.GetContextForChapter(currentChapter);
                     Parent.UserManager.SaveGame(gameSave);
                     view.SwitchView(new GameScreen(
                         Parent,
                         gameSave,
-                        OnCampainGameOver));
+                        OnCampaignGameOver));
                 }
             }
         }
