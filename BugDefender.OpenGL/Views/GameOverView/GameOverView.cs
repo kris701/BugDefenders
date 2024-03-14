@@ -26,13 +26,15 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private readonly List<string> _linesToShow;
         private int _lineIndex = 0;
         private TimeSpan _passed = TimeSpan.FromSeconds(1);
-        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, GameContext context, int credits, GameResult result, float difficulty) : base(parent, _id)
+        private string _title;
+        public GameOverView(BugDefenderGameWindow parent, Texture2D screen, GameContext context, int credits, GameResult result, float difficulty, string title) : base(parent, _id)
         {
             _screen = screen;
             _context = context;
             _credits = credits;
             _gameResult = result;
             _difficulty = difficulty;
+            _title = title;
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });
 
             Parent.UserManager.CurrentUser.HighScores.Add(new ScoreDefinition(

@@ -176,19 +176,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 100
             });
 
-            AddControl(101, new BugDefenderButtonControl(Parent, clicked: (x) => { GoToMainMenu(); })
-            {
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
-                Text = $"Exit",
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset + 10,
-                Y = yOffset + 90,
-                Height = 30,
-                Width = 100
-            });
             _saveAndExitButton = new BugDefenderButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),

@@ -23,11 +23,6 @@ namespace BugDefender.Core.Campain
             if (CurrentCampain.GameStyle == null)
                 throw new Exception("Gamestyle was not set correctly!");
             CurrentChapter = CurrentCampain.Chapters[0];
-            CurrentGame = new GameEngine(new GameContext(
-                ResourceManager.Maps.GetResource(CurrentChapter.MapID),
-                CurrentCampain.GameStyle),
-                CurrentChapter.Criterias
-                );
         }
 
         public CampainEngine(CampainSavedGame game)
@@ -43,7 +38,6 @@ namespace BugDefender.Core.Campain
                 chapter.Effect.ApplyUpgradeEffectOnObject(CurrentCampain.GameStyle);
                 CurrentChapter = chapter;
             }
-            CurrentGame = new GameEngine(game.Context);
         }
 
         public void GameOver()

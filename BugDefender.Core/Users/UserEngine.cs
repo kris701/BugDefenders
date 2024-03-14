@@ -150,10 +150,27 @@ namespace BugDefender.Core.Users
             File.WriteAllText(target, Serialize(CurrentUser));
         }
 
+        public bool SaveExists(string name) => CurrentUser.SavedGames.Any(x => x.Name == name);
+
+        public void RemoveGame(ISavedGame save)
+        {
+            if (!save.Context.CanSave())
+                throw new Exception("Game still running! Cant save");
+
+            var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == save.Name);
+            if (target != null)
+            {
+                CurrentUser.SavedGames.Remove(save);
+                SaveUser();
+            }
+        }
+
         public void SaveGame(ISavedGame save)
         {
             if (!save.Context.CanSave())
                 throw new Exception("Game still running! Cant save");
+
+            save.Date = DateTime.Now;
 
             var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == save.Name);
             if (target != null)

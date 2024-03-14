@@ -13,10 +13,10 @@ namespace BugDefender.OpenGL.Screens.MainMenu
     public partial class MainMenuView : BaseBugDefenderView
     {
         private BugDefenderButtonControl _startGameButton;
-        private BugDefenderButtonControl _continueButton;
+        private BugDefenderButtonControl _loadGameButton;
         private TextInputControl _cheatsInput;
 
-        [MemberNotNull(nameof(_startGameButton), nameof(_continueButton), nameof(_cheatsInput))]
+        [MemberNotNull(nameof(_startGameButton), nameof(_loadGameButton), nameof(_cheatsInput))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -41,27 +41,26 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Text = "Bug Defenders",
                 FontColor = Color.White,
             });
-            _continueButton = new BugDefenderButtonControl(Parent, ContinueGame)
-            {
-                X = 960 - 300,
-                Y = 300,
-                Width = 300,
-                Height = 50,
-                Font = BasicFonts.GetFont(24),
-                Text = "Continue Game",
-                FontColor = Color.White,
-                FillClickedColor = BasicTextures.GetClickedTexture(),
-                IsVisible = false
-            };
-            AddControl(0, _continueButton);
-            _startGameButton = new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
+            _loadGameButton = new BugDefenderButtonControl(Parent, (x) => SwitchView(new LoadGameView.LoadGameView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 300,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
-                Text = "Start Game",
+                Text = "Load Game",
+                FontColor = Color.White,
+                FillClickedColor = BasicTextures.GetClickedTexture()
+            };
+            AddControl(0, _loadGameButton);
+            _startGameButton = new BugDefenderButtonControl(Parent, (x) => SwitchView(new GameSetupView.GameSetupView(Parent)))
+            {
+                HorizontalAlignment = HorizontalAlignment.Middle,
+                Y = 350,
+                Width = 300,
+                Height = 50,
+                Font = BasicFonts.GetFont(24),
+                Text = "New Survival Game",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
             };
@@ -69,7 +68,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new SettingsView.SettingsView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 350,
+                Y = 400,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
@@ -80,7 +79,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new HighScoresView.HighScoresView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 400,
+                Y = 450,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
@@ -91,7 +90,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new PermaBuffsView.PermaBuffsView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 450,
+                Y = 500,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
@@ -102,7 +101,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new AchivementsView.AchivementsView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 500,
+                Y = 550,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
@@ -113,7 +112,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new ChallengeView.ChallengeView(Parent)))
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 550,
+                Y = 600,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
@@ -124,7 +123,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => (Parent as Game).Exit())
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
-                Y = 600,
+                Y = 650,
                 Width = 300,
                 Height = 50,
                 Font = BasicFonts.GetFont(24),

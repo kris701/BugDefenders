@@ -34,9 +34,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseBugDefenderView
     {
+        public Action<GameEngine, ISavedGame> OnGameEnd { get; }
+        public ISavedGame GameSave { get; }
+
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         public static Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
-        private static readonly string _saveDir = "Saves";
 
         private readonly EntityUpdater<TurretInstance, TurretControl> _turretUpdater;
         private readonly EntityUpdater<EnemyInstance, EnemyControl> _enemyUpdater;
@@ -63,11 +65,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _unselectTurret = false;
         private bool _selectTurret = false;
         private TimeSpan _hurtGameAreaTileShowTime = TimeSpan.Zero;
-        private ISavedGame _gameSave;
 
-        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave) : base(parent, _id)
+        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave, Action<GameEngine, ISavedGame> onGameEnd) : base(parent, _id)
         {
-            _gameSave = newGameSave;
+            GameSave = newGameSave;
+            Parent.UserManager.SaveGame(newGameSave);
             _game = new GameEngine(newGameSave);
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
@@ -108,6 +110,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _gameTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(33), OnUpdateGame);
             Initialize();
             Parent.AudioController.PlaySong(ID);
+            OnGameEnd = onGameEnd;
 
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
@@ -692,25 +695,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
         }
 
-        private void SaveGame()
-        {
-            if (_game.Context.CanSave())
-                Parent.UserManager.SaveGame(_gameSave);
-        }
-
         private void SaveAndGoToMainMenu()
         {
             if (_game.Context.CanSave())
             {
-                SaveGame();
-                GoToMainMenu();
+                Parent.UserManager.SaveGame(GameSave);
+                Parent.AudioController.StopSounds();
+                SwitchView(new MainMenu.MainMenuView(Parent));
             }
-        }
-
-        private void GoToMainMenu()
-        {
-            Parent.AudioController.StopSounds();
-            SwitchView(new MainMenu.MainMenuView(Parent));
         }
 
         private void GameOver()
@@ -718,33 +710,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (!_gameOverCheck)
             {
                 _gameOverCheck = true;
-                var credits = 0;
-                var result = _game.Result;
-#if RELEASE
-                if (CheatsHelper.Cheats.Count == 0)
-                {
-#endif
-                if (result == GameResult.Success)
-                {
-                    if (_gameSave is ChallengeSavedGame c)
-                    {
-                        var challenge = ResourceManager.Challenges.GetResource(c.ChallengeID);
-                        credits += challenge.Reward;
-                        Parent.UserManager.CurrentUser.CompletedChallenges.Add(c.ChallengeID);
-                    }
-
-                    Parent.UserManager.CurrentUser.Stats.Combine(_game.Context.Stats);
-                    credits += (_game.Context.Score / 100);
-                    Parent.UserManager.CurrentUser.Credits += credits;
-                    Parent.UserManager.CheckAndApplyAchivements();
-                    Parent.UserManager.SaveUser();
-                }
-#if RELEASE
-                }
-#endif
                 Parent.AudioController.StopSounds();
-                var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
-                SwitchView(new GameOverScreen.GameOverView(Parent, screen, _game.Context, credits, _game.Result, _game.Context.Map.GetDifficultyRating() * _game.Context.GameStyle.GetDifficultyRating()));
+                OnGameEnd.Invoke(_game, GameSave);
             }
         }
 

@@ -1,13 +1,17 @@
-﻿using BugDefender.Core.Game.Models.GameStyles;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
+using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text;
+using System.Xml.Linq;
 
 namespace BugDefender.OpenGL.Screens.GameSetupView
 {
@@ -34,7 +38,39 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != null && _selectedGameStyle != null)
-                SwitchView(new GameScreen.GameScreen(Parent, _selectedMap.ID, _selectedGameStyle.ID));
+                SwitchView(new GameScreen.GameScreen(Parent, new SurvivalSavedGame(_gameSaveName.Text, DateTime.Now, new GameContext(_selectedMap.ID, _selectedGameStyle.ID)), OnGameOver));
+        }
+
+        private void NameKeyDown(TextInputControl sender)
+        {
+            if (Parent.UserManager.SaveExists(sender.Text))
+                _saveOverwriteWarningLabel.IsVisible = true;
+            else
+                _saveOverwriteWarningLabel.IsVisible = false;
+        }
+
+        private void OnGameOver(GameEngine game, ISavedGame gameSave)
+        {
+            var credits = 0;
+            var result = game.Result;
+#if RELEASE
+            if (CheatsHelper.Cheats.Count == 0)
+            {
+#endif
+                if (result == GameResult.Success)
+                {
+                    Parent.UserManager.CurrentUser.Stats.Combine(game.Context.Stats);
+                    credits += (game.Context.Score / 100);
+                    Parent.UserManager.CurrentUser.Credits += credits;
+                    Parent.UserManager.CheckAndApplyAchivements();
+                    Parent.UserManager.SaveUser();
+                }
+#if RELEASE
+            }
+#endif
+            Parent.UserManager.RemoveGame(gameSave);
+            var screen = GameScreenHelper.TakeScreenCap(Parent.GraphicsDevice, Parent);
+            SwitchView(new GameOverScreen.GameOverView(Parent, screen, game.Context, credits, game.Result, game.Context.Map.GetDifficultyRating() * game.Context.GameStyle.GetDifficultyRating(), "Game Over!"));
         }
 
         private void SelectMap_Click(ButtonControl sender)
