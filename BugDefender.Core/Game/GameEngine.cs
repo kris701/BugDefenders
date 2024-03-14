@@ -45,8 +45,14 @@ namespace BugDefender.Core.Game
         public GameEngine(ISavedGame save)
         {
             Context = save.Context;
-            if (save is ChallengeSavedGame c)
-                Criterias = ResourceManager.Challenges.GetResource(c.ChallengeID).Criterias;
+            if (save is ChallengeSavedGame challengeSave)
+                Criterias = ResourceManager.Challenges.GetResource(challengeSave.ChallengeID).Criterias;
+            if (save is CampainSavedGame campainSave)
+            {
+                var campain = ResourceManager.Campains.GetResource(campainSave.CampainID);
+                var chapter = campain.Chapters.First(x => x.ID == campainSave.ChapterID);
+                Criterias = chapter.Criterias;
+            }
 
             _mainLoopTimer = new GameTimer(TimeSpan.FromMilliseconds(30), MainLoop);
             _criteriaTimer = new GameTimer(TimeSpan.FromSeconds(1), CheckCriterias);

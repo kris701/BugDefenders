@@ -5,7 +5,7 @@
   "Chapters": [
     {
       "ID": "ff91a518-876e-4421-9890-51609109cf07",
-      "NextChapterID": null,
+      "NextChapterID": "88ea3655-0251-4266-b44b-84b699f57a53",
       "Name": "Chapter 1",
       "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
       "Intro": {
@@ -23,15 +23,39 @@
       "Criterias": [
         {
           "CriteriaType": "Kills",
-          "Quantity": 100
+          "Quantity": 1
         }
       ],
       "Effect": {
         "Effects": [
+        ]
+      }
+    },
+    {
+      "ID": "88ea3655-0251-4266-b44b-84b699f57a53",
+      "NextChapterID": null,
+      "Name": "Chapter 2",
+      "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
+      "Intro": {
+        "Conversation": [
           {
-            "Target": "Damage",
-            "Modifier": 1.05
+            "From": "Unknown",
+            "Text": "Hello there stranger again"
+          },
+          {
+            "From": "You",
+            "Text": "Who are you?"
           }
+        ]
+      },
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 1
+        }
+      ],
+      "Effect": {
+        "Effects": [
         ]
       }
     }

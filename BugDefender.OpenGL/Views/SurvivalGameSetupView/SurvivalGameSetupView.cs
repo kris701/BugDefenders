@@ -14,9 +14,9 @@ using System;
 using System.Text;
 using System.Xml.Linq;
 
-namespace BugDefender.OpenGL.Screens.GameSetupView
+namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
 {
-    public partial class GameSetupView : BaseBugDefenderView
+    public partial class SurvivalGameSetupView : BaseBugDefenderView
     {
         private static readonly Guid _id = new Guid("1ccc48ee-6738-45cd-ae14-50d3d0896dc0");
 
@@ -24,7 +24,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
         private MapDefinition? _selectedMap;
         private readonly KeyWatcher _escapeKeyWatcher;
 
-        public GameSetupView(BugDefenderGameWindow parent) : base(parent, _id)
+        public SurvivalGameSetupView(BugDefenderGameWindow parent) : base(parent, _id)
         {
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, () => { SwitchView(new MainMenu.MainMenuView(Parent)); });

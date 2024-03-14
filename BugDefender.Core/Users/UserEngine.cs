@@ -154,9 +154,6 @@ namespace BugDefender.Core.Users
 
         public void RemoveGame(ISavedGame save)
         {
-            if (!save.Context.CanSave())
-                throw new Exception("Game still running! Cant save");
-
             var target = CurrentUser.SavedGames.SingleOrDefault(x => x.Name == save.Name);
             if (target != null)
             {
@@ -167,7 +164,7 @@ namespace BugDefender.Core.Users
 
         public void SaveGame(ISavedGame save)
         {
-            if (!save.Context.CanSave())
+            if (save.Context != null && !save.Context.CanSave())
                 throw new Exception("Game still running! Cant save");
 
             save.Date = DateTime.Now;

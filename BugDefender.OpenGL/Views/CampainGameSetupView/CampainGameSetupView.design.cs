@@ -10,40 +10,35 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace BugDefender.OpenGL.Screens.GameSetupView
+namespace BugDefender.OpenGL.Screens.CampainGameSetupView
 {
-    public partial class GameSetupView : BaseBugDefenderView
+    public partial class CampainGameSetupView : BaseBugDefenderView
     {
-        private TileControl _mapPreviewTile;
-        private LabelControl _mapNameLabel;
-        private TextboxControl _mapDescriptionTextbox;
-        private TextboxControl _gameStyleDescriptionTextbox;
+        private TileControl _campainPreviewTile;
+        private LabelControl _campainNameLabel;
+        private TextboxControl _campainDescriptionTextbox;
         private BugDefenderButtonControl _startButton;
-        private LabelControl _totalDifficultyLabel;
         private TextInputControl _gameSaveName;
         private LabelControl _saveOverwriteWarningLabel;
 
-        private BugDefenderButtonControl? _selectedGameStyleButton;
-        private BugDefenderButtonControl? _selectedMapButton;
+        private BugDefenderButtonControl? _selectedCampainButton;
 
-        private PageHandler<BugDefenderButtonControl> _mapPageHandler;
-        private PageHandler<BugDefenderButtonControl> _gamestylePageHandler;
+        private PageHandler<BugDefenderButtonControl> _campainPageHandler;
 
-        [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
-            nameof(_startButton), nameof(_mapPageHandler), nameof(_gamestylePageHandler),
-            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel), nameof(_gameSaveName),
+        [MemberNotNull(nameof(_campainPreviewTile), nameof(_campainNameLabel), nameof(_campainDescriptionTextbox),
+            nameof(_startButton), nameof(_campainPageHandler),
+            nameof(_gameSaveName),
             nameof(_saveOverwriteWarningLabel))]
         public override void Initialize()
         {
             BasicMenuPage.GenerateBaseMenu(
                 this,
                 Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
-                "Survival Game Setup",
-                "Select a map and a gamestyle to start.");
+                "Campain Game Setup",
+                "Select a campain to start playing!");
 
             SetupPreviewPanel(50, 225, 900, 750);
-            SetupMapsView(965, 225, 445, 750);
-            SetupGameStyleView(1425, 225, 445, 750);
+            SetupCampainsView(965, 225, 445, 750);
 
             _startButton = new BugDefenderButtonControl(Parent, StartButton_Click)
             {
@@ -104,7 +99,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             });
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new GameSetupView(Parent)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CampainGameSetupView(Parent)))
             {
                 X = 0,
                 Y = 0,
@@ -120,8 +115,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             base.Initialize();
         }
 
-        [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
-            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel))]
+        [MemberNotNull(nameof(_campainPreviewTile), nameof(_campainNameLabel), nameof(_campainDescriptionTextbox))]
         private void SetupPreviewPanel(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
@@ -132,7 +126,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 FillColor = Parent.TextureController.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
             });
-            _mapPreviewTile = new TileControl()
+            _campainPreviewTile = new TileControl()
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
                 X = x + 50,
@@ -140,15 +134,15 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = height - 300,
                 Height = height - 300,
             };
-            AddControl(1, new BorderControl(_mapPreviewTile)
+            AddControl(1, new BorderControl(_campainPreviewTile)
             {
                 Thickness = 3,
                 BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
 
-            _mapNameLabel = new LabelControl()
+            _campainNameLabel = new LabelControl()
             {
-                Text = "Select A Map",
+                Text = "Select A Campain",
                 Font = BasicFonts.GetFont(16),
                 X = x + 50,
                 Y = y + 50,
@@ -156,9 +150,9 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = height - 300,
                 FontColor = Color.White,
             };
-            AddControl(1, _mapNameLabel);
+            AddControl(1, _campainNameLabel);
             var boxHeight = height / 2;
-            _mapDescriptionTextbox = new TextboxControl()
+            _campainDescriptionTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(10),
                 X = x + (height - 300) + 75,
@@ -167,32 +161,11 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width - 550,
                 FontColor = Color.White
             };
-            AddControl(1, _mapDescriptionTextbox);
-            _gameStyleDescriptionTextbox = new TextboxControl()
-            {
-                Font = BasicFonts.GetFont(10),
-                X = x + (height - 300) + 75,
-                Y = y + 50 + boxHeight / 2 + 100,
-                Height = boxHeight - 100,
-                Width = width - 550,
-                FontColor = Color.White
-            };
-            AddControl(1, _gameStyleDescriptionTextbox);
-            _totalDifficultyLabel = new LabelControl()
-            {
-                Text = "Total Difficulty: ...",
-                Font = BasicFonts.GetFont(12),
-                X = x + 50,
-                Y = y + height - 150,
-                Height = 50,
-                Width = height - 300,
-                FontColor = Color.White,
-            };
-            AddControl(1, _totalDifficultyLabel);
+            AddControl(1, _campainDescriptionTextbox);
         }
 
-        [MemberNotNull(nameof(_mapPageHandler))]
-        private void SetupMapsView(float x, float y, float width, float height)
+        [MemberNotNull(nameof(_campainPageHandler))]
+        private void SetupCampainsView(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
             {
@@ -205,7 +178,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             AddControl(1, new LabelControl()
             {
                 Font = BasicFonts.GetFont(24),
-                Text = "Maps",
+                Text = "Campains",
                 X = x,
                 Y = y + 10,
                 Height = 50,
@@ -214,11 +187,11 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
             });
 
             var controlList = new List<BugDefenderButtonControl>();
-            var ids = ResourceManager.Maps.GetResources();
+            var ids = ResourceManager.Campains.GetResources();
             foreach (var id in ids)
             {
-                var map = ResourceManager.Maps.GetResource(id);
-                controlList.Add(new BugDefenderButtonControl(Parent, SelectMap_Click)
+                var map = ResourceManager.Campains.GetResource(id);
+                controlList.Add(new BugDefenderButtonControl(Parent, SelectCampain_Click)
                 {
                     FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                     FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
@@ -230,7 +203,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                     Tag = map
                 });
             }
-            _mapPageHandler = new PageHandler<BugDefenderButtonControl>(this, controlList)
+            _campainPageHandler = new PageHandler<BugDefenderButtonControl>(this, controlList)
             {
                 LeftButtonX = 10,
                 LeftButtonY = -50,
@@ -242,62 +215,7 @@ namespace BugDefender.OpenGL.Screens.GameSetupView
                 Width = width,
                 Height = height
             };
-            AddControl(1, _mapPageHandler);
-        }
-
-
-        [MemberNotNull(nameof(_gamestylePageHandler))]
-        private void SetupGameStyleView(float x, float y, float width, float height)
-        {
-            AddControl(1, new TileControl()
-            {
-                X = x,
-                Y = y,
-                Height = height,
-                Width = width,
-                FillColor = Parent.TextureController.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
-            });
-            AddControl(1, new LabelControl()
-            {
-                Font = BasicFonts.GetFont(24),
-                Text = "Game Styles",
-                X = x,
-                Y = y + 10,
-                Height = 50,
-                Width = width,
-                FontColor = Color.White
-            });
-
-            var controlList = new List<BugDefenderButtonControl>();
-            var ids = ResourceManager.GameStyles.GetResources();
-            foreach (var id in ids)
-            {
-                var gameStyle = ResourceManager.GameStyles.GetResource(id);
-                controlList.Add(new BugDefenderButtonControl(Parent, SelectGameStyle_Click)
-                {
-                    FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    Font = BasicFonts.GetFont(12),
-                    Text = $"{gameStyle.Name}",
-                    FontColor = Color.White,
-                    Height = 50,
-                    Width = width - 20,
-                    Tag = gameStyle
-                });
-            }
-            _gamestylePageHandler = new PageHandler<BugDefenderButtonControl>(this, controlList)
-            {
-                LeftButtonX = 10,
-                LeftButtonY = -50,
-                RightButtonX = width - 80,
-                RightButtonY = -50,
-                ItemsPrPage = 12,
-                X = x + 10,
-                Y = y + 70,
-                Width = width,
-                Height = height
-            };
-            AddControl(1, _gamestylePageHandler);
+            AddControl(1, _campainPageHandler);
         }
     }
 }

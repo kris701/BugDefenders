@@ -1,6 +1,7 @@
 ﻿using BugDefender.Core.Game;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Users.Models.SavedGames;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace BugDefender.Core.Tests.Game.Modules
         internal static GameEngine GetBaseGame()
         {
             return new GameEngine(
-                new GameContext(
+                new SurvivalSavedGame("", DateTime.Now, new GameContext(
                     new MapDefinition(
                         Guid.NewGuid(),
                         "Empty",
@@ -44,7 +45,7 @@ namespace BugDefender.Core.Tests.Game.Modules
                         1,
                         1
                     )
-                )
+                ))
             );
         }
     }

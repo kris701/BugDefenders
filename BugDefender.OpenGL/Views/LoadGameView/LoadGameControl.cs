@@ -53,6 +53,9 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Text = saveGame.Date.ToString(),
                 FontColor = Color.White
             });
+            bool isEnabled = true;
+            if (saveGame is CampainSavedGame campain)
+                isEnabled = !campain.IsCompleted;
             Children.Add(new ButtonControl(parent, clickedContinue)
             {
                 X = 20,
@@ -64,7 +67,9 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 FontColor = Color.White,
                 FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                Tag = saveGame
+                FillDisabledColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                Tag = saveGame,
+                IsEnabled = isEnabled
             });
             Children.Add(new ButtonControl(parent, removeClick)
             {
