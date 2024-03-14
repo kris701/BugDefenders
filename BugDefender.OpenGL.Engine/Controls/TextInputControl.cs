@@ -38,7 +38,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         private readonly List<Keys> _legalCharacters = new List<Keys>()
         {
             Keys.A, Keys.B, Keys.C,
-            Keys.D, Keys.E, Keys.F,
+            Keys.D, Keys.E, Keys.F, Keys.G,
             Keys.H, Keys.I, Keys.J,
             Keys.K, Keys.L, Keys.M,
             Keys.N, Keys.O, Keys.P,
@@ -88,8 +88,11 @@ namespace BugDefender.OpenGL.Engine.Controls
                         {
                             if (!keys.Any(x => x == Keys.Enter))
                                 _keyDownSoundElement.Trigger();
-                            if (newText.Length > 0 && key == Keys.Back)
-                                newText = newText.Remove(newText.Length - 1);
+                            if (key == Keys.Back)
+                            {
+                                if (newText.Length > 0)
+                                    newText = newText.Remove(newText.Length - 1);
+                            }
                             else if (Limit != 0 && newText.Length < Limit)
                             {
                                 switch (key)

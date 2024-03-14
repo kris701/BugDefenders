@@ -14,12 +14,27 @@
           {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
             "From": "Unknown",
-            "Text": "Hello there stranger"
+            "Text": "You have to save us all! The bugs are invading rapidly!"
           },
           {
             "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
             "From": "You",
             "Text": "Who are you?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "From": "Unknown",
+            "Text": "My identity is not important. Whats more important is this blueprint of a turret."
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "From": "You",
+            "Text": "Bullets huh, a little old school isnt it?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "From": "Unknown",
+            "Text": "Its all i can get together for now, but give me some time and i will find more turret blueprints for you."
           }
         ]
       },
@@ -29,6 +44,11 @@
           "Quantity": 1
         }
       ],
+      "GameStyleEffect": {
+        "Effects": [
+
+        ]
+      },
       "AddsTurrets": [ "468b3259-bd65-4aa1-9e40-5fb5e455b847" ],
       "AddsEnemies": [ "86d3f9ae-cd87-4ce7-ba70-87139f378da2" ]
     },
@@ -41,14 +61,39 @@
         "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
         "Conversation": [
           {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "From": "You",
+            "Text": "I think i got them all."
+          },
+          {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
             "From": "Unknown",
-            "Text": "Hello there stranger again"
+            "Text": "Fantastic! I wish i had good news through..."
           },
           {
             "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
             "From": "You",
-            "Text": "Who are you again?"
+            "Text": "Whats the problem?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "From": "Unknown",
+            "Text": "The bugs have evolved. They have learned to fly! And these simple gatling turrets cannot shoot upwards!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "From": "You",
+            "Text": "Thats a bit of a weird design choice isnt it???"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "From": "Unknown",
+            "Text": "Nevermind that! As a stopgap measure, i have cobbled together a laser turret blueprint. And this one can shoot both the bugs on the ground and those in the sky!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "From": "You",
+            "Text": "Great! Time to squish more bugs!"
           }
         ]
       },
@@ -58,6 +103,11 @@
           "Quantity": 1
         }
       ],
+      "GameStyleEffect": {
+        "Effects": [
+
+        ]
+      },
       "AddsTurrets": [],
       "AddsEnemies": []
     }

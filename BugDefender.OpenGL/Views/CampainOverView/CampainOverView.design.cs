@@ -26,7 +26,6 @@ namespace BugDefender.OpenGL.Screens.CampainOverView
             string title = "Campain Over...";
             if (_won)
                 title = "Campain Won!";
-
             AddControl(1, new LabelControl()
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
@@ -34,6 +33,18 @@ namespace BugDefender.OpenGL.Screens.CampainOverView
                 FontColor = Color.White,
                 Font = BasicFonts.GetFont(48),
                 Text = title
+            });
+            AddControl(1, new BorderControl(new TileControl()
+            {
+                X = 100,
+                Y = 250,
+                Width = 960,
+                Height = 540,
+                FillColor = Parent.TextureController.GetTexture(_saveGame.CampainID)
+            })
+            {
+                Thickness = 5,
+                BorderBrush = BasicTextures.GetBasicRectange(Color.Blue)
             });
 
             AddControl(1, new TileControl()

@@ -229,6 +229,30 @@
 /processorParam:TextureFormat=Color
 /build:Campains/NormalCampain/normalConvoBackground.png
 
+#begin Campains/NormalCampain/titlescreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Campains/NormalCampain/titlescreen.png
+
+#begin Campains/NormalCampain/unknown.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Campains/NormalCampain/unknown.png
+
 #begin Campains/NormalCampain/winBackground.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -240,6 +264,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Campains/NormalCampain/winBackground.png
+
+#begin Campains/NormalCampain/you.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Campains/NormalCampain/you.png
 
 #begin Common/background.png
 /importer:TextureImporter

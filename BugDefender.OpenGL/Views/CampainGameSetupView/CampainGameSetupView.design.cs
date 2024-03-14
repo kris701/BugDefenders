@@ -37,8 +37,8 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 "Campain Game Setup",
                 "Select a campain to start playing!");
 
-            SetupPreviewPanel(50, 225, 900, 750);
-            SetupCampainsView(965, 225, 900, 750);
+            SetupPreviewPanel(200, 225, 1060, 750);
+            SetupCampainsView(1060 + 200 + 10, 225, 445, 750);
 
             _startButton = new BugDefenderButtonControl(Parent, StartButton_Click)
             {
@@ -55,33 +55,6 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 IsEnabled = false
             };
             AddControl(0, _startButton);
-            _gameSaveName = new TextInputControl(Parent)
-            {
-                X = 300,
-                Y = 980,
-                Height = 50,
-                Width = 300,
-                Font = BasicFonts.GetFont(24),
-                Text = "New Game",
-                Limit = 25,
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
-            };
-            _gameSaveName.OnKeyDown += NameKeyDown;
-            AddControl(0, _gameSaveName);
-            _saveOverwriteWarningLabel = new LabelControl()
-            {
-                X = 800,
-                Y = 980,
-                Height = 50,
-                Font = BasicFonts.GetFont(16),
-                Text = "Overwrites existing save!",
-                FontColor = Color.Red,
-                IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
-            };
-            AddControl(0, _saveOverwriteWarningLabel);
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
@@ -115,7 +88,7 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             base.Initialize();
         }
 
-        [MemberNotNull(nameof(_campainPreviewTile), nameof(_campainNameLabel), nameof(_campainDescriptionTextbox))]
+        [MemberNotNull(nameof(_campainPreviewTile), nameof(_campainNameLabel), nameof(_campainDescriptionTextbox), nameof(_gameSaveName), nameof(_saveOverwriteWarningLabel))]
         private void SetupPreviewPanel(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
@@ -130,9 +103,9 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
                 X = x + 50,
-                Y = y + 150,
-                Width = height - 300,
-                Height = height - 300,
+                Y = y + 170,
+                Width = 960,
+                Height = 540,
             };
             AddControl(1, new BorderControl(_campainPreviewTile)
             {
@@ -145,23 +118,61 @@ namespace BugDefender.OpenGL.Screens.CampainGameSetupView
                 Text = "Select A Campain",
                 Font = BasicFonts.GetFont(16),
                 X = x + 50,
-                Y = y + 50,
+                Y = y + 10,
                 Height = 50,
-                Width = height - 300,
+                Width = (width - 100) / 2,
                 FontColor = Color.White,
             };
             AddControl(1, _campainNameLabel);
-            var boxHeight = height / 2;
             _campainDescriptionTextbox = new TextboxControl()
             {
                 Font = BasicFonts.GetFont(10),
-                X = x + (height - 300) + 75,
-                Y = y + 50,
-                Height = boxHeight - 100,
-                Width = width - 550,
+                X = x + 50,
+                Y = y + 60,
+                Height = 100,
+                Width = (width - 100) / 2,
                 FontColor = Color.White
             };
             AddControl(1, _campainDescriptionTextbox);
+
+            AddControl(1, new LabelControl()
+            {
+                X = x + 50 + (width - 100) / 2,
+                Y = y + 10,
+                Width = (width - 100) / 2,
+                Height = 50,
+                Font = BasicFonts.GetFont(16),
+                Text = "New Save Name",
+                FontColor = Color.White
+            }) ;
+            _gameSaveName = new TextInputControl(Parent)
+            {
+                X = x + 50 + (width - 100) / 2,
+                Y = y + 60,
+                Height = 50,
+                Width = (width - 100) / 2,
+                Font = BasicFonts.GetFont(24),
+                Text = "New Game",
+                Limit = 25,
+                FontColor = Color.White,
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+            };
+            _gameSaveName.OnKeyDown += NameKeyDown;
+            AddControl(1, _gameSaveName);
+            _saveOverwriteWarningLabel = new LabelControl()
+            {
+                X = x + 50 + (width - 100) / 2,
+                Y = y + 110,
+                Height = 50,
+                Width = (width - 100) / 2,
+                Font = BasicFonts.GetFont(16),
+                Text = "Overwrites existing save!",
+                FontColor = Color.Red,
+                IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
+            };
+            AddControl(1, _saveOverwriteWarningLabel);
         }
 
         [MemberNotNull(nameof(_campainPageHandler))]

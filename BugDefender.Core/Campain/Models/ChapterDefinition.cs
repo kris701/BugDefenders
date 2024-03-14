@@ -19,10 +19,11 @@ namespace BugDefender.Core.Campain.Models
         public CutsceneDefinition Intro { get; set; }
 
         public List<IUserCriteria> Criterias { get; set; }
+        public UpgradeEffectModel GameStyleEffect { get; set; }
         public List<Guid> AddsTurrets { get; set; }
         public List<Guid> AddsEnemies { get; set; }
 
-        public ChapterDefinition(Guid iD, Guid? nextChapterID, string name, Guid mapID, CutsceneDefinition intro, List<IUserCriteria> criterias, List<Guid> addsTurrets, List<Guid> addsEnemies)
+        public ChapterDefinition(Guid iD, Guid? nextChapterID, string name, Guid mapID, CutsceneDefinition intro, List<IUserCriteria> criterias, UpgradeEffectModel gameStyleEffect, List<Guid> addsTurrets, List<Guid> addsEnemies)
         {
             ID = iD;
             NextChapterID = nextChapterID;
@@ -30,6 +31,7 @@ namespace BugDefender.Core.Campain.Models
             MapID = mapID;
             Intro = intro;
             Criterias = criterias;
+            GameStyleEffect = gameStyleEffect;
             AddsTurrets = addsTurrets;
             AddsEnemies = addsEnemies;
         }
@@ -46,6 +48,7 @@ namespace BugDefender.Core.Campain.Models
         {
             on.TurretWhiteList.AddRange(AddsTurrets);
             on.EnemyWhiteList.AddRange(AddsEnemies);
+            GameStyleEffect.ApplyUpgradeEffectOnObject(on);
         }
     }
 }
