@@ -10,8 +10,6 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Game.Modules.Turrets;
-using BugDefender.Core.Resources;
-using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
@@ -26,7 +24,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
@@ -94,10 +91,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _laserUpdater = new EntityUpdater<LaserEntity, LineControl>(92, this, _gameArea.X, _gameArea.Y);
             _deadEnemyUpdater = new EntityUpdater<EnemyInstance, TileControl>(120, this, _gameArea.X, _gameArea.Y);
 
-            _waveKeyWatcher = new KeyWatcher(Keys.Space, () => { 
+            _waveKeyWatcher = new KeyWatcher(Keys.Space, () =>
+            {
                 if (_game.Context.CanSave())
                     Parent.UserManager.SaveGame(newGameSave);
-                _sendWave?.DoClick(); 
+                _sendWave?.DoClick();
             });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
             {

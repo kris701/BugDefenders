@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
 {
@@ -144,7 +143,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 Font = BasicFonts.GetFont(16),
                 Text = "New Save Name",
                 FontColor = Color.White
-            }) ;
+            });
             _gameSaveName = new TextInputControl(Parent)
             {
                 X = x + 50 + (width - 100) / 2,

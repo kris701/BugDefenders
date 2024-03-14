@@ -1,5 +1,4 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Helpers;
+﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Resources;

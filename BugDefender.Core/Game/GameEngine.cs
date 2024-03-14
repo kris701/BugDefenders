@@ -4,7 +4,6 @@ using BugDefender.Core.Game.Modules.Enemies;
 using BugDefender.Core.Game.Modules.Projectiles;
 using BugDefender.Core.Game.Modules.Turrets;
 using BugDefender.Core.Resources;
-using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.Core.Users.Models.UserCriterias;
 

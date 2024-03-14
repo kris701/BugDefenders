@@ -2,11 +2,6 @@
 using BugDefender.Core.Models;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.UserCriterias;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Campaign.Models
 {

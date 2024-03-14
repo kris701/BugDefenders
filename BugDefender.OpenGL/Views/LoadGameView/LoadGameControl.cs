@@ -1,13 +1,8 @@
 ﻿using BugDefender.Core.Users.Models.SavedGames;
-using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.Views.LoadGameView
@@ -55,7 +50,8 @@ namespace BugDefender.OpenGL.Views.LoadGameView
             });
             string continueText = "Continue";
             bool isEnabled = true;
-            if (saveGame is CampaignSavedGame campaign) {
+            if (saveGame is CampaignSavedGame campaign)
+            {
                 isEnabled = !campaign.IsCompleted;
                 if (campaign.IsCompleted)
                     continueText = "Completed!";

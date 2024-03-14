@@ -1,16 +1,12 @@
-﻿using BugDefender.Core.Resources;
-using BugDefender.Core.Users.Models;
-using BugDefender.OpenGL.Controls;
+﻿using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
-using BugDefender.OpenGL.Views.AchivementsView;
 using BugDefender.OpenGL.Views.Helpers;
 using BugDefender.OpenGL.Views.LoadGameView;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.LoadGameView
 {

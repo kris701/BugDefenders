@@ -1,5 +1,7 @@
-﻿using BugDefender.Core.Campaign.Models;
-using BugDefender.Core.Game;
+﻿using BugDefender.Core.Game;
+#if RELEASE
+using BugDefender.Core.Game.Helpers;
+#endif
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.SavedGames;
@@ -7,13 +9,8 @@ using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Screens.CutsceneView;
 using BugDefender.OpenGL.Screens.GameScreen;
-using BugDefender.OpenGL.Screens.MainMenu;
-using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL
 {

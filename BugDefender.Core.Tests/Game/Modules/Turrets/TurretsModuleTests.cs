@@ -1,6 +1,4 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Models.GameStyles;
-using BugDefender.Core.Game.Models.Maps;
+﻿using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Resources;
 using static BugDefender.Core.Game.Modules.Turrets.TurretsModule;
 

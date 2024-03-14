@@ -1,6 +1,4 @@
 ﻿using System.Text.Json;
-using System.Xml.Linq;
-using BugDefender.Core.Game;
 using BugDefender.Core.Resources;
 #if RELEASE
 using BugDefender.Core.Users.Helpers;

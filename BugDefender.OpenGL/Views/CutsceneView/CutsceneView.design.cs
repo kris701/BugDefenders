@@ -1,17 +1,10 @@
-﻿using BugDefender.Core.Resources;
-using BugDefender.Core.Users.Models;
-using BugDefender.OpenGL.Controls;
+﻿using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Screens.GameOverScreen;
 using BugDefender.OpenGL.Views;
-using BugDefender.OpenGL.Views.AchivementsView;
-using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace BugDefender.OpenGL.Screens.CutsceneView
 {
@@ -125,7 +118,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Y = 980,
                 X = 1670,
                 Width = 200,
-                Height = 50,    
+                Height = 50,
                 Text = "Continue",
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,

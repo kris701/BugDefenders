@@ -1,5 +1,4 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Users.Models.SavedGames;
+﻿using BugDefender.Core.Users.Models.SavedGames;
 using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Users.Models

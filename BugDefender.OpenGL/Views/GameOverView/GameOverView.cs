@@ -1,5 +1,4 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Users.Models;
+﻿using BugDefender.Core.Users.Models;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
@@ -7,7 +6,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
@@ -22,7 +20,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
         private readonly List<string> _linesToShow;
         private int _lineIndex = 0;
         private TimeSpan _passed = TimeSpan.FromSeconds(1);
-        private string _title;
+        private readonly string _title;
         public GameOverView(BugDefenderGameWindow parent, Texture2D screen, StatsDefinition stats, string title) : base(parent, _id)
         {
             _screen = screen;

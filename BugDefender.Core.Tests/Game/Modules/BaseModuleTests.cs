@@ -2,11 +2,6 @@
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models.SavedGames;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Tests.Game.Modules
 {

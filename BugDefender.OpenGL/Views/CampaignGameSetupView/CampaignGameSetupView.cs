@@ -1,19 +1,13 @@
 ﻿using BugDefender.Core.Campaign.Models;
-using BugDefender.Core.Game;
-using BugDefender.Core.Game.Models.GameStyles;
-using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
-using BugDefender.OpenGL.Views.GameView;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Text;
-using System.Xml.Linq;
 
 namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
 {

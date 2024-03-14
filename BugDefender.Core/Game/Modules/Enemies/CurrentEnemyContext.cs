@@ -1,10 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace BugDefender.Core.Game.Modules.Enemies

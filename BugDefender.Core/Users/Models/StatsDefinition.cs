@@ -8,13 +8,15 @@
         public float HighestEvolution { get; set; } = 0;
         public int Score { get; set; } = 0;
         private int _credits = 0;
-        public int Credits { 
-            get {
+        public int Credits
+        {
+            get
+            {
                 if (_credits == 0 && Score != 0)
                     _credits = Score / 100;
-                return _credits; 
-            } 
-            set { _credits = value; } 
+                return _credits;
+            }
+            set { _credits = value; }
         }
 
         public int TotalWavesStarted { get; set; } = 0;

@@ -2,7 +2,6 @@
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Input;
 using BugDefender.OpenGL.Views;
-using BugDefender.OpenGL.Views.GameView;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;

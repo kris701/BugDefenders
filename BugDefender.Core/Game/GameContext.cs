@@ -1,16 +1,11 @@
-﻿using BugDefender.Core.Game.Models.Entities.Enemies;
-using BugDefender.Core.Game.Models.Entities.Projectiles;
+﻿using BugDefender.Core.Game.Models.Entities.Projectiles;
 using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Core.Game.Modules.Enemies;
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
-using BugDefender.Core.Users.Models.Challenges;
-using BugDefender.Core.Users.Models.UserCriterias;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using static BugDefender.Core.Game.Models.Entities.Enemies.EnemyDefinition;
 
 namespace BugDefender.Core.Game
 {
