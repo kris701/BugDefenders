@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Tools;
 using CommandLine;
 using CommandLine.Text;
 using MapPathBlockingTileGen.Models;
@@ -6,7 +7,7 @@ using System.Text.Json;
 
 namespace MapPathBlockingTileGen
 {
-    internal class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
@@ -22,35 +23,36 @@ namespace MapPathBlockingTileGen
             var target = RootPath(opts.PathsFile);
             var parsed = JsonSerializer.Deserialize<PathsModel>(File.ReadAllText(target));
             if (parsed != null)
-            {
-                var newBlocks = new List<BlockedTile>();
-                foreach (var path in parsed.Paths)
-                {
-                    var from = path[0];
-                    foreach (var point in path.Skip(1))
-                    {
-                        var minX = Math.Min(from.X, point.X);
-                        var minY = Math.Min(from.Y, point.Y);
-                        var maxX = Math.Max(from.X, point.X);
-                        var maxY = Math.Max(from.Y, point.Y);
-
-                        minX -= opts.TileRange / 2;
-                        minY -= opts.TileRange / 2;
-                        maxX += opts.TileRange / 2;
-                        maxY += opts.TileRange / 2;
-
-                        var width = Math.Abs(maxX - minX);
-                        var heigth = Math.Abs(maxY - minY);
-                        newBlocks.Add(new BlockedTile(minX, minY, width, heigth));
-                        from = point;
-                    }
-                }
-
-                Console.WriteLine("Completed:");
-                Console.WriteLine(JsonSerializer.Serialize(newBlocks));
-            }
+                Console.WriteLine(JsonSerializer.Serialize(AutoGenTiles(parsed.Paths, opts.TileRange)));
             else
                 Console.WriteLine("Paths file is malformed!");
+        }
+
+        public static List<BlockedTile> AutoGenTiles(List<List<FloatPoint>> paths, float range)
+        {
+            var newBlocks = new List<BlockedTile>();
+            foreach (var path in paths)
+            {
+                var from = path[0];
+                foreach (var point in path.Skip(1))
+                {
+                    var minX = Math.Min(from.X, point.X);
+                    var minY = Math.Min(from.Y, point.Y);
+                    var maxX = Math.Max(from.X, point.X);
+                    var maxY = Math.Max(from.Y, point.Y);
+
+                    minX -= range / 2;
+                    minY -= range / 2;
+                    maxX += range / 2;
+                    maxY += range / 2;
+
+                    var width = Math.Abs(maxX - minX);
+                    var heigth = Math.Abs(maxY - minY);
+                    newBlocks.Add(new BlockedTile(minX, minY, width, heigth));
+                    from = point;
+                }
+            }
+            return newBlocks;
         }
 
         private static void HandleParseError(IEnumerable<Error> errs)
