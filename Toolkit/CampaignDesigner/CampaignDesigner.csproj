@@ -5,6 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
 	  <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <Nullable>enable</Nullable>
+	  <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
 	  <Authors>Kristian Skov Johansen</Authors>
