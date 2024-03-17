@@ -606,6 +606,10 @@
     {
       "ID": "3cca7fa9-014a-4ffa-8b95-00e775aa37c4",
       "Content": "Views/GameOverView/statsUpdate"
+    },
+    {
+      "ID": "a741f37c-ad92-43f7-9a0c-e215d26e6bc7",
+      "Content": "Campaigns/StandardCampaign/blipSelect"
     }
   ],
   "AnimationsEntities": [

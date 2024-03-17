@@ -37,6 +37,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 FillColor = Parent.TextureController.GetTexture(new Guid("6344ec42-5f76-4c44-9e03-11dd4d69c1d8"))
             });
 
+            _previousSpeaker = _cutscene.Conversation[_conversationIndex].SpeakerID;
             _leftName = new LabelControl()
             {
                 X = 50,
@@ -68,10 +69,11 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Height = 256,
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
-                Text = _cutscene.Conversation[_conversationIndex].Text,
+                Text = "",
                 IsVisible = true
             };
             AddControl(0, _middleText);
+            _targetText = _cutscene.Conversation[_conversationIndex].Text;
 
             _rightName = new LabelControl()
             {
