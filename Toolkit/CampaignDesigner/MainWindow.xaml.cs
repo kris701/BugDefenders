@@ -75,8 +75,23 @@ namespace CampaignDesigner
             {
                 var newChapterItem = new TreeViewItem()
                 {
-                    Header = chapter.Name
+                    Header = chapter.Name,
+                    ContextMenu = new ContextMenu()
                 };
+                var deleteItem = new MenuItem()
+                {
+                    Header = "Delete Chapter",
+                    Tag = chapter
+                };
+                deleteItem.Click += (s, e) =>
+                {
+                    if (s is MenuItem element && element.Tag is ChapterDefinition chapter)
+                    {
+                        _currentCampaign.Chapters.Remove(chapter);
+                        UpdateView();
+                    }
+                };
+                newChapterItem.ContextMenu.Items.Add(deleteItem);
                 var cutsceneButton = new TreeViewItem()
                 {
                     Header = "Intro Cutscene",
@@ -101,7 +116,7 @@ namespace CampaignDesigner
                     if (s is TreeViewItem element && element.Tag is ChapterDefinition chapter)
                     {
                         EditViewCanvas.Children.Clear();
-                        
+                        EditViewCanvas.Children.Add(new ChapterControl(_currentCampaign, chapter));
                     }
                 };
                 newChapterItem.Items.Add(generalButton);
@@ -185,7 +200,15 @@ namespace CampaignDesigner
 
         private void AddNewChapter_Click(object sender, RoutedEventArgs e)
         {
-
+            _currentCampaign.Chapters.Add(new ChapterDefinition(
+                Guid.NewGuid(),
+                null,
+                "New Chapter",
+                Guid.Empty,
+                new CutsceneDefinition(Guid.NewGuid(), new List<ConversationDefinition>()),
+                Guid.Empty,
+                new List<BugDefender.Core.Users.Models.UserCriterias.IUserCriteria>()));
+            UpdateView();
         }
 
         private void CampaignOverItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
