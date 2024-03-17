@@ -18,8 +18,7 @@ namespace BugDefender.Core.Tests.Game.Modules
                         new List<List<Tools.FloatPoint>>(),
                         new List<BlockedTile>(),
                         950,
-                        950,
-                        new List<string>()
+                        950
                     ),
                     new GameStyleDefinition(
                         Guid.NewGuid(),

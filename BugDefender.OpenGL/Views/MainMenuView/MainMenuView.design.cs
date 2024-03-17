@@ -139,28 +139,17 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 FillClickedColor = BasicTextures.GetClickedTexture()
             });
 
-            AddControl(0, new LabelControl()
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreenView(Parent)))
             {
-                X = 250,
+                X = 50,
                 Y = 980,
                 Width = 400,
                 Height = 50,
                 Font = BasicFonts.GetFont(16),
                 FontColor = Color.White,
                 Text = $"User: {Parent.UserManager.CurrentUser.Name}",
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
-            });
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new UsersScreen.UsersScreenView(Parent)))
-            {
-                X = 50,
-                Y = 980,
-                Width = 200,
-                Height = 50,
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                Text = "Users",
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8"))
             });
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => LinkHelper.OpenUrl("https://kris701.itch.io/bug-defenders"))
             {
