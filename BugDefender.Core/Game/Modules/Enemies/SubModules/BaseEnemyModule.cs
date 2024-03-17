@@ -71,7 +71,7 @@ namespace BugDefender.Core.Game.Modules.Enemies.SubModules
         {
             var options = _enemyLevels.Keys.Where(x => x <= wave).ToList();
             if (options.Count == 0)
-                return null;
+                options.Add(_enemyLevels.Keys.Min());
             var targetLevel = options[_rnd.Next(0, options.Count)];
             if (_enemyLevels[targetLevel].Count == 0)
                 return null;

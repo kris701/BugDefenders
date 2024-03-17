@@ -85,6 +85,27 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
 
             base.Initialize();
+
+#if DEBUG
+            if (_game.Criterias.Count > 0)
+            {
+                AddControl(999, new ButtonControl(Parent, (e) =>
+                {
+                    _game.Result = Core.Game.GameResult.Success;
+                    _game.Running = false;
+                    _game.GameOver = true;
+                })
+                {
+                    Text = $"Complete!",
+                    Font = BasicFonts.GetFont(16),
+                    FontColor = Color.HotPink,
+                    X = 20,
+                    Y = 20,
+                    Height = 30,
+                    Width = 100
+                });
+            }
+#endif
         }
 
         [MemberNotNull(nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile))]
