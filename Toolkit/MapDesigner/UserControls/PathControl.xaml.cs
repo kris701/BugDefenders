@@ -18,8 +18,8 @@ namespace MapDesigner.UserControls
 {
     public partial class PathControl : UserControl
     {
-        public float WaypointX => float.Parse(XTextbox.Text);
-        public float WaypointY => float.Parse(YTextbox.Text);
+        public float WaypointX => float.Parse($"0{XTextbox.Text}");
+        public float WaypointY => float.Parse($"0{YTextbox.Text}");
 
         private UIElementCollection _from;
         private Action _update;

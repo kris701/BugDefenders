@@ -1,47 +1,87 @@
 {
   "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
-  "Name": "Criss Cross",
-  "Description": "A map with two paths that the enemies can take!",
+  "Name": "Bouble Track",
+  "Description": "A pretty easy map where the enemies have to take a long trip around in a circle.",
   "Paths": [
     [
       {
-        "X": 0,
-        "Y": 475
+        "X": 345,
+        "Y": 950
       },
       {
-        "X": 950,
-        "Y": 475
-      }
-    ],
-    [
-      {
-        "X": 470,
-        "Y": 0
+        "X": 345,
+        "Y": 595
       },
       {
-        "X": 470,
+        "X": 190,
+        "Y": 595
+      },
+      {
+        "X": 190,
+        "Y": 200
+      },
+      {
+        "X": 770,
+        "Y": 200
+      },
+      {
+        "X": 770,
+        "Y": 595
+      },
+      {
+        "X": 610,
+        "Y": 595
+      },
+      {
+        "X": 610,
         "Y": 950
       }
     ]
   ],
   "BlockingTiles": [
     {
-      "X": -35,
-      "Y": 440,
-      "Width": 1020,
-      "Height": 70
+      "X": 320,
+      "Y": 570,
+      "Width": 50,
+      "Height": 405
     },
     {
-      "X": 435,
-      "Y": -35,
-      "Width": 70,
-      "Height": 1020
+      "X": 165,
+      "Y": 570,
+      "Width": 205,
+      "Height": 50
+    },
+    {
+      "X": 165,
+      "Y": 175,
+      "Width": 50,
+      "Height": 445
+    },
+    {
+      "X": 165,
+      "Y": 175,
+      "Width": 630,
+      "Height": 50
+    },
+    {
+      "X": 745,
+      "Y": 175,
+      "Width": 50,
+      "Height": 445
+    },
+    {
+      "X": 585,
+      "Y": 570,
+      "Width": 210,
+      "Height": 50
+    },
+    {
+      "X": 585,
+      "Y": 570,
+      "Width": 50,
+      "Height": 405
     }
   ],
   "Width": 950,
-  "Height": 950,
-  "Tags": [
-    "Hard",
-    "Map"
-  ]
+  "Height": 950
 }

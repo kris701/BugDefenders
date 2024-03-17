@@ -1,0 +1,27 @@
+{
+  "ID": "a46ad929-ab27-4455-8586-ee9c4ff6453c",
+  "Name": "Flatlined",
+  "Description": "A very difficult map. Its literally just a single short line across the map.",
+  "Paths": [
+    [
+      {
+        "X": 0,
+        "Y": 465
+      },
+      {
+        "X": 950,
+        "Y": 465
+      }
+    ]
+  ],
+  "BlockingTiles": [
+    {
+      "X": -25,
+      "Y": 440,
+      "Width": 1000,
+      "Height": 50
+    }
+  ],
+  "Width": 950,
+  "Height": 950
+}

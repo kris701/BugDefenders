@@ -112,6 +112,27 @@
       "Content": "Entities/Maps/map3"
     },
     {
+      "ID": "77c07efc-3089-4440-9674-9351d6247931",
+      "Content": "Entities/Maps/map4"
+    },
+    {
+      "ID": "2d338762-c5f5-4ab9-8943-424e9d264e94",
+      "Content": "Entities/Maps/map5"
+    },
+    {
+      "ID": "b33eff29-7ee2-4900-8e7d-b4961741739f",
+      "Content": "Entities/Maps/map6"
+    },
+    {
+      "ID": "a46ad929-ab27-4455-8586-ee9c4ff6453c",
+      "Content": "Entities/Maps/map7"
+    },
+    {
+      "ID": "1af5a5d8-2496-4d8b-9962-54020f612b12",
+      "Content": "Entities/Maps/map8"
+    },
+
+    {
       "ID": "f9eb39aa-2164-4125-925d-83a1e94fbe93",
       "Content": "Common/background"
     },

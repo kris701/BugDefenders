@@ -94,10 +94,10 @@ namespace BugDefender.OpenGL
             if (CheatsHelper.Cheats.Count == 0)
             {
 #endif
+            AddToHighScore(game.Context.Stats);
             if (result == GameResult.Success)
             {
                 AddStatsToUser(game.Context.Stats);
-                AddToHighScore(game.Context.Stats);
                 Parent.UserManager.SaveUser();
             }
 #if RELEASE

@@ -69,13 +69,6 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                     _mapNameLabel.Text = map.Name;
                     var sb = new StringBuilder();
                     sb.AppendLine(map.Description);
-                    if (map.Tags.Count > 0)
-                    {
-                        sb.AppendLine("Tags:");
-                        foreach (var tag in map.Tags)
-                            sb.Append($"{tag}, ");
-                        sb.AppendLine();
-                    }
                     sb.AppendLine();
                     sb.AppendLine($"Difficulty Rating: {Math.Round(map.GetDifficultyRating(), 2)}");
                     _mapDescriptionTextbox.Text = sb.ToString();

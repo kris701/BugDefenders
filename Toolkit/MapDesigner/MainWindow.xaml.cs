@@ -18,13 +18,11 @@ using System.Windows.Shapes;
 
 namespace MapDesigner
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private MapDefinition _currentMap;
         private FileInfo _targetFile;
+        private string _mapsDir;
 
         public MainWindow()
         {
@@ -65,8 +63,7 @@ namespace MapDesigner
                     new List<List<FloatPoint>>(),
                     new List<BlockedTile>(),
                     950,
-                    950,
-                    new List<string>()
+                    950
                     );
                 _targetFile = targetFile;
                 UpdateStatsBox();

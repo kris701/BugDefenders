@@ -1,0 +1,99 @@
+{
+  "ID": "b33eff29-7ee2-4900-8e7d-b4961741739f",
+  "Name": "Dangerous Fork",
+  "Description": "A map that is shaped like a weird fork. Enemies all come from the left side and can then split into 3 different directions.",
+  "Paths": [
+    [
+      {
+        "X": 0,
+        "Y": 432
+      },
+      {
+        "X": 950,
+        "Y": 432
+      }
+    ],
+    [
+      {
+        "X": 0,
+        "Y": 432
+      },
+      {
+        "X": 462,
+        "Y": 432
+      },
+      {
+        "X": 462,
+        "Y": 185
+      },
+      {
+        "X": 950,
+        "Y": 185
+      }
+    ],
+    [
+      {
+        "X": 0,
+        "Y": 432
+      },
+      {
+        "X": 462,
+        "Y": 432
+      },
+      {
+        "X": 462,
+        "Y": 680
+      },
+      {
+        "X": 950,
+        "Y": 680
+      }
+    ]
+  ],
+  "BlockingTiles": [
+    {
+      "X": -25,
+      "Y": 407,
+      "Width": 1000,
+      "Height": 50
+    },
+    {
+      "X": -25,
+      "Y": 407,
+      "Width": 512,
+      "Height": 50
+    },
+    {
+      "X": 437,
+      "Y": 160,
+      "Width": 50,
+      "Height": 297
+    },
+    {
+      "X": 437,
+      "Y": 160,
+      "Width": 538,
+      "Height": 50
+    },
+    {
+      "X": -25,
+      "Y": 407,
+      "Width": 512,
+      "Height": 50
+    },
+    {
+      "X": 437,
+      "Y": 407,
+      "Width": 50,
+      "Height": 298
+    },
+    {
+      "X": 437,
+      "Y": 655,
+      "Width": 538,
+      "Height": 50
+    }
+  ],
+  "Width": 950,
+  "Height": 950
+}

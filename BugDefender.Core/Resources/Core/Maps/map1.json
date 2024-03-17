@@ -1,71 +1,115 @@
-﻿{
+{
   "ID": "2811a657-6811-423a-8342-142bf5bd261a",
-  "Name": "Snakes Way",
-  "Description": "An easy map with one long snaky path.",
+  "Name": "Deaths Cross",
+  "Description": "A pretty difficult map! Enemies can come from four paths, combining into the two horizontal ones.",
   "Paths": [
     [
       {
+        "X": 465,
+        "Y": 0
+      },
+      {
+        "X": 465,
+        "Y": 440
+      },
+      {
         "X": 0,
-        "Y": 200
+        "Y": 440
+      }
+    ],
+    [
+      {
+        "X": 520,
+        "Y": 0
       },
       {
-        "X": 755,
-        "Y": 200
-      },
-      {
-        "X": 755,
-        "Y": 568
-      },
-      {
-        "X": 166,
-        "Y": 568
-      },
-      {
-        "X": 166,
-        "Y": 795
+        "X": 520,
+        "Y": 440
       },
       {
         "X": 950,
-        "Y": 795
+        "Y": 440
+      }
+    ],
+    [
+      {
+        "X": 465,
+        "Y": 950
+      },
+      {
+        "X": 465,
+        "Y": 440
+      },
+      {
+        "X": 0,
+        "Y": 440
+      }
+    ],
+    [
+      {
+        "X": 520,
+        "Y": 950
+      },
+      {
+        "X": 520,
+        "Y": 440
+      },
+      {
+        "X": 950,
+        "Y": 440
       }
     ]
   ],
   "BlockingTiles": [
     {
-      "X": -35,
-      "Y": 165,
-      "Width": 825,
-      "Height": 70
+      "X": 440,
+      "Y": -25,
+      "Width": 50,
+      "Height": 490
     },
     {
-      "X": 720,
-      "Y": 165,
-      "Width": 70,
-      "Height": 438
+      "X": -25,
+      "Y": 415,
+      "Width": 515,
+      "Height": 50
     },
     {
-      "X": 131,
-      "Y": 533,
-      "Width": 659,
-      "Height": 70
+      "X": 495,
+      "Y": -25,
+      "Width": 50,
+      "Height": 490
     },
     {
-      "X": 131,
-      "Y": 533,
-      "Width": 70,
-      "Height": 297
+      "X": 495,
+      "Y": 415,
+      "Width": 480,
+      "Height": 50
     },
     {
-      "X": 131,
-      "Y": 760,
-      "Width": 854,
-      "Height": 70
+      "X": 440,
+      "Y": 415,
+      "Width": 50,
+      "Height": 560
+    },
+    {
+      "X": -25,
+      "Y": 415,
+      "Width": 515,
+      "Height": 50
+    },
+    {
+      "X": 495,
+      "Y": 415,
+      "Width": 50,
+      "Height": 560
+    },
+    {
+      "X": 495,
+      "Y": 415,
+      "Width": 480,
+      "Height": 50
     }
   ],
   "Width": 950,
-  "Height": 950,
-  "Tags": [
-    "Easy",
-    "Map"
-  ]
+  "Height": 950
 }

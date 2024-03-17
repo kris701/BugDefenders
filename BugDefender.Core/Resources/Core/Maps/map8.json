@@ -1,0 +1,67 @@
+{
+  "ID": "1af5a5d8-2496-4d8b-9962-54020f612b12",
+  "Name": "Turn Around",
+  "Description": "A simple linear map where enemies can only follow a single path.",
+  "Paths": [
+    [
+      {
+        "X": 0,
+        "Y": 175
+      },
+      {
+        "X": 795,
+        "Y": 175
+      },
+      {
+        "X": 795,
+        "Y": 620
+      },
+      {
+        "X": 295,
+        "Y": 620
+      },
+      {
+        "X": 295,
+        "Y": 320
+      },
+      {
+        "X": 0,
+        "Y": 320
+      }
+    ]
+  ],
+  "BlockingTiles": [
+    {
+      "X": -25,
+      "Y": 150,
+      "Width": 845,
+      "Height": 50
+    },
+    {
+      "X": 770,
+      "Y": 150,
+      "Width": 50,
+      "Height": 495
+    },
+    {
+      "X": 270,
+      "Y": 595,
+      "Width": 550,
+      "Height": 50
+    },
+    {
+      "X": 270,
+      "Y": 295,
+      "Width": 50,
+      "Height": 350
+    },
+    {
+      "X": -25,
+      "Y": 295,
+      "Width": 345,
+      "Height": 50
+    }
+  ],
+  "Width": 950,
+  "Height": 950
+}
