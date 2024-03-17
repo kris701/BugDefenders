@@ -44,7 +44,7 @@ namespace CampaignDesigner.UserControls
                     NextChapterCombobox.Items.Add(new ComboBoxItem()
                     {
                         Content = $"{other.Name} ({other.ID})",
-                        Tag = other
+                        Tag = other.ID
                     });
                     if (other.ID == chapter.NextChapterID)
                         NextChapterCombobox.SelectedIndex = count;
@@ -150,7 +150,7 @@ namespace CampaignDesigner.UserControls
         {
             if (!_isLoaded)
                 return;
-            if (sender is ComboBoxItem item && item.Tag is Guid guid)
+            if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem item && item.Tag is Guid guid)
             {
                 if (guid == Guid.Empty)
                     Chapter.NextChapterID = null;
@@ -163,7 +163,7 @@ namespace CampaignDesigner.UserControls
         {
             if (!_isLoaded)
                 return;
-            if (sender is ComboBoxItem item && item.Tag is Guid guid)
+            if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem item && item.Tag is Guid guid)
                 Chapter.MapID = guid;
         }
 
@@ -171,7 +171,7 @@ namespace CampaignDesigner.UserControls
         {
             if (!_isLoaded)
                 return;
-            if (sender is ComboBoxItem item && item.Tag is Guid guid)
+            if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem item && item.Tag is Guid guid)
                 Chapter.GameStyleID = guid;
         }
 

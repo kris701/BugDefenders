@@ -102,6 +102,15 @@
     <None Remove="Resources\Core\Enemies\enemy6_2.json" />
     <None Remove="Resources\Core\Enemies\enemy6_3.json" />
     <None Remove="Resources\Core\GameStyles\campaign_easy_1.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_10.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_2.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_3.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_4.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_5.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_6.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_7.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_8.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_9.json" />
     <None Remove="Resources\Core\GameStyles\easy_bossrush.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
@@ -369,6 +378,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_1.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_10.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_2.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_3.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_4.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_5.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_6.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_7.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_8.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_9.json" />
     <EmbeddedResource Include="Resources\Core\GameStyles\hard_bossrush.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

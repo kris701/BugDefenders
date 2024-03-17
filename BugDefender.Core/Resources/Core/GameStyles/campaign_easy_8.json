@@ -1,0 +1,45 @@
+{
+  "ID": "ccf7f226-8843-419e-a9f9-1edf3ae272e2",
+  "Name": "Easy Campaign (part 8)",
+  "Description": "",
+  "EvolutionRate": 1.01,
+  "EnemySpeedMultiplier": 0.5,
+  "RewardMultiplier": 2,
+  "StartingHP": 50,
+  "StartingMoney": 4000,
+  "EnemyWaveMultiplier": 1,
+  "ProjectileSpeedCap": 20,
+  "BossEveryNWave": 5,
+  "TurretBlackList": [
+  ],
+  "EnemyBlackList": [
+  ],
+  "TurretWhiteList": [
+    "a5d3b0a0-3aaa-435e-9f82-fdf874c65460",
+    "e1e5d65f-b09e-4f71-a743-67ead199cdfc",
+    "468b3259-bd65-4aa1-9e40-5fb5e455b847",
+    "9f22ceed-4d97-4ac6-846a-405ece02d64a",
+    "1a252e16-8c8c-4179-8b1c-75b2b8f47704",
+    "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
+    "c402592b-1af3-4bb5-a7e6-9e285dfc31a2"
+  ],
+  "EnemyWhiteList": [
+    "ed5cddba-7980-4576-b516-547d4a0eae4e",
+    "3c9ec15c-3a79-45f3-a492-75ac0bfc3482",
+    "b888af9c-7cd8-4038-86cc-7b4775017195",
+    "2f0c66b3-0b40-4c02-bac5-dc93d647388b",
+    "8cf476cd-d950-4f76-9455-afdb77e443e4",
+    "f2e4af0a-37fd-42d8-8e71-dd943a3cd6f7",
+    "87dfe24d-655b-4ce1-b3c2-33350e115e0e",
+    "37d7c4a9-1479-4146-88a2-ebc4a1ba53ea",
+    "c0f67fc5-b5a4-4e0c-9607-8623861baf56",
+    "366dd4c1-dd3c-419d-85dd-452f2d45597c",
+    "292f065c-8f4b-4140-ad13-c38179b8b9fa",
+    "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
+    "86d3f9ae-cd87-4ce7-ba70-87139f378da2",
+    "709a9b8d-7a8b-488c-827f-bc7ed266226f"
+  ],
+  "MoneyPrWave": 250,
+  "TurretRefundPenalty": 0.75,
+  "CampaignOnly": true
+}
