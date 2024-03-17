@@ -205,6 +205,12 @@
 /processorParam:TextureFormat=Color
 /build:Achivements/wavesstarted_3.png
 
+#begin Campaigns/StandardCampaign/blipSelect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Campaigns/StandardCampaign/blipSelect.wav
+
 #begin Campaigns/StandardCampaign/bug.png
 /importer:TextureImporter
 /processor:TextureProcessor

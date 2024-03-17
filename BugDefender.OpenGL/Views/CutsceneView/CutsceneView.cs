@@ -18,6 +18,10 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
         private readonly CutsceneDefinition _cutscene;
         private readonly CampaignDefinition _campaign;
         private int _conversationIndex = 0;
+        private Guid _previousSpeaker = Guid.Empty;
+        private string _targetText = "";
+        private int _targetTextIndex = 0;
+        private TimeSpan _targetTextUpdateTime = TimeSpan.Zero;
 
         public CutsceneView(BugDefenderGameWindow parent, ISavedGame savedGame, CampaignDefinition campaign, CutsceneDefinition cutscene, Action<IView, ISavedGame> onConversationOver) : base(parent, _id)
         {
@@ -31,34 +35,46 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
 
         private void SkipConversation()
         {
+            if (_targetTextIndex != _targetText.Length)
+            {
+                _targetTextIndex = _targetText.Length - 1;
+                return;
+            }
+
             _conversationIndex++;
             if (_conversationIndex >= _cutscene.Conversation.Count)
                 _onConversationOver.Invoke(this, _savedGame);
             else
             {
                 var converation = _cutscene.Conversation[_conversationIndex];
-                if (_conversationIndex % 2 == 0)
-                {
-                    _leftName.Text = _campaign.Speakers[converation.SpeakerID];
-                    _leftName.IsVisible = true;
-                    _middleText.Text = converation.Text;
-                    _leftSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
-                    _leftSpeaker.IsVisible = true;
+                _middleText.Text = "";
+                _targetText = converation.Text;
+                _targetTextIndex = 0;
 
-                    _rightName.IsVisible = false;
-                    _rightSpeaker.IsVisible = false;
-                }
-                else
+                if (_previousSpeaker != converation.SpeakerID)
                 {
-                    _rightName.Text = _campaign.Speakers[converation.SpeakerID];
-                    _rightName.IsVisible = true;
-                    _middleText.Text = converation.Text;
-                    _rightSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
-                    _rightSpeaker.IsVisible = true;
+                    if (_rightName.IsVisible == true)
+                    {
+                        _leftName.Text = _campaign.Speakers[converation.SpeakerID];
+                        _leftName.IsVisible = true;
+                        _leftSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
+                        _leftSpeaker.IsVisible = true;
 
-                    _leftName.IsVisible = false;
-                    _leftSpeaker.IsVisible = false;
+                        _rightName.IsVisible = false;
+                        _rightSpeaker.IsVisible = false;
+                    }
+                    else
+                    {
+                        _rightName.Text = _campaign.Speakers[converation.SpeakerID];
+                        _rightName.IsVisible = true;
+                        _rightSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
+                        _rightSpeaker.IsVisible = true;
+
+                        _leftName.IsVisible = false;
+                        _leftSpeaker.IsVisible = false;
+                    }
                 }
+                _previousSpeaker = converation.SpeakerID;
             }
         }
 
@@ -66,6 +82,20 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
         {
             var keyState = Keyboard.GetState();
             _escapeKeyWatcher.Update(keyState);
+
+            if (_targetTextIndex < _targetText.Length)
+            {
+                _targetTextUpdateTime -= gameTime.ElapsedGameTime;
+                if (_targetTextUpdateTime <= TimeSpan.Zero)
+                {
+                    _targetTextUpdateTime = TimeSpan.FromMilliseconds(30);
+                    _targetTextIndex++;
+                    _middleText.Text = _targetText.Substring(0, _targetTextIndex);
+
+                    if (_targetTextIndex % 2 == 0)
+                        Parent.AudioController.PlaySoundEffectOnce(new Guid("a741f37c-ad92-43f7-9a0c-e215d26e6bc7"));
+                }
+            }
         }
     }
 }
