@@ -272,6 +272,8 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             foreach (var id in ids)
             {
                 var gameStyle = ResourceManager.GameStyles.GetResource(id);
+                if (gameStyle.CampaignOnly)
+                    continue;
                 controlList.Add(new BugDefenderButtonControl(Parent, SelectGameStyle_Click)
                 {
                     FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),

@@ -15,5 +15,6 @@
   "EnemyBlackList": [],
   "EnemyWhiteList": [ "709a9b8d-7a8b-488c-827f-bc7ed266226f", "c0f67fc5-b5a4-4e0c-9607-8623861baf56", "37d7c4a9-1479-4146-88a2-ebc4a1ba53ea" ],
   "MoneyPrWave": 100,
-  "TurretRefundPenalty": 0.75
+  "TurretRefundPenalty": 0.75,
+  "CampaignOnly": true
 }

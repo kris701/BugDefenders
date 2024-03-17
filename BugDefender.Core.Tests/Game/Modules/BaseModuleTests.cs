@@ -38,7 +38,8 @@ namespace BugDefender.Core.Tests.Game.Modules
                         new List<Guid>(),
                         new List<Guid>(),
                         1,
-                        1
+                        1,
+                        false
                     )
                 ))
             );

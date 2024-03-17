@@ -15,5 +15,6 @@
   "EnemyBlackList": [],
   "EnemyWhiteList": [],
   "MoneyPrWave": 50,
-  "TurretRefundPenalty": 0.75
+  "TurretRefundPenalty": 0.75,
+  "CampaignOnly": false
 }

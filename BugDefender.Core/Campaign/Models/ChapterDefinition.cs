@@ -1,5 +1,7 @@
-﻿using BugDefender.Core.Game.Models.GameStyles;
+﻿using BugDefender.Core.Game;
+using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Models;
+using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.UserCriterias;
 
@@ -12,23 +14,18 @@ namespace BugDefender.Core.Campaign.Models
         public string Name { get; set; }
         public Guid MapID { get; set; }
         public CutsceneDefinition Intro { get; set; }
-
+        public Guid GameStyleID { get; set; }
         public List<IUserCriteria> Criterias { get; set; }
-        public UpgradeEffectModel GameStyleEffect { get; set; }
-        public List<Guid> AddsTurrets { get; set; }
-        public List<Guid> AddsEnemies { get; set; }
 
-        public ChapterDefinition(Guid iD, Guid? nextChapterID, string name, Guid mapID, CutsceneDefinition intro, List<IUserCriteria> criterias, UpgradeEffectModel gameStyleEffect, List<Guid> addsTurrets, List<Guid> addsEnemies)
+        public ChapterDefinition(Guid iD, Guid? nextChapterID, string name, Guid mapID, CutsceneDefinition intro, Guid gameStyleID, List<IUserCriteria> criterias)
         {
             ID = iD;
             NextChapterID = nextChapterID;
             Name = name;
             MapID = mapID;
             Intro = intro;
+            GameStyleID = gameStyleID;
             Criterias = criterias;
-            GameStyleEffect = gameStyleEffect;
-            AddsTurrets = addsTurrets;
-            AddsEnemies = addsEnemies;
         }
 
         public bool IsValid(StatsDefinition stats)
@@ -39,11 +36,11 @@ namespace BugDefender.Core.Campaign.Models
             return true;
         }
 
-        public void Apply(GameStyleDefinition on)
+        public GameContext GetContextForChapter()
         {
-            on.TurretWhiteList.AddRange(AddsTurrets);
-            on.EnemyWhiteList.AddRange(AddsEnemies);
-            GameStyleEffect.ApplyUpgradeEffectOnObject(on);
+            return new GameContext(
+                ResourceManager.Maps.GetResource(MapID),
+                ResourceManager.GameStyles.GetResource(GameStyleID));
         }
     }
 }

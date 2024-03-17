@@ -139,14 +139,14 @@ namespace BugDefender.OpenGL
                     {
                         currentChapter = campaign.Chapters.First(x => x.ID == currentChapter.NextChapterID);
                         campaignSave.ChapterID = currentChapter.ID;
-                        gameSave.Context = campaign.GetContextForChapter(currentChapter);
+                        gameSave.Context = currentChapter.GetContextForChapter();
                         Parent.UserManager.SaveGame(gameSave);
                         view.SwitchView(new CutsceneView(Parent, campaignSave, currentChapter.Intro, OnCampaignConversationOver));
                     }
                 }
                 else
                 {
-                    gameSave.Context = campaign.GetContextForChapter(currentChapter);
+                    gameSave.Context = currentChapter.GetContextForChapter();
                     Parent.UserManager.SaveGame(gameSave);
                 }
 #if RELEASE
@@ -170,7 +170,7 @@ namespace BugDefender.OpenGL
                 {
                     var campaign = ResourceManager.Campaigns.GetResource(campaignSave.CampaignID);
                     var currentChapter = campaign.Chapters.First(x => x.ID == campaignSave.ChapterID);
-                    gameSave.Context = campaign.GetContextForChapter(currentChapter);
+                    gameSave.Context = currentChapter.GetContextForChapter();
                     Parent.UserManager.SaveGame(gameSave);
                     view.SwitchView(new GameScreen(
                         Parent,
