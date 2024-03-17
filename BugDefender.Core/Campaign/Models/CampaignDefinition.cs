@@ -12,16 +12,18 @@ namespace BugDefender.Core.Campaign.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public List<ChapterDefinition> Chapters { get; set; }
+        public Dictionary<Guid, string> Speakers { get; set; }
         public int Reward { get; set; }
 
         public CutsceneDefinition CampaignOver { get; set; }
 
         [JsonConstructor]
-        public CampaignDefinition(Guid iD, string name, string description, List<ChapterDefinition> chapters, CutsceneDefinition campaignOver, int reward)
+        public CampaignDefinition(Guid iD, string name, string description, Dictionary<Guid, string> speakers, List<ChapterDefinition> chapters, CutsceneDefinition campaignOver, int reward)
         {
             ID = iD;
             Name = name;
             Description = description;
+            Speakers = speakers;
             Chapters = chapters;
             CampaignOver = campaignOver;
             Reward = reward;

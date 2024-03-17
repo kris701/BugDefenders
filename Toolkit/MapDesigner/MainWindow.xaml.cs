@@ -37,7 +37,7 @@ namespace MapDesigner
             var targetMap = LoadFile(".json", "Json Files (.json)|*.json");
             if (targetMap != null)
             {
-                var parsed = JsonSerializer.Deserialize<MapDefinition>(File.ReadAllText(targetMap.FullName));
+                var parsed = JsonSerializer.Deserialize<MapDefinition>(File.ReadAllText(targetMap.FullName), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 if (parsed == null)
                     throw new Exception("Could not parse map file!");
                 _currentMap = parsed;
