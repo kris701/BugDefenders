@@ -1,7 +1,4 @@
-﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Models;
-using BugDefender.Core.Game.Models.GameStyles;
-using BugDefender.Core.Resources;
+﻿using BugDefender.Core.Game.Models;
 using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Campaign.Models

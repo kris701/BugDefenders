@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MapDesigner.UserControls
 {
@@ -23,8 +12,8 @@ namespace MapDesigner.UserControls
         public float BlockWidth => float.Parse(WidthTextbox.Text);
         public float BlockHeight => float.Parse(HeightTextbox.Text);
 
-        private UIElementCollection _from;
-        private Action _update;
+        private readonly UIElementCollection _from;
+        private readonly Action _update;
         private bool _loaded;
 
         public BlockingTileControl(UIElementCollection from, Action update)

@@ -2,7 +2,6 @@
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
-using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;

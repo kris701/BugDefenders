@@ -1,18 +1,11 @@
 ﻿using BugDefender.Core.Campaign.Models;
 using CampaignDesigner.UserControls;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CampaignDesigner
 {
@@ -71,7 +64,7 @@ namespace CampaignDesigner
             CampaignIDTextBlock.Text = _currentCampaign.ID.ToString();
             CampaignRewardTextbox.Text = $"{_currentCampaign.Reward}";
             ChaptersItem.Items.Clear();
-            foreach(var chapter in _currentCampaign.Chapters)
+            foreach (var chapter in _currentCampaign.Chapters)
             {
                 var newChapterItem = new TreeViewItem()
                 {

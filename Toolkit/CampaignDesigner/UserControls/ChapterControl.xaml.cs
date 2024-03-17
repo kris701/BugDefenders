@@ -1,21 +1,9 @@
 ﻿using BugDefender.Core.Campaign.Models;
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.UserCriterias;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CampaignDesigner.UserControls
 {
@@ -37,7 +25,7 @@ namespace CampaignDesigner.UserControls
             });
             NextChapterCombobox.SelectedIndex = 0;
             int count = 1;
-            foreach(var other in campaign.Chapters)
+            foreach (var other in campaign.Chapters)
             {
                 if (other.ID != chapter.ID)
                 {
@@ -53,7 +41,7 @@ namespace CampaignDesigner.UserControls
             }
 
             count = 0;
-            foreach(var id in ResourceManager.Maps.GetResources())
+            foreach (var id in ResourceManager.Maps.GetResources())
             {
                 var map = ResourceManager.Maps.GetResource(id);
                 MapIDCombobox.Items.Add(new ComboBoxItem()

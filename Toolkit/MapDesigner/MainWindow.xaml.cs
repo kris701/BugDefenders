@@ -8,12 +8,9 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace MapDesigner
@@ -22,7 +19,7 @@ namespace MapDesigner
     {
         private MapDefinition _currentMap;
         private FileInfo _targetFile;
-        private string _mapsDir;
+        private readonly string _mapsDir;
 
         public MainWindow()
         {
@@ -138,7 +135,7 @@ namespace MapDesigner
                         break;
                     var from = path.Waypoints[0];
                     var brush = PickBrush();
-                    foreach (var point in path.Waypoints.Skip(1)) 
+                    foreach (var point in path.Waypoints.Skip(1))
                     {
                         var newLine = new Line();
                         newLine.X1 = from.X;

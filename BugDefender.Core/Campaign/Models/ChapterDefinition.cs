@@ -1,6 +1,4 @@
 ﻿using BugDefender.Core.Game;
-using BugDefender.Core.Game.Models.GameStyles;
-using BugDefender.Core.Models;
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.UserCriterias;

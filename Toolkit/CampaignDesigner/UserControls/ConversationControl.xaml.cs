@@ -1,18 +1,6 @@
 ﻿using BugDefender.Core.Campaign.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CampaignDesigner.UserControls
 {
@@ -21,8 +9,8 @@ namespace CampaignDesigner.UserControls
         public ConversationDefinition Conversation { get; }
         public Dictionary<Guid, string> Speakers { get; }
         private bool _isLoaded;
-        private Action _update;
-        private List<ConversationDefinition> _conversations;
+        private readonly Action _update;
+        private readonly List<ConversationDefinition> _conversations;
 
         public ConversationControl(List<ConversationDefinition> conversations, int index, Action update, Dictionary<Guid, string> speakers)
         {

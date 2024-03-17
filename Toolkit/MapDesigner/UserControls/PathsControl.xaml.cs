@@ -1,37 +1,25 @@
 ﻿using BugDefender.Tools;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MapDesigner.UserControls
 {
     public partial class PathsControl : UserControl
     {
-        public List<FloatPoint> Waypoints { get 
+        public List<FloatPoint> Waypoints
+        {
+            get
             {
                 var retList = new List<FloatPoint>();
-                foreach(var child in SubPathsStackPanel.Children)
+                foreach (var child in SubPathsStackPanel.Children)
                     if (child is PathControl path)
                         retList.Add(new FloatPoint(path.WaypointX, path.WaypointY));
                 return retList;
-            } 
+            }
         }
 
-        private UIElementCollection _from;
-        private Action _update;
+        private readonly UIElementCollection _from;
+        private readonly Action _update;
         public PathsControl(UIElementCollection from, Action update)
         {
             _from = from;

@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CampaignDesigner.UserControls
 {
@@ -20,9 +8,9 @@ namespace CampaignDesigner.UserControls
         public Guid SpeakerID => Guid.Parse(IDText.Text);
         public string SpeakerName => SpeakerLabel.Text;
 
-        private UIElementCollection _from;
+        private readonly UIElementCollection _from;
         private bool _isLoaded;
-        private Action _save;
+        private readonly Action _save;
         public SpeakerControl(UIElementCollection from, Action save, Guid speaker, string name)
         {
             _from = from;
