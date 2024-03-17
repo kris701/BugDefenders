@@ -1,70 +1,115 @@
-﻿{
-  "ID": "2811A657-6811-423A-8342-142BF5BD261A",
-  "Name": "Snakes Way",
-  "Description": "An easy map with one long snaky path.",
-  "Width": 950,
-  "Height": 950,
-  "Tags": [
-    "Easy", "Map"
-  ],
+{
+  "ID": "2811a657-6811-423a-8342-142bf5bd261a",
+  "Name": "Deaths Cross",
+  "Description": "A pretty difficult map! Enemies can come from four paths, combining into the two horizontal ones.",
   "Paths": [
     [
       {
+        "X": 465,
+        "Y": 0
+      },
+      {
+        "X": 465,
+        "Y": 440
+      },
+      {
         "X": 0,
-        "Y": 200
+        "Y": 440
+      }
+    ],
+    [
+      {
+        "X": 520,
+        "Y": 0
       },
       {
-        "X": 755,
-        "Y": 200
-      },
-      {
-        "X": 755,
-        "Y": 562
-      },
-      {
-        "X": 166,
-        "Y": 562
-      },
-      {
-        "X": 166,
-        "Y": 800
+        "X": 520,
+        "Y": 440
       },
       {
         "X": 950,
-        "Y": 800
+        "Y": 440
+      }
+    ],
+    [
+      {
+        "X": 465,
+        "Y": 950
+      },
+      {
+        "X": 465,
+        "Y": 440
+      },
+      {
+        "X": 0,
+        "Y": 440
+      }
+    ],
+    [
+      {
+        "X": 520,
+        "Y": 950
+      },
+      {
+        "X": 520,
+        "Y": 440
+      },
+      {
+        "X": 950,
+        "Y": 440
       }
     ]
   ],
   "BlockingTiles": [
     {
-      "X": -37.5,
-      "Y": 162.5,
-      "Width": 830,
-      "Height": 75
+      "X": 440,
+      "Y": -25,
+      "Width": 50,
+      "Height": 490
     },
     {
-      "X": 717.5,
-      "Y": 162.5,
-      "Width": 75,
-      "Height": 437
+      "X": -25,
+      "Y": 415,
+      "Width": 515,
+      "Height": 50
     },
     {
-      "X": 203.5,
-      "Y": 524.5,
-      "Width": 514,
-      "Height": 75
+      "X": 495,
+      "Y": -25,
+      "Width": 50,
+      "Height": 490
     },
     {
-      "X": 128.5,
-      "Y": 524.5,
-      "Width": 75,
-      "Height": 313
+      "X": 495,
+      "Y": 415,
+      "Width": 480,
+      "Height": 50
     },
     {
-      "X": 128.5,
-      "Y": 762.5,
-      "Width": 859,
-      "Height": 75
+      "X": 440,
+      "Y": 415,
+      "Width": 50,
+      "Height": 560
+    },
+    {
+      "X": -25,
+      "Y": 415,
+      "Width": 515,
+      "Height": 50
+    },
+    {
+      "X": 495,
+      "Y": 415,
+      "Width": 50,
+      "Height": 560
+    },
+    {
+      "X": 495,
+      "Y": 415,
+      "Width": 480,
+      "Height": 50
     }
-  ]
+  ],
+  "Width": 950,
+  "Height": 950
 }

@@ -1,0 +1,26 @@
+{
+  "ID": "b1294f03-8875-4b9d-a57a-6ab4ccb7ce2e",
+  "Name": "Easy Campaign (part 3)",
+  "Description": "",
+  "EvolutionRate": 1.01,
+  "EnemySpeedMultiplier": 0.5,
+  "RewardMultiplier": 2,
+  "StartingHP": 50,
+  "StartingMoney": 4000,
+  "EnemyWaveMultiplier": 1,
+  "ProjectileSpeedCap": 20,
+  "BossEveryNWave": 1,
+  "TurretBlackList": [
+  ],
+  "EnemyBlackList": [
+  ],
+  "TurretWhiteList": [
+    "1a252e16-8c8c-4179-8b1c-75b2b8f47704"
+  ],
+  "EnemyWhiteList": [
+    "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3"
+  ],
+  "MoneyPrWave": 100,
+  "TurretRefundPenalty": 1,
+  "CampaignOnly": true
+}

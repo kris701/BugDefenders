@@ -45,7 +45,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                Text = _cutscene.Conversation[_conversationIndex].From,
+                Text = _campaign.Speakers[_cutscene.Conversation[_conversationIndex].SpeakerID],
                 IsVisible = true
             };
             AddControl(0, _leftName);
@@ -128,7 +128,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
 
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CutsceneView(Parent, _savedGame, _cutscene, _onConversationOver)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CutsceneView(Parent, _savedGame, _campaign, _cutscene, _onConversationOver)))
             {
                 X = 0,
                 Y = 0,

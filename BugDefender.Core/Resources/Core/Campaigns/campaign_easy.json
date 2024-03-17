@@ -1,170 +1,453 @@
-﻿{
-  "id": "204db9ee-0768-449a-a2a8-b1e324d3312f",
+{
+  "ID": "204db9ee-0768-449a-a2a8-b1e324d3312f",
   "Name": "Standard Campaign",
-  "description": "The main campaign for the game!",
-  "Reward": 50,
+  "Description": "The main campaign for the game!",
   "Chapters": [
     {
       "ID": "ff91a518-876e-4421-9890-51609109cf07",
       "NextChapterID": "6e6a69da-7143-4d22-9b2d-0cdb7f3e9661",
       "Name": "Chapter 1",
-      "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
+      "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
       "Intro": {
         "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
         "Conversation": [
           {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-            "From": "Unknown",
-            "Text": "You have to save us all! The bugs are invading rapidly!"
+            "Text": "Hello? Can you hear me?"
           },
           {
             "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-            "From": "You",
             "Text": "Who are you?"
           },
           {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-            "From": "Unknown",
-            "Text": "My identity is not important. Whats more important is this blueprint of a turret."
+            "Text": "My identity is not important. Im calling you because the bugs are coming!"
           },
           {
             "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-            "From": "You",
+            "Text": "Bugs? Why should i care about a few bugs?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "These are no ordinary bugs! These are killer bugs, huge and aimed at destroying humanity! Just listen to this recording i picked up a few days ago..."
+          },
+          {
+            "SpeakerID": "c69e9e7b-eb6d-463e-865b-b5539de05298",
+            "Text": "Humans....        Must....           Die...."
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "And what am i suppose to do about it anyways?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "I am currently gathering data on defensive measures, mainly in the shape of turrets. I have one blueprint ready for you that you can use right away."
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
             "Text": "Bullets huh, a little old school isnt it?"
           },
           {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-            "From": "Unknown",
             "Text": "Its all i can get together for now, but give me some time and i will find more turret blueprints for you."
           }
         ]
       },
+      "GameStyleID": "41088408-1955-4dcc-91ea-06fb301cb817",
       "Criterias": [
         {
           "CriteriaType": "Kills",
           "Quantity": 50
         }
-      ],
-      "GameStyleEffect": {
-        "Effects": [
-          {
-            "Target": "StartingMoney",
-            "Value": 2000
-          }
-        ]
-      },
-      "AddsTurrets": [  ],
-      "AddsEnemies": [ "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3" ]
+      ]
     },
     {
       "ID": "6e6a69da-7143-4d22-9b2d-0cdb7f3e9661",
       "NextChapterID": "88ea3655-0251-4266-b44b-84b699f57a53",
       "Name": "Chapter 2",
-      "MapID": "2811A657-6811-423A-8342-142BF5BD261A",
-      "Intro": {
-        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
-        "Conversation": [
-          {
-            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-            "From": "Unknown",
-            "Text": "That was only the initial swarm! Bosses are comming!"
-          },
-          {
-            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-            "From": "You",
-            "Text": "Bosses???"
-          }
-        ]
-      },
-      "Criterias": [
-        {
-          "CriteriaType": "KillsOfType",
-          "EnemyID": "9ea1bdfd-efad-45dd-b7ab-e8f6f7edf8c3",
-          "Quantity": 2
-        }
-      ],
-      "GameStyleEffect": {
-        "Effects": [
-          {
-            "Target": "StartingMoney",
-            "Value": 3000
-          }
-        ]
-      },
-      "AddsTurrets": [ "468b3259-bd65-4aa1-9e40-5fb5e455b847" ],
-      "AddsEnemies": [ "86d3f9ae-cd87-4ce7-ba70-87139f378da2", "292f065c-8f4b-4140-ad13-c38179b8b9fa", "366dd4c1-dd3c-419d-85dd-452f2d45597c" ]
-    },
-    {
-      "ID": "88ea3655-0251-4266-b44b-84b699f57a53",
-      "NextChapterID": null,
-      "Name": "Chapter 3",
       "MapID": "ca13a581-163b-40c7-8d7e-383e59c23202",
       "Intro": {
         "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
         "Conversation": [
           {
             "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-            "From": "You",
-            "Text": "I think i got them all."
+            "Text": "Well that was pretty easy..."
           },
           {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-            "From": "Unknown",
-            "Text": "Fantastic! I wish i had good news through..."
+            "Text": "Dont get too excited. This was just the simple bugs. You have now alerted the hive!"
           },
           {
             "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-            "From": "You",
-            "Text": "Whats the problem?"
+            "Text": "What does that mean?"
           },
           {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-            "From": "Unknown",
-            "Text": "The bugs have evolved. They have learned to fly! And these simple gatling turrets cannot shoot upwards!"
+            "Text": "It means the bugs that are coming now are EVOLVED beyond the normal ones! From these reading it looks like they are getting 5% more HP every wave! So you better kill them quickly!"
           },
           {
             "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-            "From": "You",
-            "Text": "Thats a bit of a weird design choice isnt it???"
+            "Text": "Thats easier said than done...    How am i suppose to kill them that fast with just this turret?"
           },
           {
             "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-            "From": "Unknown",
-            "Text": "Nevermind that! As a stopgap measure, i have cobbled together a laser turret blueprint. And this one can shoot both the bugs on the ground and those in the sky!"
-          },
-          {
-            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-            "From": "You",
-            "Text": "Great! Time to squish more bugs!"
+            "Text": "Im working on it! However, for now you have to brute force it. I have gathered additional starting funds for you to deal with this! Good luck"
           }
         ]
       },
+      "GameStyleID": "41088408-1955-4dcc-91ea-06fb301cb817",
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 100
+        }
+      ]
+    },
+    {
+      "ID": "88ea3655-0251-4266-b44b-84b699f57a53",
+      "NextChapterID": "e7633006-9332-4425-92cb-0e3c1e1d2192",
+      "Name": "Chapter 3",
+      "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Oh no! These bugs are evolving faster than i expected!!!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "What? Do they gain HP even faster now?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "I wish that was just it...  But it seems that the bugs have evolved into boss bugs now!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Is that just a big an difficult bug?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Pretty much! However i have even more funds for you to kill them with! Good luck"
+          }
+        ]
+      },
+      "GameStyleID": "b1294f03-8875-4b9d-a57a-6ab4ccb7ce2e",
       "Criterias": [
         {
           "CriteriaType": "Kills",
           "Quantity": 250
         }
-      ],
-      "GameStyleEffect": {
-        "Effects": [
+      ]
+    },
+    {
+      "ID": "e7633006-9332-4425-92cb-0e3c1e1d2192",
+      "NextChapterID": "3a3ce3dd-36ab-44de-af67-e9dfd3d8614f",
+      "Name": "Chapter 4",
+      "MapID": "df2fded0-2a01-4350-bd87-cda973e1886c",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
           {
-            "Target": "StartingMoney",
-            "Value": 4000
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Even more bugs are coming, however we have a problem."
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Even stronger bugs?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Nope, FLYING BUGS"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Cant i just shoot them with the turret?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Well, no. I cobbled together that turret blueprint really fast so it does not have the functionally to pitch..."
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "That seems like a bit of a bad design choice, dont you think?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "WE DONT HAVE TIME FOR THIS. I have made a new type of turret that can deal with these flying bugs. Its a laser turret! So keep in mind that all the enemies this time will be flying!"
           }
         ]
       },
-      "AddsTurrets": [ "e1e5d65f-b09e-4f71-a743-67ead199cdfc" ],
-      "AddsEnemies": [ "0511ffe4-1be3-489b-a0c3-066935cd7a07", "ae76b377-f010-4fcc-8f85-3d13aacd238a", "b82e41ce-c032-4ecc-ac65-83f1372663b6" ]
+      "GameStyleID": "a85371e0-4f07-4443-865f-4c169fdbca28",
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 100
+        }
+      ]
+    },
+    {
+      "ID": "3a3ce3dd-36ab-44de-af67-e9dfd3d8614f",
+      "NextChapterID": "4d5f694f-e569-4d8e-9993-2e4c57b1015a",
+      "Name": "Chapter 5",
+      "MapID": "2d338762-c5f5-4ab9-8943-424e9d264e94",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Good job! But more are coming!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Anything new i should be aware of?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Yes. This seems to be waves of both flying and ground bugs! So make sure you make both laser and gatling turrets to counter them."
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Will do!"
+          }
+        ]
+      },
+      "GameStyleID": "416c5644-49a6-4afc-9b3e-7d9a4bf15f5d",
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 250
+        }
+      ]
+    },
+    {
+      "ID": "4d5f694f-e569-4d8e-9993-2e4c57b1015a",
+      "NextChapterID": "fdef4302-cd02-451e-8977-fa543a5eb432",
+      "Name": "Chapter 6",
+      "MapID": "b33eff29-7ee2-4900-8e7d-b4961741739f",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Phew, they sure put up a fight..."
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "I know, but i have something to cheer you up!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Ice cream?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "....no...."
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "But two new turrets! They are a rocket and a missile turret! They can both deal a great amount of damage."
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Ooooo explosives huh, nice!"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Also, in case you havent noticed so far. Each turret have different types of enemies they are strong or weak against! So watch out with just making too many of the same turret!"
+          }
+        ]
+      },
+      "GameStyleID": "9cbc1275-d899-447c-88f3-b8516c1dc871",
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 500
+        }
+      ]
+    },
+    {
+      "ID": "fdef4302-cd02-451e-8977-fa543a5eb432",
+      "NextChapterID": "f4930f1e-9d23-44cd-a699-7a1639624894",
+      "Name": "Chapter 7",
+      "MapID": "1af5a5d8-2496-4d8b-9962-54020f612b12",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "I got some bad news..."
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "The bank wont loan me more money!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Ehm, what does that have to do with bugs?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Not much. But it means i cant send you money every time you start a wave!"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Instead! I have called in some friends and they have given you an Investment Turret"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Is that just a turret that gives money?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Pretty much! Every wave it gives a set amount of money."
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "So ehm, please get enough money back to pay for all my loans..."
+          }
+        ]
+      },
+      "GameStyleID": "b7078b97-3573-46a3-8503-5172acf04616",
+      "Criterias": [
+        {
+          "CriteriaType": "MoneyEarned",
+          "Quantity": 10000
+        }
+      ]
+    },
+    {
+      "ID": "f4930f1e-9d23-44cd-a699-7a1639624894",
+      "NextChapterID": "9b144027-072d-4232-9e3e-a6cd8d52f2f0",
+      "Name": "Chapter 8",
+      "MapID": "2811a657-6811-423a-8342-142bf5bd261a",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "I have found even more turrets for you!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Ooooo what do we have this time?"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "A area of effect turret that slows enemies quite significantly and a flame thrower turret! They are both very powerful, but so are all the new bugs... So good luck!"
+          }
+        ]
+      },
+      "GameStyleID": "ccf7f226-8843-419e-a9f9-1edf3ae272e2",
+      "Criterias": [
+        {
+          "CriteriaType": "WavesStarted",
+          "Quantity": 100
+        },
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 500
+        }
+      ]
+    },
+    {
+      "ID": "9b144027-072d-4232-9e3e-a6cd8d52f2f0",
+      "NextChapterID": "c5c46feb-752f-46b9-9f14-30520680d884",
+      "Name": "Chapter 9",
+      "MapID": "77c07efc-3089-4440-9674-9351d6247931",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Well, i think these are the last turrets i can come up with!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "Something that blows up EVEN MORE???"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "No..."
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "They are passive turrets! They give a passive buff to either range or damage for turrets within its effect"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "That sounds very powerful. Thanks!"
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "But be aware though, the bugs are almost at full strength!"
+          }
+        ]
+      },
+      "GameStyleID": "556bcaa6-dbe6-41f9-9adc-e9312030b7d8",
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 750
+        }
+      ]
+    },
+    {
+      "ID": "c5c46feb-752f-46b9-9f14-30520680d884",
+      "NextChapterID": null,
+      "Name": "Chapter 10",
+      "MapID": "a46ad929-ab27-4455-8586-ee9c4ff6453c",
+      "Intro": {
+        "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
+        "Conversation": [
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "This is it! The final battle."
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "I wish i had more turrets to give you but you have gotten all of them."
+          },
+          {
+            "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+            "Text": "Now there is just this one last bug attack to survive!"
+          },
+          {
+            "SpeakerID": "74ddadcb-9d75-4039-b146-7818baa5619a",
+            "Text": "I will do my best!"
+          }
+        ]
+      },
+      "GameStyleID": "f7f12d20-e8d3-4cce-8c72-9ea3a7deacbc",
+      "Criterias": [
+        {
+          "CriteriaType": "Kills",
+          "Quantity": 1000
+        }
+      ]
     }
   ],
-  "BaseGameStyle": "41088408-1955-4dcc-91ea-06fb301cb817",
+  "Speakers": {
+    "e56797b6-f58c-418c-aba0-9f0d3cd005a1": "Unknown",
+    "74ddadcb-9d75-4039-b146-7818baa5619a": "You",
+    "c69e9e7b-eb6d-463e-865b-b5539de05298": "Bug?"
+  },
+  "Reward": 50,
   "CampaignOver": {
     "ID": "2f5c4389-68ae-4464-82d0-980906a5ab3c",
     "Conversation": [
       {
         "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-        "From": "Unknown",
-        "Text": "You did it :)"
+        "Text": "You have done it! You rid the world of all the bugs!"
+      },
+      {
+        "SpeakerID": "c69e9e7b-eb6d-463e-865b-b5539de05298",
+        "Text": "Are you.... sure about..... that?"
+      },
+      {
+        "SpeakerID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
+        "Text": "Wait who is this???"
       }
     ]
   }

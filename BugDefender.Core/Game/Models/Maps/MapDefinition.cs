@@ -12,9 +12,8 @@ namespace BugDefender.Core.Game.Models.Maps
         public List<BlockedTile> BlockingTiles { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public List<string> Tags { get; set; }
 
-        public MapDefinition(Guid iD, string name, string description, List<List<FloatPoint>> paths, List<BlockedTile> blockingTiles, int width, int height, List<string> tags)
+        public MapDefinition(Guid iD, string name, string description, List<List<FloatPoint>> paths, List<BlockedTile> blockingTiles, int width, int height)
         {
             ID = iD;
             Name = name;
@@ -23,7 +22,6 @@ namespace BugDefender.Core.Game.Models.Maps
             BlockingTiles = blockingTiles;
             Width = width;
             Height = height;
-            Tags = tags;
         }
 
         public float GetDifficultyRating()

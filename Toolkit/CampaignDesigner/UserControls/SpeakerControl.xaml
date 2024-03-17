@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="CampaignDesigner.UserControls.SpeakerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CampaignDesigner.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="400" Background="LightGray" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="SpeakerLabel" TextChanged="SpeakerLabel_TextChanged"/>
+        <Button x:Name="DeleteButton" Grid.Column="1" Content="X" Background="Red" Foreground="White" Click="DeleteButton_Click"/>
+        <TextBox x:Name="IDText" Grid.Row="1" Grid.ColumnSpan="2" TextChanged="IDText_TextChanged"/>
+    </Grid>
+</UserControl>

@@ -19,8 +19,9 @@
         public List<Guid> EnemyWhiteList { get; set; }
         public int MoneyPrWave { get; set; }
         public float TurretRefundPenalty { get; set; }
+        public bool CampaignOnly { get; set; }
 
-        public GameStyleDefinition(Guid iD, string name, string description, float evolutionRate, float enemySpeedMultiplier, float rewardMultiplier, int startingHP, int startingMoney, float enemyWaveMultiplier, int projectileSpeedCap, int bossEveryNWave, List<Guid> turretBlackList, List<Guid> enemyBlackList, List<Guid> turretWhiteList, List<Guid> enemyWhiteList, int moneyPrWave, float turretRefundPenalty)
+        public GameStyleDefinition(Guid iD, string name, string description, float evolutionRate, float enemySpeedMultiplier, float rewardMultiplier, int startingHP, int startingMoney, float enemyWaveMultiplier, int projectileSpeedCap, int bossEveryNWave, List<Guid> turretBlackList, List<Guid> enemyBlackList, List<Guid> turretWhiteList, List<Guid> enemyWhiteList, int moneyPrWave, float turretRefundPenalty, bool campaignOnly)
         {
             ID = iD;
             Name = name;
@@ -39,6 +40,7 @@
             EnemyWhiteList = enemyWhiteList;
             MoneyPrWave = moneyPrWave;
             TurretRefundPenalty = turretRefundPenalty;
+            CampaignOnly = campaignOnly;
         }
 
         public float GetDifficultyRating()

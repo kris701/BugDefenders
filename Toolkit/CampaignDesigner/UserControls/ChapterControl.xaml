@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="CampaignDesigner.UserControls.ChapterControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CampaignDesigner.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="Gray" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Chapter Name:"/>
+            <TextBox x:Name="ChapterNameTextbox" Width="200" TextChanged="ChapterNameTextbox_TextChanged"/>
+            <Label Content="Next Chapter:"/>
+            <ComboBox x:Name="NextChapterCombobox" Width="200" SelectionChanged="NextChapterCombobox_SelectionChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="Target Map:"/>
+            <ComboBox x:Name="MapIDCombobox" Width="200" SelectionChanged="MapIDCombobox_SelectionChanged"/>
+            <Label Content="Target Game Style:"/>
+            <ComboBox x:Name="GamestyleIDCombobox" Width="200" SelectionChanged="GamestyleIDCombobox_SelectionChanged"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="ParseCriteriaButton" Content="Parse Criteria Content" Click="ParseCriteriaButton_Click"/>
+            <Label Content="Add Templates:"/>
+            <ComboBox x:Name="AddNewDefault" Width="300"/>
+            <Button x:Name="AddNewDefaultButton" Content="Add" Click="AddNewDefaultButton_Click"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="3" Margin="5" >
+            <TextBox x:Name="CriteriaText" FontFamily="Consolas" FontSize="20"/>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

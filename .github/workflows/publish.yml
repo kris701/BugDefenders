@@ -35,9 +35,13 @@ jobs:
 
       - name: Publish Game (Windows)
         run: dotnet publish BugDefender.OpenGL -c Release -r win-x64
-      - name: Publish Toolkit (1/2) (Windows)
-        run: dotnet publish ./Toolkit/MapPathBlockingTileGen/MapPathBlockingTileGen.csproj -c Release -r win-x64
-      - name: Publish Toolkit (2/2) (Windows)
+      - name: Publish Toolkit (1/4) (Windows)
+        run: dotnet publish ./Toolkit/MapDesigner/MapDesigner.csproj -c Release -r win-x64
+      - name: Publish Toolkit (2/4) (Windows)
+        run: dotnet publish ./Toolkit/CampaignDesigner/CampaignDesigner.csproj -c Release -r win-x64
+      - name: Publish Toolkit (3/4) (Windows)
+        run: dotnet publish ./Toolkit/GameStyleDesigner/GameStyleDesigner.csproj -c Release -r win-x64
+      - name: Publish Toolkit (4/4) (Windows)
         run: dotnet publish ./Toolkit/ModChecker/ModChecker.csproj -c Release -r win-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -70,10 +74,6 @@ jobs:
 
       - name: Publish Game (Linux)
         run: dotnet publish BugDefender.OpenGL -c Release -r linux-x64
-      - name: Publish Toolkit (1/2) (Linux)
-        run: dotnet publish ./Toolkit/MapPathBlockingTileGen/MapPathBlockingTileGen.csproj -c Release -r linux-x64
-      - name: Publish Toolkit (2/2) (Linux)
-        run: dotnet publish ./Toolkit/ModChecker/ModChecker.csproj -c Release -r linux-x64
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:

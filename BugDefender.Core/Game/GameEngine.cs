@@ -18,7 +18,7 @@ namespace BugDefender.Core.Game
         private readonly GameTimer _mainLoopTimer;
         private readonly GameTimer _criteriaTimer;
 
-        public GameResult Result { get; private set; } = GameResult.None;
+        public GameResult Result { get; set; } = GameResult.None;
         public bool GameOver { get; set; }
         private bool _running = true;
         public bool Running
@@ -72,7 +72,6 @@ namespace BugDefender.Core.Game
                 Context.GameStyle.TurretBlackList.Count != 0 && Context.GameStyle.TurretWhiteList.Count != 0)
                 throw new Exception("Cant have a black list and a white list at the same time!");
 
-            Context.Stats.MoneyEarned(Context.GameStyle.StartingMoney);
             Context.Stats.Difficulty = Context.Map.GetDifficultyRating() * Context.GameStyle.GetDifficultyRating();
 
             Initialize();

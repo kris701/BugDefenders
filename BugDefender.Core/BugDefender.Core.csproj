@@ -101,13 +101,27 @@
     <None Remove="Resources\Core\Enemies\enemy6_1.json" />
     <None Remove="Resources\Core\Enemies\enemy6_2.json" />
     <None Remove="Resources\Core\Enemies\enemy6_3.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_1.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_10.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_2.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_3.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_4.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_5.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_6.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_7.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_8.json" />
+    <None Remove="Resources\Core\GameStyles\campaign_easy_9.json" />
     <None Remove="Resources\Core\GameStyles\easy_bossrush.json" />
-    <None Remove="Resources\Core\GameStyles\easy_campaign.json" />
     <None Remove="Resources\Core\GameStyles\extreme.json" />
     <None Remove="Resources\Core\GameStyles\hard.json" />
     <None Remove="Resources\Core\GameStyles\hard_bossrush.json" />
     <None Remove="Resources\Core\GameStyles\medium_bossrush.json" />
     <None Remove="Resources\Core\Maps\map3.json" />
+    <None Remove="Resources\Core\Maps\map4.json" />
+    <None Remove="Resources\Core\Maps\map5.json" />
+    <None Remove="Resources\Core\Maps\map6.json" />
+    <None Remove="Resources\Core\Maps\map7.json" />
+    <None Remove="Resources\Core\Maps\map8.json" />
     <None Remove="Resources\Core\Projectiles\fire.json" />
     <None Remove="Resources\Core\Turrets\flameturret.json" />
     <None Remove="Resources\Core\Turrets\gatlingturret.json" />
@@ -363,7 +377,16 @@
     <EmbeddedResource Include="Resources\Core\Enemies\enemy1_1.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Core\GameStyles\easy_campaign.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_1.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_10.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_2.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_3.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_4.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_5.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_6.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_7.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_8.json" />
+    <EmbeddedResource Include="Resources\Core\GameStyles\campaign_easy_9.json" />
     <EmbeddedResource Include="Resources\Core\GameStyles\hard_bossrush.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -383,6 +406,21 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\GameStyles\easy.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Maps\map8.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Maps\map7.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Maps\map6.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Maps\map5.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Core\Maps\map4.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Core\Maps\map3.json">

@@ -16,13 +16,15 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
         private readonly Action<IView, ISavedGame> _onConversationOver;
         private readonly ISavedGame _savedGame;
         private readonly CutsceneDefinition _cutscene;
+        private readonly CampaignDefinition _campaign;
         private int _conversationIndex = 0;
 
-        public CutsceneView(BugDefenderGameWindow parent, ISavedGame savedGame, CutsceneDefinition cutscene, Action<IView, ISavedGame> onConversationOver) : base(parent, _id)
+        public CutsceneView(BugDefenderGameWindow parent, ISavedGame savedGame, CampaignDefinition campaign, CutsceneDefinition cutscene, Action<IView, ISavedGame> onConversationOver) : base(parent, _id)
         {
             _onConversationOver = onConversationOver;
             _cutscene = cutscene;
             _savedGame = savedGame;
+            _campaign = campaign;
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, SkipConversation);
         }
@@ -37,7 +39,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 var converation = _cutscene.Conversation[_conversationIndex];
                 if (_conversationIndex % 2 == 0)
                 {
-                    _leftName.Text = converation.From;
+                    _leftName.Text = _campaign.Speakers[converation.SpeakerID];
                     _leftName.IsVisible = true;
                     _middleText.Text = converation.Text;
                     _leftSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
@@ -48,7 +50,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 }
                 else
                 {
-                    _rightName.Text = converation.From;
+                    _rightName.Text = _campaign.Speakers[converation.SpeakerID];
                     _rightName.IsVisible = true;
                     _middleText.Text = converation.Text;
                     _rightSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);

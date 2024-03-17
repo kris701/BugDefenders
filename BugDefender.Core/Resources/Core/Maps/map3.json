@@ -1,61 +1,67 @@
-﻿{
+{
   "ID": "df2fded0-2a01-4350-bd87-cda973e1886c",
-  "Name": "Slow Glow",
-  "Description": "A simple map with a few turns. Shouldnt be too hard!",
-  "Width": 950,
-  "Height": 950,
-  "Tags": [
-    "Medium",
-    "Map"
-  ],
+  "Name": "Brown Snake",
+  "Description": "A snaky map!",
   "Paths": [
     [
       {
         "X": 0,
-        "Y": 195
+        "Y": 760
       },
       {
-        "X": 275,
-        "Y": 195
+        "X": 695,
+        "Y": 760
       },
       {
-        "X": 275,
-        "Y": 675
+        "X": 695,
+        "Y": 510
       },
       {
-        "X": 820,
-        "Y": 675
+        "X": 280,
+        "Y": 510
       },
       {
-        "X": 820,
-        "Y": 0
+        "X": 280,
+        "Y": 140
+      },
+      {
+        "X": 950,
+        "Y": 140
       }
     ]
   ],
   "BlockingTiles": [
     {
-      "X": -37.5,
-      "Y": 157.5,
-      "Width": 350,
-      "Height": 75
+      "X": -25,
+      "Y": 735,
+      "Width": 745,
+      "Height": 50
     },
     {
-      "X": 237.5,
-      "Y": 157.5,
-      "Width": 75,
-      "Height": 555
+      "X": 670,
+      "Y": 485,
+      "Width": 50,
+      "Height": 300
     },
     {
-      "X": 237.5,
-      "Y": 637.5,
-      "Width": 620,
-      "Height": 75
+      "X": 255,
+      "Y": 485,
+      "Width": 465,
+      "Height": 50
     },
     {
-      "X": 782.5,
-      "Y": -37.5,
-      "Width": 75,
-      "Height": 750
+      "X": 255,
+      "Y": 115,
+      "Width": 50,
+      "Height": 420
+    },
+    {
+      "X": 255,
+      "Y": 115,
+      "Width": 720,
+      "Height": 50
     }
-  ]
+  ],
+  "Width": 950,
+  "Height": 950
 }

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+	  <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <Nullable>enable</Nullable>
+	  <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+	  <Authors>Kristian Skov Johansen</Authors>
+	  <Copyright>Kristian Skov Johansen</Copyright>
+	  <Product>Bug Defenders Toolkit</Product>
+	  <Version>1.0.0</Version>
+	  <PublishSingleFile>true</PublishSingleFile>
+	  <SelfContained>false</SelfContained>
+	  <DebugType>embedded</DebugType>
+	  <PublishReadyToRun>false</PublishReadyToRun>
+	  <TieredCompilation>false</TieredCompilation>
+	  <OutputPath>../../Output/</OutputPath>
+	  <PublishDir>$(OutputPath)/$(TargetFramework)/$(RuntimeIdentifier)/publish/Toolkit</PublishDir>
+	  <SignAssembly>True</SignAssembly>
+	  <AssemblyOriginatorKeyFile>../../sgKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BugDefender.Core\BugDefender.Core.csproj" />
+  </ItemGroup>
+
+</Project>

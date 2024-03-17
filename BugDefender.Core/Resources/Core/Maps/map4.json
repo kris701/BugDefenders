@@ -1,0 +1,75 @@
+{
+  "ID": "77c07efc-3089-4440-9674-9351d6247931",
+  "Name": "Spicy Lines",
+  "Description": "A very difficult map where enemies can travel along 4 different paths!",
+  "Paths": [
+    [
+      {
+        "X": 0,
+        "Y": 130
+      },
+      {
+        "X": 950,
+        "Y": 130
+      }
+    ],
+    [
+      {
+        "X": 950,
+        "Y": 315
+      },
+      {
+        "X": 0,
+        "Y": 315
+      }
+    ],
+    [
+      {
+        "X": 0,
+        "Y": 520
+      },
+      {
+        "X": 950,
+        "Y": 520
+      }
+    ],
+    [
+      {
+        "X": 950,
+        "Y": 750
+      },
+      {
+        "X": 0,
+        "Y": 750
+      }
+    ]
+  ],
+  "BlockingTiles": [
+    {
+      "X": -25,
+      "Y": 105,
+      "Width": 1000,
+      "Height": 50
+    },
+    {
+      "X": -25,
+      "Y": 290,
+      "Width": 1000,
+      "Height": 50
+    },
+    {
+      "X": -25,
+      "Y": 495,
+      "Width": 1000,
+      "Height": 50
+    },
+    {
+      "X": -25,
+      "Y": 725,
+      "Width": 1000,
+      "Height": 50
+    }
+  ],
+  "Width": 950,
+  "Height": 950
+}
