@@ -1,12 +1,7 @@
 ﻿{
-  "ID": "2811A657-6811-423A-8342-142BF5BD261A",
+  "ID": "2811a657-6811-423a-8342-142bf5bd261a",
   "Name": "Snakes Way",
   "Description": "An easy map with one long snaky path.",
-  "Width": 950,
-  "Height": 950,
-  "Tags": [
-    "Easy", "Map"
-  ],
   "Paths": [
     [
       {
@@ -19,52 +14,58 @@
       },
       {
         "X": 755,
-        "Y": 562
+        "Y": 568
       },
       {
         "X": 166,
-        "Y": 562
+        "Y": 568
       },
       {
         "X": 166,
-        "Y": 800
+        "Y": 795
       },
       {
         "X": 950,
-        "Y": 800
+        "Y": 795
       }
     ]
   ],
   "BlockingTiles": [
     {
-      "X": -37.5,
-      "Y": 162.5,
-      "Width": 830,
-      "Height": 75
+      "X": -35,
+      "Y": 165,
+      "Width": 825,
+      "Height": 70
     },
     {
-      "X": 717.5,
-      "Y": 162.5,
-      "Width": 75,
-      "Height": 437
+      "X": 720,
+      "Y": 165,
+      "Width": 70,
+      "Height": 438
     },
     {
-      "X": 203.5,
-      "Y": 524.5,
-      "Width": 514,
-      "Height": 75
+      "X": 131,
+      "Y": 533,
+      "Width": 659,
+      "Height": 70
     },
     {
-      "X": 128.5,
-      "Y": 524.5,
-      "Width": 75,
-      "Height": 313
+      "X": 131,
+      "Y": 533,
+      "Width": 70,
+      "Height": 297
     },
     {
-      "X": 128.5,
-      "Y": 762.5,
-      "Width": 859,
-      "Height": 75
+      "X": 131,
+      "Y": 760,
+      "Width": 854,
+      "Height": 70
     }
+  ],
+  "Width": 950,
+  "Height": 950,
+  "Tags": [
+    "Easy",
+    "Map"
   ]
 }

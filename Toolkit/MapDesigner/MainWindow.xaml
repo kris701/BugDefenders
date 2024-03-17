@@ -16,7 +16,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Canvas x:Name="MapCanvas" Background="Gray"/>
+        <Canvas x:Name="MapCanvas" Background="Gray" ClipToBounds="true"/>
         <ScrollViewer Grid.Row="1" Margin="5" >
             <TextBlock x:Name="StatsTextBlock" Background="LightGray"/>
         </ScrollViewer>
@@ -28,7 +28,7 @@
             <Button x:Name="CompileMapButton" Content="Compile Map" Margin="2" Click="CompileMapButton_Click"/>
         </StackPanel>
 
-        <Grid Grid.Column="1">
+        <Grid x:Name="ControlsGrid" Grid.Column="1" IsEnabled="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

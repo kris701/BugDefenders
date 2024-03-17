@@ -1,6 +1,9 @@
 ﻿using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Tools;
+using CommandLine;
+using MapDesigner.UserControls;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -39,7 +42,15 @@ namespace MapDesigner
                     throw new Exception("Could not parse map file!");
                 _currentMap = parsed;
                 _targetFile = targetMap;
-                UpdateStatsBox();
+                BlockingTilesStackPanel.Children.Clear();
+                foreach (var block in parsed.BlockingTiles)
+                    BlockingTilesStackPanel.Children.Add(new BlockingTileControl(BlockingTilesStackPanel.Children, UpdateView, block.X, block.Y, block.Width, block.Height));
+                PathsStackPanel.Children.Clear();
+                foreach (var path in parsed.Paths)
+                    PathsStackPanel.Children.Add(new PathsControl(PathsStackPanel.Children, UpdateView, path));
+
+                UpdateView();
+                ControlsGrid.IsEnabled = true;
             }
         }
 
@@ -60,19 +71,28 @@ namespace MapDesigner
                     );
                 _targetFile = targetFile;
                 UpdateStatsBox();
+                ControlsGrid.IsEnabled = true;
             }
         }
 
         private void CompileMapButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var targetFile = SaveFile(".json", "Json Files (.json)|*.json");
+            if (targetFile != null)
+            {
+                var text = JsonSerializer.Serialize(_currentMap);
+                File.WriteAllText(targetFile.FullName, text);
+            }
         }
 
         private void AutoGenBlockingTilesButton_Click(object sender, RoutedEventArgs e)
         {
             var range = int.Parse(AutoGenBlockingTileRange.Text);
             _currentMap.BlockingTiles = MapPathBlockingTileGen.Program.AutoGenTiles(_currentMap.Paths, range);
-            UpdateStatsBox();
+            BlockingTilesStackPanel.Children.Clear();
+            foreach (var block in _currentMap.BlockingTiles)
+                BlockingTilesStackPanel.Children.Add(new BlockingTileControl(BlockingTilesStackPanel.Children, UpdateView, block.X, block.Y, block.Width, block.Height));
+            UpdateView();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -83,12 +103,62 @@ namespace MapDesigner
 
         private void NewPathButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PathsStackPanel.Children.Add(new PathsControl(PathsStackPanel.Children, UpdateView));
+            UpdateView();
         }
 
         private void NewBlockingTileButton_Click(object sender, RoutedEventArgs e)
         {
+            BlockingTilesStackPanel.Children.Add(new BlockingTileControl(BlockingTilesStackPanel.Children, UpdateView));
+            UpdateView();
+        }
 
+        public void UpdateView()
+        {
+            MapCanvas.Children.Clear();
+            _currentMap.BlockingTiles.Clear();
+            foreach (var child in BlockingTilesStackPanel.Children)
+            {
+                if (child is BlockingTileControl block)
+                {
+                    var newRec = new Canvas();
+                    newRec.Margin = new Thickness(block.BlockX, block.BlockY, 0, 0);
+                    newRec.Width = block.BlockWidth;
+                    newRec.Width = block.BlockWidth;
+                    newRec.Height = block.BlockHeight;
+                    newRec.Background = Brushes.Red;
+                    newRec.Opacity = 0.5;
+
+                    MapCanvas.Children.Add(newRec);
+                    _currentMap.BlockingTiles.Add(new BlockedTile(block.BlockX, block.BlockY, block.BlockWidth, block.BlockHeight));
+                }
+            }
+            _currentMap.Paths.Clear();
+            foreach (var child in PathsStackPanel.Children)
+            {
+                if (child is PathsControl path)
+                {
+                    if (path.Waypoints.Count < 2)
+                        break;
+                    var from = path.Waypoints[0];
+                    var brush = PickBrush();
+                    foreach (var point in path.Waypoints.Skip(1)) 
+                    {
+                        var newLine = new Line();
+                        newLine.X1 = from.X;
+                        newLine.Y1 = from.Y;
+                        newLine.X2 = point.X;
+                        newLine.Y2 = point.Y;
+                        newLine.StrokeThickness = 3;
+                        newLine.Stroke = brush;
+                        from = point;
+
+                        MapCanvas.Children.Add(newLine);
+                    }
+                    _currentMap.Paths.Add(path.Waypoints);
+                }
+            }
+            UpdateStatsBox();
         }
 
         private void LoadImage_Click(object sender, RoutedEventArgs e)
@@ -143,6 +213,22 @@ namespace MapDesigner
             sb.AppendLine($"Blocking Tiles: {_currentMap.BlockingTiles.Count}");
 
             StatsTextBlock.Text = sb.ToString();
+        }
+
+        private Brush PickBrush()
+        {
+            Brush result = Brushes.Transparent;
+
+            Random rnd = new Random();
+
+            Type brushesType = typeof(Brushes);
+
+            PropertyInfo[] properties = brushesType.GetProperties();
+
+            int random = rnd.Next(properties.Length);
+            result = (Brush)properties[random].GetValue(null, null);
+
+            return result;
         }
     }
 }
