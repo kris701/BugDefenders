@@ -1,6 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Maps;
 using BugDefender.Tools;
-using CommandLine;
 using MapDesigner.UserControls;
 using System.IO;
 using System.Reflection;
@@ -88,7 +87,7 @@ namespace MapDesigner
         private void AutoGenBlockingTilesButton_Click(object sender, RoutedEventArgs e)
         {
             var range = int.Parse(AutoGenBlockingTileRange.Text);
-            _currentMap.BlockingTiles = MapPathBlockingTileGen.Program.AutoGenTiles(_currentMap.Paths, range);
+            _currentMap.BlockingTiles = AutoGenTiles(_currentMap.Paths, range);
             BlockingTilesStackPanel.Children.Clear();
             foreach (var block in _currentMap.BlockingTiles)
                 BlockingTilesStackPanel.Children.Add(new BlockingTileControl(BlockingTilesStackPanel.Children, UpdateView, block.X, block.Y, block.Width, block.Height));
@@ -229,6 +228,33 @@ namespace MapDesigner
             result = (Brush)properties[random].GetValue(null, null);
 
             return result;
+        }
+
+        private List<BlockedTile> AutoGenTiles(List<List<FloatPoint>> paths, float range)
+        {
+            var newBlocks = new List<BlockedTile>();
+            foreach (var path in paths)
+            {
+                var from = path[0];
+                foreach (var point in path.Skip(1))
+                {
+                    var minX = Math.Min(from.X, point.X);
+                    var minY = Math.Min(from.Y, point.Y);
+                    var maxX = Math.Max(from.X, point.X);
+                    var maxY = Math.Max(from.Y, point.Y);
+
+                    minX -= range / 2;
+                    minY -= range / 2;
+                    maxX += range / 2;
+                    maxY += range / 2;
+
+                    var width = Math.Abs(maxX - minX);
+                    var heigth = Math.Abs(maxY - minY);
+                    newBlocks.Add(new BlockedTile(minX, minY, width, heigth));
+                    from = point;
+                }
+            }
+            return newBlocks;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace BugDefender.OpenGL
                 {
                     var currentChapter = campaign.Chapters[0];
                     campaignGame.ChapterID = currentChapter.ID;
-                    from.SwitchView(new CutsceneView(Parent, campaignGame, currentChapter.Intro, OnCampaignConversationOver));
+                    from.SwitchView(new CutsceneView(Parent, campaignGame, campaign, currentChapter.Intro, OnCampaignConversationOver));
                 }
                 else
                 {
@@ -133,7 +133,7 @@ namespace BugDefender.OpenGL
                         Parent.UserManager.SaveGame(gameSave);
                         Parent.UserManager.CurrentUser.Credits += campaign.Reward;
                         Parent.UserManager.SaveUser();
-                        view.SwitchView(new CutsceneView(Parent, campaignSave, campaign.CampaignOver, OnCampaignConversationOver));
+                        view.SwitchView(new CutsceneView(Parent, campaignSave, campaign, campaign.CampaignOver, OnCampaignConversationOver));
                     }
                     else
                     {
@@ -141,7 +141,7 @@ namespace BugDefender.OpenGL
                         campaignSave.ChapterID = currentChapter.ID;
                         gameSave.Context = currentChapter.GetContextForChapter();
                         Parent.UserManager.SaveGame(gameSave);
-                        view.SwitchView(new CutsceneView(Parent, campaignSave, currentChapter.Intro, OnCampaignConversationOver));
+                        view.SwitchView(new CutsceneView(Parent, campaignSave, campaign, currentChapter.Intro, OnCampaignConversationOver));
                     }
                 }
                 else

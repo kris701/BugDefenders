@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BugDefender.Core\BugDefender.Core.csproj" />
-    <ProjectReference Include="..\MapPathBlockingTileGen\MapPathBlockingTileGen.csproj" />
   </ItemGroup>
 
 </Project>
