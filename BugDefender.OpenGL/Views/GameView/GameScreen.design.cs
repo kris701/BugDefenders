@@ -101,9 +101,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 AddControl(999, new ButtonControl(Parent, (e) =>
                 {
-                    _game.Result = Core.Game.GameResult.Success;
-                    _game.Running = false;
-                    _game.GameOver = true;
+                    _game.EndGame();
                 })
                 {
                     Text = $"Complete!",

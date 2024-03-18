@@ -6,6 +6,7 @@ using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 namespace BugDefender.OpenGL.Screens.CutsceneView
 {
@@ -13,22 +14,20 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
     {
         private static readonly Guid _id = new Guid("14b01cd7-8a0d-40ad-961e-562a915448d1");
         private readonly KeyWatcher _escapeKeyWatcher;
-        private readonly Action<IView, ISavedGame> _onConversationOver;
-        private readonly ISavedGame _savedGame;
         private readonly CutsceneDefinition _cutscene;
-        private readonly CampaignDefinition _campaign;
         private int _conversationIndex = 0;
         private Guid _previousSpeaker = Guid.Empty;
         private string _targetText = "";
         private int _targetTextIndex = 0;
         private TimeSpan _targetTextUpdateTime = TimeSpan.Zero;
+        private ISavedGame _savedGame;
+        private Dictionary<Guid, string> _speakers;
 
-        public CutsceneView(BugDefenderGameWindow parent, ISavedGame savedGame, CampaignDefinition campaign, CutsceneDefinition cutscene, Action<IView, ISavedGame> onConversationOver) : base(parent, _id)
+        public CutsceneView(BugDefenderGameWindow parent, Dictionary<Guid, string> speakers, CutsceneDefinition cutscene, ISavedGame savedGame) : base(parent, _id)
         {
-            _onConversationOver = onConversationOver;
             _cutscene = cutscene;
             _savedGame = savedGame;
-            _campaign = campaign;
+            _speakers = speakers;
             Initialize();
             _escapeKeyWatcher = new KeyWatcher(Keys.Escape, SkipConversation);
         }
@@ -43,7 +42,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
 
             _conversationIndex++;
             if (_conversationIndex >= _cutscene.Conversation.Count)
-                _onConversationOver.Invoke(this, _savedGame);
+                Parent.GameManager.NewGame(_savedGame);
             else
             {
                 var converation = _cutscene.Conversation[_conversationIndex];
@@ -55,7 +54,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 {
                     if (_rightName.IsVisible == true)
                     {
-                        _leftName.Text = _campaign.Speakers[converation.SpeakerID];
+                        _leftName.Text = _speakers[converation.SpeakerID];
                         _leftName.IsVisible = true;
                         _leftSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
                         _leftSpeaker.IsVisible = true;
@@ -65,7 +64,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                     }
                     else
                     {
-                        _rightName.Text = _campaign.Speakers[converation.SpeakerID];
+                        _rightName.Text = _speakers[converation.SpeakerID];
                         _rightName.IsVisible = true;
                         _rightSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
                         _rightSpeaker.IsVisible = true;

@@ -31,9 +31,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseBugDefenderView
     {
-        public Action<IView, GameEngine, ISavedGame> OnGameEnd { get; }
-        public ISavedGame GameSave { get; }
-
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         public static Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
 
@@ -63,11 +60,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _selectTurret = false;
         private TimeSpan _hurtGameAreaTileShowTime = TimeSpan.Zero;
 
-        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave, Action<IView, GameEngine, ISavedGame> onGameEnd) : base(parent, _id)
+        public GameScreen(BugDefenderGameWindow parent, GameEngine game) : base(parent, _id)
         {
-            GameSave = newGameSave;
-            Parent.UserManager.SaveGame(newGameSave);
-            _game = new GameEngine(newGameSave);
+            _game = game;
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
             _game.OnPlayerDamaged += () =>
@@ -93,7 +88,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () =>
             {
                 if (_game.Context.CanSave())
-                    Parent.UserManager.SaveGame(newGameSave);
+                    Parent.UserManager.SaveGame(_game.GameSave);
                 _sendWave?.DoClick();
             });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
@@ -112,7 +107,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _gameTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(33), OnUpdateGame);
             Initialize();
             Parent.AudioController.PlaySong(ID);
-            OnGameEnd = onGameEnd;
 
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
@@ -709,7 +703,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             if (_game.Context.CanSave())
             {
-                Parent.UserManager.SaveGame(GameSave);
+                Parent.UserManager.SaveGame(_game.GameSave);
                 Parent.AudioController.StopSounds();
                 SwitchView(new MainMenu.MainMenuView(Parent));
             }
@@ -721,7 +715,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _gameOverCheck = true;
                 Parent.AudioController.StopSounds();
-                OnGameEnd.Invoke(this, _game, GameSave);
             }
         }
 

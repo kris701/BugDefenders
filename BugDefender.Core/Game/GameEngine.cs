@@ -14,10 +14,12 @@ namespace BugDefender.Core.Game
     public partial class GameEngine
     {
         public GameEventHandler? OnPlayerDamaged;
+        internal GameEventHandler? OnGameOver;
 
         private readonly GameTimer _mainLoopTimer;
         private readonly GameTimer _criteriaTimer;
 
+        public ISavedGame GameSave { get; private set; }
         public GameResult Result { get; set; } = GameResult.None;
         public bool GameOver { get; set; }
         private bool _running = true;
@@ -43,6 +45,7 @@ namespace BugDefender.Core.Game
 
         public GameEngine(ISavedGame save)
         {
+            GameSave = save;
             Context = save.Context;
             if (save is ChallengeSavedGame challengeSave)
                 Criterias = ResourceManager.Challenges.GetResource(challengeSave.ChallengeID).Criterias;
@@ -113,6 +116,7 @@ namespace BugDefender.Core.Game
             Running = false;
             GameOver = true;
             Result = GameResult.Success;
+            OnGameOver?.Invoke();
         }
 
         internal void DamagePlayer()
@@ -126,7 +130,18 @@ namespace BugDefender.Core.Game
                 Running = false;
                 GameOver = true;
                 Result = GameResult.Lost;
+                OnGameOver?.Invoke();
             }
         }
+
+#if DEBUG
+        public void EndGame()
+        {
+            Running = false;
+            GameOver = true;
+            Result = GameResult.Success;
+            OnGameOver?.Invoke();
+        }
+#endif
     }
 }
