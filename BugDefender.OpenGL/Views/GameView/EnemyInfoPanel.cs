@@ -1,19 +1,14 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies;
-using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
     public class EnemyInfoPanel : CollectionControl
     {
-        private TextboxControl _enemyStatsTextbox;
+        private readonly TextboxControl _enemyStatsTextbox;
 
         public EnemyInfoPanel(BugDefenderGameWindow parent)
         {

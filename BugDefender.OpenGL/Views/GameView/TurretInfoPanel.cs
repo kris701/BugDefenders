@@ -7,8 +7,6 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
@@ -19,10 +17,10 @@ namespace BugDefender.OpenGL.Views.GameView
         public TurretInstance? SelectedTurret { get; set; }
         public GameStyleDefinition GameStyle { get; set; }
 
-        private BugDefenderGameWindow _parent;
-        private BugDefenderButtonControl _sellTurretButton;
-        private TextboxControl _turretStatsTextbox;
-        private List<BugDefenderButtonControl> _turretTargetingModes;
+        private readonly BugDefenderGameWindow _parent;
+        private readonly BugDefenderButtonControl _sellTurretButton;
+        private readonly TextboxControl _turretStatsTextbox;
+        private readonly List<BugDefenderButtonControl> _turretTargetingModes;
 
         public TurretInfoPanel(BugDefenderGameWindow parent, GameStyleDefinition gameStyle, ClickedHandler sellTurretClick)
         {

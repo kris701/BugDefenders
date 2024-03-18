@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
 {

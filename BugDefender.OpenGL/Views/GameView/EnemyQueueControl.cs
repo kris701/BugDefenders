@@ -21,7 +21,7 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly BugDefenderGameWindow _parent;
         private readonly AnimatedTileControl _iconControl;
         private readonly TextboxControl _descriptionControl;
-        private BugDefenderButtonControl _background;
+        private readonly BugDefenderButtonControl _background;
         public EnemyQueueControl(BugDefenderGameWindow parent, ClickedHandler clicked)
         {
             _parent = parent;
