@@ -209,14 +209,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private void UnselectTurret()
         {
             _turretSelectRangeTile.IsVisible = false;
-            _turretStatesTextbox.Text = "Select a Turret";
-            _sellTurretButton.IsEnabled = false;
-            _sellTurretButton.Text = $"Sell Turret";
-            foreach (var button in _turretTargetingModes)
-            {
-                button.IsEnabled = false;
-                button.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
-            }
+            _turretInfoPanel.Unselect();
             _upgradePageHandler.MaxPage = 0;
             _upgradePageHandler.MinPage = 0;
             _upgradePageHandler.MaxItem = 0;
@@ -250,17 +243,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _turretSelectRangeTile.IsVisible = true;
 
             SetTurretUpgradeField(_selectedTurret);
-
-            _turretStatesTextbox.Text = _selectedTurret.ToString();
-            _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth(_game.Context.GameStyle)}$] Sell Turret";
-            _sellTurretButton.IsEnabled = true;
-
-            foreach (var button in _turretTargetingModes)
-            {
-                button.IsEnabled = true;
-                if (Enum.GetName(typeof(TargetingTypes), _selectedTurret.TargetingType) == button.Text)
-                    button.FillColor = Parent.TextureController.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
-            }
+            _turretInfoPanel.SelectInstance(_selectedTurret);
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)
@@ -603,7 +586,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
                             _buyingTurret = null;
-                            _turretStatesTextbox.Text = "Select a Turret";
+                            _turretInfoPanel.Unselect();
                             _buyingPreviewTile.IsVisible = false;
                             _buyingPreviewRangeTile.IsVisible = false;
                         }
@@ -612,7 +595,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 else if (mouseState.RightButton == ButtonState.Pressed)
                 {
                     _buyingTurret = null;
-                    _turretStatesTextbox.Text = "Select a Turret";
+                    _turretInfoPanel.Unselect();
                     _buyingPreviewTile.IsVisible = false;
                     _buyingPreviewRangeTile.IsVisible = false;
                 }
@@ -690,7 +673,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(def.ModuleInfo) * 2);
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
-                _turretStatesTextbox.Text = new TurretInstance(def).ToString();
+                _turretInfoPanel.SelectDefinition(def);
             }
         }
 

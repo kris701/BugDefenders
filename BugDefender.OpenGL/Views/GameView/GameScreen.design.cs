@@ -36,19 +36,16 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TileControl _hurtGameAreaTile;
 
         private readonly List<EnemyQueueControl> _nextEnemyPanels = new List<EnemyQueueControl>();
-        private readonly List<BugDefenderButtonControl> _turretTargetingModes = new List<BugDefenderButtonControl>();
-
-        private TextboxControl _turretStatesTextbox;
-        private BugDefenderButtonControl _sellTurretButton;
 
         private TextboxControl _gameInfoTextbox;
+        private TurretInfoPanel _turretInfoPanel;
 
         private PageHandler<TurretPurchasePanel> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
 
         [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
-            nameof(_buyingPreviewRangeTile), nameof(_turretStatesTextbox), nameof(_sellTurretButton),
+            nameof(_buyingPreviewRangeTile), nameof(_turretInfoPanel),
             nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile),
             nameof(_playtimeLabel), nameof(_gameInfoTextbox))]
         public override void Initialize()
@@ -68,7 +65,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y + 160, 320, 570);
             SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
             SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 5, _gameArea.Width, 110);
-            SetupTurretStatsPanel(_gameArea.X + _gameArea.Width + 10, 745, 650, 330);
+            _turretInfoPanel = new TurretInfoPanel(Parent, _game.Context.GameStyle, SellTurret_Click)
+            {
+                X = _gameArea.X + _gameArea.Width + 10,
+                Y = 745
+            };
+            AddControl(101, _turretInfoPanel);
 
             if (CheatsHelper.Cheats.Count > 0)
             {
@@ -458,87 +460,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 };
                 _nextEnemyPanels.Add(newItem);
                 AddControl(101, newItem);
-            }
-        }
-
-        [MemberNotNull(nameof(_sellTurretButton), nameof(_turretStatesTextbox))]
-        private void SetupTurretStatsPanel(int xOffset, int yOffset, int width, int height)
-        {
-            AddControl(101, new TileControl()
-            {
-                FillColor = Parent.TextureController.GetTexture(new Guid("90447608-bd7a-478c-9bfd-fddb26c731b7")),
-                X = xOffset,
-                Y = yOffset,
-                Height = height,
-                Width = width
-            });
-            AddControl(101, new LabelControl()
-            {
-                Text = "Turret Stats",
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset,
-                Y = yOffset + 5,
-                Height = 35,
-                Width = width
-            });
-
-            _sellTurretButton = new BugDefenderButtonControl(Parent, clicked: SellTurret_Click)
-            {
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
-                Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                Text = "Sell Turret",
-                X = xOffset + 10,
-                Y = yOffset + 40,
-                Width = width - 20,
-                Height = 30,
-                IsEnabled = false
-            };
-            AddControl(101, _sellTurretButton);
-            _turretStatesTextbox = new TextboxControl()
-            {
-                Font = BasicFonts.GetFont(8),
-                FontColor = Color.White,
-                Text = "Select a Turret",
-                X = xOffset + 10,
-                Y = yOffset + 75,
-                Width = width - 20,
-                Height = height - 115
-            };
-            AddControl(101, _turretStatesTextbox);
-
-            var values = Enum.GetValues(typeof(TargetingTypes)).Cast<TargetingTypes>().ToList();
-            var buttonWidth = (width - 20) / (values.Count - 1) - 5;
-            var count = 0;
-            _turretTargetingModes.Clear();
-            foreach (TargetingTypes option in values.Skip(1))
-            {
-                var newControl = new BugDefenderButtonControl(Parent, (e) =>
-                {
-                    if (_selectedTurret != null)
-                        _selectedTurret.TargetingType = option;
-                    foreach (var button in _turretTargetingModes)
-                        button.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")); ;
-                    e.FillColor = Parent.TextureController.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
-                })
-                {
-                    FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
-                    Font = BasicFonts.GetFont(10),
-                    FontColor = Color.White,
-                    Text = $"{Enum.GetName(typeof(TargetingTypes), option)}",
-                    X = xOffset + 12 + (count++ * (buttonWidth + 5)),
-                    Y = yOffset + 285,
-                    Height = 25,
-                    Width = buttonWidth,
-                    IsEnabled = false,
-                };
-                _turretTargetingModes.Add(newControl);
-                AddControl(101, newControl);
             }
         }
     }
