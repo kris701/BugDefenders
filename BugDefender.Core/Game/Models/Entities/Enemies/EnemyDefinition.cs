@@ -1,4 +1,6 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
+using BugDefender.Core.Resources;
+using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Enemies
 {
@@ -29,6 +31,21 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies
             EnemyType = enemyType;
             TerrainType = terrainType;
             AvailableAtWave = availableAtWave;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"Name: {Name}");
+            sb.AppendLine($"Description: {Description}");
+            sb.AppendLine($"Base Health: {Health}");
+            sb.AppendLine($"Kill Reward: {Reward}");
+            sb.AppendLine($"Starts at wave: {AvailableAtWave}");
+            sb.AppendLine($"Enemy Type: {ResourceManager.EnemyTypes.GetResource(EnemyType).Name}");
+            sb.AppendLine($"Terrain Type: {Enum.GetName(typeof(EnemyTerrrainTypes), TerrainType)}");
+
+            return sb.ToString();
         }
     }
 }

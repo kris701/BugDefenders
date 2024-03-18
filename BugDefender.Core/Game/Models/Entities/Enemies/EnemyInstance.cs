@@ -1,5 +1,6 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies.Modules;
 using BugDefender.Core.Resources;
+using System.Text;
 
 namespace BugDefender.Core.Game.Models.Entities.Enemies
 {
@@ -42,6 +43,18 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies
                 return _definition;
             _definition = ResourceManager.Enemies.GetResource(DefinitionID);
             return _definition;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(GetDefinition().ToString());
+            sb.AppendLine(ModuleInfo.ToString());
+            sb.AppendLine();
+            sb.AppendLine($"Current Health: {Health}");
+
+            return sb.ToString();
         }
     }
 }

@@ -39,13 +39,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private TextboxControl _gameInfoTextbox;
         private TurretInfoPanel _turretInfoPanel;
+        private EnemyInfoPanel _enemyInfoPanel;
 
         private PageHandler<TurretPurchasePanel> _turretPageHandler;
         private PageHandler<UpgradePanel> _upgradePageHandler;
 
         [MemberNotNull(nameof(_moneyLabel), nameof(_scoreLabel), nameof(_sendWave),
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
-            nameof(_buyingPreviewRangeTile), nameof(_turretInfoPanel),
+            nameof(_buyingPreviewRangeTile), nameof(_turretInfoPanel), nameof(_enemyInfoPanel),
             nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile),
             nameof(_playtimeLabel), nameof(_gameInfoTextbox))]
         public override void Initialize()
@@ -71,6 +72,13 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Y = 745
             };
             AddControl(101, _turretInfoPanel);
+            _enemyInfoPanel = new EnemyInfoPanel(Parent)
+            {
+                X = _gameArea.X + _gameArea.Width + 10,
+                Y = 745,
+                IsVisible = false
+            };
+            AddControl(101, _enemyInfoPanel);
 
             if (CheatsHelper.Cheats.Count > 0)
             {
@@ -453,7 +461,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _nextEnemyPanels.Clear();
             for (int i = 0; i < 4; i++)
             {
-                var newItem = new EnemyQueueControl(Parent)
+                var newItem = new EnemyQueueControl(Parent, SelectEnemy)
                 {
                     X = x + (itemXOffset++ * (itemWidth + margin)),
                     Y = y

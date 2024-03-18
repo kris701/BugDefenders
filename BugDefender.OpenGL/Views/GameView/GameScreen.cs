@@ -183,6 +183,17 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
         }
 
+        private void SelectEnemy(ButtonControl button)
+        {
+            if (button.Tag is EnemyInstance instance)
+            {
+                _turretInfoPanel.Unselect();
+                _turretInfoPanel.IsVisible = false;
+                _enemyInfoPanel.Select(instance);
+                _enemyInfoPanel.IsVisible = true;
+            }
+        }
+
         private void OnEnemyDeath(EnemyControl parent)
         {
             var entityDef = Parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(parent.Enemy.DefinitionID);
@@ -244,6 +255,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             SetTurretUpgradeField(_selectedTurret);
             _turretInfoPanel.SelectInstance(_selectedTurret);
+            _turretInfoPanel.IsVisible = true;
+            _enemyInfoPanel.Unselect();
+            _enemyInfoPanel.IsVisible = false;
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)
@@ -674,6 +688,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
                 _turretInfoPanel.SelectDefinition(def);
+                _turretInfoPanel.IsVisible = true;
+                _enemyInfoPanel.Unselect();
+                _enemyInfoPanel.IsVisible = false;
             }
         }
 
