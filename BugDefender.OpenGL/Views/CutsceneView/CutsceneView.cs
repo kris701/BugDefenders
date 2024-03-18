@@ -1,7 +1,6 @@
 ﻿using BugDefender.Core.Campaign.Models;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine.Input;
-using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -20,8 +19,8 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
         private string _targetText = "";
         private int _targetTextIndex = 0;
         private TimeSpan _targetTextUpdateTime = TimeSpan.Zero;
-        private ISavedGame _savedGame;
-        private Dictionary<Guid, string> _speakers;
+        private readonly ISavedGame _savedGame;
+        private readonly Dictionary<Guid, string> _speakers;
 
         public CutsceneView(BugDefenderGameWindow parent, Dictionary<Guid, string> speakers, CutsceneDefinition cutscene, ISavedGame savedGame) : base(parent, _id)
         {

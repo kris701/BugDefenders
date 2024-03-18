@@ -4,11 +4,6 @@ using BugDefender.Core.Resources;
 using BugDefender.Core.Users;
 using BugDefender.Core.Users.Models;
 using BugDefender.Core.Users.Models.SavedGames;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core
 {
@@ -42,12 +37,12 @@ namespace BugDefender.Core
                 case SurvivalSavedGame g:
                     _game = new GameEngine(savedGame);
                     _game.OnGameOver += OnGameEngineFinished;
-                    OnGameStarted?.Invoke(_game, g); 
+                    OnGameStarted?.Invoke(_game, g);
                     break;
                 case ChallengeSavedGame g:
                     _game = new GameEngine(savedGame);
                     _game.OnGameOver += OnGameEngineFinished;
-                    OnGameStarted?.Invoke(_game, g); 
+                    OnGameStarted?.Invoke(_game, g);
                     break;
                 case CampaignSavedGame g:
                     var campaign = ResourceManager.Campaigns.GetResource(g.CampaignID);
@@ -69,7 +64,7 @@ namespace BugDefender.Core
                         var currentChapter = campaign.Chapters.First(x => x.ID == g.ChapterID);
                         UserManager.SaveGame(g);
                         OnCutsceneStarted?.Invoke(currentChapter.Intro, campaign.Speakers, g);
-                    } 
+                    }
                     else
                     {
                         if (g.Context == null)
