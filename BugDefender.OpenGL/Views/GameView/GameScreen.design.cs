@@ -31,6 +31,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private AnimatedTileControl _buyingPreviewTile;
         private TileControl _buyingPreviewRangeTile;
+        private TileControl _buyingPreviewSizeTile;
 
         private TileControl _turretSelectRangeTile;
         private TileControl _hurtGameAreaTile;
@@ -48,7 +49,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
             nameof(_buyingPreviewRangeTile), nameof(_turretInfoPanel), nameof(_enemyInfoPanel),
             nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile),
-            nameof(_playtimeLabel), nameof(_gameInfoTextbox))]
+            nameof(_playtimeLabel), nameof(_gameInfoTextbox), nameof(_buyingPreviewSizeTile))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -313,7 +314,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(101, _gameInfoTextbox);
         }
 
-        [MemberNotNull(nameof(_turretPageHandler), nameof(_buyingPreviewRangeTile), nameof(_buyingPreviewTile))]
+        [MemberNotNull(nameof(_turretPageHandler), nameof(_buyingPreviewRangeTile), nameof(_buyingPreviewTile), nameof(_buyingPreviewSizeTile))]
         private void SetupPurchasingField(int xOffset, int yOffset, int width, int height)
         {
             AddControl(101, new TileControl()
@@ -373,6 +374,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 ViewPort = _gameArea
             };
             AddControl(101, _buyingPreviewRangeTile);
+            _buyingPreviewSizeTile = new TileControl()
+            {
+                IsVisible = false,
+                ViewPort = _gameArea
+            };
+            AddControl(101, _buyingPreviewSizeTile);
             _buyingPreviewTile = new AnimatedTileControl()
             {
                 IsVisible = false,

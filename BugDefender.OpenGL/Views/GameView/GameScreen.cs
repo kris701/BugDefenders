@@ -579,6 +579,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.X = relativeMousePosition.X - _buyingPreviewRangeTile.Width / 2;
                 _buyingPreviewRangeTile.Y = relativeMousePosition.Y - _buyingPreviewRangeTile.Height / 2;
                 _buyingPreviewRangeTile.CalculateViewPort();
+                _buyingPreviewSizeTile.IsVisible = true;
+                _buyingPreviewSizeTile.X = relativeMousePosition.X - _buyingPreviewSizeTile.Width / 2;
+                _buyingPreviewSizeTile.Y = relativeMousePosition.Y - _buyingPreviewSizeTile.Height / 2;
+                _buyingPreviewSizeTile.CalculateViewPort();
                 var at = new FloatPoint(
                     relativeMousePosition.X - _buyingTurret.Size / 2 - _gameArea.X,
                     relativeMousePosition.Y - _buyingTurret.Size / 2 - _gameArea.Y);
@@ -603,6 +607,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                             _turretInfoPanel.Unselect();
                             _buyingPreviewTile.IsVisible = false;
                             _buyingPreviewRangeTile.IsVisible = false;
+                            _buyingPreviewSizeTile.IsVisible = false;
                         }
                     }
                 }
@@ -612,6 +617,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                     _turretInfoPanel.Unselect();
                     _buyingPreviewTile.IsVisible = false;
                     _buyingPreviewRangeTile.IsVisible = false;
+                    _buyingPreviewSizeTile.IsVisible = false;
                 }
             }
             if (_selectedTurret != null && mouseState.RightButton == ButtonState.Pressed)
@@ -687,6 +693,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(def.ModuleInfo) * 2);
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
+                _buyingPreviewSizeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)(def.Size));
+                _buyingPreviewSizeTile.Width = _buyingPreviewSizeTile.FillColor.Width;
+                _buyingPreviewSizeTile.Height = _buyingPreviewSizeTile.FillColor.Height;
+
                 _turretInfoPanel.SelectDefinition(def);
                 _turretInfoPanel.IsVisible = true;
                 _enemyInfoPanel.Unselect();
