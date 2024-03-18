@@ -196,6 +196,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private void OnEnemyDeath(EnemyControl parent)
         {
+            if (parent.Enemy.Health > 0)
+                return;
             var entityDef = Parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(parent.Enemy.DefinitionID);
             if (entityDef.OnDeath != Guid.Empty)
             {
