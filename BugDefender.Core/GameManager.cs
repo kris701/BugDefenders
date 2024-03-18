@@ -1,5 +1,8 @@
 ﻿using BugDefender.Core.Campaign.Models;
 using BugDefender.Core.Game;
+#if RELEASE
+using BugDefender.Core.Game.Helpers;
+#endif
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users;
 using BugDefender.Core.Users.Models;
