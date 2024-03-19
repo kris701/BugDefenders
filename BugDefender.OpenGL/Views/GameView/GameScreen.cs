@@ -10,12 +10,10 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Game.Modules.Turrets;
-using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Input;
-using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.GameView;
@@ -26,15 +24,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
 {
     public partial class GameScreen : BaseBugDefenderView
     {
-        public Action<IView, GameEngine, ISavedGame> OnGameEnd { get; }
-        public ISavedGame GameSave { get; }
-
         private static readonly Guid _id = new Guid("2222e50b-cfcd-429b-9a21-3a3b77b4d87b");
         public static Rectangle _gameArea = new Rectangle(155, 10, 950, 950);
 
@@ -64,11 +58,9 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private bool _selectTurret = false;
         private TimeSpan _hurtGameAreaTileShowTime = TimeSpan.Zero;
 
-        public GameScreen(BugDefenderGameWindow parent, ISavedGame newGameSave, Action<IView, GameEngine, ISavedGame> onGameEnd) : base(parent, _id)
+        public GameScreen(BugDefenderGameWindow parent, GameEngine game) : base(parent, _id)
         {
-            GameSave = newGameSave;
-            Parent.UserManager.SaveGame(newGameSave);
-            _game = new GameEngine(newGameSave);
+            _game = game;
             _game.TurretsModule.OnTurretShooting += OnTurretFiring;
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
             _game.OnPlayerDamaged += () =>
@@ -94,7 +86,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _waveKeyWatcher = new KeyWatcher(Keys.Space, () =>
             {
                 if (_game.Context.CanSave())
-                    Parent.UserManager.SaveGame(newGameSave);
+                    Parent.UserManager.SaveGame(_game.GameSave);
                 _sendWave?.DoClick();
             });
             _switchTurretWatcher = new KeyWatcher(Keys.Tab, () =>
@@ -113,7 +105,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _gameTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(33), OnUpdateGame);
             Initialize();
             Parent.AudioController.PlaySong(ID);
-            OnGameEnd = onGameEnd;
 
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
@@ -183,8 +174,21 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             }
         }
 
+        private void SelectEnemy(ButtonControl button)
+        {
+            if (button.Tag is EnemyInstance instance)
+            {
+                _turretInfoPanel.Unselect();
+                _turretInfoPanel.IsVisible = false;
+                _enemyInfoPanel.Select(instance);
+                _enemyInfoPanel.IsVisible = true;
+            }
+        }
+
         private void OnEnemyDeath(EnemyControl parent)
         {
+            if (parent.Enemy.Health > 0)
+                return;
             var entityDef = Parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(parent.Enemy.DefinitionID);
             if (entityDef.OnDeath != Guid.Empty)
             {
@@ -209,14 +213,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private void UnselectTurret()
         {
             _turretSelectRangeTile.IsVisible = false;
-            _turretStatesTextbox.Text = "Select a Turret";
-            _sellTurretButton.IsEnabled = false;
-            _sellTurretButton.Text = $"Sell Turret";
-            foreach (var button in _turretTargetingModes)
-            {
-                button.IsEnabled = false;
-                button.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
-            }
+            _turretInfoPanel.Unselect();
             _upgradePageHandler.MaxPage = 0;
             _upgradePageHandler.MinPage = 0;
             _upgradePageHandler.MaxItem = 0;
@@ -250,17 +247,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _turretSelectRangeTile.IsVisible = true;
 
             SetTurretUpgradeField(_selectedTurret);
-
-            _turretStatesTextbox.Text = _selectedTurret.ToString();
-            _sellTurretButton.Text = $"[{_selectedTurret.GetTurretWorth(_game.Context.GameStyle)}$] Sell Turret";
-            _sellTurretButton.IsEnabled = true;
-
-            foreach (var button in _turretTargetingModes)
-            {
-                button.IsEnabled = true;
-                if (Enum.GetName(typeof(TargetingTypes), _selectedTurret.TargetingType) == button.Text)
-                    button.FillColor = Parent.TextureController.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
-            }
+            _turretInfoPanel.SelectInstance(_selectedTurret);
+            _turretInfoPanel.IsVisible = true;
+            _enemyInfoPanel.Unselect();
+            _enemyInfoPanel.IsVisible = false;
         }
 
         private void BuyUpgrade_Click(ButtonControl parent)
@@ -582,6 +572,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.X = relativeMousePosition.X - _buyingPreviewRangeTile.Width / 2;
                 _buyingPreviewRangeTile.Y = relativeMousePosition.Y - _buyingPreviewRangeTile.Height / 2;
                 _buyingPreviewRangeTile.CalculateViewPort();
+                _buyingPreviewSizeTile.IsVisible = true;
+                _buyingPreviewSizeTile.X = relativeMousePosition.X - _buyingPreviewSizeTile.Width / 2;
+                _buyingPreviewSizeTile.Y = relativeMousePosition.Y - _buyingPreviewSizeTile.Height / 2;
+                _buyingPreviewSizeTile.CalculateViewPort();
                 var at = new FloatPoint(
                     relativeMousePosition.X - _buyingTurret.Size / 2 - _gameArea.X,
                     relativeMousePosition.Y - _buyingTurret.Size / 2 - _gameArea.Y);
@@ -603,18 +597,20 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                         if (!keyState.IsKeyDown(Keys.LeftShift))
                         {
                             _buyingTurret = null;
-                            _turretStatesTextbox.Text = "Select a Turret";
+                            _turretInfoPanel.Unselect();
                             _buyingPreviewTile.IsVisible = false;
                             _buyingPreviewRangeTile.IsVisible = false;
+                            _buyingPreviewSizeTile.IsVisible = false;
                         }
                     }
                 }
                 else if (mouseState.RightButton == ButtonState.Pressed)
                 {
                     _buyingTurret = null;
-                    _turretStatesTextbox.Text = "Select a Turret";
+                    _turretInfoPanel.Unselect();
                     _buyingPreviewTile.IsVisible = false;
                     _buyingPreviewRangeTile.IsVisible = false;
+                    _buyingPreviewSizeTile.IsVisible = false;
                 }
             }
             if (_selectedTurret != null && mouseState.RightButton == ButtonState.Pressed)
@@ -690,7 +686,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewRangeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)GetRangeOfTurret(def.ModuleInfo) * 2);
                 _buyingPreviewRangeTile.Width = _buyingPreviewRangeTile.FillColor.Width;
                 _buyingPreviewRangeTile.Height = _buyingPreviewRangeTile.FillColor.Height;
-                _turretStatesTextbox.Text = new TurretInstance(def).ToString();
+                _buyingPreviewSizeTile.FillColor = BasicTextures.GetBasicCircle(new Color(50, 50, 50), (int)(def.Size));
+                _buyingPreviewSizeTile.Width = _buyingPreviewSizeTile.FillColor.Width;
+                _buyingPreviewSizeTile.Height = _buyingPreviewSizeTile.FillColor.Height;
+
+                _turretInfoPanel.SelectDefinition(def);
+                _turretInfoPanel.IsVisible = true;
+                _enemyInfoPanel.Unselect();
+                _enemyInfoPanel.IsVisible = false;
             }
         }
 
@@ -698,7 +701,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             if (_game.Context.CanSave())
             {
-                Parent.UserManager.SaveGame(GameSave);
+                Parent.UserManager.SaveGame(_game.GameSave);
                 Parent.AudioController.StopSounds();
                 SwitchView(new MainMenu.MainMenuView(Parent));
             }
@@ -710,7 +713,6 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _gameOverCheck = true;
                 Parent.AudioController.StopSounds();
-                OnGameEnd.Invoke(this, _game, GameSave);
             }
         }
 

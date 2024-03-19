@@ -1,4 +1,5 @@
-﻿using BugDefender.Core.Resources;
+﻿using BugDefender.Core;
+using BugDefender.Core.Resources;
 using BugDefender.Core.Resources.Integrity;
 using BugDefender.Core.Users;
 using BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker;
@@ -11,6 +12,9 @@ using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Engine.Textures;
 using BugDefender.OpenGL.Engine.Views;
 using BugDefender.OpenGL.ResourcePacks;
+using BugDefender.OpenGL.Screens.CutsceneView;
+using BugDefender.OpenGL.Screens.GameOverScreen;
+using BugDefender.OpenGL.Screens.GameScreen;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -36,6 +40,7 @@ namespace BugDefender.OpenGL
         public IView CurrentScreen { get; set; }
         public UserEngine<SettingsDefinition> UserManager { get; private set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; } = new List<IBackgroundWorker>();
+        public GameManager<SettingsDefinition> GameManager { get; private set; }
 
         public AudioController AudioController { get; private set; }
         public TextureController TextureController { get; private set; }
@@ -68,6 +73,15 @@ namespace BugDefender.OpenGL
             TextureController = new TextureController(Content);
             ResourcePackController = new ResourcePackController(this);
             UserManager = new UserEngine<SettingsDefinition>();
+            GameManager = new GameManager<SettingsDefinition>(UserManager);
+            GameManager.OnGameStarted += (g, s) => CurrentScreen.SwitchView(new GameScreen(this, g));
+            GameManager.OnCutsceneStarted += (c, p, s) => CurrentScreen.SwitchView(new CutsceneView(this, p, c, s));
+            GameManager.OnGameOver += (g, s, t) =>
+            {
+                var screen = GameScreenHelper.TakeScreenCap(GraphicsDevice, this);
+                CurrentScreen.SwitchView(new GameOverView(this, screen, g, t));
+            };
+
             BasicTextures.Initialize(GraphicsDevice);
             BasicFonts.Initialize(Content, "DefaultFonts/DefaultFont");
             MediaPlayer.IsRepeating = true;

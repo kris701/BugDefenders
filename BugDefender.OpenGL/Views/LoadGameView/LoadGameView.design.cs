@@ -17,7 +17,7 @@ namespace BugDefender.OpenGL.Screens.LoadGameView
         [MemberNotNull(nameof(_loadGamePageHandler))]
         public override void Initialize()
         {
-            BasicMenuPage.GenerateBaseMenu(
+            BasicMenuHelper.GenerateBaseMenu(
                 this,
                 Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Load a Saved Game",
@@ -44,21 +44,7 @@ namespace BugDefender.OpenGL.Screens.LoadGameView
             };
             AddControl(0, _loadGamePageHandler);
 
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
-            {
-                SwitchView(new MainMenu.MainMenuView(Parent));
-            })
-            {
-                Y = 980,
-                X = 1670,
-                Width = 200,
-                Height = 50,
-                Text = "Back",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-            });
+            AddControl(0, BasicMenuHelper.GetCancelButton(Parent, "Back", (e) => { SwitchView(new MainMenu.MainMenuView(Parent)); }));
 #if DEBUG
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new LoadGameView(Parent)))
             {

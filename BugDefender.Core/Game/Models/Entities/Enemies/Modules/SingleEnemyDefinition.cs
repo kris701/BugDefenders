@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text;
+using System.Text.Json.Serialization;
 
 namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
 {
@@ -24,6 +25,16 @@ namespace BugDefender.Core.Game.Models.Entities.Enemies.Modules
             if (SlowingDuration <= 0)
                 SlowingFactor = 1;
             return Speed * SlowingFactor;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"Type: Single");
+            sb.AppendLine($"Speed: {Speed}");
+
+            return sb.ToString();
         }
     }
 }

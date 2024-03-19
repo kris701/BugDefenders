@@ -36,12 +36,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
         private void StartButton_Click(ButtonControl sender)
         {
             if (_selectedMap != null && _selectedGameStyle != null)
-            {
-                var gameHandler = new GameHandler(Parent);
-                gameHandler.LoadGame(
-                    this,
-                    new SurvivalSavedGame(_gameSaveName.Text, DateTime.Now, new GameContext(_selectedMap.ID, _selectedGameStyle.ID)));
-            }
+                Parent.GameManager.NewGame(new SurvivalSavedGame(_gameSaveName.Text, DateTime.Now, new GameContext(_selectedMap.ID, _selectedGameStyle.ID)));
         }
 
         private void NameKeyDown(TextInputControl sender)

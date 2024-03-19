@@ -60,13 +60,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
         private void StartButton_Click(ButtonControl sender)
         {
             if (sender.Tag is ChallengeDefinition challenge)
-            {
-                var gameHandler = new GameHandler(Parent);
-                gameHandler.LoadGame(
-                    this,
-                    new ChallengeSavedGame("Latest Challenge", challenge.ID, DateTime.Now, new GameContext(challenge.MapID, challenge.GameStyleID))
-                    );
-            }
+                Parent.GameManager.NewGame(new ChallengeSavedGame("Latest Challenge", challenge.ID, DateTime.Now, new GameContext(challenge.MapID, challenge.GameStyleID)));
         }
     }
 }

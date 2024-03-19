@@ -28,10 +28,7 @@ namespace BugDefender.OpenGL.Screens.LoadGameView
         {
             if (sender.Tag is ISavedGame savedGame)
             {
-                var gameHandler = new GameHandler(Parent);
-                gameHandler.LoadGame(
-                    this,
-                    savedGame);
+                Parent.GameManager.NewGame(savedGame);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Resources;
+using BugDefender.OpenGL.Controls;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -19,21 +21,23 @@ namespace BugDefender.OpenGL.Views.GameView
         private readonly BugDefenderGameWindow _parent;
         private readonly AnimatedTileControl _iconControl;
         private readonly TextboxControl _descriptionControl;
-        public EnemyQueueControl(BugDefenderGameWindow parent)
+        private readonly BugDefenderButtonControl _background;
+        public EnemyQueueControl(BugDefenderGameWindow parent, ClickedHandler clicked)
         {
             _parent = parent;
             Width = 220;
             Height = 70;
 
-            var background = new TileControl()
+            _background = new BugDefenderButtonControl(parent, clicked)
             {
                 X = 0,
                 Y = 0,
                 Width = Width,
                 Height = Height,
-                FillColor = parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"))
+                FillColor = parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8"))
             };
-            Children.Add(background);
+            Children.Add(_background);
             _iconControl = new AnimatedTileControl()
             {
                 X = 10,
@@ -66,6 +70,7 @@ namespace BugDefender.OpenGL.Views.GameView
 
             var def = ResourceManager.Enemies.GetResource(wave[0]);
             var instance = new EnemyInstance(def, evolution);
+            _background.Tag = instance;
             var animation = _parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(def.ID);
             var textureSet = _parent.TextureController.GetTextureSet(animation.OnCreate);
             _iconControl.TileSet = textureSet.GetLoadedContent();

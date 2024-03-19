@@ -19,7 +19,6 @@ namespace MapDesigner
     {
         private MapDefinition _currentMap;
         private FileInfo _targetFile;
-        private readonly string _mapsDir;
 
         public MainWindow()
         {

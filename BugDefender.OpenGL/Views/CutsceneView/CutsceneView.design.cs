@@ -2,6 +2,7 @@
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
+using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -46,7 +47,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Height = 50,
                 Font = BasicFonts.GetFont(24),
                 FontColor = Color.White,
-                Text = _campaign.Speakers[_cutscene.Conversation[_conversationIndex].SpeakerID],
+                Text = _speakers[_cutscene.Conversation[_conversationIndex].SpeakerID],
                 IsVisible = true
             };
             AddControl(0, _leftName);
@@ -96,41 +97,11 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
             };
             AddControl(0, _rightSpeaker);
 
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
-            {
-                _onConversationOver.Invoke(this, _savedGame);
-            })
-            {
-                X = 50,
-                Y = 980,
-                Width = 200,
-                Height = 50,
-                Text = "Skip All",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-            });
-
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
-            {
-                SkipConversation();
-            })
-            {
-                Y = 980,
-                X = 1670,
-                Width = 200,
-                Height = 50,
-                Text = "Continue",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-            });
-
+            AddControl(0, BasicMenuHelper.GetCancelButton(Parent, "Skip All", (e) => { Parent.GameManager.NewGame(_savedGame); }));
+            AddControl(0, BasicMenuHelper.GetAcceptButton(Parent, "Continue", (e) => { SkipConversation(); }));
 
 #if DEBUG
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CutsceneView(Parent, _savedGame, _campaign, _cutscene, _onConversationOver)))
+            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CutsceneView(Parent, _speakers, _cutscene, _savedGame)))
             {
                 X = 0,
                 Y = 0,

@@ -34,10 +34,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
         {
             if (_selectedCampaign != null)
             {
-                var gameHandler = new GameHandler(Parent);
-                gameHandler.LoadGame(
-                    this,
-                    new CampaignSavedGame(_gameSaveName.Text, DateTime.Now, null, _selectedCampaign.ID, Guid.Empty, new Core.Users.Models.StatsDefinition(), false));
+                Parent.GameManager.NewGame(new CampaignSavedGame(_gameSaveName.Text, DateTime.Now, null, _selectedCampaign.ID, Guid.Empty, false, new Core.Users.Models.StatsDefinition(), false));
             }
         }
 
