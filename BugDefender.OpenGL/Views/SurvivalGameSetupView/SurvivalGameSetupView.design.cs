@@ -59,33 +59,6 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 IsEnabled = false
             };
             AddControl(0, _startButton);
-            _gameSaveName = new TextInputControl(Parent)
-            {
-                X = 300,
-                Y = 980,
-                Height = 50,
-                Width = 300,
-                Font = BasicFonts.GetFont(24),
-                Text = "New Game",
-                Limit = 25,
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
-            };
-            _gameSaveName.OnKeyDown += NameKeyDown;
-            AddControl(0, _gameSaveName);
-            _saveOverwriteWarningLabel = new LabelControl()
-            {
-                X = 800,
-                Y = 980,
-                Height = 50,
-                Font = BasicFonts.GetFont(16),
-                Text = "Overwrites existing save!",
-                FontColor = Color.Red,
-                IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
-            };
-            AddControl(0, _saveOverwriteWarningLabel);
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
             {
                 SwitchView(new MainMenu.MainMenuView(Parent));
@@ -120,7 +93,8 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
         }
 
         [MemberNotNull(nameof(_mapPreviewTile), nameof(_mapNameLabel), nameof(_mapDescriptionTextbox),
-            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel))]
+            nameof(_gameStyleDescriptionTextbox), nameof(_totalDifficultyLabel), nameof(_gameSaveName),
+            nameof(_saveOverwriteWarningLabel))]
         private void SetupPreviewPanel(float x, float y, float width, float height)
         {
             AddControl(1, new TileControl()
@@ -135,7 +109,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             {
                 FillColor = BasicTextures.GetBasicRectange(Color.Black),
                 X = x + 50,
-                Y = y + 150,
+                Y = y + 260,
                 Width = height - 300,
                 Height = height - 300,
             };
@@ -150,7 +124,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Text = "Select A Map",
                 Font = BasicFonts.GetFont(16),
                 X = x + 50,
-                Y = y + 50,
+                Y = y + 20,
                 Height = 50,
                 Width = height - 300,
                 FontColor = Color.White,
@@ -161,8 +135,8 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             {
                 Font = BasicFonts.GetFont(10),
                 X = x + (height - 300) + 75,
-                Y = y + 50,
-                Height = boxHeight - 100,
+                Y = y + 20,
+                Height = boxHeight - 30,
                 Width = width - 550,
                 FontColor = Color.White
             };
@@ -171,8 +145,8 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             {
                 Font = BasicFonts.GetFont(10),
                 X = x + (height - 300) + 75,
-                Y = y + 50 + boxHeight / 2 + 100,
-                Height = boxHeight - 100,
+                Y = y + 10 + boxHeight,
+                Height = boxHeight - 30,
                 Width = width - 550,
                 FontColor = Color.White
             };
@@ -182,12 +156,50 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Text = "Total Difficulty: ...",
                 Font = BasicFonts.GetFont(12),
                 X = x + 50,
-                Y = y + height - 150,
-                Height = 50,
+                Y = y + 70,
+                Height = 20,
                 Width = height - 300,
                 FontColor = Color.White,
             };
+            AddControl(1, new LabelControl()
+            {
+                X = x + 50,
+                Y = y + 100,
+                Height = 50,
+                Width = height - 300,
+                Font = BasicFonts.GetFont(12),
+                Text = "New Save Name",
+                FontColor = Color.White
+            });
             AddControl(1, _totalDifficultyLabel);
+            _gameSaveName = new TextInputControl(Parent)
+            {
+                X = x + 50,
+                Y = y + 150,
+                Height = 50,
+                Width = height - 300,
+                Font = BasicFonts.GetFont(24),
+                Text = "New Game",
+                Limit = 25,
+                FontColor = Color.White,
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+            };
+            _gameSaveName.OnKeyDown += NameKeyDown;
+            AddControl(1, _gameSaveName);
+            _saveOverwriteWarningLabel = new LabelControl()
+            {
+                X = x + 50,
+                Y = y + 200,
+                Height = 50,
+                Width = height - 300,
+                Font = BasicFonts.GetFont(16),
+                Text = "Overwrites existing save!",
+                FontColor = Color.Red,
+                IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
+            };
+            AddControl(1, _saveOverwriteWarningLabel);
         }
 
         [MemberNotNull(nameof(_mapPageHandler))]
