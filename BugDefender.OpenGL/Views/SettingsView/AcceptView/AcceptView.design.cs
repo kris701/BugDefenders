@@ -3,6 +3,7 @@ using BugDefender.OpenGL.Engine;
 using BugDefender.OpenGL.Engine.Controls;
 using BugDefender.OpenGL.Engine.Helpers;
 using BugDefender.OpenGL.Views;
+using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -53,32 +54,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
             };
             AddControl(0, _timeLeftLabel);
 
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => { Accept(); })
-            {
-                X = 50,
-                Y = 980,
-                Width = 200,
-                Height = 50,
-                Text = "Apply",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-            });
-
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => { Cancel(); })
-            {
-                Y = 980,
-                X = 1670,
-                Width = 200,
-                Height = 50,
-                Text = "Cancel",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-            });
-
+            AddControl(0, BasicMenuHelper.GetCancelButton(Parent, "Accept", (e) => { Accept(); }));
+            AddControl(0, BasicMenuHelper.GetCancelButton(Parent, "Cancel", (e) => { Cancel(); }));
 #if DEBUG
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new AcceptView(Parent, _oldSettings, _newSettings)))
             {

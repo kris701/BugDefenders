@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
             nameof(_saveOverwriteWarningLabel))]
         public override void Initialize()
         {
-            BasicMenuPage.GenerateBaseMenu(
+            BasicMenuHelper.GenerateBaseMenu(
                 this,
                 Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Campaign Game Setup",
@@ -39,36 +39,10 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
             SetupPreviewPanel(200, 225, 1060, 750);
             SetupCampaignsView(1060 + 200 + 10, 225, 445, 750);
 
-            _startButton = new BugDefenderButtonControl(Parent, StartButton_Click)
-            {
-                X = 50,
-                Y = 980,
-                Width = 200,
-                Height = 50,
-                Text = "Start",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
-                IsEnabled = false
-            };
+            _startButton = BasicMenuHelper.GetAcceptButton(Parent, "Start", StartButton_Click);
+            _startButton.IsEnabled = false;
             AddControl(0, _startButton);
-            AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) =>
-            {
-                SwitchView(new MainMenu.MainMenuView(Parent));
-            })
-            {
-                Y = 980,
-                X = 1670,
-                Width = 200,
-                Height = 50,
-                Text = "Back",
-                Font = BasicFonts.GetFont(24),
-                FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-            });
+            AddControl(0, BasicMenuHelper.GetCancelButton(Parent, "Back", (e) => { SwitchView(new MainMenu.MainMenuView(Parent)); }));
 
 #if DEBUG
             AddControl(0, new BugDefenderButtonControl(Parent, clicked: (x) => SwitchView(new CampaignGameSetupView(Parent)))
