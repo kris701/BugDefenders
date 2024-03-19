@@ -83,7 +83,43 @@
     },
     {
       "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
-      "Content": "Campaigns/StandardCampaign/normalConvoBackground"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter1"
+    },
+    {
+      "ID": "923f9d5d-78f5-4201-9df7-502b49bf79e5",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter2"
+    },
+    {
+      "ID": "5dcd66a8-30e1-4e31-b5d0-551d655be301",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter3"
+    },
+    {
+      "ID": "578ffbe5-61b3-433f-b081-09b1e571c8bc",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter4"
+    },
+    {
+      "ID": "77cbc125-5241-4ee9-93ef-385f72ea3206",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter5"
+    },
+    {
+      "ID": "668e306c-0cf3-4263-82b5-d547f2fb2d9d",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter6"
+    },
+    {
+      "ID": "742853cc-39dd-4e53-8eb8-1eead559e79f",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter7"
+    },
+    {
+      "ID": "deff2c66-b76b-4e29-88fe-c90c12582da5",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter8"
+    },
+    {
+      "ID": "638c2f71-cd6b-4a9a-b557-bce31539aad5",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter9"
+    },
+    {
+      "ID": "4e9d6736-dd87-4c8e-bbfe-923f5d1b4c5e",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter10"
     },
     {
       "ID": "74ddadcb-9d75-4039-b146-7818baa5619a",

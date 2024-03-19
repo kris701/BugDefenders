@@ -33,8 +33,8 @@ namespace BugDefender.OpenGL
         private static readonly string _contentDir = "Content";
         private static readonly string _modsDir = "Mods";
 
-        public float XScale { get; private set; }
-        public float YScale { get; private set; }
+        public float XScale { get; private set; } = 1;
+        public float YScale { get; private set; } = 1;
 
         public GraphicsDeviceManager Device { get; }
         public IView CurrentScreen { get; set; }
@@ -49,11 +49,13 @@ namespace BugDefender.OpenGL
         private readonly Func<BugDefenderGameWindow, IView> _screenToLoad;
         private SpriteBatch? _spriteBatch;
         private readonly NotificationBackroundWorker _notificationWorker;
+        private Matrix _scaleMatrix;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public BugDefenderGameWindow(Func<BugDefenderGameWindow, IView> screen) : base()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
+            _scaleMatrix = Matrix.CreateScale(XScale, YScale, 1.0f);
             Device = new GraphicsDeviceManager(this);
             Content.RootDirectory = _contentDir;
             _screenToLoad = screen;
@@ -88,7 +90,6 @@ namespace BugDefender.OpenGL
             SoundEffect.Initialize();
             _notificationWorker.Handles.Add(new AchivementsHandle(_notificationWorker));
             _notificationWorker.Handles.Add(new BuffsHandle(_notificationWorker));
-            //_notificationWorker.Handles.Add(new GameUpdateHandle(_notificationWorker));
             BackroundWorkers = new List<IBackgroundWorker>() {
                 _notificationWorker,
                 new FPSBackgroundWorker(this)
@@ -207,8 +208,7 @@ namespace BugDefender.OpenGL
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            var matrix = Matrix.CreateScale(XScale, YScale, 1.0f);
-            _spriteBatch!.Begin(transformMatrix: matrix);
+            _spriteBatch!.Begin(transformMatrix: _scaleMatrix);
             CurrentScreen.Draw(gameTime, _spriteBatch);
             foreach (var worker in BackroundWorkers)
                 worker.Draw(gameTime, _spriteBatch);
@@ -237,6 +237,7 @@ namespace BugDefender.OpenGL
             Device.ApplyChanges();
             XScale = (float)Device.PreferredBackBufferWidth / (float)IWindow.BaseScreenSize.X;
             YScale = (float)Device.PreferredBackBufferHeight / (float)IWindow.BaseScreenSize.Y;
+            _scaleMatrix = Matrix.CreateScale(XScale, YScale, 1.0f);
         }
     }
 }
