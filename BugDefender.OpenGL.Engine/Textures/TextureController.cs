@@ -21,23 +21,17 @@ namespace BugDefender.OpenGL.Engine.Textures
         public void LoadTexture(TextureDefinition item)
         {
             if (_textures.ContainsKey(item.ID))
-                _textures[item.ID].SetContent(_contentManager.Load<Texture2D>(item.Content));
-            else
-            {
-                item.SetContent(_contentManager.Load<Texture2D>(item.Content));
-                _textures.Add(item.ID, item);
-            }
+                _textures.Remove(item.ID);
+            item.LoadContent(_contentManager);
+            _textures.Add(item.ID, item);
         }
 
         public void LoadTextureSet(TextureSetDefinition item)
         {
             if (_textureSets.ContainsKey(item.ID))
                 _textureSets.Remove(item.ID);
+            item.LoadContent(_contentManager);
             _textureSets.Add(item.ID, item);
-            var textureSet = new List<Texture2D>();
-            foreach (var content in item.Contents)
-                textureSet.Add(_contentManager.Load<Texture2D>(content));
-            _textureSets[item.ID].SetContent(textureSet);
         }
 
         public Texture2D GetTexture(Guid id)
@@ -55,7 +49,7 @@ namespace BugDefender.OpenGL.Engine.Textures
                 return _textureSets[id];
             if (_textures.ContainsKey(id))
             {
-                var newSet = new TextureSetDefinition(id, 0, new List<string>());
+                var newSet = new TextureSetDefinition(id, 0, new List<string>(), false);
                 newSet.SetContent(new List<Texture2D>() { _textures[id].GetLoadedContent() });
                 _textureSets.Add(id, newSet);
                 return newSet;
@@ -65,7 +59,7 @@ namespace BugDefender.OpenGL.Engine.Textures
             {
                 if (_noTexture == null)
                     _noTexture = BasicTextures.GetBasicRectange(Color.HotPink);
-                _noTextureSet = new TextureSetDefinition(Guid.Empty, 9999, new List<string>());
+                _noTextureSet = new TextureSetDefinition(Guid.Empty, 9999, new List<string>(), false);
                 _noTextureSet.SetContent(new List<Texture2D>() { _noTexture });
             }
             return _noTextureSet;

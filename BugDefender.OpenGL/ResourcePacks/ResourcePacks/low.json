@@ -75,106 +75,131 @@
 
     {
       "ID": "6344ec42-5f76-4c44-9e03-11dd4d69c1d8",
-      "Content": "Campaigns/StandardCampaign/conversationBox"
+      "Content": "Campaigns/StandardCampaign/conversationBox",
+      "IsDefered": true
     },
     {
       "ID": "2f5c4389-68ae-4464-82d0-980906a5ab3c",
-      "Content": "Campaigns/StandardCampaign/winBackground"
+      "Content": "Campaigns/StandardCampaign/winBackground",
+      "IsDefered": true
     },
     {
       "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter1"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter1",
+      "IsDefered": true
     },
     {
       "ID": "923f9d5d-78f5-4201-9df7-502b49bf79e5",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter2"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter2",
+      "IsDefered": true
     },
     {
       "ID": "5dcd66a8-30e1-4e31-b5d0-551d655be301",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter3"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter3",
+      "IsDefered": true
     },
     {
       "ID": "578ffbe5-61b3-433f-b081-09b1e571c8bc",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter4"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter4",
+      "IsDefered": true
     },
     {
       "ID": "77cbc125-5241-4ee9-93ef-385f72ea3206",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter5"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter5",
+      "IsDefered": true
     },
     {
       "ID": "668e306c-0cf3-4263-82b5-d547f2fb2d9d",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter6"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter6",
+      "IsDefered": true
     },
     {
       "ID": "742853cc-39dd-4e53-8eb8-1eead559e79f",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter7"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter7",
+      "IsDefered": true
     },
     {
       "ID": "deff2c66-b76b-4e29-88fe-c90c12582da5",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter8"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter8",
+      "IsDefered": true
     },
     {
       "ID": "638c2f71-cd6b-4a9a-b557-bce31539aad5",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter9"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter9",
+      "IsDefered": true
     },
     {
       "ID": "4e9d6736-dd87-4c8e-bbfe-923f5d1b4c5e",
-      "Content": "Campaigns/StandardCampaign/Conversations/chapter10"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter10",
+      "IsDefered": true
     },
     {
       "ID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-      "Content": "Campaigns/StandardCampaign/you"
+      "Content": "Campaigns/StandardCampaign/you",
+      "IsDefered": true
     },
     {
       "ID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-      "Content": "Campaigns/StandardCampaign/unknown"
+      "Content": "Campaigns/StandardCampaign/unknown",
+      "IsDefered": true
     },
     {
       "ID": "c69e9e7b-eb6d-463e-865b-b5539de05298",
-      "Content": "Campaigns/StandardCampaign/bug"
+      "Content": "Campaigns/StandardCampaign/bug",
+      "IsDefered": true
     },
     {
       "ID": "204db9ee-0768-449a-a2a8-b1e324d3312f",
-      "Content": "Campaigns/StandardCampaign/titlescreen"
+      "Content": "Campaigns/StandardCampaign/titlescreen",
+      "IsDefered": true
     },
 
 
     {
       "ID": "2811A657-6811-423A-8342-142BF5BD261A",
-      "Content": "Entities/Maps/map1"
+      "Content": "Entities/Maps/map1",
+      "IsDefered": true
     },
     {
       "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
-      "Content": "Entities/Maps/map2"
+      "Content": "Entities/Maps/map2",
+      "IsDefered": true
     },
     {
       "ID": "df2fded0-2a01-4350-bd87-cda973e1886c",
-      "Content": "Entities/Maps/map3"
+      "Content": "Entities/Maps/map3",
+      "IsDefered": true
     },
     {
       "ID": "77c07efc-3089-4440-9674-9351d6247931",
-      "Content": "Entities/Maps/map4"
+      "Content": "Entities/Maps/map4",
+      "IsDefered": true
     },
     {
       "ID": "2d338762-c5f5-4ab9-8943-424e9d264e94",
-      "Content": "Entities/Maps/map5"
+      "Content": "Entities/Maps/map5",
+      "IsDefered": true
     },
     {
       "ID": "b33eff29-7ee2-4900-8e7d-b4961741739f",
-      "Content": "Entities/Maps/map6"
+      "Content": "Entities/Maps/map6",
+      "IsDefered": true
     },
     {
       "ID": "a46ad929-ab27-4455-8586-ee9c4ff6453c",
-      "Content": "Entities/Maps/map7"
+      "Content": "Entities/Maps/map7",
+      "IsDefered": true
     },
     {
       "ID": "1af5a5d8-2496-4d8b-9962-54020f612b12",
-      "Content": "Entities/Maps/map8"
+      "Content": "Entities/Maps/map8",
+      "IsDefered": true
     },
 
     {
       "ID": "f9eb39aa-2164-4125-925d-83a1e94fbe93",
-      "Content": "Common/background"
+      "Content": "Common/background",
+      "IsDefered": true
     },
     {
       "ID": "a23f20ed-299a-4f94-b398-3dd00ff63bd5",
@@ -191,7 +216,8 @@
 
     {
       "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
-      "Content": "Views/GameView/background"
+      "Content": "Views/GameView/background",
+      "IsDefered": true
     },
     {
       "ID": "c20d95f4-517c-4fbd-aa25-115ea05539de",
