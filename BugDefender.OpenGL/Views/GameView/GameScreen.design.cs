@@ -25,6 +25,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
         private BugDefenderButtonControl _sendWave;
         private BugDefenderButtonControl _saveAndExitButton;
+        private ConfirmationControl _confirmationControl;
 
         private LabelControl _playtimeLabel;
 
@@ -48,7 +49,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             nameof(_saveAndExitButton), nameof(_upgradePageHandler), nameof(_buyingPreviewTile),
             nameof(_buyingPreviewRangeTile), nameof(_turretInfoPanel), nameof(_enemyInfoPanel),
             nameof(_turretPageHandler), nameof(_turretSelectRangeTile), nameof(_hurtGameAreaTile),
-            nameof(_playtimeLabel), nameof(_gameInfoTextbox), nameof(_buyingPreviewSizeTile))]
+            nameof(_playtimeLabel), nameof(_gameInfoTextbox), nameof(_buyingPreviewSizeTile), nameof(_confirmationControl))]
         public override void Initialize()
         {
             AddControl(0, new TileControl()
@@ -79,6 +80,16 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 IsVisible = false
             };
             AddControl(101, _enemyInfoPanel);
+            _confirmationControl = new ConfirmationControl(Parent, 
+                (s) => { SaveAndGoToMainMenu(); }, 
+                (s) => {
+                    _confirmationControl!.IsVisible = false;
+                    _game.Running = true; 
+                })
+            {
+                IsVisible = false
+            };
+            AddControl(200, _confirmationControl);
 
             if (CheatsHelper.Cheats.Count > 0)
             {
@@ -202,33 +213,37 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 100
             });
 
-            _saveAndExitButton = new BugDefenderButtonControl(Parent, clicked: (x) => { SaveAndGoToMainMenu(); })
+            _saveAndExitButton = new BugDefenderButtonControl(Parent, 
+                (x) => {
+                    _game.Running = false;
+                    _confirmationControl.IsVisible = true; }
+                )
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
                 Text = $"Save and Exit",
                 Font = BasicFonts.GetFont(10),
                 FontColor = Color.White,
-                X = xOffset + 10,
-                Y = yOffset + 90,
+                X = xOffset + 110,
+                Y = yOffset + 60,
                 Height = 30,
-                Width = width - 20,
+                Width = 200,
                 IsEnabled = false
             };
             AddControl(101, _saveAndExitButton);
 
             AddControl(101, new BugDefenderButtonControl(Parent, clicked: AutoRunButton_Click)
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
                 FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                X = xOffset + 10,
+                Y = yOffset + 90,
+                Height = 30,
+                Width = width - 20,
                 Text = $"[ ] Auto-Wave",
                 Font = BasicFonts.GetFont(10),
-                FontColor = Color.White,
-                X = xOffset + 110,
-                Y = yOffset + 60,
-                Height = 30,
-                Width = 200
+                FontColor = Color.White
             });
 
             _sendWave = new BugDefenderButtonControl(Parent, clicked: (s) =>
