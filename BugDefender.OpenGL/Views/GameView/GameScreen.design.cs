@@ -80,11 +80,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 IsVisible = false
             };
             AddControl(101, _enemyInfoPanel);
-            _confirmationControl = new ConfirmationControl(Parent, 
-                (s) => { SaveAndGoToMainMenu(); }, 
-                (s) => {
+            _confirmationControl = new ConfirmationControl(Parent,
+                (s) => { SaveAndGoToMainMenu(); },
+                (s) =>
+                {
                     _confirmationControl!.IsVisible = false;
-                    _game.Running = true; 
+                    _game.Running = true;
                 })
             {
                 IsVisible = false
@@ -213,10 +214,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 Width = 100
             });
 
-            _saveAndExitButton = new BugDefenderButtonControl(Parent, 
-                (x) => {
+            _saveAndExitButton = new BugDefenderButtonControl(Parent,
+                (x) =>
+                {
                     _game.Running = false;
-                    _confirmationControl.IsVisible = true; }
+                    _confirmationControl.IsVisible = true;
+                }
                 )
             {
                 FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),

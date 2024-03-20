@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System.Text.Json.Serialization;
 
 namespace BugDefender.OpenGL.Engine.Textures
 {
