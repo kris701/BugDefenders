@@ -21,31 +21,14 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Height = 140,
                 FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
             });
-            var typeStr = "";
-            switch (saveGame)
-            {
-                case SurvivalSavedGame: typeStr = "(Survival) "; break;
-                case ChallengeSavedGame: typeStr = "(Challenge) "; break;
-                case CampaignSavedGame: typeStr = "(Campaign) "; break;
-            }
             Children.Add(new LabelControl()
             {
                 X = 20,
                 Y = 20,
-                Width = 400,
+                Width = 800,
                 Height = 40,
                 Font = BasicFonts.GetFont(12),
-                Text = $"{typeStr}{saveGame.Name}",
-                FontColor = Color.White
-            });
-            Children.Add(new LabelControl()
-            {
-                X = 480,
-                Y = 20,
-                Width = 400,
-                Height = 40,
-                Font = BasicFonts.GetFont(12),
-                Text = saveGame.Date.ToString(),
+                Text = $"{saveGame}",
                 FontColor = Color.White
             });
             string continueText = "Continue";

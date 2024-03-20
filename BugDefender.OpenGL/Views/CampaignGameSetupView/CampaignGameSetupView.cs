@@ -63,6 +63,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                     _campaignNameLabel.Text = campaign.Name;
                     var sb = new StringBuilder();
                     sb.AppendLine(campaign.Description);
+                    sb.AppendLine($"Chapters: {_selectedCampaign.Chapters.Count}");
                     sb.AppendLine($"Completion reward: {_selectedCampaign.Reward} credits!");
                     _campaignDescriptionTextbox.Text = sb.ToString();
                     _startButton.IsEnabled = true;
