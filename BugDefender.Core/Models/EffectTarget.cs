@@ -77,10 +77,10 @@ namespace BugDefender.Core.Models
 
         public override int GetHashCode() => HashCode.Combine(Target, Value, Modifier);
 
-        public void ApplyUpgradeEffectOnObject<U>(U item) where U : notnull => ExecuteActionOnProperty(item, ApplyEffect);
-        public void UnApplyUpgradeEffectOnObject<U>(U item) where U : notnull => ExecuteActionOnProperty(item, UnApplyEffect);
-        public void TryApplyUpgradeEffectOnObject<U>(U item) where U : notnull => TryExecuteActionOnProperty(item, ApplyEffect);
-        public void TryUnApplyUpgradeEffectOnObject<U>(U item) where U : notnull => TryExecuteActionOnProperty(item, UnApplyEffect);
+        public void ApplyOnObject<U>(U item) where U : notnull => ExecuteActionOnProperty(item, ApplyEffect);
+        public void UnApplyOnObject<U>(U item) where U : notnull => ExecuteActionOnProperty(item, UnApplyEffect);
+        public void TryApplyOnObject<U>(U item) where U : notnull => TryExecuteActionOnProperty(item, ApplyEffect);
+        public void TryUnApplyOnObject<U>(U item) where U : notnull => TryExecuteActionOnProperty(item, UnApplyEffect);
 
         private void ApplyEffect<U>(U item, PropertyInfo first)
         {
@@ -130,6 +130,5 @@ namespace BugDefender.Core.Models
                 return;
             action(target.Item1, target.Item2);
         }
-
     }
 }

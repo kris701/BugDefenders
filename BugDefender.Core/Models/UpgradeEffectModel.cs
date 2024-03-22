@@ -28,25 +28,25 @@ namespace BugDefender.Core.Models
         public void ApplyUpgradeEffectOnObject<U>(U item) where U : notnull
         {
             foreach (var effect in Effects)
-                effect.ApplyUpgradeEffectOnObject(item);
+                effect.ApplyOnObject(item);
         }
 
         public void TryApplyUpgradeEffectOnObject<U>(U item) where U : notnull
         {
             foreach (var effect in Effects)
-                effect.TryApplyUpgradeEffectOnObject(item);
+                effect.TryApplyOnObject(item);
         }
 
         public void UnApplyUpgradeEffectOnObject<U>(U item) where U : notnull
         {
             foreach (var effect in Effects)
-                effect.UnApplyUpgradeEffectOnObject(item);
+                effect.UnApplyOnObject(item);
         }
 
         public void TryUnApplyUpgradeEffectOnObject<U>(U item) where U : notnull
         {
             foreach (var effect in Effects)
-                effect.TryUnApplyUpgradeEffectOnObject(item);
+                effect.TryUnApplyOnObject(item);
         }
     }
 }
