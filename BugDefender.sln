@@ -32,7 +32,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDesigner", "Toolkit\MapD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CampaignDesigner", "Toolkit\CampaignDesigner\CampaignDesigner.csproj", "{6A0B9630-511E-4C0E-94A1-BF25DE47BEB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameStyleDesigner", "Toolkit\GameStyleDesigner\GameStyleDesigner.csproj", "{2307CC56-E8E9-4F3C-A647-63C1EE3B4092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameStyleDesigner", "Toolkit\GameStyleDesigner\GameStyleDesigner.csproj", "{2307CC56-E8E9-4F3C-A647-63C1EE3B4092}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugDefender.OpenGL.Engine.Tests", "BugDefender.OpenGL.Engine.Tests\BugDefender.OpenGL.Engine.Tests.csproj", "{8C859AC5-7DE4-4086-B8CB-B696A2020A19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +78,10 @@ Global
 		{2307CC56-E8E9-4F3C-A647-63C1EE3B4092}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2307CC56-E8E9-4F3C-A647-63C1EE3B4092}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2307CC56-E8E9-4F3C-A647-63C1EE3B4092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C859AC5-7DE4-4086-B8CB-B696A2020A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C859AC5-7DE4-4086-B8CB-B696A2020A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C859AC5-7DE4-4086-B8CB-B696A2020A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C859AC5-7DE4-4086-B8CB-B696A2020A19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
