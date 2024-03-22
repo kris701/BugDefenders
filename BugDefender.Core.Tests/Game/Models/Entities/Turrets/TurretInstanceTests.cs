@@ -1,11 +1,6 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BugDefender.Core.Tests.Game.Models.Entities.Turrets
 {
@@ -14,7 +9,7 @@ namespace BugDefender.Core.Tests.Game.Models.Entities.Turrets
     {
         public static IEnumerable<object[]> UpgradeTurretIDs()
         {
-            foreach(var gameStyleID in ResourceManager.GameStyles.GetResources())
+            foreach (var gameStyleID in ResourceManager.GameStyles.GetResources())
             {
                 var gameStyle = ResourceManager.GameStyles.GetResource(gameStyleID);
                 foreach (var turretId in ResourceManager.Turrets.GetResources())

@@ -119,7 +119,7 @@ namespace BugDefender.Core.Tests.Models
         public void Can_ApplyOnObject(string target, float modifier, string? value, dynamic expected)
         {
             // ARRANGE
-            var effect = new EffectTarget(target) 
+            var effect = new EffectTarget(target)
             {
                 Modifier = modifier
             };
