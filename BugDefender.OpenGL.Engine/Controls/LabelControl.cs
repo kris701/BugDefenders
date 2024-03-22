@@ -22,6 +22,11 @@ namespace BugDefender.OpenGL.Engine.Controls
             get => _element.FontColor;
             set => _element.FontColor = value;
         }
+        public float TextX => _element._textX;
+        public float TextY => _element._textY;
+        public float TextWidth => _element._textWidth;
+        public float TextHeight => _element._textHeight;
+
         private readonly TextElement _element;
 
         public LabelControl()
