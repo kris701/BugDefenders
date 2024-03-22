@@ -29,7 +29,7 @@ namespace BugDefender.Core.Tests.Campaign.Models
             var campaign = ResourceManager.Campaigns.GetResource(campaignID);
 
             // ACT
-            foreach(var chapter in campaign.Chapters)
+            foreach (var chapter in campaign.Chapters)
                 if (chapter.NextChapterID != null)
                     Assert.IsTrue(campaign.Chapters.Any(x => x.ID == chapter.NextChapterID));
         }
@@ -53,7 +53,7 @@ namespace BugDefender.Core.Tests.Campaign.Models
             var campaign = ResourceManager.Campaigns.GetResource(campaignID);
 
             // ACT
-            foreach(var chapter in campaign.Chapters)
+            foreach (var chapter in campaign.Chapters)
                 Assert.IsTrue(IsSpeakersReferenced(campaign.Speakers, chapter.Intro));
             Assert.IsTrue(IsSpeakersReferenced(campaign.Speakers, campaign.CampaignOver));
         }

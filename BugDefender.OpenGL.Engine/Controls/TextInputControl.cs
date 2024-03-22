@@ -52,7 +52,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             Keys.D6, Keys.D7, Keys.D8,
             Keys.D9
         };
-        private TileControl _iBeam;
+        private readonly TileControl _iBeam;
         private TimeSpan _iBeamTimer = TimeSpan.Zero;
 
         public TextInputControl(IWindow parent, KeyEventHandler? onEnter = null)
