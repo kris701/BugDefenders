@@ -166,6 +166,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                     if (!_captured)
                     {
                         _iBeam.IsVisible = true;
+                        _iBeam.Height = TextHeight;
                         _iBeam.X = translatedPos.X - 10;
                         _iBeam.Y = translatedPos.Y - 15;
                     }
