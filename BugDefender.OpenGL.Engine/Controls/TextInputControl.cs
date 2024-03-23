@@ -35,6 +35,7 @@ namespace BugDefender.OpenGL.Engine.Controls
         private List<Keys> _lastKeys = new List<Keys>();
         private bool _holding = false;
         private bool _blocked = false;
+        private bool _keyDown = false;
         private readonly List<Keys> _legalCharacters = new List<Keys>()
         {
             Keys.A, Keys.B, Keys.C,
@@ -51,6 +52,8 @@ namespace BugDefender.OpenGL.Engine.Controls
             Keys.D6, Keys.D7, Keys.D8,
             Keys.D9
         };
+        private readonly TileControl _iBeam;
+        private TimeSpan _iBeamTimer = TimeSpan.Zero;
 
         public TextInputControl(IWindow parent, KeyEventHandler? onEnter = null)
         {
@@ -58,6 +61,13 @@ namespace BugDefender.OpenGL.Engine.Controls
             OnEnter += onEnter;
             _keyDownSoundElement = new SoundEffectElement(parent);
             _enterSoundElement = new SoundEffectElement(parent);
+            _iBeam = new TileControl()
+            {
+                FillColor = BasicTextures.GetBasicRectange(Color.White),
+                Height = 30,
+                Width = 3,
+                IsVisible = false
+            };
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -66,10 +76,11 @@ namespace BugDefender.OpenGL.Engine.Controls
                 return;
 
             base.Draw(gameTime, spriteBatch);
-            if (_holding)
+            if (_holding || _keyDown)
                 DrawTile(gameTime, spriteBatch, FillClickedColor);
             if (!IsEnabled)
                 DrawTile(gameTime, spriteBatch, FillDisabledColor);
+            _iBeam.Draw(gameTime, spriteBatch);
         }
 
         public override void Update(GameTime gameTime)
@@ -78,6 +89,7 @@ namespace BugDefender.OpenGL.Engine.Controls
             {
                 if (_captured)
                 {
+                    _keyDown = false;
                     var keyState = Keyboard.GetState();
                     var keys = keyState.GetPressedKeys();
                     var newText = Text;
@@ -86,6 +98,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                     {
                         if (!_lastKeys.Contains(key) && _legalCharacters.Contains(key))
                         {
+                            _keyDown = true;
                             if (!keys.Any(x => x == Keys.Enter))
                                 _keyDownSoundElement.Trigger();
                             if (key == Keys.Back)
@@ -133,6 +146,16 @@ namespace BugDefender.OpenGL.Engine.Controls
                     }
                     _lastKeys.Clear();
                     _lastKeys = keys.ToList();
+
+                    _iBeam.X = TextX + TextWidth;
+                    _iBeam.Y = TextY;
+
+                    _iBeamTimer -= gameTime.ElapsedGameTime;
+                    if (_iBeamTimer <= TimeSpan.Zero)
+                    {
+                        _iBeamTimer = TimeSpan.FromMilliseconds(500);
+                        _iBeam.IsVisible = !_iBeam.IsVisible;
+                    }
                 }
 
                 var mouseState = Mouse.GetState();
@@ -140,6 +163,13 @@ namespace BugDefender.OpenGL.Engine.Controls
                 if (!_blocked && (translatedPos.X > X && translatedPos.X < X + Width &&
                     translatedPos.Y > Y && translatedPos.Y < Y + Height))
                 {
+                    if (!_captured)
+                    {
+                        _iBeam.IsVisible = true;
+                        _iBeam.Height = TextHeight;
+                        _iBeam.X = translatedPos.X - 10;
+                        _iBeam.Y = translatedPos.Y - 15;
+                    }
                     if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
                         _holding = true;
                     else if (_holding && mouseState.LeftButton == ButtonState.Released)
@@ -150,6 +180,8 @@ namespace BugDefender.OpenGL.Engine.Controls
                 }
                 else
                 {
+                    if (!_captured)
+                        _iBeam.IsVisible = false;
                     if (_holding && mouseState.LeftButton == ButtonState.Released)
                         _holding = false;
                     if (mouseState.LeftButton == ButtonState.Pressed)
@@ -162,6 +194,7 @@ namespace BugDefender.OpenGL.Engine.Controls
                 }
             }
 
+            _iBeam.Update(gameTime);
             base.Update(gameTime);
         }
     }

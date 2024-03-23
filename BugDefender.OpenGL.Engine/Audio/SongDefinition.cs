@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Media;
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
 
 namespace BugDefender.OpenGL.Engine.Audio
 {
@@ -7,10 +8,12 @@ namespace BugDefender.OpenGL.Engine.Audio
         public Guid ID { get; set; }
         public string Content { get; set; }
 
-        public SongDefinition(Guid iD, string content)
+        public SongDefinition(Guid iD, string content, bool isDefered) : base(isDefered)
         {
             ID = iD;
             Content = content;
         }
+
+        public override Song LoadMethod(ContentManager manager) => manager.Load<Song>(Content);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game;
+using BugDefender.Core.Resources;
 
 namespace BugDefender.Core.Users.Models.SavedGames
 {
@@ -23,6 +24,13 @@ namespace BugDefender.Core.Users.Models.SavedGames
             SeenIntro = seenIntro;
             Stats = stats;
             IsCompleted = isCompleted;
+        }
+
+        public override string ToString()
+        {
+            var campaign = ResourceManager.Campaigns.GetResource(CampaignID);
+            var chapter = campaign.Chapters.First(x => x.ID == ChapterID);
+            return $"({campaign.Name}) {Name}, {chapter.Name}, {Date}";
         }
     }
 }

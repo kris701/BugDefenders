@@ -21,7 +21,7 @@ namespace BugDefender.OpenGL.Engine.Audio
         {
             if (_songs.ContainsKey(item.ID))
                 _songs.Remove(item.ID);
-            item.SetContent(_contentManager.Load<Song>(item.Content));
+            item.LoadContent(_contentManager);
             _songs.Add(item.ID, item);
         }
 
@@ -29,7 +29,7 @@ namespace BugDefender.OpenGL.Engine.Audio
         {
             if (_soundEffects.ContainsKey(item.ID))
                 _soundEffects.Remove(item.ID);
-            item.SetContent(_contentManager.Load<SoundEffect>(item.Content));
+            item.LoadContent(_contentManager);
             _soundEffects.Add(item.ID, item);
         }
 

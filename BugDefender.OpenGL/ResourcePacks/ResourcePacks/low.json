@@ -6,139 +6,216 @@
   "Textures": [
     {
       "ID": "cae05609-66c4-4f8a-9e53-a7cebc7817d6",
-      "Content": "Achivements/moneyearned_1"
+      "Content": "Achivements/moneyearned_1",
+      "IsDefered": true
     },
     {
       "ID": "c034193b-2172-4bc4-8a1e-4c25ad3bc955",
-      "Content": "Achivements/moneyearned_2"
+      "Content": "Achivements/moneyearned_2",
+      "IsDefered": true
     },
     {
       "ID": "b4e2e147-1d69-4588-ad1d-756c7bbac911",
-      "Content": "Achivements/moneyearned_3"
+      "Content": "Achivements/moneyearned_3",
+      "IsDefered": true
     },
 
     {
       "ID": "62a25083-8ce2-4783-b303-cf8d745cfd49",
-      "Content": "Achivements/totalkills_1"
+      "Content": "Achivements/totalkills_1",
+      "IsDefered": true
     },
     {
       "ID": "0242dd8b-6079-444d-a077-6ffe5e556ec9",
-      "Content": "Achivements/totalkills_2"
+      "Content": "Achivements/totalkills_2",
+      "IsDefered": true
     },
     {
       "ID": "279c4d26-f1a1-4107-8bb8-fc458b7ed1d3",
-      "Content": "Achivements/totalkills_3"
+      "Content": "Achivements/totalkills_3",
+      "IsDefered": true
     },
     {
       "ID": "7a4ab642-e363-4917-82a4-2888362a9636",
-      "Content": "Achivements/totalkills_4"
+      "Content": "Achivements/totalkills_4",
+      "IsDefered": true
     },
 
     {
       "ID": "fcd8f51c-66e7-4609-b37e-153f528faf1e",
-      "Content": "Achivements/turretsplaced_1"
+      "Content": "Achivements/turretsplaced_1",
+      "IsDefered": true
     },
     {
       "ID": "57c6af7b-5f97-408a-b26b-fb3c54de4749",
-      "Content": "Achivements/turretsplaced_2"
+      "Content": "Achivements/turretsplaced_2",
+      "IsDefered": true
     },
     {
       "ID": "5c53b0c5-1709-490e-86cb-b8873c1e0dc3",
-      "Content": "Achivements/turretsplaced_3"
+      "Content": "Achivements/turretsplaced_3",
+      "IsDefered": true
     },
 
     {
       "ID": "e68ad92b-3abc-4a26-89f1-d05d5b5e7f27",
-      "Content": "Achivements/turretssold_1"
+      "Content": "Achivements/turretssold_1",
+      "IsDefered": true
     },
     {
       "ID": "22228843-2fc0-45bd-ac7e-7744881c7976",
-      "Content": "Achivements/turretssold_2"
+      "Content": "Achivements/turretssold_2",
+      "IsDefered": true
     },
     {
       "ID": "4b0240d5-8f7c-4f66-8a10-dc069c395cc9",
-      "Content": "Achivements/turretssold_3"
+      "Content": "Achivements/turretssold_3",
+      "IsDefered": true
     },
 
     {
       "ID": "b4ee2d68-a981-4c74-afa0-c361a4fd36e9",
-      "Content": "Achivements/wavesstarted_1"
+      "Content": "Achivements/wavesstarted_1",
+      "IsDefered": true
     },
     {
       "ID": "f4bf6cde-04a0-4407-8944-773087f72328",
-      "Content": "Achivements/wavesstarted_2"
+      "Content": "Achivements/wavesstarted_2",
+      "IsDefered": true
     },
     {
       "ID": "a8518315-2963-451b-a908-223ef55118e8",
-      "Content": "Achivements/wavesstarted_3"
+      "Content": "Achivements/wavesstarted_3",
+      "IsDefered": true
     },
 
     {
       "ID": "6344ec42-5f76-4c44-9e03-11dd4d69c1d8",
-      "Content": "Campaigns/StandardCampaign/conversationBox"
+      "Content": "Campaigns/StandardCampaign/conversationBox",
+      "IsDefered": true
     },
     {
       "ID": "2f5c4389-68ae-4464-82d0-980906a5ab3c",
-      "Content": "Campaigns/StandardCampaign/winBackground"
+      "Content": "Campaigns/StandardCampaign/winBackground",
+      "IsDefered": true
     },
     {
       "ID": "95961247-a863-438b-9428-6ff2bcb67e09",
-      "Content": "Campaigns/StandardCampaign/normalConvoBackground"
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter1",
+      "IsDefered": true
+    },
+    {
+      "ID": "923f9d5d-78f5-4201-9df7-502b49bf79e5",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter2",
+      "IsDefered": true
+    },
+    {
+      "ID": "5dcd66a8-30e1-4e31-b5d0-551d655be301",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter3",
+      "IsDefered": true
+    },
+    {
+      "ID": "578ffbe5-61b3-433f-b081-09b1e571c8bc",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter4",
+      "IsDefered": true
+    },
+    {
+      "ID": "77cbc125-5241-4ee9-93ef-385f72ea3206",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter5",
+      "IsDefered": true
+    },
+    {
+      "ID": "668e306c-0cf3-4263-82b5-d547f2fb2d9d",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter6",
+      "IsDefered": true
+    },
+    {
+      "ID": "742853cc-39dd-4e53-8eb8-1eead559e79f",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter7",
+      "IsDefered": true
+    },
+    {
+      "ID": "deff2c66-b76b-4e29-88fe-c90c12582da5",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter8",
+      "IsDefered": true
+    },
+    {
+      "ID": "638c2f71-cd6b-4a9a-b557-bce31539aad5",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter9",
+      "IsDefered": true
+    },
+    {
+      "ID": "4e9d6736-dd87-4c8e-bbfe-923f5d1b4c5e",
+      "Content": "Campaigns/StandardCampaign/Conversations/chapter10",
+      "IsDefered": true
     },
     {
       "ID": "74ddadcb-9d75-4039-b146-7818baa5619a",
-      "Content": "Campaigns/StandardCampaign/you"
+      "Content": "Campaigns/StandardCampaign/you",
+      "IsDefered": true
     },
     {
       "ID": "e56797b6-f58c-418c-aba0-9f0d3cd005a1",
-      "Content": "Campaigns/StandardCampaign/unknown"
+      "Content": "Campaigns/StandardCampaign/unknown",
+      "IsDefered": true
     },
     {
       "ID": "c69e9e7b-eb6d-463e-865b-b5539de05298",
-      "Content": "Campaigns/StandardCampaign/bug"
+      "Content": "Campaigns/StandardCampaign/bug",
+      "IsDefered": true
     },
     {
       "ID": "204db9ee-0768-449a-a2a8-b1e324d3312f",
-      "Content": "Campaigns/StandardCampaign/titlescreen"
+      "Content": "Campaigns/StandardCampaign/titlescreen",
+      "IsDefered": true
     },
 
 
     {
       "ID": "2811A657-6811-423A-8342-142BF5BD261A",
-      "Content": "Entities/Maps/map1"
+      "Content": "Entities/Maps/map1",
+      "IsDefered": true
     },
     {
       "ID": "ca13a581-163b-40c7-8d7e-383e59c23202",
-      "Content": "Entities/Maps/map2"
+      "Content": "Entities/Maps/map2",
+      "IsDefered": true
     },
     {
       "ID": "df2fded0-2a01-4350-bd87-cda973e1886c",
-      "Content": "Entities/Maps/map3"
+      "Content": "Entities/Maps/map3",
+      "IsDefered": true
     },
     {
       "ID": "77c07efc-3089-4440-9674-9351d6247931",
-      "Content": "Entities/Maps/map4"
+      "Content": "Entities/Maps/map4",
+      "IsDefered": true
     },
     {
       "ID": "2d338762-c5f5-4ab9-8943-424e9d264e94",
-      "Content": "Entities/Maps/map5"
+      "Content": "Entities/Maps/map5",
+      "IsDefered": true
     },
     {
       "ID": "b33eff29-7ee2-4900-8e7d-b4961741739f",
-      "Content": "Entities/Maps/map6"
+      "Content": "Entities/Maps/map6",
+      "IsDefered": true
     },
     {
       "ID": "a46ad929-ab27-4455-8586-ee9c4ff6453c",
-      "Content": "Entities/Maps/map7"
+      "Content": "Entities/Maps/map7",
+      "IsDefered": true
     },
     {
       "ID": "1af5a5d8-2496-4d8b-9962-54020f612b12",
-      "Content": "Entities/Maps/map8"
+      "Content": "Entities/Maps/map8",
+      "IsDefered": true
     },
 
     {
       "ID": "f9eb39aa-2164-4125-925d-83a1e94fbe93",
-      "Content": "Common/background"
+      "Content": "Common/background",
+      "IsDefered": true
     },
     {
       "ID": "a23f20ed-299a-4f94-b398-3dd00ff63bd5",
@@ -155,100 +232,123 @@
 
     {
       "ID": "32b08b60-c8b9-450a-90b3-73086261e87f",
-      "Content": "Views/GameView/background"
+      "Content": "Views/GameView/background",
+      "IsDefered": true
     },
     {
       "ID": "c20d95f4-517c-4fbd-aa25-115ea05539de",
-      "Content": "Views/GameView/controlsField"
+      "Content": "Views/GameView/controlsField",
+      "IsDefered": true
     },
     {
       "ID": "2712c649-3e74-44ca-b8a9-c3032aba217e",
-      "Content": "Views/GameView/nextEnemyField"
+      "Content": "Views/GameView/nextEnemyField",
+      "IsDefered": true
     },
     {
       "ID": "98e37f25-6313-4e41-8805-2eabcde084ff",
-      "Content": "Views/GameView/purchasingField"
+      "Content": "Views/GameView/purchasingField",
+      "IsDefered": true
     },
     {
       "ID": "90447608-bd7a-478c-9bfd-fddb26c731b7",
-      "Content": "Views/GameView/turretStatsField"
+      "Content": "Views/GameView/turretStatsField",
+      "IsDefered": true
     },
     {
       "ID": "86f37f1c-921f-484a-98da-4b0790f51d70",
-      "Content": "Views/GameView/gameField"
+      "Content": "Views/GameView/gameField",
+      "IsDefered": true
     },
     {
       "ID": "3715b90d-7cc7-4528-99fc-84c8497d06c1",
-      "Content": "Views/GameView/gameField_hurt"
+      "Content": "Views/GameView/gameField_hurt",
+      "IsDefered": true
     },
     {
       "ID": "8799e365-3b1c-47fa-b11b-83173f6d4bca",
-      "Content": "Views/GameView/upgradePanel"
+      "Content": "Views/GameView/upgradePanel",
+      "IsDefered": true
     },
     {
       "ID": "5c993d08-bc73-433c-a09b-0b944ac2f425",
-      "Content": "Views/GameView/turretPuchaseButton"
+      "Content": "Views/GameView/turretPuchaseButton",
+      "IsDefered": true
     },
 
     {
       "ID": "22be929c-5f6e-4d7a-9fd7-6a7385f88b20",
-      "Content": "Entities/Turrets/moneyturret/idle"
+      "Content": "Entities/Turrets/moneyturret/idle",
+      "IsDefered": true
     },
     {
       "ID": "aa60f60c-a792-425b-a225-5735e5a33cc9",
-      "Content": "Common/button"
+      "Content": "Common/button",
+      "IsDefered": true
     },
     {
       "ID": "12a9ad25-3e34-4398-9c61-6522c49f5dd8",
-      "Content": "Common/buttonClick"
+      "Content": "Common/buttonClick",
+      "IsDefered": true
     },
     {
       "ID": "5e7e1313-fa7c-4f71-9a6e-e2650a7af968",
-      "Content": "Common/buttonDisable"
+      "Content": "Common/buttonDisable",
+      "IsDefered": true
     },
     {
       "ID": "5b3e5e64-9c3d-4ba5-a113-b6a41a501c20",
-      "Content": "Common/buttonGreen"
+      "Content": "Common/buttonGreen",
+      "IsDefered": true
     },
 
     {
       "ID": "0ab3a089-b713-4853-aff6-8c7d8d565048",
-      "Content": "Common/buttonWide"
+      "Content": "Common/buttonWide",
+      "IsDefered": true
     },
     {
       "ID": "78bbfd61-b6de-416a-80ba-e53360881759",
-      "Content": "Common/buttonWideClick"
+      "Content": "Common/buttonWideClick",
+      "IsDefered": true
     },
     {
       "ID": "6fb75caf-80ca-4f03-a1bb-2485b48aefd8",
-      "Content": "Common/buttonWideDisable"
+      "Content": "Common/buttonWideDisable",
+      "IsDefered": true
     },
     {
       "ID": "86911ca2-ebf3-408c-98f9-6221d9a322bc",
-      "Content": "Common/buttonWideGreen"
+      "Content": "Common/buttonWideGreen",
+      "IsDefered": true
     },
 
     {
       "ID": "61bcf9c3-a78d-4521-8534-5690bdc2d6db",
-      "Content": "Common/buttonExtraWide"
+      "Content": "Common/buttonExtraWide",
+      "IsDefered": true
     },
 
     {
       "ID": "d86347e3-3834-4161-9bbe-0d761d1d27ae",
-      "Content": "Common/buttonSquare"
+      "Content": "Common/buttonSquare",
+      "IsDefered": true
     },
     {
       "ID": "2c220d3f-5e7a-44ec-b4da-459f104c1e4a",
-      "Content": "Common/buttonSquareClick"
+      "Content": "Common/buttonSquareClick",
+      "IsDefered": true
     },
 
     {
       "ID": "e5cb13c4-39e1-4906-b1d1-52e353fb0546",
-      "Content": "Views/GameSetupView/selectionBox"
+      "Content": "Views/GameSetupView/selectionBox",
+      "IsDefered": true
     },
     {
       "ID": "02f8c9e2-e4c0-4310-934a-62c84cbb7384",
-      "Content": "Views/GameSetupView/descriptionBox"
+      "Content": "Views/GameSetupView/descriptionBox",
+      "IsDefered": true
     }
   ],
   "TextureSets": [

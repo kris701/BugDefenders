@@ -25,11 +25,14 @@ namespace BugDefender.Core.Tests.Game.Models.Entities.Upgrades
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             var turretInstance = new TurretInstance(turretDef);
             var upgrade = turretDef.Upgrades.First(x => x.ID == upgradeID);
+            var before = turretInstance.ToString();
 
             // ACT
             upgrade.Apply(turretInstance);
 
             // ASSERT
+            Assert.IsTrue(turretInstance.HasUpgrades.Contains(upgradeID));
+            Assert.AreNotEqual(before, turretInstance.ToString());
         }
     }
 }

@@ -51,7 +51,14 @@ namespace BugDefender.Core
                     var campaign = ResourceManager.Campaigns.GetResource(g.CampaignID);
                     if (g.IsCompleted)
                     {
-                        OnGameOver?.Invoke(g.Stats, g, "Campaign Won!");
+                        if (!g.SeenIntro)
+                        {
+                            g.SeenIntro = true;
+                            UserManager.SaveGame(g);
+                            OnCutsceneStarted?.Invoke(campaign.CampaignOver, campaign.Speakers, g);
+                        }
+                        else
+                            OnGameOver?.Invoke(g.Stats, g, "Campaign Won!");
                     }
                     else if (g.ChapterID == Guid.Empty)
                     {
@@ -203,6 +210,7 @@ namespace BugDefender.Core
                     save.IsCompleted = true;
                     save.Context = null;
                     save.Stats.Credits += campaign.Reward;
+                    save.SeenIntro = false;
                     UserManager.SaveGame(save);
                     UserManager.CurrentUser.Credits += campaign.Reward;
                     UserManager.SaveUser();

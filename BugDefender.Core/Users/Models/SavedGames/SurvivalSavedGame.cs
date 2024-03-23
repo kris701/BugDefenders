@@ -14,5 +14,10 @@ namespace BugDefender.Core.Users.Models.SavedGames
             Date = date;
             Context = context;
         }
+
+        public override string ToString()
+        {
+            return $"(Survival) {Name}, {Context.Map.Name}, {Date}";
+        }
     }
 }

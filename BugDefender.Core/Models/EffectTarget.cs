@@ -1,12 +1,34 @@
-﻿using System.Text.Json;
+﻿using BugDefender.Core.Helpers;
+using System.Reflection;
+using System.Text.Json;
 
 namespace BugDefender.Core.Models
 {
     public class EffectTarget
     {
         public string Target { get; set; }
-        public JsonElement? Value { get; set; } = null;
-        public float Modifier { get; set; } = 1;
+        private JsonElement? _value = null;
+        public JsonElement? Value
+        {
+            get => _value;
+            set
+            {
+                if (Modifier != 1 && value != null)
+                    throw new Exception("Cannot have a modifier and value at the same time!");
+                _value = value;
+            }
+        }
+        private float _modifier = 1;
+        public float Modifier
+        {
+            get => _modifier;
+            set
+            {
+                if (Value != null && value != 1)
+                    throw new Exception("Cannot have a modifier and value at the same time!");
+                _modifier = value;
+            }
+        }
 
         public EffectTarget(string target)
         {
@@ -39,6 +61,74 @@ namespace BugDefender.Core.Models
             }
             _displayName = _displayName.Trim();
             return _displayName;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is EffectTarget other)
+            {
+                if (other.Target != Target) return false;
+                if (other.Modifier != Modifier) return false;
+                if (!other.Value.Equals(Value)) return false;
+                return true;
+            }
+            return false;
+        }
+
+        public override int GetHashCode() => HashCode.Combine(Target, Value, Modifier);
+
+        public void ApplyOnObject<U>(U item) where U : notnull => ExecuteActionOnProperty(item, ApplyEffect);
+        public void UnApplyOnObject<U>(U item) where U : notnull => ExecuteActionOnProperty(item, UnApplyEffect);
+        public void TryApplyOnObject<U>(U item) where U : notnull => TryExecuteActionOnProperty(item, ApplyEffect);
+        public void TryUnApplyOnObject<U>(U item) where U : notnull => TryExecuteActionOnProperty(item, UnApplyEffect);
+
+        private void ApplyEffect<U>(U item, PropertyInfo first)
+        {
+            var current = first.GetValue(item);
+            if (current == null)
+                throw new Exception("Unknown change attempted on object!");
+            if (Value != null)
+            {
+                var newValue = JsonSerializer.Deserialize((dynamic)Value, current.GetType());
+                first.SetValue(item, newValue);
+            }
+            else if (Modifier != 1)
+            {
+                var asFloat = Convert.ToSingle(current);
+                first.SetValue(item, Convert.ChangeType(asFloat * Modifier, current.GetType()));
+            }
+            else
+                throw new Exception("Unknown change attempted on object!");
+        }
+
+        private void UnApplyEffect<U>(U item, PropertyInfo first)
+        {
+            var current = first.GetValue(item);
+            if (current == null)
+                throw new Exception("Unknown change attempted on object!");
+            if (Modifier != 1)
+            {
+                var asFloat = Convert.ToSingle(current);
+                first.SetValue(item, Convert.ChangeType(asFloat / Modifier, current.GetType()));
+            }
+            else
+                throw new Exception("Unknown change attempted on object!");
+        }
+
+        private void ExecuteActionOnProperty<U>(U item, Action<object, PropertyInfo> action) where U : notnull
+        {
+            var target = ReflectionHelper.GetPropertyInstance(item, Target);
+            if (target == null)
+                throw new Exception("Invalid object selection!");
+            action(target.Item1, target.Item2);
+        }
+
+        private void TryExecuteActionOnProperty<U>(U item, Action<object, PropertyInfo> action) where U : notnull
+        {
+            var target = ReflectionHelper.GetPropertyInstance(item, Target);
+            if (target == null)
+                return;
+            action(target.Item1, target.Item2);
         }
     }
 }
