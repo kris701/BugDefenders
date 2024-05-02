@@ -54,13 +54,13 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 if (sender.Tag is MapDefinition map)
                 {
                     if (_selectedMapButton != null)
-                        _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                        _selectedMapButton.FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                     _selectedMapButton = button;
-                    _selectedMapButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    _selectedMapButton.FillColor = Parent.Textures.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                     _selectedMap = map;
-                    _mapPreviewTile.FillColor = Parent.TextureController.GetTexture(map.ID);
+                    _mapPreviewTile.FillColor = Parent.Textures.GetTexture(map.ID);
                     _mapNameLabel.Text = map.Name;
                     var sb = new StringBuilder();
                     sb.AppendLine(map.Description);
@@ -84,10 +84,10 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 if (sender.Tag is GameStyleDefinition gameStyle)
                 {
                     if (_selectedGameStyleButton != null)
-                        _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                        _selectedGameStyleButton.FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                     _selectedGameStyleButton = button;
-                    _selectedGameStyleButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    _selectedGameStyleButton.FillColor = Parent.Textures.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                     var sb = new StringBuilder();
                     sb.AppendLine(gameStyle.Description);

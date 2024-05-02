@@ -6,6 +6,7 @@ using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.CutsceneView
 {
@@ -27,7 +28,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Y = 0,
                 Width = 1920,
                 Height = 1080,
-                FillColor = Parent.TextureController.GetTexture(_cutscene.ID)
+                FillColor = Parent.Textures.GetTexture(_cutscene.ID)
             });
             AddControl(0, new TileControl()
             {
@@ -35,7 +36,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Y = 30,
                 Width = 1920 - 60,
                 Height = 350,
-                FillColor = Parent.TextureController.GetTexture(new Guid("6344ec42-5f76-4c44-9e03-11dd4d69c1d8"))
+                FillColor = Parent.Textures.GetTexture(new Guid("6344ec42-5f76-4c44-9e03-11dd4d69c1d8"))
             });
 
             _previousSpeaker = _cutscene.Conversation[_conversationIndex].SpeakerID;
@@ -45,7 +46,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Y = 50 + 256 + 10,
                 Width = 256,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White,
                 Text = _speakers[_cutscene.Conversation[_conversationIndex].SpeakerID],
                 IsVisible = true
@@ -57,7 +58,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Y = 50,
                 Width = 256,
                 Height = 256,
-                FillColor = Parent.TextureController.GetTexture(_cutscene.Conversation[_conversationIndex].SpeakerID)
+                FillColor = Parent.Textures.GetTexture(_cutscene.Conversation[_conversationIndex].SpeakerID)
             };
             AddControl(0, _leftSpeaker);
 
@@ -68,7 +69,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Y = 50,
                 Width = 1920 - 256 - 256 - 20 - 100,
                 Height = 256,
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
                 Text = "",
                 IsVisible = true
@@ -82,7 +83,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Y = 50 + 256 + 10,
                 Width = 256,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White,
                 IsVisible = false
             };
@@ -108,7 +109,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });

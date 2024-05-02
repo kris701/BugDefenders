@@ -8,6 +8,7 @@ using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.ChallengeView
 {
@@ -19,9 +20,10 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
         {
             BasicMenuHelper.GenerateBaseMenu(
                 this,
-                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Todays Challenges",
-                $"{_remainingChallenges.Count} challenges for today. Time until reroll:");
+                $"{_remainingChallenges.Count} challenges for today. Time until reroll:",
+                Parent.Fonts);
 
             _waitLabel = new LabelControl()
             {
@@ -29,7 +31,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 X = 1100,
                 Height = 35,
                 Width = 400,
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White
             };
             AddControl(0, _waitLabel);
@@ -38,7 +40,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 200,
                 Height = 50,
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 Text = "Overwrites existing challenge save!",
                 FontColor = Color.Red,
                 IsVisible = Parent.UserManager.SaveExists("Latest Challenge")
@@ -69,7 +71,7 @@ namespace BugDefender.OpenGL.Screens.ChallengeView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });

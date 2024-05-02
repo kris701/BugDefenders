@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.PermaBuffsView
 {
@@ -22,9 +23,10 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
         {
             BasicMenuHelper.GenerateBaseMenu(
                 this,
-                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Permanent Buffs",
-                $"Currently {Parent.UserManager.CurrentUser.Buffs.Count} buffs are applied. You have {Parent.UserManager.CurrentUser.Credits} credits.");
+                $"Currently {Parent.UserManager.CurrentUser.Buffs.Count} buffs are applied. You have {Parent.UserManager.CurrentUser.Credits} credits.",
+                Parent.Fonts);
 
             var ids = ResourceManager.Buffs.GetResources();
             var sorted = new List<BuffDefinition>();
@@ -78,7 +80,7 @@ namespace BugDefender.OpenGL.Screens.PermaBuffsView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });

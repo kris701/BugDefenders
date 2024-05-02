@@ -64,7 +64,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _game.TurretsModule.OnTurretIdle += OnTurretIdling;
             _game.OnPlayerDamaged += () =>
             {
-                Parent.AudioController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
+                Parent.Audio.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
                 if (_hurtGameAreaTile != null)
                 {
                     _hurtGameAreaTile.IsVisible = true;
@@ -103,7 +103,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _backgroundTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(100), OnUpdateBackground);
             _gameTasksTimer = new GameTimer(TimeSpan.FromMilliseconds(33), OnUpdateGame);
             Initialize();
-            Parent.AudioController.PlaySong(ID);
+            Parent.Audio.PlaySong(ID);
 
 #if DEBUG && DRAWBLOCKINGTILES
             foreach (var blockingTile in _game.Context.Map.BlockingTiles)
@@ -146,7 +146,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 var control = _turretUpdater.GetItem(_selectedTurret);
                 if (control != null)
-                    Parent.AudioController.StopSoundEffect(control.CurrentSoundEffect);
+                    Parent.Audio.StopSoundEffect(control.CurrentSoundEffect);
                 _game.TurretsModule.SellTurret(_selectedTurret);
                 _selectedTurret = null;
                 _unselectTurret = true;
@@ -162,8 +162,8 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 {
                     var soundDef = Parent.ResourcePackController.GetSoundEffects<ProjectileEntityDefinition>(projectile.DefinitionID);
                     if (soundDef.OnDestroyed != Guid.Empty)
-                        Parent.AudioController.PlaySoundEffectOnce(soundDef.OnDestroyed);
-                    var effect = Parent.TextureController.GetTextureSet(entityDef.OnDestroyed);
+                        Parent.Audio.PlaySoundEffectOnce(soundDef.OnDestroyed);
+                    var effect = Parent.Textures.GetTextureSet(entityDef.OnDestroyed);
                     _effects.Add(new EffectEntity(entityDef.OnDestroyed, TimeSpan.FromMilliseconds(250), effect)
                     {
                         X = projectile.CenterX - effect.GetLoadedContent()[0].Width / 2,
@@ -191,7 +191,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             var entityDef = Parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(parent.Enemy.DefinitionID);
             if (entityDef.OnDeath != Guid.Empty)
             {
-                var effect = Parent.TextureController.GetTextureSet(entityDef.OnDeath);
+                var effect = Parent.Textures.GetTextureSet(entityDef.OnDeath);
                 _effects.Add(new EffectEntity(entityDef.OnDeath, TimeSpan.FromMilliseconds(250), effect)
                 {
                     X = parent.Enemy.CenterX - effect.GetLoadedContent()[0].Width / 2,
@@ -258,7 +258,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 if (_game.TurretsModule.CanUpgradeTurret(_selectedTurret, upg.ID) == TurretsModule.CanUpgradeResult.Success)
                 {
-                    Parent.AudioController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
+                    Parent.Audio.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
                     _game.TurretsModule.UpgradeTurret(_selectedTurret, upg.ID);
                     var control = _turretUpdater.GetItem(_selectedTurret);
                     if (control != null)
@@ -274,12 +274,12 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _game.Running = !_game.Running;
             if (_game.Running)
             {
-                Parent.AudioController.ResumeSounds();
+                Parent.Audio.ResumeSounds();
                 parent.Text = "Pause";
             }
             else
             {
-                Parent.AudioController.PauseSounds();
+                Parent.Audio.PauseSounds();
                 parent.Text = "Start";
             }
         }
@@ -438,7 +438,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         private TileControl CreateNewDeadEnemyControl(EnemyInstance entity)
         {
             var animation = Parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(entity.DefinitionID).OnCreate;
-            var textureSet = Parent.TextureController.GetTextureSet(animation);
+            var textureSet = Parent.Textures.GetTextureSet(animation);
             return new TileControl()
             {
                 FillColor = textureSet.GetLoadedContent()[0],
@@ -457,10 +457,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 var entityDef = Parent.ResourcePackController.GetSoundEffects<ProjectileEntityDefinition>(entity.DefinitionID);
                 if (entityDef.OnCreate != Guid.Empty)
-                    Parent.AudioController.PlaySoundEffectOnce(entityDef.OnCreate);
+                    Parent.Audio.PlaySoundEffectOnce(entityDef.OnCreate);
             }
             var animation = Parent.ResourcePackController.GetAnimation<ProjectileEntityDefinition>(entity.DefinitionID).OnCreate;
-            var textureSet = Parent.TextureController.GetTextureSet(animation);
+            var textureSet = Parent.Textures.GetTextureSet(animation);
             return new AnimatedTileControl()
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),
@@ -480,7 +480,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 var entityDef = Parent.ResourcePackController.GetSoundEffects<EffectEntityDefinition>(entity.ID);
                 if (entityDef.OnCreate != Guid.Empty)
-                    Parent.AudioController.PlaySoundEffectOnce(entityDef.OnCreate);
+                    Parent.Audio.PlaySoundEffectOnce(entityDef.OnCreate);
             }
             var newTile = new AnimatedTileControl()
             {
@@ -532,14 +532,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (control == null)
                 return;
             control.SetTurretAnimation(Parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
-            Parent.AudioController.StopSoundEffect(control.CurrentSoundEffect);
-            control.CurrentSoundEffect = Parent.AudioController.PlaySoundEffect(Parent.ResourcePackController.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
+            Parent.Audio.StopSoundEffect(control.CurrentSoundEffect);
+            control.CurrentSoundEffect = Parent.Audio.PlaySoundEffect(Parent.ResourcePackController.GetSoundEffects<TurretEntityDefinition>(turret.DefinitionID).OnShoot);
             if (turret.TurretInfo is AOETurretDefinition def)
             {
                 var entityDef = Parent.ResourcePackController.GetAnimation<EffectEntityDefinition>(turret.DefinitionID);
                 if (entityDef.OnCreate != Guid.Empty)
                 {
-                    var effect = Parent.TextureController.GetTextureSet(entityDef.OnCreate);
+                    var effect = Parent.Textures.GetTextureSet(entityDef.OnCreate);
                     _effects.Add(new EffectEntity(entityDef.OnCreate, TimeSpan.FromSeconds(1), effect)
                     {
                         X = turret.CenterX - def.Range,
@@ -556,7 +556,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (control == null)
                 return;
             control.SetTurretAnimation(Parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(turret.DefinitionID).OnIdle);
-            Parent.AudioController.StopSoundEffect(control.CurrentSoundEffect);
+            Parent.Audio.StopSoundEffect(control.CurrentSoundEffect);
         }
 
         private void UpdateWithinGameField(MouseState mouseState, FloatPoint relativeMousePosition, KeyboardState keyState)
@@ -676,7 +676,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _buyingTurret = def;
                 var animation = Parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(def.ID).OnIdle;
-                var textureSet = Parent.TextureController.GetTextureSet(animation);
+                var textureSet = Parent.Textures.GetTextureSet(animation);
                 _buyingPreviewTile.TileSet = textureSet.GetLoadedContent();
                 _buyingPreviewTile.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
                 _buyingPreviewTile.Width = def.Size;
@@ -701,7 +701,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (_game.Context.CanSave())
             {
                 Parent.UserManager.SaveGame(_game.GameSave);
-                Parent.AudioController.StopSounds();
+                Parent.Audio.StopSounds();
                 SwitchView(new MainMenu.MainMenuView(Parent));
             }
         }
@@ -711,7 +711,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             if (!_gameOverCheck)
             {
                 _gameOverCheck = true;
-                Parent.AudioController.StopSounds();
+                Parent.Audio.StopSounds();
             }
         }
 

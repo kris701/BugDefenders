@@ -3,6 +3,7 @@ using MonoGame.OpenGL.Formatter.Controls;
 using MonoGame.OpenGL.Formatter.Helpers;
 using Microsoft.Xna.Framework;
 using System;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -16,14 +17,14 @@ namespace BugDefender.OpenGL.Views.GameView
             Height = 330;
             Children.Add(new TileControl()
             {
-                FillColor = parent.TextureController.GetTexture(new Guid("90447608-bd7a-478c-9bfd-fddb26c731b7")),
+                FillColor = parent.Textures.GetTexture(new Guid("90447608-bd7a-478c-9bfd-fddb26c731b7")),
                 Height = Height,
                 Width = Width
             });
             Children.Add(new LabelControl()
             {
                 Text = "Enemy Stats",
-                Font = BasicFonts.GetFont(10),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 Y = 5,
                 Height = 35,
@@ -32,7 +33,7 @@ namespace BugDefender.OpenGL.Views.GameView
 
             _enemyStatsTextbox = new TextboxControl()
             {
-                Font = BasicFonts.GetFont(8),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx8),
                 FontColor = Color.White,
                 Text = "Select an Enemy",
                 X = 10,

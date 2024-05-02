@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
 {
@@ -36,9 +37,10 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
         {
             BasicMenuHelper.GenerateBaseMenu(
                 this,
-                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Survival Game Setup",
-                "Select a map and a gamestyle to start.");
+                "Select a map and a gamestyle to start.",
+                Parent.Fonts);
 
             SetupPreviewPanel(50, 225, 900, 750);
             SetupMapsView(965, 225, 445, 750);
@@ -56,7 +58,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
@@ -76,7 +78,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Y = y,
                 Height = height,
                 Width = width,
-                FillColor = Parent.TextureController.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
+                FillColor = Parent.Textures.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
             });
             _mapPreviewTile = new TileControl()
             {
@@ -95,7 +97,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             _mapNameLabel = new LabelControl()
             {
                 Text = "Select A Map",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 X = x + 50,
                 Y = y + 20,
                 Height = 50,
@@ -106,7 +108,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             var boxHeight = height / 2;
             _mapDescriptionTextbox = new TextboxControl()
             {
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 X = x + (height - 300) + 75,
                 Y = y + 20,
                 Height = boxHeight - 30,
@@ -116,7 +118,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             AddControl(1, _mapDescriptionTextbox);
             _gameStyleDescriptionTextbox = new TextboxControl()
             {
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 X = x + (height - 300) + 75,
                 Y = y + 10 + boxHeight,
                 Height = boxHeight - 30,
@@ -127,7 +129,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
             _totalDifficultyLabel = new LabelControl()
             {
                 Text = "Total Difficulty: ...",
-                Font = BasicFonts.GetFont(12),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                 X = x + 50,
                 Y = y + 70,
                 Height = 20,
@@ -140,7 +142,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Y = y + 100,
                 Height = 50,
                 Width = height - 300,
-                Font = BasicFonts.GetFont(12),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                 Text = "New Save Name",
                 FontColor = Color.White
             });
@@ -151,13 +153,13 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Y = y + 150,
                 Height = 50,
                 Width = height - 300,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "New Game",
                 Limit = 25,
                 FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.Textures.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
             };
             _gameSaveName.OnKeyDown += NameKeyDown;
             AddControl(1, _gameSaveName);
@@ -167,7 +169,7 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Y = y + 200,
                 Height = 50,
                 Width = height - 300,
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 Text = "Overwrites existing save!",
                 FontColor = Color.Red,
                 IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
@@ -184,11 +186,11 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Y = y,
                 Height = height,
                 Width = width,
-                FillColor = Parent.TextureController.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
+                FillColor = Parent.Textures.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
             AddControl(1, new LabelControl()
             {
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Maps",
                 X = x,
                 Y = y + 10,
@@ -204,9 +206,9 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 var map = ResourceManager.Maps.GetResource(id);
                 controlList.Add(new BugDefenderButtonControl(Parent, SelectMap_Click)
                 {
-                    FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    Font = BasicFonts.GetFont(12),
+                    FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = Parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                     Text = $"{map.Name}",
                     FontColor = Color.White,
                     Height = 50,
@@ -239,11 +241,11 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                 Y = y,
                 Height = height,
                 Width = width,
-                FillColor = Parent.TextureController.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
+                FillColor = Parent.Textures.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
             AddControl(1, new LabelControl()
             {
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Game Styles",
                 X = x,
                 Y = y + 10,
@@ -261,9 +263,9 @@ namespace BugDefender.OpenGL.Screens.SurvivalGameSetupView
                     continue;
                 controlList.Add(new BugDefenderButtonControl(Parent, SelectGameStyle_Click)
                 {
-                    FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    Font = BasicFonts.GetFont(12),
+                    FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = Parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                     Text = $"{gameStyle.Name}",
                     FontColor = Color.White,
                     Height = 50,

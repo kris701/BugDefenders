@@ -11,7 +11,7 @@ namespace BugDefender.OpenGL.Screens.SplashScreen
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
+                FillColor = Parent.Textures.GetTexture(new Guid("a23f20ed-299a-4f94-b398-3dd00ff63bd5")),
                 Width = IWindow.BaseScreenSize.X,
                 Height = IWindow.BaseScreenSize.Y
             });

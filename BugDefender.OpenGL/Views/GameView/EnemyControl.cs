@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 );
 
             var animation = parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(enemy.DefinitionID).OnCreate;
-            var textureSet = parent.TextureController.GetTextureSet(animation);
+            var textureSet = parent.Textures.GetTextureSet(animation);
             _enemyTile = new AnimatedTileControl()
             {
                 FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime),

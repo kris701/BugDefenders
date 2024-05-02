@@ -4,6 +4,7 @@ using MonoGame.OpenGL.Formatter.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Text;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.AchivementsView
 {
@@ -23,12 +24,12 @@ namespace BugDefender.OpenGL.Views.AchivementsView
             if (isUnlocked)
             {
                 if (parent.UserManager.CurrentUser.Achivements.Contains(achivement.ID))
-                    backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    backgroundTile.FillColor = parent.Textures.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
                 else
-                    backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                    backgroundTile.FillColor = parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
             }
             else
-                backgroundTile.FillColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
+                backgroundTile.FillColor = parent.Textures.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8"));
             Children.Add(backgroundTile);
             Children.Add(new TileControl()
             {
@@ -36,7 +37,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 X = 40,
                 Width = 75,
                 Height = 75,
-                FillColor = parent.TextureController.GetTexture(achivement.ID)
+                FillColor = parent.Textures.GetTexture(achivement.ID)
             });
             Children.Add(new LabelControl()
             {
@@ -45,7 +46,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 Width = 350,
                 Height = 25,
                 Text = achivement.Name,
-                Font = BasicFonts.GetFont(16),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
             });
             Children.Add(new TextboxControl()
@@ -54,7 +55,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 Y = 50,
                 Width = 350,
                 Height = 70,
-                Font = BasicFonts.GetFont(12),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx12),
                 FontColor = Color.White,
                 Text = achivement.Description
             });
@@ -68,7 +69,7 @@ namespace BugDefender.OpenGL.Views.AchivementsView
                 Y = 20,
                 Width = 350,
                 Height = 100,
-                Font = BasicFonts.GetFont(12),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx12),
                 FontColor = Color.White,
                 Text = sb.ToString()
             });

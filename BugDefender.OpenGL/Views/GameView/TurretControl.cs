@@ -6,6 +6,7 @@ using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using Microsoft.Xna.Framework;
 using System;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -29,12 +30,12 @@ namespace BugDefender.OpenGL.Views.GameView
             {
                 X = (Width - 35) / 2,
                 Y = (Height - 35) / 2,
-                FillColor = parent.TextureController.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d")),
+                FillColor = parent.Textures.GetTexture(new Guid("ba2a23be-8bf7-4307-9009-8ed330ac5b7d")),
                 Width = 35,
                 Height = 35,
             });
             _currentAnimation = parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(instance.DefinitionID).OnIdle;
-            var textureSet = parent.TextureController.GetTextureSet(_currentAnimation);
+            var textureSet = parent.Textures.GetTextureSet(_currentAnimation);
             _turretControl = new BugDefenderAnmiatedButtonControl(parent, clicked)
             {
                 TileSet = textureSet.GetLoadedContent(),
@@ -50,7 +51,7 @@ namespace BugDefender.OpenGL.Views.GameView
             _turretLevelControl = new LabelControl()
             {
                 X = Width,
-                Font = BasicFonts.GetFont(10),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 IsVisible = Instance.HasUpgrades.Count > 0,
                 Text = $"{Instance.HasUpgrades.Count}"
@@ -63,7 +64,7 @@ namespace BugDefender.OpenGL.Views.GameView
             if (id == _currentAnimation)
                 return;
             _currentAnimation = id;
-            var textureSet = _parent.TextureController.GetTextureSet(id);
+            var textureSet = _parent.Textures.GetTextureSet(id);
             _turretControl.TileSet = textureSet.GetLoadedContent();
             _turretControl.Frame = 0;
             _turretControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);

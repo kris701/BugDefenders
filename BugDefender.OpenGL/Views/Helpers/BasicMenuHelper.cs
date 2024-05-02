@@ -7,12 +7,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
+using MonoGame.OpenGL.Formatter.Fonts;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.Helpers
 {
     public static class BasicMenuHelper
     {
-        public static void GenerateBaseMenu(IView view, Texture2D background, string title, string subtitle)
+        public static void GenerateBaseMenu(IView view, Texture2D background, string title, string subtitle, FontController fonts)
         {
             view.AddControl(0, new TileControl()
             {
@@ -28,7 +30,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 Width = 800,
                 Text = title,
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(48)
+                Font = fonts.GetFont(FontSizes.Ptx48)
             });
             view.AddControl(0, new LabelControl()
             {
@@ -37,7 +39,7 @@ namespace BugDefender.OpenGL.Views.Helpers
                 Height = 35,
                 Width = 700,
                 Text = subtitle,
-                Font = BasicFonts.GetFont(16),
+                Font = fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White
             });
         }
@@ -51,11 +53,11 @@ namespace BugDefender.OpenGL.Views.Helpers
                 Width = 200,
                 Height = 50,
                 Text = text,
-                Font = BasicFonts.GetFont(24),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White,
-                FillColor = parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                FillColor = parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = parent.Textures.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
             };
         }
 
@@ -68,11 +70,11 @@ namespace BugDefender.OpenGL.Views.Helpers
                 Width = 200,
                 Height = 50,
                 Text = text,
-                Font = BasicFonts.GetFont(24),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White,
-                FillColor = parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                FillColor = parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = parent.Textures.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
             };
         }
     }

@@ -5,6 +5,7 @@ using MonoGame.OpenGL.Formatter.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using System;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -20,14 +21,14 @@ namespace BugDefender.OpenGL.Views.GameView
 
             Turret = turret;
             var currentAnimation = parent.ResourcePackController.GetAnimation<TurretEntityDefinition>(turret.ID).OnIdle;
-            var textureSet = parent.TextureController.GetTextureSet(currentAnimation);
+            var textureSet = parent.Textures.GetTextureSet(currentAnimation);
             Children.Add(new TileControl()
             {
                 X = 0,
                 Y = 0,
                 Width = Width,
                 Height = Height,
-                FillColor = parent.TextureController.GetTexture(new Guid("5c993d08-bc73-433c-a09b-0b944ac2f425")),
+                FillColor = parent.Textures.GetTexture(new Guid("5c993d08-bc73-433c-a09b-0b944ac2f425")),
             });
             Children.Add(new TileControl()
             {
@@ -42,7 +43,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 X = 70,
                 Y = 20,
                 Width = Width - 70,
-                Font = BasicFonts.GetFont(10),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx10),
                 Text = turret.Name
             });
             _turretButton = new BugDefenderButtonControl(parent, buy)
@@ -52,11 +53,11 @@ namespace BugDefender.OpenGL.Views.GameView
                 Width = Width - 80,
                 Height = 30,
                 IsEnabled = false,
-                Font = BasicFonts.GetFont(10),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx10),
                 Text = $"Unlocked at wave {turret.AvailableAtWave}",
-                FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = parent.Textures.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Tag = turret
             };
             Children.Add(_turretButton);

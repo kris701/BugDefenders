@@ -6,6 +6,7 @@ using MonoGame.OpenGL.Formatter.Views;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.Helpers
 {
@@ -18,7 +19,7 @@ namespace BugDefender.OpenGL.Views.Helpers
         public IView Parent { get; set; }
 
         public float ButtonSize { get; set; } = 50;
-        public int ButtonFontSize { get; set; } = 16;
+        public Guid ButtonFontSize { get; set; } = FontSizes.Ptx16;
         public float LeftButtonX { get; set; } = 0;
         public float LeftButtonY { get; set; } = 0;
         public float RightButtonX { get; set; } = 0;
@@ -55,11 +56,11 @@ namespace BugDefender.OpenGL.Views.Helpers
                 UpdatePages();
             })
             {
-                FillColor = Parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FillDisabledColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = Parent.Parent.Textures.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.Parent.Textures.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillDisabledColor = Parent.Parent.Textures.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(ButtonFontSize),
+                Font = Parent.Parent.Fonts.GetFont(ButtonFontSize),
                 Text = $"<",
                 X = LeftButtonX,
                 Y = LeftButtonY,
@@ -79,11 +80,11 @@ namespace BugDefender.OpenGL.Views.Helpers
                 UpdatePages();
             })
             {
-                FillColor = Parent.Parent.TextureController.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
-                FillClickedColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
-                FillDisabledColor = Parent.Parent.TextureController.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillColor = Parent.Parent.Textures.GetTexture(new Guid("d86347e3-3834-4161-9bbe-0d761d1d27ae")),
+                FillClickedColor = Parent.Parent.Textures.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
+                FillDisabledColor = Parent.Parent.Textures.GetTexture(new Guid("2c220d3f-5e7a-44ec-b4da-459f104c1e4a")),
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(ButtonFontSize),
+                Font = Parent.Parent.Fonts.GetFont(ButtonFontSize),
                 Text = $">",
                 X = RightButtonX,
                 Y = RightButtonY,

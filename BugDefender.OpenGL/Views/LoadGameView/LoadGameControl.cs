@@ -4,6 +4,7 @@ using MonoGame.OpenGL.Formatter.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.LoadGameView
 {
@@ -19,7 +20,7 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Y = 0,
                 Width = 900,
                 Height = 140,
-                FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
+                FillColor = parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"))
             });
             Children.Add(new LabelControl()
             {
@@ -27,7 +28,7 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Y = 20,
                 Width = 800,
                 Height = 40,
-                Font = BasicFonts.GetFont(12),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx12),
                 Text = $"{saveGame}",
                 FontColor = Color.White
             });
@@ -45,12 +46,12 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Y = 70,
                 Width = 400,
                 Height = 40,
-                Font = BasicFonts.GetFont(12),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx12),
                 Text = continueText,
                 FontColor = Color.White,
-                FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = parent.Textures.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Tag = saveGame,
                 IsEnabled = isEnabled
             });
@@ -60,11 +61,11 @@ namespace BugDefender.OpenGL.Views.LoadGameView
                 Y = 70,
                 Width = 400,
                 Height = 40,
-                Font = BasicFonts.GetFont(12),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx12),
                 Text = "Delete",
                 FontColor = Color.Red,
-                FillColor = parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillColor = parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
                 Tag = saveGame
             });
         }

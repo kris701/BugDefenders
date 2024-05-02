@@ -55,7 +55,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                     {
                         _leftName.Text = _speakers[converation.SpeakerID];
                         _leftName.IsVisible = true;
-                        _leftSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
+                        _leftSpeaker.FillColor = Parent.Textures.GetTexture(converation.SpeakerID);
                         _leftSpeaker.IsVisible = true;
 
                         _rightName.IsVisible = false;
@@ -65,7 +65,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                     {
                         _rightName.Text = _speakers[converation.SpeakerID];
                         _rightName.IsVisible = true;
-                        _rightSpeaker.FillColor = Parent.TextureController.GetTexture(converation.SpeakerID);
+                        _rightSpeaker.FillColor = Parent.Textures.GetTexture(converation.SpeakerID);
                         _rightSpeaker.IsVisible = true;
 
                         _leftName.IsVisible = false;
@@ -91,7 +91,7 @@ namespace BugDefender.OpenGL.Screens.CutsceneView
                     _middleText.Text = _targetText.Substring(0, _targetTextIndex);
 
                     if (_targetTextIndex % 2 == 0)
-                        Parent.AudioController.PlaySoundEffectOnce(new Guid("a741f37c-ad92-43f7-9a0c-e215d26e6bc7"));
+                        Parent.Audio.PlaySoundEffectOnce(new Guid("a741f37c-ad92-43f7-9a0c-e215d26e6bc7"));
                 }
             }
         }

@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.GameScreen
 {
@@ -54,16 +55,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("32b08b60-c8b9-450a-90b3-73086261e87f")),
+                FillColor = Parent.Textures.GetTexture(new Guid("32b08b60-c8b9-450a-90b3-73086261e87f")),
                 Width = IWindow.BaseScreenSize.X,
                 Height = IWindow.BaseScreenSize.Y
             });
 
             SetupGameField(_gameArea.X, _gameArea.Y, _gameArea.Width, _gameArea.Height);
             SetupGameControlsField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y, 320, 160);
-
             SetupBaseGameField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y, 320, 160);
-
             SetupPurchasingField(_gameArea.X + _gameArea.Width + 10 + 330, _gameArea.Y + 160, 320, 570);
             SetupUpgradeField(_gameArea.X + _gameArea.Width + 10, _gameArea.Y + 160, 320, 570);
             SetupNextEnemyPanel(_gameArea.X, _gameArea.Y + _gameArea.Height + 5, _gameArea.Width, 110);
@@ -97,7 +96,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 AddControl(200, new LabelControl()
                 {
                     Text = $"Cheats On!",
-                    Font = BasicFonts.GetFont(16),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                     FontColor = Color.HotPink,
                     X = _gameArea.X + 40,
                     Y = _gameArea.Y + 10,
@@ -117,7 +116,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 })
                 {
                     Text = $"Complete!",
-                    Font = BasicFonts.GetFont(16),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                     FontColor = Color.HotPink,
                     X = 20,
                     Y = 20,
@@ -133,7 +132,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(50, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(_game.Context.Map.ID),
+                FillColor = Parent.Textures.GetTexture(_game.Context.Map.ID),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -141,7 +140,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             AddControl(100, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("86f37f1c-921f-484a-98da-4b0790f51d70")),
+                FillColor = Parent.Textures.GetTexture(new Guid("86f37f1c-921f-484a-98da-4b0790f51d70")),
                 X = xOffset - 50,
                 Y = yOffset - 50,
                 Height = height + 100,
@@ -149,7 +148,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             });
             _hurtGameAreaTile = new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("3715b90d-7cc7-4528-99fc-84c8497d06c1")),
+                FillColor = Parent.Textures.GetTexture(new Guid("3715b90d-7cc7-4528-99fc-84c8497d06c1")),
                 X = xOffset - 50,
                 Y = yOffset - 50,
                 Height = height + 100,
@@ -172,7 +171,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(101, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
+                FillColor = Parent.Textures.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -181,7 +180,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _scoreLabel = new LabelControl()
             {
                 Text = $"Wave 0, Score 0, HP: 50",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 X = xOffset + 5,
                 Y = yOffset + 5,
@@ -192,7 +191,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _moneyLabel = new LabelControl()
             {
                 Text = $"Money: {_game.Context.Money}$",
-                Font = BasicFonts.GetFont(12),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                 FontColor = Color.White,
                 X = xOffset + 5,
                 Y = yOffset + 30,
@@ -203,10 +202,10 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             AddControl(101, new BugDefenderButtonControl(Parent, clicked: StartButton_Click)
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 Text = $"Pause",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 X = xOffset + 10,
                 Y = yOffset + 60,
@@ -222,11 +221,11 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 }
                 )
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillDisabledColor = Parent.Textures.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
                 Text = $"Save and Exit",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 X = xOffset + 110,
                 Y = yOffset + 60,
@@ -238,14 +237,14 @@ namespace BugDefender.OpenGL.Screens.GameScreen
 
             AddControl(101, new BugDefenderButtonControl(Parent, clicked: AutoRunButton_Click)
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 X = xOffset + 10,
                 Y = yOffset + 90,
                 Height = 30,
                 Width = width - 20,
                 Text = $"[ ] Auto-Wave",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White
             });
 
@@ -253,13 +252,13 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 _game.EnemiesModule.QueueEnemies();
                 if (_game.Context.GameStyle.MoneyPrWave > 0 || _game.Context.Turrets.Any(x => x.TurretInfo is InvestmentTurretDefinition))
-                    Parent.AudioController.PlaySoundEffectOnce(new Guid("e6908fa1-85b3-4f18-9bf0-cc4fa97a29c1"));
+                    Parent.Audio.PlaySoundEffectOnce(new Guid("e6908fa1-85b3-4f18-9bf0-cc4fa97a29c1"));
             })
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 Text = $"Send Wave",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 X = xOffset + 10,
                 Y = yOffset + 120,
@@ -274,7 +273,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(101, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
+                FillColor = Parent.Textures.GetTexture(new Guid("c20d95f4-517c-4fbd-aa25-115ea05539de")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -286,7 +285,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(101, new LabelControl()
             {
                 Text = title,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White,
                 X = xOffset,
                 Y = yOffset + 15,
@@ -296,7 +295,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _playtimeLabel = new LabelControl()
             {
                 Text = "Game Time: ",
-                Font = BasicFonts.GetFont(12),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                 FontColor = Color.White,
                 X = xOffset,
                 Y = yOffset + 45,
@@ -319,7 +318,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             _gameInfoTextbox = new TextboxControl()
             {
                 Text = sb.ToString(),
-                Font = BasicFonts.GetFont(8),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx8),
                 FontColor = Color.White,
                 X = xOffset,
                 Y = yOffset + 75,
@@ -334,7 +333,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(101, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
+                FillColor = Parent.Textures.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -343,7 +342,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(101, new LabelControl()
             {
                 Text = "Turrets",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
                 X = xOffset,
                 Y = yOffset + 5,
@@ -369,7 +368,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 ItemsPrPage = 7,
                 ButtonSize = 25,
-                ButtonFontSize = 10,
+                ButtonFontSize = FontSizes.Ptx10,
                 LeftButtonX = 5,
                 LeftButtonY = -25,
                 RightButtonX = width - 50,
@@ -408,7 +407,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(101, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
+                FillColor = Parent.Textures.GetTexture(new Guid("98e37f25-6313-4e41-8805-2eabcde084ff")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -417,7 +416,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(101, new LabelControl()
             {
                 Text = "Upgrades",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
                 X = xOffset,
                 Y = yOffset,
@@ -437,7 +436,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             {
                 ItemsPrPage = 3,
                 ButtonSize = 25,
-                ButtonFontSize = 10,
+                ButtonFontSize = FontSizes.Ptx10,
                 Margin = 20,
                 LeftButtonX = 5,
                 LeftButtonY = -25,
@@ -458,7 +457,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
         {
             AddControl(101, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("2712c649-3e74-44ca-b8a9-c3032aba217e")),
+                FillColor = Parent.Textures.GetTexture(new Guid("2712c649-3e74-44ca-b8a9-c3032aba217e")),
                 X = xOffset,
                 Y = yOffset,
                 Height = height,
@@ -467,7 +466,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
             AddControl(101, new LabelControl()
             {
                 Text = "Next Enemies",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 X = xOffset,
                 Y = yOffset,

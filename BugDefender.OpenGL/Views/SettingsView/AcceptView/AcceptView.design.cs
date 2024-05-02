@@ -7,6 +7,7 @@ using BugDefender.OpenGL.Views.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
 {
@@ -19,7 +20,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                FillColor = Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = IWindow.BaseScreenSize.X,
                 Height = IWindow.BaseScreenSize.Y
             });
@@ -32,7 +33,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 Width = 800,
                 Text = "Accept Changes?",
                 FontColor = Color.White,
-                Font = BasicFonts.GetFont(48)
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx48)
             });
             AddControl(0, new LabelControl()
             {
@@ -41,7 +42,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 Height = 35,
                 Width = 700,
                 Text = $"Settings will reset in 10 seconds otherwise.",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White
             });
             _timeLeftLabel = new LabelControl()
@@ -49,7 +50,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 500,
                 Text = "10 seconds left",
-                Font = BasicFonts.GetFont(48),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx48),
                 FontColor = Color.Red
             };
             AddControl(0, _timeLeftLabel);
@@ -64,7 +65,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView.AcceptView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });

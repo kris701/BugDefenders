@@ -8,7 +8,6 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
     public class NotificationBackroundWorker : BaseBackroundWorker
     {
-        public override Guid ID { get; } = new Guid("50249fa6-d417-435e-be97-910940531f13");
         public TimeSpan HoldTime { get; set; } = TimeSpan.FromSeconds(4);
         public float Speed { get; set; } = 3;
         public List<INotificationHandle> Handles { get; set; } = new List<INotificationHandle>();
@@ -56,7 +55,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
                     {
                         X = 0,
                         Y = _currentY,
-                        FillColor = Parent.TextureController.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"))
+                        FillColor = Parent.Textures.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"))
                     };
                     _notification.Initialize();
                     _currentMoveState = MoveState.Up;

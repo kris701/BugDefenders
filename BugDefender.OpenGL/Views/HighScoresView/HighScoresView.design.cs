@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.HighScoresView
 {
@@ -19,9 +20,10 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
         {
             BasicMenuHelper.GenerateBaseMenu(
                 this,
-                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "High Scores",
-                "Play the game and get your highscore onto the list!");
+                "Play the game and get your highscore onto the list!",
+                Parent.Fonts);
 
             var allScores = new List<ScoreDefinition>();
             foreach (var user in Parent.UserManager.Users)
@@ -40,8 +42,8 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                     Width = 1200,
                     Text = $"User: {Parent.UserManager.Users.First(x => x.HighScores.Contains(score)).Name}, Score: {score.Score}, Game Time: {score.GameTime}, Date: {score.Date}, Difficulty: {Math.Round(score.DifficultyRating, 2)}",
                     FontColor = Color.White,
-                    Font = BasicFonts.GetFont(12),
-                    FillColor = Parent.TextureController.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
+                    FillColor = Parent.Textures.GetTexture(new Guid("61bcf9c3-a78d-4521-8534-5690bdc2d6db")),
                 });
             }
 
@@ -55,7 +57,7 @@ namespace BugDefender.OpenGL.Screens.HighScoresView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });

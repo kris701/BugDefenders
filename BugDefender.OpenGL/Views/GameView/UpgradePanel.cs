@@ -5,6 +5,7 @@ using MonoGame.OpenGL.Formatter.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -25,14 +26,14 @@ namespace BugDefender.OpenGL.Views.GameView
             {
                 Width = Width,
                 Height = Height,
-                FillColor = parent.TextureController.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
+                FillColor = parent.Textures.GetTexture(new Guid("8799e365-3b1c-47fa-b11b-83173f6d4bca")),
             });
             _nameLabel = new LabelControl()
             {
                 Y = 10,
                 Height = 25,
                 Width = Width,
-                Font = BasicFonts.GetFont(12),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx12),
                 FontColor = Color.White,
             };
             Children.Add(_nameLabel);
@@ -40,7 +41,7 @@ namespace BugDefender.OpenGL.Views.GameView
             {
                 Y = 25,
                 Width = Width,
-                Font = BasicFonts.GetFont(10),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 Height = 85,
                 Margin = 15
@@ -51,10 +52,10 @@ namespace BugDefender.OpenGL.Views.GameView
                 X = 10,
                 Y = 115,
                 Width = Width - 20,
-                Font = BasicFonts.GetFont(10),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx10),
                 FontColor = Color.White,
                 FillColor = BasicTextures.GetBasicRectange(Color.Transparent),
-                FillClickedColor = parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillClickedColor = parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                 FillDisabledColor = BasicTextures.GetBasicRectange(Color.Transparent),
                 Height = 35
             };

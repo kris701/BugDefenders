@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {
@@ -34,8 +35,8 @@ namespace BugDefender.OpenGL.Views.GameView
                 Y = 0,
                 Width = Width,
                 Height = Height,
-                FillColor = parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8"))
+                FillColor = parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8"))
             };
             Children.Add(_background);
             _iconControl = new AnimatedTileControl()
@@ -51,7 +52,7 @@ namespace BugDefender.OpenGL.Views.GameView
                 X = 10 + _iconControl.Width,
                 Y = 10,
                 Margin = 3,
-                Font = BasicFonts.GetFont(8),
+                Font = parent.Fonts.GetFont(FontSizes.Ptx8),
                 FontColor = Color.White,
                 Height = 50,
                 Width = 150,
@@ -72,7 +73,7 @@ namespace BugDefender.OpenGL.Views.GameView
             var instance = new EnemyInstance(def, evolution);
             _background.Tag = instance;
             var animation = _parent.ResourcePackController.GetAnimation<EnemyEntityDefinition>(def.ID);
-            var textureSet = _parent.TextureController.GetTextureSet(animation.OnCreate);
+            var textureSet = _parent.Textures.GetTextureSet(animation.OnCreate);
             _iconControl.TileSet = textureSet.GetLoadedContent();
             _iconControl.FrameTime = TimeSpan.FromMilliseconds(textureSet.FrameTime);
             _iconControl.Frame = 0;

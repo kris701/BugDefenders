@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
 {
@@ -32,9 +33,10 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
         {
             BasicMenuHelper.GenerateBaseMenu(
                 this,
-                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Campaign Game Setup",
-                "Select a campaign to start playing!");
+                "Select a campaign to start playing!",
+                Parent.Fonts);
 
             SetupPreviewPanel(200, 225, 1060, 750);
             SetupCampaignsView(1060 + 200 + 10, 225, 445, 750);
@@ -52,7 +54,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
@@ -70,7 +72,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 Y = y,
                 Height = height,
                 Width = width,
-                FillColor = Parent.TextureController.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
+                FillColor = Parent.Textures.GetTexture(new Guid("02f8c9e2-e4c0-4310-934a-62c84cbb7384")),
             });
             _campaignPreviewTile = new TileControl()
             {
@@ -89,7 +91,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
             _campaignNameLabel = new LabelControl()
             {
                 Text = "Select A Campaign",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 X = x + 50,
                 Y = y + 10,
                 Height = 50,
@@ -99,7 +101,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
             AddControl(1, _campaignNameLabel);
             _campaignDescriptionTextbox = new TextboxControl()
             {
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 X = x + 50,
                 Y = y + 60,
                 Height = 100,
@@ -114,7 +116,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 Y = y + 10,
                 Width = (width - 100) / 2,
                 Height = 50,
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 Text = "New Save Name",
                 FontColor = Color.White
             });
@@ -124,13 +126,13 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 Y = y + 60,
                 Height = 50,
                 Width = (width - 100) / 2,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "New Game",
                 Limit = 25,
                 FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.Textures.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
             };
             _gameSaveName.OnKeyDown += NameKeyDown;
             AddControl(1, _gameSaveName);
@@ -140,7 +142,7 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 Y = y + 110,
                 Height = 50,
                 Width = (width - 100) / 2,
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 Text = "Overwrites existing save!",
                 FontColor = Color.Red,
                 IsVisible = Parent.UserManager.SaveExists(_gameSaveName.Text)
@@ -157,11 +159,11 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 Y = y,
                 Height = height,
                 Width = width,
-                FillColor = Parent.TextureController.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
+                FillColor = Parent.Textures.GetTexture(new Guid("e5cb13c4-39e1-4906-b1d1-52e353fb0546")),
             });
             AddControl(1, new LabelControl()
             {
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Campaigns",
                 X = x,
                 Y = y + 10,
@@ -177,9 +179,9 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 var map = ResourceManager.Campaigns.GetResource(id);
                 controlList.Add(new BugDefenderButtonControl(Parent, SelectCampaign_Click)
                 {
-                    FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                    Font = BasicFonts.GetFont(12),
+                    FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                    FillClickedColor = Parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                     Text = $"{map.Name}",
                     FontColor = Color.White,
                     Height = 50,

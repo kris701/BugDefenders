@@ -53,13 +53,13 @@ namespace BugDefender.OpenGL.Screens.CampaignGameSetupView
                 if (sender.Tag is CampaignDefinition campaign)
                 {
                     if (_selectedCampaignButton != null)
-                        _selectedCampaignButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+                        _selectedCampaignButton.FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
 
                     _selectedCampaignButton = button;
-                    _selectedCampaignButton.FillColor = Parent.TextureController.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
+                    _selectedCampaignButton.FillColor = Parent.Textures.GetTexture(new Guid("86911ca2-ebf3-408c-98f9-6221d9a322bc"));
 
                     _selectedCampaign = campaign;
-                    _campaignPreviewTile.FillColor = Parent.TextureController.GetTexture(campaign.ID);
+                    _campaignPreviewTile.FillColor = Parent.Textures.GetTexture(campaign.ID);
                     _campaignNameLabel.Text = campaign.Name;
                     var sb = new StringBuilder();
                     sb.AppendLine(campaign.Description);

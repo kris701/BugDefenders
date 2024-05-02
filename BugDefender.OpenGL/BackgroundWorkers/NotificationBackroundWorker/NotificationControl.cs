@@ -4,6 +4,7 @@ using MonoGame.OpenGL.Formatter.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {
@@ -33,7 +34,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
             {
                 _iconTile.Width = 75;
                 _iconTile.Height = 75;
-                _iconTile.FillColor = Parent.TextureController.GetTexture(Item.Definition.ID);
+                _iconTile.FillColor = Parent.Textures.GetTexture(Item.Definition.ID);
                 _iconTile.X = X + 20;
                 _iconTile.Y = Y + 20;
                 _iconTile.Initialize();
@@ -41,7 +42,7 @@ namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 
             _descriptionTextbox.Width = 200;
             _descriptionTextbox.Height = 100;
-            _descriptionTextbox.Font = BasicFonts.GetFont(10);
+            _descriptionTextbox.Font = Parent.Fonts.GetFont(FontSizes.Ptx10);
             _descriptionTextbox.FontColor = Color.White;
             _descriptionTextbox.Text = $"{Item.PreFix}{Environment.NewLine}{Item.Definition.Name}{Environment.NewLine}{Item.Definition.Description}";
             if (!Item.HasImage)

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.LoadGameView
 {
@@ -19,9 +20,10 @@ namespace BugDefender.OpenGL.Screens.LoadGameView
         {
             BasicMenuHelper.GenerateBaseMenu(
                 this,
-                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Load a Saved Game",
-                $"This user has a total of {Parent.UserManager.CurrentUser.SavedGames.Count} saved games");
+                $"This user has a total of {Parent.UserManager.CurrentUser.SavedGames.Count} saved games",
+                Parent.Fonts);
 
             var controlList = new List<LoadGameControl>();
             foreach (var savedGame in Parent.UserManager.CurrentUser.SavedGames)
@@ -53,7 +55,7 @@ namespace BugDefender.OpenGL.Screens.LoadGameView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });

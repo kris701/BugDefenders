@@ -1,5 +1,6 @@
 ﻿using BugDefender.Core.Game.Models;
 using MonoGame.OpenGL.Formatter.Audio;
+using MonoGame.OpenGL.Formatter.Fonts;
 using MonoGame.OpenGL.Formatter.Textures;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,11 @@ namespace BugDefender.OpenGL.ResourcePacks
         public List<TextureSetDefinition> TextureSets { get; set; }
         public List<SongDefinition> Songs { get; set; }
         public List<SoundEffectDefinition> SoundEffects { get; set; }
+        public List<FontDefinition> Fonts { get; set; }
         public List<IEntityResource> AnimationsEntities { get; set; }
         public List<IEntityResource> SoundEffectEntities { get; set; }
 
-        public ResourcePackDefinition(Guid iD, string name, string description, Guid? basedOn, List<TextureDefinition> textures, List<TextureSetDefinition> textureSets, List<SongDefinition> songs, List<SoundEffectDefinition> soundEffects, List<IEntityResource> animationsEntities, List<IEntityResource> soundEffectEntities)
+        public ResourcePackDefinition(Guid iD, string name, string description, Guid? basedOn, List<TextureDefinition> textures, List<TextureSetDefinition> textureSets, List<SongDefinition> songs, List<SoundEffectDefinition> soundEffects, List<FontDefinition> fonts, List<IEntityResource> animationsEntities, List<IEntityResource> soundEffectEntities)
         {
             ID = iD;
             Name = name;
@@ -31,6 +33,7 @@ namespace BugDefender.OpenGL.ResourcePacks
             SoundEffects = soundEffects;
             AnimationsEntities = animationsEntities;
             SoundEffectEntities = soundEffectEntities;
+            Fonts = fonts;
         }
     }
 }

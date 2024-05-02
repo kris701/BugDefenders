@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.SettingsView
 {
@@ -66,9 +67,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
         {
             BasicMenuHelper.GenerateBaseMenu(
                 this,
-                Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 "Settings",
-                "Game settings. Each user have their own settings.");
+                "Game settings. Each user have their own settings.",
+                Parent.Fonts);
 
             SetupScreenSettingsView(220);
             SetupTextureSettingsView(390);
@@ -93,7 +95,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });
@@ -110,7 +112,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset + 100,
                 Text = "Other",
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White
             });
 
@@ -125,10 +127,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 Width = 200,
                 Height = 50,
                 Text = "Fullscreen",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isFullScreen);
             _isVSync = new BugDefenderButtonControl(Parent, clicked: (x) =>
@@ -142,10 +144,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 Width = 200,
                 Height = 50,
                 Text = "VSync",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isVSync);
             _isFPSCounter = new BugDefenderButtonControl(Parent, clicked: (x) =>
@@ -159,10 +161,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 Width = 200,
                 Height = 50,
                 Text = "FPS Counter",
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
             };
             AddControl(1, _isFPSCounter);
 
@@ -171,7 +173,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset + 10,
                 Text = "UI Scale",
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White
             });
 
@@ -192,11 +194,11 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                     Width = 1585 / _resolutionOptions.Count,
                     Height = 40,
                     Text = $"{_resolutionOptions[i].X}x{_resolutionOptions[i].Y}",
-                    Font = BasicFonts.GetFont(16),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                     FontColor = Color.White,
-                    FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
-                    FillDisabledColor = Parent.TextureController.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
+                    FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillDisabledColor = Parent.Textures.GetTexture(new Guid("5e7e1313-fa7c-4f71-9a6e-e2650a7af968")),
                     Tag = _resolutionOptions[i]
                 };
                 AddControl(1, newControl);
@@ -213,7 +215,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset,
                 Text = "Texture packs",
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White
             });
 
@@ -232,10 +234,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                     Width = 1585 / packs.Count,
                     Height = 50,
                     Text = Parent.ResourcePackController.GetResourcePack(packs[i]).Name,
-                    Font = BasicFonts.GetFont(16),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                     FontColor = Color.White,
-                    FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                     Tag = packs[i]
                 };
                 AddControl(1, newControl);
@@ -252,7 +254,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset,
                 Text = "Music Volume",
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White
             });
 
@@ -270,10 +272,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                     Width = 1585 / _musicOptions.Count,
                     Height = 40,
                     Text = $"{Math.Round(_musicOptions[i] * 100, 0)}%",
-                    Font = BasicFonts.GetFont(16),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                     FontColor = Color.White,
-                    FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                     Tag = _musicOptions[i]
                 };
                 AddControl(1, newControl);
@@ -290,7 +292,7 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = yOffset,
                 Text = "Sound Effects Volume",
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 FontColor = Color.White
             });
 
@@ -308,10 +310,10 @@ namespace BugDefender.OpenGL.Screens.SettingsView
                     Width = 1585 / _soundEffectOptions.Count,
                     Height = 40,
                     Text = $"{Math.Round(_soundEffectOptions[i] * 100, 0)}%",
-                    Font = BasicFonts.GetFont(16),
+                    Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                     FontColor = Color.White,
-                    FillColor = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
-                    FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
+                    FillColor = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9")),
+                    FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8")),
                     Tag = _soundEffectOptions[i]
                 };
                 AddControl(1, newControl);

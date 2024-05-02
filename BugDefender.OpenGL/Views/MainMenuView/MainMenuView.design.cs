@@ -20,7 +20,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         {
             AddControl(0, new TileControl()
             {
-                FillColor = Parent.TextureController.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
+                FillColor = Parent.Textures.GetTexture(new Guid("f9eb39aa-2164-4125-925d-83a1e94fbe93")),
                 Width = IWindow.BaseScreenSize.X,
                 Height = IWindow.BaseScreenSize.Y
             });
@@ -28,7 +28,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 1050,
-                Font = BasicFonts.GetFont(12),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx12),
                 Text = "Copyright Kristian Skov Johansen",
                 FontColor = Color.White,
             });
@@ -36,7 +36,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 HorizontalAlignment = HorizontalAlignment.Middle,
                 Y = 200,
-                Font = BasicFonts.GetFont(72),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx72),
                 Text = "Bug Defenders",
                 FontColor = Color.White,
             });
@@ -46,7 +46,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 300,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Load Game",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -57,7 +57,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 350,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "New Campaign Game",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -68,7 +68,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 400,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "New Survival Game",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -79,7 +79,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 450,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Settings",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -90,7 +90,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 500,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "High Scores",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -101,7 +101,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 550,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Buffs",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -112,7 +112,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 600,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Achivements",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -123,7 +123,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 650,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Challenges",
                 FontColor = Color.White,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -134,7 +134,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Y = 700,
                 Width = 400,
                 Height = 50,
-                Font = BasicFonts.GetFont(24),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx24),
                 Text = "Exit",
                 FontColor = Color.Red,
                 FillClickedColor = BasicTextures.GetClickedTexture()
@@ -142,9 +142,9 @@ namespace BugDefender.OpenGL.Screens.MainMenu
 
             var userButton = BasicMenuHelper.GetCancelButton(Parent, $"User: {Parent.UserManager.CurrentUser.Name}", (e) => { SwitchView(new UsersScreen.UsersScreenView(Parent)); });
             userButton.Width = 400;
-            userButton.Font = BasicFonts.GetFont(16);
-            userButton.FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
-            userButton.FillClickedColor = Parent.TextureController.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8"));
+            userButton.Font = Parent.Fonts.GetFont(FontSizes.Ptx16);
+            userButton.FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048"));
+            userButton.FillClickedColor = Parent.Textures.GetTexture(new Guid("12a9ad25-3e34-4398-9c61-6522c49f5dd8"));
             AddControl(0, userButton);
             AddControl(0, BasicMenuHelper.GetAcceptButton(Parent, "Itch IO", (x) => LinkHelper.OpenUrl("https://kris701.itch.io/bug-defenders")));
 
@@ -152,11 +152,11 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             {
                 Width = 800,
                 Height = 100,
-                Font = BasicFonts.GetFont(16),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx16),
                 FontColor = Color.White,
-                FillColor = Parent.TextureController.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
-                FillClickedColor = Parent.TextureController.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
-                FillDisabledColor = Parent.TextureController.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
+                FillColor = Parent.Textures.GetTexture(new Guid("0ab3a089-b713-4853-aff6-8c7d8d565048")),
+                FillClickedColor = Parent.Textures.GetTexture(new Guid("78bbfd61-b6de-416a-80ba-e53360881759")),
+                FillDisabledColor = Parent.Textures.GetTexture(new Guid("6fb75caf-80ca-4f03-a1bb-2485b48aefd8")),
                 Limit = 50,
                 IsVisible = false,
                 HorizontalAlignment = HorizontalAlignment.Middle,
@@ -172,7 +172,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
                 Width = 50,
                 Height = 25,
                 Text = "Reload",
-                Font = BasicFonts.GetFont(10),
+                Font = Parent.Fonts.GetFont(FontSizes.Ptx10),
                 FillColor = BasicTextures.GetBasicRectange(Color.White),
                 FillClickedColor = BasicTextures.GetBasicRectange(Color.Gray)
             });

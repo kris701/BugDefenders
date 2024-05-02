@@ -1,6 +1,7 @@
 ﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Resources;
 using MonoGame.OpenGL.Formatter.Audio;
+using MonoGame.OpenGL.Formatter.Fonts;
 using MonoGame.OpenGL.Formatter.Textures;
 using System;
 using System.Collections.Generic;
@@ -35,13 +36,15 @@ namespace BugDefender.OpenGL.ResourcePacks
             if (pack.BasedOn != null)
                 LoadResourcePack(ResourcePacks.GetResource((Guid)pack.BasedOn));
             foreach (var item in pack.Textures)
-                Parent.TextureController.LoadTexture(item);
+                Parent.Textures.LoadTexture(item);
             foreach (var item in pack.TextureSets)
-                Parent.TextureController.LoadTextureSet(item);
+                Parent.Textures.LoadTextureSet(item);
             foreach (var item in pack.Songs)
-                Parent.AudioController.LoadSong(item);
+                Parent.Audio.LoadSong(item);
             foreach (var item in pack.SoundEffects)
-                Parent.AudioController.LoadSoundEffect(item);
+                Parent.Audio.LoadSoundEffect(item);
+            foreach (var item in pack.Fonts)
+                Parent.Fonts.LoadFont(item);
             foreach (var item in pack.AnimationsEntities)
                 LoadAnimationEntity(item);
             foreach (var item in pack.SoundEffectEntities)
@@ -122,7 +125,7 @@ namespace BugDefender.OpenGL.ResourcePacks
                                 foreach (var texture in textureDef)
                                 {
                                     texture.Content = Path.Combine(subFolder.Parent.FullName, "Content", texture.Content);
-                                    Parent.TextureController.LoadTexture(texture);
+                                    Parent.Textures.LoadTexture(texture);
                                 }
                             }
                         }
@@ -139,7 +142,7 @@ namespace BugDefender.OpenGL.ResourcePacks
                                     for (int i = 0; i < textureSet.Contents.Count; i++)
                                         textureSet.Contents[i] = Path.Combine(subFolder.Parent.FullName, "Content", textureSet.Contents[i]);
                                     foreach (var content in textureSet.Contents)
-                                        Parent.TextureController.LoadTextureSet(textureSet);
+                                        Parent.Textures.LoadTextureSet(textureSet);
                                 }
                             }
                         }
@@ -154,7 +157,22 @@ namespace BugDefender.OpenGL.ResourcePacks
                                 foreach (var song in songsDef)
                                 {
                                     song.Content = Path.Combine(subFolder.Parent.FullName, "Content", song.Content);
-                                    Parent.AudioController.LoadSong(song);
+                                    Parent.Audio.LoadSong(song);
+                                }
+                            }
+                        }
+                    }
+                    else if (subFolder.Name.ToUpper() == "FONTS")
+                    {
+                        foreach (var file in subFolder.GetFiles())
+                        {
+                            var fontDef = JsonSerializer.Deserialize<List<FontDefinition>>(File.ReadAllText(file.FullName));
+                            if (fontDef != null)
+                            {
+                                foreach (var font in fontDef)
+                                {
+                                    font.Content = Path.Combine(subFolder.Parent.FullName, "Content", font.Content);
+                                    Parent.Fonts.LoadFont(font);
                                 }
                             }
                         }
@@ -169,7 +187,7 @@ namespace BugDefender.OpenGL.ResourcePacks
                                 foreach (var soundEffect in soundEffectsDef)
                                 {
                                     soundEffect.Content = Path.Combine(subFolder.Parent.FullName, "Content", soundEffect.Content);
-                                    Parent.AudioController.LoadSoundEffect(soundEffect);
+                                    Parent.Audio.LoadSoundEffect(soundEffect);
                                 }
                             }
                         }

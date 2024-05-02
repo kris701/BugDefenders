@@ -30,7 +30,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
 
             Initialize();
 
-            Parent.AudioController.PlaySong(ID);
+            Parent.Audio.PlaySong(ID);
 
             _linesToShow = new List<string>();
             _linesToShow.Add($"Final Score: {stats.Score}");
@@ -64,7 +64,7 @@ namespace BugDefender.OpenGL.Screens.GameOverScreen
 
                     _statsTextBox.Text = sb.ToString();
                     _statsTextBox.Initialize();
-                    Parent.AudioController.PlaySoundEffectOnce(new Guid("3cca7fa9-014a-4ffa-8b95-00e775aa37c4"));
+                    Parent.Audio.PlaySoundEffectOnce(new Guid("3cca7fa9-014a-4ffa-8b95-00e775aa37c4"));
                 }
             }
         }

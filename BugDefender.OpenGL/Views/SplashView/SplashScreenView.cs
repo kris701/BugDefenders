@@ -14,7 +14,7 @@ namespace BugDefender.OpenGL.Screens.SplashScreen
         public SplashScreenView(BugDefenderGameWindow parent) : base(parent, _id)
         {
             Initialize();
-            Parent.AudioController.PlaySong(MainMenuView._id);
+            Parent.Audio.PlaySong(MainMenuView._id);
         }
 
         public override void OnUpdate(GameTime gameTime)

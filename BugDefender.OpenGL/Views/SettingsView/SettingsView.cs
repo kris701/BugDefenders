@@ -26,8 +26,8 @@ namespace BugDefender.OpenGL.Screens.SettingsView
 
         public void UpdateScreenSettingsButtons()
         {
-            var normal = Parent.TextureController.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"));
-            var selected = Parent.TextureController.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
+            var normal = Parent.Textures.GetTexture(new Guid("aa60f60c-a792-425b-a225-5735e5a33cc9"));
+            var selected = Parent.Textures.GetTexture(new Guid("5b3e5e64-9c3d-4ba5-a113-b6a41a501c20"));
             _isFullScreen.FillColor = normal;
             _isVSync.FillColor = normal;
             _isFPSCounter.FillColor = normal;

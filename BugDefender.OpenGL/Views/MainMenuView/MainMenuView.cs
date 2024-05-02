@@ -17,7 +17,7 @@ namespace BugDefender.OpenGL.Screens.MainMenu
         public MainMenuView(BugDefenderGameWindow parent) : base(parent, _id)
         {
             Initialize();
-            Parent.AudioController.PlaySong(ID);
+            Parent.Audio.PlaySong(ID);
             Parent.UserManager.SaveUser();
             _cheatsInputWatcher = new KeysWatcher(new List<Keys>() { Keys.LeftAlt, Keys.Enter }, OpenCheatsMenu);
             _escapeInputWatcher = new KeyWatcher(Keys.Escape, CloseCheatsMenu);
@@ -45,9 +45,9 @@ namespace BugDefender.OpenGL.Screens.MainMenu
             var preCount = CheatsHelper.Cheats.Count;
             CheatsHelper.AddCheat(control.Text);
             if (CheatsHelper.Cheats.Count == preCount)
-                Parent.AudioController.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
+                Parent.Audio.PlaySoundEffectOnce(new Guid("130c17d8-7cab-4fc0-8256-18092609f8d5"));
             else
-                Parent.AudioController.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
+                Parent.Audio.PlaySoundEffectOnce(new Guid("aebfa031-8a3c-46c1-82dd-13a39d3caf36"));
             control.Text = "";
         }
     }

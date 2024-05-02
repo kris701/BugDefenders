@@ -3,6 +3,36 @@
   "Name": "Low Quality",
   "Description": "",
   "BasedOn": null,
+  "Fonts": [
+    {
+      "ID": "80190e5c-c21d-412b-9fb7-96b7cbef76f2",
+      "Content": "DefaultFonts/DefaultFont8"
+    },
+    {
+      "ID": "42f15b37-1da4-4b95-8c8e-2056743f172b",
+      "Content": "DefaultFonts/DefaultFont10"
+    },
+    {
+      "ID": "29fd3e67-78b3-4623-84be-0f6a7dc27d6d",
+      "Content": "DefaultFonts/DefaultFont12"
+    },
+    {
+      "ID": "03f95e8f-0211-4551-9d18-24929db6a51a",
+      "Content": "DefaultFonts/DefaultFont16"
+    },
+    {
+      "ID": "4c74ca32-4baf-442d-b9b6-fa1bdb3807f6",
+      "Content": "DefaultFonts/DefaultFont24"
+    },
+    {
+      "ID": "e26c5bba-c837-48e1-8074-3c4b326edba3",
+      "Content": "DefaultFonts/DefaultFont48"
+    },
+    {
+      "ID": "f822985f-331c-4f03-8ec1-54f58114cc04",
+      "Content": "DefaultFonts/DefaultFont72"
+    }
+  ],
   "Textures": [
     {
       "ID": "cae05609-66c4-4f8a-9e53-a7cebc7817d6",
