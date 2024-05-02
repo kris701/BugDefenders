@@ -1,12 +1,12 @@
 ﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Helpers;
+using BugDefender.OpenGL.Views;
+using Microsoft.Xna.Framework;
 using MonoGame.OpenGL.Formatter;
 using MonoGame.OpenGL.Formatter.Controls;
 using MonoGame.OpenGL.Formatter.Helpers;
-using BugDefender.OpenGL.Views;
-using Microsoft.Xna.Framework;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.GameOverScreen
 {

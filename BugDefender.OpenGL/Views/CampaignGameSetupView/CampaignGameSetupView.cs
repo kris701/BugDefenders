@@ -1,11 +1,11 @@
 ﻿using BugDefender.Core.Campaign.Models;
 using BugDefender.Core.Users.Models.SavedGames;
 using BugDefender.OpenGL.Controls;
-using MonoGame.OpenGL.Formatter.Controls;
-using MonoGame.OpenGL.Formatter.Input;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Input;
 using System;
 using System.Text;
 

@@ -1,12 +1,11 @@
 ﻿using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Helpers;
+using Microsoft.Xna.Framework;
 using MonoGame.OpenGL.Formatter.Controls;
 using MonoGame.OpenGL.Formatter.Controls.Elements;
-using MonoGame.OpenGL.Formatter.Helpers;
 using MonoGame.OpenGL.Formatter.Views;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.Helpers
 {

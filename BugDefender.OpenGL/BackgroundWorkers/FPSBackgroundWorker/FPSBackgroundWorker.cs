@@ -1,9 +1,8 @@
-﻿using MonoGame.OpenGL.Formatter.BackgroundWorkers;
-using MonoGame.OpenGL.Formatter.Helpers;
+﻿using BugDefender.OpenGL.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.BackgroundWorkers;
 using System;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker
 {

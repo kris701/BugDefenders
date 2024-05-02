@@ -1,6 +1,6 @@
-﻿using MonoGame.OpenGL.Formatter.BackgroundWorkers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.BackgroundWorkers;
 using System;
 using System.Collections.Generic;
 

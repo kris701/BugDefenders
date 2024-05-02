@@ -1,6 +1,5 @@
 ﻿using BugDefender.OpenGL.Helpers;
 using MonoGame.OpenGL.Formatter.Controls;
-using MonoGame.OpenGL.Formatter.Helpers;
 using System;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
 

@@ -1,15 +1,14 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.OpenGL.Controls;
-using MonoGame.OpenGL.Formatter.Controls;
-using MonoGame.OpenGL.Formatter.Helpers;
+using BugDefender.OpenGL.Helpers;
 using Microsoft.Xna.Framework;
+using MonoGame.OpenGL.Formatter.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using static BugDefender.Core.Game.Models.Entities.Turrets.TurretInstance;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {

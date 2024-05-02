@@ -1,9 +1,9 @@
 ﻿using BugDefender.Core.Users.Models;
-using MonoGame.OpenGL.Formatter.Input;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.OpenGL.Formatter.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;

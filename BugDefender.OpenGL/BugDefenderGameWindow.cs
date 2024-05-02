@@ -5,12 +5,6 @@ using BugDefender.Core.Users;
 using BugDefender.OpenGL.BackgroundWorkers.FPSBackgroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker;
 using BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker.Handles;
-using MonoGame.OpenGL.Formatter;
-using MonoGame.OpenGL.Formatter.Audio;
-using MonoGame.OpenGL.Formatter.BackgroundWorkers;
-using MonoGame.OpenGL.Formatter.Helpers;
-using MonoGame.OpenGL.Formatter.Textures;
-using MonoGame.OpenGL.Formatter.Views;
 using BugDefender.OpenGL.ResourcePacks;
 using BugDefender.OpenGL.Screens.CutsceneView;
 using BugDefender.OpenGL.Screens.GameOverScreen;
@@ -19,12 +13,18 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using MonoGame.OpenGL.Formatter;
+using MonoGame.OpenGL.Formatter.Audio;
+using MonoGame.OpenGL.Formatter.BackgroundWorkers;
+using MonoGame.OpenGL.Formatter.Fonts;
+using MonoGame.OpenGL.Formatter.Helpers;
+using MonoGame.OpenGL.Formatter.Textures;
+using MonoGame.OpenGL.Formatter.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using MonoGame.OpenGL.Formatter.Fonts;
 
 namespace BugDefender.OpenGL
 {

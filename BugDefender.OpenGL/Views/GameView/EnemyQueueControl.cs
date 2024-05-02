@@ -1,16 +1,15 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Enemies;
 using BugDefender.Core.Resources;
 using BugDefender.OpenGL.Controls;
-using MonoGame.OpenGL.Formatter.Controls;
-using MonoGame.OpenGL.Formatter.Helpers;
+using BugDefender.OpenGL.Helpers;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using Microsoft.Xna.Framework;
+using MonoGame.OpenGL.Formatter.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {

@@ -1,10 +1,10 @@
 ﻿using BugDefender.OpenGL.Controls;
-using MonoGame.OpenGL.Formatter.Controls;
-using MonoGame.OpenGL.Formatter.Helpers;
+using BugDefender.OpenGL.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Helpers;
 using System;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {

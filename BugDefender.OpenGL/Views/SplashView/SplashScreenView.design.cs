@@ -1,6 +1,6 @@
-﻿using MonoGame.OpenGL.Formatter;
+﻿using BugDefender.OpenGL.Views;
+using MonoGame.OpenGL.Formatter;
 using MonoGame.OpenGL.Formatter.Controls;
-using BugDefender.OpenGL.Views;
 using System;
 
 namespace BugDefender.OpenGL.Screens.SplashScreen

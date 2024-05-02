@@ -1,10 +1,9 @@
 ﻿using BugDefender.Core.Users.Models;
-using MonoGame.OpenGL.Formatter.Controls;
-using MonoGame.OpenGL.Formatter.Helpers;
+using BugDefender.OpenGL.Helpers;
 using Microsoft.Xna.Framework;
+using MonoGame.OpenGL.Formatter.Controls;
 using System;
 using System.Text;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.AchivementsView
 {

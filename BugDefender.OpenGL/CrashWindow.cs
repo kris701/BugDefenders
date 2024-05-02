@@ -1,11 +1,10 @@
-﻿using MonoGame.OpenGL.Formatter.Helpers;
+﻿using BugDefender.OpenGL.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Fonts;
 using System;
 using System.IO;
 using System.Text;
-using MonoGame.OpenGL.Formatter.Fonts;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL
 {

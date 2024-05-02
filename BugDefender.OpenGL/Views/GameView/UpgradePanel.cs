@@ -1,11 +1,11 @@
 ﻿using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.OpenGL.Controls;
+using BugDefender.OpenGL.Helpers;
+using Microsoft.Xna.Framework;
 using MonoGame.OpenGL.Formatter.Controls;
 using MonoGame.OpenGL.Formatter.Helpers;
-using Microsoft.Xna.Framework;
 using System;
 using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Views.GameView
 {

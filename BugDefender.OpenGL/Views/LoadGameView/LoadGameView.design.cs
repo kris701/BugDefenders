@@ -1,13 +1,13 @@
 ﻿using BugDefender.OpenGL.Controls;
-using MonoGame.OpenGL.Formatter.Helpers;
+using BugDefender.OpenGL.Helpers;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using BugDefender.OpenGL.Views.LoadGameView;
 using Microsoft.Xna.Framework;
+using MonoGame.OpenGL.Formatter.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using BugDefender.OpenGL.Helpers;
 
 namespace BugDefender.OpenGL.Screens.LoadGameView
 {
