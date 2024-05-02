@@ -1,5 +1,5 @@
 ﻿using BugDefender.Core.Users.Models;
-using BugDefender.OpenGL.Engine.Input;
+using MonoGame.OpenGL.Formatter.Input;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

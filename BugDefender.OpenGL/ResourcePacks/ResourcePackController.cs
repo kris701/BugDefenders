@@ -1,7 +1,7 @@
 ﻿using BugDefender.Core.Game.Helpers;
 using BugDefender.Core.Resources;
-using BugDefender.OpenGL.Engine.Audio;
-using BugDefender.OpenGL.Engine.Textures;
+using MonoGame.OpenGL.Formatter.Audio;
+using MonoGame.OpenGL.Formatter.Textures;
 using System;
 using System.Collections.Generic;
 using System.IO;

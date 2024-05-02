@@ -1,6 +1,6 @@
 ﻿using BugDefender.Core.Users.Models;
-using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Helpers;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Helpers;
 using Microsoft.Xna.Framework;
 using System;
 using System.Text;

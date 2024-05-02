@@ -459,10 +459,6 @@
     <EmbeddedResource Include="Resources\Core\Turrets\slowingturret.json" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BugDefender.Tools\BugDefender.Tools.csproj" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

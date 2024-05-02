@@ -1,6 +1,6 @@
 ﻿using BugDefender.Core.Game.Models;
-using BugDefender.OpenGL.Engine.Audio;
-using BugDefender.OpenGL.Engine.Textures;
+using MonoGame.OpenGL.Formatter.Audio;
+using MonoGame.OpenGL.Formatter.Textures;
 using System;
 using System.Collections.Generic;
 

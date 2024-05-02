@@ -24,10 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolkit", "Toolkit", "{E5EB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModChecker", "Toolkit\ModChecker\ModChecker.csproj", "{B61229D5-DABA-497B-8036-174BD869C3BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugDefender.OpenGL.Engine", "BugDefender.OpenGL.Engine\BugDefender.OpenGL.Engine.csproj", "{4ED05166-0491-4877-82D4-2171A78F22CD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugDefender.Tools", "BugDefender.Tools\BugDefender.Tools.csproj", "{C679CE63-4C30-4725-8EF1-05D239CAC589}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDesigner", "Toolkit\MapDesigner\MapDesigner.csproj", "{78DA1079-0F24-4A50-A076-639AC81C35C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CampaignDesigner", "Toolkit\CampaignDesigner\CampaignDesigner.csproj", "{6A0B9630-511E-4C0E-94A1-BF25DE47BEB7}"
@@ -56,14 +52,6 @@ Global
 		{B61229D5-DABA-497B-8036-174BD869C3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B61229D5-DABA-497B-8036-174BD869C3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B61229D5-DABA-497B-8036-174BD869C3BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4ED05166-0491-4877-82D4-2171A78F22CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4ED05166-0491-4877-82D4-2171A78F22CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4ED05166-0491-4877-82D4-2171A78F22CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4ED05166-0491-4877-82D4-2171A78F22CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C679CE63-4C30-4725-8EF1-05D239CAC589}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C679CE63-4C30-4725-8EF1-05D239CAC589}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C679CE63-4C30-4725-8EF1-05D239CAC589}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C679CE63-4C30-4725-8EF1-05D239CAC589}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78DA1079-0F24-4A50-A076-639AC81C35C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78DA1079-0F24-4A50-A076-639AC81C35C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78DA1079-0F24-4A50-A076-639AC81C35C8}.Release|Any CPU.ActiveCfg = Release|Any CPU

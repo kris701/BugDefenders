@@ -1,5 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Maps;
-using BugDefender.Tools;
+using BugDefender.Core.Models;
 using MapDesigner.UserControls;
 using System.IO;
 using System.Reflection;

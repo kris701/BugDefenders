@@ -1,5 +1,5 @@
 ﻿using BugDefender.Core.Game.Helpers;
-using BugDefender.Tools;
+using BugDefender.Core.Models;
 
 namespace BugDefender.Core.Game.Models.Maps
 {

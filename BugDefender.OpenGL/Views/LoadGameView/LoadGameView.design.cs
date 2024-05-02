@@ -1,5 +1,5 @@
 ﻿using BugDefender.OpenGL.Controls;
-using BugDefender.OpenGL.Engine.Helpers;
+using MonoGame.OpenGL.Formatter.Helpers;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.Helpers;
 using BugDefender.OpenGL.Views.LoadGameView;

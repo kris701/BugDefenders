@@ -1,4 +1,4 @@
-﻿using BugDefender.OpenGL.Engine.Views;
+﻿using MonoGame.OpenGL.Formatter.Views;
 using System;
 
 namespace BugDefender.OpenGL.Views

@@ -10,14 +10,13 @@ using BugDefender.Core.Game.Models.Entities.Turrets;
 using BugDefender.Core.Game.Models.Entities.Turrets.Modules;
 using BugDefender.Core.Game.Models.Entities.Upgrades;
 using BugDefender.Core.Game.Modules.Turrets;
-using BugDefender.OpenGL.Engine;
-using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.Input;
+using MonoGame.OpenGL.Formatter;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Helpers;
+using MonoGame.OpenGL.Formatter.Input;
 using BugDefender.OpenGL.ResourcePacks.EntityResources;
 using BugDefender.OpenGL.Views;
 using BugDefender.OpenGL.Views.GameView;
-using BugDefender.Tools;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -576,7 +575,7 @@ namespace BugDefender.OpenGL.Screens.GameScreen
                 _buyingPreviewSizeTile.X = relativeMousePosition.X - _buyingPreviewSizeTile.Width / 2;
                 _buyingPreviewSizeTile.Y = relativeMousePosition.Y - _buyingPreviewSizeTile.Height / 2;
                 _buyingPreviewSizeTile.CalculateViewPort();
-                var at = new FloatPoint(
+                var at = new Core.Models.FloatPoint(
                     relativeMousePosition.X - _buyingTurret.Size / 2 - _gameArea.X,
                     relativeMousePosition.Y - _buyingTurret.Size / 2 - _gameArea.Y);
                 if (!_game.TurretsModule.IsTurretPlacementOk(_buyingTurret, at))

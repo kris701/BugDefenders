@@ -1,4 +1,5 @@
 ﻿using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Models;
 using BugDefender.Core.Resources;
 using static BugDefender.Core.Game.Modules.Turrets.TurretsModule;
 
@@ -47,7 +48,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
             var upgrade = turretDef.Upgrades.First(x => x.ID == upgradeID);
@@ -69,7 +70,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
             var upgrade = turretDef.Upgrades.First(x => x.ID == upgradeID);
@@ -91,7 +92,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
 
@@ -111,7 +112,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
             var upgrade = turretDef.Upgrades.First(x => x.ID == upgradeID);
@@ -134,7 +135,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
             var upgrade = turretDef.Upgrades.First(x => x.ID == upgradeID);
@@ -160,7 +161,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
             var upgrade = turretDef.Upgrades.First(x => x.ID == upgradeID);
@@ -184,7 +185,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
             var upgrade = turretDef.Upgrades.First(x => x.ID == upgradeID);
@@ -211,7 +212,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(50, 50)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(50, 50)));
             var instance = game.Context.Turrets.ElementAt(0);
             Assert.IsNotNull(instance);
             Assert.IsTrue(game.Context.Turrets.Contains(instance));
@@ -238,7 +239,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
 
             // ACT
-            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.IsTrue(result);
@@ -256,7 +257,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
                 200, 200));
 
             // ACT
-            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.IsFalse(result);
@@ -271,7 +272,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
 
             // ACT
-            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new Tools.FloatPoint(-50, 300));
+            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new FloatPoint(-50, 300));
 
             // ASSERT
             Assert.IsFalse(result);
@@ -286,10 +287,10 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var turretDef = ResourceManager.Turrets.GetResource(turretID);
             game.Context.Money = turretDef.Cost;
             game.Context.Wave = turretDef.AvailableAtWave;
-            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(300, 300)));
+            Assert.AreEqual(AddTurretResult.Success, game.TurretsModule.AddTurret(turretDef, new FloatPoint(300, 300)));
 
             // ACT
-            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.IsTurretPlacementOk(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.IsFalse(result);
@@ -311,7 +312,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             var preMoney = game.Context.Money;
 
             // ACT
-            var result = game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.AddTurret(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.AreEqual(AddTurretResult.Success, result);
@@ -329,7 +330,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             game.Context.Wave = turretDef.AvailableAtWave;
 
             // ACT
-            var result = game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.AddTurret(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.AreEqual(AddTurretResult.NotEnoughMoney, result);
@@ -346,7 +347,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             game.Context.Wave = turretDef.AvailableAtWave - 1;
 
             // ACT
-            var result = game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.AddTurret(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.AreEqual(AddTurretResult.NotAvailableForWave, result);
@@ -364,7 +365,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             game.Context.GameStyle.TurretBlackList.Add(turretID);
 
             // ACT
-            var result = game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.AddTurret(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.AreEqual(AddTurretResult.Blacklisted, result);
@@ -382,7 +383,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             game.Context.GameStyle.TurretWhiteList.Add(Guid.NewGuid());
 
             // ACT
-            var result = game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(300, 300));
+            var result = game.TurretsModule.AddTurret(turretDef, new FloatPoint(300, 300));
 
             // ASSERT
             Assert.AreEqual(AddTurretResult.NotWhiteListed, result);
@@ -399,7 +400,7 @@ namespace BugDefender.Core.Tests.Game.Modules.Turrets
             game.Context.Wave = turretDef.AvailableAtWave;
 
             // ACT
-            var result = game.TurretsModule.AddTurret(turretDef, new Tools.FloatPoint(-50, 300));
+            var result = game.TurretsModule.AddTurret(turretDef, new FloatPoint(-50, 300));
 
             // ASSERT
             Assert.AreEqual(AddTurretResult.PlacementInvalid, result);

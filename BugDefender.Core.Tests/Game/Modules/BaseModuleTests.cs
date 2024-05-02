@@ -1,6 +1,7 @@
 ﻿using BugDefender.Core.Game;
 using BugDefender.Core.Game.Models.GameStyles;
 using BugDefender.Core.Game.Models.Maps;
+using BugDefender.Core.Models;
 using BugDefender.Core.Users.Models.SavedGames;
 
 namespace BugDefender.Core.Tests.Game.Modules
@@ -15,7 +16,7 @@ namespace BugDefender.Core.Tests.Game.Modules
                         Guid.NewGuid(),
                         "Empty",
                         "",
-                        new List<List<Tools.FloatPoint>>(),
+                        new List<List<FloatPoint>>(),
                         new List<BlockedTile>(),
                         950,
                         950

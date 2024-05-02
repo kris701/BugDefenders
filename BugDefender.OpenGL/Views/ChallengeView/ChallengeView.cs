@@ -2,8 +2,8 @@
 using BugDefender.Core.Resources;
 using BugDefender.Core.Users.Models.Challenges;
 using BugDefender.Core.Users.Models.SavedGames;
-using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Input;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Input;
 using BugDefender.OpenGL.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;

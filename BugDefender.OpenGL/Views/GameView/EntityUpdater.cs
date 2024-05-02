@@ -1,6 +1,6 @@
 ﻿using BugDefender.Core.Game.Models;
-using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Views;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Views;
 using System;
 using System.Collections.Generic;
 

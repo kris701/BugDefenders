@@ -1,4 +1,4 @@
-﻿using BugDefender.OpenGL.Engine.BackgroundWorkers;
+﻿using MonoGame.OpenGL.Formatter.BackgroundWorkers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;

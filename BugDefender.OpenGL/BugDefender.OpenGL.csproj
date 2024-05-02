@@ -9,7 +9,7 @@
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Copyright>Kristian Skov Johansen</Copyright>
 	  <Product>Bug Defenders</Product>
-	  <Version>0.2.4</Version>
+	  <Version>0.2.5</Version>
 	  <PublishSingleFile>true</PublishSingleFile>
 	  <SelfContained>true</SelfContained>
 	  <DebugType>embedded</DebugType>
@@ -27,11 +27,6 @@
     <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <!--<DefineConstants>$(DefineConstants);CENTERPOINT</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);TEXTBORDER</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
-	  <!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
   </PropertyGroup>
 	<ItemGroup>
 		<TrimmerRootAssembly Include="MonoGame.Framework" />
@@ -74,10 +69,10 @@
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.OpenGL.Formatter" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BugDefender.Core\BugDefender.Core.csproj" />
-    <ProjectReference Include="..\BugDefender.OpenGL.Engine\BugDefender.OpenGL.Engine.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Licences\INNO-SETUP-LICENSE.txt">

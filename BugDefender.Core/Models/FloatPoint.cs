@@ -1,4 +1,4 @@
-﻿namespace BugDefender.Tools
+﻿namespace BugDefender.Core.Models
 {
     public class FloatPoint
     {

@@ -1,5 +1,5 @@
 ﻿using BugDefender.Core.Game.Models;
-using static BugDefender.OpenGL.Engine.Controls.ButtonControl;
+using static MonoGame.OpenGL.Formatter.Controls.ButtonControl;
 
 namespace BugDefender.OpenGL.BackgroundWorkers.NotificationBackroundWorker
 {

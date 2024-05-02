@@ -1,8 +1,8 @@
 ﻿using BugDefender.OpenGL.Controls;
-using BugDefender.OpenGL.Engine.Controls;
-using BugDefender.OpenGL.Engine.Controls.Elements;
-using BugDefender.OpenGL.Engine.Helpers;
-using BugDefender.OpenGL.Engine.Views;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Controls.Elements;
+using MonoGame.OpenGL.Formatter.Helpers;
+using MonoGame.OpenGL.Formatter.Views;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
